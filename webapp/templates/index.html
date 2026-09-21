@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Baixar vídeo</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #22c55e;
+    --accent-dark: #16a34a;
+    --danger: #f87171;
+    --border: #334155;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 28px 16px 48px;
+  }
+  .card { width: 100%; max-width: 480px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  p.subtitle { color: var(--muted); margin: 0 0 22px; font-size: 0.9rem; }
+  .field { margin-bottom: 12px; }
+  input[type=url] {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 1rem;
+  }
+  input[type=url]:focus { outline: 2px solid var(--accent); }
+  button { border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: #06210f; width: 100%; padding: 14px 18px; }
+  .btn-primary:active { background: var(--accent-dark); }
+  .btn-primary:disabled { opacity: 0.6; }
+  .box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .box-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .box-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .box-value { white-space: pre-wrap; word-break: break-word; font-size: 0.95rem; line-height: 1.45; }
+  .copy-btn {
+    flex-shrink: 0;
+    background: var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    border-radius: 8px;
+  }
+  .hidden { display: none !important; }
+  .status { text-align: center; color: var(--muted); margin: 22px 0; }
+  .spinner {
+    width: 22px; height: 22px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error-box {
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid var(--danger);
+    color: #fecaca;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 18px;
+  }
+  .error-box a {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--text);
+    background: var(--border);
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .download-btn { display: block; text-align: center; text-decoration: none; margin-top: 6px; }
+  .resultado { margin-top: 22px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Baixar vídeo</h1>
+    <p class="subtitle">Cole o link de um vídeo do Instagram ou Facebook</p>
+
+    <div class="field">
+      <input id="url" type="url" inputmode="url" placeholder="https://..." autocapitalize="off" autocorrect="off">
+    </div>
+    <button class="btn-primary" id="buscar-btn">Buscar</button>
+
+    <div id="status" class="status hidden">
+      <div class="spinner"></div>
+      <div id="status-text">Buscando vídeo...</div>
+    </div>
+
+    <div id="resultado" class="resultado hidden">
+      <div class="box">
+        <div class="box-label">Perfil</div>
+        <div class="box-row">
+          <div class="box-value" id="autor-valor"></div>
+          <button class="copy-btn" data-copy="autor-valor">Copiar</button>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-label">Legenda</div>
+        <div class="box-row">
+          <div class="box-value" id="legenda-valor"></div>
+          <button class="copy-btn" data-copy="legenda-valor">Copiar</button>
+        </div>
+      </div>
+      <a class="btn-primary download-btn" id="baixar-link" href="#">Baixar vídeo</a>
+    </div>
+
+    <div id="erro" class="error-box hidden">
+      <div id="erro-texto"></div>
+      <a id="erro-link" href="#" target="_blank" rel="noopener">Abrir link original</a>
+    </div>
+  </div>
+
+<script>
+  const urlInput = document.getElementById('url');
+  const buscarBtn = document.getElementById('buscar-btn');
+  const statusEl = document.getElementById('status');
+  const statusText = document.getElementById('status-text');
+  const resultadoEl = document.getElementById('resultado');
+  const erroEl = document.getElementById('erro');
+  const erroTexto = document.getElementById('erro-texto');
+  const erroLink = document.getElementById('erro-link');
+  const autorValor = document.getElementById('autor-valor');
+  const legendaValor = document.getElementById('legenda-valor');
+  const baixarLink = document.getElementById('baixar-link');
+
+  function resetViews() {
+    resultadoEl.classList.add('hidden');
+    erroEl.classList.add('hidden');
+  }
+
+  async function buscar() {
+    const url = urlInput.value.trim();
+    if (!url) {
+      alert('Cole um link antes de buscar.');
+      return;
+    }
+    resetViews();
+    statusEl.classList.remove('hidden');
+    statusText.textContent = 'Buscando vídeo...';
+    buscarBtn.disabled = true;
+
+    try {
+      const resp = await fetch('/api/buscar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      });
+      const data = await resp.json();
+
+      if (!data.ok) {
+        erroTexto.textContent = data.error || 'Não foi possível baixar esse vídeo.';
+        erroLink.href = data.original_url || url;
+        erroEl.classList.remove('hidden');
+        return;
+      }
+
+      autorValor.textContent = data.author;
+      legendaValor.textContent = data.caption;
+      baixarLink.href = '/api/baixar/' + data.token;
+      resultadoEl.classList.remove('hidden');
+    } catch (err) {
+      erroTexto.textContent = 'Falha de conexão. Verifique sua internet e tente novamente.';
+      erroLink.href = url;
+      erroEl.classList.remove('hidden');
+    } finally {
+      statusEl.classList.add('hidden');
+      buscarBtn.disabled = false;
+    }
+  }
+
+  buscarBtn.addEventListener('click', buscar);
+
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const target = document.getElementById(btn.dataset.copy);
+      const text = target.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const range = document.createRange();
+        range.selectNode(target);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+      }
+      const original = btn.textContent;
+      btn.textContent = 'Copiado!';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+</script>
+</body>
+</html>
