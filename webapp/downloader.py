@@ -1,3 +1,4 @@
+import logging
 import os
 import tempfile
 import uuid
@@ -5,6 +6,23 @@ from dataclasses import dataclass
 from typing import Optional
 
 import yt_dlp
+
+logger = logging.getLogger(__name__)
+
+
+class _YdlLogger:
+    def debug(self, msg):
+        if not msg.startswith("[debug] "):
+            logger.info("yt-dlp: %s", msg)
+
+    def info(self, msg):
+        logger.info("yt-dlp: %s", msg)
+
+    def warning(self, msg):
+        logger.warning("yt-dlp: %s", msg)
+
+    def error(self, msg):
+        logger.error("yt-dlp: %s", msg)
 
 
 class DownloadError(Exception):
@@ -34,6 +52,11 @@ _COOKIES_PATH = _load_cookies_path()
 _IG_USERNAME = os.environ.get("INSTAGRAM_USERNAME")
 _IG_PASSWORD = os.environ.get("INSTAGRAM_PASSWORD")
 
+if _IG_USERNAME and _IG_PASSWORD:
+    logger.info("Login do Instagram configurado para o usuário: %s", _IG_USERNAME)
+else:
+    logger.warning("INSTAGRAM_USERNAME/INSTAGRAM_PASSWORD não configurados — downloads serão anônimos.")
+
 
 def download_video(url: str, download_dir: str) -> DownloadResult:
     os.makedirs(download_dir, exist_ok=True)
@@ -44,7 +67,8 @@ def download_video(url: str, download_dir: str) -> DownloadResult:
         "format": "mp4/bestvideo+bestaudio/best",
         "merge_output_format": "mp4",
         "quiet": True,
-        "no_warnings": True,
+        "no_warnings": False,
+        "logger": _YdlLogger(),
         "noplaylist": True,
         "retries": 3,
         "cookiefile": _COOKIES_PATH,
