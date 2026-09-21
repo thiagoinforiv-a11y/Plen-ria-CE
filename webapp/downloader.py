@@ -1,4 +1,5 @@
 import os
+import tempfile
 import uuid
 from dataclasses import dataclass
 from typing import Optional
@@ -17,6 +18,19 @@ class DownloadResult:
     author: Optional[str]
 
 
+def _load_cookies_path() -> Optional[str]:
+    content = os.environ.get("INSTAGRAM_COOKIES")
+    if not content:
+        return None
+    path = os.path.join(tempfile.gettempdir(), "instagram_cookies.txt")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    return path
+
+
+_COOKIES_PATH = _load_cookies_path()
+
+
 def download_video(url: str, download_dir: str) -> DownloadResult:
     os.makedirs(download_dir, exist_ok=True)
     output_template = os.path.join(download_dir, f"{uuid.uuid4().hex}.%(ext)s")
@@ -30,6 +44,8 @@ def download_video(url: str, download_dir: str) -> DownloadResult:
         "noplaylist": True,
         "retries": 3,
     }
+    if _COOKIES_PATH:
+        ydl_opts["cookiefile"] = _COOKIES_PATH
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

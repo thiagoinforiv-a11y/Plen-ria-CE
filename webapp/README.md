@@ -75,6 +75,39 @@ No plano Free do Render, o serviço "dorme" depois de um tempo sem uso e
 leva alguns segundos para acordar na primeira requisição seguinte — normal
 para esse tipo de uso pessoal.
 
+## Autenticação no Instagram (cookies)
+
+O Instagram costuma bloquear downloads anônimos vindos de servidores/nuvem
+(como o Render), mesmo em posts públicos. Para contornar isso, o app aceita
+uma variável de ambiente `INSTAGRAM_COOKIES` com os cookies de uma sessão
+logada — isso faz o yt-dlp se passar por um navegador autenticado.
+
+**Recomendação:** use uma conta secundária do Instagram, não a sua
+principal, já que logins automatizados a partir de um servidor podem levar
+o Instagram a sinalizar a conta.
+
+### Exportando os cookies pelo iPhone
+
+1. Instale um app de extensão de cookies para Safari (ex.: busque
+   "Cookie-Editor" na App Store).
+2. Vá em **Ajustes → Safari → Extensões** e ative a extensão instalada.
+3. No Safari, acesse `instagram.com` e faça login com a conta que vai usar.
+4. Ainda no Instagram, abra a extensão (ícone de puzzle/extensões na barra
+   do Safari) e use a opção **Export** — escolha o formato **Netscape**
+   (é o formato que o yt-dlp espera). Copie todo o texto exportado.
+
+### Configurando no Render
+
+1. No painel do serviço, vá em **Environment**.
+2. Adicione uma variável:
+   - KEY: `INSTAGRAM_COOKIES`
+   - VALUE: cole todo o conteúdo copiado (várias linhas, tudo bem)
+3. Salve — o Render faz um novo deploy automaticamente.
+
+Os cookies expiram de tempos em tempos (a sessão do Instagram pode cair);
+se o app voltar a falhar depois de um tempo, repita esse processo para
+gerar cookies novos.
+
 ## Estrutura
 
 ```
