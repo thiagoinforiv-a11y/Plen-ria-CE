@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram video downloader bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Plen-ria-CE
+ExecStart=/home/ubuntu/Plen-ria-CE/.venv/bin/python /home/ubuntu/Plen-ria-CE/run.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
