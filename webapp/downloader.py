@@ -18,17 +18,21 @@ class DownloadResult:
     author: Optional[str]
 
 
-def _load_cookies_path() -> Optional[str]:
-    content = os.environ.get("INSTAGRAM_COOKIES")
-    if not content:
-        return None
+def _load_cookies_path() -> str:
+    """Path to a cookiejar yt-dlp reads from and writes back to, so a
+    session started via username/password login is reused across
+    requests instead of logging in again every time."""
     path = os.path.join(tempfile.gettempdir(), "instagram_cookies.txt")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
+    content = os.environ.get("INSTAGRAM_COOKIES")
+    if content and not os.path.exists(path):
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
     return path
 
 
 _COOKIES_PATH = _load_cookies_path()
+_IG_USERNAME = os.environ.get("INSTAGRAM_USERNAME")
+_IG_PASSWORD = os.environ.get("INSTAGRAM_PASSWORD")
 
 
 def download_video(url: str, download_dir: str) -> DownloadResult:
@@ -43,9 +47,11 @@ def download_video(url: str, download_dir: str) -> DownloadResult:
         "no_warnings": True,
         "noplaylist": True,
         "retries": 3,
+        "cookiefile": _COOKIES_PATH,
     }
-    if _COOKIES_PATH:
-        ydl_opts["cookiefile"] = _COOKIES_PATH
+    if _IG_USERNAME and _IG_PASSWORD:
+        ydl_opts["username"] = _IG_USERNAME
+        ydl_opts["password"] = _IG_PASSWORD
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
