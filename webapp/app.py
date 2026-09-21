@@ -9,10 +9,10 @@ import uuid
 
 from flask import Flask, Response, after_this_request, jsonify, render_template, request, send_file
 
-from downloader import DownloadError, download_video
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+from downloader import DownloadError, download_video  # noqa: E402 (must follow logging setup)
 
 app = Flask(__name__)
 
