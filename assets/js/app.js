@@ -27,6 +27,7 @@
     limiar: store.get("limiar", 1), rankAll: false, busca: "",
     cmp: [], secSel: [], secBairro: "", secCand: "", secSort: "validos",
     mapCand: "", cmpBy: "bairro", cmpMode: "votos",
+    dep: { pid: "", ano: null },
   };
   const cache = new Map();
 
@@ -42,8 +43,13 @@
     const reg = (window.PLENARIA_CIDADES || []).find((c) => c.id === id) || (window.PLENARIA_CIDADES || [])[0];
     if (!reg) throw new Error("Nenhuma cidade em data/cidades.js");
     window.PLENARIA_DATA = window.PLENARIA_DATA || {};
-    if (!window.PLENARIA_DATA[reg.id]) await loadScript(reg.arquivo);
+    if (!window.PLENARIA_DATA[reg.id]) {
+      await loadScript(reg.arquivo);
+      // ficha editável à mão (fatos, quem manda); opcional
+      await loadScript(reg.arquivo.replace(/\.js$/, ".ficha.js")).catch(() => null);
+    }
     S.city = window.PLENARIA_DATA[reg.id];
+    S.ficha = (window.PLENARIA_FICHAS || {})[reg.id] || null;
     S.cityId = reg.id;
     store.set("cidade", reg.id);
     const anos = Object.keys(S.city.eleicoes).sort().reverse();
@@ -67,11 +73,11 @@
     return ctx.find((c) => c.ano == ano && c.turno === turno && c.cargo === base) || ctx.find((c) => c.ano == ano && c.turno === 1) || null;
   }
 
-  /** agregados do cargo/ano atual: por seção, por local, por bairro */
-  function agg() {
-    const key = S.cityId + S.ano + S.cargo;
+  /** agregados de um cargo/ano (padrão: o selecionado): por seção, por local, por bairro */
+  function agg(ano = S.ano, cargo = S.cargo) {
+    const key = S.cityId + ano + cargo;
     if (cache.has(key)) return cache.get(key);
-    const e = E(), c = C();
+    const e = S.city.eleicoes[ano], c = e.cargos[cargo];
     const cands = c.candidatos;
     const validos = c.totais ? c.totais.validos : cands.reduce((s, x) => s + x.votos, 0);
     const r = { cands, validos, secoes: {}, locais: {}, bairros: {}, bySq: {} };
@@ -350,8 +356,103 @@
       Anos disponíveis: ${Object.keys(S.city.eleicoes).sort().reverse().map((a) => `${a} (${S.city.eleicoes[a].nivel === "secao" ? "por seção" : "totais municipais"})`).join(", ")}.`;
   }
 
+
+  // ------------------------------------------------------------------ ficha da cidade
+  const SELOS = {
+    "confirmado": ["✔", "Confirmado", "oficial ou 2+ fontes independentes"],
+    "declaracao": ["❝", "Declaração", "alguém disse; registrado como fala"],
+    "uma-fonte": ["①", "Uma fonte só", "ainda sem segunda fonte"],
+    "pesquisa": ["▤", "Pesquisa registrada", "instituto e nº de registro"],
+    "a-conferir": ["?", "A conferir", "não verificado"],
+  };
+  const selo = (k) => { const v = SELOS[k] || SELOS["a-conferir"]; return `<span class="selo selo-${esc(k)}" title="${esc(v[2])}"><b>${v[0]}</b> ${esc(v[1])}</span>`; };
+  const fontes = (fs) => (fs || []).map((f) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nome)} ↗</a>`).join(" · ");
+  const dataBR = (d) => { if (!d) return ""; const [y, m, dd] = String(d).split("-"); const mes = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"][+m - 1]; return dd ? `${+dd} ${mes} ${y}` : m ? `${mes} ${y}` : y; };
+
+  function renderFicha() {
+    const el = $("#ficha"), f = S.ficha, m = S.city.meta;
+    const head = `<div class="blk-h"><div><h2>Ficha de <em class="s">${esc(m.municipio)}</em></h2><p class="lead">Quem manda, com quem e o que aconteceu. Cada item mostra a fonte e o grau de confiança.</p></div>
+      <div class="selos-leg">${Object.keys(SELOS).map(selo).join("")}</div></div>`;
+    if (!f) { el.innerHTML = head + `<div class="notice">Ainda não há ficha para ${esc(m.municipio)}. Ela fica em <code>data/${esc(m.uf.toLowerCase())}/${esc(m.slug)}.ficha.js</code>.</div>`; return; }
+    const fatos = [...(f.fatos || [])].sort((a, b) => String(b.data).localeCompare(String(a.data)));
+    el.innerHTML = head + `<div class="grid poder">${(f.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v">${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>
+      <div class="fatos">${fatos.map((x) => `<article class="fato"><div class="dt">${esc(dataBR(x.data))}</div><div><div class="tt">${esc(x.titulo)} ${selo(x.selo)}</div>${x.resumo ? `<p>${esc(x.resumo)}</p>` : ""}${x.nota ? `<p class="nota">${esc(x.nota)}</p>` : ""}<div class="fs">${fontes(x.fontes)}</div></div></article>`).join("")}</div>
+      ${f.observacao ? `<p class="muted" style="font-size:12.5px;margin-top:14px">${esc(f.observacao)}${f.atualizado ? ` Atualizado em ${esc(dataBR(f.atualizado))}.` : ""}</p>` : ""}`;
+  }
+
+  // ------------------------------------------------------------------ deputado × cidade
+  function deputados() {
+    const m = new Map();
+    for (const [ano, e] of Object.entries(S.city.eleicoes))
+      for (const [k, c] of Object.entries(e.cargos)) {
+        if (!k.startsWith("deputado") || k.endsWith("_2t")) continue;
+        c.candidatos.forEach((x) => { const d = m.get(x.pid) || { pid: x.pid, ent: [] }; d.ent.push({ ano, cargo: k, x }); m.set(x.pid, d); });
+      }
+    const lista = [...m.values()];
+    lista.forEach((d) => d.ent.sort((p, q) => q.ano - p.ano));
+    return lista.sort((p, q) => q.ent[0].ano - p.ent[0].ano || q.ent[0].x.votos - p.ent[0].x.votos);
+  }
+  function statusEleito(sit) {
+    const s = (sit || "").toLowerCase();
+    if (!s) return ["—", ""];
+    if (s.startsWith("eleito")) return ["Eleito", "ok"];
+    if (s.includes("suplente")) return ["Suplente · não eleito", "no"];
+    return ["Não eleito", "no"];
+  }
+  function renderDeputado() {
+    const el = $("#deputado"), m = S.city.meta;
+    const cs = window.PLENARIA_CIDADES || [];
+    const lista = deputados();
+    const head = (tools) => `<div class="blk-h"><div><h2>Deputado na <em class="s">cidade</em></h2><p class="lead">Escolha a cidade e o deputado: votos na cidade e no estado, locais e bairros mais fortes e o histórico dele na cidade.</p></div>${tools}</div>`;
+    const selCity = `<select class="pill" id="dep-city">${cs.map((c) => `<option value="${esc(c.id)}" ${c.id === S.cityId ? "selected" : ""}>${esc(c.nome)} · ${esc(c.uf)}</option>`).join("")}</select>`;
+    if (!lista.length) {
+      el.innerHTML = head(`<div class="tools">${selCity}</div>`) + `<div class="notice"><b>Ainda não há votação de deputados carregada para ${esc(m.municipio)}.</b> Ela vem dos arquivos oficiais do TSE (por seção, com bairro e local). Assim que o acesso ao TSE for liberado: <code>python3 scripts/plenaria.py tse --municipio ${esc(m.municipio)} --ano 2026 --ano 2022 --ano 2018 --baixar</code></div>`;
+      return;
+    }
+    if (!lista.some((d) => d.pid === S.dep.pid)) S.dep = { pid: lista[0].pid, ano: null };
+    const d = lista.find((z) => z.pid === S.dep.pid);
+    const ent = d.ent.find((z) => z.ano === S.dep.ano) || d.ent[0];
+    const anos = [...new Set(lista.flatMap((z) => z.ent.map((e) => e.ano)))].sort().reverse();
+    const opts = anos.map((ano) => `<optgroup label="${ano}">${lista.filter((z) => z.ent[0].ano === ano).map((z) => { const x = z.ent[0].x; return `<option value="${esc(z.pid)}" ${z.pid === d.pid ? "selected" : ""}>${esc(x.urna)} (${esc(x.partido || "")}) — ${fmt(x.votos)} votos</option>`; }).join("")}</optgroup>`).join("");
+    const tools = `<div class="tools">${selCity}<select class="pill" id="dep-sel" aria-label="Deputado">${opts}</select>${d.ent.length > 1 ? `<select class="pill" id="dep-ano">${d.ent.map((e) => `<option value="${e.ano}" ${e === ent ? "selected" : ""}>${e.ano} · ${esc(cargoCurto(e.cargo))}</option>`).join("")}</select>` : ""}</div>`;
+    const a = agg(ent.ano, ent.cargo), x = a.bySq[ent.x.sq], e = S.city.eleicoes[ent.ano];
+    const u = x.uf || {};
+    const [st, stc] = statusEleito(x.situacao);
+    const hist = historico(x.pid);
+    const porSec = e.nivel === "secao";
+    const locais = porSec ? Object.values(a.locais).map((l) => ({ l, v: l.cand[x.sq] || 0 })).filter((r) => r.v).sort((p, q) => q.v - p.v).slice(0, 5) : [];
+    const bairros = porSec ? Object.values(a.bairros).map((b) => ({ b, v: b.cand[x.sq] || 0 })).sort((p, q) => q.v - p.v) : [];
+    const lmax = locais[0] ? locais[0].v : 1, bmax = bairros[0] && bairros[0].v ? bairros[0].v : 1;
+    const hmax = Math.max(...hist.map((h) => h.x.votos), 1);
+    el.innerHTML = head(tools) + `<div class="dep-card card">
+      <div class="dep-id">
+        <div class="pf-photo">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="Foto de ${esc(x.urna)}" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
+        <div class="k">${esc(cargoCurto(ent.cargo))} · ${esc(ent.ano)}</div>
+        <h3>${esc(x.urna)}</h3><div class="full">${esc(x.nome)}</div>
+        <div class="badges"><span>${esc(x.partido || "")} ${esc(x.nr || "")}</span></div>
+        <div class="status ${stc}">${esc(st)}</div>
+        <div class="city">em <b>${esc(m.municipio)}</b> · ${esc(m.uf)}</div>
+      </div>
+      <div class="dep-body">
+        <div class="grid dep-k">
+          <div><div class="v num">${fmt(x.votos)}</div><div class="l">votos em ${esc(m.municipio)}</div></div>
+          <div><div class="v num">${x._pos}º</div><div class="l">na cidade · ${pct(x.votos / a.validos)} dos válidos</div></div>
+          <div><div class="v num">${u.total != null ? fmt(u.total) : "—"}</div><div class="l">votos no ${esc(m.uf)} (total geral)${u.rank ? ` · ${u.rank}º do estado` : ""}</div></div>
+          <div><div class="v num">${u.total ? pct(x.votos / u.total) : "—"}</div><div class="l">da votação dele veio de ${esc(m.municipio)}${u.posMun ? ` · ${u.posMun}º município dele` : ""}</div></div>
+          <div><div class="v num">${hist.length}</div><div class="l">${hist.length === 1 ? "eleição" : "eleições"} com voto em ${esc(m.municipio)} (anos carregados)</div></div>
+        </div>
+        ${porSec ? `<div class="grid dep-cols">
+          <div><h4>Top 5 locais de votação</h4>${locais.map(({ l, v }, i) => `<div class="hbar"><div class="lb">${i + 1}. ${esc(l.nome)}<div class="muted" style="font-size:11.5px">${esc(l.bairro)}</div></div><div class="t"><i style="width:${(v / lmax) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (l.validos || 1))}</div></div>`).join("")}</div>
+          <div><h4>Votos por bairro</h4>${bairros.map(({ b, v }) => `<div class="hbar" ${tip(`${esc(b.nome)}: ${fmt(v)} votos · ${pct(v / (b.validos || 1))} dos válidos do bairro`)}><div class="lb">${esc(b.nome)}</div><div class="t"><i style="width:${(v / bmax) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (b.validos || 1))}</div></div>`).join("")}</div>
+        </div>` : `<div class="notice" style="margin-top:16px">Locais e bairros não disponíveis para ${esc(ent.ano)} (só totais do município).</div>`}
+        <h4>Histórico em ${esc(m.municipio)}</h4>
+        <div class="timeline">${hist.map((h) => { const [hs] = statusEleito(h.x.situacao); return `<div class="tl ${h.ano == ent.ano && h.cargo === ent.cargo ? "cur" : ""}"><div class="y">${h.ano} <span class="muted" style="font-weight:500;font-size:14px">· ${esc(cargoCurto(h.cargo))} · ${esc(h.x.partido || "")}</span></div>
+          <div class="c">${fmt(h.x.votos)} votos na cidade · ${pct(h.share)} dos válidos · ${h.pos}º de ${h.n}${h.x.uf && h.x.uf.total ? ` · ${fmt(h.x.uf.total)} no estado` : ""} · ${esc(hs)}</div><div class="t"><i style="width:${(h.x.votos / hmax) * 100}%"></i></div></div>`; }).join("")}</div>
+      </div></div>`;
+  }
+
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderRanking(); renderBairros(); renderMapa(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderDeputado(); renderRanking(); renderBairros(); renderMapa(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -485,6 +586,9 @@
       if (t.id === "sec-cand") { S.secCand = t.value; S.secSort = t.value ? "cand" : "validos"; renderSecoes(); }
       if (t.id === "map-cand") { S.mapCand = t.value; renderMapa(); }
       if (t.id === "cmp-add" && t.value) toggleCmp(t.value);
+      if (t.id === "dep-sel") { S.dep = { pid: t.value, ano: null }; renderDeputado(); }
+      if (t.id === "dep-ano") { S.dep.ano = t.value; renderDeputado(); }
+      if (t.id === "dep-city") { const pid = S.dep.pid; loadCity(t.value).then(() => { S.dep.pid = pid; S.cmp = []; S.secSel = []; renderAll(); $("#deputado").scrollIntoView(); }); }
     });
     document.addEventListener("mouseover", (ev) => { const l = ev.target.closest("[data-local]"); if (l) mapSide(l.dataset.local); });
     // tooltip único
@@ -501,7 +605,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "ranking", "bairros", "mapa", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "ficha", "deputado", "ranking", "bairros", "mapa", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());
   }
