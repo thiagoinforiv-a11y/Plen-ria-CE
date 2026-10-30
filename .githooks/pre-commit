@@ -1,3 +1,4 @@
 #!/bin/sh
-# Bloqueia o commit se os dados contradisserem fatos conhecidos (scripts/verificar.mjs).
-node scripts/verificar.mjs || { echo "Commit bloqueado: corrija os erros acima."; exit 1; }
+# Bloqueia o commit se os dados contradisserem fatos conhecidos ou se a página quebrar.
+node scripts/verificar.mjs || { echo "Commit bloqueado: corrija os erros de dados acima."; exit 1; }
+node scripts/teste-pagina.mjs || { echo "Commit bloqueado: a página quebrou (veja acima)."; exit 1; }

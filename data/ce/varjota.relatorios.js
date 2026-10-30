@@ -218,11 +218,11 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
     },
     {
       nomes: ["Antunino Martins"],
-      papel: "Vereador (2025–2028)",
+      papel: "Secretário de Saúde de Varjota",
       partido: "PSB",
-      resumo: "2º vereador mais votado em 2020 (MDB, 818). Consta como vereador da legislatura atual pelo PSB.",
+      resumo: "2º vereador mais votado em 2020 (MDB, 818). Não concorreu em 2024 (não consta na lista oficial de candidatos) e hoje é secretário de Saúde. O portal da Câmara ainda o mostra pela legislatura anterior.",
       redes: [],
-      destaques: [{ data: "2025-01", titulo: "Vereador da 11ª legislatura (PSB)", selo: "uma-fonte", fontes: [{ nome: "Portal da Câmara", url: "https://camaravarjota.ce.gov.br/parlamentares/" }] }],
+      destaques: [{ data: "2020-11-15", titulo: "Eleito vereador com 818 votos (MDB), 2º mais votado", selo: "confirmado", fontes: [{ nome: "Portal da Câmara", url: "https://camaravarjota.ce.gov.br/parlamentares/" }] }],
     },
     {
       nomes: ["Aristeu Linhares"],

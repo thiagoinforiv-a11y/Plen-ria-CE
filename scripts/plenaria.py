@@ -246,6 +246,22 @@ def cmd_seed(a):
         for r in csv.DictReader(f):
             if r["id_municipio"] == a.cd_ibge and r["ano"] and int(r["ano"]) >= a.desde:
                 perfis[(r["ano"], r["sequencial"])] = r
+    # candidaturas registradas em anos ainda sem resultado no espelho (ex.: 2024): nome, partido e
+    # sequencial do TSE — servem para foto oficial e para confirmar quem concorreu
+    com_resultado = set()
+    with gzip.open(res, "rt", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["id_municipio"] == a.cd_ibge and r["ano"]:
+                com_resultado.add(r["ano"])
+    cidade["candidaturas"] = {}
+    for (ano_c, sq), r in perfis.items():
+        if ano_c in com_resultado or r["cargo"] not in ("prefeito", "vereador", "vice-prefeito"):
+            continue
+        cidade["candidaturas"].setdefault(ano_c, []).append({
+            "sq": sq, "urna": titulo(r["nome_urna"] or r["nome"]), "nome": titulo(r["nome"]), "cargo": r["cargo"],
+            "partido": r["sigla_partido"], "nr": r["numero"], "ocupacao": r["ocupacao"] or None})
+    for lst in cidade["candidaturas"].values():
+        lst.sort(key=lambda c: (c["cargo"] != "prefeito", c["cargo"], c["urna"]))
 
     pessoas = Pessoas(cidade)
     eleicoes = {}

@@ -930,8 +930,82 @@
       <div style="margin-top:14px">${tabela}</div>`;
   }
 
+
+  // ------------------------------------------------------------------ quem é quem: rostos por grupo, com ligações aos deputados
+  function fotoPorNome(nome) {
+    const n = normNome(nome);
+    const manual = (S.local && S.local.fotos) || {};
+    for (const [k, v] of Object.entries(manual)) if (normNome(k) === n) return { foto: v };
+    const c24 = ((S.city.candidaturas || {})["2024"] || []).find((c) => normNome(c.urna) === n || normNome(c.nome) === n);
+    if (c24) return { foto: `https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/2045202024/${c24.sq}/${S.city.meta.cd_tse}`, c24 };
+    const c = acharCandidato([nome]);
+    const r = acharRelatorio([nome]);
+    return { foto: c && c.x.foto && /^https|^fotos/.test(c.x.foto) ? c.x.foto : null, wiki: r && r.wiki };
+  }
+  function retrato(nome, sub, extra = {}) {
+    const f = fotoPorNome(nome);
+    const nm = nome.split(" / ")[0];
+    return `<div class="rt ${extra.cls || ""}" data-pessoa="${esc(nome)}" ${extra.dep ? `data-dep="${esc(nome)}"` : ""} role="button" tabindex="0">
+      ${avatar({ urna: nm, foto: f.foto, wiki: f.wiki }, "av rta")}
+      <div class="rtn">${esc(nome)}</div>${sub ? `<div class="rts">${sub}</div>` : ""}${extra.tag ? `<span class="rtt ${extra.tagc || ""}">${esc(extra.tag)}</span>` : ""}</div>`;
+  }
+  function renderQuem() {
+    const el = $("#quem"); if (!el) return;
+    const m = S.city.meta, L = S.local || {}, F = S.ficha || {};
+    const e26 = S.city.eleicoes["2026"] || { cargos: {} };
+    const votos26 = (nome) => { for (const k of ["deputado_federal", "deputado_estadual"]) { const c = e26.cargos[k]; const x = c && c.candidatos.find((y) => normNome(y.urna) === normNome(nome)); if (x) return { x, cargo: k }; } return null; };
+    const pref = (F.poder || []).find((p) => p.papel === "Prefeito"), vice = (F.poder || []).find((p) => p.papel === "Vice-prefeito");
+    const c24 = (S.city.candidaturas || {})["2024"] || [];
+    const sub24 = (nome) => { const c = c24.find((y) => normNome(y.urna) === normNome(nome)); return c ? `${esc(c.partido)}` : ""; };
+    let html = `<div class="blk-h"><div><h2>Quem é quem em <em class="s">${esc(m.municipio)}</em></h2><p class="lead">Os rostos da política da cidade, por grupo. Passe o dedo ou o mouse sobre um vereador ou liderança para ver a quais deputados ele levou voto em 2026.</p></div></div>`;
+    html += `<div class="qtopo">${pref ? retrato(pref.nome, "Prefeito · " + (sub24(pref.nome) || ""), { cls: "big", tag: "2º mandato" }) : ""}${vice ? retrato(vice.nome, "Vice-prefeito · Republicanos", { cls: "big", tag: "rompido", tagc: "warn" }) : ""}</div>`;
+    const grupos = L.grupos || [];
+    const apoios = L.apoios || [];
+    if (!grupos.length) { el.innerHTML = html + `<div class="notice">Os grupos e as ligações vêm do seu arquivo local (<code>${esc(m.slug)}.local.js</code>).</div>`; return; }
+    const chave = { "Situação": "prefeito", "Oposição": "oposição", "Terceira via": "terceira via" };
+    const ordem = ["Situação", "Terceira via", "Oposição"].map((n) => grupos.find((g) => g.nome === n)).filter(Boolean);
+    html += `<div class="board" id="board"><svg class="blinks" id="blinks"></svg>${ordem.map((g) => {
+      const k = chave[g.nome];
+      const doGrupo = apoios.filter((a) => (a.grupo || "") === k && a.vereador !== "Elmo Monte");
+      const lideres = g.lider.split(" · ");
+      const vers = (g.camara || [...new Set(doGrupo.filter((a) => (a.tipo || "vereador") === "vereador").map((a) => a.vereador))]).filter((v) => !lideres.includes(v));
+      const lids0 = [...new Set(doGrupo.filter((a) => a.tipo === "liderança").map((a) => a.vereador))];
+      const lids = lids0.filter((v) => !g.lider.split(" · ").includes(v));
+      const deps = [...new Set(apoios.filter((a) => (a.grupo || "") === k).flatMap((a) => a.deputados))];
+      const cor = k === "prefeito" ? "var(--s1)" : k === "oposição" ? "var(--s2)" : "var(--s3)";
+      return `<div class="bcol" style="--c:${cor}"><div class="bh"><span class="dot"></span>${esc(g.nome)}<span class="muted">${esc(g.forca || "")}</span></div>
+        <div class="blead">${lideres.map((n) => retrato(n, "liderança do grupo", { cls: "mid" })).join("")}</div>
+        ${vers.length ? `<div class="bk">Na Câmara</div><div class="bgrid">${vers.map((v) => retrato(v, sub24(v) || "vereador")).join("")}</div>` : ""}
+        ${lids.length ? `<div class="bk">Lideranças</div><div class="bgrid">${lids.map((v) => retrato(v, "liderança")).join("")}</div>` : ""}
+        <div class="bk">Deputados com voto em ${esc(m.municipio)} · 2026</div><div class="bgrid deps">${deps.map((d) => { const v = votos26(d); return retrato(d, v ? `<b class="num">${fmt(v.x.votos)}</b> · ${v.cargo === "deputado_federal" ? "federal" : "estadual"}` : "", { dep: true, tag: v && /^eleit/.test(v.x.situacao || "") ? "eleito" : v && v.x.situacao ? v.x.situacao : "", tagc: v && /^eleit/.test(v.x.situacao || "") ? "ok" : "" }); }).join("")}</div></div>`; }).join("")}</div>`;
+    el.innerHTML = html;
+    // ligações: ao passar sobre alguém, desenha linhas até os deputados que ele apoiou
+    const board = $("#board"), svg = $("#blinks");
+    const mapa = {}; apoios.forEach((a) => { (mapa[a.vereador] ||= new Set()); a.deputados.forEach((d) => mapa[a.vereador].add(d)); });
+    const limpar = () => { svg.innerHTML = ""; board.classList.remove("foco"); $$(".rt.on", board).forEach((x) => x.classList.remove("on")); };
+    const ligar = (rt) => {
+      const nome = rt.dataset.pessoa, alvo = mapa[nome]; if (!alvo || !alvo.size) return;
+      limpar(); board.classList.add("foco"); rt.classList.add("on");
+      const B = board.getBoundingClientRect(), a = rt.querySelector(".rta").getBoundingClientRect();
+      const x1 = a.left + a.width / 2 - B.left, y1 = a.top + a.height / 2 - B.top;
+      svg.setAttribute("viewBox", `0 0 ${B.width} ${B.height}`);
+      let paths = "";
+      $$(".rt[data-dep]", board).forEach((d) => {
+        if (!alvo.has(d.dataset.dep)) return;
+        d.classList.add("on");
+        const r = d.querySelector(".rta").getBoundingClientRect(), x2 = r.left + r.width / 2 - B.left, y2 = r.top + r.height / 2 - B.top;
+        const cy = (y1 + y2) / 2;
+        paths += `<path d="M${x1},${y1} C${x1},${cy} ${x2},${cy} ${x2},${y2}" />`;
+      });
+      svg.innerHTML = paths;
+      if (window.gsap) svg.querySelectorAll("path").forEach((p) => { const n = p.getTotalLength(); gsap.fromTo(p, { strokeDasharray: n, strokeDashoffset: n }, { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }); });
+    };
+    board.addEventListener("mouseover", (ev) => { const rt = ev.target.closest(".rt:not([data-dep])"); if (rt) ligar(rt); });
+    board.addEventListener("mouseleave", limpar);
+    board.addEventListener("click", (ev) => { const rt = ev.target.closest(".rt"); if (!rt) return; if (!rt.dataset.dep && mapa[rt.dataset.pessoa]) { ligar(rt); } else openRelatorio(rt.dataset.pessoa.split(" / ")[0]); });
+  }
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderMapa(); renderCruzamento(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderQuem(); renderFicha(); renderMapa(); renderCruzamento(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -1218,7 +1292,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "ficha", "mapa", "estrategia", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "quem", "ficha", "mapa", "estrategia", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     addEventListener("resize", () => { clearTimeout(bind._rt); bind._rt = setTimeout(() => desenharMapa.fit && desenharMapa.fit(), 200); });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());
