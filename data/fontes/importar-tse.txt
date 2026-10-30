@@ -1,0 +1,4 @@
+# Anos para a automação "Importar dados do TSE" (um por linha). Alterar este arquivo dispara a importação.
+2024
+2026
+2022
