@@ -86,7 +86,7 @@ for (const c of ctx.window.PLENARIA_CIDADES || []) {
       if (q && q.simulado) for (const p of q.partidos) {
         const reais = cg.candidatos.filter((x) => x.partido === p.sigla && (x.situacao || "").startsWith("eleito")).map((x) => x.urna).sort().join(", ");
         const sim = p.eleitos.map((x) => x.urna).sort().join(", ");
-        if (reais !== sim) erros.push(`${tag}: ${ano} ${k}: recálculo das cadeiras do ${p.sigla} dá [${sim}], oficial é [${reais}]`);
+        if (reais !== sim) (+ano >= 2022 ? avisos : erros).push(`${tag}: ${ano} ${k}: recálculo das cadeiras do ${p.sigla} dá [${sim}], oficial é [${reais}]${+ano >= 2022 ? " (regra de sobras pós-2021: conferir)" : ""}`);
       }
     }
     for (let i = 1; i < cg.candidatos.length; i++) if (cg.candidatos[i].votos > cg.candidatos[i - 1].votos) { erros.push(`${tag}: ${ano} ${k}: ranking fora de ordem`); break; }

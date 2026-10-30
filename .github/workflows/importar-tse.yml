@@ -1,0 +1,44 @@
+name: Importar dados do TSE
+# Roda nos servidores do GitHub (que têm acesso ao TSE): baixa votação por seção, locais de votação,
+# candidaturas, vagas e FOTOS oficiais, confere tudo e salva no branch. Disparo manual.
+on:
+  workflow_dispatch:
+    inputs:
+      anos:
+        description: "Anos a importar (separados por espaço)"
+        default: "2024 2026 2022"
+permissions:
+  contents: write
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Importar do TSE
+        run: |
+          args=""; for a in ${{ inputs.anos }}; do args="$args --ano $a"; done
+          python3 scripts/plenaria.py tse --municipio Varjota $args --baixar --continuar
+      - name: Completar 2026 com a lista parcial (só se o TSE ainda não tiver 2026)
+        run: python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true
+      - name: Conferir dados
+        run: node scripts/verificar.mjs
+      - name: Testar a página
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node scripts/teste-pagina.mjs
+      - name: Salvar no branch
+        run: |
+          git config user.name "plenaria-bot"
+          git config user.email "plenaria-bot@users.noreply.github.com"
+          git add data fotos
+          git diff --cached --quiet && { echo "Nada novo."; exit 0; }
+          git commit -m "Dados oficiais do TSE (${{ inputs.anos }}) com fotos — importação automática"
+          git push

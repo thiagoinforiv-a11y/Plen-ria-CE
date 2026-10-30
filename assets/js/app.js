@@ -936,11 +936,14 @@
     const n = normNome(nome);
     const manual = (S.local && S.local.fotos) || {};
     for (const [k, v] of Object.entries(manual)) if (normNome(k) === n) return { foto: v };
+    const cl = acharCandidato([nome]);
+    if (cl && cl.x.foto && /^fotos\//.test(cl.x.foto)) return { foto: cl.x.foto };
     const c24 = ((S.city.candidaturas || {})["2024"] || []).find((c) => normNome(c.urna) === n || normNome(c.nome) === n);
     if (c24) return { foto: `https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/2045202024/${c24.sq}/${S.city.meta.cd_tse}`, c24 };
     const c = acharCandidato([nome]);
     const r = acharRelatorio([nome]);
-    return { foto: c && c.x.foto && /^https|^fotos/.test(c.x.foto) ? c.x.foto : null, wiki: r && r.wiki };
+    if (c && c.x.foto && /^fotos\//.test(c.x.foto)) return { foto: c.x.foto };   // foto oficial guardada no projeto
+    return { foto: c && c.x.foto && /^https/.test(c.x.foto) ? c.x.foto : null, wiki: r && r.wiki };
   }
   function retrato(nome, sub, extra = {}) {
     const f = fotoPorNome(nome);
@@ -1333,9 +1336,9 @@
   if ("MutationObserver" in window) new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => n.nodeType === 1 && hidratarFotos(n)))).observe(document.body, { childList: true, subtree: true });
   // ------------------------------------------------------------------ movimento: barras crescem do zero, números contam, blocos sobem
   const MOV = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const SEL_BAR = ".rrow .bar i, .hbar .t i, .tl .t i, .gbars .b i, .rx-t i";
-  const SEL_NUM = ".kpi .v, .dep-k .v, .pf-k .v, .tk b, .cz-q .n, .rrow .vv, .lchip .n, .acard .n";
-  const SEL_POP = ".card, .rrow, .fato, .cpick, .li, .lig";
+  const SEL_BAR = ".rrow .bar i, .hbar .t i, .tl .t i, .gbars .b i, .rx-t i, .stk i";
+  const SEL_NUM = ".kpi .v, .dep-k .v, .pf-k .v, .tk b, .cz-q .n, .rrow .vv, .lchip .n, .acard .n, .qbig b, .gv b, .gvd b, .rts b, .qrow .x, .lr .x";
+  const SEL_POP = ".card, .rrow, .fato, .cpick, .li, .lig, .rt, .qrow, .lr, .pux";
   const contar = (el) => {
     const m = el.textContent.trim().match(/^([^\d]*)(\d{1,3}(?:\.\d{3})*|\d+)(,\d+)?(.*)$/);
     if (!m || !window.gsap) return;

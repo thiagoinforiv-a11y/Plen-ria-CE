@@ -362,7 +362,7 @@ def cmd_tse(a):
     cidade = carregar(uf, slug(a.municipio)) or nova_cidade(uf, a.municipio)
     pessoas = Pessoas(cidade)
 
-    for ano in sorted(set(a.ano)):
+    def _ano(ano):
         print(f"\n== {a.municipio}/{uf} — {ano}")
         f_secao = arquivo_tse(pasta, f"votacao_secao_{ano}_{uf}.zip",
                               f"{CDN}/votacao_secao/votacao_secao_{ano}_{uf}.zip", a.baixar)
@@ -517,6 +517,20 @@ def cmd_tse(a):
                         fotos_ok[m.group(1)] = os.path.relpath(alvo_foto, RAIZ).replace(os.sep, "/")
             print(f"  {len(fotos_ok)} fotos extraídas")
 
+        # vagas em disputa (para quociente eleitoral)
+        vagas = {}
+        f_vagas = os.path.join(pasta, f"consulta_vagas_{ano}.zip")
+        if a.baixar and not os.path.exists(f_vagas):
+            try:
+                baixar(f"{CDN}/consulta_vagas/consulta_vagas_{ano}.zip", f_vagas)
+            except Exception as ex:
+                print(f"  (sem consulta_vagas: {ex})")
+        if os.path.exists(f_vagas):
+            for r in ler_csv_zip(f_vagas, f"_{uf}"):
+                cg = CARGOS.get(r.get("CD_CARGO"))
+                if cg and r.get("SG_UE") in (cd_mun, uf):
+                    vagas[cg] = inteiro(g(r, "QT_VAGAS", "QT_VAGA"))
+
         # 6) monta a eleição
         e = {"ano": int(ano), "data": data_eleicao, "nivel": "secao",
              "fonte": "TSE — Dados Abertos (votacao_secao, eleitorado_local_votacao, consulta_cand, votacao_candidato_munzona)",
@@ -562,6 +576,17 @@ def cmd_tse(a):
                            "brancos": brancos, "nulos": nulos},
                 "legendas": legendas, "candidatos": cands,
             }
+            if cargo in ("vereador", "deputado_federal", "deputado_estadual") and turno == 1:
+                partidos = {}
+                for c in cands:
+                    pp = partidos.setdefault(c["partido"] or "?", {"nominais": 0, "legenda": 0, "total": 0})
+                    pp["nominais"] += c["votos"]; pp["total"] += c["votos"]
+                for sig, v in legendas.items():
+                    pp = partidos.setdefault(sig, {"nominais": 0, "legenda": 0, "total": 0})
+                    pp["legenda"] += v["total"]; pp["total"] += v["total"]
+                e["cargos"][chave_cargo]["partidos"] = partidos
+                if cargo == "vereador" and vagas.get(cargo):
+                    e["cargos"][chave_cargo]["vagas"] = vagas[cargo]
             print(f"  {chave_cargo}: {len(cands)} candidatos com voto, {nominais + leg} válidos")
         cidade["eleicoes"][str(ano)] = e
 
@@ -592,6 +617,13 @@ def cmd_tse(a):
                           "fonte": "TSE — Dados Abertos (detalhe_votacao_munzona)"})
                 cidade["contexto"].append(t)
             cidade["contexto"].sort(key=lambda c: (c["ano"], c["turno"], c["cargo"]))
+    for ano in sorted(set(a.ano)):
+        try:
+            _ano(ano)
+        except (SystemExit, Exception) as ex:
+            if not a.continuar:
+                raise
+            print(f"  !! {ano} não importado: {ex}")
     salvar(cidade)
 
 
@@ -646,6 +678,7 @@ def main():
     t.add_argument("--pasta", default=os.path.join(RAIZ, "tse_raw"))
     t.add_argument("--baixar", action="store_true", help="baixa do cdn.tse.jus.br o que faltar")
     t.add_argument("--sem-fotos", dest="fotos", action="store_false")
+    t.add_argument("--continuar", action="store_true", help="se um ano falhar (arquivo ainda não publicado), segue para os outros")
     m = sub.add_parser("manual", help="votação municipal parcial a partir de data/fontes/*.json")
     m.add_argument("arquivo")
     m.add_argument("--forcar", action="store_true")
