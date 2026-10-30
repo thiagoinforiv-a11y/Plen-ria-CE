@@ -376,6 +376,26 @@ input.search { background: var(--surface-2); border: 1px solid var(--line); bord
 .parts .pt { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
 .parts .arr { color: var(--muted); font-size: 12px; }
 
+/* relatório */
+.relchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.relchips .cpick { cursor: pointer; }
+.relchips .cpick:hover { border-color: var(--accent); }
+.relk { cursor: pointer; text-decoration: underline; text-decoration-color: rgba(212, 255, 58, .5); text-underline-offset: 3px; }
+.relk:hover { color: var(--accent); }
+.rel .rp { font-size: 14px; color: var(--ink-2); }
+.rel p { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 8px 0 0; }
+.redes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+.redes .rede { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.redes .rede:hover { border-color: var(--accent); }
+.rfatos { margin-top: 12px; }
+.rfatos .fato { grid-template-columns: 82px 1fr; gap: 12px; padding: 12px 0 12px 16px; }
+.rfatos .fato .tt { font-size: 14.5px; }
+.rfatos .fato p { font-size: 13.5px; }
+.buscas { display: flex; flex-wrap: wrap; gap: 6px; }
+.buscas a { font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); text-decoration: none; }
+.buscas a:hover { border-color: var(--accent); color: var(--ink); }
+.pf-body .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 14px 0 8px; }
+
 /* deputado na cidade */
 .dep-card { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; }
 .dep-id { background: var(--accent); color: var(--accent-ink); padding: 28px 24px; }

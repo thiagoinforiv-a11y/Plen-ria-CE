@@ -50,10 +50,12 @@
       await loadScript(reg.arquivo.replace(/\.js$/, ".ficha.js")).catch(() => null);
       // conhecimento local e leituras: só no computador do usuário (fora do git)
       await loadScript(reg.arquivo.replace(/\.js$/, ".local.js")).catch(() => null);
+      await loadScript(reg.arquivo.replace(/\.js$/, ".relatorios.js")).catch(() => null);
     }
     S.city = window.PLENARIA_DATA[reg.id];
     S.ficha = (window.PLENARIA_FICHAS || {})[reg.id] || null;
     S.local = (window.PLENARIA_LOCAL || {})[reg.id] || null;
+    S.rel = (window.PLENARIA_RELATORIOS || {})[reg.id] || null;
     resolverFotos();
     S.cityId = reg.id;
     store.set("cidade", reg.id);
@@ -485,13 +487,14 @@
     const fatos = [...(F.fatos || []), ...(L.fatos || []).map((x) => ({ selo: "local", ...x }))].sort((a, b) => String(b.data).localeCompare(String(a.data)));
     const sub = (t) => `<h3 class="fh">${t}</h3>`;
     const grupos = L.grupos || F.grupos || [];
-    const ligado = (d) => `<div class="lig"><div><b>${esc(d.nome)}</b> <span class="muted">${esc([d.cargo, d.partido].filter(Boolean).join(" · "))}</span></div>
+    const ligado = (d) => `<div class="lig"><div><b data-rel="${esc(d.nome)}" role="button" tabindex="0" class="relk">${esc(d.nome)}</b> <span class="muted">${esc([d.cargo, d.partido].filter(Boolean).join(" · "))}</span></div>
       <div class="r">${esc(d.resultado || "")}${d.votosCidade != null ? ` · <b class="num">${fmt(d.votosCidade)}</b> em ${esc(m.municipio)}` : d.votosCidadeTxt ? ` · ${esc(d.votosCidadeTxt)} em ${esc(m.municipio)}` : ""}</div>
       ${d.selo ? `<div class="f">${selo(d.selo)} ${fontes(d.fontes)}</div>` : ""}</div>`;
     el.innerHTML = head +
-      `<div class="grid poder">${(F.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v">${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>` +
+      `<div class="grid poder">${(F.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v"${acharRelatorio([p.nome]) ? ` data-rel="${esc(p.nome)}" role="button" tabindex="0" style="cursor:pointer"` : ""}>${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>` +
+      ((S.rel && S.rel.pessoas.length) ? sub("Relatórios por pessoa") + `<div class="relchips">${S.rel.pessoas.map((r) => { const c = acharCandidato(r.nomes); return `<button type="button" class="cpick" data-rel="${esc(r.nomes[0])}">${avatar({ urna: r.nomes[0], foto: c && c.x.foto })}<b>${esc(r.nomes[0])}</b><span class="muted">${esc(r.partido || "")}</span></button>`; }).join("")}</div>` : "") +
       (grupos.length ? sub("Grupos políticos") + `<div class="grid grupos">${grupos.map((g, i) => { const [pl, pc] = POSICAO[g.posicao] || [g.posicao || "", ""]; return `<div class="card gcard" style="--g:${SLOTS[i] || "var(--other)"}">
-        <div class="gh"><div><div class="l">${esc(g.nome)}</div><div class="v">${esc(g.lider || "")}</div></div>${pl ? `<span class="pos ${pc}">${esc(pl)}</span>` : ""}</div>
+        <div class="gh"><div><div class="l">${esc(g.nome)}</div><div class="v"${acharRelatorio([g.lider]) ? ` data-rel="${esc(g.lider)}" role="button" tabindex="0" class="relk"` : ""}>${esc(g.lider || "")}</div></div>${pl ? `<span class="pos ${pc}">${esc(pl)}</span>` : ""}</div>
         ${g.resumo ? `<p class="d">${esc(g.resumo)}</p>` : ""}
         ${(g.ligados || []).length ? `<div class="k">Deputados e lideranças ligados</div>${g.ligados.map(ligado).join("")}` : ""}
         ${g.vereadores ? `<div class="k">Câmara</div><p class="d">${esc(g.vereadores)}</p>` : ""}
@@ -701,6 +704,60 @@
     }
     return out.sort((p, q) => q.ano - p.ano || p.cargo.localeCompare(q.cargo));
   }
+
+  // ------------------------------------------------------------------ relatório por pessoa (rede e notícias)
+  const normNome = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+  function acharRelatorio(nomes) {
+    const alvo = new Set(nomes.filter(Boolean).map(normNome));
+    return ((S.rel && S.rel.pessoas) || []).find((r) => r.nomes.some((n) => alvo.has(normNome(n)))) || null;
+  }
+  function acharCandidato(nomes) {
+    const alvo = new Set(nomes.filter(Boolean).map(normNome));
+    let best = null;
+    for (const [ano, e] of Object.entries(S.city.eleicoes))
+      for (const [k, c] of Object.entries(e.cargos))
+        for (const x of c.candidatos)
+          if ((alvo.has(normNome(x.urna)) || alvo.has(normNome(x.nome))) && (!best || +ano > +best.ano)) best = { ano, cargo: k, x };
+    return best;
+  }
+  function buscasHTML(nome) {
+    const cid = S.city.meta.municipio;
+    const q = encodeURIComponent(`"${nome}"`), qc = encodeURIComponent(`"${nome}" ${cid}`);
+    const L = [
+      ["Google", `https://www.google.com/search?q=${qc}`],
+      ["Notícias", `https://news.google.com/search?q=${q}&hl=pt-BR&gl=BR&ceid=BR:pt-419`],
+      ["Instagram", `https://www.google.com/search?q=${encodeURIComponent(`site:instagram.com "${nome}"`)}`],
+      ["Facebook", `https://www.facebook.com/search/top?q=${encodeURIComponent(nome)}`],
+      ["YouTube", `https://www.youtube.com/results?search_query=${qc}`],
+      ["X / Twitter", `https://x.com/search?q=${q}&f=live`],
+    ];
+    return `<div class="buscas">${L.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join("")}</div>`;
+  }
+  function relatorioHTML(nomes) {
+    const r = acharRelatorio(nomes);
+    const nome = (r && r.nomes[0]) || nomes[0];
+    const dest = r ? [...(r.destaques || [])].sort((a, b) => String(b.data).localeCompare(String(a.data))) : [];
+    return `<h4>Relatório na rede${S.rel && S.rel.atualizado ? ` <span style="text-transform:none;letter-spacing:0">· atualizado em ${esc(dataBR(S.rel.atualizado))}</span>` : ""}</h4>
+      ${r ? `<div class="rel">${r.papel ? `<div class="rp">${esc(r.papel)}${r.partido ? ` · <b>${esc(r.partido)}</b>` : ""}</div>` : ""}${r.resumo ? `<p>${esc(r.resumo)}</p>` : ""}
+        <div class="redes">${(r.redes || []).length ? r.redes.map((rd) => `<a href="${esc(rd.url)}" target="_blank" rel="noopener" class="rede"><b>${esc(rd.rede)}</b> ${esc(rd.rotulo || "")} ↗</a>${rd.selo ? selo(rd.selo) : ""}`).join("") : `<span class="muted" style="font-size:13px">Nenhum perfil oficial confirmado nas buscas.</span>`}</div>
+        ${dest.length ? `<div class="fatos rfatos">${dest.map((x) => `<article class="fato"><div class="dt">${esc(dataBR(x.data))}</div><div><div class="tt">${esc(x.titulo)} ${selo(x.selo)}</div>${x.resumo ? `<p>${esc(x.resumo)}</p>` : ""}<div class="fs">${fontes(x.fontes)}</div></div></article>`).join("")}</div>` : ""}</div>`
+        : `<p class="muted" style="font-size:13.5px">Ainda não há relatório pesquisado para ${esc(nome)}. Use as buscas abaixo ou peça para eu levantar.</p>`}
+      <div class="k" style="margin-top:14px">Buscar mais na rede</div>${buscasHTML(nome)}`;
+  }
+  function openRelatorio(nome) {
+    const r = acharRelatorio([nome]);
+    const nomes = r ? r.nomes : [nome];
+    const c = acharCandidato(nomes);
+    if (c) return openProfile(c.x.sq, c.ano, c.cargo);
+    const foto = null;
+    $("#drawer").innerHTML = `<div class="pf-top"><button class="close" id="pf-close" aria-label="Fechar">✕</button>
+      <div class="pf-id"><div class="pf-photo">${esc(initials(nomes[0]))}${foto ? `<img src="${esc(foto)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
+      <div><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7">Relatório</div><h3>${esc(nomes[0])}</h3>${r && r.papel ? `<div class="full">${esc(r.papel)}</div>` : ""}
+      ${r && r.partido ? `<div class="badges"><span>${esc(r.partido)}</span></div>` : ""}</div></div></div>
+      <div class="pf-body">${relatorioHTML(nomes)}<p class="muted" style="font-size:12.5px;margin-top:16px">Sem votação desta pessoa nas eleições carregadas para ${esc(S.city.meta.municipio)}. Os números por seção entram quando o TSE for liberado.</p></div>`;
+    abrirDrawer();
+  }
+
   function openProfile(sq, ano = S.ano, cargo = S.cargo) {
     const a = agg(ano, cargo), x = a.bySq[sq];
     const porSecao = () => S.city.eleicoes[ano].nivel === "secao";
@@ -734,6 +791,7 @@
         <div class="timeline">${hist.map((h) => `<div class="tl ${h.ano == ano && h.cargo === cargo ? "cur" : ""}"><div class="y">${h.ano} <span class="muted" style="font-weight:500;font-size:14px">· ${esc(cargoCurto(h.cargo))}</span></div>
           <div class="c">${fmt(h.x.votos)} votos · ${pct(h.share)} dos válidos · ${h.pos}º de ${h.n}${h.x.situacao ? ` · ${esc(situTxt(h.x.situacao))}` : ""} · ${esc(h.x.partido || "")}</div><div class="t"><i style="width:${(h.x.votos / hmax) * 100}%"></i></div></div>`).join("")}</div>
         ${hist.length < 2 ? `<p class="muted" style="font-size:13px">Sem outras candidaturas ligadas a esta pessoa nos anos carregados para ${esc(m.municipio)}.</p>` : ""}
+        ${relatorioHTML([x.urna, x.nome])}
         ${fatos.length ? `<h4>Ficha</h4><dl class="facts">${fatos.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
         ${divulgaLink(ano, cargo, x.sq) ? `<p style="margin-top:14px"><a class="btn" style="text-decoration:none;color:var(--ink)" href="${divulgaLink(ano, cargo, x.sq)}" target="_blank" rel="noopener">Ficha oficial no TSE (DivulgaCand) ↗</a></p>` : ""}
         <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
@@ -741,6 +799,9 @@
           ${porSecao() ? `<button class="btn" type="button" id="pf-secoes" data-sq="${x.sq}">Ver nas seções</button>` : ""}
         </div>
       </div>`;
+    abrirDrawer();
+  }
+  function abrirDrawer() {
     const d = $("#drawer"), sc = $("#scrim");
     d.setAttribute("aria-hidden", "false"); sc.classList.add("on");
     if (window.gsap) { gsap.to(d, { x: 0, xPercent: 0, duration: 0.45, ease: "power3.out" }); gsap.to(sc, { opacity: 1, duration: 0.3 }); gsap.from(".pf-body > *", { y: 16, opacity: 0, stagger: 0.03, duration: 0.4, delay: 0.1 }); }
@@ -773,6 +834,8 @@
     });
     document.addEventListener("click", (ev) => {
       const t = ev.target;
+      const rl = t.closest("[data-rel]");
+      if (rl) { ev.preventDefault(); openRelatorio(rl.dataset.rel); return; }
       const cargo = t.closest("[data-cargo]");
       if (cargo) { S.cargo = cargo.dataset.cargo; S.cmp = []; S.secSel = []; S.secCand = ""; renderAll(); return; }
       const cmp = t.closest("[data-cmp]");
@@ -819,6 +882,7 @@
     document.addEventListener("keydown", (ev) => {
       if (ev.key === "Escape") closeProfile();
       if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches("[role=button][data-sq]")) { ev.preventDefault(); openProfile(ev.target.dataset.sq); }
+      if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches("[role=button][data-rel]")) { ev.preventDefault(); openRelatorio(ev.target.dataset.rel); }
     });
     document.addEventListener("input", (ev) => {
       const t = ev.target;
