@@ -197,6 +197,9 @@ def cmd_seed(a):
                  os.path.join(pasta, "bd_resultados_candidato.csv.gz"))
     cand = baixar(BD.format("candidatos%2Fcandidatos_bdpro.csv.gz"),
                   os.path.join(pasta, "bd_candidatos.csv.gz"))
+    vagas_f = baixar(BD.format("vagas%2Fvagas_bdpro.csv.gz"), os.path.join(pasta, "bd_vagas.csv.gz"))
+    part_f = baixar(BD.format("resultados_partido_municipio%2Fresultados_partido_municipio_bdpro.csv.gz"),
+                    os.path.join(pasta, "bd_resultados_partido_municipio.csv.gz"))
 
     alvo = norm(a.municipio)
     cidade = carregar(a.uf, slug(a.municipio))
@@ -273,6 +276,24 @@ def cmd_seed(a):
                 "idade": inteiro(p.get("idade")), "instrucao": p.get("instrucao") or None,
                 "votos": inteiro(r["votos"]) or 0, "foto": None,
             })
+    # vagas em disputa e votos por partido (nominais + legenda) — base dos quocientes
+    vagas = {}
+    with gzip.open(vagas_f, "rt", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["id_municipio"] == a.cd_ibge and r["cargo"] in ("vereador", "prefeito"):
+                vagas[(r["ano"], r["cargo"])] = inteiro(r["vagas"])
+    partidos = {}
+    with gzip.open(part_f, "rt", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["id_municipio"] == a.cd_ibge and r["cargo"] == "vereador" and r["turno"] == "1":
+                n, l = inteiro(r["votos_nominais"]) or 0, inteiro(r["votos_legenda"]) or 0
+                partidos.setdefault(r["ano"], {})[r["sigla_partido"]] = {"nominais": n, "legenda": l, "total": n + l}
+    for ano, e in eleicoes.items():
+        for slug_c, c in e["cargos"].items():
+            if (ano, slug_c) in vagas:
+                c["vagas"] = vagas[(ano, slug_c)]
+            if slug_c == "vereador" and ano in partidos:
+                c["partidos"] = partidos[ano]
     for ano, e in eleicoes.items():
         for slug_c, c in e["cargos"].items():
             c["candidatos"].sort(key=lambda x: -x["votos"])

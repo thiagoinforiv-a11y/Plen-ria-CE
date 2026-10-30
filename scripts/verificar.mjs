@@ -23,6 +23,8 @@ const SELOS = new Set(["confirmado", "declaracao", "uma-fonte", "pesquisa", "a-c
 const erros = [], avisos = [];
 
 carregar("data/cidades.js");
+carregar("assets/js/quociente.js");
+const Q = ctx.window.PlenariaQuociente;
 for (const c of ctx.window.PLENARIA_CIDADES || []) {
   const tag = c.nome;
   carregar(c.arquivo);
@@ -62,6 +64,17 @@ for (const c of ctx.window.PLENARIA_CIDADES || []) {
       if (sqs.has(x.sq)) erros.push(`${tag}: ${ano} ${k}: candidato repetido ${x.urna}`);
       sqs.add(x.sq);
       if (x.secoes) { const s2 = Object.values(x.secoes).reduce((t, v) => t + v, 0); if (s2 !== x.votos) erros.push(`${tag}: ${ano} ${k}: ${x.urna} soma por seção ${s2} ≠ total ${x.votos}`); }
+    }
+    // quociente: votos por partido fecham com os válidos e, sem coligações, a distribuição recalculada bate com os eleitos oficiais
+    if (cg.partidos) {
+      const tot = Object.values(cg.partidos).reduce((t, p) => t + p.total, 0);
+      if (cg.totais && tot !== cg.totais.validos) erros.push(`${tag}: ${ano} ${k}: votos por partido ${tot} ≠ válidos ${cg.totais.validos}`);
+      const q = Q.quociente(cg, ano);
+      if (q && q.simulado) for (const p of q.partidos) {
+        const reais = cg.candidatos.filter((x) => x.partido === p.sigla && (x.situacao || "").startsWith("eleito")).map((x) => x.urna).sort().join(", ");
+        const sim = p.eleitos.map((x) => x.urna).sort().join(", ");
+        if (reais !== sim) erros.push(`${tag}: ${ano} ${k}: recálculo das cadeiras do ${p.sigla} dá [${sim}], oficial é [${reais}]`);
+      }
     }
     for (let i = 1; i < cg.candidatos.length; i++) if (cg.candidatos[i].votos > cg.candidatos[i - 1].votos) { erros.push(`${tag}: ${ano} ${k}: ranking fora de ordem`); break; }
   }

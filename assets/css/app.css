@@ -544,3 +544,27 @@ select.pill, .seg, .btn, input.search { border-color: rgba(255, 255, 255, .08); 
 .apcard.op { box-shadow: inset 0 0 0 1px rgba(217, 89, 38, .45), var(--glow); }
 .apcard.op .l:after { content: " · oposição"; color: #e8a07f; }
 .tagx { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #ffd780; margin-left: 6px; }
+
+.quoc { margin-bottom: 22px; }
+.quoc .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+.qhead { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 16px; }
+.qbig { display: flex; align-items: baseline; gap: 10px; }
+.qbig b { font-size: 48px; font-weight: 900; letter-spacing: -.04em; line-height: 1; color: var(--accent); }
+.qbig span { color: var(--ink-2); font-size: 14px; }
+.qok { font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 999px; background: rgba(62, 194, 122, .12); color: var(--good); box-shadow: inset 0 0 0 1px rgba(62, 194, 122, .4); }
+.qok.bad { background: rgba(230, 103, 103, .12); color: #e66767; box-shadow: inset 0 0 0 1px rgba(230, 103, 103, .4); }
+.qok.neutro { background: rgba(255, 255, 255, .05); color: var(--ink-2); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1); }
+.qrow { display: grid; grid-template-columns: 170px minmax(160px, 1.2fr) 62px 140px 2fr; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, .05); font-size: 13.5px; }
+.qrow.qh { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); border-top: 0; padding-top: 0; }
+.qrow .qp b { display: block; }
+.qrow .qp span { font-size: 11.5px; }
+.qrow .qq { font-weight: 800; text-align: right; }
+.qrow .qe { display: flex; flex-wrap: wrap; gap: 4px; }
+.qrow .qe .cpick { font-size: 12.5px; padding: 3px 9px; cursor: pointer; }
+.pux { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; padding: 8px 0; border-top: 1px solid rgba(255, 255, 255, .05); }
+.pux b { color: var(--ink); }
+@media (max-width: 900px) { .qrow { grid-template-columns: 1fr 1fr; } .qrow.qh { display: none; } .qrow .qe { grid-column: 1 / -1; } }
+.apcard .ah { align-items: center; }
+.apcard .apav { width: 48px; height: 48px; flex: none; }
+.qgeral { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.qgeral .pux a { color: var(--ink-2); }

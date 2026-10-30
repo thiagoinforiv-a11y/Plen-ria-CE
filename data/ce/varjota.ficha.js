@@ -16,6 +16,25 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
     ultimasEleicoes: { municipal: 2024, geral: 2026 },
   },
 
+  // Quocientes da eleição geral (Ceará inteiro) — contexto para os deputados ligados a Varjota.
+  quocientes: [
+    {
+      titulo: "Deputado federal 2026 · 22 vagas", qe: 250984,
+      itens: [
+        { texto: "Último eleito teve 56.068 votos (Carmelo Neto, PL): puxado pelo voto do partido — André Fernandes (PL) fez 684.372, cerca de 2,7 quocientes sozinho.", selo: "confirmado", fontes: [{ nome: "Hub Político (quociente por estado)", url: "https://hubpolitico.com.br/inteligencia/relatorios/eleicao-2026/quociente-eleitoral" }, { nome: "CNN Brasil", url: "https://www.cnnbrasil.com.br/eleicoes/conheca-os-22-deputados-federais-eleitos-pelo-ceara-em-2026/" }] },
+        { texto: "Três candidatos passaram de 100 mil votos e ficaram fora da Câmara, enquanto outros entraram com bem menos, levados pelo partido.", selo: "uma-fonte", fontes: [{ nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/tres-candidatos-do-ceara-superam-100-mil-votos-e-ficam-fora-da-camara-dos-deputados-1.3796461" }] },
+        { texto: "7 das 22 vagas saíram das sobras (maiores médias), entre elas Neném Coelho (MDB), Luisa Cela (PT) e Dr. Acilon (PSB); AJ Albuquerque (PP) também entrou por média. O PDT contesta a regra no STF (ADI 8036).", selo: "confirmado", fontes: [{ nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/pdt-questiona-no-stf-regra-que-elegeu-sete-deputados-pelo-ceara-1.3802359" }, { nome: "Conjur", url: "https://conjur.com.br/2026-out-23/pdt-questiona-no-stf-regras-de-distribuicao-de-sobras-eleitorais-nas-eleicoes-proporcionais/" }] },
+      ],
+    },
+    {
+      titulo: "Deputado estadual 2026 · 46 vagas", qe: null,
+      itens: [
+        { texto: "Quociente de 2026 ainda não confirmado em duas fontes (em 2022 foi 109.592; a projeção era de cerca de 110 mil).", selo: "a-conferir", fontes: [{ nome: "Diário do Nordeste (cálculo)", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/quantos-votos-sao-necessarios-para-eleger-um-deputado-federal-ou-estadual-no-ceara-1.3793054" }] },
+        { texto: "Último eleito teve 28.316 votos (Frota Neto, PL), puxado pela votação do PL — Tancredo dos Santos foi o mais votado do estado, com 151.396.", selo: "uma-fonte", fontes: [{ nome: "Hub Político", url: "https://hubpolitico.com.br/eleicoes/2026/apuracao/ce/deputado-estadual" }] },
+      ],
+    },
+  ],
+
   poder: [
     {
       papel: "Prefeito",

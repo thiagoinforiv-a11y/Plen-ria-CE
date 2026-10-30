@@ -141,7 +141,7 @@
 
   // ------------------------------------------------------------------ peças
   const avatar = (x, cls = "av") =>
-    `<span class="${cls}" style="position:relative">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="" loading="lazy" style="position:absolute;inset:0" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</span>`;
+    `<span class="${cls}" style="position:relative"${!x.foto && x.wiki ? ` data-wiki="${esc(x.wiki)}"` : ""}>${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="" loading="lazy" style="position:absolute;inset:0" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</span>`;
   const situTxt = (s) => (s || "").toLowerCase().replace("eleito por qp", "eleito (QP)").replace("eleito por média", "eleito (média)");
   const situ = (x) => {
     const s = situTxt(x.situacao);
@@ -199,6 +199,30 @@
     </div>`;
   }
 
+
+  // ------------------------------------------------------------------ quociente eleitoral, partidário e "puxados"
+  function quocienteHTML() {
+    const c = C();
+    if (!window.PlenariaQuociente || !c.partidos || !c.vagas) return "";
+    const q = PlenariaQuociente.quociente(c, S.ano), pz = PlenariaQuociente.puxados(c);
+    const eleitos = (sigla) => c.candidatos.filter((x) => x.partido === sigla && (x.situacao || "").startsWith("eleito"));
+    const confere = q.simulado && q.partidos.every((p) => p.eleitos.length === eleitos(p.sigla).length && p.eleitos.every((x) => eleitos(p.sigla).includes(x)));
+    const mx = q.partidos[0] ? q.partidos[0].total : 1;
+    const linhas = q.partidos.filter((p) => p.total > 0).map((p) => { const el = eleitos(p.sigla); const top = p.lista[0];
+      return `<div class="qrow"><div class="qp"><b>${esc(p.sigla)}</b><span class="muted">${fmt(p.nominais)} nominais + ${fmt(p.legenda)} legenda</span></div>
+        <div class="hbar" style="grid-template-columns:1fr 92px;padding:0"><div class="t"><i style="width:${(p.total / mx) * 100}%"></i></div><div class="x num">${fmt(p.total)}</div></div>
+        <div class="qq num" ${tip(`${fmt(p.total)} ÷ QE ${fmt(q.QE)} = ${p.qp.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}`)}>${p.qp.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+        <div class="qc">${el.length ? `<b class="num">${el.length}</b>${q.simulado ? ` <span class="muted">(${p.qpCad} QP + ${p.medCad} média)</span>` : ""}` : `<span class="muted">0</span>`}</div>
+        <div class="qe">${el.map((x) => `<span class="cpick" data-sq="${x.sq}">${esc(x.urna)} <span class="muted num">${fmt(x.votos)}</span></span>`).join("") || `<span class="muted" style="font-size:12.5px">${top ? `mais votado: ${esc(top.urna)} (${fmt(top.votos)})` : ""}</span>`}</div></div>`; }).join("");
+    const pux = pz.map((z) => `<div class="pux"><b>${esc(z.x.urna)}</b> <span class="muted">(${esc(z.x.partido)})</span> foi eleito com <b class="num">${fmt(z.x.votos)}</b> votos, enquanto ${z.acima.slice(0, 3).map((y) => `<b>${esc(y.urna)}</b> <span class="muted">(${esc(y.partido)}, ${fmt(y.votos)})</span>`).join(", ")} ${z.acima.length > 1 ? "ficaram" : "ficou"} de fora. Puxado pelo voto ${q.coligacoes ? "da coligação" : "do partido"}${z.puxador && z.puxador.sq !== z.x.sq ? ` — puxador: <b>${esc(z.puxador.urna)}</b> (${fmt(z.puxador.votos)})` : ""}.</div>`).join("");
+    return `<div class="card quoc"><div class="qhead"><div><div class="k">Quociente eleitoral · ${esc(S.ano)}</div>
+        <div class="qbig"><b class="num">${fmt(q.QE)}</b><span>votos por cadeira</span></div>
+        <div class="muted" style="font-size:13px">${fmt(q.validos)} válidos ÷ ${q.vagas} vagas${q.simulado ? ` · cada eleito precisa de ao menos ${fmt(Math.ceil((+S.ano >= 2022 ? 0.1 : 0.1) * q.QE))} votos (10% do QE)` : ""}</div></div>
+        ${q.simulado ? `<span class="qok ${confere ? "" : "bad"}">${confere ? "✔ Recalculado: bate com o resultado oficial" : "✘ Recalculado: não bate — conferir"}</span>` : `<span class="qok neutro">Em ${esc(S.ano)} havia coligações: as cadeiras saíram por coligação</span>`}</div>
+      <div class="qtab"><div class="qrow qh"><div>Partido</div><div>Votos (nominal + legenda)</div><div>QP${q.coligacoes ? "*" : ""}</div><div>Cadeiras</div><div>Eleitos</div></div>${linhas}</div>
+      ${pux ? `<div class="k" style="margin-top:18px">Quem foi puxado</div>${pux}` : `<p class="muted" style="font-size:13px;margin-top:14px">Nenhum eleito teve menos votos do que alguém que ficou de fora.</p>`}
+      <p class="muted" style="font-size:12px;margin-top:12px">QP = votos do partido ÷ QE; a parte inteira dá as cadeiras diretas, as demais saem pelas maiores médias (sobras).${q.coligacoes ? " *Com coligações, o QP valia para a coligação inteira; aqui aparece o que o partido teria sozinho." : ""}</p></div>`;
+  }
   function renderRanking() {
     const a = agg();
     const rel = new Set(relevantes(a).map((x) => x.sq));
@@ -207,13 +231,15 @@
     const total = lista.length;
     if (!S.rankAll && !S.busca) lista = lista.slice(0, Math.max(15, rel.size));
     const max = a.cands[0] ? a.cands[0].votos : 1;
+    const puxSet = new Set(window.PlenariaQuociente && C().partidos ? PlenariaQuociente.puxados(C()).map((z) => z.x.sq) : []);
     $("#ranking").innerHTML = `<div class="blk-h"><div><h2>Os mais <em class="s">votados</em></h2><p class="lead">Clique em um nome para abrir o perfil: foto, desempenho por bairro e histórico na cidade. Use ◯ para separar até 4 candidatos para comparar.</p></div>
       <div class="tools"><input class="search" id="busca" type="search" placeholder="Buscar nome, partido ou número" value="${esc(S.busca)}"></div></div>
+      ${quocienteHTML()}
       <div class="rank">${lista.map((x) => {
         const sl = slotOf(x.sq);
         return `<div class="rrow ${rel.has(x.sq) ? "" : "dim"}" data-sq="${x.sq}" role="button" tabindex="0">
           <div class="pos num">${x._pos}º</div>${avatar(x)}
-          <div><div class="nm">${esc(x.urna)}</div><div class="meta">${esc(x.partido || "")} · ${esc(x.nr || "")}${situ(x)}</div></div>
+          <div><div class="nm">${esc(x.urna)}</div><div class="meta">${esc(x.partido || "")} · ${esc(x.nr || "")}${situ(x)}${puxSet.has(x.sq) ? `<span class="tag" style="border-color:rgba(224,164,42,.6);color:#ffd780">puxado</span>` : ""}</div></div>
           <div class="bar" ${tip(`<b>${esc(x.urna)}</b><br>${fmt(x.votos)} votos · ${pct(x.votos / a.validos, 2)} dos válidos`)}><i style="width:${(x.votos / max) * 100}%"></i></div>
           <div class="vv num">${fmt(x.votos)}</div><div class="pp num">${pct(x.votos / a.validos)}</div>
           <button class="chk" type="button" data-cmp="${x.sq}" aria-pressed="${!!sl}" title="Comparar" style="${sl ? `background:${sl}` : ""}">${sl ? "✓" : "◯"}</button>
@@ -511,7 +537,10 @@
       ${d.selo ? `<div class="f">${selo(d.selo)} ${fontes(d.fontes)}</div>` : ""}</div>`;
     el.innerHTML = head +
       `<div class="grid poder">${(F.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v"${acharRelatorio([p.nome]) ? ` data-rel="${esc(p.nome)}" role="button" tabindex="0" style="cursor:pointer"` : ""}>${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>` +
-      ((S.rel && S.rel.pessoas.length) ? sub("Relatórios por pessoa") + `<div class="relchips">${S.rel.pessoas.map((r) => { const c = acharCandidato(r.nomes); return `<button type="button" class="cpick" data-rel="${esc(r.nomes[0])}">${avatar({ urna: r.nomes[0], foto: c && c.x.foto })}<b>${esc(r.nomes[0])}</b><span class="muted">${esc(r.partido || "")}</span></button>`; }).join("")}</div>` : "") +
+      ((F.quocientes || []).length ? sub("Quocientes da eleição geral · Ceará") + `<div class="grid qgeral">${F.quocientes.map((q) => `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">${esc(q.titulo)}</div>
+        <div class="qbig" style="margin:8px 0 6px">${q.qe ? `<b class="num">${fmt(q.qe)}</b><span>votos por cadeira (quociente eleitoral)</span>` : `<b style="font-size:24px;color:var(--ink-2)">a confirmar</b>`}</div>
+        ${q.itens.map((it) => `<div class="pux">${esc(it.texto)} ${selo(it.selo)}<div class="fs" style="margin-top:4px;font-size:12px">${fontes(it.fontes)}</div></div>`).join("")}</div>`).join("")}</div>` : "") +
+      ((S.rel && S.rel.pessoas.length) ? sub("Relatórios por pessoa") + `<div class="relchips">${S.rel.pessoas.map((r) => { const c = acharCandidato(r.nomes); return `<button type="button" class="cpick" data-rel="${esc(r.nomes[0])}">${avatar({ urna: r.nomes[0], foto: c && c.x.foto, wiki: r.wiki })}<b>${esc(r.nomes[0])}</b><span class="muted">${esc(r.partido || "")}</span></button>`; }).join("")}</div>` : "") +
       (grupos.length ? sub("Grupos políticos") + `<div class="grid grupos">${grupos.map((g, i) => { const [pl, pc] = POSICAO[g.posicao] || [g.posicao || "", ""]; return `<div class="card gcard" style="--g:${SLOTS[i] || "var(--other)"}">
         <div class="gh"><div><div class="l">${esc(g.nome)}</div><div class="v"${acharRelatorio([g.lider]) ? ` data-rel="${esc(g.lider)}" role="button" tabindex="0" class="relk"` : ""}>${esc(g.lider || "")}</div></div>${pl ? `<span class="pos ${pc}">${esc(pl)}</span>` : ""}</div>
         ${g.resumo ? `<p class="d">${esc(g.resumo)}</p>` : ""}
@@ -803,7 +832,8 @@
     D.pares.forEach((p) => { const r = porDep.get(p.deputado) || { nome: p.deputado, vers: [] }; r.vers.push(p); porDep.set(p.deputado, r); });
     const ordem = [...porDep.values()].sort((a, b) => (a.vers[0].grupo === "oposição") - (b.vers[0].grupo === "oposição") || b.vers.length - a.vers.length);
     const mapa = `<div class="grid apo">${ordem.map((d) => { const i = info[d.nome] || {}; const op = d.vers.some((v) => v.grupo === "oposição"); const eleito = /^eleit/i.test(i.resultado || "");
-      return `<div class="card apcard ${op ? "op" : ""}"><div class="ah"><div><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
+      const rr = acharRelatorio([d.nome]), cc = acharCandidato(rr ? rr.nomes : [d.nome]);
+      return `<div class="card apcard ${op ? "op" : ""}"><div class="ah">${avatar({ urna: d.nome, foto: cc && cc.x.foto, wiki: rr && rr.wiki }, "av apav")}<div style="flex:1;min-width:0"><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
         <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}</div>
         <div class="k">Vereadores que trabalharam</div><div class="vers">${d.vers.map((v) => `<span class="cpick" ${v.obs ? `title="${esc(v.obs)}"` : ""}><b>${esc(v.vereador)}</b>${v.obs && /especula/i.test(v.obs) ? `<span class="tagx">especulação</span>` : ""}</span>`).join("")}</div></div>`; }).join("")}</div>`;
     return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Mapa de apoios (informação local ◆). Abaixo, a medição de cada par com os votos por seção.</p>` + mapa + `<p class="muted" style="font-size:13px;margin:22px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
@@ -927,7 +957,7 @@
     if (c) return openProfile(c.x.sq, c.ano, c.cargo);
     const foto = null;
     $("#drawer").innerHTML = `<div class="pf-top"><button class="close" id="pf-close" aria-label="Fechar">✕</button>
-      <div class="pf-id"><div class="pf-photo">${esc(initials(nomes[0]))}${foto ? `<img src="${esc(foto)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
+      <div class="pf-id"><div class="pf-photo"${r && r.wiki ? ` data-wiki="${esc(r.wiki)}"` : ""}>${esc(initials(nomes[0]))}${foto ? `<img src="${esc(foto)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
       <div><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7">Relatório</div><h3>${esc(nomes[0])}</h3>${r && r.papel ? `<div class="full">${esc(r.papel)}</div>` : ""}
       ${r && r.partido ? `<div class="badges"><span>${esc(r.partido)}</span></div>` : ""}</div></div></div>
       <div class="pf-body">${relatorioHTML(nomes)}<p class="muted" style="font-size:12.5px;margin-top:16px">Sem votação desta pessoa nas eleições carregadas para ${esc(S.city.meta.municipio)}. Os números por seção entram quando o TSE for liberado.</p></div>`;
@@ -1163,6 +1193,31 @@
   }
 
 
+
+  // ------------------------------------------------------------------ fotos via Wikipédia (carregadas pelo navegador de quem abre a página)
+  const wikiCache = (() => { try { return JSON.parse(localStorage.getItem("plenaria.wiki") || "{}"); } catch (e) { return {}; } })();
+  async function fotoWiki(titulo) {
+    if (titulo in wikiCache) return wikiCache[titulo];
+    let url = null;
+    for (const lang of ["pt", "en"]) {
+      try {
+        const r = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(titulo)}`);
+        if (r.ok) { const j = await r.json(); if (j.thumbnail && j.thumbnail.source) { url = j.thumbnail.source; break; } }
+      } catch (e) { /* sem rede */ }
+    }
+    wikiCache[titulo] = url;
+    try { localStorage.setItem("plenaria.wiki", JSON.stringify(wikiCache)); } catch (e) { /* ok */ }
+    return url;
+  }
+  function hidratarFotos(raiz) {
+    if (!raiz || !raiz.querySelectorAll) return;
+    [...(raiz.matches && raiz.matches("[data-wiki]") ? [raiz] : []), ...raiz.querySelectorAll("[data-wiki]")].forEach(async (el) => {
+      if (el.dataset.wok) return; el.dataset.wok = "1";
+      const u = await fotoWiki(el.dataset.wiki);
+      if (u && !el.querySelector("img")) el.insertAdjacentHTML("beforeend", `<img src="${esc(u)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;border-radius:50%">`);
+    });
+  }
+  if ("MutationObserver" in window) new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => n.nodeType === 1 && hidratarFotos(n)))).observe(document.body, { childList: true, subtree: true });
   // ------------------------------------------------------------------ movimento: barras crescem do zero, números contam, blocos sobem
   const MOV = !matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SEL_BAR = ".rrow .bar i, .hbar .t i, .tl .t i, .gbars .b i, .rx-t i";

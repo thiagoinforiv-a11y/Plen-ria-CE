@@ -53,6 +53,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "Danniel_Oliveira",
       nomes: ["Danniel Oliveira", "Daniel Oliveira"],
       papel: "Deputado estadual (MDB) — 1º suplente para 2027",
       partido: "MDB",
@@ -65,6 +66,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "Yury_do_Paredão",
       nomes: ["Yury do Paredão", "Yuri do Paredão"],
       papel: "Deputado federal reeleito (2027–2030)",
       partido: "MDB",
@@ -77,6 +79,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "Lia_Gomes",
       nomes: ["Lia Gomes", "Lia Ferreira Gomes"],
       papel: "Deputada estadual reeleita (2027–2030)",
       partido: "PSB",
@@ -89,6 +92,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "Denis_Bezerra",
       nomes: ["Denis Bezerra"],
       papel: "Ex-deputado federal — 2º suplente do PSB para 2027",
       partido: "PSB",
@@ -100,6 +104,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "AJ_Albuquerque",
       nomes: ["AJ Albuquerque", "A J Albuquerque"],
       papel: "Deputado federal reeleito por média (2027–2030)",
       partido: "PP",
@@ -120,6 +125,99 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       destaques: [
         { data: "2024-10-06", titulo: "2º colocado para prefeito: 4.955 votos (35,73%)", selo: "confirmado", fontes: [{ nome: "ND+ (dados do TSE)", url: "https://ndmais.com.br/eleicoes-2024/resultados/1turno/ce/varjota/" }, { nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/quem-ganhou-a-eleicao-2024-para-prefeito-em-varjota-1.3566881" }] },
       ],
+    },
+    {
+      wiki: "Tainah_Marinho",
+      nomes: ["Tainah Marinho"],
+      papel: "Deputada federal eleita (2027–2030)",
+      partido: "PSB",
+      resumo: "Eleita com 265.585 votos, a mulher mais votada para deputada federal na história do Ceará; vaga pelo quociente partidário. Em Varjota, foi apoiada pelo vereador Lucas da Célia.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-05", titulo: "Mulher mais votada para federal na história do Ceará", selo: "confirmado", fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/05/tainah-marinho-se-torna-a-mulher-mais-votada-para-deputada-federal-da-historia-do-ceara.html" }, { nome: "Revista Fórum", url: "https://revistaforum.com.br/resultado_eleicoes_2026/tainah-marinho-psb-e-eleita-deputada-federal-pelo-ceara/" }] },
+      ],
+    },
+    {
+      wiki: "Robério_Monteiro",
+      nomes: ["Robério Monteiro"],
+      papel: "Deputado federal eleito (2027–2030)",
+      partido: "PSB",
+      resumo: "Eleito com 165.876 votos. Registrado como o \"Monteiro\" apoiado pela vereadora Patrícia Ximenes (a confirmar).",
+      redes: [],
+      destaques: [
+        { data: "2026-10-04", titulo: "Eleito com 165.876 votos", selo: "uma-fonte", fontes: [{ nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/veja-lista-de-deputados-federais-eleitos-no-ceara-em-2026-1.3796450" }] },
+      ],
+    },
+    {
+      wiki: "Romeu_Aldigueri",
+      nomes: ["Romeu Aldigueri"],
+      papel: "Deputado estadual eleito (2027–2030)",
+      partido: "PSB",
+      resumo: "Eleito com 112.303 votos, 3º mais votado do PSB no Ceará. Em Varjota, apoiado pelo vereador Lucas da Célia.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-05", titulo: "Eleito com 112.303 votos", selo: "confirmado", fontes: [{ nome: "O Tempo (dados do TSE)", url: "https://www.otempo.com.br/eleicoes/2026/deputados-estaduais/2026/10/5/tse-confirma-eleicao-de-romeu-aldigueri-para-deputado-estadual-pelo-ceara-nas-eleicoes-2026" }, { nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/veja-a-lista-de-deputados-estaduais-eleitos-no-ceara-em-2026-1.3795425" }] },
+      ],
+    },
+    {
+      wiki: "Jeová_Mota",
+      nomes: ["Jeová Mota"],
+      papel: "Deputado estadual reeleito (2027–2030)",
+      partido: "PSB",
+      resumo: "Reeleito com 73.211 votos. Em Varjota, apoiado pelo presidente da Câmara, Roberto do Garrone.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-04", titulo: "Reeleito com 73.211 votos", selo: "uma-fonte", fontes: [{ nome: "Hub Político", url: "https://hubpolitico.com.br/perfil/jeovamota" }] },
+      ],
+    },
+    {
+      wiki: "James_Bel",
+      nomes: ["James Bel", "James Bell"],
+      papel: "Deputado estadual eleito (2027–2030)",
+      partido: "União",
+      resumo: "Eleito com 52.070 votos. Em Varjota, apoiado pela vereadora Patrícia Ximenes.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-05", titulo: "Eleito com 52.070 votos", selo: "uma-fonte", fontes: [{ nome: "O Tempo (dados do TSE)", url: "https://www.otempo.com.br/eleicoes/2026/deputados-estaduais/2026/10/5/tse-confirma-eleicao-de-james-bel-para-deputado-estadual-pelo-ceara-nas-eleicoes-2026" }] },
+      ],
+    },
+    {
+      wiki: "Neném_Coelho",
+      nomes: ["Neném Coelho", "Neném"],
+      papel: "Deputado federal eleito pelas sobras (2027–2030)",
+      partido: "MDB",
+      resumo: "Um dos sete federais do Ceará eleitos na distribuição das sobras — regra questionada pelo PDT no STF. Em Varjota, apoiado pela vereadora Patrícia Ximenes.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-30", titulo: "Citado entre os sete eleitos pelas sobras no Ceará", selo: "confirmado", fontes: [{ nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/pdt-questiona-no-stf-regra-que-elegeu-sete-deputados-pelo-ceara-1.3802359" }, { nome: "Repórter Ceará", url: "https://reporterceara.com.br/2026/10/30/pdt-leva-ao-stf-questionamento-sobre-regra-que-definiu-sete-vagas-de-deputado-federal-no-ceara/" }] },
+      ],
+    },
+    {
+      wiki: "Giordanna_Mano",
+      nomes: ["Giordanna Mano", "Jordana Mano"],
+      papel: "Deputada federal eleita (2027–2030)",
+      partido: "PRD",
+      resumo: "Ex-prefeita de Nova Russas. Eleita com 235.848 votos, 4ª mais votada do Ceará. Especulação local: teria recebido apoio do vereador Eudes Mesquita.",
+      redes: [],
+      destaques: [
+        { data: "2026-10-04", titulo: "Eleita com 235.848 votos (4ª do Ceará)", selo: "confirmado", fontes: [{ nome: "Revista Fórum", url: "https://revistaforum.com.br/resultado_eleicoes_2026/giordanna-mano-prd-e-eleita-deputada-federal-pelo-ceara/" }, { nome: "CNN Brasil", url: "https://www.cnnbrasil.com.br/eleicoes/2026/candidatos/ce/deputado-federal/prd/giordanna-mano/2555/" }] },
+      ],
+    },
+    {
+      nomes: ["Antunino Martins"],
+      papel: "Vereador (2025–2028)",
+      partido: "PSB",
+      resumo: "2º vereador mais votado em 2020 (MDB, 818). Consta como vereador da legislatura atual pelo PSB.",
+      redes: [],
+      destaques: [{ data: "2025-01", titulo: "Vereador da 11ª legislatura (PSB)", selo: "uma-fonte", fontes: [{ nome: "Portal da Câmara", url: "https://camaravarjota.ce.gov.br/parlamentares/" }] }],
+    },
+    {
+      nomes: ["Aristeu Linhares"],
+      papel: "Vereador (2025–2028)",
+      partido: "PSB",
+      resumo: "Eleito em 2016 (PTB) e 2020 (PDT). Consta como vereador da legislatura atual pelo PSB.",
+      redes: [],
+      destaques: [{ data: "2025-01", titulo: "Vereador da 11ª legislatura (PSB)", selo: "uma-fonte", fontes: [{ nome: "Portal da Câmara", url: "https://camaravarjota.ce.gov.br/parlamentares/" }] }],
     },
   ],
 };
