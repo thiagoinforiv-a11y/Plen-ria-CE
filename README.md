@@ -55,6 +55,19 @@ Base histórica (totais municipais):
 python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2313955 --desde 2000
 ```
 
+## Conferência automática dos dados
+
+`scripts/verificar.mjs` confere tudo antes de publicar e **bloqueia** se algo contradiz um fato conhecido:
+código do município (IBGE/TSE), prefeito eleito de cada ano, vereadores mais votados, somas dos votos
+contra o total oficial, ranking, links e selos. Os fatos de referência ficam em `referencias` na ficha
+da cidade. Roda sozinho:
+
+- antes de cada commit (`.githooks/pre-commit`; ative com `git config core.hooksPath .githooks`);
+- a cada push no GitHub (`.github/workflows/verificar.yml`);
+- ao fim do importador (`scripts/plenaria.py`).
+
+Quando falta uma eleição recente, a página mostra um aviso no topo em vez de deixar o ano antigo parecer atual.
+
 ## Informação local (fora do GitHub)
 
 `data/<uf>/<cidade>.local.js` guarda o que é conhecimento seu (quem apoiou quem, leituras).

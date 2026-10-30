@@ -1,0 +1,3 @@
+#!/bin/sh
+# Bloqueia o commit se os dados contradisserem fatos conhecidos (scripts/verificar.mjs).
+node scripts/verificar.mjs || { echo "Commit bloqueado: corrija os erros acima."; exit 1; }

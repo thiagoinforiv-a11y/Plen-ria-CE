@@ -160,8 +160,21 @@
     $("#seg-cargo").innerHTML = cargosDe(S.ano).map((k) => `<button type="button" data-cargo="${k}" aria-pressed="${k === S.cargo}">${esc(cargoCurto(k))}</button>`).join("");
   }
 
+  function avisoCobertura() {
+    const ref = (S.ficha && S.ficha.referencias) || {};
+    const ult = ref.ultimasEleicoes || {};
+    const municipal = ["prefeito", "vereador"].includes(S.cargo.replace(/_2t$/, ""));
+    const esperado = municipal ? ult.municipal : ult.geral;
+    if (!esperado || +S.ano >= esperado) return "";
+    const top = municipal && S.cargo === "vereador" && (ref.vereadoresMaisVotados || {})[esperado];
+    const pref = municipal && S.cargo === "prefeito" && (ref.prefeitos || {})[esperado];
+    return `<div class="aviso-cob"><b>Atenção: você está vendo ${esc(S.ano)}, não a eleição mais recente.</b> O resultado de ${esperado} ainda não foi carregado na página (vem do TSE).
+      ${top ? ` Em ${esperado}, os mais votados para vereador foram <b>${top.map(esc).join(", ")}</b>.` : ""}${pref ? ` Em ${esperado}, o prefeito eleito foi <b>${esc(pref)}</b>.` : ""}</div>`;
+  }
   function renderHero() {
     const a = agg(), m = S.city.meta, c = C();
+    const av = $("#aviso-cob") || (() => { const d = document.createElement("div"); d.id = "aviso-cob"; $("#visao").prepend(d); return d; })();
+    av.innerHTML = avisoCobertura();
     $("#hero-title").innerHTML = `${esc(cargoCurto(S.cargo))} em <em class="s">${esc(m.municipio)}</em>, ${esc(S.ano)}`;
     const rel = relevantes(a);
     const lider = a.cands[0];

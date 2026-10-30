@@ -102,6 +102,20 @@ def salvar(cidade):
         f.write(f'window.PLENARIA_DATA["{uf.lower()}/{s}"] = {corpo};\n')
     atualizar_registro(cidade)
     print(f"✔ {os.path.relpath(p, RAIZ)} ({os.path.getsize(p) / 1024:.0f} KB)")
+    conferir()
+
+
+def conferir():
+    """Roda a conferência automática; avisa alto se os dados contradizem fatos conhecidos."""
+    import subprocess
+    try:
+        r = subprocess.run(["node", os.path.join(RAIZ, "scripts", "verificar.mjs")], capture_output=True, text=True)
+    except FileNotFoundError:
+        print("(node não encontrado: rode scripts/verificar.mjs manualmente)")
+        return
+    print(r.stdout.strip())
+    if r.returncode:
+        print("\n!!! Os dados gerados contradizem fatos conhecidos. NÃO publique antes de corrigir.")
 
 
 def atualizar_registro(cidade):

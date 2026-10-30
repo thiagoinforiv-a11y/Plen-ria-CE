@@ -7,6 +7,15 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
   atualizado: "2026-10-30",
   observacao: "Levantamento por busca na web. Neste ambiente as páginas não puderam ser abertas por inteiro; os itens foram conferidos pelo resumo da busca e devem ser relidos na fonte quando o acesso for liberado.",
 
+  // Conferência automática (scripts/verificar.py): fatos conhecidos que os dados TÊM de bater.
+  // Se a base carregada contradizer qualquer item, a verificação falha e nada é publicado.
+  referencias: {
+    municipio: { ibge: "2313955", tse: "98574" },
+    prefeitos: { 2000: "Gentil Magalhães", 2004: "Gentil Magalhães", 2008: "Rosa Cândida", 2012: "Rosa Paulino", 2016: "Célia", 2020: "Elmo Monte", 2024: "Elmo Monte" },
+    vereadoresMaisVotados: { 2024: ["Rosa Paulino", "Eudes Mesquita", "Gonçalinho"] },
+    ultimasEleicoes: { municipal: 2024, geral: 2026 },
+  },
+
   poder: [
     {
       papel: "Prefeito",
@@ -150,10 +159,14 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
     },
     {
       data: "2024-10-06",
-      titulo: "Vereadores mais votados: Rosa Paulino (1.774), Eudes Mesquita (992) e Gonçalinho (915)",
+      titulo: "Vereadores mais votados em 2024: Rosa Paulino (1.774), Eudes Mesquita (992) e Gonçalinho (915)",
       resumo: "Os três foram eleitos para a legislatura 2025–2028.",
-      selo: "uma-fonte",
-      fontes: [{ nome: "Anuário do Ceará", url: "https://www.anuariodoceara.com.br/guia-das-cidades/fichas-dos-municipios/varjota/" }],
+      selo: "confirmado",
+      fontes: [
+        { nome: "Anuário do Ceará", url: "https://www.anuariodoceara.com.br/guia-das-cidades/fichas-dos-municipios/varjota/" },
+        { nome: "Câmara de Varjota (Rosa Paulino)", url: "https://camaravarjota.ce.gov.br/parlamentares/30/perfil/" },
+        { nome: "ND+ (dados do TSE)", url: "https://ndmais.com.br/eleicoes-2024/resultados/1turno/ce/varjota/" },
+      ],
     },
     {
       data: "",
