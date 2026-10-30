@@ -54,6 +54,7 @@
     S.city = window.PLENARIA_DATA[reg.id];
     S.ficha = (window.PLENARIA_FICHAS || {})[reg.id] || null;
     S.local = (window.PLENARIA_LOCAL || {})[reg.id] || null;
+    resolverFotos();
     S.cityId = reg.id;
     store.set("cidade", reg.id);
     const anos = Object.keys(S.city.eleicoes).sort().reverse();
@@ -61,6 +62,27 @@
     S.ano = anos.find((a) => S.city.eleicoes[a].nivel === "secao") || anos[0];
     S.cargo = cargosDe(S.ano)[0];
     cache.clear();
+  }
+  // Fotos: 1) arquivo local (importador do TSE ou enviado por você); 2) foto oficial do DivulgaCand,
+  // carregada direto pelo navegador de quem abre a página (some sozinha se o TSE não tiver a foto).
+  const DIVULGA = { 2012: "1699", 2014: "680", 2016: "2", 2018: "2022802018", 2020: "2030402020", 2022: "2040602022", 2024: "2045202024" };
+  const MUNICIPAIS = new Set(["prefeito", "vereador", "vice-prefeito"]);
+  function divulgaUE(ano, cargo) { return MUNICIPAIS.has(cargo.replace(/_2t$/, "")) ? S.city.meta.cd_tse : S.city.meta.uf; }
+  function divulgaLink(ano, cargo, sq) {
+    const el = DIVULGA[ano];
+    return el && /^\d{9,}$/.test(sq || "") ? `https://divulgacandcontas.tse.jus.br/divulga/#/candidato/${ano}/${el}/${divulgaUE(ano, cargo)}/${sq}` : null;
+  }
+  function resolverFotos() {
+    const manual = (S.local && S.local.fotos) || {};
+    const porNome = Object.fromEntries(Object.entries(manual).map(([k, v]) => [k.toLowerCase(), v]));
+    for (const [ano, e] of Object.entries(S.city.eleicoes))
+      for (const [k, c] of Object.entries(e.cargos))
+        for (const x of c.candidatos) {
+          const m = manual[x.pid] || porNome[(x.urna || "").toLowerCase()] || porNome[(x.nome || "").toLowerCase()];
+          if (m) { x.foto = m; continue; }
+          const el = DIVULGA[ano];
+          if (!x.foto && el && /^\d{9,}$/.test(x.sq || "")) x.foto = `https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/${el}/${x.sq}/${divulgaUE(ano, k)}`;
+        }
   }
   const E = () => S.city.eleicoes[S.ano];
   const C = () => E().cargos[S.cargo];
@@ -116,7 +138,7 @@
 
   // ------------------------------------------------------------------ peças
   const avatar = (x, cls = "av") =>
-    `<span class="${cls}" style="position:relative">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="" loading="lazy" style="position:absolute;inset:0" onerror="this.remove()">` : ""}</span>`;
+    `<span class="${cls}" style="position:relative">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="" loading="lazy" style="position:absolute;inset:0" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</span>`;
   const situTxt = (s) => (s || "").toLowerCase().replace("eleito por qp", "eleito (QP)").replace("eleito por média", "eleito (média)");
   const situ = (x) => {
     const s = situTxt(x.situacao);
@@ -529,7 +551,7 @@
     const hmax = Math.max(...hist.map((h) => h.x.votos), 1);
     el.innerHTML = head(tools) + `<div class="dep-card card">
       <div class="dep-id">
-        <div class="pf-photo">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="Foto de ${esc(x.urna)}" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
+        <div class="pf-photo">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="Foto de ${esc(x.urna)}" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
         <div class="k">${esc(cargoCurto(ent.cargo))} · ${esc(ent.ano)}</div>
         <h3>${esc(x.urna)}</h3><div class="full">${esc(x.nome)}</div>
         <div class="badges"><span>${esc(x.partido || "")} ${esc(x.nr || "")}</span></div>
@@ -647,7 +669,7 @@
       const ult = d.ent[d.ent.length - 1];
       const partidos = d.ent.map((e) => e.x.partido).filter((p, j, a) => p && p !== a[j - 1]);
       const fake = { urna: d.urna, foto: d.foto };
-      return `<div class="card tcard" style="--c:${SLOTS[i]}"><div class="th">${avatar(fake, "av tav")}<div style="min-width:0"><div class="nm" data-sq="${ult.x.sq}" data-ano="${ult.ano}" data-cargo="${ult.cargo}">${esc(d.urna)}</div><div class="muted" style="font-size:12.5px">${esc(d.nome)}</div></div><button type="button" class="chk" data-trm="${d.pid}" aria-label="Remover">×</button></div>
+      return `<div class="card tcard" style="--c:${SLOTS[i]}"><div class="th">${avatar(fake, "av tav")}<div style="min-width:0"><div class="nm" data-sq="${ult.x.sq}" data-pano="${ult.ano}" data-pcargo="${ult.cargo}">${esc(d.urna)}</div><div class="muted" style="font-size:12.5px">${esc(d.nome)}</div></div><button type="button" class="chk" data-trm="${d.pid}" aria-label="Remover">×</button></div>
         <div class="tend ${tc}">${esc(tl)}</div>${tx ? `<div class="muted" style="font-size:12.5px">${esc(tx)}</div>` : ""}
         <div class="grid tk"><div><b>${d.ent.length}</b><span>candidaturas</span></div><div><b>${d.eleito}</b><span>vezes eleito</span></div><div><b>${fmt(best.x.votos)}</b><span>melhor: ${best.ano}</span></div></div>
         <div class="k">Partidos</div><div class="parts">${partidos.map((p, j) => `${j ? '<span class="arr">→</span>' : ""}<span class="pt">${esc(p)}</span>`).join("")}</div></div>`;
@@ -679,7 +701,7 @@
     }
     return out.sort((p, q) => q.ano - p.ano || p.cargo.localeCompare(q.cargo));
   }
-  function openProfile(sq, ano = ano, cargo = cargo) {
+  function openProfile(sq, ano = S.ano, cargo = S.cargo) {
     const a = agg(ano, cargo), x = a.bySq[sq];
     const porSecao = () => S.city.eleicoes[ano].nivel === "secao";
     if (!x) return;
@@ -693,7 +715,7 @@
     const u = x.uf;
     const fatos = [["Nome completo", x.nome], ["Número", x.nr], ["Partido", x.partido], ["Federação", x.federacao], ["Situação", x.situacao && cap(situTxt(x.situacao))], ["Ocupação", x.ocupacao && cap(x.ocupacao)], ["Idade", x.idade && x.idade + " anos"], ["Instrução", x.instrucao && cap(x.instrucao)], ["Gênero", x.genero && cap(x.genero)]].filter(([, v]) => v);
     $("#drawer").innerHTML = `<div class="pf-top"><button class="close" id="pf-close" aria-label="Fechar">✕</button>
-      <div class="pf-id"><div class="pf-photo">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="Foto de ${esc(x.urna)}" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
+      <div class="pf-id"><div class="pf-photo">${esc(initials(x.urna))}${x.foto ? `<img src="${esc(x.foto)}" alt="Foto de ${esc(x.urna)}" referrerpolicy="no-referrer" onerror="this.remove()" style="position:absolute;inset:0">` : ""}</div>
       <div><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.7">${esc(cargoCurto(cargo))} · ${ano}</div><h3>${esc(x.urna)}</h3><div class="full">${esc(x.nome)}</div>
       <div class="badges"><span>${esc(x.partido || "")} ${esc(x.nr || "")}</span>${x.situacao ? `<span>${esc(situTxt(x.situacao))}</span>` : ""}</div></div></div></div>
       <div class="pf-body">
@@ -713,6 +735,7 @@
           <div class="c">${fmt(h.x.votos)} votos · ${pct(h.share)} dos válidos · ${h.pos}º de ${h.n}${h.x.situacao ? ` · ${esc(situTxt(h.x.situacao))}` : ""} · ${esc(h.x.partido || "")}</div><div class="t"><i style="width:${(h.x.votos / hmax) * 100}%"></i></div></div>`).join("")}</div>
         ${hist.length < 2 ? `<p class="muted" style="font-size:13px">Sem outras candidaturas ligadas a esta pessoa nos anos carregados para ${esc(m.municipio)}.</p>` : ""}
         ${fatos.length ? `<h4>Ficha</h4><dl class="facts">${fatos.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : ""}
+        ${divulgaLink(ano, cargo, x.sq) ? `<p style="margin-top:14px"><a class="btn" style="text-decoration:none;color:var(--ink)" href="${divulgaLink(ano, cargo, x.sq)}" target="_blank" rel="noopener">Ficha oficial no TSE (DivulgaCand) ↗</a></p>` : ""}
         <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn primary" type="button" data-cmp="${x.sq}">${S.cmp.includes(x.sq) ? "✓ Na comparação" : "+ Comparar"}</button>
           ${porSecao() ? `<button class="btn" type="button" id="pf-secoes" data-sq="${x.sq}">Ver nas seções</button>` : ""}
@@ -760,7 +783,7 @@
       const sq = t.closest("[data-sq]");
       if (sq && !t.closest("#drawer .hbar")) {
         ev.preventDefault();
-        if (sq.dataset.ano) openProfile(sq.dataset.sq, sq.dataset.ano, sq.dataset.cargo);
+        if (sq.dataset.pano) openProfile(sq.dataset.sq, sq.dataset.pano, sq.dataset.pcargo);
         else if (t.closest("#mapa, .fpop")) openProfile(sq.dataset.sq, S.map.ano, S.map.cargo);
         else if (t.closest("#deputado") && S.dep.cur) openProfile(sq.dataset.sq, S.dep.cur.ano, S.dep.cur.cargo);
         else openProfile(sq.dataset.sq);
