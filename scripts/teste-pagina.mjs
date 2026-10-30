@@ -32,11 +32,12 @@ for (const vp of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     titulo: (document.querySelector("#hero-title") || {}).textContent || "",
     secoes: ["quem", "ficha", "ranking", "trajetoria", "historico"].filter((id) => !(document.getElementById(id) || {}).innerHTML),
     largura: document.documentElement.scrollWidth,
+    culpados: [...document.querySelectorAll("#app *")].filter((e) => { const r = e.getBoundingClientRect(); return r.right > innerWidth + 2 && r.width > 0 && !e.closest("nav.tabs, .leaflet-container, .tbl-wrap, .heat"); }).slice(0, 5).map((e) => `${e.tagName.toLowerCase()}.${String(e.className).split(" ").join(".")} (${Math.round(e.getBoundingClientRect().right)}px)`),
   }));
   if (r.falhou) erros.push(`${vp.width}px: página mostrou "Não foi possível carregar os dados"`);
   if (!r.titulo) erros.push(`${vp.width}px: título vazio`);
   if (r.secoes.length) erros.push(`${vp.width}px: seções vazias: ${r.secoes.join(", ")}`);
-  if (r.largura > vp.width + 2) erros.push(`${vp.width}px: rolagem horizontal (${r.largura}px)`);
+  if (r.largura > vp.width + 2) erros.push(`${vp.width}px: rolagem horizontal (${r.largura}px) — ${r.culpados.join("; ")}`);
   await p.close();
 }
 await b.close(); srv.close();

@@ -37,6 +37,15 @@ jobs:
         run: python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true
       - name: Conferir dados
         run: node scripts/verificar.mjs
+      - name: Guardar dados conferidos no branch dados-tse
+        run: |
+          git config user.name "plenaria-bot"
+          git config user.email "plenaria-bot@users.noreply.github.com"
+          git checkout -B dados-tse
+          git add data fotos
+          git commit -m "Dados oficiais do TSE ($ANOS) conferidos — base para revisão" || true
+          git push -f origin dados-tse
+          git checkout -
       - name: Testar a página
         run: |
           npm install --no-save playwright@1.56.1
