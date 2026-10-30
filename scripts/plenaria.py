@@ -354,6 +354,40 @@ def g(r, *nomes):
     return None
 
 
+def fotos_divulgacand(ano, uf, cd_mun, sqs, destino, municipal):
+    """Baixa a foto oficial de cada candidato pelo DivulgaCand (TSE), um a um."""
+    base = "https://divulgacandcontas.tse.jus.br/divulga/rest"
+    try:
+        with urllib.request.urlopen(f"{base}/v1/eleicao/ordinarias", timeout=60) as r:
+            eleicoes = json.load(r)
+    except Exception as ex:
+        print(f"  (DivulgaCand indisponível: {ex})")
+        return {}
+    cand = [e for e in eleicoes if str(e.get("ano")) == str(ano) and str(e.get("nomeEleicao", "")).lower().find("turno") == -1 or str(e.get("ano")) == str(ano)]
+    cand = [e for e in cand if str(e.get("ano")) == str(ano)]
+    tipo = "M" if municipal else "F"
+    escolha = [e for e in cand if str(e.get("tipoAbrangencia", "")).upper().startswith(tipo)] or cand
+    if not escolha:
+        print(f"  (DivulgaCand sem eleição de {ano})")
+        return {}
+    ue = cd_mun if municipal else uf
+    ok = {}
+    os.makedirs(destino, exist_ok=True)
+    for e in escolha[:2]:
+        for sq in sorted(sqs - set(ok)):
+            try:
+                with urllib.request.urlopen(f"{base}/arquivo/img/{e['id']}/{sq}/{ue}", timeout=30) as r:
+                    dados = r.read()
+                    if len(dados) > 1500 and r.headers.get_content_type().startswith("image"):
+                        alvo = os.path.join(destino, f"{sq}.jpg")
+                        open(alvo, "wb").write(dados)
+                        ok[sq] = os.path.relpath(alvo, RAIZ).replace(os.sep, "/")
+            except Exception:
+                pass
+    print(f"  {len(ok)} fotos baixadas do DivulgaCand (eleição {[e.get('id') for e in escolha[:2]]})")
+    return ok
+
+
 def cmd_tse(a):
     pasta = os.path.abspath(a.pasta)
     os.makedirs(pasta, exist_ok=True)
@@ -380,10 +414,15 @@ def cmd_tse(a):
                 print(f"  (sem detalhe_votacao_munzona: {ex})")
         f_foto = os.path.join(pasta, f"foto_cand{ano}_{uf}_div.zip")
         if a.fotos and a.baixar and not os.path.exists(f_foto):
-            try:
-                baixar(f"{CDN}/consulta_cand/foto_cand{ano}_{uf}_div.zip", f_foto)
-            except Exception as ex:
-                print(f"  (sem fotos: {ex})")
+            # o TSE já publicou o pacote de fotos em endereços diferentes conforme o ano
+            for u in (f"https://cdn.tse.jus.br/estatistica/sead/eleicoes/eleicoes{ano}/fotos/foto_cand{ano}_{uf}_div.zip",
+                      f"{CDN}/consulta_cand/foto_cand{ano}_{uf}_div.zip",
+                      f"{CDN}/fotos/foto_cand{ano}_{uf}_div.zip"):
+                try:
+                    baixar(u, f_foto)
+                    break
+                except Exception as ex:
+                    print(f"  (fotos não estão em {u}: {ex})")
 
         # 1) votos por seção do município (1º turno; 2º turno só p/ cargos majoritários)
         cd_mun = cidade["meta"].get("cd_tse")
@@ -516,6 +555,11 @@ def cmd_tse(a):
                             dst.write(src.read())
                         fotos_ok[m.group(1)] = os.path.relpath(alvo_foto, RAIZ).replace(os.sep, "/")
             print(f"  {len(fotos_ok)} fotos extraídas")
+        if a.fotos and a.baixar:
+            faltam = {k for vs in votos.values() for k in vs if k.isdigit()} - set(fotos_ok)
+            if faltam:
+                fotos_ok.update(fotos_divulgacand(ano, uf, cd_mun, faltam, os.path.join(RAIZ, "fotos", uf.lower(), slug(a.municipio), str(ano)),
+                                                  municipal=bool(votos) and all(c in ("prefeito", "vereador") for _, c in votos)))
 
         # vagas em disputa (para quociente eleitoral)
         vagas = {}
