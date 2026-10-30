@@ -204,6 +204,18 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       ],
     },
     {
+      wiki: "Eduardo_Bismarck",
+      nomes: ["Eduardo Bismarck"],
+      papel: "Secretário de Turismo do Ceará; deputado federal até jan/2027",
+      partido: "PV (Federação Brasil da Esperança)",
+      resumo: "Eleito deputado federal em 2018 e 2022 (102.287 votos). Assumiu a Secretaria de Turismo no governo Elmano em dez/2024. Não se reelegeu em 2026. Filho de Bismarck Maia, prefeito de Aracati.",
+      redes: [{ rede: "Instagram", url: "https://www.instagram.com/eduardobismarckce/", rotulo: "@eduardobismarckce", selo: "uma-fonte" }],
+      destaques: [
+        { data: "2026-10-05", titulo: "Não consegue a reeleição para deputado federal", selo: "uma-fonte", fontes: [{ nome: "GCMais", url: "https://gcmais.com.br/noticias/2026/10/05/quem-sao-os-deputados-federais-do-ceara-derrotados-na-tentativa-de-reeleicao" }] },
+        { data: "2024-12", titulo: "Assume a Secretaria de Turismo do Ceará", selo: "confirmado", fontes: [{ nome: "Panrotas", url: "https://www.panrotas.com.br/gente/movimentacao/2024/12/eduardo-bismarck-e-o-novo-secretario-de-turismo-do-ceara_212985.html" }, { nome: "Brasilturis", url: "https://brasilturis.com.br/2024/12/26/eduardo-bismarck-assume-como-novo-secretario-de-turismo-do-ceara/" }] },
+      ],
+    },
+    {
       nomes: ["Antunino Martins"],
       papel: "Vereador (2025–2028)",
       partido: "PSB",
