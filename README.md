@@ -5,7 +5,10 @@ Página de análise eleitoral (começando por **Varjota/CE**) com apresentação
 
 - **Mais votados** por cargo e eleição, com limiar ajustável de "votação relevante" (% dos válidos).
 - **Bairros**: quem venceu cada bairro, top 5 por bairro, placar de bairros vencidos e mapa de calor candidato × bairro.
-- **Mapa** dos locais de votação (coordenadas do TSE), colorido pelo vencedor ou pela força de um candidato.
+- **Ficha da cidade**: quem manda, grupos políticos e deputados ligados, leitura, pontos a acompanhar e linha do tempo com selo de confiança por item.
+- **Mapa das forças** (Leaflet): balões por bairro/distrito com a foto de quem lidera; ao tocar, sobem as 3 maiores forças.
+  Dá para entrar no bairro → local de votação → seção, alternar entre deputados (2026) e vereadores/prefeito (2024)
+  e fixar até 3 candidatos para acompanhar em todo o mapa.
 - **Seções**: tabela completa, filtro por bairro, votos de um candidato seção a seção e comparação de até 4 seções.
 - **Comparar** até 4 candidatos por bairro ou por local, em votos ou % dos válidos.
 - **Perfil** do candidato: foto, ficha, votos na cidade, posição, bairros vencidos, melhores seções,
@@ -30,7 +33,7 @@ Tudo vem dos dados abertos do TSE. Nada é estimado ou inventado.
 Para gerar o detalhe por seção/bairro dos deputados (precisa de acesso a `cdn.tse.jus.br`):
 
 ```bash
-python3 scripts/plenaria.py tse --municipio Varjota --ano 2022 --ano 2018 --ano 2014 --baixar
+python3 scripts/plenaria.py tse --municipio Varjota --ano 2026 --ano 2024 --ano 2022 --baixar
 ```
 
 O script baixa `votacao_secao`, `eleitorado_local_votacao` (bairro e coordenadas),
@@ -43,6 +46,11 @@ Base histórica (totais municipais):
 ```bash
 python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2314003
 ```
+
+## Informação local (fora do GitHub)
+
+`data/<uf>/<cidade>.local.js` guarda o que é conhecimento seu (quem apoiou quem, leituras).
+Está no `.gitignore`: guarde uma cópia e coloque na pasta ao lado de `<cidade>.ficha.js`.
 
 ## Estrutura (pronta para outras cidades e login)
 

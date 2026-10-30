@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
@@ -111,7 +112,7 @@
     </div>
   </header>
   <nav class="tabs" aria-label="Seções da análise"><div class="wrap">
-    <a href="#visao">Visão geral</a><a href="#ficha">Ficha da cidade</a><a href="#deputado">Deputado na cidade</a><a href="#ranking">Mais votados</a><a href="#bairros">Bairros</a><a href="#mapa">Mapa</a><a href="#secoes">Seções</a><a href="#comparar">Comparar</a><a href="#historico">Histórico</a>
+    <a href="#visao">Visão geral</a><a href="#ficha">Ficha da cidade</a><a href="#mapa">Mapa</a><a href="#deputado">Deputado na cidade</a><a href="#ranking">Mais votados</a><a href="#bairros">Bairros</a><a href="#secoes">Seções</a><a href="#comparar">Comparar</a><a href="#historico">Histórico</a>
   </div></nav>
 
   <main class="wrap">
@@ -121,10 +122,10 @@
     </div>
     <div id="sec-kpis"></div>
     <section class="blk" id="ficha"></section>
+    <section class="blk" id="mapa"></section>
     <section class="blk" id="deputado"></section>
     <section class="blk" id="ranking"></section>
     <section class="blk" id="bairros"></section>
-    <section class="blk" id="mapa"></section>
     <section class="blk" id="secoes"></section>
     <section class="blk" id="comparar"></section>
     <section class="blk" id="historico"></section>
@@ -138,6 +139,7 @@
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script>window.gsap || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"><\/script>')</script>
+<script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="data/cidades.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/intro.js"></script>
