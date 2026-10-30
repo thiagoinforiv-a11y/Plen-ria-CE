@@ -596,7 +596,10 @@
     const lista = [...idx.values()].filter(okTipo);
     if (!T.init || !T.sel.every((p) => idx.has(p))) {
       T.init = true;
-      T.sel = lista.sort((p, q) => q.ent.length - p.ent.length || q.ent[q.ent.length - 1].x.votos - p.ent[p.ent.length - 1].x.votos).slice(0, 2).map((d) => d.pid);
+      // padrão: os dois mais votados da eleição mais recente desse tipo
+      const ult = Math.max(...lista.flatMap((d) => d.ent.filter((e) => TIPOS[T.tipo][1](e.cargo)).map((e) => e.ano)));
+      const v = (d) => (d.ent.find((e) => e.ano === ult && TIPOS[T.tipo][1](e.cargo)) || { x: { votos: -1 } }).x.votos;
+      T.sel = [...lista].sort((p, q) => v(q) - v(p)).slice(0, 2).map((d) => d.pid);
     }
     const sel = T.sel.map((p) => idx.get(p)).filter(Boolean);
     const anos = Object.keys(S.city.eleicoes).map(Number).sort();

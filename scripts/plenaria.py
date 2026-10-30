@@ -189,7 +189,7 @@ def cmd_seed(a):
 
     # contexto: comparecimento, abstenção e votos por cargo
     if not a.cd_ibge:
-        sys.exit("Informe --cd-ibge (ex.: Varjota = 2314003).")
+        sys.exit("Informe --cd-ibge (ex.: Varjota = 2313955).")
     contexto = []
     with gzip.open(det, "rt", encoding="utf-8") as f:
         for r in csv.DictReader(f):
@@ -550,7 +550,7 @@ def main():
     s = sub.add_parser("seed", help="totais municipais históricos (Base dos Dados)")
     s.add_argument("--municipio", required=True)
     s.add_argument("--uf", default="CE")
-    s.add_argument("--cd-ibge", help="código IBGE do município (Varjota = 2314003)")
+    s.add_argument("--cd-ibge", help="código IBGE do município (Varjota = 2313955)")
     s.add_argument("--desde", type=int, default=2010)
     s.add_argument("--pasta", default=os.path.join(RAIZ, "tse_raw"))
     t = sub.add_parser("tse", help="detalhe por seção/bairro a partir dos dados abertos do TSE")

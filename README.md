@@ -46,7 +46,7 @@ O script baixa `votacao_secao`, `eleitorado_local_votacao` (bairro e coordenadas
 Base histórica (totais municipais):
 
 ```bash
-python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2314003 --desde 2000
+python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2313955 --desde 2000
 ```
 
 ## Informação local (fora do GitHub)
