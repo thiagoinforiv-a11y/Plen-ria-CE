@@ -411,6 +411,17 @@ input.search { background: var(--surface-2); border: 1px solid var(--line); bord
 .rx-t i { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
 .rx-t .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: var(--ink-2); }
 
+/* onde ir */
+.cz-base { margin-bottom: 16px; }
+.cz-base .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+.cz-base .cmp-pick { align-items: center; }
+.cz-res { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.cz-q { display: flex; gap: 12px; border-left: 4px solid var(--c); padding: 14px; }
+.cz-q .n { font-size: 30px; font-weight: 900; letter-spacing: -.04em; line-height: 1; min-width: 30px; }
+.cz-q b { display: block; font-size: 14.5px; }
+.cz-q span { display: block; font-size: 12px; line-height: 1.4; margin-top: 3px; }
+.qtag { display: inline-block; font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px; border: 2px solid var(--c); white-space: nowrap; }
+
 /* deputado na cidade */
 .dep-card { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; }
 .dep-id { background: var(--accent); color: var(--accent-ink); padding: 28px 24px; }

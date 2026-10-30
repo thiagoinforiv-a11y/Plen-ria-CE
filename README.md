@@ -16,6 +16,9 @@ Página de análise eleitoral (começando por **Varjota/CE**) com apresentação
 - **Raio-X de força**: índice por bairro e local (% na área ÷ % na cidade × 100), com "onde é forte",
   "onde é fraco", "onde pode crescer" (votos que faltam para a média dele) e concentração do voto;
   no mapa, "Raio-X de" pinta os balões pela força do candidato escolhido.
+- **Onde ir**: cruza a força dos vereadores do grupo (base local) com a de um deputado, bairro a bairro ou
+  local a local, e classifica cada área em "Ir primeiro", "Território adversário", "Voto próprio do deputado",
+  "Consolidado" ou "Não compensa", com os votos que faltaram e quem manda ali.
 - **Perfil** do candidato: foto, ficha, votos na cidade, posição, bairros vencidos, melhores seções,
   votação no estado e peso da cidade na votação dele, e **histórico na cidade** em outras eleições.
 

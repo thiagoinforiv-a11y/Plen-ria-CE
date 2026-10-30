@@ -29,6 +29,7 @@
     map: { ano: null, cargo: null, bairro: null, local: null, secao: null, foco: [] }, cmpBy: "bairro", cmpMode: "votos",
     dep: { pid: "", ano: null },
     traj: { tipo: "vereador", sel: [], modo: "pct", init: false },
+    cruz: { depEl: "", dep: "", verEl: "", aliados: [], nivel: "bairro" },
   };
   const cache = new Map();
 
@@ -690,8 +691,101 @@
       <p class="muted" style="font-size:12.5px;margin-top:10px">A mesma pessoa é ligada entre eleições pelo identificador do candidato (Base dos Dados/TSE). % dos válidos permite comparar anos com eleitorados diferentes.</p>`;
   }
 
+
+  // ------------------------------------------------------------------ onde ir: cruza a base local (vereadores) com um deputado
+  const QUAD = {
+    ir: ["Ir primeiro", "Base local forte, deputado fraco: voto do grupo que não foi para ele", "var(--s1)", 1],
+    adv: ["Território adversário", "Os dois fracos num lugar grande: alguém de fora manda ali", "var(--s2)", 2],
+    proprio: ["Voto próprio do deputado", "Deputado forte sem a base local: reforçar com lideranças", "var(--s3)", 3],
+    ok: ["Consolidado", "Os dois fortes: manter, sem gastar energia", "#8d8b82", 4],
+    nao: ["Não compensa", "Os dois fracos num lugar pequeno", "#5d5c57", 5],
+  };
+  function cruzamento() {
+    const C = S.cruz;
+    const [da, dc] = C.depEl.split("|"), [va, vc] = C.verEl.split("|");
+    const aD = agg(da, dc), aV = agg(va, vc);
+    const dep = aD.bySq[C.dep];
+    const aliados = C.aliados.map((sq) => aV.bySq[sq]).filter(Boolean);
+    if (!dep || !aliados.length) return null;
+    const chave = (z) => (C.nivel === "bairro" ? z.nome : normNome(z.nome));
+    const mapa = new Map();
+    const fonte = (o, lado) => Object.values(o).forEach((z) => { const k = chave(z); const r = mapa.get(k) || { nome: z.nome, bairro: z.bairro || z.nome }; r[lado] = z; mapa.set(k, r); });
+    fonte(C.nivel === "bairro" ? aD.bairros : aD.locais, "d");
+    fonte(C.nivel === "bairro" ? aV.bairros : aV.locais, "v");
+    const baseD = dep.votos / (aD.validos || 1);
+    const votosAl = aliados.reduce((t, x) => t + x.votos, 0), baseV = votosAl / (aV.validos || 1);
+    const totVal = [...mapa.values()].reduce((t, r) => t + ((r.d && r.d.validos) || 0), 0) || 1;
+    const linhas = [...mapa.values()].filter((r) => r.d && r.v).map((r) => {
+      const vd = r.d.cand[dep.sq] || 0, valD = r.d.validos || 0;
+      const vv = aliados.reduce((t, x) => t + (r.v.cand[x.sq] || 0), 0), valV = r.v.validos || 0;
+      const idxD = baseD ? ((vd / (valD || 1)) / baseD) * 100 : 0, idxV = baseV ? ((vv / (valV || 1)) / baseV) * 100 : 0;
+      const peso = valD / totVal;
+      let q;
+      if (idxV >= 100 && idxD < 100) q = "ir";
+      else if (idxV >= 100) q = "ok";
+      else if (idxD >= 100) q = "proprio";
+      else q = peso >= 0.1 ? "adv" : "nao";
+      const gap = Math.max(0, Math.round(baseD * valD - vd));
+      const liderV = r.v.rank && r.v.rank[0] ? aV.bySq[r.v.rank[0][0]] : null;
+      const liderD = r.d.rank && r.d.rank[0] ? aD.bySq[r.d.rank[0][0]] : null;
+      return { nome: r.nome, bairro: r.bairro, vd, valD, vv, valV, idxD, idxV, peso, q, gap, liderV, liderD, aptos: r.d.aptos || r.v.aptos || 0 };
+    });
+    linhas.sort((p, q) => QUAD[p.q][3] - QUAD[q.q][3] || q.gap - p.gap);
+    return { dep, aliados, baseD, baseV, linhas, aD, aV, da, dc, va, vc };
+  }
+  function renderCruzamento() {
+    const el = $("#estrategia"), m = S.city.meta;
+    const opts = mapEleicoes();
+    const deps = opts.filter((o) => !["vereador", "prefeito"].includes(o.cargo));
+    const vers = opts.filter((o) => ["vereador", "prefeito"].includes(o.cargo));
+    const head = (tools) => `<div class="blk-h"><div><h2>Onde <em class="s">ir</em></h2><p class="lead">Cruza a força dos vereadores do grupo (a base local) com a do deputado, bairro a bairro: onde o voto do grupo não chegou nele, onde é território adversário e onde não compensa ir.</p></div>${tools || ""}</div>`;
+    if (!deps.length || !vers.length) {
+      el.innerHTML = head() + `<div class="notice"><b>Precisa da votação por seção de uma eleição de vereador e de uma de deputado.</b> Assim que o TSE for liberado: <code>python3 scripts/plenaria.py tse --municipio ${esc(m.municipio)} --ano 2026 --ano 2024 --baixar</code></div>`;
+      return;
+    }
+    const C = S.cruz;
+    if (!deps.some((o) => `${o.ano}|${o.cargo}` === C.depEl)) { C.depEl = `${deps[0].ano}|${deps[0].cargo}`; C.dep = ""; }
+    if (!vers.some((o) => `${o.ano}|${o.cargo}` === C.verEl)) { C.verEl = `${vers.find((o) => o.cargo === "vereador")?.ano || vers[0].ano}|${vers.find((o) => o.cargo === "vereador") ? "vereador" : vers[0].cargo}`; C.aliados = []; }
+    const aD = agg(...C.depEl.split("|")), aV = agg(...C.verEl.split("|"));
+    if (!aD.bySq[C.dep]) C.dep = aD.cands[0] ? aD.cands[0].sq : "";
+    C.aliados = C.aliados.filter((sq) => aV.bySq[sq]);
+    const tools = `<div class="tools">
+      <select class="pill" id="cz-depel">${deps.map((o) => `<option value="${o.ano}|${o.cargo}" ${`${o.ano}|${o.cargo}` === C.depEl ? "selected" : ""}>${o.ano} · ${esc(cargoCurto(o.cargo))}</option>`).join("")}</select>
+      <select class="pill" id="cz-dep">${relevantes(aD).concat(aD.cands.filter((x) => !relevantes(aD).includes(x)).slice(0, 60)).map((x) => `<option value="${x.sq}" ${x.sq === C.dep ? "selected" : ""}>${esc(x.urna)} (${esc(x.partido || "")})</option>`).join("")}</select>
+      <div class="seg"><button type="button" data-cznivel="bairro" aria-pressed="${C.nivel === "bairro"}">Bairros</button><button type="button" data-cznivel="local" aria-pressed="${C.nivel === "local"}">Locais</button></div></div>`;
+    const base = `<div class="cz-base"><div class="k">Base local <span class="muted" style="text-transform:none;letter-spacing:0">· ${esc(C.verEl.split("|")[0])} · escolha os vereadores do grupo</span></div>
+      <div class="cmp-pick">${C.aliados.map((sq) => { const x = aV.bySq[sq]; return `<span class="cpick">${avatar(x)}<b>${esc(x.urna)}</b><span class="muted num">${fmt(x.votos)}</span><button type="button" data-czrm="${sq}" aria-label="Remover">×</button></span>`; }).join("")}
+      <select class="pill" id="cz-add"><option value="">+ Adicionar vereador do grupo</option>${aV.cands.filter((x) => !C.aliados.includes(x.sq)).map((x) => `<option value="${x.sq}">${esc(x.urna)} (${esc(x.partido || "")}) · ${fmt(x.votos)}</option>`).join("")}</select>
+      ${vers.length > 1 ? `<select class="pill" id="cz-verel">${vers.map((o) => `<option value="${o.ano}|${o.cargo}" ${`${o.ano}|${o.cargo}` === C.verEl ? "selected" : ""}>${o.ano} · ${esc(cargoCurto(o.cargo))}</option>`).join("")}</select>` : ""}</div></div>`;
+    const R = cruzamento();
+    if (!R) { el.innerHTML = head(tools) + base + `<div class="notice">Escolha o deputado e pelo menos um vereador do grupo para ver o cruzamento.</div>`; return; }
+    // gráfico de quadrantes: x = força da base local, y = força do deputado (100 = média de cada um)
+    const W = 760, H = 460, P = { l: 56, r: 24, t: 24, b: 48 };
+    const mx = Math.max(160, ...R.linhas.map((l) => Math.max(l.idxD, l.idxV))) * 1.1;
+    const X = (v) => P.l + (Math.min(v, mx) / mx) * (W - P.l - P.r), Y = (v) => H - P.b - (Math.min(v, mx) / mx) * (H - P.t - P.b);
+    const vmax = Math.max(...R.linhas.map((l) => l.valD), 1);
+    let svg = `<rect x="${X(100)}" y="${Y(mx)}" width="${X(mx) - X(100)}" height="${Y(100) - Y(mx)}" fill="#8d8b82" opacity=".06"/>`;
+    svg += `<line x1="${X(100)}" x2="${X(100)}" y1="${Y(0)}" y2="${Y(mx)}" stroke="var(--ink-2)" stroke-dasharray="4 4"/><line x1="${X(0)}" x2="${X(mx)}" y1="${Y(100)}" y2="${Y(100)}" stroke="var(--ink-2)" stroke-dasharray="4 4"/>`;
+    svg += `<text x="${X(100) + 8}" y="${Y(0) - 8}" style="fill:var(--s1)">IR PRIMEIRO ↘</text><text x="${X(100) + 8}" y="${Y(mx) + 16}">CONSOLIDADO</text><text x="${X(0) + 8}" y="${Y(mx) + 16}">VOTO PRÓPRIO DO DEPUTADO</text><text x="${X(0) + 8}" y="${Y(0) - 8}">ADVERSÁRIO / NÃO COMPENSA</text>`;
+    svg += `<text x="${(W + P.l) / 2}" y="${H - 10}" text-anchor="middle">força da base local (vereadores) →  100 = média do grupo</text><text x="16" y="${(H - P.b) / 2}" transform="rotate(-90 16 ${(H - P.b) / 2})" text-anchor="middle">força do deputado →</text>`;
+    svg += R.linhas.map((l) => { const r = 7 + 18 * Math.sqrt(l.valD / vmax); const t = `<b>${esc(l.nome)}</b>${C.nivel === "local" ? ` · ${esc(l.bairro)}` : ""}<br>${QUAD[l.q][0]}<br>${esc(R.dep.urna)}: ${fmt(l.vd)} votos (índice ${Math.round(l.idxD)})<br>Grupo: ${fmt(l.vv)} votos (índice ${Math.round(l.idxV)})<br>${fmt(l.valD)} válidos${l.gap ? ` · faltam ~${fmt(l.gap)} p/ a média dele` : ""}`;
+      return `<circle cx="${X(l.idxV)}" cy="${Y(l.idxD)}" r="${r.toFixed(1)}" fill="${QUAD[l.q][2]}" fill-opacity=".85" stroke="var(--surface)" stroke-width="2" ${tip(t)}/><text class="lab" x="${X(l.idxV)}" y="${Y(l.idxD) - r - 4}" text-anchor="middle">${esc(l.nome.length > 18 ? l.nome.slice(0, 17) + "…" : l.nome)}</text>`; }).join("");
+    const resumo = Object.entries(QUAD).map(([k, q]) => { const ls = R.linhas.filter((l) => l.q === k); return `<div class="card cz-q" style="--c:${q[2]}"><div class="n">${ls.length}</div><div><b>${q[0]}</b><span class="muted">${q[1]}</span><span class="num">${fmt(ls.reduce((t, l) => t + l.valD, 0))} válidos${k === "ir" ? ` · ~${fmt(ls.reduce((t, l) => t + l.gap, 0))} votos a buscar` : ""}</span></div></div>`; }).join("");
+    const tabela = `<div class="tbl-wrap" style="max-height:none"><table class="tbl"><thead><tr><th>${C.nivel === "bairro" ? "Bairro / distrito" : "Local de votação"}</th><th>Leitura</th><th class="r">${esc(R.dep.urna)}</th><th class="r">Grupo</th><th class="r">A buscar</th><th>Quem manda ali (vereador)</th></tr></thead><tbody>
+      ${R.linhas.map((l) => `<tr><td><b>${esc(l.nome)}</b>${C.nivel === "local" ? `<div class="muted" style="font-size:12px">${esc(l.bairro)}</div>` : ""}<div class="muted" style="font-size:12px">${fmt(l.valD)} válidos</div></td>
+        <td><span class="qtag" style="--c:${QUAD[l.q][2]}">${QUAD[l.q][0]}</span></td>
+        <td class="r num">${fmt(l.vd)}<div class="muted">${pct(l.vd / (l.valD || 1))} · ${Math.round(l.idxD)}</div></td>
+        <td class="r num">${fmt(l.vv)}<div class="muted">${pct(l.vv / (l.valV || 1))} · ${Math.round(l.idxV)}</div></td>
+        <td class="r num">${l.gap ? `~${fmt(l.gap)}` : "—"}</td>
+        <td>${l.liderV ? `${esc(l.liderV.urna)} <span class="muted">${esc(l.liderV.partido || "")}${C.aliados.includes(l.liderV.sq) ? " · do grupo" : ""}</span>` : "—"}</td></tr>`).join("")}</tbody></table></div>`;
+    el.innerHTML = head(tools) + base + `<div class="grid cz-res">${resumo}</div>
+      <div class="card" style="margin-top:14px"><svg class="chart" viewBox="0 0 ${W} ${H}" style="height:auto" role="img" aria-label="Quadrantes de força">${svg}</svg>
+      <p class="muted" style="font-size:12.5px;margin:6px 0 0">Cada bolha é um ${C.nivel === "bairro" ? "bairro" : "local"}; tamanho = votos válidos. Índice = % na área ÷ % na cidade × 100. "A buscar" = votos que faltaram para o deputado chegar à média dele ali.</p></div>
+      <div style="margin-top:14px">${tabela}</div>`;
+  }
+
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderMapa(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderMapa(); renderCruzamento(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -923,6 +1017,8 @@
       if (mode) { S.cmpMode = mode.dataset.mode; renderComparar(); return; }
       const mn = t.closest("[data-mnav]");
       if (mn) { ev.preventDefault(); desenharMapa.nav(mn.dataset.mnav); return; }
+      const czn = t.closest("[data-cznivel]"); if (czn) { S.cruz.nivel = czn.dataset.cznivel; renderCruzamento(); return; }
+      const czr = t.closest("[data-czrm]"); if (czr) { S.cruz.aliados = S.cruz.aliados.filter((q) => q !== czr.dataset.czrm); renderCruzamento(); return; }
       const tt = t.closest("[data-ttipo]"); if (tt) { S.traj.tipo = tt.dataset.ttipo; S.traj.init = false; renderTrajetoria(); return; }
       const tm = t.closest("[data-tmodo]"); if (tm) { S.traj.modo = tm.dataset.tmodo; renderTrajetoria(); return; }
       const tr = t.closest("[data-trm]"); if (tr) { S.traj.sel = S.traj.sel.filter((p) => p !== tr.dataset.trm); if (!S.traj.sel.length) S.traj.sel = []; renderTrajetoria(); return; }
@@ -950,6 +1046,10 @@
       if (t.id === "sec-bairro") { S.secBairro = t.value; renderSecoes(); }
       if (t.id === "sec-cand") { S.secCand = t.value; S.secSort = t.value ? "cand" : "validos"; renderSecoes(); }
       if (t.id === "map-el") { const [ano, cargo] = t.value.split("|"); Object.assign(S.map, { ano, cargo, bairro: null, local: null, secao: null, zoom: false, foco: [] }); renderMapa(); }
+      if (t.id === "cz-depel") { S.cruz.depEl = t.value; S.cruz.dep = ""; renderCruzamento(); }
+      if (t.id === "cz-dep") { S.cruz.dep = t.value; renderCruzamento(); }
+      if (t.id === "cz-verel") { S.cruz.verEl = t.value; S.cruz.aliados = []; renderCruzamento(); }
+      if (t.id === "cz-add" && t.value) { S.cruz.aliados.push(t.value); renderCruzamento(); }
       if (t.id === "map-rx") { S.map.rx = t.value; renderMapa(); }
       if (t.id === "map-foco" && t.value) { S.map.foco.push(t.value); renderMapa(); }
       if (t.id === "cmp-add" && t.value) toggleCmp(t.value);
@@ -972,7 +1072,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "ficha", "mapa", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "ficha", "mapa", "estrategia", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     addEventListener("resize", () => { clearTimeout(bind._rt); bind._rt = setTimeout(() => desenharMapa.fit && desenharMapa.fit(), 200); });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());
