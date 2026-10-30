@@ -283,9 +283,11 @@
     const a = agg(S.map.ano, S.map.cargo);
     const rel = relevantes(a).slice(0, 40);
     const tools = `<div class="tools"><select class="pill" id="map-el">${opts.map((o) => `<option value="${o.ano}|${o.cargo}" ${o.ano === S.map.ano && o.cargo === S.map.cargo ? "selected" : ""}>${o.ano} · ${esc(cargoCurto(o.cargo))}</option>`).join("")}</select>
+      <select class="pill" id="map-rx"><option value="">Cor: quem lidera</option>${rel.map((x) => `<option value="${x.sq}" ${x.sq === S.map.rx ? "selected" : ""}>Raio-X de ${esc(x.urna)}</option>`).join("")}</select>
       ${S.map.foco.length < 3 ? `<select class="pill" id="map-foco"><option value="">+ Escolher candidato</option>${rel.filter((x) => !S.map.foco.includes(x.sq)).map((x) => `<option value="${x.sq}">${esc(x.urna)} (${esc(x.partido || "")})</option>`).join("")}</select>` : ""}</div>`;
     const chips = S.map.foco.length ? `<div class="cmp-pick">${S.map.foco.map((sq) => { const x = a.bySq[sq]; return x ? `<span class="cpick">${avatar(x)}<b>${esc(x.urna)}</b><button type="button" data-unfoco="${sq}" aria-label="Remover">×</button></span>` : ""; }).join("")}</div>` : "";
-    el.innerHTML = head(tools) + chips + `<div class="mapx"><div id="lmap" class="lmap" role="application" aria-label="Mapa de ${esc(S.city.meta.municipio)}"></div><aside class="mpanel" id="mpanel"></aside></div>`;
+    const rxLeg = S.map.rx && a.bySq[S.map.rx] ? `<div class="legend" style="margin:0 0 10px">Raio-X de <b style="margin:0 6px">${esc(a.bySq[S.map.rx].urna)}</b>${CLASSES.map(([, n, ic, c]) => `<span><i style="background:${c}"></i>${ic} ${n}</span>`).join("")}</div>` : "";
+    el.innerHTML = head(tools) + chips + rxLeg + `<div class="mapx"><div id="lmap" class="lmap" role="application" aria-label="Mapa de ${esc(S.city.meta.municipio)}"></div><aside class="mpanel" id="mpanel"></aside></div>`;
     desenharMapa();
   }
   function desenharMapa() {
@@ -304,9 +306,12 @@
     }
     const vmax = Math.max(...bairros.map((b) => b.validos), 1);
     const balao = (o, nome, latlng, nivel, id) => {
-      const w = o.rank && o.rank[0] ? a.bySq[o.rank[0][0]] : null;
+      const rx = S.map.rx && a.bySq[S.map.rx];
+      const w = rx || (o.rank && o.rank[0] ? a.bySq[o.rank[0][0]] : null);
       const sz = Math.round(44 + 30 * Math.sqrt(o.validos / vmax));
-      const html = `<div class="bal" style="--c:${w ? cor(w.sq) : "var(--other)"};--s:${sz}px">${w ? avatar(w, "bav") : ""}<span class="bn">${esc(nome)}</span></div>`;
+      let ring = w ? cor(w.sq) : "var(--other)", rot = esc(nome);
+      if (rx) { const base = rx.votos / (a.validos || 1), idx = base ? (((o.cand[rx.sq] || 0) / (o.validos || 1)) / base) * 100 : 0, cl = classe(idx); ring = cl[3]; rot = `${esc(nome)} · ${cl[2]} ${Math.round(idx)}`; }
+      const html = `<div class="bal" style="--c:${ring};--s:${sz}px">${w ? avatar(w, "bav") : ""}<span class="bn">${rot}</span></div>`;
       const mk = L.marker(latlng, { icon: L.divIcon({ html, className: "balw", iconSize: [sz, sz], iconAnchor: [sz / 2, sz / 2] }), riseOnHover: true, keyboard: true, title: nome });
       mk.on("click", () => selecionar(nivel, id));
       const drill = nivel === "bairro" ? `<button type="button" class="btn primary fdrill" data-mdrill="${esc(id)}">Ver locais e seções ›</button>` : "";
@@ -572,7 +577,7 @@
         ${porSec ? `<div class="grid dep-cols">
           <div><h4>Top 5 locais de votação</h4>${locais.map(({ l, v }, i) => `<div class="hbar"><div class="lb">${i + 1}. ${esc(l.nome)}<div class="muted" style="font-size:11.5px">${esc(l.bairro)}</div></div><div class="t"><i style="width:${(v / lmax) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (l.validos || 1))}</div></div>`).join("")}</div>
           <div><h4>Votos por bairro</h4>${bairros.map(({ b, v }) => `<div class="hbar" ${tip(`${esc(b.nome)}: ${fmt(v)} votos · ${pct(v / (b.validos || 1))} dos válidos do bairro`)}><div class="lb">${esc(b.nome)}</div><div class="t"><i style="width:${(v / bmax) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (b.validos || 1))}</div></div>`).join("")}</div>
-        </div>` : `<div class="notice" style="margin-top:16px">Locais e bairros não disponíveis para ${esc(ent.ano)} (só totais do município).</div>`}
+        </div>${raioXHTML(a, x.sq)}` : `<div class="notice" style="margin-top:16px">Locais e bairros não disponíveis para ${esc(ent.ano)} (só totais do município).</div>`}
         <h4>Histórico em ${esc(m.municipio)}</h4>
         <div class="timeline">${hist.map((h) => { const [hs] = statusEleito(h.x.situacao); return `<div class="tl ${h.ano == ent.ano && h.cargo === ent.cargo ? "cur" : ""}"><div class="y">${h.ano} <span class="muted" style="font-weight:500;font-size:14px">· ${esc(cargoCurto(h.cargo))} · ${esc(h.x.partido || "")}</span></div>
           <div class="c">${fmt(h.x.votos)} votos na cidade · ${pct(h.share)} dos válidos · ${h.pos}º de ${h.n}${h.x.uf && h.x.uf.total ? ` · ${fmt(h.x.uf.total)} no estado` : ""} · ${esc(hs)}</div><div class="t"><i style="width:${(h.x.votos / hmax) * 100}%"></i></div></div>`; }).join("")}</div>
@@ -758,6 +763,53 @@
     abrirDrawer();
   }
 
+
+  // ------------------------------------------------------------------ raio-x: onde é forte, onde é fraco
+  // Índice de força = % do candidato na área ÷ % dele na cidade × 100 (100 = igual à média dele).
+  const CLASSES = [
+    [130, "Reduto", "▲▲", "#3987e5"], [110, "Forte", "▲", "#86b6ef"], [90, "Na média", "■", "#8d8b82"],
+    [70, "Fraco", "▼", "#e8a07f"], [-1, "Muito fraco", "▼▼", "#d95926"],
+  ];
+  const classe = (idx) => CLASSES.find(([min]) => idx >= min);
+  function raioX(a, sq) {
+    const x = a.bySq[sq];
+    const base = x.votos / (a.validos || 1);
+    const min = Math.max(30, a.validos * 0.02);
+    const areas = (o) => Object.values(o).map((z) => {
+      const v = z.cand[sq] || 0, share = v / (z.validos || 1);
+      const idx = base ? (share / base) * 100 : 0;
+      return { z, nome: z.nome, v, val: z.validos, share, idx, cl: classe(idx), gap: Math.max(0, Math.round(base * z.validos - v)), ok: z.validos >= min };
+    });
+    const bairros = areas(a.bairros), locais = areas(a.locais);
+    const porVotos = [...locais].sort((p, q) => q.v - p.v);
+    const conc3 = porVotos.slice(0, 3).reduce((t, r) => t + r.v, 0) / (x.votos || 1);
+    return { x, base, bairros, locais, conc3, topLocal: porVotos[0] };
+  }
+  function raioXHTML(a, sq) {
+    const r = raioX(a, sq);
+    if (!r.x.votos) return "";
+    const fortes = r.bairros.filter((b) => b.ok && b.idx >= 110).sort((p, q) => q.idx - p.idx).slice(0, 3);
+    const fracos = r.bairros.filter((b) => b.ok && b.idx < 90).sort((p, q) => p.idx - q.idx).slice(0, 3);
+    const crescer = [...r.locais].filter((l) => l.ok && l.idx < 100).sort((p, q) => q.gap - p.gap).slice(0, 3);
+    const item = (b, extra) => `<div class="rx-i"><span class="rx-b" style="--c:${b.cl[3]}">${b.cl[2]} ${Math.round(b.idx)}</span><div><b>${esc(b.nome)}</b><span class="muted">${fmt(b.v)} votos · ${pct(b.share)} ${extra || ""}</span></div></div>`;
+    const lista = [...r.bairros].sort((p, q) => q.idx - p.idx);
+    const lim = Math.max(60, ...lista.map((b) => Math.abs(b.idx - 100)));
+    const div = lista.map((b) => {
+      const d = b.idx - 100, w = (Math.abs(d) / lim) * 50;
+      return `<div class="rx-row" ${tip(`<b>${esc(b.nome)}</b><br>${fmt(b.v)} votos · ${pct(b.share)} dos válidos do bairro<br>Índice ${Math.round(b.idx)} · ${b.cl[1]}`)}><div class="lb">${esc(b.nome)}</div><div class="rx-t"><i style="${d >= 0 ? `left:50%;width:${w}%` : `left:${50 - w}%;width:${w}%`};background:${b.cl[3]}"></i><span class="mid"></span></div><div class="x num">${b.cl[2]} ${Math.round(b.idx)}</div></div>`;
+    }).join("");
+    const conc = r.conc3 >= 0.6 ? "voto concentrado" : r.conc3 >= 0.35 ? "voto médio" : "voto espalhado";
+    return `<h4>Raio-X: onde é forte e onde é fraco</h4>
+      <p class="muted" style="font-size:12.5px;margin:-4px 0 12px">Índice = % dele na área ÷ % dele na cidade (${pct(r.base)}) × 100. Acima de 100, ele vai melhor ali do que no conjunto da cidade.</p>
+      <div class="grid rx3">
+        <div class="card"><div class="k">Onde é forte</div>${fortes.map((b) => item(b)).join("") || `<span class="muted">Nenhum bairro acima de 110.</span>`}</div>
+        <div class="card"><div class="k">Onde é fraco</div>${fracos.map((b) => item(b)).join("") || `<span class="muted">Nenhum bairro abaixo de 90.</span>`}</div>
+        <div class="card"><div class="k">Onde pode crescer</div>${crescer.map((l) => item(l, `· faltam ~${fmt(l.gap)} p/ a média`)).join("") || `<span class="muted">Já está na média ou acima em todos os locais.</span>`}</div>
+      </div>
+      <div class="rx-conc"><b>${pct(r.conc3, 0)}</b> dos votos dele vêm de 3 locais (${conc})${r.topLocal ? ` · maior reduto em votos: <b>${esc(r.topLocal.nome)}</b> (${fmt(r.topLocal.v)})` : ""}</div>
+      <div class="rx-div">${div}</div>
+      <div class="legend">${CLASSES.map(([, n, ic, c]) => `<span><i style="background:${c}"></i>${ic} ${n}</span>`).join("")}</div>`;
+  }
   function openProfile(sq, ano = S.ano, cargo = S.cargo) {
     const a = agg(ano, cargo), x = a.bySq[sq];
     const porSecao = () => S.city.eleicoes[ano].nivel === "secao";
@@ -785,6 +837,7 @@
           ${u ? `<div class="card"><div class="v num">${fmt(u.total)}</div><div class="l">votos no ${esc(m.uf)}${u.rank ? ` — ${u.rank}º do estado` : ""}</div></div>
           <div class="card"><div class="v num">${pct(x.votos / (u.total || 1))}</div><div class="l">da votação dele veio de ${esc(m.municipio)}${u.posMun ? ` — ${u.posMun}º município dele (de ${u.nMun})` : ""}</div></div>` : ""}
         </div>
+        ${porSecao() ? raioXHTML(a, sq) : ""}
         ${bairros.length ? `<h4>Por bairro</h4>${bairros.map(({ b, v }) => `<div class="hbar" ${tip(`${esc(b.nome)}: ${fmt(v)} votos · ${pct(v / (b.validos || 1))} dos válidos do bairro`)}><div class="lb">${esc(b.nome)}</div><div class="t"><i style="width:${(v / bmax) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (b.validos || 1))}</div></div>`).join("")}` : ""}
         ${secs.length ? `<h4>Melhores seções</h4>${secs.map(({ s, v }) => `<div class="hbar"><div class="lb">Seção ${s.secao}</div><div class="t"><i style="width:${(v / secs[0].v) * 100}%"></i></div><div class="x num">${fmt(v)} · ${pct(v / (s.validos || 1))}</div></div><div class="muted" style="font-size:12px;margin:-2px 0 6px">${esc(s.localNome)} · ${esc(s.bairro)}</div>`).join("")}` : ""}
         <h4>Histórico em ${esc(m.municipio)}</h4>
@@ -897,6 +950,7 @@
       if (t.id === "sec-bairro") { S.secBairro = t.value; renderSecoes(); }
       if (t.id === "sec-cand") { S.secCand = t.value; S.secSort = t.value ? "cand" : "validos"; renderSecoes(); }
       if (t.id === "map-el") { const [ano, cargo] = t.value.split("|"); Object.assign(S.map, { ano, cargo, bairro: null, local: null, secao: null, zoom: false, foco: [] }); renderMapa(); }
+      if (t.id === "map-rx") { S.map.rx = t.value; renderMapa(); }
       if (t.id === "map-foco" && t.value) { S.map.foco.push(t.value); renderMapa(); }
       if (t.id === "cmp-add" && t.value) toggleCmp(t.value);
       if (t.id === "traj-add" && t.value) { const d = ($("#trajetoria")._opts || []).find((z) => t.value.startsWith(z.urna + " — " + z.nome)); if (d) { S.traj.sel.push(d.pid); renderTrajetoria(); } }

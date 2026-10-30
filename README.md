@@ -13,6 +13,9 @@ Página de análise eleitoral (começando por **Varjota/CE**) com apresentação
 - **Trajetória e comparação**: até 4 nomes (vereadores, prefeitos ou deputados) eleição a eleição desde 2000,
   com partido de cada ano, votos, % dos válidos, posição, resultado e tendência (crescimento/declínio).
 - **Comparar** até 4 candidatos por bairro ou por local, em votos ou % dos válidos.
+- **Raio-X de força**: índice por bairro e local (% na área ÷ % na cidade × 100), com "onde é forte",
+  "onde é fraco", "onde pode crescer" (votos que faltam para a média dele) e concentração do voto;
+  no mapa, "Raio-X de" pinta os balões pela força do candidato escolhido.
 - **Perfil** do candidato: foto, ficha, votos na cidade, posição, bairros vencidos, melhores seções,
   votação no estado e peso da cidade na votação dele, e **histórico na cidade** em outras eleições.
 

@@ -396,6 +396,21 @@ input.search { background: var(--surface-2); border: 1px solid var(--line); bord
 .buscas a:hover { border-color: var(--accent); color: var(--ink); }
 .pf-body .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 14px 0 8px; }
 
+/* raio-x */
+.rx3 { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.rx3 .card { padding: 14px; }
+.rx3 .k, .dep-body .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+.rx-i { display: grid; grid-template-columns: 62px 1fr; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+.rx-i span.muted { display: block; font-size: 12px; }
+.rx-b { font-weight: 900; font-size: 12.5px; padding: 3px 6px; border-radius: 8px; border: 2px solid var(--c); text-align: center; white-space: nowrap; }
+.rx-conc { margin: 14px 0 10px; font-size: 13.5px; color: var(--ink-2); }
+.rx-row { display: grid; grid-template-columns: 130px 1fr 64px; gap: 10px; align-items: center; padding: 4px 0; font-size: 13px; }
+.rx-row .lb { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rx-row .x { text-align: right; color: var(--ink-2); }
+.rx-t { position: relative; height: 12px; background: var(--surface-2); border-radius: 3px; }
+.rx-t i { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.rx-t .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: var(--ink-2); }
+
 /* deputado na cidade */
 .dep-card { display: grid; grid-template-columns: 300px 1fr; padding: 0; overflow: hidden; }
 .dep-id { background: var(--accent); color: var(--accent-ink); padding: 28px 24px; }
@@ -435,7 +450,7 @@ footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top:
   .gbars .g { grid-template-columns: 1fr; }
   .wrap { padding: 0 16px; }
   .hbar { grid-template-columns: 100px 1fr 80px; }
-  .dep-card, .dep-cols { grid-template-columns: 1fr; }
+  .dep-card, .dep-cols, .rx3 { grid-template-columns: 1fr; }
   .dep-cols .hbar { grid-template-columns: 110px 1fr 80px; }
   .fato { grid-template-columns: 1fr; gap: 4px; }
   .selos-leg { justify-content: flex-start; }
@@ -444,3 +459,4 @@ footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; border-top:
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
 }
+#drawer .rx3 { grid-template-columns: 1fr; }
