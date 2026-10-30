@@ -131,9 +131,10 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       nomes: ["Tainah Marinho"],
       papel: "Deputada federal eleita (2027–2030)",
       partido: "PSB",
-      resumo: "Eleita com 265.585 votos, a mulher mais votada para deputada federal na história do Ceará; vaga pelo quociente partidário. Em Varjota, foi apoiada pelo vereador Lucas da Célia.",
+      resumo: "Engenheira civil, 30 anos, candidata a prefeita de Barroquinha em 2024. Eleita com 265.585 votos (2ª do Ceará), a mulher mais votada para deputada federal na história do estado. Ligada ao presidente da Alece, Romeu Aldigueri (PSB) — o registro no TSE traz o sobrenome Aldigueri.",
       redes: [],
       destaques: [
+        { data: "2026-10-05", titulo: "Apresentada como primeira-dama da Assembleia, ligada a Romeu Aldigueri", selo: "confirmado", fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/05/tainah-marinho-se-torna-a-mulher-mais-votada-para-deputada-federal-da-historia-do-ceara.html" }, { nome: "Gazeta do Povo (registro TSE)", url: "https://www.gazetadopovo.com.br/eleicoes/2026/candidatos/ce/deputado-federal/tainah-marinho-psb-4077/" }] },
         { data: "2026-10-05", titulo: "Mulher mais votada para federal na história do Ceará", selo: "confirmado", fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/05/tainah-marinho-se-torna-a-mulher-mais-votada-para-deputada-federal-da-historia-do-ceara.html" }, { nome: "Revista Fórum", url: "https://revistaforum.com.br/resultado_eleicoes_2026/tainah-marinho-psb-e-eleita-deputada-federal-pelo-ceara/" }] },
       ],
     },
@@ -153,7 +154,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
       nomes: ["Romeu Aldigueri"],
       papel: "Deputado estadual eleito (2027–2030)",
       partido: "PSB",
-      resumo: "Eleito com 112.303 votos, 3º mais votado do PSB no Ceará. Em Varjota, apoiado pelo vereador Lucas da Célia.",
+      resumo: "Presidente da Assembleia Legislativa do Ceará. Reeleito com 112.303 votos, 3º mais votado do PSB. Fez dobradinha com Tainah Marinho, a quem é ligado.",
       redes: [],
       destaques: [
         { data: "2026-10-05", titulo: "Eleito com 112.303 votos", selo: "confirmado", fontes: [{ nome: "O Tempo (dados do TSE)", url: "https://www.otempo.com.br/eleicoes/2026/deputados-estaduais/2026/10/5/tse-confirma-eleicao-de-romeu-aldigueri-para-deputado-estadual-pelo-ceara-nas-eleicoes-2026" }, { nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/veja-a-lista-de-deputados-estaduais-eleitos-no-ceara-em-2026-1.3795425" }] },

@@ -568,3 +568,5 @@ select.pill, .seg, .btn, input.search { border-color: rgba(255, 255, 255, .08); 
 .apcard .apav { width: 48px; height: 48px; flex: none; }
 .qgeral { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
 .qgeral .pux a { color: var(--ink-2); }
+.apcard.tv { box-shadow: inset 0 0 0 1px rgba(25, 158, 112, .5), var(--glow); }
+.apcard.tv .l:after { content: " · terceira via"; color: #4fd1a5; }
