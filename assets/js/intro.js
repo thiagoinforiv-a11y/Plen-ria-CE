@@ -144,6 +144,7 @@
     // CENA 5 — fechamento: emblema + nome + CTA com clique (12.4 – 15s)
     t.to("#s5", { clipPath: `circle(150% at 50% 30%)`, duration: 0.8, ease: "power3.inOut" }, 12.4)
       .to("#s5 .emblem", { scale: 1, rotation: 0, duration: 0.9, ease: "back.out(1.4)" }, 12.6)
+      .fromTo("#s5 .pfoto", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.6)" }, 12.95)
       .to("#s5 .title", { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 12.8)
       .to("#s5 .cta", { y: 0, opacity: 1, duration: 0.5 }, 13.0)
       .to("#btn-enter", { scale: 1, duration: 0.5, ease: "back.out(2)" }, 13.15)
@@ -163,7 +164,12 @@
     intro.style.display = ""; ui.style.display = "";
     gsap.set([intro, ui], { opacity: 1 });
     fit();
-    const val = fill(window.App.introData());
+    const dados = window.App.introData();
+    const val = fill(dados);
+    // foto do prefeito no centro do emblema final (some sozinha se não carregar)
+    const pf = document.querySelector("#s5 .pfoto"), img = pf && pf.querySelector("img");
+    if (pf && dados && dados.fotoPrefeito) { img.src = dados.fotoPrefeito; img.referrerPolicy = "no-referrer"; img.onerror = () => pf.classList.add("off"); pf.querySelector(".pnome").textContent = "Prefeito " + (dados.prefeito || ""); pf.classList.remove("off"); }
+    else if (pf) pf.classList.add("off");
     if (reduce) {
       // sem movimento: só o quadro final, com o botão
       gsap.set(["#s2", "#s3", "#h1", "#h2", "#h3"], { clipPath: "inset(0% 0% 100% 0%)" });

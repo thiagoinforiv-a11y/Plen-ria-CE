@@ -1007,8 +1007,85 @@
     board.addEventListener("mouseleave", limpar);
     board.addEventListener("click", (ev) => { const rt = ev.target.closest(".rt"); if (!rt) return; if (!rt.dataset.dep && mapa[rt.dataset.pessoa]) { ligar(rt); } else openRelatorio(rt.dataset.pessoa.split(" / ")[0]); });
   }
+
+  // ------------------------------------------------------------------ simulador de 2028
+  // Parte da força de cada liderança em 2026 (média federal/estadual dos deputados que apoiou) e deixa
+  // o usuário mover cada bloco. Projeção por bairro usa a distribuição real de Elmo × Silvino em 2024.
+  const DESTINOS = { sit: "Situação", op: "Oposição", tv: "Terceira via", fora: "Não transfere" };
+  function simBase() {
+    const L = S.local || {};
+    return (L.liderancas || []).map((l, i) => ({ i, nome: l.nome, grupo: l.grupo, deps: l.deps, votos: Math.round(((l.fed || 0) + (l.est || 0)) / ((l.fed && l.est) ? 2 : 1)) }));
+  }
+  function simInit() {
+    if (S.sim) return S.sim;
+    const ini = {}; simBase().forEach((b) => (ini[b.i] = b.grupo === "situação" ? "sit" : b.grupo === "oposição" ? "op" : b.grupo === "terceira via" ? "tv" : "fora"));
+    S.sim = { dest: ini, fid: 75, opiniao: 50, desgaste: 0, tvPropria: true, elmo: 80 };
+    return S.sim;
+  }
+  function simCalc() {
+    const sim = simInit(), base = simBase();
+    const tot = { sit: 0, op: 0, tv: 0, fora: 0 };
+    for (const b of base) {
+      if (b.grupo === "opinião") { tot.sit += b.votos * sim.opiniao / 100; tot.op += b.votos * (100 - sim.opiniao) / 100; continue; }
+      const d = sim.dest[b.i] || "fora";
+      const proprio = (d === "sit" && b.grupo === "situação") || (d === "op" && b.grupo === "oposição") || (d === "tv" && b.grupo === "terceira via");
+      // quem muda de lado leva só parte do voto; o Elmo não concorre em 2028 e transfere parte ao sucessor
+      const ef = (b.nome === "Elmo" ? sim.elmo / 100 : 1) * (proprio ? 1 : sim.fid / 100);
+      tot[d] += b.votos * ef; tot.fora += b.votos * (1 - ef);
+    }
+    tot.sit = Math.max(0, tot.sit - sim.desgaste); tot.fora += sim.desgaste;
+    if (!sim.tvPropria) { tot.sit += tot.tv / 2; tot.op += tot.tv / 2; tot.tv = 0; }
+    const validos = tot.sit + tot.op + tot.tv;
+    return { tot, validos, base };
+  }
+  function renderSimulador() {
+    const el = $("#simulador"); if (!el) return;
+    const m = S.city.meta;
+    const head = `<div class="blk-h"><div><h2>Simulador de <em class="s">2028</em></h2><p class="lead">Mova cada liderança para um lado e veja o placar. A base é a força real de 2026 (votos dos deputados que cada uma apoiou em ${esc(m.municipio)}); a projeção por bairro usa o mapa de 2024.</p></div></div>`;
+    const base = simBase();
+    if (!base.length) { el.innerHTML = head + `<div class="notice">O simulador usa a força das lideranças do seu arquivo local (<code>${esc(m.slug)}.local.js</code>).</div>`; return; }
+    const sim = simInit(), R = simCalc(), T = R.tot, V = R.validos || 1;
+    const lider = T.sit >= T.op ? (T.sit >= T.tv ? "sit" : "tv") : (T.op >= T.tv ? "op" : "tv");
+    const ord = Object.entries({ sit: T.sit, op: T.op, tv: T.tv }).sort((a, b) => b[1] - a[1]);
+    const margem = ord[0][1] - ord[1][1];
+    const cor = { sit: "var(--s1)", op: "var(--s2)", tv: "var(--s3)", fora: "#5d5c57" };
+    const linhas = base.filter((b) => b.grupo !== "opinião").map((b) => `<div class="smr"><div class="sml"><b>${esc(b.nome)}</b><span class="muted">${esc(b.deps)} · ≈ ${fmt(b.votos)}</span></div>
+      <div class="seg smseg">${Object.entries(DESTINOS).map(([k, n]) => `<button type="button" data-simd="${b.i}|${k}" aria-pressed="${sim.dest[b.i] === k}" style="${sim.dest[b.i] === k ? `background:${cor[k]};color:#fff` : ""}">${n}</button>`).join("")}</div></div>`).join("");
+    // projeção por bairro (2024: prefeito, Elmo × Silvino)
+    let bairros = "";
+    const e24 = S.city.eleicoes["2024"];
+    if (e24 && e24.nivel === "secao" && e24.cargos.prefeito) {
+      const a = agg("2024", "prefeito"), [sit24, op24] = a.cands;
+      const fS = T.sit / (sit24.votos || 1), fO = T.op / (op24.votos || 1);
+      const rows = Object.values(a.bairros).sort((p, q) => q.validos - p.validos).map((b) => {
+        const s = (b.cand[sit24.sq] || 0) * fS, o = (b.cand[op24.sq] || 0) * fO, t = T.tv * (b.validos / a.validos);
+        const tt = s + o + t || 1;
+        return `<div class="sbr"><div class="lb">${esc(b.nome)}</div><div class="stk"><i style="width:${s / tt * 100}%;background:var(--s1)"></i><i style="width:${t / tt * 100}%;background:var(--s3)"></i><i style="width:${o / tt * 100}%;background:var(--s2)"></i></div><div class="x num">${s >= o ? "S" : "O"} ${pct(Math.abs(s - o) / tt, 0)}</div></div>`;
+      }).join("");
+      bairros = `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Projeção por bairro (base: ${esc(sit24.urna)} × ${esc(op24.urna)} em 2024)</div>${rows}</div>`;
+    }
+    el.innerHTML = head + `<div class="grid simg">
+      <div class="card simres"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">Placar projetado</div>
+        ${["sit", "op", "tv"].map((k) => `<div class="sp"><span class="dot" style="background:${cor[k]}"></span><b>${DESTINOS[k]}</b><span class="num big">${fmt(T[k])}</span><span class="num muted">${pct(T[k] / V)}</span></div><div class="stk" style="height:14px;margin:4px 0 12px"><i style="width:${T[k] / V * 100}%;background:${cor[k]}"></i></div>`).join("")}
+        <div class="simv" style="--c:${cor[lider]}">${DESTINOS[lider]} vence por <b class="num">${fmt(margem)}</b> votos</div>
+        <div class="muted" style="font-size:12px;margin-top:8px">${fmt(T.fora)} votos se perdem na mudança (não transferem). Modelo simples, para comparar cenários — não é pesquisa.</div></div>
+      <div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">Ajustes</div>
+        <label class="simsl">O Elmo (que não pode concorrer) transfere <b>${sim.elmo}%</b> do voto dele ao candidato que apoiar<input type="range" min="30" max="100" step="5" value="${sim.elmo}" data-sims="elmo"></label>
+        <label class="simsl">Quem muda de lado leva <b>${sim.fid}%</b> do voto<input type="range" min="20" max="100" step="5" value="${sim.fid}" data-sims="fid"></label>
+        <label class="simsl">Voto de opinião para a situação: <b>${sim.opiniao}%</b><input type="range" min="0" max="100" step="5" value="${sim.opiniao}" data-sims="opiniao"></label>
+        <label class="simsl">Desgaste do governo (votos que a situação perde): <b>${fmt(sim.desgaste)}</b><input type="range" min="0" max="2300" step="50" value="${sim.desgaste}" data-sims="desgaste"><span class="muted" style="font-size:11.5px">Referência: 1.860 a 2.229 eleitores votaram no deputado do Elmo e não no Elmano em 2026.</span></label>
+        <label class="simck"><input type="checkbox" data-simtv ${sim.tvPropria ? "checked" : ""}> Terceira via com candidatura própria (desmarcado: divide meio a meio)</label>
+        <div class="tools" style="margin-top:10px"><button class="btn" type="button" data-simcen="base">Cenário base</button><button class="btn" type="button" data-simcen="racha">Racha na situação</button><button class="btn" type="button" data-simcen="tvop">Terceira via com a oposição</button></div></div></div>
+      ${bairros}
+      <div class="card" style="margin-top:14px"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Para onde vai cada liderança</div>${linhas}</div>`;
+  }
+  function simCenario(nome) {
+    S.sim = null; const sim = simInit(), base = simBase();
+    if (nome === "racha") base.forEach((b) => { if (["Raony", "Educação", "Cleiton", "Marcos César"].includes(b.nome)) sim.dest[b.i] = "tv"; });
+    if (nome === "tvop") base.forEach((b) => { if (b.grupo === "terceira via") sim.dest[b.i] = "op"; });
+  }
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderQuem(); renderFicha(); renderMapa(); renderCruzamento(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderQuem(); renderFicha(); renderMapa(); renderCruzamento(); renderSimulador(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -1240,6 +1317,8 @@
       if (mode) { S.cmpMode = mode.dataset.mode; renderComparar(); return; }
       const mn = t.closest("[data-mnav]");
       if (mn) { ev.preventDefault(); desenharMapa.nav(mn.dataset.mnav); return; }
+      const sd = t.closest("[data-simd]"); if (sd) { const [i, k] = sd.dataset.simd.split("|"); simInit().dest[i] = k; renderSimulador(); return; }
+      const sc = t.closest("[data-simcen]"); if (sc) { simCenario(sc.dataset.simcen); renderSimulador(); return; }
       const czn = t.closest("[data-cznivel]"); if (czn) { S.cruz.nivel = czn.dataset.cznivel; renderCruzamento(); return; }
       const czr = t.closest("[data-czrm]"); if (czr) { S.cruz.aliados = S.cruz.aliados.filter((q) => q !== czr.dataset.czrm); renderCruzamento(); return; }
       const tt = t.closest("[data-ttipo]"); if (tt) { S.traj.tipo = tt.dataset.ttipo; S.traj.init = false; renderTrajetoria(); return; }
@@ -1262,6 +1341,7 @@
         S.limiar = +t.value; store.set("limiar", S.limiar);
         clearTimeout(bind._lt); bind._lt = setTimeout(() => { renderHero(); renderKPIs(); renderRanking(); renderBairros(); renderMapa(); renderSecoes(); $("#lim").focus(); }, 120);
       }
+      if (t.dataset && t.dataset.sims) { simInit()[t.dataset.sims] = +t.value; clearTimeout(bind._st); bind._st = setTimeout(() => { const y = scrollY; renderSimulador(); scrollTo(0, y); }, 60); }
       if (t.id === "busca") { S.busca = t.value; renderRanking(); const b = $("#busca"); b.focus(); b.setSelectionRange(b.value.length, b.value.length); }
     });
     document.addEventListener("change", (ev) => {
@@ -1269,6 +1349,7 @@
       if (t.id === "sec-bairro") { S.secBairro = t.value; renderSecoes(); }
       if (t.id === "sec-cand") { S.secCand = t.value; S.secSort = t.value ? "cand" : "validos"; renderSecoes(); }
       if (t.id === "map-el") { const [ano, cargo] = t.value.split("|"); Object.assign(S.map, { ano, cargo, bairro: null, local: null, secao: null, zoom: false, foco: [] }); renderMapa(); }
+      if (t.matches && t.matches("[data-simtv]")) { simInit().tvPropria = t.checked; renderSimulador(); }
       if (t.id === "cz-depel") { S.cruz.depEl = t.value; S.cruz.dep = ""; renderCruzamento(); }
       if (t.id === "cz-dep") { S.cruz.dep = t.value; renderCruzamento(); }
       if (t.id === "cz-verel") { S.cruz.verEl = t.value; S.cruz.aliados = []; renderCruzamento(); }
@@ -1295,7 +1376,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "quem", "ficha", "mapa", "estrategia", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "quem", "ficha", "mapa", "estrategia", "simulador", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     addEventListener("resize", () => { clearTimeout(bind._rt); bind._rt = setTimeout(() => desenharMapa.fit && desenharMapa.fit(), 200); });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());
@@ -1398,7 +1479,9 @@
       const ctx = (S.city.contexto || []).filter((c) => c.turno === 1 && c.aptos && c.secoes);
       const ano = Math.max(...ctx.map((c) => c.ano));
       const c = ctx.find((x) => x.ano === ano && x.cargo === "deputado_estadual") || ctx.find((x) => x.ano === ano);
-      return c ? { ...c, municipio: S.city.meta.municipio, uf: S.city.meta.uf } : null;
+      const pref = ((S.ficha && S.ficha.poder) || []).find((p) => p.papel === "Prefeito");
+      const foto = pref ? fotoPorNome(pref.nome) : {};
+      return c ? { ...c, municipio: S.city.meta.municipio, uf: S.city.meta.uf, prefeito: pref && pref.nome, fotoPrefeito: foto.foto || null } : null;
     },
     show() {
       const app = $("#app");
