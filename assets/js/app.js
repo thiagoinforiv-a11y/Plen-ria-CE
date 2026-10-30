@@ -619,6 +619,8 @@
     if (d <= -0.5) return ["▼ Em declínio", "down", txt];
     return ["■ Estável", "", txt];
   }
+  const _renderCruzamento = renderCruzamento;
+  renderCruzamento = function () { _renderCruzamento(); $("#estrategia").insertAdjacentHTML("beforeend", divisaoHTML()); };
   function renderTrajetoria() {
     const el = $("#trajetoria"), m = S.city.meta;
     const idx = pessoasIdx();
@@ -732,6 +734,59 @@
     });
     linhas.sort((p, q) => QUAD[p.q][3] - QUAD[q.q][3] || q.gap - p.gap);
     return { dep, aliados, baseD, baseV, linhas, aD, aV, da, dc, va, vc };
+  }
+
+  // ------------------------------------------------------------------ divisão da base: cada vereador com seu deputado
+  // Os pares vêm de S.local.apoios (conhecimento local). Com votos por seção, mede se cada vereador entregou.
+  function pearson(xs, ys) {
+    const n = xs.length; if (n < 3) return null;
+    const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+    let sxy = 0, sxx = 0, syy = 0;
+    for (let i = 0; i < n; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) ** 2; syy += (ys[i] - my) ** 2; }
+    return sxx && syy ? sxy / Math.sqrt(sxx * syy) : null;
+  }
+  function divisaoBase() {
+    const apoios = (S.local && S.local.apoios) || [];
+    if (!apoios.length) return { apoios };
+    const ops = mapEleicoes();
+    const ver = ops.find((o) => o.cargo === "vereador");
+    const deps = ops.filter((o) => o.cargo.startsWith("deputado"));
+    const achar = (a, nome) => a && a.cands.find((x) => normNome(x.urna) === normNome(nome) || normNome(x.nome) === normNome(nome));
+    const aV = ver ? agg(ver.ano, ver.cargo) : null;
+    const pares = [];
+    for (const ap of apoios) for (const dn of ap.deputados || []) {
+      const p = { vereador: ap.vereador, deputado: dn, grupo: ap.grupo || "" };
+      const xv = achar(aV, ap.vereador);
+      let dep = null, aD = null;
+      for (const o of deps) { const a = agg(o.ano, o.cargo); const x = achar(a, dn); if (x) { dep = x; aD = a; p.cargoDep = o.cargo; p.anoDep = o.ano; break; } }
+      if (xv && dep) {
+        p.vVer = xv.votos; p.vDep = dep.votos; p.transf = dep.votos / (xv.votos || 1);
+        const nomes = Object.keys(aV.bairros).filter((b) => aD.bairros[b]);
+        p.corr = pearson(nomes.map((b) => (aV.bairros[b].cand[xv.sq] || 0) / (aV.bairros[b].validos || 1)), nomes.map((b) => (aD.bairros[b].cand[dep.sq] || 0) / (aD.bairros[b].validos || 1)));
+        const redutos = Object.values(aV.locais).map((l) => ({ l, v: l.cand[xv.sq] || 0 })).sort((a, b) => b.v - a.v).slice(0, 3);
+        p.redutos = redutos.map(({ l, v }) => {
+          const ld = Object.values(aD.locais).find((z) => normNome(z.nome) === normNome(l.nome));
+          const lider = ld && ld.rank[0] ? aD.bySq[ld.rank[0][0]] : null;
+          return { nome: l.nome, vVer: v, vDep: ld ? ld.cand[dep.sq] || 0 : null, lider, ok: lider && lider.sq === dep.sq };
+        });
+      } else p.falta = !xv ? (aV ? "vereador não encontrado na votação de " + ver.ano : "falta a votação por seção dos vereadores") : "falta a votação por seção dos deputados";
+      pares.push(p);
+    }
+    return { apoios, pares };
+  }
+  function divisaoHTML() {
+    const D = divisaoBase();
+    const head = `<h3 class="fh" style="margin-top:46px">Divisão da base: cada vereador com seu deputado</h3>`;
+    if (!D.apoios.length) return head + `<div class="notice">Registre no arquivo local quem trabalhou para quem (campo <code>apoios</code>, ex.: <code>{ vereador: "Eudes Mesquita", deputados: ["Lia Gomes"] }</code>). Com isso a página mede, para cada par, quanto do voto do vereador virou voto do deputado e se o deputado ganhou nos redutos do vereador.</div>`;
+    const comDados = D.pares.filter((p) => p.vDep != null);
+    const linha = (p) => `<tr><td><b>${esc(p.vereador)}</b>${p.grupo ? `<div class="muted" style="font-size:12px">${esc(p.grupo)}</div>` : ""}</td><td>${esc(p.deputado)}${p.cargoDep ? `<div class="muted" style="font-size:12px">${esc(cargoCurto(p.cargoDep))} ${esc(p.anoDep)}</div>` : ""}</td>
+      ${p.vDep != null ? `<td class="r num">${fmt(p.vVer)}</td><td class="r num">${fmt(p.vDep)}</td><td class="r num"><b>${pct(p.transf, 0)}</b></td>
+        <td class="r num">${p.corr == null ? "—" : `<span class="qtag" style="--c:${p.corr >= 0.5 ? "var(--s1)" : p.corr >= 0.2 ? "#8d8b82" : "var(--s2)"}">${p.corr.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}</span>`}</td>
+        <td>${p.redutos.map((r) => `<div style="font-size:12.5px">${esc(r.nome)}: ${r.ok ? "✔ deputado venceu" : r.lider ? `✘ venceu ${esc(r.lider.urna)}` : "—"}${r.vDep != null ? ` <span class="muted">(${fmt(r.vDep)} p/ ele)</span>` : ""}</div>`).join("")}</td>`
+        : `<td colspan="5" class="muted" style="font-size:12.5px">Aguardando dados: ${esc(p.falta)}</td>`}</tr>`;
+    return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
+      <div class="tbl-wrap" style="max-height:none"><table class="tbl"><thead><tr><th>Vereador</th><th>Deputado apoiado</th><th class="r">Votos vereador</th><th class="r">Votos deputado</th><th class="r">Transferência</th><th class="r">Sintonia</th><th>Nos 3 redutos do vereador</th></tr></thead><tbody>${D.pares.map(linha).join("")}</tbody></table></div>
+      ${comDados.length ? "" : `<p class="muted" style="font-size:12.5px;margin-top:8px">Os pares estão registrados; os números aparecem quando a votação por seção de vereadores e deputados for importada do TSE.</p>`}`;
   }
   function renderCruzamento() {
     const el = $("#estrategia"), m = S.city.meta;
