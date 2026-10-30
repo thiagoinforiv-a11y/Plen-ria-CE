@@ -30,6 +30,9 @@ jobs:
           echo "Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV
           args=""; for a in $anos; do args="$args --ano $a"; done
           python3 scripts/plenaria.py tse --municipio Varjota $args --baixar --continuar
+      - name: Emendas parlamentares (Portal da Transparência)
+        continue-on-error: true
+        run: python3 scripts/emendas.py --municipio Varjota --uf CE
       - name: Completar 2026 com a lista parcial (só se o TSE ainda não tiver 2026)
         run: python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true
       - name: Conferir dados

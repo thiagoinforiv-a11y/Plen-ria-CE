@@ -52,11 +52,13 @@
       // conhecimento local e leituras: só no computador do usuário (fora do git)
       await loadScript(reg.arquivo.replace(/\.js$/, ".local.js")).catch(() => null);
       await loadScript(reg.arquivo.replace(/\.js$/, ".relatorios.js")).catch(() => null);
+      await loadScript(reg.arquivo.replace(/\.js$/, ".emendas.js")).catch(() => null);
     }
     S.city = window.PLENARIA_DATA[reg.id];
     S.ficha = (window.PLENARIA_FICHAS || {})[reg.id] || null;
     S.local = (window.PLENARIA_LOCAL || {})[reg.id] || null;
     S.rel = (window.PLENARIA_RELATORIOS || {})[reg.id] || null;
+    S.emendas = (window.PLENARIA_EMENDAS || {})[reg.id] || null;
     resolverFotos();
     S.cityId = reg.id;
     store.set("cidade", reg.id);
@@ -1084,8 +1086,34 @@
     if (nome === "racha") base.forEach((b) => { if (["Raony", "Educação", "Cleiton", "Marcos César"].includes(b.nome)) sim.dest[b.i] = "tv"; });
     if (nome === "tvop") base.forEach((b) => { if (b.grupo === "terceira via") sim.dest[b.i] = "op"; });
   }
+
+  // ------------------------------------------------------------------ emendas × votos
+  const brl = (v) => "R$ " + (v >= 1e6 ? (v / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 2 }) + " mi" : v >= 1e3 ? (v / 1e3).toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " mil" : fmt(v));
+  function renderEmendas() {
+    const el = $("#emendas"); if (!el) return;
+    const m = S.city.meta, Em = S.emendas;
+    const head = `<div class="blk-h"><div><h2>Emendas × <em class="s">votos</em></h2><p class="lead">Quanto cada parlamentar mandou para ${esc(m.municipio)} em emendas federais (valor pago) e quanto voto teve na cidade. Mostra quem é padrinho de verdade e quem só pediu voto.</p></div></div>`;
+    if (!Em || !(Em.autores || []).length) { el.innerHTML = head + `<div class="notice">As emendas vêm do Portal da Transparência pela automação do GitHub ("Importar dados do TSE"). Assim que ela rodar, esta seção se preenche.</div>`; return; }
+    const votosDe = (autor) => {
+      const n = normNome(autor); let best = null;
+      for (const [ano, e] of Object.entries(S.city.eleicoes)) for (const [k, c] of Object.entries(e.cargos)) if (k.startsWith("deputado") || k === "senador")
+        for (const x of c.candidatos) if ((normNome(x.urna) === n || normNome(x.nome) === n || normNome(x.nome).startsWith(n)) && (!best || +ano > +best.ano)) best = { ano, cargo: k, x };
+      return best;
+    };
+    const rows = Em.autores.filter((a) => a.pago > 0 || a.empenhado > 0).map((a) => ({ a, v: votosDe(a.autor) }));
+    const mx = Math.max(...rows.map((r) => r.a.pago), 1);
+    el.innerHTML = head + `<div class="card"><div class="qrow qh" style="grid-template-columns:minmax(180px,1.2fr) 2fr 110px 120px 120px"><div>Autor</div><div>Pago em ${esc(m.municipio)}</div><div>Votos aqui</div><div>R$ por voto</div><div>Anos</div></div>
+      ${rows.map(({ a, v }) => `<div class="qrow" style="grid-template-columns:minmax(180px,1.2fr) 2fr 110px 120px 120px">
+        <div class="ln" style="display:flex;gap:10px;align-items:center">${avatar({ urna: a.autor, foto: v && v.x.foto, wiki: (acharRelatorio([a.autor]) || {}).wiki })}<div><b ${v ? `data-sq="${v.x.sq}" data-pano="${v.ano}" data-pcargo="${v.cargo}" class="relk"` : ""}>${esc(titulo(a.autor))}</b><div class="muted" style="font-size:11.5px">${esc(a.tipo || "")}</div></div></div>
+        <div class="hbar" style="grid-template-columns:1fr 92px;padding:0"><div class="t"><i style="width:${(a.pago / mx) * 100}%"></i></div><div class="x num">${brl(a.pago)}</div></div>
+        <div class="num">${v ? `<b>${fmt(v.x.votos)}</b> <span class="muted">(${v.ano})</span>` : `<span class="muted">—</span>`}</div>
+        <div class="num">${v && v.x.votos ? brl(a.pago / v.x.votos) : "—"}</div>
+        <div class="muted" style="font-size:12px">${Object.keys(a.anos).sort().join(", ")}</div></div>`).join("")}
+      <p class="muted" style="font-size:12px;margin-top:10px">Fonte: ${esc(Em.fonte)}. Valor pago inclui restos a pagar pagos. Emendas de bancada/comissão aparecem pelo nome do colegiado.</p></div>`;
+  }
+  const titulo = (s) => String(s || "").toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()).replace(/\b(De|Da|Do|Das|Dos|E)\b/g, (w) => w.toLowerCase());
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderQuem(); renderFicha(); renderMapa(); renderCruzamento(); renderSimulador(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderQuem(); renderFicha(); renderMapa(); renderCruzamento(); renderSimulador(); renderEmendas(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -1376,7 +1404,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "quem", "ficha", "mapa", "estrategia", "simulador", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "quem", "ficha", "mapa", "estrategia", "simulador", "emendas", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     addEventListener("resize", () => { clearTimeout(bind._rt); bind._rt = setTimeout(() => desenharMapa.fit && desenharMapa.fit(), 200); });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());
