@@ -529,3 +529,18 @@ select.pill, .seg, .btn, input.search { border-color: rgba(255, 255, 255, .08); 
 
 .aviso-cob { margin: 0 0 22px; padding: 14px 18px; border-radius: 16px; background: rgba(201, 133, 0, .12); box-shadow: inset 0 0 0 1px rgba(224, 164, 42, .45); color: #f3e2b8; font-size: 14.5px; line-height: 1.5; }
 .aviso-cob b { color: #ffd780; }
+
+.apo { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.apcard .ah { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
+.apcard .l { font-size: 11.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.apcard .v { font-size: 19px; font-weight: 900; letter-spacing: -.02em; margin-top: 4px; }
+.apcard .d { font-size: 12.5px; color: var(--ink-2); margin-top: 6px; }
+.apcard .d a { color: var(--ink-2); }
+.apcard .k { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 14px 0 6px; }
+.apcard .vers { display: flex; flex-wrap: wrap; gap: 6px; }
+.apcard .cpick { font-size: 13px; padding: 5px 10px; }
+.apcard .pos { font-size: 11.5px; font-weight: 800; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
+.apcard .pos.ok { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.apcard.op { box-shadow: inset 0 0 0 1px rgba(217, 89, 38, .45), var(--glow); }
+.apcard.op .l:after { content: " · oposição"; color: #e8a07f; }
+.tagx { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #ffd780; margin-left: 6px; }

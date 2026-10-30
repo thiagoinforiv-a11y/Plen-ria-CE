@@ -768,7 +768,7 @@
     const aV = ver ? agg(ver.ano, ver.cargo) : null;
     const pares = [];
     for (const ap of apoios) for (const dn of ap.deputados || []) {
-      const p = { vereador: ap.vereador, deputado: dn, grupo: ap.grupo || "" };
+      const p = { vereador: ap.vereador, deputado: dn, grupo: ap.grupo || "", obs: ap.obs || "" };
       const xv = achar(aV, ap.vereador);
       let dep = null, aD = null;
       for (const o of deps) { const a = agg(o.ano, o.cargo); const x = achar(a, dn); if (x) { dep = x; aD = a; p.cargoDep = o.cargo; p.anoDep = o.ano; break; } }
@@ -792,12 +792,21 @@
     const head = `<h3 class="fh" style="margin-top:46px">Divisão da base: cada vereador com seu deputado</h3>`;
     if (!D.apoios.length) return head + `<div class="notice">Registre no arquivo local quem trabalhou para quem (campo <code>apoios</code>, ex.: <code>{ vereador: "Eudes Mesquita", deputados: ["Lia Gomes"] }</code>). Com isso a página mede, para cada par, quanto do voto do vereador virou voto do deputado e se o deputado ganhou nos redutos do vereador.</div>`;
     const comDados = D.pares.filter((p) => p.vDep != null);
-    const linha = (p) => `<tr><td><b>${esc(p.vereador)}</b>${p.grupo ? `<div class="muted" style="font-size:12px">${esc(p.grupo)}</div>` : ""}</td><td>${esc(p.deputado)}${p.cargoDep ? `<div class="muted" style="font-size:12px">${esc(cargoCurto(p.cargoDep))} ${esc(p.anoDep)}</div>` : ""}</td>
+    const linha = (p) => `<tr><td><b>${esc(p.vereador)}</b>${p.grupo ? `<div class="muted" style="font-size:12px">${esc(p.grupo)}</div>` : ""}${p.obs ? `<div style="font-size:12px;color:#ffd780">${esc(p.obs)}</div>` : ""}</td><td>${esc(p.deputado)}${p.cargoDep ? `<div class="muted" style="font-size:12px">${esc(cargoCurto(p.cargoDep))} ${esc(p.anoDep)}</div>` : ""}</td>
       ${p.vDep != null ? `<td class="r num">${fmt(p.vVer)}</td><td class="r num">${fmt(p.vDep)}</td><td class="r num"><b>${pct(p.transf, 0)}</b></td>
         <td class="r num">${p.corr == null ? "—" : `<span class="qtag" style="--c:${p.corr >= 0.5 ? "var(--s1)" : p.corr >= 0.2 ? "#8d8b82" : "var(--s2)"}">${p.corr.toLocaleString("pt-BR", { maximumFractionDigits: 2 })}</span>`}</td>
         <td>${p.redutos.map((r) => `<div style="font-size:12.5px">${esc(r.nome)}: ${r.ok ? "✔ deputado venceu" : r.lider ? `✘ venceu ${esc(r.lider.urna)}` : "—"}${r.vDep != null ? ` <span class="muted">(${fmt(r.vDep)} p/ ele)</span>` : ""}</div>`).join("")}</td>`
         : `<td colspan="5" class="muted" style="font-size:12.5px">Aguardando dados: ${esc(p.falta)}</td>`}</tr>`;
-    return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
+    // quem trabalhou para quem (não depende do TSE)
+    const info = (S.local && S.local.deputadosInfo) || {};
+    const porDep = new Map();
+    D.pares.forEach((p) => { const r = porDep.get(p.deputado) || { nome: p.deputado, vers: [] }; r.vers.push(p); porDep.set(p.deputado, r); });
+    const ordem = [...porDep.values()].sort((a, b) => (a.vers[0].grupo === "oposição") - (b.vers[0].grupo === "oposição") || b.vers.length - a.vers.length);
+    const mapa = `<div class="grid apo">${ordem.map((d) => { const i = info[d.nome] || {}; const op = d.vers.some((v) => v.grupo === "oposição"); const eleito = /^eleit/i.test(i.resultado || "");
+      return `<div class="card apcard ${op ? "op" : ""}"><div class="ah"><div><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
+        <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}</div>
+        <div class="k">Vereadores que trabalharam</div><div class="vers">${d.vers.map((v) => `<span class="cpick" ${v.obs ? `title="${esc(v.obs)}"` : ""}><b>${esc(v.vereador)}</b>${v.obs && /especula/i.test(v.obs) ? `<span class="tagx">especulação</span>` : ""}</span>`).join("")}</div></div>`; }).join("")}</div>`;
+    return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Mapa de apoios (informação local ◆). Abaixo, a medição de cada par com os votos por seção.</p>` + mapa + `<p class="muted" style="font-size:13px;margin:22px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
       <div class="tbl-wrap" style="max-height:none"><table class="tbl"><thead><tr><th>Vereador</th><th>Deputado apoiado</th><th class="r">Votos vereador</th><th class="r">Votos deputado</th><th class="r">Transferência</th><th class="r">Sintonia</th><th>Nos 3 redutos do vereador</th></tr></thead><tbody>${D.pares.map(linha).join("")}</tbody></table></div>
       ${comDados.length ? "" : `<p class="muted" style="font-size:12.5px;margin-top:8px">Os pares estão registrados; os números aparecem quando a votação por seção de vereadores e deputados for importada do TSE.</p>`}`;
   }
