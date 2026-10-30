@@ -1085,6 +1085,58 @@
     $$("section.blk:not(.seen), #sec-kpis:not(.seen)").forEach((el) => { el.classList.add("reveal", "seen"); revealIO.observe(el); });
   }
 
+
+  // ------------------------------------------------------------------ movimento: barras crescem do zero, números contam, blocos sobem
+  const MOV = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SEL_BAR = ".rrow .bar i, .hbar .t i, .tl .t i, .gbars .b i, .rx-t i";
+  const SEL_NUM = ".kpi .v, .dep-k .v, .pf-k .v, .tk b, .cz-q .n, .rrow .vv, .lchip .n, .acard .n";
+  const SEL_POP = ".card, .rrow, .fato, .cpick, .li, .lig";
+  const contar = (el) => {
+    const m = el.textContent.trim().match(/^([^\d]*)(\d{1,3}(?:\.\d{3})*|\d+)(,\d+)?(.*)$/);
+    if (!m || !window.gsap) return;
+    const dec = m[3] ? m[3].length - 1 : 0;
+    const alvo = parseFloat(m[2].replace(/\./g, "") + (m[3] ? "." + m[3].slice(1) : ""));
+    const o = { v: 0 };
+    gsap.to(o, { v: alvo, duration: 1.2, ease: "power2.out", onUpdate: () => { el.textContent = m[1] + o.v.toLocaleString("pt-BR", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + m[4]; } });
+  };
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    const el = e.target; io.unobserve(el);
+    if (el.classList.contains("anim-bar")) el.style.transform = "scaleX(1)";
+    if (el.classList.contains("anim-pop")) el.classList.add("in");
+    if (el.dataset.conta) contar(el);
+    if (el.tagName === "svg") desenharSVG(el);
+  }), { rootMargin: "0px 0px -6% 0px" }) : null;
+  function desenharSVG(svg) {
+    if (!window.gsap) return;
+    svg.querySelectorAll("polyline, line[stroke-width='2']").forEach((l) => {
+      const n = l.getTotalLength ? l.getTotalLength() : 0; if (!n) return;
+      const dash = l.getAttribute("stroke-dasharray");
+      gsap.fromTo(l, { strokeDasharray: n, strokeDashoffset: n }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.out", onComplete: () => { l.style.strokeDasharray = dash || ""; l.style.strokeDashoffset = ""; } });
+    });
+    gsap.from(svg.querySelectorAll("circle"), { scale: 0, transformOrigin: "50% 50%", transformBox: "fill-box", duration: 0.5, ease: "back.out(2)", stagger: 0.02, delay: 0.3 });
+    gsap.from(svg.querySelectorAll("rect[rx]"), { scaleY: 0, transformOrigin: "50% 100%", transformBox: "fill-box", duration: 0.9, ease: "power3.out", stagger: 0.06 });
+    gsap.from(svg.querySelectorAll("text.lab"), { opacity: 0, duration: 0.6, delay: 0.8 });
+  }
+  function animar(raiz) {
+    if (!MOV || !io || !raiz || !raiz.querySelectorAll) return;
+    const pega = (sel) => [...(raiz.matches && raiz.matches(sel) ? [raiz] : []), ...raiz.querySelectorAll(sel)].filter((el) => !el.dataset.a && (el.dataset.a = "1"));
+    pega(SEL_BAR).forEach((el, i) => {
+      el.classList.add("anim-bar");
+      const neg = el.closest(".rx-t") && parseFloat(el.style.left) < 50;
+      el.style.transformOrigin = neg ? "right center" : "left center";
+      el.style.transform = "scaleX(0)";
+      el.style.transitionDelay = `${Math.min(i % 14, 12) * 45}ms`;
+      io.observe(el);
+    });
+    pega(SEL_NUM).forEach((el) => { el.dataset.conta = "1"; io.observe(el); });
+    pega(SEL_POP).forEach((el, i) => { if (el.closest("#intro, .leaflet-pane")) return; el.classList.add("anim-pop"); el.style.transitionDelay = `${Math.min(i % 12, 10) * 40}ms`; io.observe(el); });
+    pega("svg.chart").forEach((el) => io.observe(el));
+  }
+  if (MOV && "MutationObserver" in window) {
+    new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => n.nodeType === 1 && animar(n)))).observe(document.body, { childList: true, subtree: true });
+  }
+
   // ------------------------------------------------------------------ API p/ a intro
   const ready = (async () => {
     await loadCity(store.get("cidade", null));
