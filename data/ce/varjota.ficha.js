@@ -47,6 +47,26 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
 
   fatos: [
     {
+      data: "2026-10-23",
+      titulo: "PDT leva ao STF a regra das sobras (ADI 8036, relator Gilmar Mendes)",
+      resumo: "Ação contra o art. 109 do Código Eleitoral (cálculo das 'maiores médias'), com pedido de liminar. No Ceará, 7 das 22 vagas federais de 2026 saíram das sobras. Pelo cálculo do próprio PDT, entrariam André Figueiredo (PDT), Renato Roseno (PSOL) e Sandrinha Cavalcante (Cidadania); sairiam Dr. Acilon (PSB), AJ Albuquerque (PP) e Célio Studart (PSD).",
+      nota: "A ação existe e está no STF (várias fontes). Os nomes de quem entra e sai são cálculo do PDT, não do TSE. Sem decisão até 30/10. Efeito em Varjota depende de quanto a cidade votou em cada um desses nomes (dado do TSE ainda não carregado).",
+      selo: "confirmado",
+      fontes: [
+        { nome: "Conjur", url: "https://conjur.com.br/2026-out-23/pdt-questiona-no-stf-regras-de-distribuicao-de-sobras-eleitorais-nas-eleicoes-proporcionais/" },
+        { nome: "Gazeta do Povo", url: "https://www.gazetadopovo.com.br/eleicoes/2026/gilmar-recebe-acao-do-pdt-que-pode-mudar-calculo-de-cadeiras-na-camara/" },
+        { nome: "O Povo (Vertical)", url: "https://mais.opovo.com.br/colunistas/vertical/2026/10/29/acao-pode-alterar-bancada-federal-do-ceara.html" },
+      ],
+    },
+    {
+      data: "2026-10-07",
+      titulo: "Denis Bezerra (PSB) fica como 2º suplente federal, com 40.405 votos",
+      resumo: "Atrás de Roger Aguiar (106.170) na lista de suplentes do PSB. Só assume se abrir vaga na bancada do PSB.",
+      nota: "Se a ação das sobras tirar uma vaga do PSB, o deputado que sair passa a disputar a suplência e Denis tende a cair de posição.",
+      selo: "uma-fonte",
+      fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/07/veja-suplentes-de-deputado-federal-de-todos-os-partidos-no-ce.html" }],
+    },
+    {
       data: "2026-10-04",
       titulo: "Yuri do Paredão é o deputado federal mais votado em Varjota",
       resumo: "Levantamento do O Povo com o 1º colocado para deputado federal em cada município cearense coloca Varjota entre as 24 cidades vencidas por Yuri do Paredão.",
