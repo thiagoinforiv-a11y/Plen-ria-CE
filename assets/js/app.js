@@ -28,6 +28,7 @@
     cmp: [], secSel: [], secBairro: "", secCand: "", secSort: "validos",
     map: { ano: null, cargo: null, bairro: null, local: null, secao: null, foco: [] }, cmpBy: "bairro", cmpMode: "votos",
     dep: { pid: "", ano: null },
+    traj: { tipo: "vereador", sel: [], modo: "pct", init: false },
   };
   const cache = new Map();
 
@@ -553,8 +554,111 @@
       </div></div>`;
   }
 
+
+  // ------------------------------------------------------------------ trajetória e comparação (todas as eleições carregadas)
+  const TIPOS = { vereador: ["Vereadores", (k) => k === "vereador"], prefeito: ["Prefeitos", (k) => k === "prefeito"], deputado: ["Deputados", (k) => k.startsWith("deputado")] };
+  function pessoasIdx() {
+    const m = new Map();
+    for (const [ano, e] of Object.entries(S.city.eleicoes))
+      for (const [k, c] of Object.entries(e.cargos)) {
+        if (k.endsWith("_2t")) continue;
+        const val = c.totais ? c.totais.validos : c.candidatos.reduce((t, y) => t + y.votos, 0);
+        c.candidatos.forEach((x, i) => {
+          const d = m.get(x.pid) || { pid: x.pid, ent: [] };
+          d.ent.push({ ano: +ano, cargo: k, x, pos: i + 1, n: c.candidatos.length, share: x.votos / (val || 1) });
+          m.set(x.pid, d);
+        });
+      }
+    for (const d of m.values()) {
+      d.ent.sort((p, q) => p.ano - q.ano);
+      const ult = d.ent[d.ent.length - 1].x;
+      d.urna = ult.urna; d.nome = ult.nome;
+      d.foto = [...d.ent].reverse().map((e) => e.x.foto).find(Boolean) || null;
+      d.eleito = d.ent.filter((e) => (e.x.situacao || "").startsWith("eleito")).length;
+    }
+    return m;
+  }
+  function tendencia(ent) {
+    if (ent.length < 2) return ["Uma candidatura", ""];
+    const a = ent[ent.length - 2], b = ent[ent.length - 1];
+    if (a.cargo !== b.cargo) return ["Mudou de cargo", ""];
+    const d = (b.share - a.share) * 100;
+    const txt = `${d > 0 ? "+" : ""}${d.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} p.p. · ${b.x.votos - a.x.votos > 0 ? "+" : ""}${fmt(b.x.votos - a.x.votos)} votos vs ${a.ano}`;
+    if (d >= 0.5) return ["▲ Em crescimento", "up", txt];
+    if (d <= -0.5) return ["▼ Em declínio", "down", txt];
+    return ["■ Estável", "", txt];
+  }
+  function renderTrajetoria() {
+    const el = $("#trajetoria"), m = S.city.meta;
+    const idx = pessoasIdx();
+    const T = S.traj;
+    const okTipo = (d) => d.ent.some((e) => TIPOS[T.tipo][1](e.cargo));
+    const lista = [...idx.values()].filter(okTipo);
+    if (!T.init || !T.sel.every((p) => idx.has(p))) {
+      T.init = true;
+      T.sel = lista.sort((p, q) => q.ent.length - p.ent.length || q.ent[q.ent.length - 1].x.votos - p.ent[p.ent.length - 1].x.votos).slice(0, 2).map((d) => d.pid);
+    }
+    const sel = T.sel.map((p) => idx.get(p)).filter(Boolean);
+    const anos = Object.keys(S.city.eleicoes).map(Number).sort();
+    const tem = Object.keys(TIPOS).filter((k) => [...idx.values()].some((d) => d.ent.some((e) => TIPOS[k][1](e.cargo))));
+    const opts = lista.filter((d) => !T.sel.includes(d.pid)).sort((p, q) => p.urna.localeCompare(q.urna, "pt-BR"));
+    const head = `<div class="blk-h"><div><h2>Trajetória e <em class="s">comparação</em></h2><p class="lead">A evolução de cada nome em ${esc(m.municipio)}, eleição a eleição: partido, votos, posição e resultado. Escolha até 4 para comparar. Dados de ${anos[0]} a ${anos[anos.length - 1]}.</p></div>
+      <div class="tools"><div class="seg" role="group" aria-label="Tipo">${tem.map((k) => `<button type="button" data-ttipo="${k}" aria-pressed="${k === T.tipo}">${TIPOS[k][0]}</button>`).join("")}</div>
+      <div class="seg" role="group" aria-label="Medida"><button type="button" data-tmodo="pct" aria-pressed="${T.modo === "pct"}">% dos válidos</button><button type="button" data-tmodo="votos" aria-pressed="${T.modo === "votos"}">Votos</button></div>
+      ${sel.length < 4 ? `<input class="search" id="traj-add" list="traj-dl" placeholder="+ Adicionar nome para comparar" autocomplete="off"><datalist id="traj-dl">${opts.map((d) => `<option value="${esc(d.urna)} — ${esc(d.nome)} (${d.ent.map((e) => e.ano).join(", ")})"></option>`).join("")}</datalist>` : ""}</div></div>`;
+    el._opts = opts;
+    if (!sel.length) { el.innerHTML = head + `<div class="notice">Escolha um nome no campo acima.</div>`; return; }
+    // gráfico: um eixo só (% dos válidos ou votos), uma linha por pessoa
+    // eixo X: todas as eleições do tipo escolhido (mantém o espaçamento real entre os anos)
+    const xs = [...new Set([...Object.entries(S.city.eleicoes).filter(([, e]) => Object.keys(e.cargos).some((k) => TIPOS[T.tipo][1](k))).map(([a]) => +a), ...sel.flatMap((d) => d.ent.map((e) => e.ano))])].sort((p, q) => p - q);
+    const W = 900, H = 340, P = { l: 56, r: 30, t: 40, b: 40 };
+    const val = (e) => (T.modo === "pct" ? e.share : e.x.votos);
+    const bruto = Math.max(...sel.flatMap((d) => d.ent.map(val)), 1e-9);
+    const passo = (() => { const r = bruto / 4, k = Math.pow(10, Math.floor(Math.log10(r))); return [1, 2, 2.5, 5, 10].map((f) => f * k).find((v) => v >= r); })();
+    const vmax = Math.ceil((bruto * 1.12) / passo) * passo;
+    const xp = (ano) => P.l + (xs.length === 1 ? (W - P.l - P.r) / 2 : ((xs.indexOf(ano)) * (W - P.l - P.r)) / (xs.length - 1));
+    const yp = (v) => H - P.b - (v / vmax) * (H - P.t - P.b);
+    const ticks = Array.from({ length: Math.round(vmax / passo) + 1 }, (_, i) => i * passo);
+    const fy = (v) => (T.modo === "pct" ? pct(v, passo * 100 < 1 ? 1 : 0) : fmt(v));
+    let svg = ticks.map((v) => `<line x1="${P.l}" x2="${W - P.r}" y1="${yp(v)}" y2="${yp(v)}" stroke="var(--line)"/><text x="${P.l - 8}" y="${yp(v) + 4}" text-anchor="end">${fy(v)}</text>`).join("");
+    svg += xs.map((a) => `<text x="${xp(a)}" y="${H - 14}" text-anchor="middle">${a}</text>`).join("");
+    sel.forEach((d, i) => {
+      const c = SLOTS[i];
+      for (let j = 1; j < d.ent.length; j++) {
+        const a = d.ent[j - 1], b = d.ent[j];
+        const gap = b.ano - a.ano > 4 || a.cargo !== b.cargo;
+        svg += `<line x1="${xp(a.ano)}" y1="${yp(val(a))}" x2="${xp(b.ano)}" y2="${yp(val(b))}" stroke="${c}" stroke-width="2" ${gap ? 'stroke-dasharray="5 5"' : ""}/>`;
+      }
+      d.ent.forEach((e) => {
+        const ok = (e.x.situacao || "").startsWith("eleito");
+        const t = `<b>${esc(d.urna)}</b> · ${e.ano}<br>${esc(cargoCurto(e.cargo))} · ${esc(e.x.partido || "")}<br>${fmt(e.x.votos)} votos · ${pct(e.share)} dos válidos<br>${e.pos}º de ${e.n} · ${esc(situTxt(e.x.situacao) || "—")}`;
+        svg += `<circle cx="${xp(e.ano)}" cy="${yp(val(e))}" r="6" fill="${ok ? c : "var(--surface)"}" stroke="${c}" stroke-width="2.5" ${tip(t)}/>`;
+        if (sel.length <= 2) svg += `<text class="lab" x="${xp(e.ano)}" y="${yp(val(e)) + (i ? 22 : -12)}" text-anchor="middle">${esc(e.x.partido || "")}</text>`;
+      });
+      const u = d.ent[d.ent.length - 1];
+      if (sel.length > 2) svg += `<text class="lab" x="${Math.min(xp(u.ano) + 10, W - 4)}" y="${yp(val(u)) + 4}" style="fill:var(--ink-2)">${esc(d.urna.split(" ")[0])}</text>`;
+    });
+    const cards = sel.map((d, i) => {
+      const [tl, tc, tx] = tendencia(d.ent);
+      const best = [...d.ent].sort((p, q) => q.share - p.share)[0];
+      const ult = d.ent[d.ent.length - 1];
+      const partidos = d.ent.map((e) => e.x.partido).filter((p, j, a) => p && p !== a[j - 1]);
+      const fake = { urna: d.urna, foto: d.foto };
+      return `<div class="card tcard" style="--c:${SLOTS[i]}"><div class="th">${avatar(fake, "av tav")}<div style="min-width:0"><div class="nm" data-sq="${ult.x.sq}" data-ano="${ult.ano}" data-cargo="${ult.cargo}">${esc(d.urna)}</div><div class="muted" style="font-size:12.5px">${esc(d.nome)}</div></div><button type="button" class="chk" data-trm="${d.pid}" aria-label="Remover">×</button></div>
+        <div class="tend ${tc}">${esc(tl)}</div>${tx ? `<div class="muted" style="font-size:12.5px">${esc(tx)}</div>` : ""}
+        <div class="grid tk"><div><b>${d.ent.length}</b><span>candidaturas</span></div><div><b>${d.eleito}</b><span>vezes eleito</span></div><div><b>${fmt(best.x.votos)}</b><span>melhor: ${best.ano}</span></div></div>
+        <div class="k">Partidos</div><div class="parts">${partidos.map((p, j) => `${j ? '<span class="arr">→</span>' : ""}<span class="pt">${esc(p)}</span>`).join("")}</div></div>`;
+    }).join("");
+    const linhas = xs.map((a) => `<tr><td><b>${a}</b></td>${sel.map((d) => { const e = d.ent.find((z) => z.ano === a); return `<td>${e ? `<b class="num">${fmt(e.x.votos)}</b> <span class="muted num">${pct(e.share)}</span><div class="muted" style="font-size:12px">${esc(e.x.partido || "")} · ${e.pos}º de ${e.n} · ${esc(situTxt(e.x.situacao) || "")}${TIPOS.vereador[1](e.cargo) ? "" : " · " + esc(cargoCurto(e.cargo))}</div>` : `<span class="muted">—</span>`}</td>`; }).join("")}</tr>`).reverse().join("");
+    el.innerHTML = head + `<div class="grid tcards">${cards}</div>
+      <div class="card" style="margin-top:14px"><div class="legend" style="margin:0 0 6px">${sel.map((d, i) => `<span><i style="background:${SLOTS[i]}"></i>${esc(d.urna)}</span>`).join("")}<span><i style="background:transparent;box-shadow:inset 0 0 0 2px var(--ink-2)"></i>vazado = não eleito</span><span>tracejado = pulou eleição ou mudou de cargo</span></div>
+      <svg class="chart" viewBox="0 0 ${W} ${H}" style="height:auto" role="img" aria-label="Evolução eleitoral">${svg}</svg></div>
+      <div class="tbl-wrap" style="margin-top:14px;max-height:none"><table class="tbl"><thead><tr><th>Eleição</th>${sel.map((d, i) => `<th><i style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${SLOTS[i]};margin-right:6px"></i>${esc(d.urna)}</th>`).join("")}</tr></thead><tbody>${linhas}</tbody></table></div>
+      <p class="muted" style="font-size:12.5px;margin-top:10px">A mesma pessoa é ligada entre eleições pelo identificador do candidato (Base dos Dados/TSE). % dos válidos permite comparar anos com eleitorados diferentes.</p>`;
+  }
+
   function renderAll() {
-    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderMapa(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
+    renderControls(); renderHero(); renderKPIs(); renderFicha(); renderMapa(); renderTrajetoria(); renderDeputado(); renderRanking(); renderBairros(); renderSecoes(); renderComparar(); renderHistorico(); renderFooter();
     revealOnScroll();
   }
 
@@ -653,7 +757,8 @@
       const sq = t.closest("[data-sq]");
       if (sq && !t.closest("#drawer .hbar")) {
         ev.preventDefault();
-        if (t.closest("#mapa, .fpop")) openProfile(sq.dataset.sq, S.map.ano, S.map.cargo);
+        if (sq.dataset.ano) openProfile(sq.dataset.sq, sq.dataset.ano, sq.dataset.cargo);
+        else if (t.closest("#mapa, .fpop")) openProfile(sq.dataset.sq, S.map.ano, S.map.cargo);
         else if (t.closest("#deputado") && S.dep.cur) openProfile(sq.dataset.sq, S.dep.cur.ano, S.dep.cur.cargo);
         else openProfile(sq.dataset.sq);
         return;
@@ -676,6 +781,9 @@
       if (mode) { S.cmpMode = mode.dataset.mode; renderComparar(); return; }
       const mn = t.closest("[data-mnav]");
       if (mn) { ev.preventDefault(); desenharMapa.nav(mn.dataset.mnav); return; }
+      const tt = t.closest("[data-ttipo]"); if (tt) { S.traj.tipo = tt.dataset.ttipo; S.traj.init = false; renderTrajetoria(); return; }
+      const tm = t.closest("[data-tmodo]"); if (tm) { S.traj.modo = tm.dataset.tmodo; renderTrajetoria(); return; }
+      const tr = t.closest("[data-trm]"); if (tr) { S.traj.sel = S.traj.sel.filter((p) => p !== tr.dataset.trm); if (!S.traj.sel.length) S.traj.sel = []; renderTrajetoria(); return; }
       const md = t.closest("[data-mdrill]"); if (md) { desenharMapa.nav("drill", md.dataset.mdrill); return; }
       const mb = t.closest("[data-mbai]"); if (mb) { desenharMapa.nav("bai", mb.dataset.mbai); return; }
       const ml = t.closest("[data-mloc]"); if (ml) { desenharMapa.nav("loc", ml.dataset.mloc); return; }
@@ -701,6 +809,7 @@
       if (t.id === "map-el") { const [ano, cargo] = t.value.split("|"); Object.assign(S.map, { ano, cargo, bairro: null, local: null, secao: null, zoom: false, foco: [] }); renderMapa(); }
       if (t.id === "map-foco" && t.value) { S.map.foco.push(t.value); renderMapa(); }
       if (t.id === "cmp-add" && t.value) toggleCmp(t.value);
+      if (t.id === "traj-add" && t.value) { const d = ($("#trajetoria")._opts || []).find((z) => t.value.startsWith(z.urna + " — " + z.nome)); if (d) { S.traj.sel.push(d.pid); renderTrajetoria(); } }
       if (t.id === "dep-sel") { S.dep = { pid: t.value, ano: null }; renderDeputado(); }
       if (t.id === "dep-ano") { S.dep.ano = t.value; renderDeputado(); }
       if (t.id === "dep-city") { const pid = S.dep.pid; loadCity(t.value).then(() => { S.dep.pid = pid; S.cmp = []; S.secSel = []; renderAll(); $("#deputado").scrollIntoView(); }); }
@@ -719,7 +828,7 @@
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });
-    ["visao", "ficha", "mapa", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
+    ["visao", "ficha", "mapa", "trajetoria", "deputado", "ranking", "bairros", "secoes", "comparar", "historico"].forEach((id) => io.observe(document.getElementById(id)));
     if (window.gsap) gsap.set("#drawer", { x: 0, xPercent: 100 });
     addEventListener("resize", () => { clearTimeout(bind._rt); bind._rt = setTimeout(() => desenharMapa.fit && desenharMapa.fit(), 200); });
     $("#btn-intro").addEventListener("click", () => window.Intro && window.Intro.play());

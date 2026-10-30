@@ -10,6 +10,8 @@ Página de análise eleitoral (começando por **Varjota/CE**) com apresentação
   Dá para entrar no bairro → local de votação → seção, alternar entre deputados (2026) e vereadores/prefeito (2024)
   e fixar até 3 candidatos para acompanhar em todo o mapa.
 - **Seções**: tabela completa, filtro por bairro, votos de um candidato seção a seção e comparação de até 4 seções.
+- **Trajetória e comparação**: até 4 nomes (vereadores, prefeitos ou deputados) eleição a eleição desde 2000,
+  com partido de cada ano, votos, % dos válidos, posição, resultado e tendência (crescimento/declínio).
 - **Comparar** até 4 candidatos por bairro ou por local, em votos ou % dos válidos.
 - **Perfil** do candidato: foto, ficha, votos na cidade, posição, bairros vencidos, melhores seções,
   votação no estado e peso da cidade na votação dele, e **histórico na cidade** em outras eleições.
@@ -26,8 +28,8 @@ Tudo vem dos dados abertos do TSE. Nada é estimado ou inventado.
 
 | Eleição | Nível | Fonte |
 |---|---|---|
-| 2012, 2016, 2020 (prefeito e vereador) | totais do município | TSE via espelho Base dos Dados |
-| Eleitorado/comparecimento 2010–2022 | totais do município | TSE via espelho Base dos Dados |
+| 2000 a 2020 (prefeito e vereador) | totais do município | TSE via espelho Base dos Dados |
+| Eleitorado/comparecimento 2000–2022 | totais do município | TSE via espelho Base dos Dados |
 | Deputados (2014, 2018, 2022, 2026…) | **seção, local e bairro** | TSE — `cdn.tse.jus.br` (rodar o importador abaixo) |
 
 Para gerar o detalhe por seção/bairro dos deputados (precisa de acesso a `cdn.tse.jus.br`):
@@ -44,7 +46,7 @@ O script baixa `votacao_secao`, `eleitorado_local_votacao` (bairro e coordenadas
 Base histórica (totais municipais):
 
 ```bash
-python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2314003
+python3 scripts/plenaria.py seed --municipio Varjota --cd-ibge 2314003 --desde 2000
 ```
 
 ## Informação local (fora do GitHub)
