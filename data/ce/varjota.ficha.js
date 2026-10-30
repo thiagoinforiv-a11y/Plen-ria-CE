@@ -4,7 +4,7 @@
  * Nunca registre como "pesquisa" um número sem instituto e registro. */
 window.PLENARIA_FICHAS = window.PLENARIA_FICHAS || {};
 window.PLENARIA_FICHAS["ce/varjota"] = {
-  atualizado: "2026-10-22",
+  atualizado: "2026-10-30",
   observacao: "Levantamento por busca na web. Neste ambiente as páginas não puderam ser abertas por inteiro; os itens foram conferidos pelo resumo da busca e devem ser relidos na fonte quando o acesso for liberado.",
 
   poder: [
@@ -45,7 +45,73 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
     },
   ],
 
+  acompanhar: [
+    {
+      titulo: "ADI 8036 (PDT) — sobras eleitorais no STF",
+      status: "Sem decisão",
+      porque: "Pelo cálculo do PDT, sairiam AJ Albuquerque (PP), Dr. Acilon (PSB) e Célio Studart (PSD). Atinge o federal ligado ao vice e a bancada do PSB (Denis Bezerra).",
+      fontes: [{ nome: "Conjur", url: "https://conjur.com.br/2026-out-23/pdt-questiona-no-stf-regras-de-distribuicao-de-sobras-eleitorais-nas-eleicoes-proporcionais/" }],
+    },
+    {
+      titulo: "Investigação eleitoral sobre Yury do Paredão (PF/TRE-CE)",
+      status: "Em andamento · sem denúncia",
+      porque: "Yury foi o federal mais votado em Varjota. Uma eventual ação contra o mandato mexe com a oposição local.",
+      fontes: [{ nome: "Diário do Nordeste", url: "https://diariodonordeste.verdesmares.com.br/pontopoder/yury-do-paredao-e-alvo-de-operacao-da-pf-que-investiga-ilicitos-eleitorais-1.3795705" }],
+    },
+    {
+      titulo: "Suplência de Danniel Oliveira (MDB) na Assembleia",
+      status: "1º suplente · 81.259 votos",
+      porque: "Assume se o deputado estadual do MDB sair. Daria à oposição de Varjota um deputado estadual em exercício.",
+      fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/08/veja-suplentes-de-deputado-estadual-de-todos-os-partidos-no-ce.html" }],
+    },
+    {
+      titulo: "Suplência de Denis Bezerra (PSB) na Câmara",
+      status: "2º suplente · 40.405 votos",
+      porque: "Precisa de duas vagas abertas no PSB. Cai de posição se a ação das sobras tirar uma cadeira do partido.",
+      fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/07/veja-suplentes-de-deputado-federal-de-todos-os-partidos-no-ce.html" }],
+    },
+  ],
+
   fatos: [
+    {
+      data: "2026-10-04",
+      titulo: "Yury do Paredão (MDB) reeleito com 261.291 votos, 3º mais votado do Ceará",
+      resumo: "Foi o candidato a federal que ficou em 1º no maior número de municípios cearenses. Eleito em 2022 pelo PL, migrou para o MDB.",
+      selo: "confirmado",
+      fontes: [
+        { nome: "O Povo", url: "https://mais.opovo.com.br/reportagens-especiais/resultado-legislativo-eleicoes-2026/2026/10/05/eleicoes-2026-quem-foram-os-deputados-federais-mais-votados-no-ceara.html" },
+        { nome: "O Povo (comparativo 2022–2026)", url: "https://mais.opovo.com.br/jornal/politica/2026/10/16/sete-deputados-federais-do-ceara-ampliam-votacao-entre-2022-e-2026-e-cinco-perdem-votos.html" },
+      ],
+    },
+    {
+      data: "2026-10-04",
+      titulo: "Lia Gomes (PSB) reeleita deputada estadual; 3.504 votos em Varjota",
+      resumo: "54.433 votos no estado.",
+      selo: "uma-fonte",
+      fontes: [{ nome: "Hub Político", url: "https://hubpolitico.com.br/eleicoes/2026/apuracao/ce/deputado-estadual/candidato/liagomes" }],
+    },
+    {
+      data: "2026-10-04",
+      titulo: "Danniel Oliveira (MDB) fica como 1º suplente estadual, com 81.259 votos",
+      resumo: "Atribuiu a não reeleição à votação fraca de colega de chapa. Tem base em Varjota (2.462 votos na cidade em 2022).",
+      selo: "confirmado",
+      fontes: [
+        { nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/13/deputado-atribui-nao-reeleicao-a-votacao-de-colega-da-chapa.html" },
+        { nome: "Anuário do Ceará", url: "https://www.anuariodoceara.com.br/guia-das-cidades/fichas-dos-municipios/varjota/" },
+      ],
+    },
+    {
+      data: "2026-10-02",
+      titulo: "PF faz buscas na casa de Yury do Paredão em investigação eleitoral",
+      resumo: "14 mandados autorizados pelo TRE-CE, a pedido da Procuradoria Regional Eleitoral, em Fortaleza, Juazeiro do Norte e Barbalha. A defesa diz que nada foi apreendido na casa dele e que a apuração envolve material de campanha.",
+      nota: "Sem denúncia, prisão ou decisão judicial até 30/10. Operação não significa culpa.",
+      selo: "confirmado",
+      fontes: [
+        { nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/02/pf-cumpre-14-mandados-em-investigacao-eleitoral-no-ceara.html" },
+        { nome: "Metrópoles", url: "https://www.metropoles.com/colunas/tacio-lorran/deputado-yury-do-paredao-e-alvo-de-operacao-da-policia-federal" },
+        { nome: "CN7 (versão do deputado)", url: "https://cn7.com.br/yury-do-paredao-confirma-busca-da-pf-em-residencia-e-afirma-que-nada-foi-apreendido/" },
+      ],
+    },
     {
       data: "2026-10-23",
       titulo: "PDT leva ao STF a regra das sobras (ADI 8036, relator Gilmar Mendes)",
@@ -68,8 +134,8 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
     },
     {
       data: "2026-10-04",
-      titulo: "Yuri do Paredão é o deputado federal mais votado em Varjota",
-      resumo: "Levantamento do O Povo com o 1º colocado para deputado federal em cada município cearense coloca Varjota entre as 24 cidades vencidas por Yuri do Paredão.",
+      titulo: "Yury do Paredão é o deputado federal mais votado em Varjota",
+      resumo: "Levantamento do O Povo com o 1º colocado para deputado federal em cada município cearense coloca Varjota entre as 24 cidades vencidas por Yury do Paredão.",
       nota: "Os votos exatos na cidade virão do TSE.",
       selo: "uma-fonte",
       fontes: [{ nome: "O Povo", url: "https://www.opovo.com.br/noticias/politica/eleicoes/2026/10/16/veja-os-deputados-federais-mais-votados-em-cada-estado.html" }],

@@ -47,9 +47,12 @@
       await loadScript(reg.arquivo);
       // ficha editável à mão (fatos, quem manda); opcional
       await loadScript(reg.arquivo.replace(/\.js$/, ".ficha.js")).catch(() => null);
+      // conhecimento local e leituras: só no computador do usuário (fora do git)
+      await loadScript(reg.arquivo.replace(/\.js$/, ".local.js")).catch(() => null);
     }
     S.city = window.PLENARIA_DATA[reg.id];
     S.ficha = (window.PLENARIA_FICHAS || {})[reg.id] || null;
+    S.local = (window.PLENARIA_LOCAL || {})[reg.id] || null;
     S.cityId = reg.id;
     store.set("cidade", reg.id);
     const anos = Object.keys(S.city.eleicoes).sort().reverse();
@@ -364,20 +367,39 @@
     "uma-fonte": ["①", "Uma fonte só", "ainda sem segunda fonte"],
     "pesquisa": ["▤", "Pesquisa registrada", "instituto e nº de registro"],
     "a-conferir": ["?", "A conferir", "não verificado"],
+    "local": ["◆", "Informação local", "conhecimento seu; fica só no seu computador"],
   };
   const selo = (k) => { const v = SELOS[k] || SELOS["a-conferir"]; return `<span class="selo selo-${esc(k)}" title="${esc(v[2])}"><b>${v[0]}</b> ${esc(v[1])}</span>`; };
   const fontes = (fs) => (fs || []).map((f) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nome)} ↗</a>`).join(" · ");
   const dataBR = (d) => { if (!d) return ""; const [y, m, dd] = String(d).split("-"); const mes = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"][+m - 1]; return dd ? `${+dd} ${mes} ${y}` : m ? `${mes} ${y}` : y; };
 
+  const POSICAO = { situacao: ["Situação", "ok"], oposicao: ["Oposição", "op"], rompido: ["Rompido", "rp"], independente: ["Independente", ""] };
   function renderFicha() {
-    const el = $("#ficha"), f = S.ficha, m = S.city.meta;
-    const head = `<div class="blk-h"><div><h2>Ficha de <em class="s">${esc(m.municipio)}</em></h2><p class="lead">Quem manda, com quem e o que aconteceu. Cada item mostra a fonte e o grau de confiança.</p></div>
+    const el = $("#ficha"), f = S.ficha, L = S.local || {}, m = S.city.meta;
+    const head = `<div class="blk-h"><div><h2>Ficha de <em class="s">${esc(m.municipio)}</em></h2><p class="lead">Quem manda, com quem, que força tem e o que aconteceu. Cada item mostra a fonte e o grau de confiança.</p></div>
       <div class="selos-leg">${Object.keys(SELOS).map(selo).join("")}</div></div>`;
-    if (!f) { el.innerHTML = head + `<div class="notice">Ainda não há ficha para ${esc(m.municipio)}. Ela fica em <code>data/${esc(m.uf.toLowerCase())}/${esc(m.slug)}.ficha.js</code>.</div>`; return; }
-    const fatos = [...(f.fatos || [])].sort((a, b) => String(b.data).localeCompare(String(a.data)));
-    el.innerHTML = head + `<div class="grid poder">${(f.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v">${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>
-      <div class="fatos">${fatos.map((x) => `<article class="fato"><div class="dt">${esc(dataBR(x.data))}</div><div><div class="tt">${esc(x.titulo)} ${selo(x.selo)}</div>${x.resumo ? `<p>${esc(x.resumo)}</p>` : ""}${x.nota ? `<p class="nota">${esc(x.nota)}</p>` : ""}<div class="fs">${fontes(x.fontes)}</div></div></article>`).join("")}</div>
-      ${f.observacao ? `<p class="muted" style="font-size:12.5px;margin-top:14px">${esc(f.observacao)}${f.atualizado ? ` Atualizado em ${esc(dataBR(f.atualizado))}.` : ""}</p>` : ""}`;
+    if (!f && !S.local) { el.innerHTML = head + `<div class="notice">Ainda não há ficha para ${esc(m.municipio)}. Ela fica em <code>data/${esc(m.uf.toLowerCase())}/${esc(m.slug)}.ficha.js</code>.</div>`; return; }
+    const F = f || {};
+    const fatos = [...(F.fatos || []), ...(L.fatos || []).map((x) => ({ selo: "local", ...x }))].sort((a, b) => String(b.data).localeCompare(String(a.data)));
+    const sub = (t) => `<h3 class="fh">${t}</h3>`;
+    const grupos = L.grupos || F.grupos || [];
+    const ligado = (d) => `<div class="lig"><div><b>${esc(d.nome)}</b> <span class="muted">${esc([d.cargo, d.partido].filter(Boolean).join(" · "))}</span></div>
+      <div class="r">${esc(d.resultado || "")}${d.votosCidade != null ? ` · <b class="num">${fmt(d.votosCidade)}</b> em ${esc(m.municipio)}` : d.votosCidadeTxt ? ` · ${esc(d.votosCidadeTxt)} em ${esc(m.municipio)}` : ""}</div>
+      ${d.selo ? `<div class="f">${selo(d.selo)} ${fontes(d.fontes)}</div>` : ""}</div>`;
+    el.innerHTML = head +
+      `<div class="grid poder">${(F.poder || []).map((p) => `<div class="card pcard"><div class="l">${esc(p.papel)}</div><div class="v">${esc(p.nome)}</div>${p.detalhe ? `<div class="d">${esc(p.detalhe)}</div>` : ""}<div class="f">${selo(p.selo)} ${fontes(p.fontes)}</div></div>`).join("")}</div>` +
+      (grupos.length ? sub("Grupos políticos") + `<div class="grid grupos">${grupos.map((g, i) => { const [pl, pc] = POSICAO[g.posicao] || [g.posicao || "", ""]; return `<div class="card gcard" style="--g:${SLOTS[i] || "var(--other)"}">
+        <div class="gh"><div><div class="l">${esc(g.nome)}</div><div class="v">${esc(g.lider || "")}</div></div>${pl ? `<span class="pos ${pc}">${esc(pl)}</span>` : ""}</div>
+        ${g.resumo ? `<p class="d">${esc(g.resumo)}</p>` : ""}
+        ${(g.ligados || []).length ? `<div class="k">Deputados e lideranças ligados</div>${g.ligados.map(ligado).join("")}` : ""}
+        ${g.vereadores ? `<div class="k">Câmara</div><p class="d">${esc(g.vereadores)}</p>` : ""}
+        ${g.forca ? `<div class="forca"><span>Força nas urnas 2026</span><b>${esc(g.forca)}</b></div>` : ""}</div>`; }).join("")}</div>` : "") +
+      ((L.analise || []).length ? sub(`Leitura <span class="muted" style="font-weight:500;font-size:14px">· análise, não é fato</span>`) + `<div class="grid analise">${L.analise.map((a, i) => `<div class="card acard"><div class="n">${String(i + 1).padStart(2, "0")}</div><div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.texto)}</p></div></div>`).join("")}</div>` : "") +
+      ((F.acompanhar || []).length ? sub("Acompanhar") + `<div class="grid acomp">${F.acompanhar.map((a) => `<div class="card wcard"><div class="st">${esc(a.status || "")}</div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.porque || "")}</p><div class="f">${fontes(a.fontes)}</div></div>`).join("")}</div>` : "") +
+      sub("Linha do tempo") +
+      `<div class="fatos">${fatos.map((x) => `<article class="fato"><div class="dt">${esc(dataBR(x.data))}</div><div><div class="tt">${esc(x.titulo)} ${selo(x.selo)}</div>${x.resumo ? `<p>${esc(x.resumo)}</p>` : ""}${x.nota ? `<p class="nota">${esc(x.nota)}</p>` : ""}<div class="fs">${fontes(x.fontes)}</div></div></article>`).join("")}</div>
+      ${F.observacao ? `<p class="muted" style="font-size:12.5px;margin-top:14px">${esc(F.observacao)}${F.atualizado ? ` Atualizado em ${esc(dataBR(F.atualizado))}.` : ""}</p>` : ""}
+      ${S.local ? `<p class="muted" style="font-size:12.5px">◆ Itens de informação local e a leitura vêm de <code>${esc(m.slug)}.local.js</code>, que não vai para o GitHub.</p>` : ""}`;
   }
 
   // ------------------------------------------------------------------ deputado × cidade
