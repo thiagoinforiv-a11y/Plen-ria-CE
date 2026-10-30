@@ -811,7 +811,7 @@
           const lider = ld && ld.rank[0] ? aD.bySq[ld.rank[0][0]] : null;
           return { nome: l.nome, vVer: v, vDep: ld ? ld.cand[dep.sq] || 0 : null, lider, ok: lider && lider.sq === dep.sq };
         });
-      } else if (ap.tipo === "liderança") p.falta = "liderança local sem votação própria — com o TSE, mede-se onde o deputado foi forte";
+      } else if (ap.tipo === "liderança" || ap.tipo === "prefeito") p.falta = (ap.tipo === "prefeito" ? "apoio do próprio prefeito" : "liderança local sem votação própria") + " — com o TSE, mede-se onde o deputado foi forte";
       else p.falta = !xv ? (aV ? "vereador não encontrado na votação de " + ver.ano : "falta a votação por seção dos vereadores") : "falta a votação por seção dos deputados";
       pares.push(p);
     }
@@ -836,7 +836,7 @@
       const rr = acharRelatorio([d.nome]), cc = acharCandidato(rr ? rr.nomes : [d.nome]);
       return `<div class="card apcard ${op ? "op" : ""}"><div class="ah">${avatar({ urna: d.nome, foto: cc && cc.x.foto, wiki: rr && rr.wiki }, "av apav")}<div style="flex:1;min-width:0"><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
         <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}</div>
-        <div class="k">Quem trabalhou em Varjota</div><div class="vers">${d.vers.map((v) => `<span class="cpick" ${v.obs ? `title="${esc(v.obs)}"` : ""}><b>${esc(v.vereador)}</b>${v.tipo === "liderança" ? `<span class="tagx" style="color:var(--ink-2)">liderança</span>` : ""}${v.obs && /especula/i.test(v.obs) ? `<span class="tagx">especulação</span>` : ""}</span>`).join("")}</div></div>`; }).join("")}</div>`;
+        <div class="k">Quem trabalhou em Varjota</div><div class="vers">${d.vers.map((v) => `<span class="cpick" ${v.obs ? `title="${esc(v.obs)}"` : ""}><b>${esc(v.vereador)}</b>${v.tipo === "liderança" ? `<span class="tagx" style="color:var(--ink-2)">liderança</span>` : v.tipo === "prefeito" ? `<span class="tagx" style="color:var(--accent)">prefeito</span>` : ""}${v.obs && /especula/i.test(v.obs) ? `<span class="tagx">especulação</span>` : ""}</span>`).join("")}</div></div>`; }).join("")}</div>`;
     return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Mapa de apoios (informação local ◆). Abaixo, a medição de cada par com os votos por seção.</p>` + mapa + `<p class="muted" style="font-size:13px;margin:22px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
       <div class="tbl-wrap" style="max-height:none"><table class="tbl"><thead><tr><th>Vereador</th><th>Deputado apoiado</th><th class="r">Votos vereador</th><th class="r">Votos deputado</th><th class="r">Transferência</th><th class="r">Sintonia</th><th>Nos 3 redutos do vereador</th></tr></thead><tbody>${D.pares.map(linha).join("")}</tbody></table></div>
       ${comDados.length ? "" : `<p class="muted" style="font-size:12.5px;margin-top:8px">Os pares estão registrados; os números aparecem quando a votação por seção de vereadores e deputados for importada do TSE.</p>`}`;
