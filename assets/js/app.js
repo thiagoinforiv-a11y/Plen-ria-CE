@@ -174,7 +174,7 @@
   function renderHero() {
     const a = agg(), m = S.city.meta, c = C();
     const av = $("#aviso-cob") || (() => { const d = document.createElement("div"); d.id = "aviso-cob"; $("#visao").prepend(d); return d; })();
-    av.innerHTML = avisoCobertura();
+    av.innerHTML = avisoCobertura() + (C().parcial ? `<div class="aviso-cob">Lista <b>parcial</b>: só os candidatos levantados para ${esc(S.city.meta.municipio)} em ${esc(S.ano)} (${esc(E().fonte)}). Números conferidos com outra fonte quando possível; a lista completa vem do TSE.</div>` : "");
     $("#hero-title").innerHTML = `${esc(cargoCurto(S.cargo))} em <em class="s">${esc(m.municipio)}</em>, ${esc(S.ano)}`;
     const rel = relevantes(a);
     const lider = a.cands[0];
@@ -522,6 +522,43 @@
   const fontes = (fs) => (fs || []).map((f) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.nome)} ↗</a>`).join(" · ");
   const dataBR = (d) => { if (!d) return ""; const [y, m, dd] = String(d).split("-"); const mes = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"][+m - 1]; return dd ? `${+dd} ${mes} ${y}` : m ? `${mes} ${y}` : y; };
 
+
+  // ------------------------------------------------------------------ blocos locais: lideranças, placar, governador, 2028
+  const COR_GRUPO = { "situação": "var(--s1)", "oposição": "var(--s2)", "terceira via": "var(--s3)", "opinião": "#8d8b82" };
+  function blocosLocaisHTML(sub) {
+    const L = S.local || {};
+    let h = "";
+    if ((L.liderancas || []).length) {
+      const mx = Math.max(...L.liderancas.map((l) => Math.max(l.fed, l.est)), 1);
+      const ordem = ["situação", "oposição", "terceira via", "opinião"];
+      h += sub(`Força das lideranças em 2026 <span class="muted" style="font-weight:500;font-size:14px;text-transform:none;letter-spacing:0">· votos em Varjota dos deputados que cada uma apoiou</span>`) +
+        `<div class="card lid">${ordem.map((g) => { const ls = L.liderancas.filter((l) => l.grupo === g); if (!ls.length) return ""; const tf = ls.reduce((t, l) => t + l.fed, 0), te = ls.reduce((t, l) => t + l.est, 0);
+          return `<div class="lg"><div class="lgh"><span class="dot" style="background:${COR_GRUPO[g]}"></span><b>${esc(cap(g))}</b><span class="muted num">federal ${fmt(tf)} · estadual ${fmt(te)}</span></div>
+            ${ls.map((l) => `<div class="lr"><div class="ln"><b>${esc(l.nome)}</b><span class="muted">${esc(l.deps)}</span></div>
+              <div class="lb2"><div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · federal<br>${fmt(l.fed)} votos`)}><div class="t"><i style="width:${(l.fed / mx) * 100}%;background:${COR_GRUPO[g]}"></i></div><div class="x num">${l.fed ? fmt(l.fed) : "—"}</div></div>
+              <div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · estadual<br>${fmt(l.est)} votos`)}><div class="t"><i style="width:${(l.est / mx) * 100}%;background:${COR_GRUPO[g]};opacity:.55"></i></div><div class="x num">${l.est ? fmt(l.est) : "—"}</div></div></div></div>`).join("")}</div>`; }).join("")}
+          <div class="legend"><span><i style="background:var(--ink-2)"></i>barra cheia = federal</span><span><i style="background:var(--ink-2);opacity:.55"></i>barra clara = estadual</span><span>◆ informação local · fonte dos votos: Band (apuração por município)</span></div></div>`;
+    }
+    if (L.placar) {
+      const P = L.placar, cores = ["var(--s1)", "var(--s2)", "#8d8b82", "var(--s3)", "#5d5c57", "#3a3936", "#2c2b29"];
+      const barra = (i) => `<div class="stk">${P.linhas.map((l, j) => `<i style="width:${(l[i] / P.total) * 100}%;background:${cores[j]}" ${tip(`<b>${esc(l[0])}</b><br>${fmt(l[i])} votos · ${pct(l[i] / P.total)}`)}></i>`).join("")}</div>`;
+      h += sub(`Placar de 2026 <span class="muted" style="font-weight:500;font-size:14px;text-transform:none;letter-spacing:0">· sobre ${fmt(P.total)} votos (${fmt(P.abstencoes)} faltaram)</span>`) +
+        `<div class="card placar"><div class="pl"><b>Federal</b>${barra(1)}</div><div class="pl"><b>Estadual</b>${barra(2)}</div>
+        <div class="legend">${P.linhas.map((l, j) => `<span><i style="background:${cores[j]}"></i>${esc(l[0])} <b class="num" style="margin-left:4px">${pct(l[1] / P.total)}</b> / <b class="num">${pct(l[2] / P.total)}</b></span>`).join("")}</div></div>`;
+    }
+    if (L.governador) {
+      const G = L.governador, tot = G.ciro + G.elmano;
+      h += sub("Governador em Varjota: o recado das urnas") + `<div class="grid gov"><div class="card"><div class="gv"><div><span class="muted">Ciro Gomes</span><b class="num">${fmt(G.ciro)}</b><span class="num">${pct(G.ciro / tot)}</span></div><div><span class="muted">Elmano de Freitas</span><b class="num">${fmt(G.elmano)}</b><span class="num">${pct(G.elmano / tot)}</span></div></div>
+        <div class="stk" style="margin-top:14px"><i style="width:${(G.ciro / tot) * 100}%;background:var(--s2)"></i><i style="width:${(G.elmano / tot) * 100}%;background:var(--s1)"></i></div>
+        <div class="gvd"><div><b class="num">+${fmt(G.margem2024)}</b><span>vitória do Elmo em 2024</span></div><div class="arrow">→</div><div><b class="num">−${fmt(G.ciro - G.elmano)}</b><span>Elmano em 2026</span></div><div><b class="num">≈ ${fmt(G.margem2024 + G.ciro - G.elmano)}</b><span>votos de virada</span></div></div></div>
+        <div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Leitura</div>${G.leitura.map((t) => `<div class="pux">${esc(t)}</div>`).join("")}</div></div>`;
+    }
+    if ((L.cenario2028 || []).length) h += sub("Cenário de 2028") + `<div class="grid analise">${L.cenario2028.map((a, i) => `<div class="card acard"><div class="n">${String(i + 1).padStart(2, "0")}</div><div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.texto)}</p></div></div>`).join("")}</div>`;
+    if ((L.raony || []).length) h += sub("Estratégia: Raony") + `<div class="card">${L.raony.map((t) => `<div class="pux">${esc(t)}</div>`).join("")}</div>`;
+    if ((L.divergencias || []).length) h += sub("Divergências a resolver") + `<div class="card diverg">${L.divergencias.map((t) => `<div class="pux">⚠ ${esc(t)}</div>`).join("")}</div>`;
+    if ((L.pendencias || []).length) h += sub("Pendências") + `<div class="card">${L.pendencias.map((t) => `<div class="pux">☐ ${esc(t)}</div>`).join("")}</div>`;
+    return h;
+  }
   const POSICAO = { situacao: ["Situação", "ok"], oposicao: ["Oposição", "op"], rompido: ["Rompido", "rp"], independente: ["Independente", ""] };
   function renderFicha() {
     const el = $("#ficha"), f = S.ficha, L = S.local || {}, m = S.city.meta;
@@ -547,6 +584,7 @@
         ${(g.ligados || []).length ? `<div class="k">Deputados e lideranças ligados</div>${g.ligados.map(ligado).join("")}` : ""}
         ${g.vereadores ? `<div class="k">Câmara</div><p class="d">${esc(g.vereadores)}</p>` : ""}
         ${g.forca ? `<div class="forca"><span>Força nas urnas 2026</span><b>${esc(g.forca)}</b></div>` : ""}</div>`; }).join("")}</div>` : "") +
+      blocosLocaisHTML(sub) +
       ((L.analise || []).length ? sub(`Leitura <span class="muted" style="font-weight:500;font-size:14px">· análise, não é fato</span>`) + `<div class="grid analise">${L.analise.map((a, i) => `<div class="card acard"><div class="n">${String(i + 1).padStart(2, "0")}</div><div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.texto)}</p></div></div>`).join("")}</div>` : "") +
       ((F.acompanhar || []).length ? sub("Acompanhar") + `<div class="grid acomp">${F.acompanhar.map((a) => `<div class="card wcard"><div class="st">${esc(a.status || "")}</div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.porque || "")}</p><div class="f">${fontes(a.fontes)}</div></div>`).join("")}</div>` : "") +
       sub("Linha do tempo") +
@@ -835,7 +873,7 @@
     const mapa = `<div class="grid apo">${ordem.map((d) => { const i = info[d.nome] || {}; const op = d.vers.some((v) => v.grupo === "oposição"), tv = d.vers.some((v) => v.grupo === "terceira via"); const eleito = /^eleit/i.test(i.resultado || "");
       const rr = acharRelatorio([d.nome]), cc = acharCandidato(rr ? rr.nomes : [d.nome]);
       return `<div class="card apcard ${op ? "op" : tv ? "tv" : ""}"><div class="ah">${avatar({ urna: d.nome, foto: cc && cc.x.foto, wiki: rr && rr.wiki }, "av apav")}<div style="flex:1;min-width:0"><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
-        <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}</div>
+        <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}${cc && !i.resultado ? `${esc([cc.x.partido, cc.x.situacao].filter(Boolean).join(" · "))}` : ""}${cc ? ` · <b class="num">${fmt(cc.x.votos)}</b> em ${esc(S.city.meta.municipio)} (${cc.ano})` : ""}</div>
         <div class="k">Quem trabalhou em Varjota</div><div class="vers">${d.vers.map((v) => `<span class="cpick" ${v.obs ? `title="${esc(v.obs)}"` : ""}><b>${esc(v.vereador)}</b>${v.tipo === "liderança" ? `<span class="tagx" style="color:var(--ink-2)">liderança</span>` : v.tipo === "prefeito" ? `<span class="tagx" style="color:var(--accent)">prefeito</span>` : ""}${v.obs && /especula/i.test(v.obs) ? `<span class="tagx">especulação</span>` : ""}</span>`).join("")}</div></div>`; }).join("")}</div>`;
     return head + `<p class="muted" style="font-size:13px;margin:-6px 0 12px">Mapa de apoios (informação local ◆). Abaixo, a medição de cada par com os votos por seção.</p>` + mapa + `<p class="muted" style="font-size:13px;margin:22px 0 12px">Transferência = votos do deputado na cidade ÷ votos do vereador. Sintonia = se o deputado foi bem justamente onde o vereador é forte (de −1 a 1; acima de 0,5 o vereador entregou no território dele).</p>
       <div class="tbl-wrap" style="max-height:none"><table class="tbl"><thead><tr><th>Vereador</th><th>Deputado apoiado</th><th class="r">Votos vereador</th><th class="r">Votos deputado</th><th class="r">Transferência</th><th class="r">Sintonia</th><th>Nos 3 redutos do vereador</th></tr></thead><tbody>${D.pares.map(linha).join("")}</tbody></table></div>

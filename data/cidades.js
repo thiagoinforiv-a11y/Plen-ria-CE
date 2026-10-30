@@ -5,6 +5,7 @@ window.PLENARIA_CIDADES = [
   "nome": "Varjota",
   "arquivo": "data/ce/varjota.js",
   "anos": [
+   "2026",
    "2020",
    "2016",
    "2012",

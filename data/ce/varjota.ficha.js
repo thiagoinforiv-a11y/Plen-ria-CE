@@ -14,6 +14,9 @@ window.PLENARIA_FICHAS["ce/varjota"] = {
     prefeitos: { 2000: "Gentil Magalhães", 2004: "Gentil Magalhães", 2008: "Rosa Cândida", 2012: "Rosa Paulino", 2016: "Célia", 2020: "Elmo Monte", 2024: "Elmo Monte" },
     vereadoresMaisVotados: { 2024: ["Rosa Paulino", "Eudes Mesquita", "Gonçalinho"] },
     ultimasEleicoes: { municipal: 2024, geral: 2026 },
+    // conferências cruzadas: fontes independentes que os dados de 2026 têm de respeitar
+    votosConhecidos: [{ ano: 2026, cargo: "deputado_estadual", nome: "Lia Gomes", votos: 3504, fonte: "Hub Político" }],
+    maisVotados: [[2026, "deputado_federal", "Yury do Paredão"]],
   },
 
   // Quocientes da eleição geral (Ceará inteiro) — contexto para os deputados ligados a Varjota.

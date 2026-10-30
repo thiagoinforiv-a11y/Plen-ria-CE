@@ -1,0 +1,39 @@
+{
+  "_sobre": "Votação em Varjota/CE, 1º turno de 2026, só dos candidatos levantados (lista PARCIAL). Fonte: apuração da Band por município, levantada em 18–19/10/2026. Substituir pela votação completa do TSE quando o acesso for liberado.",
+  "uf": "CE", "municipio": "Varjota", "ano": 2026, "data": "2026-10-04",
+  "fonte": "Band — apuração por município (levantamento de 18/10/2026; lista parcial)",
+  "comparecimento": 13452, "abstencoes": 2539, "aptos": 15991,
+  "cargos": {
+    "deputado_federal": {
+      "totais": { "brancos": 337, "nulos": 250, "validos": 12865 },
+      "url": "https://www.band.com.br/politica/eleicoes/2026/apuracao/deputado-federal/ce/varjota",
+      "candidatos": [
+        ["Yury do Paredão", "MDB", 2387, "eleito"], ["Denis Bezerra", "PSB", 2099, "suplente"],
+        ["Eduardo Bismarck", "PV", 1160, "não eleito"], ["André Fernandes", "PL", 1137, "eleito"],
+        ["Idilvan", "PSB", 1018, "eleito"], ["Tainah Marinho", "PSB", 588, "eleito"],
+        ["Dr. Jaziel", "PL", 453, "eleito"], ["Moses Rodrigues", "", 351, ""],
+        ["Giordanna Mano", "PRD", 340, "eleito"], ["Erika Amorim", "", 332, ""],
+        ["Neném Coelho", "MDB", 322, "eleito"], ["Priscila Costa", "", 281, ""],
+        ["Célio Studart", "PSD", 236, "eleito"], ["AJ Albuquerque", "PP", 172, "eleito"]
+      ]
+    },
+    "deputado_estadual": {
+      "totais": { "brancos": 485, "nulos": 313, "validos": 12653 },
+      "url": "https://www.band.com.br/politica/eleicoes/2026/apuracao/deputado-estadual/ce/varjota",
+      "candidatos": [
+        ["Lia Gomes", "PSB", 3504, "eleito"], ["Danniel Oliveira", "MDB", 2573, "suplente"],
+        ["James Bel", "União", 828, "eleito"], ["Romeu Aldigueri", "PSB", 594, "eleito"],
+        ["Moisés Braz", "", 398, ""], ["Tancredo dos Santos", "PL", 397, "eleito"],
+        ["Moses Filho", "União", 373, ""], ["Dra. Silvana", "", 363, ""],
+        ["David Vasconcelos", "PL", 226, ""], ["Emília Pessoa", "", 212, ""],
+        ["Carlos Júnior", "Mobiliza", 207, ""], ["Pastor Frota", "", 161, ""],
+        ["Martinha Brandão", "", 106, ""], ["Bruno Pedrosa", "", 25, ""]
+      ]
+    },
+    "governador": {
+      "totais": { "brancos_nulos": 987, "validos": 12465 },
+      "url": "https://www.band.com.br/politica/eleicoes/2026/apuracao/governador/ce/varjota",
+      "candidatos": [ ["Ciro Gomes", "PSDB", 7241, "não eleito"], ["Elmano de Freitas", "PT", 5180, "eleito"] ]
+    }
+  }
+}

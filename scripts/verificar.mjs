@@ -55,9 +55,22 @@ for (const c of ctx.window.PLENARIA_CIDADES || []) {
     if (!c2) { avisos.push(`${tag}: ${ano} sem resultado de vereador carregado — mais votados (${nomes.join(", ")}) não conferidos`); continue; }
     nomes.forEach((n, i) => { const x = c2.candidatos[i]; if (!x || !mesmoNome(x, n)) erros.push(`${tag}: ${i + 1}º vereador mais votado em ${ano} nos dados é "${x ? x.urna : "—"}", mas o conhecido é "${n}"`); });
   }
+  // 3b) votos por candidato conhecidos de outra fonte têm de bater
+  for (const r of ref.votosConhecidos || []) {
+    const cg = d.eleicoes[r.ano]?.cargos?.[r.cargo];
+    if (!cg) continue;
+    const x = cg.candidatos.find((y) => mesmoNome(y, r.nome));
+    if (!x) erros.push(`${tag}: ${r.ano} ${r.cargo}: ${r.nome} não está nos dados (fonte: ${r.fonte})`);
+    else if (x.votos !== r.votos) erros.push(`${tag}: ${r.ano} ${r.cargo}: ${r.nome} tem ${x.votos} nos dados, mas ${r.fonte} diz ${r.votos}`);
+  }
+  for (const [ano, cargo, nome] of ref.maisVotados || []) {
+    const cg = d.eleicoes[ano]?.cargos?.[cargo];
+    if (cg && !mesmoNome(cg.candidatos[0], nome)) erros.push(`${tag}: ${ano} ${cargo}: mais votado nos dados é ${cg.candidatos[0].urna}, a fonte diz ${nome}`);
+  }
   // 4) somas e duplicidades
   for (const [ano, e] of Object.entries(d.eleicoes)) for (const [k, cg] of Object.entries(e.cargos)) {
     const soma = cg.candidatos.reduce((t, x) => t + x.votos, 0);
+    if (cg.parcial && cg.totais && cg.totais.validos != null && soma > cg.totais.validos) erros.push(`${tag}: ${ano} ${k} (parcial): candidatos somam ${soma}, acima dos válidos ${cg.totais.validos}`);
     if (cg.totais && cg.totais.nominais != null && soma !== cg.totais.nominais) erros.push(`${tag}: ${ano} ${k}: soma dos candidatos ${soma} ≠ nominais oficiais ${cg.totais.nominais}`);
     const sqs = new Set();
     for (const x of cg.candidatos) {

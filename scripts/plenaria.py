@@ -579,6 +579,41 @@ def cmd_tse(a):
     salvar(cidade)
 
 
+def cmd_manual(a):
+    """Carrega votação municipal de um arquivo de fonte (data/fontes/*.json), marcada como parcial."""
+    f = json.load(open(a.arquivo, encoding="utf-8"))
+    cidade = carregar(f["uf"], slug(f["municipio"]))
+    if cidade is None:
+        sys.exit("Rode o seed antes (a cidade ainda não existe).")
+    ano = str(f["ano"])
+    if cidade["eleicoes"].get(ano, {}).get("nivel") == "secao" and not a.forcar:
+        sys.exit(f"{ano} já tem votação por seção do TSE; não sobrescrevo com dado parcial.")
+    pessoas = Pessoas(cidade)
+    e = {"ano": int(ano), "data": f.get("data"), "nivel": "municipio", "parcial": True,
+         "fonte": f["fonte"], "locais": {}, "secoes": {}, "cargos": {}}
+    for cargo, c in f["cargos"].items():
+        cands = []
+        for i, (nome, partido, votos, situ) in enumerate(c["candidatos"]):
+            pid = pessoas.resolver(nome, extra=f"manual:{norm(nome)}")
+            cands.append({"sq": f"m{ano}{cargo[:3]}{i:03d}", "pid": pid, "nr": "", "nome": nome, "urna": nome,
+                          "partido": partido or None, "situacao": situ or None, "votos": votos, "foto": None})
+        cands.sort(key=lambda x: -x["votos"])
+        t = dict(c["totais"])
+        t["nominais"] = sum(x["votos"] for x in cands)
+        e["cargos"][cargo] = {"cargo": NOME_CARGO[cargo], "turno": 1, "parcial": True, "url": c.get("url"),
+                              "totais": t, "candidatos": cands, "legendas": {}}
+    cidade["eleicoes"][ano] = e
+    vistos = {(x["ano"], x["turno"], x["cargo"]) for x in cidade["contexto"]}
+    for cargo, c in f["cargos"].items():
+        if (int(ano), 1, cargo) not in vistos:
+            cidade["contexto"].append({"ano": int(ano), "turno": 1, "cargo": cargo, "aptos": f.get("aptos"), "secoes": None,
+                                       "comparecimento": f.get("comparecimento"), "abstencoes": f.get("abstencoes"),
+                                       "validos": c["totais"].get("validos"), "brancos": c["totais"].get("brancos"),
+                                       "nulos": c["totais"].get("nulos"), "nominais": None, "legenda": None, "fonte": f["fonte"]})
+    cidade["contexto"].sort(key=lambda c: (c["ano"], c["turno"], c["cargo"]))
+    salvar(cidade)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -595,8 +630,11 @@ def main():
     t.add_argument("--pasta", default=os.path.join(RAIZ, "tse_raw"))
     t.add_argument("--baixar", action="store_true", help="baixa do cdn.tse.jus.br o que faltar")
     t.add_argument("--sem-fotos", dest="fotos", action="store_false")
+    m = sub.add_parser("manual", help="votação municipal parcial a partir de data/fontes/*.json")
+    m.add_argument("arquivo")
+    m.add_argument("--forcar", action="store_true")
     a = ap.parse_args()
-    {"seed": cmd_seed, "tse": cmd_tse}[a.cmd](a)
+    {"seed": cmd_seed, "tse": cmd_tse, "manual": cmd_manual}[a.cmd](a)
 
 
 if __name__ == "__main__":
