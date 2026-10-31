@@ -527,22 +527,35 @@
 
   // ------------------------------------------------------------------ blocos locais: lideranças, placar, governador, 2028
   const COR_GRUPO = { "situação": "var(--s1)", "oposição": "var(--s2)", "terceira via": "var(--s3)", "opinião": "#8d8b82" };
+  // blocos políticos: cada grupo sem núcleos é um bloco; um grupo com núcleos (ex.: terceira via) vira um bloco por núcleo
+  const chaveGrupo = (g) => (g.posicao === "situacao" ? "situação" : String(g.nome || "").toLowerCase());
+  const blocoDe = (x) => x.nucleo || (x.grupo === "prefeito" || x.grupo === "situação" ? "situação" : x.grupo || "");
+  function blocos() {
+    const out = [];
+    ((S.local || {}).grupos || []).forEach((g, i) => {
+      if ((g.nucleos || []).length) g.nucleos.forEach((n, j) => out.push({ k: n.nome, nome: n.nome, grupo: g.nome, cor: n.cor || SLOTS[(i + j) % SLOTS.length], g, n }));
+      else out.push({ k: chaveGrupo(g), nome: g.posicao === "situacao" ? `Grupo do ${String(g.lider || "").split(" ")[0]}` : g.nome, grupo: g.nome, cor: COR_GRUPO[chaveGrupo(g)] || SLOTS[i % SLOTS.length], g, n: null });
+    });
+    return out;
+  }
+  const corBloco = (k) => (blocos().find((b) => b.k === k) || {}).cor || COR_GRUPO[k] || "#8d8b82";
   function blocosLocaisHTML(sub) {
     const L = S.local || {};
     let h = "";
     if ((L.liderancas || []).length) {
       const mx = Math.max(...L.liderancas.map((l) => Math.max(l.fed, l.est)), 1);
-      const ordem = ["situação", "oposição", "terceira via", "opinião"];
+      const ordem = [...blocos().map((b) => b.k), "opinião"];
+      const rotulo = (k) => { const b = blocos().find((z) => z.k === k); return b ? (b.n ? `${b.grupo} · ${b.nome}` : b.nome) : cap(k); };
       h += sub(`Força das lideranças em 2026 <span class="muted" style="font-weight:500;font-size:14px;text-transform:none;letter-spacing:0">· votos em Varjota dos deputados que cada uma apoiou</span>`) +
-        `<div class="card lid">${ordem.map((g) => { const ls = L.liderancas.filter((l) => l.grupo === g); if (!ls.length) return ""; const tf = ls.reduce((t, l) => t + l.fed, 0), te = ls.reduce((t, l) => t + l.est, 0);
-          return `<div class="lg"><div class="lgh"><span class="dot" style="background:${COR_GRUPO[g]}"></span><b>${esc(cap(g))}</b><span class="muted num">federal ${fmt(tf)} · estadual ${fmt(te)}</span></div>
+        `<div class="card lid">${ordem.map((g) => { const ls = L.liderancas.filter((l) => blocoDe(l) === g); if (!ls.length) return ""; const cg = corBloco(g); const tf = ls.reduce((t, l) => t + l.fed, 0), te = ls.reduce((t, l) => t + l.est, 0);
+          return `<div class="lg"><div class="lgh"><span class="dot" style="background:${cg}"></span><b>${esc(rotulo(g))}</b><span class="muted num">federal ${fmt(tf)} · estadual ${fmt(te)}</span></div>
             ${ls.map((l) => `<div class="lr"><div class="ln"><b>${esc(l.nome)}</b><span class="muted">${esc(l.deps)}</span></div>
-              <div class="lb2"><div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · federal<br>${fmt(l.fed)} votos`)}><div class="t"><i style="width:${(l.fed / mx) * 100}%;background:${COR_GRUPO[g]}"></i></div><div class="x num">${l.fed ? fmt(l.fed) : "—"}</div></div>
-              <div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · estadual<br>${fmt(l.est)} votos`)}><div class="t"><i style="width:${(l.est / mx) * 100}%;background:${COR_GRUPO[g]};opacity:.55"></i></div><div class="x num">${l.est ? fmt(l.est) : "—"}</div></div></div></div>`).join("")}</div>`; }).join("")}
+              <div class="lb2"><div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · federal<br>${fmt(l.fed)} votos`)}><div class="t"><i style="width:${(l.fed / mx) * 100}%;background:${cg}"></i></div><div class="x num">${l.fed ? fmt(l.fed) : "—"}</div></div>
+              <div class="hbar" style="grid-template-columns:1fr 64px;padding:2px 0" ${tip(`<b>${esc(l.nome)}</b> · estadual<br>${fmt(l.est)} votos`)}><div class="t"><i style="width:${(l.est / mx) * 100}%;background:${cg};opacity:.55"></i></div><div class="x num">${l.est ? fmt(l.est) : "—"}</div></div></div></div>`).join("")}</div>`; }).join("")}
           <div class="legend"><span><i style="background:var(--ink-2)"></i>barra cheia = federal</span><span><i style="background:var(--ink-2);opacity:.55"></i>barra clara = estadual</span><span>◆ informação local · fonte dos votos: Band (apuração por município)</span></div></div>`;
     }
     if (L.placar) {
-      const P = L.placar, cores = ["var(--s1)", "var(--s2)", "#8d8b82", "var(--s3)", "#5d5c57", "#3a3936", "#2c2b29"];
+      const P = L.placar, cores = P.linhas.map((l) => { const b = blocos().find((z) => l[0] === z.nome || l[0].endsWith(z.nome.split(" ")[0])); return b ? b.cor : /opini/i.test(l[0]) ? "#8d8b82" : /legenda/i.test(l[0]) ? "#5d5c57" : /branco/i.test(l[0]) ? "#3a3936" : "#2c2b29"; });
       const barra = (i) => `<div class="stk">${P.linhas.map((l, j) => `<i style="width:${(l[i] / P.total) * 100}%;background:${cores[j]}" ${tip(`<b>${esc(l[0])}</b><br>${fmt(l[i])} votos · ${pct(l[i] / P.total)}`)}></i>`).join("")}</div>`;
       h += sub(`Placar de 2026 <span class="muted" style="font-weight:500;font-size:14px;text-transform:none;letter-spacing:0">· sobre ${fmt(P.total)} votos (${fmt(P.abstencoes)} faltaram)</span>`) +
         `<div class="card placar"><div class="pl"><b>Federal</b>${barra(1)}</div><div class="pl"><b>Estadual</b>${barra(2)}</div>
@@ -585,6 +598,12 @@
         ${g.resumo ? `<p class="d">${esc(g.resumo)}</p>` : ""}
         ${(g.ligados || []).length ? `<div class="k">Deputados e lideranças ligados</div>${g.ligados.map(ligado).join("")}` : ""}
         ${g.vereadores ? `<div class="k">Câmara</div><p class="d">${esc(g.vereadores)}</p>` : ""}
+        ${(g.nucleos || []).length ? `<div class="nucs">${g.nucleos.map((n) => `<div class="nuc float" style="--g:${n.cor || "var(--other)"}">
+          <div class="nh">${avatar({ urna: n.nome, foto: (fotoPorNome(n.nome) || {}).foto, wiki: (acharRelatorio([n.nome]) || {}).wiki }, "av")}<div><div class="l">Núcleo</div><div class="v relk" data-rel="${esc(n.nome)}" role="button" tabindex="0">${esc(n.nome)}</div></div></div>
+          ${n.resumo ? `<p class="d">${esc(n.resumo)}</p>` : ""}
+          ${(n.ligados || []).length ? `<div class="k">Deputados</div>${n.ligados.map(ligado).join("")}` : ""}
+          ${n.vereadores ? `<div class="k">Câmara</div><p class="d">${esc(n.vereadores)}</p>` : ""}
+          ${n.forca ? `<div class="forca"><span>Força 2026</span><b>${esc(n.forca)}</b></div>` : ""}</div>`).join("")}</div>` : ""}
         ${g.forca ? `<div class="forca"><span>Força nas urnas 2026</span><b>${esc(g.forca)}</b></div>` : ""}</div>`; }).join("")}</div>` : "") +
       blocosLocaisHTML(sub) +
       ((L.analise || []).length ? sub(`Leitura <span class="muted" style="font-weight:500;font-size:14px">· análise, não é fato</span>`) + `<div class="grid analise">${L.analise.map((a, i) => `<div class="card acard"><div class="n">${String(i + 1).padStart(2, "0")}</div><div><div class="tt">${esc(a.titulo)}</div><p>${esc(a.texto)}</p></div></div>`).join("")}</div>` : "") +
@@ -600,7 +619,7 @@
     const m = new Map();
     for (const [ano, e] of Object.entries(S.city.eleicoes))
       for (const [k, c] of Object.entries(e.cargos)) {
-        if (!k.startsWith("deputado") || k.endsWith("_2t")) continue;
+        if (!(k.startsWith("deputado") || k === "senador") || k.endsWith("_2t")) continue;
         c.candidatos.forEach((x) => { const d = m.get(x.pid) || { pid: x.pid, ent: [] }; d.ent.push({ ano, cargo: k, x }); m.set(x.pid, d); });
       }
     const lista = [...m.values()];
@@ -618,7 +637,7 @@
     const el = $("#deputado"), m = S.city.meta;
     const cs = window.PLENARIA_CIDADES || [];
     const lista = deputados();
-    const head = (tools) => `<div class="blk-h"><div><h2>Deputado na <em class="s">cidade</em></h2><p class="lead">Escolha a cidade e o deputado: votos na cidade e no estado, locais e bairros mais fortes e o histórico dele na cidade.</p></div>${tools}</div>`;
+    const head = (tools) => `<div class="blk-h"><div><h2>Deputado ou senador na <em class="s">cidade</em></h2><p class="lead">Escolha a cidade e o parlamentar (deputado federal, estadual ou senador): votos na cidade e no estado, locais e bairros mais fortes e o histórico dele na cidade.</p></div>${tools}</div>`;
     const selCity = `<select class="pill" id="dep-city">${cs.map((c) => `<option value="${esc(c.id)}" ${c.id === S.cityId ? "selected" : ""}>${esc(c.nome)} · ${esc(c.uf)}</option>`).join("")}</select>`;
     if (!lista.length) {
       el.innerHTML = head(`<div class="tools">${selCity}</div>`) + `<div class="notice"><b>Ainda não há votação de deputados carregada para ${esc(m.municipio)}.</b> Ela vem dos arquivos oficiais do TSE (por seção, com bairro e local). Assim que o acesso ao TSE for liberado: <code>python3 scripts/plenaria.py tse --municipio ${esc(m.municipio)} --ano 2026 --ano 2022 --ano 2018 --baixar</code></div>`;
@@ -628,7 +647,7 @@
     const d = lista.find((z) => z.pid === S.dep.pid);
     const ent = d.ent.find((z) => z.ano === S.dep.ano) || d.ent[0];
     const anos = [...new Set(lista.flatMap((z) => z.ent.map((e) => e.ano)))].sort().reverse();
-    const opts = anos.map((ano) => `<optgroup label="${ano}">${lista.filter((z) => z.ent[0].ano === ano).map((z) => { const x = z.ent[0].x; return `<option value="${esc(z.pid)}" ${z.pid === d.pid ? "selected" : ""}>${esc(x.urna)} (${esc(x.partido || "")}) — ${fmt(x.votos)} votos</option>`; }).join("")}</optgroup>`).join("");
+    const opts = anos.map((ano) => `<optgroup label="${ano}">${lista.filter((z) => z.ent[0].ano === ano).map((z) => { const x = z.ent[0].x; return `<option value="${esc(z.pid)}" ${z.pid === d.pid ? "selected" : ""}>${esc(x.urna)} (${esc(x.partido || "")}) · ${esc(cargoCurto(z.ent[0].cargo))} — ${fmt(x.votos)} votos</option>`; }).join("")}</optgroup>`).join("");
     const tools = `<div class="tools">${selCity}<select class="pill" id="dep-sel" aria-label="Deputado">${opts}</select>${d.ent.length > 1 ? `<select class="pill" id="dep-ano">${d.ent.map((e) => `<option value="${e.ano}" ${e === ent ? "selected" : ""}>${e.ano} · ${esc(cargoCurto(e.cargo))}</option>`).join("")}</select>` : ""}</div>`;
     const a = agg(ent.ano, ent.cargo), x = a.bySq[ent.x.sq], e = S.city.eleicoes[ent.ano];
     S.dep.cur = { ano: ent.ano, cargo: ent.cargo };
@@ -669,7 +688,7 @@
 
 
   // ------------------------------------------------------------------ trajetória e comparação (todas as eleições carregadas)
-  const TIPOS = { vereador: ["Vereadores", (k) => k === "vereador"], prefeito: ["Prefeitos", (k) => k === "prefeito"], deputado: ["Deputados", (k) => k.startsWith("deputado")] };
+  const TIPOS = { vereador: ["Vereadores", (k) => k === "vereador"], prefeito: ["Prefeitos", (k) => k === "prefeito"], deputado: ["Deputados", (k) => k.startsWith("deputado")], senador: ["Senadores", (k) => k === "senador"] };
   function pessoasIdx() {
     const m = new Map();
     for (const [ano, e] of Object.entries(S.city.eleicoes))
@@ -832,12 +851,12 @@
     if (!apoios.length) return { apoios };
     const ops = mapEleicoes();
     const ver = ops.find((o) => o.cargo === "vereador");
-    const deps = ops.filter((o) => o.cargo.startsWith("deputado"));
+    const deps = ops.filter((o) => o.cargo.startsWith("deputado") || o.cargo === "senador");
     const achar = (a, nome) => a && a.cands.find((x) => normNome(x.urna) === normNome(nome) || normNome(x.nome) === normNome(nome));
     const aV = ver ? agg(ver.ano, ver.cargo) : null;
     const pares = [];
     for (const ap of apoios) for (const dn of ap.deputados || []) {
-      const p = { vereador: ap.vereador, deputado: dn, grupo: ap.grupo || "", obs: ap.obs || "", tipo: ap.tipo || "vereador" };
+      const p = { vereador: ap.vereador, deputado: dn, grupo: ap.nucleo ? `${ap.grupo} · ${ap.nucleo}` : ap.grupo || "", nucleo: ap.nucleo || "", obs: ap.obs || "", tipo: ap.tipo || "vereador" };
       const xv = achar(aV, ap.vereador);
       let dep = null, aD = null;
       for (const o of deps) { const a = agg(o.ano, o.cargo); const x = achar(a, dn); if (x) { dep = x; aD = a; p.cargoDep = o.cargo; p.anoDep = o.ano; break; } }
@@ -872,7 +891,7 @@
     const porDep = new Map();
     D.pares.forEach((p) => { const r = porDep.get(p.deputado) || { nome: p.deputado, vers: [] }; r.vers.push(p); porDep.set(p.deputado, r); });
     const ordem = [...porDep.values()].sort((a, b) => (a.vers[0].grupo === "oposição") - (b.vers[0].grupo === "oposição") || b.vers.length - a.vers.length);
-    const mapa = `<div class="grid apo">${ordem.map((d) => { const i = info[d.nome] || {}; const op = d.vers.some((v) => v.grupo === "oposição"), tv = d.vers.some((v) => v.grupo === "terceira via"); const eleito = /^eleit/i.test(i.resultado || "");
+    const mapa = `<div class="grid apo">${ordem.map((d) => { const i = info[d.nome] || {}; const bk = d.vers.map((v) => v.nucleo || (/^(prefeito|situação)$/.test(v.grupo) ? "situação" : v.grupo)).find((k) => k && k !== "situação"); const op = !!bk && bk === (blocos()[1] || {}).k, tv = !!bk && !op; const eleito = /^eleit/i.test(i.resultado || "");
       const rr = acharRelatorio([d.nome]), cc = acharCandidato(rr ? rr.nomes : [d.nome]);
       return `<div class="card apcard ${op ? "op" : tv ? "tv" : ""}"><div class="ah">${avatar({ urna: d.nome, foto: cc && cc.x.foto, wiki: rr && rr.wiki }, "av apav")}<div style="flex:1;min-width:0"><div class="l">${esc([i.cargo, i.partido].filter(Boolean).join(" · ") || "Deputado")}</div><div class="v relk" data-rel="${esc(d.nome)}" role="button" tabindex="0">${esc(d.nome)}</div></div><span class="pos ${eleito ? "ok" : ""}">${eleito ? "Eleito" : esc((i.resultado || "?").split(" · ")[0])}</span></div>
         <div class="d">${esc(i.resultado || "")}${i.url ? ` · <a href="${esc(i.url)}" target="_blank" rel="noopener">fonte ↗</a>` : ""}${cc && !i.resultado ? `${esc([cc.x.partido, cc.x.situacao].filter(Boolean).join(" · "))}` : ""}${cc ? ` · <b class="num">${fmt(cc.x.votos)}</b> em ${esc(S.city.meta.municipio)} (${cc.ano})` : ""}</div>
@@ -967,22 +986,26 @@
     const grupos = L.grupos || [];
     const apoios = L.apoios || [];
     if (!grupos.length) { el.innerHTML = html + `<div class="notice">Os grupos e as ligações vêm do seu arquivo local (<code>${esc(m.slug)}.local.js</code>).</div>`; return; }
-    const chave = { "Situação": "prefeito", "Oposição": "oposição", "Terceira via": "terceira via" };
-    const ordem = ["Situação", "Terceira via", "Oposição"].map((n) => grupos.find((g) => g.nome === n)).filter(Boolean);
-    html += `<div class="board" id="board"><svg class="blinks" id="blinks"></svg>${ordem.map((g) => {
-      const k = chave[g.nome];
-      const doGrupo = apoios.filter((a) => (a.grupo || "") === k && a.vereador !== "Elmo Monte");
-      const lideres = g.lider.split(" · ");
-      const vers = (g.camara || [...new Set(doGrupo.filter((a) => (a.tipo || "vereador") === "vereador").map((a) => a.vereador))]).filter((v) => !lideres.includes(v));
-      const lids0 = [...new Set(doGrupo.filter((a) => a.tipo === "liderança").map((a) => a.vereador))];
-      const lids = lids0.filter((v) => !g.lider.split(" · ").includes(v));
-      const deps = [...new Set(apoios.filter((a) => (a.grupo || "") === k).flatMap((a) => a.deputados))];
-      const cor = k === "prefeito" ? "var(--s1)" : k === "oposição" ? "var(--s2)" : "var(--s3)";
-      return `<div class="bcol" style="--c:${cor}"><div class="bh"><span class="dot"></span>${esc(g.nome)}<span class="muted">${esc(g.forca || "")}</span></div>
-        <div class="blead">${lideres.map((n) => retrato(n, "liderança do grupo", { cls: "mid" })).join("")}</div>
+    // uma coluna por bloco; os núcleos de um mesmo grupo (terceira via) ficam lado a lado dentro do grupo
+    const coluna = (b) => {
+      const doBloco = apoios.filter((a) => blocoDe(a) === b.k && a.vereador !== "Elmo Monte");
+      const src = b.n || b.g;
+      const lideres = b.n ? [b.n.nome] : String(b.g.lider || "").split(" · ");
+      const vers = (src.camara || [...new Set(doBloco.filter((a) => (a.tipo || "vereador") === "vereador").map((a) => a.vereador))]).filter((v) => !lideres.includes(v));
+      const lids = [...new Set(doBloco.filter((a) => a.tipo === "liderança").map((a) => a.vereador))].filter((v) => !lideres.includes(v));
+      const deps = [...new Set(apoios.filter((a) => blocoDe(a) === b.k).flatMap((a) => a.deputados))];
+      return `<div class="bcol${b.n ? " nuc" : ""}" style="--c:${b.cor}"><div class="bh"><span class="dot"></span>${esc(b.n ? b.nome : b.g.nome)}<span class="muted">${esc(src.forca || "")}</span></div>
+        <div class="blead">${lideres.map((n) => retrato(n, b.n ? "dono do núcleo" : "liderança do grupo", { cls: "mid" })).join("")}</div>
         ${vers.length ? `<div class="bk">Na Câmara</div><div class="bgrid">${vers.map((v) => retrato(v, sub24(v) || "vereador")).join("")}</div>` : ""}
         ${lids.length ? `<div class="bk">Lideranças</div><div class="bgrid">${lids.map((v) => retrato(v, "liderança")).join("")}</div>` : ""}
-        <div class="bk">Deputados com voto em ${esc(m.municipio)} · 2026</div><div class="bgrid deps">${deps.map((d) => { const v = votos26(d); return retrato(d, v ? `<b class="num">${fmt(v.x.votos)}</b> · ${v.cargo === "deputado_federal" ? "federal" : "estadual"}` : "", { dep: true, tag: v && /^eleit/.test(v.x.situacao || "") ? "eleito" : v && v.x.situacao ? v.x.situacao : "", tagc: v && /^eleit/.test(v.x.situacao || "") ? "ok" : "" }); }).join("")}</div></div>`; }).join("")}</div>`;
+        ${deps.length ? `<div class="bk">Deputados com voto em ${esc(m.municipio)} · 2026</div><div class="bgrid deps">${deps.map((d) => { const v = votos26(d); return retrato(d, v ? `<b class="num">${fmt(v.x.votos)}</b> · ${v.cargo === "deputado_federal" ? "federal" : "estadual"}` : "", { dep: true, tag: v && /^eleit/.test(v.x.situacao || "") ? "eleito" : v && v.x.situacao ? v.x.situacao : "", tagc: v && /^eleit/.test(v.x.situacao || "") ? "ok" : "" }); }).join("")}</div>` : ""}</div>`;
+    };
+    const bl = blocos();
+    html += `<div class="board" id="board"><svg class="blinks" id="blinks"></svg>${grupos.map((g) => {
+      const meus = bl.filter((b) => b.g === g);
+      if (!meus.some((b) => b.n)) return meus.map(coluna).join("");
+      return `<div class="bgrupo"><div class="bgh"><b>${esc(g.nome)}</b><span class="muted">${esc(g.forca || "")}</span><p>${esc(g.resumo || "")}</p></div><div class="bnucs">${meus.map(coluna).join("")}</div></div>`;
+    }).join("")}</div>`;
     el.innerHTML = html;
     // ligações: ao passar sobre alguém, desenha linhas até os deputados que ele apoiou
     const board = $("#board"), svg = $("#blinks");
@@ -1013,32 +1036,44 @@
   // ------------------------------------------------------------------ simulador de 2028
   // Parte da força de cada liderança em 2026 (média federal/estadual dos deputados que apoiou) e deixa
   // o usuário mover cada bloco. Projeção por bairro usa a distribuição real de Elmo × Silvino em 2024.
-  const DESTINOS = { sit: "Situação", op: "Oposição", tv: "Terceira via", fora: "Não transfere" };
+  // destinos = um por bloco (grupo do Elmo e cada núcleo da terceira via) + "não transfere"
+  function destinos() {
+    const d = {}; blocos().forEach((b) => (d[b.k] = { nome: b.n ? b.nome : b.k === "situação" ? "Situação" : b.nome, cor: b.cor, tv: !!b.n }));
+    d.fora = { nome: "Não transfere", cor: "#5d5c57" };
+    return d;
+  }
   function simBase() {
     const L = S.local || {};
-    return (L.liderancas || []).map((l, i) => ({ i, nome: l.nome, grupo: l.grupo, deps: l.deps, votos: Math.round(((l.fed || 0) + (l.est || 0)) / ((l.fed && l.est) ? 2 : 1)) }));
+    return (L.liderancas || []).map((l, i) => ({ i, nome: l.nome, grupo: l.grupo, k: blocoDe(l), deps: l.deps, votos: Math.round(((l.fed || 0) + (l.est || 0)) / ((l.fed && l.est) ? 2 : 1)) }));
   }
   function simInit() {
     if (S.sim) return S.sim;
-    const ini = {}; simBase().forEach((b) => (ini[b.i] = b.grupo === "situação" ? "sit" : b.grupo === "oposição" ? "op" : b.grupo === "terceira via" ? "tv" : "fora"));
-    S.sim = { dest: ini, fid: 75, opiniao: 50, desgaste: 0, tvPropria: true, elmo: 80 };
+    const D = destinos(), ini = {}; simBase().forEach((b) => (ini[b.i] = D[b.k] ? b.k : "fora"));
+    S.sim = { dest: ini, fid: 75, opiniao: 50, desgaste: 0, unida: false, elmo: 80 };
     return S.sim;
   }
   function simCalc() {
-    const sim = simInit(), base = simBase();
-    const tot = { sit: 0, op: 0, tv: 0, fora: 0 };
+    const sim = simInit(), base = simBase(), D = destinos();
+    const tot = {}; Object.keys(D).forEach((k) => (tot[k] = 0));
+    let opin = 0;
     for (const b of base) {
-      if (b.grupo === "opinião") { tot.sit += b.votos * sim.opiniao / 100; tot.op += b.votos * (100 - sim.opiniao) / 100; continue; }
+      if (b.grupo === "opinião") { opin += b.votos; continue; }
       const d = sim.dest[b.i] || "fora";
-      const proprio = (d === "sit" && b.grupo === "situação") || (d === "op" && b.grupo === "oposição") || (d === "tv" && b.grupo === "terceira via");
+      if (d === "fora") { tot.fora += b.votos; continue; }
       // quem muda de lado leva só parte do voto; o Elmo não concorre em 2028 e transfere parte ao sucessor
-      const ef = (b.nome === "Elmo" ? sim.elmo / 100 : 1) * (proprio ? 1 : sim.fid / 100);
+      const ef = (b.nome === "Elmo" ? sim.elmo / 100 : 1) * (d === b.k ? 1 : sim.fid / 100);
       tot[d] += b.votos * ef; tot.fora += b.votos * (1 - ef);
     }
-    tot.sit = Math.max(0, tot.sit - sim.desgaste); tot.fora += sim.desgaste;
-    if (!sim.tvPropria) { tot.sit += tot.tv / 2; tot.op += tot.tv / 2; tot.tv = 0; }
-    const validos = tot.sit + tot.op + tot.tv;
-    return { tot, validos, base };
+    tot["situação"] = Math.max(0, (tot["situação"] || 0) - sim.desgaste); tot.fora += sim.desgaste;
+    // voto de opinião: parte vai à situação, o resto se divide entre os núcleos na proporção da força deles
+    const tvs = Object.keys(D).filter((k) => D[k].tv), somaTv = tvs.reduce((t, k) => t + tot[k], 0) || 1;
+    tot["situação"] += opin * sim.opiniao / 100;
+    tvs.forEach((k) => (tot[k] += opin * (1 - sim.opiniao / 100) * (tot[k] / somaTv)));
+    let linhas = Object.keys(D).filter((k) => k !== "fora").map((k) => ({ k, nome: D[k].nome, cor: D[k].cor, v: tot[k] }));
+    if (sim.unida) { const u = linhas.filter((l) => D[l.k].tv); linhas = [...linhas.filter((l) => !D[l.k].tv), { k: "tv", nome: "Terceira via unida", cor: "var(--s2)", v: u.reduce((t, l) => t + l.v, 0) }]; }
+    linhas.sort((p, q) => q.v - p.v);
+    const validos = linhas.reduce((t, l) => t + l.v, 0);
+    return { tot, linhas, validos, base, D };
   }
   function renderSimulador() {
     const el = $("#simulador"); if (!el) return;
@@ -1046,45 +1081,58 @@
     const head = `<div class="blk-h"><div><h2>Simulador de <em class="s">2028</em></h2><p class="lead">Mova cada liderança para um lado e veja o placar. A base é a força real de 2026 (votos dos deputados que cada uma apoiou em ${esc(m.municipio)}); a projeção por bairro usa o mapa de 2024.</p></div></div>`;
     const base = simBase();
     if (!base.length) { el.innerHTML = head + `<div class="notice">O simulador usa a força das lideranças do seu arquivo local (<code>${esc(m.slug)}.local.js</code>).</div>`; return; }
-    const sim = simInit(), R = simCalc(), T = R.tot, V = R.validos || 1;
-    const lider = T.sit >= T.op ? (T.sit >= T.tv ? "sit" : "tv") : (T.op >= T.tv ? "op" : "tv");
-    const ord = Object.entries({ sit: T.sit, op: T.op, tv: T.tv }).sort((a, b) => b[1] - a[1]);
-    const margem = ord[0][1] - ord[1][1];
-    const cor = { sit: "var(--s1)", op: "var(--s2)", tv: "var(--s3)", fora: "#5d5c57" };
+    const sim = simInit(), R = simCalc(), D = R.D, V = R.validos || 1, Ls = R.linhas;
+    const margem = Ls[0].v - (Ls[1] ? Ls[1].v : 0);
     const linhas = base.filter((b) => b.grupo !== "opinião").map((b) => `<div class="smr"><div class="sml"><b>${esc(b.nome)}</b><span class="muted">${esc(b.deps)} · ≈ ${fmt(b.votos)}</span></div>
-      <div class="seg smseg">${Object.entries(DESTINOS).map(([k, n]) => `<button type="button" data-simd="${b.i}|${k}" aria-pressed="${sim.dest[b.i] === k}" style="${sim.dest[b.i] === k ? `background:${cor[k]};color:#fff` : ""}">${n}</button>`).join("")}</div></div>`).join("");
+      <div class="seg smseg">${Object.entries(D).map(([k, d]) => `<button type="button" data-simd="${b.i}|${esc(k)}" aria-pressed="${sim.dest[b.i] === k}" style="${sim.dest[b.i] === k ? `background:${d.cor};color:#fff` : ""}">${esc(d.nome)}</button>`).join("")}</div></div>`).join("");
+    // referência real: o tamanho dos lados em 2024 (prefeito) e em 2026 (deputados)
+    const L = S.local || {}, P = L.placar;
+    const e24p = S.city.eleicoes["2024"] && S.city.eleicoes["2024"].cargos.prefeito;
+    let ref = "";
+    if (e24p) {
+      const [p1, p2] = e24p.candidatos, v24 = p1.votos + p2.votos;
+      const sit26 = P ? P.linhas[0][1] : 0, tv26 = P ? P.linhas.filter((l) => /terceira via/i.test(l[0])).reduce((t, l) => t + l[1], 0) : 0;
+      ref = `<div class="card simref"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">De onde vem a força de cada lado</div>
+        <div class="srf"><div><span class="muted">2024 · prefeito</span><b class="num">${fmt(p1.votos)} × ${fmt(p2.votos)}</b><span>${esc(p1.urna)} ${pct(p1.votos / v24)} × ${esc(p2.urna)} ${pct(p2.votos / v24)} · <b>${(p1.votos / p2.votos).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} para 1</b></span></div>
+        ${P ? `<div><span class="muted">2026 · deputado federal</span><b class="num">${fmt(sit26)} × ${fmt(tv26)}</b><span>grupo do Elmo × terceira via somada · <b>${(sit26 / (tv26 || 1)).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} para 1</b></span></div>` : ""}</div>
+        <p class="muted" style="font-size:12.5px;margin:10px 0 0">Os números de cada liderança são os votos, em ${esc(m.municipio)}, dos deputados que ela pediu em 2026 (TSE) — não são votos "dela". A proporção entre os lados ficou a mesma de 2024; o voto de opinião (${P ? fmt(P.linhas.find((l) => /opini/i.test(l[0]))[1]) : "—"}) e os votos de legenda ficam fora dos lados.</p></div>`;
+    }
     // projeção por bairro (2024: prefeito, Elmo × Silvino)
     let bairros = "";
     const e24 = S.city.eleicoes["2024"];
     if (e24 && e24.nivel === "secao" && e24.cargos.prefeito) {
       const a = agg("2024", "prefeito"), [sit24, op24] = a.cands;
-      const fS = T.sit / (sit24.votos || 1), fO = T.op / (op24.votos || 1);
+      const vs = R.tot["situação"] || 0, vo = V - vs;
+      const fS = vs / (sit24.votos || 1), fO = vo / (op24.votos || 1);
       const rows = Object.values(a.bairros).sort((p, q) => q.validos - p.validos).map((b) => {
-        const s = (b.cand[sit24.sq] || 0) * fS, o = (b.cand[op24.sq] || 0) * fO, t = T.tv * (b.validos / a.validos);
-        const tt = s + o + t || 1;
-        return `<div class="sbr"><div class="lb">${esc(b.nome)}</div><div class="stk"><i style="width:${s / tt * 100}%;background:var(--s1)"></i><i style="width:${t / tt * 100}%;background:var(--s3)"></i><i style="width:${o / tt * 100}%;background:var(--s2)"></i></div><div class="x num">${s >= o ? "S" : "O"} ${pct(Math.abs(s - o) / tt, 0)}</div></div>`;
+        const sv = (b.cand[sit24.sq] || 0) * fS, o = (b.cand[op24.sq] || 0) * fO, tt = sv + o || 1;
+        return `<div class="sbr"><div class="lb">${esc(b.nome)}</div><div class="stk"><i class="anim-bar" style="width:${sv / tt * 100}%;background:var(--s1)"></i><i class="anim-bar" style="width:${o / tt * 100}%;background:var(--s2)"></i></div><div class="x num">${sv >= o ? "S" : "TV"} ${pct(Math.abs(sv - o) / tt, 0)}</div></div>`;
       }).join("");
-      bairros = `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Projeção por bairro (base: ${esc(sit24.urna)} × ${esc(op24.urna)} em 2024)</div>${rows}</div>`;
+      bairros = `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Projeção por bairro: situação × terceira via somada (base: ${esc(sit24.urna)} × ${esc(op24.urna)} em 2024)</div>${rows}</div>`;
     }
+    const ld = Ls[0];
     el.innerHTML = head + `<div class="grid simg">
-      <div class="card simres"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">Placar projetado</div>
-        ${["sit", "op", "tv"].map((k) => `<div class="sp"><span class="dot" style="background:${cor[k]}"></span><b>${DESTINOS[k]}</b><span class="num big">${fmt(T[k])}</span><span class="num muted">${pct(T[k] / V)}</span></div><div class="stk" style="height:14px;margin:4px 0 12px"><i style="width:${T[k] / V * 100}%;background:${cor[k]}"></i></div>`).join("")}
-        <div class="simv" style="--c:${cor[lider]}">${DESTINOS[lider]} vence por <b class="num">${fmt(margem)}</b> votos</div>
-        <div class="muted" style="font-size:12px;margin-top:8px">${fmt(T.fora)} votos se perdem na mudança (não transferem). Modelo simples, para comparar cenários — não é pesquisa.</div></div>
+      <div class="card simres float"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">Placar projetado</div>
+        ${Ls.map((l) => `<div class="sp"><span class="dot" style="background:${l.cor}"></span><b>${esc(l.nome)}</b><span class="num big">${fmt(l.v)}</span><span class="num muted">${pct(l.v / V)}</span></div><div class="stk" style="height:14px;margin:4px 0 12px"><i class="anim-bar" style="width:${l.v / V * 100}%;background:${l.cor}"></i></div>`).join("")}
+        <div class="simv" style="--c:${ld.cor}">${esc(ld.nome)} vence por <b class="num">${fmt(margem)}</b> votos</div>
+        <div class="muted" style="font-size:12px;margin-top:8px">${fmt(R.tot.fora)} votos se perdem na mudança (não transferem). Modelo simples, para comparar cenários — não é pesquisa.</div></div>
       <div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px">Ajustes</div>
         <label class="simsl">O Elmo (que não pode concorrer) transfere <b>${sim.elmo}%</b> do voto dele ao candidato que apoiar<input type="range" min="30" max="100" step="5" value="${sim.elmo}" data-sims="elmo"></label>
         <label class="simsl">Quem muda de lado leva <b>${sim.fid}%</b> do voto<input type="range" min="20" max="100" step="5" value="${sim.fid}" data-sims="fid"></label>
         <label class="simsl">Voto de opinião para a situação: <b>${sim.opiniao}%</b><input type="range" min="0" max="100" step="5" value="${sim.opiniao}" data-sims="opiniao"></label>
         <label class="simsl">Desgaste do governo (votos que a situação perde): <b>${fmt(sim.desgaste)}</b><input type="range" min="0" max="2300" step="50" value="${sim.desgaste}" data-sims="desgaste"><span class="muted" style="font-size:11.5px">Referência: 1.860 a 2.229 eleitores votaram no deputado do Elmo e não no Elmano em 2026.</span></label>
-        <label class="simck"><input type="checkbox" data-simtv ${sim.tvPropria ? "checked" : ""}> Terceira via com candidatura própria (desmarcado: divide meio a meio)</label>
-        <div class="tools" style="margin-top:10px"><button class="btn" type="button" data-simcen="base">Cenário base</button><button class="btn" type="button" data-simcen="racha">Racha na situação</button><button class="btn" type="button" data-simcen="tvop">Terceira via com a oposição</button></div></div></div>
+        <label class="simck"><input type="checkbox" data-simtv ${sim.unida ? "checked" : ""}> Terceira via unida: os três núcleos num só candidato</label>
+        <div class="tools" style="margin-top:10px"><button class="btn" type="button" data-simcen="base">Cenário base</button><button class="btn" type="button" data-simcen="racha">Racha na situação</button><button class="btn" type="button" data-simcen="unida">Terceira via unida</button></div></div></div>
+      ${ref}
       ${bairros}
       <div class="card" style="margin-top:14px"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Para onde vai cada liderança</div>${linhas}</div>`;
   }
   function simCenario(nome) {
     S.sim = null; const sim = simInit(), base = simBase();
-    if (nome === "racha") base.forEach((b) => { if (["Raony", "Educação", "Cleiton", "Marcos César"].includes(b.nome)) sim.dest[b.i] = "tv"; });
-    if (nome === "tvop") base.forEach((b) => { if (b.grupo === "terceira via") sim.dest[b.i] = "op"; });
+    // racha: parte da base do Elmo vai para o núcleo mais forte fora dele
+    const alvo = (blocos().find((b) => b.n) || {}).k || "fora";
+    if (nome === "racha") base.forEach((b) => { if (["Raony", "Educação", "Cleiton", "Marcos César"].includes(b.nome)) sim.dest[b.i] = alvo; });
+    if (nome === "unida") sim.unida = true;
   }
 
   // ------------------------------------------------------------------ emendas × votos
@@ -1170,6 +1218,19 @@
         ${dest.length ? `<div class="fatos rfatos">${dest.map((x) => `<article class="fato"><div class="dt">${esc(dataBR(x.data))}</div><div><div class="tt">${esc(x.titulo)} ${selo(x.selo)}</div>${x.resumo ? `<p>${esc(x.resumo)}</p>` : ""}<div class="fs">${fontes(x.fontes)}</div></div></article>`).join("")}</div>` : ""}</div>`
         : `<p class="muted" style="font-size:13.5px">Ainda não há relatório pesquisado para ${esc(nome)}. Use as buscas abaixo ou peça para eu levantar.</p>`}
       <div class="k" style="margin-top:14px">Buscar mais na rede</div>${buscasHTML(nome)}`;
+  }
+  function hcardHTML(nome) {
+    if (!nome) return "";
+    const r = acharRelatorio([nome]), c = acharCandidato(r ? r.nomes : [nome]), f = fotoPorNome(nome);
+    if (!r && !c) return "";
+    const ap = ((S.local || {}).apoios || []).filter((a) => normNome(a.vereador) === normNome(nome) || (a.deputados || []).some((d) => normNome(d) === normNome(nome)));
+    const b = ap.length ? blocos().find((z) => z.k === blocoDe(ap[0])) : null;
+    const sit = c && c.x.situacao ? statusEleito(c.x.situacao)[0] : "";
+    return `<div class="hc-top">${avatar({ urna: nome, foto: f.foto || (c && c.x.foto), wiki: (r && r.wiki) || f.wiki }, "av hc-av")}<div style="min-width:0">
+        <div class="hc-n">${esc(nome)}</div><div class="hc-s">${esc([r && r.papel, (r && r.partido) || (c && c.x.partido)].filter(Boolean).join(" · ") || (c ? cargoCurto(c.cargo) : ""))}</div></div></div>
+      ${c ? `<div class="hc-k"><div><b class="num">${fmt(c.x.votos)}</b><span>votos em ${esc(S.city.meta.municipio)}</span></div><div><b>${esc(c.ano)}</b><span>${esc(cargoCurto(c.cargo))}</span></div>${sit ? `<div><b>${esc(sit.split(" ·")[0])}</b><span>resultado</span></div>` : ""}</div>` : ""}
+      ${b ? `<div class="hc-g" style="--c:${b.cor}"><i></i>${esc(b.n ? `${b.grupo} · núcleo ${b.nome}` : b.nome)}</div>` : ""}
+      <div class="hc-f">clique para abrir o relatório</div>`;
   }
   function openRelatorio(nome) {
     const r = acharRelatorio([nome]);
@@ -1377,7 +1438,7 @@
       if (t.id === "sec-bairro") { S.secBairro = t.value; renderSecoes(); }
       if (t.id === "sec-cand") { S.secCand = t.value; S.secSort = t.value ? "cand" : "validos"; renderSecoes(); }
       if (t.id === "map-el") { const [ano, cargo] = t.value.split("|"); Object.assign(S.map, { ano, cargo, bairro: null, local: null, secao: null, zoom: false, foco: [] }); renderMapa(); }
-      if (t.matches && t.matches("[data-simtv]")) { simInit().tvPropria = t.checked; renderSimulador(); }
+      if (t.matches && t.matches("[data-simtv]")) { simInit().unida = t.checked; renderSimulador(); }
       if (t.id === "cz-depel") { S.cruz.depEl = t.value; S.cruz.dep = ""; renderCruzamento(); }
       if (t.id === "cz-dep") { S.cruz.dep = t.value; renderCruzamento(); }
       if (t.id === "cz-verel") { S.cruz.verEl = t.value; S.cruz.aliados = []; renderCruzamento(); }
@@ -1401,6 +1462,28 @@
       tipEl.style.top = (ev.clientY + 16 + h > innerHeight ? ev.clientY - h - 12 : ev.clientY + 16) + "px";
       tipEl.style.opacity = 1;
     });
+    // cartão flutuante: ao parar sobre o rosto ou o nome de alguém, mostra quem é, com foto e números
+    const hc = $("#hcard");
+    if (hc && matchMedia("(hover: hover)").matches) {
+      let alvo = null, timer = 0;
+      const esconder = () => { clearTimeout(timer); alvo = null; hc.classList.remove("on"); };
+      document.addEventListener("mouseover", (ev) => {
+        const t = ev.target.closest && ev.target.closest(".rt[data-pessoa], [data-rel], .cpick");
+        if (t === alvo) return;
+        if (!t || t.closest("#drawer")) return esconder();
+        esconder(); alvo = t;
+        timer = setTimeout(() => {
+          const nome = (t.dataset.pessoa || t.dataset.rel || (t.querySelector("b") || {}).textContent || "").split(" / ")[0].trim();
+          const html = hcardHTML(nome); if (!html || alvo !== t) return;
+          hc.innerHTML = html;
+          const r = t.getBoundingClientRect(), w = hc.offsetWidth, h = hc.offsetHeight;
+          const x = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 8));
+          const y = r.top - h - 12 > 8 ? r.top - h - 12 : Math.min(r.bottom + 12, innerHeight - h - 8);
+          hc.style.left = x + "px"; hc.style.top = y + "px"; hc.classList.add("on");
+        }, 280);
+      });
+      addEventListener("scroll", esconder, { passive: true });
+    }
     // aba ativa
     const links = $$("nav.tabs a");
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-40% 0px -55% 0px" });

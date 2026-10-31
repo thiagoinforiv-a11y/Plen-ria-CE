@@ -6,6 +6,15 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
   atualizado: "2026-10-30",
   pessoas: [
     {
+      nomes: ["Glerton Paulino", "Glediston Paulino Ximenes"],
+      papel: "Liderança de Varjota; ex-vereador e ex-presidente da Câmara",
+      partido: "MDB",
+      resumo: "Eleito vereador em 2004 (PPS, 740 votos — TSE). Foi presidente da Câmara, Secretário de Finanças e presidente do PMDB municipal. Casado com Rosa Paulino (prefeita 2009–2016, vereadora mais votada de 2024). Chegou a ser apontado como o nome mais forte para enfrentar o Elmo.",
+      destaques: [
+        { data: "2014-05", titulo: "Blog descreve Glerton como liderança, ex-presidente da Câmara e presidente do PMDB", selo: "uma-fonte", fontes: [{ nome: "Blog do Tidi", url: "https://blogdotidi.blogspot.com/2014/05/lideranca-varjotense-glerton-paulino.html" }] },
+      ],
+    },
+    {
       nomes: ["Elmo Monte", "Francisco Elmo Bezerra Monte"],
       papel: "Prefeito de Varjota (2021–2024; reeleito para 2025–2028)",
       partido: "PSB",
