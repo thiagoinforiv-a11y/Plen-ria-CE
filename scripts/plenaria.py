@@ -507,9 +507,12 @@ def cmd_tse(a):
         # 3) perfil dos candidatos
         cargos_mun = {c for _, c in votos}
         perfis, partidos_nr = {}, {}
+        vices = set()
         for r in ler_csv_zip(f_cand, f"_{uf}"):
             if r.get("SG_UF") != uf:
                 continue
+            if r.get("CD_CARGO") == "12" and r.get("SG_UE") == cd_mun:
+                vices.add(r["SQ_CANDIDATO"])     # vice-prefeito: sem voto próprio, mas com foto
             cargo = CARGOS.get(r.get("CD_CARGO"))
             if cargo not in cargos_mun:
                 continue
@@ -543,7 +546,7 @@ def cmd_tse(a):
         fotos_ok = {}
         if a.fotos and os.path.exists(f_foto):
             destino = os.path.join(RAIZ, "fotos", uf.lower(), slug(a.municipio), str(ano))
-            com_voto = {k for vs in votos.values() for k in vs if k.isdigit()}
+            com_voto = {k for vs in votos.values() for k in vs if k.isdigit()} | vices
             with zipfile.ZipFile(f_foto) as z:
                 for n in z.namelist():
                     m = re.search(r"(\d{9,})", os.path.basename(n))

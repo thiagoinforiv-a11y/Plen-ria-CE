@@ -941,7 +941,7 @@
     const cl = acharCandidato([nome]);
     if (cl && cl.x.foto && /^fotos\//.test(cl.x.foto)) return { foto: cl.x.foto };
     const c24 = ((S.city.candidaturas || {})["2024"] || []).find((c) => normNome(c.urna) === n || normNome(c.nome) === n);
-    if (c24) return { foto: `https://divulgacandcontas.tse.jus.br/divulga/rest/arquivo/img/2045202024/${c24.sq}/${S.city.meta.cd_tse}`, c24 };
+    if (c24) return { foto: `fotos/${S.city.meta.uf.toLowerCase()}/${S.city.meta.slug}/2024/${c24.sq}.jpg`, c24 };
     const c = acharCandidato([nome]);
     const r = acharRelatorio([nome]);
     if (c && c.x.foto && /^fotos\//.test(c.x.foto)) return { foto: c.x.foto };   // foto oficial guardada no projeto
@@ -1102,8 +1102,8 @@
     };
     const rows = Em.autores.filter((a) => a.pago > 0 || a.empenhado > 0).map((a) => ({ a, v: votosDe(a.autor) }));
     const mx = Math.max(...rows.map((r) => r.a.pago), 1);
-    el.innerHTML = head + `<div class="card"><div class="qrow qh" style="grid-template-columns:minmax(180px,1.2fr) 2fr 110px 120px 120px"><div>Autor</div><div>Pago em ${esc(m.municipio)}</div><div>Votos aqui</div><div>R$ por voto</div><div>Anos</div></div>
-      ${rows.map(({ a, v }) => `<div class="qrow" style="grid-template-columns:minmax(180px,1.2fr) 2fr 110px 120px 120px">
+    el.innerHTML = head + `<div class="card"><div class="qrow qh eqrow"><div>Autor</div><div>Pago em ${esc(m.municipio)}</div><div>Votos aqui</div><div>R$ por voto</div><div>Anos</div></div>
+      ${rows.map(({ a, v }) => `<div class="qrow eqrow">
         <div class="ln" style="display:flex;gap:10px;align-items:center">${avatar({ urna: a.autor, foto: v && v.x.foto, wiki: (acharRelatorio([a.autor]) || {}).wiki })}<div><b ${v ? `data-sq="${v.x.sq}" data-pano="${v.ano}" data-pcargo="${v.cargo}" class="relk"` : ""}>${esc(titulo(a.autor))}</b><div class="muted" style="font-size:11.5px">${esc(a.tipo || "")}</div></div></div>
         <div class="hbar" style="grid-template-columns:1fr 92px;padding:0"><div class="t"><i style="width:${(a.pago / mx) * 100}%"></i></div><div class="x num">${brl(a.pago)}</div></div>
         <div class="num">${v ? `<b>${fmt(v.x.votos)}</b> <span class="muted">(${v.ano})</span>` : `<span class="muted">—</span>`}</div>
@@ -1133,7 +1133,7 @@
   }
 
   // ------------------------------------------------------------------ relatório por pessoa (rede e notícias)
-  const normNome = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+  const normNome = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[.'’-]/g, " ").replace(/\s+/g, " ").trim();
   function acharRelatorio(nomes) {
     const alvo = new Set(nomes.filter(Boolean).map(normNome));
     return ((S.rel && S.rel.pessoas) || []).find((r) => r.nomes.some((n) => alvo.has(normNome(n)))) || null;

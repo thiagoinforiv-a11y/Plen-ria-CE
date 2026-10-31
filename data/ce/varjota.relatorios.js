@@ -184,7 +184,7 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
     },
     {
       wiki: "Neném_Coelho",
-      nomes: ["Neném Coelho", "Neném"],
+      nomes: ["Nenen Coelho", "Neném Coelho", "Neném"],
       papel: "Deputado federal eleito pelas sobras (2027–2030)",
       partido: "MDB",
       resumo: "Um dos sete federais do Ceará eleitos na distribuição das sobras — regra questionada pelo PDT no STF. Em Varjota, apoiado pela vereadora Patrícia Ximenes.",
@@ -226,11 +226,11 @@ window.PLENARIA_RELATORIOS["ce/varjota"] = {
     },
     {
       nomes: ["Aristeu Linhares"],
-      papel: "Vereador (2025–2028)",
+      papel: "Ex-vereador (2017–2024)",
       partido: "PSB",
-      resumo: "Eleito em 2016 (PTB) e 2020 (PDT). Consta como vereador da legislatura atual pelo PSB.",
+      resumo: "Eleito em 2016 (PTB) e 2020 (PDT). Em 2024, pelo PSB, teve 553 votos e não se reelegeu — ficou de fora enquanto Eudes do Croatá (MDB) entrou com 280, puxado pelo voto do MDB.",
       redes: [],
-      destaques: [{ data: "2025-01", titulo: "Vereador da 11ª legislatura (PSB)", selo: "uma-fonte", fontes: [{ nome: "Portal da Câmara", url: "https://camaravarjota.ce.gov.br/parlamentares/" }] }],
+      destaques: [{ data: "2024-10-06", titulo: "Não se reelege: 553 votos (PSB)", selo: "confirmado", fontes: [{ nome: "TSE — votação por seção", url: "https://dadosabertos.tse.jus.br/" }] }],
     },
   ],
 };
