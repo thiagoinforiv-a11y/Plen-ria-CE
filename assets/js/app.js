@@ -555,7 +555,7 @@
           <div class="legend"><span><i style="background:var(--ink-2)"></i>barra cheia = federal</span><span><i style="background:var(--ink-2);opacity:.55"></i>barra clara = estadual</span><span>◆ informação local · fonte dos votos: Band (apuração por município)</span></div></div>`;
     }
     if (L.placar) {
-      const P = L.placar, cores = P.linhas.map((l) => { const b = blocos().find((z) => l[0] === z.nome || l[0].endsWith(z.nome.split(" ")[0])); return b ? b.cor : /opini/i.test(l[0]) ? "#8d8b82" : /legenda/i.test(l[0]) ? "#5d5c57" : /branco/i.test(l[0]) ? "#3a3936" : "#2c2b29"; });
+      const P = L.placar, cores = P.linhas.map((l) => { const b = blocos().find((z) => l[0] === z.nome || (z.n ? l[0].endsWith(z.nome.split(" ")[0]) : l[0].startsWith(z.nome))); return b ? b.cor : /opini/i.test(l[0]) ? "#8d8b82" : /legenda/i.test(l[0]) ? "#5d5c57" : /branco/i.test(l[0]) ? "#3a3936" : "#2c2b29"; });
       const barra = (i) => `<div class="stk">${P.linhas.map((l, j) => `<i style="width:${(l[i] / P.total) * 100}%;background:${cores[j]}" ${tip(`<b>${esc(l[0])}</b><br>${fmt(l[i])} votos · ${pct(l[i] / P.total)}`)}></i>`).join("")}</div>`;
       h += sub(`Placar de 2026 <span class="muted" style="font-weight:500;font-size:14px;text-transform:none;letter-spacing:0">· sobre ${fmt(P.total)} votos (${fmt(P.abstencoes)} faltaram)</span>`) +
         `<div class="card placar"><div class="pl"><b>Federal</b>${barra(1)}</div><div class="pl"><b>Estadual</b>${barra(2)}</div>
@@ -1065,8 +1065,8 @@
       tot[d] += b.votos * ef; tot.fora += b.votos * (1 - ef);
     }
     tot["situação"] = Math.max(0, (tot["situação"] || 0) - sim.desgaste); tot.fora += sim.desgaste;
-    // voto de opinião: parte vai à situação, o resto se divide entre os núcleos na proporção da força deles
-    const tvs = Object.keys(D).filter((k) => D[k].tv), somaTv = tvs.reduce((t, k) => t + tot[k], 0) || 1;
+    // voto de opinião: parte vai à situação, o resto se divide entre os outros lados na proporção da força deles
+    const tvs = Object.keys(D).filter((k) => k !== "situação" && k !== "fora"), somaTv = tvs.reduce((t, k) => t + tot[k], 0) || 1;
     tot["situação"] += opin * sim.opiniao / 100;
     tvs.forEach((k) => (tot[k] += opin * (1 - sim.opiniao / 100) * (tot[k] / somaTv)));
     let linhas = Object.keys(D).filter((k) => k !== "fora").map((k) => ({ k, nome: D[k].nome, cor: D[k].cor, v: tot[k] }));
@@ -1091,10 +1091,10 @@
     let ref = "";
     if (e24p) {
       const [p1, p2] = e24p.candidatos, v24 = p1.votos + p2.votos;
-      const sit26 = P ? P.linhas[0][1] : 0, tv26 = P ? P.linhas.filter((l) => /terceira via/i.test(l[0])).reduce((t, l) => t + l[1], 0) : 0;
+      const sit26 = P ? P.linhas[0][1] : 0, tv26 = P ? P.linhas.filter((l) => /oposi|terceira via/i.test(l[0])).reduce((t, l) => t + l[1], 0) : 0;
       ref = `<div class="card simref"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">De onde vem a força de cada lado</div>
         <div class="srf"><div><span class="muted">2024 · prefeito</span><b class="num">${fmt(p1.votos)} × ${fmt(p2.votos)}</b><span>${esc(p1.urna)} ${pct(p1.votos / v24)} × ${esc(p2.urna)} ${pct(p2.votos / v24)} · <b>${(p1.votos / p2.votos).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} para 1</b></span></div>
-        ${P ? `<div><span class="muted">2026 · deputado federal</span><b class="num">${fmt(sit26)} × ${fmt(tv26)}</b><span>grupo do Elmo × terceira via somada · <b>${(sit26 / (tv26 || 1)).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} para 1</b></span></div>` : ""}</div>
+        ${P ? `<div><span class="muted">2026 · deputado federal</span><b class="num">${fmt(sit26)} × ${fmt(tv26)}</b><span>grupo do Elmo × oposição + terceira via · <b>${(sit26 / (tv26 || 1)).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} para 1</b></span></div>` : ""}</div>
         <p class="muted" style="font-size:12.5px;margin:10px 0 0">Os números de cada liderança são os votos, em ${esc(m.municipio)}, dos deputados que ela pediu em 2026 (TSE) — não são votos "dela". A proporção entre os lados ficou a mesma de 2024; o voto de opinião (${P ? fmt(P.linhas.find((l) => /opini/i.test(l[0]))[1]) : "—"}) e os votos de legenda ficam fora dos lados.</p></div>`;
     }
     // projeção por bairro (2024: prefeito, Elmo × Silvino)
@@ -1106,9 +1106,9 @@
       const fS = vs / (sit24.votos || 1), fO = vo / (op24.votos || 1);
       const rows = Object.values(a.bairros).sort((p, q) => q.validos - p.validos).map((b) => {
         const sv = (b.cand[sit24.sq] || 0) * fS, o = (b.cand[op24.sq] || 0) * fO, tt = sv + o || 1;
-        return `<div class="sbr"><div class="lb">${esc(b.nome)}</div><div class="stk"><i class="anim-bar" style="width:${sv / tt * 100}%;background:var(--s1)"></i><i class="anim-bar" style="width:${o / tt * 100}%;background:var(--s2)"></i></div><div class="x num">${sv >= o ? "S" : "TV"} ${pct(Math.abs(sv - o) / tt, 0)}</div></div>`;
+        return `<div class="sbr"><div class="lb">${esc(b.nome)}</div><div class="stk"><i class="anim-bar" style="width:${sv / tt * 100}%;background:var(--s1)"></i><i class="anim-bar" style="width:${o / tt * 100}%;background:var(--s2)"></i></div><div class="x num">${sv >= o ? "S" : "O"} ${pct(Math.abs(sv - o) / tt, 0)}</div></div>`;
       }).join("");
-      bairros = `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Projeção por bairro: situação × terceira via somada (base: ${esc(sit24.urna)} × ${esc(op24.urna)} em 2024)</div>${rows}</div>`;
+      bairros = `<div class="card"><div class="k" style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px">Projeção por bairro: situação × oposição + terceira via (base: ${esc(sit24.urna)} × ${esc(op24.urna)} em 2024)</div>${rows}</div>`;
     }
     const ld = Ls[0];
     el.innerHTML = head + `<div class="grid simg">
@@ -1229,7 +1229,7 @@
     return `<div class="hc-top">${avatar({ urna: nome, foto: f.foto || (c && c.x.foto), wiki: (r && r.wiki) || f.wiki }, "av hc-av")}<div style="min-width:0">
         <div class="hc-n">${esc(nome)}</div><div class="hc-s">${esc([r && r.papel, (r && r.partido) || (c && c.x.partido)].filter(Boolean).join(" · ") || (c ? cargoCurto(c.cargo) : ""))}</div></div></div>
       ${c ? `<div class="hc-k"><div><b class="num">${fmt(c.x.votos)}</b><span>votos em ${esc(S.city.meta.municipio)}</span></div><div><b>${esc(c.ano)}</b><span>${esc(cargoCurto(c.cargo))}</span></div>${sit ? `<div><b>${esc(sit.split(" ·")[0])}</b><span>resultado</span></div>` : ""}</div>` : ""}
-      ${b ? `<div class="hc-g" style="--c:${b.cor}"><i></i>${esc(b.n ? `${b.grupo} · núcleo ${b.nome}` : b.nome)}</div>` : ""}
+      ${b ? `<div class="hc-g" style="--c:${b.cor}"><i></i>${esc(b.n ? `${b.grupo} · núcleo ${b.nome}` : b.k === "situação" ? b.nome : `${b.nome} · liderada por ${b.g.lider}`)}</div>` : ""}
       <div class="hc-f">clique para abrir o relatório</div>`;
   }
   function openRelatorio(nome) {
