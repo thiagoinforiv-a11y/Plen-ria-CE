@@ -11,6 +11,8 @@ window.PLENARIA_FICHAS["ce/pacuja"] = {
     municipio: { ibge: "2309904", tse: "14990" },
     prefeitos: { 2012: "Lucivane", 2016: "Alex Melo", 2024: "Pedro Allan" },
     ultimasEleicoes: { municipal: 2024, geral: 2026 },
+    // mandatos interrompidos (entram no vídeo de histórico)
+    interrupcoes: [{ eleicao: 2020, nome: "Raimundo Filho", motivo: "cassado por abuso de poder econômico", curto: "cassado" }],
   },
 
   poder: [

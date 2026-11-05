@@ -8,6 +8,9 @@ const id = process.argv[2] || "ce/varjota";
 global.window = {};
 require(`../data/${id}.js`);
 const D = window.PLENARIA_DATA[id], M = D.meta;
+try { require(`../data/${id}.ficha.js`); } catch (e) {}
+const FICHA = (window.PLENARIA_FICHAS || {})[id] || {}, INTER = (FICHA.referencias || {}).interrupcoes || [];
+const interrupcao = (ano, nome) => INTER.find((x) => String(x.eleicao) === String(ano) && (!nome || x.nome === nome));
 const anos = Object.keys(D.eleicoes).filter((a) => D.eleicoes[a].cargos.prefeito && D.eleicoes[a].cargos.vereador).sort().slice(-3);
 const PARTIDO = { PMDB: "MDB", PFL: "DEM", PPS: "Cidadania", PR: "PL", PRB: "Republicanos", PSL: "União", DEM: "União" };
 const part = (p) => PARTIDO[p] || p;
@@ -35,7 +38,8 @@ const aberturas = [];
 for (let i = 1; i < todosPref.length; i++) {
   const a = todosPref[i].ano, sai = todosPref[i - 1].p, cands = D.eleicoes[a].cargos.prefeito.candidatos, entra = todosPref[i].p;
   if (cands.some((x) => x.pid === sai.pid)) continue;
-  aberturas.push({ ano: a, saiu: sai.urna, motivo: bisado(i - 1) ? "fim do segundo mandato" : "não disputou", partidoSaiu: part(sai.partido), venceu: entra.urna, partidoVenceu: part(entra.partido), mesmoPartido: part(sai.partido) === part(entra.partido) });
+  const it = interrupcao(todosPref[i - 1].ano, sai.urna);
+  aberturas.push({ ano: a, saiu: sai.urna, interrompido: it ? it.curto : null, motivo: it ? it.motivo : bisado(i - 1) ? "fim do segundo mandato" : "não disputou", partidoSaiu: part(sai.partido), venceu: entra.urna, partidoVenceu: part(entra.partido), mesmoPartido: part(sai.partido) === part(entra.partido) });
 }
 const precedentes = aberturas.filter((x) => anos.includes(x.ano)), precedente = precedentes[precedentes.length - 1] || null;
 const tend = (xs) => Math.round(xs[xs.length - 1] + (xs[xs.length - 1] - xs[xs.length - 2]));
@@ -58,7 +62,7 @@ const seqVenc = () => { const g = []; prefeito.forEach((p) => { const u = g[g.le
   const vezes = ["", "", "duas vezes", "três vezes"]; return "Em três eleições: " + g.map((x, i) => (i ? "depois " : "") + x.nome + (x.n > 1 ? ", " + vezes[x.n] : "")).join("; "); };
 const fraseAberturas = () => { if (!precedentes.length) return "";
   const qtd = ["", "uma vez", "duas vezes", "três vezes"][precedentes.length] || precedentes.length + " vezes";
-  return `Isso já aconteceu ${qtd}. ` + precedentes.map((x) => `Em ${anoExt(x.ano)}, sem ${x.saiu} na disputa, ${x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} venceu e virou o jogo`}.`).join(" ") + " "; };
+  return `Isso já aconteceu ${qtd}. ` + precedentes.map((x) => `Em ${anoExt(x.ano)}, sem ${x.saiu}${x.interrompido ? `, ${x.interrompido},` : ""} na disputa, ${x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} venceu e virou o jogo`}.`).join(" ") + " "; };
 const frasePartidos = () => { const lid = camara.map((c) => ({ ano: c.ano, p: c.partidos[0][0], n: c.partidos[0][1] })); const partes = []; let i = 0;
   while (i < lid.length) { let j = i; while (j + 1 < lid.length && lid[j + 1].p === lid[i].p && lid[j + 1].n === lid[i].n) j++;
     const anosTxt = lid.slice(i, j + 1).map((x) => anoExt(x.ano)).join(" e em "); partes.push(`${i ? "em " + anosTxt + ", o " + lid[i].p + " passou a liderar com " : "o " + lid[i].p + " fez " }${ext(lid[i].n)} cadeiras${i ? "" : " em " + anosTxt}`); i = j + 1; }
@@ -68,7 +72,7 @@ const [a0, a1, a2] = anos, C = M.municipio;
 const fala = [
   `${C}. De ${anoExt(a0)} a ${anoExt(a2)}: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de ${anoExt(2028)}.`,
   `O eleitorado foi de ${ext(eleitorado[0].aptos)} para ${ext(eleitorado[2].aptos)}. E a abstenção ${abst[2] < abst[0] ? "caiu" : "subiu"}: de ${ext(abst[0])} para ${ext(abst[2])} eleitores.`,
-  ...prefeito.map((p) => `Em ${anoExt(p.ano)}, ${p.venc.nome} ${fem(p.venc.nome) ? "venceu" : "venceu"} com ${ext(pct(p.venc.pct))} por cento. ${p.seg ? `${p.seg.nome} ficou com ${ext(pct(p.seg.pct))}. Diferença de ${ext(p.margem)} votos.` : ""}`),
+  ...prefeito.map((p) => { const it = interrupcao(p.ano, p.venc.nome); return `Em ${anoExt(p.ano)}, ${p.venc.nome} venceu com ${ext(pct(p.venc.pct))} por cento. ${p.seg ? `${p.seg.nome} ficou com ${ext(pct(p.seg.pct))}. Diferença de ${ext(p.margem)} votos.` : ""}${it ? ` Depois, foi ${it.motivo}.` : ""}`; }),
   `${seqVenc()}. ${semReeleicao ? `Em ${anoExt(2028)}, ${ult.venc.nome} não pode concorrer de novo: a cadeira de prefeito fica aberta.` : `Em ${anoExt(2028)}, ${ult.venc.nome} pode tentar a reeleição.`}`,
   `Na Câmara, ${frasePartidos()}.`,
   `A renovação é alta. Caras novas em cada eleição: ${renov.map((r) => ext(r.novos)).join(", ").replace(/, ([^,]*)$/, " e $1")}, de ${ext(renov[0].cadeiras)} cadeiras.`,
@@ -76,7 +80,8 @@ const fala = [
   `Então, como será ${anoExt(2028)}? ${semReeleicao ? "Prefeitura aberta. " : ""}${fraseAberturas()}${precedentes.length ? "E os grupos mudaram desde então. " : ""}Se a renovação seguir a média, cerca de ${ext(novosMedia)} vereadores novos.`,
   `Plenária CE. Inteligência eleitoral de ${C}. A história de cada eleição, para decidir a próxima.`,
 ];
-const out = { id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, precedentes, qe2028, novosMedia, fala };
+const interrupcoes = INTER;
+const out = { interrupcoes, id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, precedentes, qe2028, novosMedia, fala };
 const slug = id.split("/")[1];
 fs.writeFileSync(new URL(`./historico-${slug}.json`, import.meta.url), JSON.stringify(out, null, 1));
 // roteiro também vai para a narração
