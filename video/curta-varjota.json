@@ -1,0 +1,111 @@
+{
+ "video": "curta1",
+ "municipio": "Varjota",
+ "cd_ibge": "2313955",
+ "cadeiras": 11,
+ "candidatos": 33,
+ "validos": 13768,
+ "qe": 1252,
+ "eleitos": [
+  {
+   "urna": "Rosa Paulino",
+   "foto": "fotos/ce/varjota/2024/60002136565.jpg",
+   "votos": 1774,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Eudes Mesquita",
+   "foto": "fotos/ce/varjota/2024/60002042096.jpg",
+   "votos": 992,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Gonçalinho",
+   "foto": "fotos/ce/varjota/2024/60002042093.jpg",
+   "votos": 915,
+   "eleito20": true,
+   "v20": 784
+  },
+  {
+   "urna": "Regio Ximenes",
+   "foto": "fotos/ce/varjota/2024/60002042092.jpg",
+   "votos": 884,
+   "eleito20": true,
+   "v20": 726
+  },
+  {
+   "urna": "Patricia Ximenes",
+   "foto": "fotos/ce/varjota/2024/60002042397.jpg",
+   "votos": 847,
+   "eleito20": false,
+   "v20": 403
+  },
+  {
+   "urna": "Lucas da Célia",
+   "foto": "fotos/ce/varjota/2024/60002136561.jpg",
+   "votos": 834,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Roberto do Garrone",
+   "foto": "fotos/ce/varjota/2024/60002042391.jpg",
+   "votos": 783,
+   "eleito20": true,
+   "v20": 835
+  },
+  {
+   "urna": "Fransquinha do Edvard",
+   "foto": "fotos/ce/varjota/2024/60002042098.jpg",
+   "votos": 682,
+   "eleito20": false,
+   "v20": 414
+  },
+  {
+   "urna": "Djinha",
+   "foto": "fotos/ce/varjota/2024/60002042094.jpg",
+   "votos": 672,
+   "eleito20": true,
+   "v20": 539
+  },
+  {
+   "urna": "Professora Inara",
+   "foto": "fotos/ce/varjota/2024/60002042394.jpg",
+   "votos": 599,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Eudes do Croatá",
+   "foto": "fotos/ce/varjota/2024/60002136562.jpg",
+   "votos": 280,
+   "eleito20": false,
+   "v20": 291
+  }
+ ],
+ "reeleitos": 4,
+ "novos": 7,
+ "eleitos20": 11,
+ "top": {
+  "urna": "Rosa Paulino",
+  "foto": "fotos/ce/varjota/2024/60002136565.jpg",
+  "votos": 1774
+ },
+ "cresceu": {
+  "urna": "Patricia Ximenes",
+  "foto": "fotos/ce/varjota/2024/60002042397.jpg",
+  "votos": 847,
+  "v20": 403,
+  "mult": 2.101736972704715
+ },
+ "fala": [
+  "Trinta e três candidatos. Onze cadeiras. Quantos votos vale uma vaga na Câmara de Varjota?",
+  "Treze mil setecentos e sessenta e oito votos válidos, divididos por onze. Dá mil duzentos e cinquenta e dois votos por cadeira.",
+  "Esses são os onze vereadores eleitos em dois mil e vinte e quatro.",
+  "Sete deles não tinham sido eleitos em dois mil e vinte. Quatro se reelegeram.",
+  "A maior votação foi de Rosa Paulino: mil setecentos e setenta e quatro votos. E Patricia Ximenes mais que dobrou: de quatrocentos e três para oitocentos e quarenta e sete.",
+  "E você: qual vereador quer ver no próximo vídeo? Comenta aqui. Plenária CE."
+ ]
+}

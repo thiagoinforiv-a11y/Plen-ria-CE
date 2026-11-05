@@ -1,0 +1,125 @@
+{
+ "video": "curta1",
+ "municipio": "Ipu",
+ "cd_ibge": "2305803",
+ "cadeiras": 13,
+ "candidatos": 77,
+ "validos": 28207,
+ "qe": 2170,
+ "eleitos": [
+  {
+   "urna": "Nonato Filho",
+   "foto": "fotos/ce/ipu/2024/60002205467.jpeg",
+   "votos": 2154,
+   "eleito20": true,
+   "v20": 1226
+  },
+  {
+   "urna": "Monga",
+   "foto": "fotos/ce/ipu/2024/60002205464.jpeg",
+   "votos": 2064,
+   "eleito20": true,
+   "v20": 1556
+  },
+  {
+   "urna": "Zeca Rufino",
+   "foto": "fotos/ce/ipu/2024/60002309615.jpg",
+   "votos": 1446,
+   "eleito20": true,
+   "v20": 1410
+  },
+  {
+   "urna": "Moreira Filho",
+   "foto": "fotos/ce/ipu/2024/60002309612.jpeg",
+   "votos": 1232,
+   "eleito20": true,
+   "v20": 1080
+  },
+  {
+   "urna": "Cristina Peres",
+   "foto": "fotos/ce/ipu/2024/60002309618.jpg",
+   "votos": 1227,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Raimundo Amaro",
+   "foto": "fotos/ce/ipu/2024/60002309622.jpg",
+   "votos": 1098,
+   "eleito20": true,
+   "v20": 1318
+  },
+  {
+   "urna": "Joice Mororó",
+   "foto": "fotos/ce/ipu/2024/60002205463.jpeg",
+   "votos": 1021,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Victor Gomes",
+   "foto": "fotos/ce/ipu/2024/60002309624.jpeg",
+   "votos": 987,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Ivan Moreira",
+   "foto": "fotos/ce/ipu/2024/60002309621.jpg",
+   "votos": 978,
+   "eleito20": true,
+   "v20": 638
+  },
+  {
+   "urna": "Farias Filho",
+   "foto": "fotos/ce/ipu/2024/60002204989.jpeg",
+   "votos": 920,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Elisafran Mororó",
+   "foto": "fotos/ce/ipu/2024/60002204986.jpeg",
+   "votos": 692,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Hilton Belém",
+   "foto": "fotos/ce/ipu/2024/60002205458.jpeg",
+   "votos": 683,
+   "eleito20": true,
+   "v20": 715
+  },
+  {
+   "urna": "Chagas Teteu",
+   "foto": "fotos/ce/ipu/2024/60002309659.jpeg",
+   "votos": 647,
+   "eleito20": false,
+   "v20": null
+  }
+ ],
+ "reeleitos": 7,
+ "novos": 6,
+ "eleitos20": 13,
+ "top": {
+  "urna": "Nonato Filho",
+  "foto": "fotos/ce/ipu/2024/60002205467.jpeg",
+  "votos": 2154
+ },
+ "cresceu": {
+  "urna": "Ivan Moreira",
+  "foto": "fotos/ce/ipu/2024/60002309621.jpg",
+  "votos": 978,
+  "v20": 638,
+  "mult": 1.5329153605015673
+ },
+ "fala": [
+  "Setenta e sete candidatos. Treze cadeiras. Quantos votos vale uma vaga na Câmara de Ipu?",
+  "Vinte e oito mil duzentos e sete votos válidos, divididos por treze. Dá dois mil cento e setenta votos por cadeira.",
+  "Esses são os treze vereadores eleitos em dois mil e vinte e quatro.",
+  "Seis deles não tinham sido eleitos em dois mil e vinte. Sete se reelegeram.",
+  "A maior votação foi de Nonato Filho: dois mil cento e cinquenta e quatro votos. E Ivan Moreira cresceu cinquenta e três por cento: de seiscentos e trinta e oito para novecentos e setenta e oito.",
+  "E você: qual vereador quer ver no próximo vídeo? Comenta aqui. Plenária CE."
+ ]
+}

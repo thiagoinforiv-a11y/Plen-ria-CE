@@ -1,0 +1,111 @@
+{
+ "video": "curta1",
+ "municipio": "Cariré",
+ "cd_ibge": "2303105",
+ "cadeiras": 11,
+ "candidatos": 20,
+ "validos": 12772,
+ "qe": 1161,
+ "eleitos": [
+  {
+   "urna": "Robson Pessoa",
+   "foto": "fotos/ce/carire/2024/60001965879.jpg",
+   "votos": 1360,
+   "eleito20": true,
+   "v20": 1081
+  },
+  {
+   "urna": "Luciana Miranda",
+   "foto": "fotos/ce/carire/2024/60001965880.jpg",
+   "votos": 1249,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Manim Pinheiro",
+   "foto": "fotos/ce/carire/2024/60002336249.jpg",
+   "votos": 1081,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Professora Sandra Aguiar",
+   "foto": "fotos/ce/carire/2024/60001965882.jpg",
+   "votos": 974,
+   "eleito20": true,
+   "v20": 568
+  },
+  {
+   "urna": "Neto Chaves",
+   "foto": "fotos/ce/carire/2024/60001965873.jpg",
+   "votos": 917,
+   "eleito20": false,
+   "v20": 554
+  },
+  {
+   "urna": "Lucy Ximenes",
+   "foto": "fotos/ce/carire/2024/60001965878.jpg",
+   "votos": 869,
+   "eleito20": true,
+   "v20": 570
+  },
+  {
+   "urna": "Edilson Brito",
+   "foto": "fotos/ce/carire/2024/60001965874.jpg",
+   "votos": 823,
+   "eleito20": false,
+   "v20": 413
+  },
+  {
+   "urna": "Henrique Chaves",
+   "foto": "fotos/ce/carire/2024/60001965872.jpg",
+   "votos": 818,
+   "eleito20": false,
+   "v20": 561
+  },
+  {
+   "urna": "Márcio Brito",
+   "foto": "fotos/ce/carire/2024/60002336248.jpg",
+   "votos": 795,
+   "eleito20": true,
+   "v20": 605
+  },
+  {
+   "urna": "Elizangela Mesquita",
+   "foto": "fotos/ce/carire/2024/60001965883.jpg",
+   "votos": 768,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Flávio do Ozir",
+   "foto": "fotos/ce/carire/2024/60001965877.jpg",
+   "votos": 727,
+   "eleito20": true,
+   "v20": 613
+  }
+ ],
+ "reeleitos": 5,
+ "novos": 6,
+ "eleitos20": 11,
+ "top": {
+  "urna": "Robson Pessoa",
+  "foto": "fotos/ce/carire/2024/60001965879.jpg",
+  "votos": 1360
+ },
+ "cresceu": {
+  "urna": "Edilson Brito",
+  "foto": "fotos/ce/carire/2024/60001965874.jpg",
+  "votos": 823,
+  "v20": 413,
+  "mult": 1.9927360774818401
+ },
+ "fala": [
+  "Vinte candidatos. Onze cadeiras. Quantos votos vale uma vaga na Câmara de Cariré?",
+  "Doze mil setecentos e setenta e dois votos válidos, divididos por onze. Dá mil cento e sessenta e um votos por cadeira.",
+  "Esses são os onze vereadores eleitos em dois mil e vinte e quatro.",
+  "Seis deles não tinham sido eleitos em dois mil e vinte. Cinco se reelegeram.",
+  "A maior votação foi de Robson Pessoa: mil trezentos e sessenta votos. E Edilson Brito quase dobrou: de quatrocentos e treze para oitocentos e vinte e três.",
+  "E você: qual vereador quer ver no próximo vídeo? Comenta aqui. Plenária CE."
+ ]
+}

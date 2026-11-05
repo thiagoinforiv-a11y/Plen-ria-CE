@@ -1,0 +1,125 @@
+{
+ "video": "curta1",
+ "municipio": "Santa Quitéria",
+ "cd_ibge": "2312205",
+ "cadeiras": 13,
+ "candidatos": 79,
+ "validos": 27601,
+ "qe": 2123,
+ "eleitos": [
+  {
+   "urna": "Danio Braga",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030973.jpg",
+   "votos": 1887,
+   "eleito20": true,
+   "v20": 970
+  },
+  {
+   "urna": "Joel Barroso",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030969.jpg",
+   "votos": 1767,
+   "eleito20": true,
+   "v20": 869
+  },
+  {
+   "urna": "Cesário Júnior",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030530.jpg",
+   "votos": 1545,
+   "eleito20": true,
+   "v20": 1033
+  },
+  {
+   "urna": "Eliandro Mesquita",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030974.jpg",
+   "votos": 1482,
+   "eleito20": true,
+   "v20": 1000
+  },
+  {
+   "urna": "Douglas Lira",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030522.jpg",
+   "votos": 1429,
+   "eleito20": true,
+   "v20": 975
+  },
+  {
+   "urna": "Jarina Cavalcante",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030977.jpg",
+   "votos": 1177,
+   "eleito20": true,
+   "v20": 661
+  },
+  {
+   "urna": "Pé de Mola",
+   "foto": "fotos/ce/santa-quiteria/2024/60002223953.jpeg",
+   "votos": 1085,
+   "eleito20": false,
+   "v20": 664
+  },
+  {
+   "urna": "Miúdo",
+   "foto": "fotos/ce/santa-quiteria/2024/60002071379.jpg",
+   "votos": 863,
+   "eleito20": true,
+   "v20": 806
+  },
+  {
+   "urna": "Renato Catunda",
+   "foto": "fotos/ce/santa-quiteria/2024/60002223954.jpg",
+   "votos": 809,
+   "eleito20": true,
+   "v20": 738
+  },
+  {
+   "urna": "Lino Paiva",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030971.jpg",
+   "votos": 724,
+   "eleito20": false,
+   "v20": 633
+  },
+  {
+   "urna": "Dra Emanuela Barbosa",
+   "foto": "fotos/ce/santa-quiteria/2024/60002203670.jpg",
+   "votos": 666,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Aurismenia Chaves",
+   "foto": "fotos/ce/santa-quiteria/2024/60002071373.jpg",
+   "votos": 635,
+   "eleito20": true,
+   "v20": 693
+  },
+  {
+   "urna": "Possidônio",
+   "foto": "fotos/ce/santa-quiteria/2024/60002108224.jpeg",
+   "votos": 475,
+   "eleito20": false,
+   "v20": null
+  }
+ ],
+ "reeleitos": 9,
+ "novos": 4,
+ "eleitos20": 13,
+ "top": {
+  "urna": "Danio Braga",
+  "foto": "fotos/ce/santa-quiteria/2024/60002030973.jpg",
+  "votos": 1887
+ },
+ "cresceu": {
+  "urna": "Joel Barroso",
+  "foto": "fotos/ce/santa-quiteria/2024/60002030969.jpg",
+  "votos": 1767,
+  "v20": 869,
+  "mult": 2.0333716915995397
+ },
+ "fala": [
+  "Setenta e nove candidatos. Treze cadeiras. Quantos votos vale uma vaga na Câmara de Santa Quitéria?",
+  "Vinte e sete mil seiscentos e um votos válidos, divididos por treze. Dá dois mil cento e vinte e três votos por cadeira.",
+  "Esses são os treze vereadores eleitos em dois mil e vinte e quatro.",
+  "Quatro deles não tinham sido eleitos em dois mil e vinte. Nove se reelegeram.",
+  "A maior votação foi de Danio Braga: mil oitocentos e oitenta e sete votos. E Joel Barroso mais que dobrou: de oitocentos e sessenta e nove para mil setecentos e sessenta e sete.",
+  "E você: qual vereador quer ver no próximo vídeo? Comenta aqui. Plenária CE."
+ ]
+}
