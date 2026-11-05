@@ -33,13 +33,21 @@ const out = {
 };
 const multFala = (m) => (m >= 2 ? "mais que dobrou" : m >= 1.9 ? "quase dobrou" : `cresceu ${ext(Math.round((m - 1) * 100))} por cento`);
 out.fala = [
-  `${Cap(ext(V.candidatos))} candidatos. ${Cap(ext(n))} cadeiras. Quantos votos vale uma vaga na Câmara de ${CID}?`,
-  `${Cap(ext(V.validos))} votos válidos, divididos por ${ext(n)}. Dá ${ext(V.qe)} votos por cadeira.`,
-  `Esses são os ${ext(n)} vereadores eleitos em ${anoExt(2024)}.`,
-  `${Cap(ext(novos))} deles não tinham sido eleitos em ${anoExt(2020)}. ${reeleitos.length === 1 ? "Só um se reelegeu" : Cap(ext(reeleitos.length)) + " se reelegeram"}.`,
-  `A maior votação foi de ${top.urna}: ${ext(top.votos)} votos.` + (cresceu ? ` E ${cresceu.urna} ${multFala(out.cresceu.mult)}: de ${ext(cresceu.v20)} para ${ext(cresceu.votos)}.` : ""),
-  `E você: qual vereador quer ver no próximo vídeo? Comenta aqui. Plenária CE.`,
+  `${Cap(ext(V.candidatos))} candidatos, ${ext(n)} cadeiras. Quanto vale uma vaga na Câmara de ${CID}?`,
+  `${Cap(ext(V.qe))} votos por cadeira. É o quociente eleitoral.`,
+  `Esses são os ${ext(n)} eleitos de ${anoExt(2024)}.`,
+  `${Cap(ext(novos))} não tinham sido eleitos em ${anoExt(2020)}.`,
+  `Maior votação: ${top.urna}.` + (cresceu ? ` E ${cresceu.urna} ${multFala(out.cresceu.mult)} de voto.` : ""),
+  `Qual vereador você quer ver no próximo vídeo? Comenta aqui.`,
 ];
 fs.writeFileSync(new URL(`./curta-${SLUG}.json`, import.meta.url), JSON.stringify(out, null, 1));
 const nf = new URL("./narracao.json", import.meta.url), N = JSON.parse(fs.readFileSync(nf)); N.videos[`curta1-${SLUG}`] = out.fala; fs.writeFileSync(nf, JSON.stringify(N, null, 2) + "\n");
 out.fala.forEach((f, i) => console.log(i, f));
+// trilha de efeitos (tempos da animação de cena-curta.html; o mixador estica cada cena para caber a fala)
+const S = [0, 5, 11, 18, 25, 33, 39];
+fs.writeFileSync(new URL(`./trilha-curta1-${SLUG}.json`, import.meta.url), JSON.stringify({
+  video: `curta1-${SLUG}`, S, boom: [0.15, S[5] + 0.2], impactos: [2.3, S[1] + 1.4, S[3] + 1.2], riser: null, radar: null,
+  ticks: [[0.1, 1.2], [S[1] + 1.4, S[1] + 3.0], [S[2] + 1.2, S[2] + 3.0]], bips: [S[3] + 1.8, S[3] + 2.05, S[3] + 2.3], urna: [S[5] + 1.2],
+  pops: [S[4] + 0.4, S[4] + 3.5], swells: [[S[4] + 0.6, 196], [S[5] + 0.4, 220]],
+  intensidade: [[0, 0.6], [S[1], 0.55], [S[2], 0.7], [S[3], 0.75], [S[4], 0.8], [S[5], 0.6]],
+}, null, 1));
