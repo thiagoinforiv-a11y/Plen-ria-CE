@@ -33,6 +33,8 @@ const ult = prefeito[prefeito.length - 1], pen = prefeito[prefeito.length - 2];
 const todosPref = Object.keys(D.eleicoes).filter((a) => D.eleicoes[a].cargos.prefeito).sort().map((a) => ({ ano: a, p: D.eleicoes[a].cargos.prefeito.candidatos[0] }));
 const bisado = (i) => i > 0 && todosPref[i].p.pid === todosPref[i - 1].p.pid;
 const semReeleicao = bisado(todosPref.length - 1);
+// mandato atual interrompido (cassação seguida de eleição suplementar): quem governa hoje é outro
+const atualInt = INTER.find((x) => String(x.eleicao) === String(todosPref[todosPref.length - 1].ano) && x.atual) || null;
 // prefeitura aberta: o prefeito no cargo não estava na disputa (fim do segundo mandato ou não concorreu)
 const aberturas = [];
 for (let i = 1; i < todosPref.length; i++) {
@@ -85,16 +87,16 @@ const cartoes2028 = (FICHA.fatos || []).filter((f) => f.cartao2028).map((f) => f
 const fala = [
   `${C}. De ${anoExt(a0)} a ${anoExt(a2)}: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de ${anoExt(2028)}.`,
   `O eleitorado foi de ${ext(eleitorado[0].aptos)} para ${ext(eleitorado[2].aptos)}. E a abstenção ${abst[2] < abst[0] ? "caiu" : "subiu"}: de ${ext(abst[0])} para ${ext(abst[2])} eleitores.`,
-  ...prefeito.map((p) => { const it = interrupcao(p.ano, p.venc.nome); return `Em ${anoExt(p.ano)}, ${p.venc.nome} venceu com ${ext(pct(p.venc.pct))} por cento. ${p.seg ? `${p.seg.nome} ficou com ${ext(pct(p.seg.pct))}. Diferença de ${ext(p.margem)} votos.` : ""}${it ? ` Depois, foi ${it.motivo}.` : ""}`; }),
-  `${seqVenc()}. ${semReeleicao ? `Em ${anoExt(2028)}, ${ult.venc.nome} não pode concorrer de novo: a cadeira de prefeito fica aberta.` : `Em ${anoExt(2028)}, ${ult.venc.nome} pode tentar a reeleição.`}`,
+  ...prefeito.map((p) => { const it = interrupcao(p.ano, p.venc.nome); return `Em ${anoExt(p.ano)}, ${p.venc.nome} venceu com ${ext(pct(p.venc.pct))} por cento. ${p.seg ? `${p.seg.nome} ficou com ${ext(pct(p.seg.pct))}. Diferença de ${ext(p.margem)} votos.` : ""}${it ? ` Depois, foi ${it.motivo}.${it.depois ? " " + it.depois : ""}` : ""}`; }),
+  `${seqVenc()}. ${atualInt ? `Hoje, a prefeitura está com ${atualInt.atual}, eleito na eleição suplementar.` : semReeleicao ? `Em ${anoExt(2028)}, ${ult.venc.nome} não pode concorrer de novo: a cadeira de prefeito fica aberta.` : `Em ${anoExt(2028)}, ${ult.venc.nome} pode tentar a reeleição.`}`,
   `Na Câmara, ${frasePartidos()}.`,
   `A renovação é alta. Caras novas em cada eleição: ${renov.map((r) => ext(r.novos)).join(", ").replace(/, ([^,]*)$/, " e $1")}, de ${extF(renov[0].cadeiras)} cadeiras.`,
   `Para se eleger, o preço subiu. O quociente foi de ${ext(camara[0].qe)} para ${ext(camara[2].qe)} votos por cadeira. Na tendência, ${anoExt(2028)} pede perto de ${ext(Math.round(qe2028 / 50) * 50)}.`,
-  `Então, como será ${anoExt(2028)}? ${semReeleicao ? "Prefeitura aberta. " : ""}${fraseAberturas()}${cartoes2028.length ? "E os grupos mudaram desde então. " : ""}Se a renovação seguir a média, cerca de ${ext(novosMedia)} vereadores novos.`,
+  `Então, como será ${anoExt(2028)}? ${atualInt ? "A prefeitura mudou de mãos no meio do mandato. " : semReeleicao ? "Prefeitura aberta. " : ""}${fraseAberturas()}${cartoes2028.length && !atualInt ? "E os grupos mudaram desde então. " : ""}Se a renovação seguir a média, cerca de ${ext(novosMedia)} vereadores novos.`,
   `Plenária CE. Inteligência eleitoral de ${C}. A história de cada eleição, para decidir a próxima.`,
 ];
 const interrupcoes = INTER;
-const out = { cartoes2028, interrupcoes, id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, precedentes, qe2028, novosMedia, fala };
+const out = { atual: atualInt && { nome: atualInt.atual, quando: atualInt.quando }, cartoes2028, interrupcoes, id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, precedentes, qe2028, novosMedia, fala };
 const slug = id.split("/")[1];
 // nomes de urna vêm sem acento do TSE em alguns anos
 const ACENTOS = [[/\bJoao\b/g, "João"], [/\bSebastiao\b/g, "Sebastião"], [/\bConceicao\b/g, "Conceição"], [/\bSergio\b/g, "Sérgio"], [/\bTomas\b/g, "Tomás"], [/\bRoberio\b/g, "Robério"], [/\bDra\.? /g, "Dra. "], [/\bDr\.? /g, "Dr. "], [/\bJose\b/g, "José"], [/\bMaria Jose\b/g, "Maria José"]];

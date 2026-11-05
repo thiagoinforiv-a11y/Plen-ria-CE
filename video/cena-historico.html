@@ -200,7 +200,7 @@
       if (it) texto(it.curto, LX[i], LY + 250, { tam: 24, w: 800, a, cor: "#ff4d6d" });
       else if ((D.precedentes || []).some((x) => x.ano === p.ano)) texto("prefeitura\naberta", LX[i], LY + 250, { tam: 22, w: 700, a, cor: "#bdbab0", lh: 26 }); });
     { const a = vis(t, 36.6, 42.1), pul = 1 + 0.06 * Math.sin(t * 4); texto("2028", LX[3], LY - 130, { tam: 34, w: 900, a, cor: AC }); texto("?", LX[3], LY + 40 * pul, { tam: 130 * pul, w: 900, a, cor: AC, brilho: 26 }); }
-    texto(D.semReeleicao ? `${D.prefeito[2].venc.nome} não pode\nconcorrer em 2028` : `${D.prefeito[2].venc.nome} pode\ntentar a reeleição`, W / 2, 1420, { tam: 50, w: 800, a: vis(t, 38, 42.1), sobe: 1 });
+    texto(D.atual ? `Hoje: ${D.atual.nome}\neleito na suplementar` : D.semReeleicao ? `${D.prefeito[2].venc.nome} não pode\nconcorrer em 2028` : `${D.prefeito[2].venc.nome} pode\ntentar a reeleição`, W / 2, 1420, { tam: 50, w: 800, a: vis(t, 38, 42.1), sobe: 1 });
     // 7 · câmara por partido
     texto("CÂMARA · CADEIRAS POR PARTIDO", W / 2, 300, { tam: 34, w: 800, ls: 4, a: vis(t, 42.4, 50.1), cor: "#bdbab0" });
     CM.forEach((c, i) => { const a = vis(t, 43 + i * 0.4, 50.1); texto(c.ano, CBX, CBY[i] - 60, { tam: 36, w: 900, al: "left", a }); let x0 = CBX;
@@ -218,7 +218,7 @@
     // 10 · 2028
     texto("COMO SERÁ", W / 2, 380, { tam: 40, w: 800, ls: 10, a: vis(t, 64.4, 75.1), cor: "#bdbab0" });
     texto("2028?", W / 2, 620, { tam: 150, w: 900, a: vis(t, 64.6, 75.1), brilho: 30, cor: AC, sobe: 1 });
-    const itens = [D.semReeleicao ? ["Prefeitura aberta", `${D.prefeito[2].venc.nome} cumpre o segundo mandato`] : ["Reeleição em jogo", `${D.prefeito[2].venc.nome} pode concorrer`],
+    const itens = [D.atual ? ["Prefeitura mudou de mãos", `${D.atual.nome} venceu a suplementar${D.atual.quando ? " (" + D.atual.quando + ")" : ""}`] : D.semReeleicao ? ["Prefeitura aberta", `${D.prefeito[2].venc.nome} cumpre o segundo mandato`] : ["Reeleição em jogo", `${D.prefeito[2].venc.nome} pode concorrer`],
       ...(D.precedentes || []).map((x) => [`${x.ano}: sem ${x.saiu.split(" ")[0]}${x.interrompido ? ` (${x.interrompido})` : ""} na disputa`, x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} venceu, pelo ${x.partidoVenceu}`]),
       ...(D.cartoes2028 || []), ...LOCAL.cartoes,
       [`≈ ${fmt(Math.round(D.qe2028 / 50) * 50)} votos por cadeira`, "quociente na tendência"], [`≈ ${D.novosMedia} vereadores novos`, "se a renovação seguir a média"]].filter(Boolean);
