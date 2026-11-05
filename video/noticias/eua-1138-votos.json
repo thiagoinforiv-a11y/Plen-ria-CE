@@ -1,0 +1,19 @@
+{
+ "id": "eua-1138-votos",
+ "tempo": 1.35,
+ "fontes": "Fontes: AP/ABC News, 05/11/2026; TSE, eleições 2024",
+ "cenas": [
+  {"midia": "fotos/pixabay/capitolio-1273914.jpg", "credito": "Foto: Pixabay", "tarja": "1.138 votos: a diferença na disputa pelo Senado no Mississippi (EUA)",
+   "fala": "Mil cento e trinta e oito votos. É a diferença, até agora, na disputa pelo Senado no estado americano do Mississippi."},
+  {"grande": "QUASE 1 MILHÃO", "sub": "DE VOTOS E SEM RESULTADO", "tarja": "Disputa ainda sem resultado final (05/11)",
+   "fala": "Quase um milhão de pessoas votaram, e a eleição ainda não tem resultado final."},
+  {"grande": "3 VOTOS", "sub": "PIRES FERREIRA, 2024", "tarja": "Em Pires Ferreira, 3 votos separaram uma vaga na Câmara",
+   "fala": "Aqui na região, a diferença foi ainda menor. Em Pires Ferreira, três votos separaram uma vaga na Câmara."},
+  {"midia": "fotos/ce/pires-ferreira/2024/60002188680.jpg", "credito": "Foto: TSE", "tarja": "Nilton Anastácio: eleito com 401 votos",
+   "fala": "Nilton Anastácio se elegeu com quatrocentos e um votos."},
+  {"midia": "fotos/ce/pires-ferreira/2024/60002188677.jpg", "credito": "Foto: TSE", "tarja": "Eduardo do Donato: 398 votos, suplente",
+   "fala": "Eduardo do Donato, do mesmo partido, ficou como suplente com trezentos e noventa e oito."},
+  {"grande": "?", "sub": "CADA VOTO CONTA", "tarja": "Você conhece uma eleição decidida por tão pouco? Comenta aqui",
+   "fala": "Lá ou aqui, cada voto conta. Você conhece uma eleição decidida por tão pouco? Comenta aqui."}
+ ]
+}
