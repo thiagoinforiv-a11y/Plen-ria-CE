@@ -1,0 +1,21 @@
+name: Raio-X de candidato (TSE)
+# Lê data/fontes/candidato-tse.txt (linha 1: nome completo; linha 2: UF; linha 3: anos) e salva no branch dados-candidato.
+on:
+  workflow_dispatch:
+  push:
+    paths: ["data/fontes/candidato-tse.txt"]
+permissions:
+  contents: write
+jobs:
+  raiox:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          N="$(sed -n 1p data/fontes/candidato-tse.txt)"; U="$(sed -n 2p data/fontes/candidato-tse.txt)"; A="$(sed -n 3p data/fontes/candidato-tse.txt)"
+          python3 scripts/candidato_tse.py "$N" "$U" $A
+          git config user.name plenaria-bot; git config user.email plenaria-bot@users.noreply.github.com
+          git fetch origin dados-candidato || true
+          cp -r data/candidatos /tmp/c; git checkout -B dados-candidato; mkdir -p data/candidatos; cp /tmp/c/* data/candidatos/
+          git add data/candidatos; git commit -m "Raio-X TSE: $N" || true; git push -f origin dados-candidato
