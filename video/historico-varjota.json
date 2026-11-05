@@ -1,4 +1,5 @@
 {
+ "interrupcoes": [],
  "id": "ce/varjota",
  "municipio": "Varjota",
  "cd_ibge": "2313955",
@@ -236,6 +237,7 @@
  "precedente": {
   "ano": "2020",
   "saiu": "Célia",
+  "interrompido": null,
   "motivo": "não disputou",
   "partidoSaiu": "MDB",
   "venceu": "Elmo Monte",
@@ -246,6 +248,7 @@
   {
    "ano": "2016",
    "saiu": "Rosa Paulino",
+   "interrompido": null,
    "motivo": "fim do segundo mandato",
    "partidoSaiu": "MDB",
    "venceu": "Célia",
@@ -255,6 +258,7 @@
   {
    "ano": "2020",
    "saiu": "Célia",
+   "interrompido": null,
    "motivo": "não disputou",
    "partidoSaiu": "MDB",
    "venceu": "Elmo Monte",
