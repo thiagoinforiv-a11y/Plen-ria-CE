@@ -1,0 +1,29 @@
+name: Narração do vídeo
+# Gera a narração (vozes neurais em português) nos servidores do GitHub e guarda no branch "narracao".
+on:
+  push:
+    paths:
+      - "video/narracao.json"
+permissions:
+  contents: write
+jobs:
+  narrar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Gerar áudio
+        run: |
+          pip install edge-tts==7.3.1
+          python3 video/narrar.py
+      - name: Guardar no branch narracao
+        run: |
+          git config user.name "plenaria-bot"
+          git config user.email "plenaria-bot@users.noreply.github.com"
+          git checkout -B narracao
+          git add -f video/audio
+          git commit -m "Narração gerada ($GITHUB_SHA)"
+          git push -f origin narracao
