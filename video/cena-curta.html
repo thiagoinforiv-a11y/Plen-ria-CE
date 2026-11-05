@@ -28,7 +28,7 @@
   const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   const n = D.cadeiras, E = D.eleitos;
   // tempos das cenas (a narração estica cada uma; ver trilha-curta1-<cidade>.json)
-  const S = [0, 5, 11, 18, 25, 33, 39];
+  const S = D.S;
   window.DURACAO = S[S.length - 1];
 
   // ---------------- imagens e fontes
@@ -73,7 +73,7 @@
     const kx = Math.cos(((c + d) / 2) * Math.PI / 180), s = Math.min(760 / ((b - a) * kx), 720 / (d - c)) * (D.presidente ? 0.62 : 1), cx = (a + b) / 2, cy = (c + d) / 2, out = [];
     while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, poly)) out.push([W / 2 + (lon - cx) * s * kx, (D.presidente ? 1090 : 1080) - (lat - cy) * s, rnd() < 0.3 ? AC : "#fff"]); } return out; })();
 
-  const KF = [[0, "poeira", 0], [0.2, "cand", 1.6], [2.4, "candEl", 0.8], [S[1] + 0.1, "anel", 1.6], [S[2] + 0.1, "grade", 1.6], [S[3] + 0.1, "renov", 1.6], [S[4] + 0.1, "dest", 1.6], [S[5] + 0.1, "cidade", 1.8]];
+  const KF = [[0, "poeira", 0], [0.2, "cand", 1.6], [2.4, "candEl", 0.8], [S[1] - 0.35, "anel", 1.5], [S[2] - 0.35, "grade", 1.5], [S[3] - 0.35, "renov", 1.5], [S[4] - 0.35, "dest", 1.5], [S[5] - 0.35, "cidade", 1.7]];
   const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
 
   // ---------------- desenho

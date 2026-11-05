@@ -32,7 +32,7 @@ const REL = ((window.PLENARIA_RELATORIOS || {})[ID] || {}).pessoas || Object.val
 const pres = REL.find((r) => /^Presidente da Câmara/i.test(r.papel || "") && (r.destaques || []).some((d) => d.selo === "confirmado" && /Presidente da Câmara/i.test(d.titulo)));
 const presE = pres && V.eleitos.find((e) => pres.nomes.includes(e.urna));
 const out = {
-  video: "curta1", municipio: CID, cd_ibge: V.cd_ibge || H.cd_ibge, cadeiras: n, candidatos: V.candidatos, validos: V.validos, qe: V.qe,
+  video: "curta1", S: [0, 4.5, 10, 15.5, 21, 28, 34], municipio: CID, cd_ibge: V.cd_ibge || H.cd_ibge, cadeiras: n, candidatos: V.candidatos, validos: V.validos, qe: V.qe,
   eleitos: [...V.eleitos].sort((a, b) => b.votos - a.votos).map((e) => ({ urna: e.urna, foto: e.foto, votos: e.votos, eleito20: !!e.eleito20, v20: e.v20 })),
   reeleitos: reeleitos.length, novos, eleitos20: r20 ? r20.cadeiras : n,
   presidente: presE ? { urna: presE.urna, foto: presE.foto } : null,
@@ -52,9 +52,9 @@ fs.writeFileSync(new URL(`./curta-${SLUG}.json`, import.meta.url), JSON.stringif
 const nf = new URL("./narracao.json", import.meta.url), N = JSON.parse(fs.readFileSync(nf)); N.videos[`curta1-${SLUG}`] = out.fala; fs.writeFileSync(nf, JSON.stringify(N, null, 2) + "\n");
 out.fala.forEach((f, i) => console.log(i, f));
 // trilha de efeitos (tempos da animação de cena-curta.html; o mixador estica cada cena para caber a fala)
-const S = [0, 5, 11, 18, 25, 33, 39];
+const S = out.S;
 fs.writeFileSync(new URL(`./trilha-curta1-${SLUG}.json`, import.meta.url), JSON.stringify({
-  video: `curta1-${SLUG}`, S, boom: [0.15, S[5] + 0.2], impactos: [2.3, S[1] + 1.4, S[3] + 1.2], riser: null, radar: null,
+  video: `curta1-${SLUG}`, S, tempo: 1.12, boom: [0.15, S[5] + 0.2], impactos: [2.3, S[1] + 1.4, S[3] + 1.2], riser: null, radar: null,
   ticks: [[0.1, 1.2], [S[1] + 1.4, S[1] + 3.0], [S[2] + 1.2, S[2] + 3.0]], bips: [S[3] + 1.8, S[3] + 2.05, S[3] + 2.3], urna: [S[5] + 1.2],
   pops: [S[4] + 0.4, S[4] + 3.5], swells: [[S[4] + 0.6, 196], [S[5] + 0.4, 220]],
   intensidade: [[0, 0.6], [S[1], 0.55], [S[2], 0.7], [S[3], 0.75], [S[4], 0.8], [S[5], 0.6]],

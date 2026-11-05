@@ -11,8 +11,8 @@ SR = 48000
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 rng = np.random.default_rng(3)
 
-def ler(arq):
-    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", arq, "-af", "highpass=f=70,lowshelf=g=2:f=140,acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120,aecho=0.8:0.6:38:0.06",
+def ler(arq, tempo=1.0):
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", arq, "-af", "highpass=f=70,lowshelf=g=2:f=140,acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120,aecho=0.8:0.6:38:0.06" + (f",atempo={tempo}" if tempo != 1 else ""),
                           "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.float32).copy()
 
@@ -128,7 +128,7 @@ def main():
     a = ap.parse_args()
     C = json.load(open(a.trilha, encoding="utf-8")); S = C["S"]
     pasta = os.path.join(RAIZ, "audio", C["video"], a.voz)
-    falas = [ler(os.path.join(pasta, f"{i:02d}.mp3")) for i in range(len(S) - 1)]
+    falas = [ler(os.path.join(pasta, f"{i:02d}.mp3"), C.get("tempo", 1.0)) for i in range(len(S) - 1)]
     lead = [0.9] + [0.45] * (len(S) - 2)
     V = [0.0]
     for k in range(len(S) - 1):
