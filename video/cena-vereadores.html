@@ -10,6 +10,7 @@
 </head>
 <body>
 <canvas id="c" width="1080" height="1920"></canvas>
+<script src="efeitos.js"></script>
 <script>
 /* Vídeo "Raio-X da Câmara de Varjota" — cena desenhada quadro a quadro: render(t) desenha o instante t (segundos).
  * Todos os números vêm de dados-vereadores.json (gerado de dados oficiais do TSE por video/dados-vereadores.mjs). */
@@ -157,6 +158,9 @@
       if (brilhoY != null) al *= 1 + 2.5 * Math.exp(-((y - brilhoY) ** 2) / 900);
       ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c;
       ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill();
+      if (dur && k > 0 && k < 1) { // rastro: liga a posição de um instante antes à atual
+        const k2 = ease(clamp(((t - 0.06 - t0) / dur - p.d) / (1 - 0.35))), xb = lerp(a0[0], a1[0], k2), yb = lerp(a0[1], a1[1], k2);
+        if (Math.hypot(x - xb, y - yb) > 3) { ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = p.s * 0.9; ctx.globalAlpha = clamp(al * 0.3); ctx.beginPath(); ctx.moveTo(xb, yb); ctx.lineTo(x, y); ctx.stroke(); } }
     }
     ctx.restore();
   };
