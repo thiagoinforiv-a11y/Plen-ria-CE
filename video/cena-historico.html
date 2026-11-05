@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Histórico municipal</title>
+<style>
+  html, body { margin: 0; background: #070707; }
+  canvas { display: block; width: 540px; height: 960px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Vídeo "Histórico municipal" (padrão para qualquer cidade: cena-historico.html?d=historico-<cidade>.json) — cena desenhada quadro a quadro: render(t) desenha o instante t (segundos).
+ * Todos os números vêm de historico-<cidade>.json (gerado de dados oficiais do TSE por video/historico.mjs). */
+(async () => {
+  const W = 1080, H = 1920, cv = document.getElementById("c"), ctx = cv.getContext("2d");
+  const D = await (await fetch(new URLSearchParams(location.search).get("d") || "historico-varjota.json")).json(), G = await (await fetch("geo-ce.json")).json();
+  const AC = "#d4ff3a", FONT = "Inter, 'Inter Display', sans-serif";
+  const fmt = (n) => Math.round(n).toLocaleString("pt-BR");
+  const pc = (x, d = 1) => (x * 100).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const eout = (x) => 1 - Math.pow(1 - x, 3);
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  // aparece em a, some em b (com fade de f segundos)
+  const vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+  let seed = 7; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+  // ---------------- cidade e câmera (genérico: qualquer município do CE pelo código IBGE)
+  const cityPoly = G.poly[D.cd_ibge], vjPoly = cityPoly;
+  const lons = cityPoly.map((p) => p[0]), lats = cityPoly.map((p) => p[1]);
+  const kx = Math.cos((5 * Math.PI) / 180);
+  const CE = { lon: -39.35, lat: -5.25, s: 205 };
+  const VJ = { lon: (Math.min(...lons) + Math.max(...lons)) / 2, lat: (Math.min(...lats) + Math.max(...lats)) / 2 };
+  VJ.s = Math.min((W * 0.78) / ((Math.max(...lons) - Math.min(...lons)) * kx), (H * 0.42) / (Math.max(...lats) - Math.min(...lats)));
+  const proj = (lon, lat, v, cy = H * 0.5) => [W / 2 + (lon - v.lon) * v.s * kx, cy - (lat - v.lat) * v.s];
+  const camera = (t) => { const k = ease(prog(t, 2.4, 5.0)); return { lon: lerp(CE.lon, VJ.lon, k), lat: lerp(CE.lat, VJ.lat, k), s: Math.exp(lerp(Math.log(CE.s), Math.log(VJ.s), k)) }; };
+  const dentro = (x, y, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
+  const MAPY = H * 0.52;
+
+  // ---------------- imagens (sem foto: iniciais)
+  const img = {};
+  const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = () => ok(); i.src = "../" + src; });
+  const pessoas = {}; D.prefeito.forEach((p) => { pessoas[p.venc.nome] = p.venc.foto; if (p.seg) pessoas[p.seg.nome] = p.seg.foto; });
+  await Promise.all(Object.entries(pessoas).map(([k, f]) => carregar(k, f)));
+  await document.fonts.load("900 60px Inter"); await document.fonts.load("500 30px Inter");
+  const CORP = { MDB: "#ff7a45", PSB: AC, PT: "#ff4d6d", PDT: "#4da3ff", PSDB: "#7cc4ff", PL: "#3b6dff", DC: "#d4a72c", PTB: "#e7e5df", "União": "#2dd4bf", PP: "#8bd3ff", Republicanos: "#5aa0ff", PSD: "#f5c542", Cidadania: "#f472b6", Podemos: "#34d399", Avante: "#fb923c", Solidariedade: "#facc15", PSOL: "#ffd166", PCdoB: "#ef4444", PV: "#4ade80" };
+  const corP = (p) => CORP[p] || "#a8a59c";
+  const iniciais = (n) => n.split(" ").filter((w) => w.length > 2).slice(0, 2).map((w) => w[0]).join("").toUpperCase() || n.slice(0, 2).toUpperCase();
+
+  // ---------------- formas
+  const N = 2400;
+  const P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
+  const forma = {};
+  const poeira = () => [rnd() * W, rnd() * H, "dust"];
+  const completa = (out) => { while (out.length < N) out.push(poeira()); return out.slice(0, N); };
+  forma.poeira = Array.from({ length: N }, () => [rnd() * W, rnd() * H]);
+  const amostra = (v, cy) => { const out = []; const [a, b, c, d] = [Math.min(...lons), Math.max(...lons), Math.min(...lats), Math.max(...lats)];
+    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, cityPoly)) out.push(proj(lon, lat, v, cy)); } return out; };
+  forma.pequena = amostra(CE, MAPY); forma.cheia = amostra(VJ, MAPY);
+  // eleitorado: colunas de pontos (1 ponto = POR eleitores); compareceu = cor, faltou = branco apagado
+  const EL = D.eleitorado, POR = 25, PER = 16, GAP = 13, ELX = [W * 0.22, W * 0.5, W * 0.78], ELB = 1440;
+  forma.eleitorado = completa((() => { const out = []; EL.forEach((e, i) => { const n = Math.round(e.aptos / POR), nc = Math.round(e.comparecimento / POR); for (let k = 0; k < n; k++) out.push([ELX[i] - ((PER - 1) * GAP) / 2 + (k % PER) * GAP, ELB - Math.floor(k / PER) * GAP, k < nc ? AC : "#5d5c57"]); }); return out; })());
+  // duelos de prefeito
+  const FOTO_Y = 760, FX = [W * 0.29, W * 0.71];
+  const duo = (p) => Array.from({ length: N }, (_, i) => { const tot = p.venc.pct + (p.seg ? p.seg.pct : 0), esq = i < N * (p.venc.pct / tot), cx = esq ? FX[0] : FX[1], a = rnd() * 6.283, r = 170 + Math.abs(gauss()) * 34; return [cx + Math.cos(a) * r, FOTO_Y + Math.sin(a) * r, corP(esq ? p.venc.partido : p.seg.partido)]; });
+  D.prefeito.forEach((p, i) => (forma["pref" + i] = duo(p)));
+  // linha dos prefeitos (3 eleições + 2028)
+  const LX = [W * 0.17, W * 0.39, W * 0.61, W * 0.83], LY = 860;
+  forma.linha = Array.from({ length: N }, (_, i) => { const j = i % 4, a = rnd() * 6.283, r = (j === 3 ? 96 : 88) + Math.abs(gauss()) * (j === 3 ? 30 : 12); return [LX[j] + Math.cos(a) * r, LY + Math.sin(a) * r, j === 3 ? (rnd() < 0.5 ? AC : "dust") : corP(D.prefeito[j].venc.partido)]; });
+  // câmara: barras empilhadas por partido
+  const CM = D.camara, CBX = 140, CBW = 800, CBY = [700, 1000, 1300];
+  forma.camara = completa((() => { const out = []; const por = Math.floor(N * 0.95 / (CM.length * CM[0].cadeiras)); CM.forEach((c, i) => { let x0 = CBX; c.partidos.forEach(([p, n]) => { const w = (CBW * n) / c.cadeiras; for (let k = 0; k < por * n; k++) out.push([x0 + 4 + rnd() * (w - 8), CBY[i] + gauss() * 14, corP(p)]); x0 += w; }); }); return out; })());
+  // renovação: 11 pontos por eleição (novo = cor, reeleito = branco)
+  const RV = D.renov, RVY = [680, 980, 1280];
+  forma.renov = completa((() => { const out = []; const por = Math.floor(N * 0.9 / (RV.length * RV[0].cadeiras)); RV.forEach((r, i) => { for (let s = 0; s < r.cadeiras; s++) { const x = W / 2 + (s - (r.cadeiras - 1) / 2) * 80; const novo = s >= r.reeleitos; for (let k = 0; k < por; k++) { const a = rnd() * 6.283, rr = Math.sqrt(rnd()) * 26; out.push([x + Math.cos(a) * rr, RVY[i] + Math.sin(a) * rr, novo ? AC : "#ffffff"]); } } }); return out; })());
+  // quociente: 3 barras + 2028 projetado
+  const QV = [...CM.map((c) => c.qe), D.qe2028], QX = [W * 0.2, W * 0.4, W * 0.6, W * 0.8], QB = 1400, QH = 700, qmax = Math.max(...QV) * 1.05;
+  forma.quociente = completa((() => { const out = []; const por = Math.floor((N * 0.95) / 4); QV.forEach((q, i) => { const h = (QH * q) / qmax; for (let k = 0; k < por; k++) { const proj28 = i === 3; if (proj28 && rnd() < 0.55) continue; out.push([QX[i] - 55 + rnd() * 110, QB - rnd() * h, proj28 ? "#bdbab0" : AC]); } }); return out; })());
+  // 2028: anel
+  forma.f2028 = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 300 + gauss() * 18; return [W / 2 + Math.cos(a) * r, 560 + Math.sin(a) * r * 0.32, rnd() < 0.3 ? AC : "#fff"]; });
+  const CEF = { lon: -39.35, lat: -5.25, s: 190 };
+  forma.ceara = (() => { const verts = G.mun.flat(); const out = []; for (let i = 0; i < N; i++) { const [lon, lat] = verts[Math.floor(rnd() * verts.length)]; const [x, y] = proj(lon, lat, CEF, H * 0.5); out.push([x + gauss() * 2, y + gauss() * 2]); } return out; })();
+
+    const KF = [[0, "poeira", 0], [1.0, "pequena", 1.6], [2.8, "cheia", 2.2], [6.2, "eleitorado", 2.0], [13.2, "pref0", 1.8], [20.2, "pref1", 1.6], [27.2, "pref2", 1.6], [34.2, "linha", 2.0], [42.2, "camara", 2.0], [50.2, "renov", 1.8], [57.2, "quociente", 2.0], [64.2, "f2028", 2.0], [75.2, "ceara", 2.4]];
+
+  const posicao = (t) => {
+    let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++;
+    const [t0, nome, dur] = KF[k], ant = k ? forma[KF[k - 1][1]] : forma[nome], cur = forma[nome];
+    return { ant, cur, t0, dur };
+  };
+
+  // ---------------- desenho
+  const fundo = (t) => {
+    const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8);
+    g.addColorStop(0, "#1b1c1a"); g.addColorStop(1, "#060606"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // bokeh suave
+    for (let i = 0; i < 9; i++) { const x = (i * 263 + t * 9 * (i % 3 + 1)) % (W + 200) - 100, y = (i * 517) % H + Math.sin(t * 0.3 + i) * 30, r = 50 + (i % 4) * 30;
+      const b = ctx.createRadialGradient(x, y, 0, x, y, r); b.addColorStop(0, "rgba(255,255,255,.035)"); b.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = b; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill(); }
+  };
+  const texto = (s, x, y, o = {}) => {
+    const a = o.a == null ? 1 : o.a; if (a <= 0.01) return;
+    ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center"; ctx.textBaseline = "alphabetic";
+    ctx.font = `${o.w || 700} ${o.tam || 56}px ${FONT}`; ctx.letterSpacing = (o.ls || 0) + "px";
+    if (o.brilho) { ctx.shadowColor = o.cor || "rgba(255,255,255,.6)"; ctx.shadowBlur = o.brilho; }
+    const dy = o.sobe ? (1 - a) * 24 : 0;
+    String(s).split("\n").forEach((l, i) => ctx.fillText(l, x, y + dy + i * (o.lh || (o.tam || 56) * 1.18)));
+    ctx.restore();
+  };
+  const foto = (k, x, y, r, a, o = {}) => {
+    if (a <= 0.01 || !img[k]) return;
+    const s = 0.85 + 0.15 * eout(a);
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+    ctx.shadowColor = o.cor || "rgba(255,255,255,.35)"; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip();
+    const i = img[k], sc = Math.max((2 * r) / i.width, (2 * r) / i.height); ctx.drawImage(i, -i.width * sc / 2, -i.height * sc * 0.42, i.width * sc, i.height * sc); ctx.restore();
+    ctx.lineWidth = 5; ctx.strokeStyle = o.cor || "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke();
+    ctx.restore();
+  };
+  const marca = () => { ctx.save(); ctx.font = `700 19px ${FONT}`; ctx.letterSpacing = "4px"; const s = "PLENÁRIA CE", w = ctx.measureText(s).width + 36; const x = W - w - 60, y = H - 120;
+    ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(x, y, w, 40, 20); ctx.stroke(); ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.textAlign = "left"; ctx.fillText(s, x + 18, y + 27); ctx.restore(); };
+  const contornos = (t, v, cy, a, realce) => {
+    if (a <= 0.01) return;
+    ctx.save(); ctx.lineWidth = 1.4; ctx.strokeStyle = `rgba(255,255,255,${0.16 * a})`;
+    const k = prog(t, 0.2, 2.4);
+    G.mun.forEach((r, ri) => { if (ri / G.mun.length > k * 1.02) return; ctx.beginPath(); r.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.stroke(); });
+    if (realce > 0) { ctx.beginPath(); vjPoly.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath();
+      ctx.shadowColor = AC; ctx.shadowBlur = 24 * realce; ctx.strokeStyle = `rgba(212,255,58,${0.9 * realce})`; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = `rgba(212,255,58,${0.08 * realce})`; ctx.fill(); }
+    ctx.restore();
+  };
+  const particulas = (t, brilhoY) => {
+    const { ant, cur, t0, dur } = posicao(t);
+    ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < N; i++) {
+      const p = P[i], k = dur ? ease(clamp(((t - t0) / dur - p.d) / (1 - 0.35))) : 1;
+      const a0 = ant[i], a1 = cur[i];
+      let x = lerp(a0[0], a1[0], k) + Math.sin(t * 0.9 + p.ph) * 1.6, y = lerp(a0[1], a1[1], k) + Math.cos(t * 0.8 + p.ph) * 1.6;
+      // na transição, as partículas fazem uma curva em vez de linha reta
+      const curva = Math.sin(k * Math.PI) * 60 * (p.d - 0.17); x += curva; y -= curva * 0.6;
+      const c = (k > 0.5 ? a1[2] : a0[2]) || "#fff";
+      let al = p.a * (0.55 + 0.45 * Math.sin(t * 2 + p.ph * 3) ** 2);
+      if (c === "dust") al *= 0.14;
+      if (brilhoY != null) al *= 1 + 2.5 * Math.exp(-((y - brilhoY) ** 2) / 900);
+      ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c;
+      ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill();
+    }
+    ctx.restore();
+  };
+  const fotoOu = (nome, x, y, r, a, cor) => { if (a <= 0.01) return; if (img[nome]) return foto(nome, x, y, r, a, { cor });
+    ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fillStyle = "#1a1a18"; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = cor || "#fff"; ctx.stroke();
+    ctx.fillStyle = "#f3f1ea"; ctx.font = `900 ${Math.round(r * 0.7)}px ${FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(iniciais(nome), x, y + 2); ctx.restore(); };
+  const curto = (n) => (n.length > 14 ? n.split(" ")[0] : n);
+  window.DURACAO = 81;
+  window.render = (t) => {
+    ctx.clearRect(0, 0, W, H); fundo(t);
+    const cam = camera(t), aMapa = 1 - prog(t, 5.6, 6.6);
+    contornos(t, cam, MAPY, aMapa, prog(t, 1.0, 2.4) * aMapa);
+    if (t > 74.8) contornos(t, CEF, H * 0.5, prog(t, 75, 77), prog(t, 77, 78.5));
+    ctx.save();
+    if (t > 57 && t < 64.4) { const a = vis(t, 57.4, 64.2), h = (QH * QV[3]) / qmax; ctx.globalAlpha = a; ctx.setLineDash([10, 8]); ctx.strokeStyle = "#bdbab0"; ctx.lineWidth = 2; ctx.strokeRect(QX[3] - 60, QB - h, 120, h); ctx.setLineDash([]); }
+    if (t > 34 && t < 42.4) { const a = vis(t, 35, 42.2); ctx.globalAlpha = a * 0.5; ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(LX[0], LY + 150); ctx.lineTo(lerp(LX[0], LX[3], eout(prog(t, 35, 37))), LY + 150); ctx.stroke(); }
+    ctx.restore();
+    particulas(t, null);
+    const C = D.municipio, anos = D.anos;
+    // 1 · abertura
+    texto(C.toUpperCase(), W / 2, 300, { tam: C.length > 10 ? 92 : 118, w: 900, ls: 12, a: vis(t, 0.5, 6.0), brilho: 30, sobe: 1 });
+    texto(`${anos.join(" · ")}  →  2028`, W / 2, 380, { tam: 36, w: 700, ls: 4, a: vis(t, 1.2, 6.0), cor: AC });
+    texto("PREFEITURA E CÂMARA, ELEIÇÃO POR ELEIÇÃO", W / 2, 1640, { tam: 28, w: 600, ls: 5, a: vis(t, 2.0, 6.0), cor: "#bdbab0" });
+    // 2 · eleitorado
+    texto("ELEITORADO", W / 2, 300, { tam: 34, w: 700, ls: 8, a: vis(t, 6.4, 13.1), cor: "#bdbab0" });
+    texto(`cada ponto = ${POR} eleitores · aceso = foi votar`, W / 2, 360, { tam: 28, w: 500, a: vis(t, 6.6, 13.1), cor: "#8d8b82" });
+    EL.forEach((e, i) => { const a = vis(t, 7 + i * 0.3, 13.1);
+      texto(e.ano, ELX[i], ELB + 70, { tam: 40, w: 900, a }); texto(fmt(e.aptos * eout(prog(t, 7.2 + i * 0.3, 9 + i * 0.3))), ELX[i], ELB + 115, { tam: 30, w: 700, a, cor: "#bdbab0" });
+      texto(`faltaram ${fmt(e.abstencoes)}`, ELX[i], ELB + 160, { tam: 24, w: 600, a, cor: "#8d8b82" }); });
+    texto(EL[2].abstencoes < EL[0].abstencoes ? `Abstenção caiu ${Math.round((1 - EL[2].abstencoes / EL[0].abstencoes) * 100)}%` : `Abstenção subiu ${Math.round((EL[2].abstencoes / EL[0].abstencoes - 1) * 100)}%`, W / 2, 1740, { tam: 46, w: 800, a: vis(t, 9.5, 13.1), cor: AC, sobe: 1 });
+    // 3–5 · prefeito em cada eleição
+    D.prefeito.forEach((p, i) => { const t0 = 13 + i * 7, t1 = t0 + 7.1;
+      texto(`${p.ano} · PREFEITO`, W / 2, 300, { tam: 34, w: 700, ls: 8, a: vis(t, t0 + 0.2, t1), cor: "#bdbab0" });
+      fotoOu(p.venc.nome, FX[0], FOTO_Y, 150, vis(t, t0 + 0.8, t1), corP(p.venc.partido)); if (p.seg) fotoOu(p.seg.nome, FX[1], FOTO_Y, 150, vis(t, t0 + 1.1, t1), "#bdbab0");
+      texto(curto(p.venc.nome).toUpperCase(), FX[0], 1060, { tam: 34, w: 800, ls: 4, a: vis(t, t0 + 1.2, t1) }); texto(p.venc.partido, FX[0], 1100, { tam: 26, w: 700, a: vis(t, t0 + 1.2, t1), cor: corP(p.venc.partido) });
+      if (p.seg) { texto(curto(p.seg.nome).toUpperCase(), FX[1], 1060, { tam: 34, w: 800, ls: 4, a: vis(t, t0 + 1.4, t1) }); texto(p.seg.partido, FX[1], 1100, { tam: 26, w: 700, a: vis(t, t0 + 1.4, t1), cor: corP(p.seg.partido) }); }
+      texto(pc(p.venc.pct * eout(prog(t, t0 + 1.4, t0 + 3))), FX[0], 1200, { tam: 84, w: 900, a: vis(t, t0 + 1.4, t1), cor: corP(p.venc.partido), brilho: 18 });
+      if (p.seg) texto(pc(p.seg.pct * eout(prog(t, t0 + 1.6, t0 + 3.2))), FX[1], 1200, { tam: 84, w: 900, a: vis(t, t0 + 1.6, t1) });
+      texto(`venceu por ${fmt(p.margem)} votos`, W / 2, 1420, { tam: 50, w: 700, a: vis(t, t0 + 3.2, t1), sobe: 1 }); });
+    // 6 · linha dos prefeitos
+    texto("QUEM GANHOU A PREFEITURA", W / 2, 300, { tam: 34, w: 800, ls: 6, a: vis(t, 34.4, 42.1), cor: "#bdbab0" });
+    D.prefeito.forEach((p, i) => { const a = vis(t, 35 + i * 0.5, 42.1); fotoOu(p.venc.nome, LX[i], LY, 78, a, corP(p.venc.partido));
+      texto(p.ano, LX[i], LY - 130, { tam: 34, w: 900, a }); texto(curto(p.venc.nome), LX[i], LY + 120, { tam: 26, w: 800, a }); texto(`+${fmt(p.margem)}`, LX[i], LY + 200, { tam: 30, w: 800, a, cor: corP(p.venc.partido) }); });
+    { const a = vis(t, 36.6, 42.1), pul = 1 + 0.06 * Math.sin(t * 4); texto("2028", LX[3], LY - 130, { tam: 34, w: 900, a, cor: AC }); texto("?", LX[3], LY + 40 * pul, { tam: 130 * pul, w: 900, a, cor: AC, brilho: 26 }); }
+    texto(D.semReeleicao ? `${D.prefeito[2].venc.nome} não pode\nconcorrer em 2028` : `${D.prefeito[2].venc.nome} pode\ntentar a reeleição`, W / 2, 1420, { tam: 50, w: 800, a: vis(t, 38, 42.1), sobe: 1 });
+    // 7 · câmara por partido
+    texto("CÂMARA · CADEIRAS POR PARTIDO", W / 2, 300, { tam: 34, w: 800, ls: 4, a: vis(t, 42.4, 50.1), cor: "#bdbab0" });
+    CM.forEach((c, i) => { const a = vis(t, 43 + i * 0.4, 50.1); texto(c.ano, CBX, CBY[i] - 60, { tam: 36, w: 900, al: "left", a }); let x0 = CBX;
+      c.partidos.forEach(([p, n]) => { const w = (CBW * n) / c.cadeiras; if (w > 60) texto(`${p} ${n}`, x0 + w / 2, CBY[i] + 70, { tam: n > 1 ? 28 : 22, w: 800, a, cor: corP(p) }); x0 += w; }); });
+    // 8 · renovação
+    texto("CARAS NOVAS NA CÂMARA", W / 2, 300, { tam: 34, w: 800, ls: 6, a: vis(t, 50.4, 57.1), cor: "#bdbab0" });
+    texto("aceso = novo · branco = reeleito", W / 2, 360, { tam: 28, w: 500, a: vis(t, 50.6, 57.1), cor: "#8d8b82" });
+    RV.forEach((r, i) => { const a = vis(t, 51 + i * 0.4, 57.1); texto(`${r.ano}`, W / 2, RVY[i] - 60, { tam: 34, w: 900, a }); texto(`${r.novos} novos de ${r.cadeiras}`, W / 2, RVY[i] + 80, { tam: 30, w: 700, a, cor: AC }); });
+    texto(`Média: ${D.novosMedia} caras novas por eleição`, W / 2, 1560, { tam: 44, w: 800, a: vis(t, 53.5, 57.1), sobe: 1 });
+    // 9 · quociente
+    texto("O PREÇO DE UMA CADEIRA", W / 2, 300, { tam: 34, w: 800, ls: 6, a: vis(t, 57.4, 64.1), cor: "#bdbab0" });
+    texto("quociente eleitoral · votos por vaga", W / 2, 360, { tam: 28, w: 500, a: vis(t, 57.6, 64.1), cor: "#8d8b82" });
+    QV.forEach((q, i) => { const a = vis(t, 58 + i * 0.4, 64.1), h = (QH * q) / qmax; texto(i === 3 ? `≈ ${fmt(Math.round(q / 50) * 50)}` : fmt(q * eout(prog(t, 58.2 + i * 0.4, 60 + i * 0.4))), QX[i], QB - h - 24, { tam: 38, w: 900, a, cor: i === 3 ? "#bdbab0" : AC });
+      texto(i === 3 ? "2028" : CM[i].ano, QX[i], QB + 60, { tam: 34, w: 900, a }); if (i === 3) texto("tendência", QX[i], QB + 100, { tam: 24, w: 600, a, cor: "#8d8b82" }); });
+    // 10 · 2028
+    texto("COMO SERÁ", W / 2, 380, { tam: 40, w: 800, ls: 10, a: vis(t, 64.4, 75.1), cor: "#bdbab0" });
+    texto("2028?", W / 2, 620, { tam: 150, w: 900, a: vis(t, 64.6, 75.1), brilho: 30, cor: AC, sobe: 1 });
+    const itens = [D.semReeleicao ? ["Prefeitura aberta", `${D.prefeito[2].venc.nome} cumpre o segundo mandato`] : ["Reeleição em jogo", `${D.prefeito[2].venc.nome} pode concorrer`],
+      D.precedente ? [`O precedente: ${D.precedente.ano}`, D.precedente.mesmoPartido ? `prefeitura aberta e o ${D.precedente.partidoSaiu} manteve com ${D.precedente.venceu}` : `prefeitura aberta e ${D.precedente.venceu} (${D.precedente.partidoVenceu}) virou`] : null,
+      [`≈ ${fmt(Math.round(D.qe2028 / 50) * 50)} votos por cadeira`, "quociente na tendência"], [`≈ ${D.novosMedia} vereadores novos`, "se a renovação seguir a média"]].filter(Boolean);
+    itens.forEach(([tt, sb], i) => { const a = vis(t, 66 + i * 1.6, 75.1), y = 900 + i * 190;
+      ctx.save(); ctx.globalAlpha = a * 0.9; ctx.fillStyle = "rgba(255,255,255,.04)"; ctx.strokeStyle = "rgba(212,255,58,.35)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(110, y - 70, W - 220, 150, 26); ctx.fill(); ctx.stroke(); ctx.restore();
+      texto(tt, W / 2, y, { tam: 42, w: 800, a }); texto(sb, W / 2, y + 48, { tam: 27, w: 500, a, cor: "#bdbab0" }); });
+    texto("projeções = tendência dos números, não pesquisa", W / 2, 1720, { tam: 24, w: 500, a: vis(t, 68, 75.1), cor: "#8d8b82" });
+    // 11 · encerramento
+    texto("PLENÁRIA CE", W / 2, 360, { tam: 104, w: 900, ls: 8, a: vis(t, 77.2, 81.2, 0.6), brilho: 30, sobe: 1 });
+    texto(`Inteligência eleitoral de ${C}`, W / 2, 430, { tam: 38, w: 600, a: vis(t, 77.6, 81.2, 0.6) });
+    texto("a história de cada eleição, para decidir a próxima", W / 2, 1600, { tam: 32, w: 600, a: vis(t, 78, 81.2, 0.6), cor: AC });
+    texto(`Fonte: TSE · eleições municipais ${anos.join(", ")}`, W / 2, 1700, { tam: 24, w: 500, a: vis(t, 78.4, 81.2, 0.6), cor: "#8d8b82" });
+    marca();
+  };
+  window.render(0);
+  window.pronto = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+{
+ "id": "ce/varjota",
+ "municipio": "Varjota",
+ "cd_ibge": "2313955",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 15909,
+   "comparecimento": 12664,
+   "abstencoes": 3245
+  },
+  {
+   "ano": "2020",
+   "aptos": 16437,
+   "comparecimento": 13726,
+   "abstencoes": 2711
+  },
+  {
+   "ano": "2024",
+   "aptos": 16213,
+   "comparecimento": 14374,
+   "abstencoes": 1839
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Célia",
+    "partido": "MDB",
+    "votos": 6597,
+    "pct": 0.5399852664320209,
+    "pid": "8e3b7d0edb",
+    "foto": null
+   },
+   "seg": {
+    "nome": "Elmo Monte",
+    "partido": "PDT",
+    "votos": 5620,
+    "pct": 0.46001473356797906,
+    "pid": "6e18eebda5",
+    "foto": "fotos/ce/varjota/2024/60002135977.jpg"
+   },
+   "margem": 977
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Elmo Monte",
+    "partido": "PDT",
+    "votos": 7068,
+    "pct": 0.5311889373215091,
+    "pid": "6e18eebda5",
+    "foto": "fotos/ce/varjota/2024/60002135977.jpg"
+   },
+   "seg": {
+    "nome": "Rosa Paulino",
+    "partido": "MDB",
+    "votos": 6238,
+    "pct": 0.46881106267849093,
+    "pid": "4bd2086938",
+    "foto": "fotos/ce/varjota/2024/60002136565.jpg"
+   },
+   "margem": 830
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Elmo Monte",
+    "partido": "PSB",
+    "votos": 8914,
+    "pct": 0.6427283870502559,
+    "pid": "6e18eebda5",
+    "foto": "fotos/ce/varjota/2024/60002135977.jpg"
+   },
+   "seg": {
+    "nome": "Silvino Oliveira",
+    "partido": "MDB",
+    "votos": 4955,
+    "pct": 0.357271612949744,
+    "pid": "734b310c03",
+    "foto": "fotos/ce/varjota/2024/60002246669.jpg"
+   },
+   "margem": 3959
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 11,
+   "candidatos": 33,
+   "validos": 12147,
+   "qe": 1104,
+   "partidos": [
+    [
+     "MDB",
+     5
+    ],
+    [
+     "PDT",
+     2
+    ],
+    [
+     "DC",
+     1
+    ],
+    [
+     "PSDB",
+     1
+    ],
+    [
+     "PTB",
+     1
+    ],
+    [
+     "PT",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Carlim do Tatá",
+    "votos": 787,
+    "partido": "MDB",
+    "foto": "fotos/ce/varjota/2024/60002042395.jpg"
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 11,
+   "candidatos": 48,
+   "validos": 13184,
+   "qe": 1199,
+   "partidos": [
+    [
+     "MDB",
+     5
+    ],
+    [
+     "PDT",
+     4
+    ],
+    [
+     "PT",
+     1
+    ],
+    [
+     "PL",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Roberto do Garrone",
+    "votos": 835,
+    "partido": "PT",
+    "foto": "fotos/ce/varjota/2024/60002042391.jpg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 11,
+   "candidatos": 33,
+   "validos": 13768,
+   "qe": 1252,
+   "partidos": [
+    [
+     "PSB",
+     5
+    ],
+    [
+     "MDB",
+     3
+    ],
+    [
+     "PT",
+     3
+    ]
+   ],
+   "top": {
+    "nome": "Rosa Paulino",
+    "votos": 1774,
+    "partido": "MDB",
+    "foto": "fotos/ce/varjota/2024/60002136565.jpg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 11,
+   "reeleitos": 4,
+   "novos": 7,
+   "nomes": [
+    "Carlim do Tatá",
+    "Régio Ximenes",
+    "Marcos Cesar",
+    "Anchieta"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 11,
+   "reeleitos": 7,
+   "novos": 4,
+   "nomes": [
+    "Roberto do Garrone",
+    "Gonçalinho",
+    "Regio Ximenes",
+    "Anchieta",
+    "Aristeu Linhares",
+    "Edgar Procópio",
+    "Marcos Cesar"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 11,
+   "reeleitos": 4,
+   "novos": 7,
+   "nomes": [
+    "Gonçalinho",
+    "Regio Ximenes",
+    "Roberto do Garrone",
+    "Djinha"
+   ]
+  }
+ ],
+ "semReeleicao": true,
+ "precedente": {
+  "ano": "2016",
+  "saiu": "Rosa Paulino",
+  "partidoSaiu": "MDB",
+  "venceu": "Célia",
+  "partidoVenceu": "MDB",
+  "mesmoPartido": true
+ },
+ "qe2028": 1305,
+ "novosMedia": 6,
+ "fala": [
+  "Varjota. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de quinze mil novecentos e nove para dezesseis mil duzentos e treze. E a abstenção caiu: de três mil duzentos e quarenta e cinco para mil oitocentos e trinta e nove eleitores.",
+  "Em dois mil e dezesseis, Célia venceu com cinquenta e quatro por cento. Elmo Monte ficou com quarenta e seis. Diferença de novecentos e setenta e sete votos.",
+  "Em dois mil e vinte, Elmo Monte venceu com cinquenta e três por cento. Rosa Paulino ficou com quarenta e sete. Diferença de oitocentos e trinta votos.",
+  "Em dois mil e vinte e quatro, Elmo Monte venceu com sessenta e quatro por cento. Silvino Oliveira ficou com trinta e seis. Diferença de três mil novecentos e cinquenta e nove votos.",
+  "Em três eleições: Célia; depois Elmo Monte, duas vezes. Em dois mil e vinte e oito, Elmo Monte não pode concorrer de novo: a cadeira de prefeito fica aberta.",
+  "Na Câmara, o MDB fez cinco cadeiras em dois mil e dezesseis e em dois mil e vinte. E em dois mil e vinte e quatro, o PSB passou a liderar com cinco cadeiras, e o MDB caiu para três.",
+  "A renovação é alta. Caras novas em cada eleição: sete, quatro e sete, de onze cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de mil cento e quatro para mil duzentos e cinquenta e dois votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de mil e trezentos.",
+  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Na última vez que isso aconteceu, em dois mil e dezesseis, o MDB manteve a prefeitura com Célia. E se a renovação seguir a média, cerca de seis vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Varjota. A história de cada eleição, para decidir a próxima."
+ ]
+}
