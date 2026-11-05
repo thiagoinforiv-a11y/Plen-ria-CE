@@ -43,6 +43,7 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
   Todo vídeo novo sai com tarja; nos de dados, só no gancho (capa no quadro de ~5 s).
 - Publicação: Metricool (marca 6990789, fuso da conta Europe/Madrid) com TikTok e Instagram @plenariace conectados.
   Vídeo precisa de URL pública: branch `midia` (raw.githubusercontent.com/.../midia/...). TikTok exige `tiktokData.title`.
-  Agendados: SQ 05/11 18h; Varjota, Ipu, Reriutaba 06/11 10h/12h/18h; Cariré, Pires Ferreira, Pacujá 09/11 10h/12h/18h (Fortaleza).
+  Agendados (Fortaleza): 05/11 SQ 14h30, Varjota 16h, Ipu 18h, Reriutaba 19h30; 06/11 Cariré 10h, Pires Ferreira 12h, Pacujá 18h.
+  Fluxo padrão: repositório público + branch `midia` = links prontos; o Metricool copia o vídeo ao agendar.
 - Métricas do TikTok (set/2026): bombam confronto real + frase entre aspas, curtos (15–34 s), sessões de Câmara. Perfil ficou 45 dias parado.
 - Rede da sessão bloqueia litterbox/catbox; .claude/settings.json tem a regra, mas falta liberar o domínio no ambiente.
