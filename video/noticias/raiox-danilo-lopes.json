@@ -1,0 +1,21 @@
+{
+ "id": "raiox-danilo-lopes",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2020 a 2026",
+ "cenas": [
+  {"midia": "fotos/ce/reriutaba/2026/60002532968.jpg", "credito": "Foto: TSE", "tarja": "Danilo Lopes: 4 eleições em 6 anos. O raio-X da campanha",
+   "fala": "Quatro eleições em seis anos. O raio-X de Danilo Lopes, com os números do TSE."},
+  {"grande": "3.782 VOTOS", "sub": "VEREADOR ELEITO EM FORTALEZA, 2020", "tarja": "2020: eleito vereador de Fortaleza",
+   "fala": "Em dois mil e vinte, se elegeu vereador de Fortaleza com três mil setecentos e oitenta e dois votos."},
+  {"grande": "15.573 VOTOS", "sub": "DEPUTADO ESTADUAL, 2022", "tarja": "2022: suplente de deputado estadual",
+   "fala": "Em dois mil e vinte e dois, tentou deputado estadual: quinze mil quinhentos e setenta e três votos, em cento e sessenta e quatro cidades. Ficou como suplente."},
+  {"grande": "8.862 VOTOS", "sub": "VEREADOR EM FORTALEZA, 2024", "tarja": "2024: mais que o dobro de 2020, e suplente",
+   "fala": "Em dois mil e vinte e quatro, voltou para vereador: oito mil oitocentos e sessenta e dois votos, mais que o dobro de antes. Mesmo assim, suplente."},
+  {"grande": "11.164 VOTOS", "sub": "DEPUTADO FEDERAL, 2026", "tarja": "2026: suplente de deputado federal",
+   "fala": "Em dois mil e vinte e seis, deputado federal: onze mil cento e sessenta e quatro votos, em cento e sessenta e uma cidades. Suplente outra vez."},
+  {"grande": "3 EM 4", "sub": "VOTOS VIERAM DE FORTALEZA", "tarja": "76% dos votos de 2026 vieram de Fortaleza",
+   "fala": "Três de cada quatro votos vieram de Fortaleza. Na nossa região, a maior votação foi em Reriutaba: quarenta e três."},
+  {"grande": "?", "sub": "QUAL O PRÓXIMO PASSO", "tarja": "Qual vai ser o próximo passo? Comenta aqui",
+   "fala": "Depois de quatro eleições, qual vai ser o próximo passo? Comenta aqui."}
+ ]
+}
