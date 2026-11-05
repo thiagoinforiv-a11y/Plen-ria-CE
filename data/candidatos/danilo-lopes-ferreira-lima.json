@@ -1,0 +1,2372 @@
+{
+ "nome": "DANILO LOPES FERREIRA LIMA",
+ "uf": "CE",
+ "fonte": "TSE, votacao_candidato_munzona",
+ "eleicoes": {
+  "2026": [
+   {
+    "sq": "60002532968",
+    "urna": "DANILO LOPES",
+    "numero": "2525",
+    "partido": "PRD",
+    "situacao": "SUPLENTE",
+    "cargo": "Deputado Federal",
+    "turno": "1",
+    "total": 11164,
+    "pos_estado": 58,
+    "candidatos_estado": 265,
+    "municipios_com_voto": 161,
+    "municipios_total": 184,
+    "primeiro_lugar_em": [],
+    "municipios": [
+     {
+      "municipio": "FORTALEZA",
+      "votos": 8446,
+      "pos": 41,
+      "candidatos": 265,
+      "nominais": 1402680
+     },
+     {
+      "municipio": "CAUCAIA",
+      "votos": 226,
+      "pos": 66,
+      "candidatos": 265,
+      "nominais": 191444
+     },
+     {
+      "municipio": "QUIXERAMOBIM",
+      "votos": 135,
+      "pos": 36,
+      "candidatos": 265,
+      "nominais": 46841
+     },
+     {
+      "municipio": "MARACANAÚ",
+      "votos": 122,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 138620
+     },
+     {
+      "municipio": "EUSÉBIO",
+      "votos": 117,
+      "pos": 40,
+      "candidatos": 265,
+      "nominais": 46426
+     },
+     {
+      "municipio": "SOBRAL",
+      "votos": 97,
+      "pos": 60,
+      "candidatos": 265,
+      "nominais": 113358
+     },
+     {
+      "municipio": "JUAZEIRO DO NORTE",
+      "votos": 82,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 151615
+     },
+     {
+      "municipio": "ITAREMA",
+      "votos": 62,
+      "pos": 27,
+      "candidatos": 265,
+      "nominais": 26136
+     },
+     {
+      "municipio": "AQUIRAZ",
+      "votos": 60,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 54078
+     },
+     {
+      "municipio": "CASCAVEL",
+      "votos": 56,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 46176
+     },
+     {
+      "municipio": "QUIXADÁ",
+      "votos": 53,
+      "pos": 53,
+      "candidatos": 265,
+      "nominais": 47511
+     },
+     {
+      "municipio": "HORIZONTE",
+      "votos": 53,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 47267
+     },
+     {
+      "municipio": "MARANGUAPE",
+      "votos": 51,
+      "pos": 61,
+      "candidatos": 265,
+      "nominais": 66502
+     },
+     {
+      "municipio": "MORADA NOVA",
+      "votos": 50,
+      "pos": 50,
+      "candidatos": 265,
+      "nominais": 43399
+     },
+     {
+      "municipio": "TIANGUÁ",
+      "votos": 47,
+      "pos": 50,
+      "candidatos": 265,
+      "nominais": 45450
+     },
+     {
+      "municipio": "JAGUARIBE",
+      "votos": 45,
+      "pos": 43,
+      "candidatos": 265,
+      "nominais": 21799
+     },
+     {
+      "municipio": "LIMOEIRO DO NORTE",
+      "votos": 44,
+      "pos": 54,
+      "candidatos": 265,
+      "nominais": 35779
+     },
+     {
+      "municipio": "RERIUTABA",
+      "votos": 43,
+      "pos": 16,
+      "candidatos": 265,
+      "nominais": 12310
+     },
+     {
+      "municipio": "SÃO GONÇALO DO AMARANTE",
+      "votos": 40,
+      "pos": 63,
+      "candidatos": 265,
+      "nominais": 37777
+     },
+     {
+      "municipio": "IGUATU",
+      "votos": 39,
+      "pos": 60,
+      "candidatos": 265,
+      "nominais": 55030
+     },
+     {
+      "municipio": "CANINDÉ",
+      "votos": 39,
+      "pos": 57,
+      "candidatos": 265,
+      "nominais": 46322
+     },
+     {
+      "municipio": "BOA VIAGEM",
+      "votos": 35,
+      "pos": 47,
+      "candidatos": 265,
+      "nominais": 32005
+     },
+     {
+      "municipio": "ITAPIPOCA",
+      "votos": 33,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 84023
+     },
+     {
+      "municipio": "CRATEÚS",
+      "votos": 32,
+      "pos": 43,
+      "candidatos": 265,
+      "nominais": 46749
+     },
+     {
+      "municipio": "ITAITINGA",
+      "votos": 30,
+      "pos": 63,
+      "candidatos": 265,
+      "nominais": 30064
+     },
+     {
+      "municipio": "PACATUBA",
+      "votos": 30,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 44426
+     },
+     {
+      "municipio": "CRATO",
+      "votos": 29,
+      "pos": 78,
+      "candidatos": 265,
+      "nominais": 74180
+     },
+     {
+      "municipio": "NOVA RUSSAS",
+      "votos": 29,
+      "pos": 27,
+      "candidatos": 265,
+      "nominais": 18811
+     },
+     {
+      "municipio": "PARACURU",
+      "votos": 29,
+      "pos": 60,
+      "candidatos": 265,
+      "nominais": 24923
+     },
+     {
+      "municipio": "PACAJUS",
+      "votos": 28,
+      "pos": 67,
+      "candidatos": 265,
+      "nominais": 42477
+     },
+     {
+      "municipio": "ARACATI",
+      "votos": 27,
+      "pos": 57,
+      "candidatos": 265,
+      "nominais": 44298
+     },
+     {
+      "municipio": "RUSSAS",
+      "votos": 26,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 44960
+     },
+     {
+      "municipio": "SANTANA DO ACARAÚ",
+      "votos": 26,
+      "pos": 39,
+      "candidatos": 265,
+      "nominais": 20032
+     },
+     {
+      "municipio": "GUARACIABA DO NORTE",
+      "votos": 25,
+      "pos": 42,
+      "candidatos": 265,
+      "nominais": 25026
+     },
+     {
+      "municipio": "TRAIRI",
+      "votos": 22,
+      "pos": 70,
+      "candidatos": 265,
+      "nominais": 39278
+     },
+     {
+      "municipio": "FORTIM",
+      "votos": 22,
+      "pos": 36,
+      "candidatos": 265,
+      "nominais": 13678
+     },
+     {
+      "municipio": "VIÇOSA DO CEARÁ",
+      "votos": 21,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 35646
+     },
+     {
+      "municipio": "AMONTADA",
+      "votos": 18,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 27394
+     },
+     {
+      "municipio": "PACOTI",
+      "votos": 18,
+      "pos": 39,
+      "candidatos": 265,
+      "nominais": 8105
+     },
+     {
+      "municipio": "CAMOCIM",
+      "votos": 18,
+      "pos": 53,
+      "candidatos": 265,
+      "nominais": 37228
+     },
+     {
+      "municipio": "APUIARÉS",
+      "votos": 17,
+      "pos": 42,
+      "candidatos": 265,
+      "nominais": 9792
+     },
+     {
+      "municipio": "ARACOIABA",
+      "votos": 17,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 20372
+     },
+     {
+      "municipio": "IPUEIRAS",
+      "votos": 16,
+      "pos": 41,
+      "candidatos": 265,
+      "nominais": 22106
+     },
+     {
+      "municipio": "GUAIÚBA",
+      "votos": 16,
+      "pos": 54,
+      "candidatos": 265,
+      "nominais": 16881
+     },
+     {
+      "municipio": "REDENÇÃO",
+      "votos": 16,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 17927
+     },
+     {
+      "municipio": "CARIDADE",
+      "votos": 16,
+      "pos": 48,
+      "candidatos": 265,
+      "nominais": 13600
+     },
+     {
+      "municipio": "PENTECOSTE",
+      "votos": 15,
+      "pos": 62,
+      "candidatos": 265,
+      "nominais": 25203
+     },
+     {
+      "municipio": "UBAJARA",
+      "votos": 15,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 20487
+     },
+     {
+      "municipio": "PARAIPABA",
+      "votos": 14,
+      "pos": 65,
+      "candidatos": 265,
+      "nominais": 21557
+     },
+     {
+      "municipio": "JAGUARETAMA",
+      "votos": 14,
+      "pos": 50,
+      "candidatos": 265,
+      "nominais": 11816
+     },
+     {
+      "municipio": "BEBERIBE",
+      "votos": 14,
+      "pos": 75,
+      "candidatos": 265,
+      "nominais": 37249
+     },
+     {
+      "municipio": "JAGUARUANA",
+      "votos": 13,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 22399
+     },
+     {
+      "municipio": "BATURITÉ",
+      "votos": 13,
+      "pos": 61,
+      "candidatos": 265,
+      "nominais": 21852
+     },
+     {
+      "municipio": "OCARA",
+      "votos": 13,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 20972
+     },
+     {
+      "municipio": "ITATIRA",
+      "votos": 13,
+      "pos": 44,
+      "candidatos": 265,
+      "nominais": 14054
+     },
+     {
+      "municipio": "ACARAÚ",
+      "votos": 12,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 36615
+     },
+     {
+      "municipio": "ACOPIARA",
+      "votos": 12,
+      "pos": 64,
+      "candidatos": 265,
+      "nominais": 28773
+     },
+     {
+      "municipio": "QUIXERÉ",
+      "votos": 12,
+      "pos": 53,
+      "candidatos": 265,
+      "nominais": 14454
+     },
+     {
+      "municipio": "ICÓ",
+      "votos": 11,
+      "pos": 69,
+      "candidatos": 265,
+      "nominais": 37285
+     },
+     {
+      "municipio": "SANTA QUITÉRIA",
+      "votos": 11,
+      "pos": 64,
+      "candidatos": 265,
+      "nominais": 25457
+     },
+     {
+      "municipio": "CHOROZINHO",
+      "votos": 11,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 14241
+     },
+     {
+      "municipio": "IRAUÇUBA",
+      "votos": 11,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 15180
+     },
+     {
+      "municipio": "MONSENHOR TABOSA",
+      "votos": 10,
+      "pos": 34,
+      "candidatos": 265,
+      "nominais": 11244
+     },
+     {
+      "municipio": "PINDORETAMA",
+      "votos": 10,
+      "pos": 67,
+      "candidatos": 265,
+      "nominais": 16644
+     },
+     {
+      "municipio": "MOMBAÇA",
+      "votos": 10,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 22719
+     },
+     {
+      "municipio": "CARIÚS",
+      "votos": 10,
+      "pos": 47,
+      "candidatos": 265,
+      "nominais": 11793
+     },
+     {
+      "municipio": "MULUNGU",
+      "votos": 10,
+      "pos": 44,
+      "candidatos": 265,
+      "nominais": 7444
+     },
+     {
+      "municipio": "FORQUILHA",
+      "votos": 10,
+      "pos": 47,
+      "candidatos": 265,
+      "nominais": 15740
+     },
+     {
+      "municipio": "URUBURETAMA",
+      "votos": 9,
+      "pos": 53,
+      "candidatos": 265,
+      "nominais": 13953
+     },
+     {
+      "municipio": "JUCÁS",
+      "votos": 9,
+      "pos": 60,
+      "candidatos": 265,
+      "nominais": 14003
+     },
+     {
+      "municipio": "JAGUARIBARA",
+      "votos": 9,
+      "pos": 42,
+      "candidatos": 265,
+      "nominais": 7161
+     },
+     {
+      "municipio": "BARREIRA",
+      "votos": 9,
+      "pos": 54,
+      "candidatos": 265,
+      "nominais": 15665
+     },
+     {
+      "municipio": "QUIXELÔ",
+      "votos": 9,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 11569
+     },
+     {
+      "municipio": "CATUNDA",
+      "votos": 9,
+      "pos": 33,
+      "candidatos": 265,
+      "nominais": 7289
+     },
+     {
+      "municipio": "ITAPAJÉ",
+      "votos": 9,
+      "pos": 78,
+      "candidatos": 265,
+      "nominais": 30580
+     },
+     {
+      "municipio": "IPU",
+      "votos": 9,
+      "pos": 62,
+      "candidatos": 265,
+      "nominais": 25651
+     },
+     {
+      "municipio": "GRANJA",
+      "votos": 9,
+      "pos": 69,
+      "candidatos": 265,
+      "nominais": 30382
+     },
+     {
+      "municipio": "ARATUBA",
+      "votos": 8,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 9277
+     },
+     {
+      "municipio": "UMIRIM",
+      "votos": 8,
+      "pos": 53,
+      "candidatos": 265,
+      "nominais": 12389
+     },
+     {
+      "municipio": "MORRINHOS",
+      "votos": 8,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 15147
+     },
+     {
+      "municipio": "CAPISTRANO",
+      "votos": 8,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 12686
+     },
+     {
+      "municipio": "ALTO SANTO",
+      "votos": 8,
+      "pos": 49,
+      "candidatos": 265,
+      "nominais": 9321
+     },
+     {
+      "municipio": "VÁRZEA ALEGRE",
+      "votos": 8,
+      "pos": 71,
+      "candidatos": 265,
+      "nominais": 24273
+     },
+     {
+      "municipio": "TABULEIRO DO NORTE",
+      "votos": 8,
+      "pos": 69,
+      "candidatos": 265,
+      "nominais": 19254
+     },
+     {
+      "municipio": "CEDRO",
+      "votos": 8,
+      "pos": 64,
+      "candidatos": 265,
+      "nominais": 15005
+     },
+     {
+      "municipio": "IBARETAMA",
+      "votos": 7,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 10815
+     },
+     {
+      "municipio": "AURORA",
+      "votos": 7,
+      "pos": 63,
+      "candidatos": 265,
+      "nominais": 14483
+     },
+     {
+      "municipio": "MILHÃ",
+      "votos": 7,
+      "pos": 45,
+      "candidatos": 265,
+      "nominais": 8907
+     },
+     {
+      "municipio": "IRACEMA",
+      "votos": 7,
+      "pos": 48,
+      "candidatos": 265,
+      "nominais": 8908
+     },
+     {
+      "municipio": "TAUÁ",
+      "votos": 7,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 34997
+     },
+     {
+      "municipio": "ITAPIÚNA",
+      "votos": 7,
+      "pos": 63,
+      "candidatos": 265,
+      "nominais": 12517
+     },
+     {
+      "municipio": "TAMBORIL",
+      "votos": 7,
+      "pos": 54,
+      "candidatos": 265,
+      "nominais": 15929
+     },
+     {
+      "municipio": "PALHANO",
+      "votos": 7,
+      "pos": 51,
+      "candidatos": 265,
+      "nominais": 7843
+     },
+     {
+      "municipio": "SÃO BENEDITO",
+      "votos": 7,
+      "pos": 82,
+      "candidatos": 265,
+      "nominais": 26643
+     },
+     {
+      "municipio": "VARJOTA",
+      "votos": 7,
+      "pos": 49,
+      "candidatos": 265,
+      "nominais": 12567
+     },
+     {
+      "municipio": "COREAÚ",
+      "votos": 6,
+      "pos": 57,
+      "candidatos": 265,
+      "nominais": 14776
+     },
+     {
+      "municipio": "BARBALHA",
+      "votos": 6,
+      "pos": 97,
+      "candidatos": 265,
+      "nominais": 40103
+     },
+     {
+      "municipio": "HIDROLÂNDIA",
+      "votos": 6,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 12649
+     },
+     {
+      "municipio": "JIJOCA DE JERICOACOARA",
+      "votos": 6,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 16058
+     },
+     {
+      "municipio": "TURURU",
+      "votos": 6,
+      "pos": 62,
+      "candidatos": 265,
+      "nominais": 12619
+     },
+     {
+      "municipio": "MARTINÓPOLE",
+      "votos": 5,
+      "pos": 47,
+      "candidatos": 265,
+      "nominais": 8498
+     },
+     {
+      "municipio": "CARIRIAÇU",
+      "votos": 5,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 19391
+     },
+     {
+      "municipio": "GUARAMIRANGA",
+      "votos": 5,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 4901
+     },
+     {
+      "municipio": "BREJO SANTO",
+      "votos": 5,
+      "pos": 85,
+      "candidatos": 265,
+      "nominais": 27023
+     },
+     {
+      "municipio": "JARDIM",
+      "votos": 5,
+      "pos": 62,
+      "candidatos": 265,
+      "nominais": 15997
+     },
+     {
+      "municipio": "IBIAPINA",
+      "votos": 5,
+      "pos": 67,
+      "candidatos": 265,
+      "nominais": 14312
+     },
+     {
+      "municipio": "SOLONÓPOLE",
+      "votos": 5,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 10785
+     },
+     {
+      "municipio": "URUOCA",
+      "votos": 4,
+      "pos": 55,
+      "candidatos": 265,
+      "nominais": 8562
+     },
+     {
+      "municipio": "PENAFORTE",
+      "votos": 4,
+      "pos": 50,
+      "candidatos": 265,
+      "nominais": 6504
+     },
+     {
+      "municipio": "SÃO LUÍS DO CURU",
+      "votos": 4,
+      "pos": 69,
+      "candidatos": 265,
+      "nominais": 9524
+     },
+     {
+      "municipio": "MISSÃO VELHA",
+      "votos": 4,
+      "pos": 81,
+      "candidatos": 265,
+      "nominais": 22506
+     },
+     {
+      "municipio": "CARIRÉ",
+      "votos": 4,
+      "pos": 57,
+      "candidatos": 265,
+      "nominais": 11380
+     },
+     {
+      "municipio": "SÃO JOÃO DO JAGUARIBE",
+      "votos": 4,
+      "pos": 48,
+      "candidatos": 265,
+      "nominais": 4352
+     },
+     {
+      "municipio": "MADALENA",
+      "votos": 4,
+      "pos": 66,
+      "candidatos": 265,
+      "nominais": 11368
+     },
+     {
+      "municipio": "LAVRAS DA MANGABEIRA",
+      "votos": 4,
+      "pos": 75,
+      "candidatos": 265,
+      "nominais": 17643
+     },
+     {
+      "municipio": "ACARAPE",
+      "votos": 4,
+      "pos": 71,
+      "candidatos": 265,
+      "nominais": 9880
+     },
+     {
+      "municipio": "QUITERIANÓPOLIS",
+      "votos": 3,
+      "pos": 58,
+      "candidatos": 265,
+      "nominais": 12759
+     },
+     {
+      "municipio": "PARAMBU",
+      "votos": 3,
+      "pos": 59,
+      "candidatos": 265,
+      "nominais": 19472
+     },
+     {
+      "municipio": "PARAMOTI",
+      "votos": 3,
+      "pos": 73,
+      "candidatos": 265,
+      "nominais": 7998
+     },
+     {
+      "municipio": "MIRAÍMA",
+      "votos": 3,
+      "pos": 64,
+      "candidatos": 265,
+      "nominais": 9621
+     },
+     {
+      "municipio": "ABAIARA",
+      "votos": 3,
+      "pos": 54,
+      "candidatos": 265,
+      "nominais": 5580
+     },
+     {
+      "municipio": "ITAIÇABA",
+      "votos": 3,
+      "pos": 56,
+      "candidatos": 265,
+      "nominais": 5807
+     },
+     {
+      "municipio": "TARRAFAS",
+      "votos": 3,
+      "pos": 41,
+      "candidatos": 265,
+      "nominais": 5355
+     },
+     {
+      "municipio": "PEDRA BRANCA",
+      "votos": 3,
+      "pos": 82,
+      "candidatos": 265,
+      "nominais": 24990
+     },
+     {
+      "municipio": "TEJUÇUOCA",
+      "votos": 3,
+      "pos": 75,
+      "candidatos": 265,
+      "nominais": 12727
+     },
+     {
+      "municipio": "CHORÓ",
+      "votos": 3,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 8710
+     },
+     {
+      "municipio": "PALMÁCIA",
+      "votos": 2,
+      "pos": 92,
+      "candidatos": 265,
+      "nominais": 7553
+     },
+     {
+      "municipio": "BAIXIO",
+      "votos": 2,
+      "pos": 48,
+      "candidatos": 265,
+      "nominais": 4320
+     },
+     {
+      "municipio": "CRUZ",
+      "votos": 2,
+      "pos": 89,
+      "candidatos": 265,
+      "nominais": 17950
+     },
+     {
+      "municipio": "CROATÁ",
+      "votos": 2,
+      "pos": 66,
+      "candidatos": 265,
+      "nominais": 10871
+     },
+     {
+      "municipio": "POTENGI",
+      "votos": 2,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 6123
+     },
+     {
+      "municipio": "MAURITI",
+      "votos": 2,
+      "pos": 97,
+      "candidatos": 265,
+      "nominais": 27763
+     },
+     {
+      "municipio": "INDEPENDÊNCIA",
+      "votos": 2,
+      "pos": 76,
+      "candidatos": 265,
+      "nominais": 16836
+     },
+     {
+      "municipio": "IPAUMIRIM",
+      "votos": 2,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 7210
+     },
+     {
+      "municipio": "PIRES FERREIRA",
+      "votos": 2,
+      "pos": 52,
+      "candidatos": 265,
+      "nominais": 7240
+     },
+     {
+      "municipio": "CAMPOS SALES",
+      "votos": 2,
+      "pos": 78,
+      "candidatos": 265,
+      "nominais": 15014
+     },
+     {
+      "municipio": "GRANJEIRO",
+      "votos": 2,
+      "pos": 61,
+      "candidatos": 265,
+      "nominais": 4904
+     },
+     {
+      "municipio": "ICAPUÍ",
+      "votos": 2,
+      "pos": 80,
+      "candidatos": 265,
+      "nominais": 13880
+     },
+     {
+      "municipio": "ARNEIROZ",
+      "votos": 2,
+      "pos": 56,
+      "candidatos": 265,
+      "nominais": 5101
+     },
+     {
+      "municipio": "IBICUITINGA",
+      "votos": 2,
+      "pos": 75,
+      "candidatos": 265,
+      "nominais": 10094
+     },
+     {
+      "municipio": "NOVO ORIENTE",
+      "votos": 2,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 16721
+     },
+     {
+      "municipio": "BELA CRUZ",
+      "votos": 2,
+      "pos": 87,
+      "candidatos": 265,
+      "nominais": 16246
+     },
+     {
+      "municipio": "FRECHEIRINHA",
+      "votos": 1,
+      "pos": 83,
+      "candidatos": 265,
+      "nominais": 10402
+     },
+     {
+      "municipio": "GENERAL SAMPAIO",
+      "votos": 1,
+      "pos": 87,
+      "candidatos": 265,
+      "nominais": 6279
+     },
+     {
+      "municipio": "SENADOR POMPEU",
+      "votos": 1,
+      "pos": 112,
+      "candidatos": 265,
+      "nominais": 15629
+     },
+     {
+      "municipio": "MORAÚJO",
+      "votos": 1,
+      "pos": 74,
+      "candidatos": 265,
+      "nominais": 6097
+     },
+     {
+      "municipio": "MERUOCA",
+      "votos": 1,
+      "pos": 96,
+      "candidatos": 265,
+      "nominais": 10053
+     },
+     {
+      "municipio": "PEREIRO",
+      "votos": 1,
+      "pos": 94,
+      "candidatos": 265,
+      "nominais": 10493
+     },
+     {
+      "municipio": "PORANGA",
+      "votos": 1,
+      "pos": 68,
+      "candidatos": 265,
+      "nominais": 7652
+     },
+     {
+      "municipio": "MUCAMBO",
+      "votos": 1,
+      "pos": 69,
+      "candidatos": 265,
+      "nominais": 9336
+     },
+     {
+      "municipio": "PORTEIRAS",
+      "votos": 1,
+      "pos": 86,
+      "candidatos": 265,
+      "nominais": 11051
+     },
+     {
+      "municipio": "ASSARÉ",
+      "votos": 1,
+      "pos": 97,
+      "candidatos": 265,
+      "nominais": 13470
+     },
+     {
+      "municipio": "CATARINA",
+      "votos": 1,
+      "pos": 75,
+      "candidatos": 265,
+      "nominais": 6829
+     },
+     {
+      "municipio": "UMARI",
+      "votos": 1,
+      "pos": 63,
+      "candidatos": 265,
+      "nominais": 4954
+     },
+     {
+      "municipio": "MASSAPÊ",
+      "votos": 1,
+      "pos": 106,
+      "candidatos": 265,
+      "nominais": 24773
+     },
+     {
+      "municipio": "PIQUET CARNEIRO",
+      "votos": 1,
+      "pos": 87,
+      "candidatos": 265,
+      "nominais": 8680
+     },
+     {
+      "municipio": "ORÓS",
+      "votos": 1,
+      "pos": 92,
+      "candidatos": 265,
+      "nominais": 13028
+     },
+     {
+      "municipio": "NOVA OLINDA",
+      "votos": 1,
+      "pos": 93,
+      "candidatos": 265,
+      "nominais": 9746
+     },
+     {
+      "municipio": "AIUABA",
+      "votos": 1,
+      "pos": 77,
+      "candidatos": 265,
+      "nominais": 8465
+     },
+     {
+      "municipio": "ARARENDÁ",
+      "votos": 1,
+      "pos": 66,
+      "candidatos": 265,
+      "nominais": 7670
+     },
+     {
+      "municipio": "BANABUIÚ",
+      "votos": 1,
+      "pos": 107,
+      "candidatos": 265,
+      "nominais": 12456
+     }
+    ]
+   }
+  ],
+  "2024": [
+   {
+    "sq": "60001939492",
+    "urna": "DANILO LOPES",
+    "numero": "55999",
+    "partido": "PSD",
+    "situacao": "SUPLENTE",
+    "cargo": "Vereador",
+    "turno": "1",
+    "total": 8862,
+    "pos_estado": 39,
+    "candidatos_estado": 11617,
+    "municipios_com_voto": 1,
+    "municipios_total": 184,
+    "primeiro_lugar_em": [],
+    "municipios": [
+     {
+      "municipio": "FORTALEZA",
+      "votos": 8862,
+      "pos": 39,
+      "candidatos": 735,
+      "nominais": 1271903
+     }
+    ]
+   }
+  ],
+  "2022": [
+   {
+    "sq": "60001634412",
+    "urna": "DANILO LOPES",
+    "numero": "70007",
+    "partido": "AVANTE",
+    "situacao": "SUPLENTE",
+    "cargo": "Deputado Estadual",
+    "turno": "1",
+    "total": 15573,
+    "pos_estado": 82,
+    "candidatos_estado": 514,
+    "municipios_com_voto": 164,
+    "municipios_total": 184,
+    "primeiro_lugar_em": [],
+    "municipios": [
+     {
+      "municipio": "FORTALEZA",
+      "votos": 11718,
+      "pos": 32,
+      "candidatos": 514,
+      "nominais": 1285074
+     },
+     {
+      "municipio": "CAUCAIA",
+      "votos": 396,
+      "pos": 66,
+      "candidatos": 514,
+      "nominais": 164312
+     },
+     {
+      "municipio": "MARACANAÚ",
+      "votos": 186,
+      "pos": 74,
+      "candidatos": 514,
+      "nominais": 122656
+     },
+     {
+      "municipio": "SOBRAL",
+      "votos": 152,
+      "pos": 61,
+      "candidatos": 514,
+      "nominais": 98107
+     },
+     {
+      "municipio": "QUIXERAMOBIM",
+      "votos": 130,
+      "pos": 40,
+      "candidatos": 514,
+      "nominais": 40974
+     },
+     {
+      "municipio": "VÁRZEA ALEGRE",
+      "votos": 120,
+      "pos": 22,
+      "candidatos": 514,
+      "nominais": 20482
+     },
+     {
+      "municipio": "EUSÉBIO",
+      "votos": 120,
+      "pos": 35,
+      "candidatos": 514,
+      "nominais": 36413
+     },
+     {
+      "municipio": "MARANGUAPE",
+      "votos": 117,
+      "pos": 45,
+      "candidatos": 514,
+      "nominais": 58737
+     },
+     {
+      "municipio": "ARACATI",
+      "votos": 104,
+      "pos": 29,
+      "candidatos": 514,
+      "nominais": 39892
+     },
+     {
+      "municipio": "JUAZEIRO DO NORTE",
+      "votos": 89,
+      "pos": 93,
+      "candidatos": 514,
+      "nominais": 125127
+     },
+     {
+      "municipio": "QUIXADÁ",
+      "votos": 88,
+      "pos": 51,
+      "candidatos": 514,
+      "nominais": 38583
+     },
+     {
+      "municipio": "GUARACIABA DO NORTE",
+      "votos": 76,
+      "pos": 25,
+      "candidatos": 514,
+      "nominais": 20508
+     },
+     {
+      "municipio": "PACATUBA",
+      "votos": 73,
+      "pos": 54,
+      "candidatos": 514,
+      "nominais": 36740
+     },
+     {
+      "municipio": "CANINDÉ",
+      "votos": 63,
+      "pos": 57,
+      "candidatos": 514,
+      "nominais": 39929
+     },
+     {
+      "municipio": "ITAPIPOCA",
+      "votos": 58,
+      "pos": 63,
+      "candidatos": 514,
+      "nominais": 68736
+     },
+     {
+      "municipio": "TIANGUÁ",
+      "votos": 54,
+      "pos": 48,
+      "candidatos": 514,
+      "nominais": 38075
+     },
+     {
+      "municipio": "MORADA NOVA",
+      "votos": 54,
+      "pos": 51,
+      "candidatos": 514,
+      "nominais": 38777
+     },
+     {
+      "municipio": "AQUIRAZ",
+      "votos": 51,
+      "pos": 68,
+      "candidatos": 514,
+      "nominais": 44268
+     },
+     {
+      "municipio": "PARACURU",
+      "votos": 48,
+      "pos": 46,
+      "candidatos": 514,
+      "nominais": 19285
+     },
+     {
+      "municipio": "AMONTADA",
+      "votos": 48,
+      "pos": 42,
+      "candidatos": 514,
+      "nominais": 23127
+     },
+     {
+      "municipio": "ALTANEIRA",
+      "votos": 48,
+      "pos": 6,
+      "candidatos": 514,
+      "nominais": 4347
+     },
+     {
+      "municipio": "BATURITÉ",
+      "votos": 45,
+      "pos": 35,
+      "candidatos": 514,
+      "nominais": 18863
+     },
+     {
+      "municipio": "CASCAVEL",
+      "votos": 44,
+      "pos": 60,
+      "candidatos": 514,
+      "nominais": 40166
+     },
+     {
+      "municipio": "PENTECOSTE",
+      "votos": 40,
+      "pos": 49,
+      "candidatos": 514,
+      "nominais": 21890
+     },
+     {
+      "municipio": "CRATO",
+      "votos": 39,
+      "pos": 76,
+      "candidatos": 514,
+      "nominais": 66700
+     },
+     {
+      "municipio": "JAGUARUANA",
+      "votos": 38,
+      "pos": 43,
+      "candidatos": 514,
+      "nominais": 19201
+     },
+     {
+      "municipio": "BEBERIBE",
+      "votos": 38,
+      "pos": 71,
+      "candidatos": 514,
+      "nominais": 31269
+     },
+     {
+      "municipio": "LIMOEIRO DO NORTE",
+      "votos": 38,
+      "pos": 45,
+      "candidatos": 514,
+      "nominais": 34005
+     },
+     {
+      "municipio": "ACARAÚ",
+      "votos": 37,
+      "pos": 35,
+      "candidatos": 514,
+      "nominais": 30565
+     },
+     {
+      "municipio": "CRATEÚS",
+      "votos": 35,
+      "pos": 52,
+      "candidatos": 514,
+      "nominais": 38678
+     },
+     {
+      "municipio": "REDENÇÃO",
+      "votos": 34,
+      "pos": 57,
+      "candidatos": 514,
+      "nominais": 15731
+     },
+     {
+      "municipio": "IGUATU",
+      "votos": 33,
+      "pos": 60,
+      "candidatos": 514,
+      "nominais": 49757
+     },
+     {
+      "municipio": "PACAJUS",
+      "votos": 33,
+      "pos": 84,
+      "candidatos": 514,
+      "nominais": 36075
+     },
+     {
+      "municipio": "JATI",
+      "votos": 32,
+      "pos": 14,
+      "candidatos": 514,
+      "nominais": 4454
+     },
+     {
+      "municipio": "CHOROZINHO",
+      "votos": 30,
+      "pos": 31,
+      "candidatos": 514,
+      "nominais": 12338
+     },
+     {
+      "municipio": "ARACOIABA",
+      "votos": 30,
+      "pos": 44,
+      "candidatos": 514,
+      "nominais": 17755
+     },
+     {
+      "municipio": "JAGUARETAMA",
+      "votos": 29,
+      "pos": 25,
+      "candidatos": 514,
+      "nominais": 10516
+     },
+     {
+      "municipio": "IPU",
+      "votos": 29,
+      "pos": 33,
+      "candidatos": 514,
+      "nominais": 20886
+     },
+     {
+      "municipio": "BOA VIAGEM",
+      "votos": 28,
+      "pos": 44,
+      "candidatos": 514,
+      "nominais": 28481
+     },
+     {
+      "municipio": "RUSSAS",
+      "votos": 28,
+      "pos": 84,
+      "candidatos": 514,
+      "nominais": 41024
+     },
+     {
+      "municipio": "CARIRÉ",
+      "votos": 28,
+      "pos": 25,
+      "candidatos": 514,
+      "nominais": 9620
+     },
+     {
+      "municipio": "CARIDADE",
+      "votos": 25,
+      "pos": 32,
+      "candidatos": 514,
+      "nominais": 12274
+     },
+     {
+      "municipio": "SÃO GONÇALO DO AMARANTE",
+      "votos": 24,
+      "pos": 73,
+      "candidatos": 514,
+      "nominais": 18353
+     },
+     {
+      "municipio": "TRAIRI",
+      "votos": 23,
+      "pos": 77,
+      "candidatos": 514,
+      "nominais": 32640
+     },
+     {
+      "municipio": "PARAIPABA",
+      "votos": 23,
+      "pos": 58,
+      "candidatos": 514,
+      "nominais": 18416
+     },
+     {
+      "municipio": "ITAITINGA",
+      "votos": 22,
+      "pos": 90,
+      "candidatos": 514,
+      "nominais": 21653
+     },
+     {
+      "municipio": "RERIUTABA",
+      "votos": 21,
+      "pos": 36,
+      "candidatos": 514,
+      "nominais": 10450
+     },
+     {
+      "municipio": "HORIZONTE",
+      "votos": 21,
+      "pos": 86,
+      "candidatos": 514,
+      "nominais": 40837
+     },
+     {
+      "municipio": "VIÇOSA DO CEARÁ",
+      "votos": 21,
+      "pos": 48,
+      "candidatos": 514,
+      "nominais": 30519
+     },
+     {
+      "municipio": "SÃO BENEDITO",
+      "votos": 21,
+      "pos": 45,
+      "candidatos": 514,
+      "nominais": 22238
+     },
+     {
+      "municipio": "CRUZ",
+      "votos": 20,
+      "pos": 36,
+      "candidatos": 514,
+      "nominais": 14417
+     },
+     {
+      "municipio": "NOVA RUSSAS",
+      "votos": 19,
+      "pos": 48,
+      "candidatos": 514,
+      "nominais": 16318
+     },
+     {
+      "municipio": "OCARA",
+      "votos": 19,
+      "pos": 64,
+      "candidatos": 514,
+      "nominais": 17732
+     },
+     {
+      "municipio": "TAUÁ",
+      "votos": 19,
+      "pos": 54,
+      "candidatos": 514,
+      "nominais": 30849
+     },
+     {
+      "municipio": "URUOCA",
+      "votos": 19,
+      "pos": 19,
+      "candidatos": 514,
+      "nominais": 7739
+     },
+     {
+      "municipio": "SENADOR POMPEU",
+      "votos": 19,
+      "pos": 51,
+      "candidatos": 514,
+      "nominais": 14173
+     },
+     {
+      "municipio": "LAVRAS DA MANGABEIRA",
+      "votos": 19,
+      "pos": 41,
+      "candidatos": 514,
+      "nominais": 15826
+     },
+     {
+      "municipio": "PINDORETAMA",
+      "votos": 18,
+      "pos": 60,
+      "candidatos": 514,
+      "nominais": 13409
+     },
+     {
+      "municipio": "GRANJA",
+      "votos": 18,
+      "pos": 34,
+      "candidatos": 514,
+      "nominais": 27520
+     },
+     {
+      "municipio": "ITAREMA",
+      "votos": 18,
+      "pos": 58,
+      "candidatos": 514,
+      "nominais": 21222
+     },
+     {
+      "municipio": "GUAIÚBA",
+      "votos": 17,
+      "pos": 57,
+      "candidatos": 514,
+      "nominais": 14439
+     },
+     {
+      "municipio": "ITAPAJÉ",
+      "votos": 17,
+      "pos": 72,
+      "candidatos": 514,
+      "nominais": 27805
+     },
+     {
+      "municipio": "JAGUARIBE",
+      "votos": 17,
+      "pos": 53,
+      "candidatos": 514,
+      "nominais": 19707
+     },
+     {
+      "municipio": "MULUNGU",
+      "votos": 16,
+      "pos": 24,
+      "candidatos": 514,
+      "nominais": 6098
+     },
+     {
+      "municipio": "BARREIRA",
+      "votos": 16,
+      "pos": 42,
+      "candidatos": 514,
+      "nominais": 13275
+     },
+     {
+      "municipio": "APUIARÉS",
+      "votos": 16,
+      "pos": 41,
+      "candidatos": 514,
+      "nominais": 8726
+     },
+     {
+      "municipio": "FORTIM",
+      "votos": 15,
+      "pos": 40,
+      "candidatos": 514,
+      "nominais": 11399
+     },
+     {
+      "municipio": "MASSAPÊ",
+      "votos": 15,
+      "pos": 51,
+      "candidatos": 514,
+      "nominais": 21317
+     },
+     {
+      "municipio": "SANTANA DO ACARAÚ",
+      "votos": 15,
+      "pos": 53,
+      "candidatos": 514,
+      "nominais": 17796
+     },
+     {
+      "municipio": "ICÓ",
+      "votos": 15,
+      "pos": 58,
+      "candidatos": 514,
+      "nominais": 33457
+     },
+     {
+      "municipio": "IBARETAMA",
+      "votos": 15,
+      "pos": 36,
+      "candidatos": 514,
+      "nominais": 9242
+     },
+     {
+      "municipio": "CAPISTRANO",
+      "votos": 14,
+      "pos": 56,
+      "candidatos": 514,
+      "nominais": 11339
+     },
+     {
+      "municipio": "PEDRA BRANCA",
+      "votos": 14,
+      "pos": 50,
+      "candidatos": 514,
+      "nominais": 22850
+     },
+     {
+      "municipio": "JIJOCA DE JERICOACOARA",
+      "votos": 14,
+      "pos": 36,
+      "candidatos": 514,
+      "nominais": 12622
+     },
+     {
+      "municipio": "ACOPIARA",
+      "votos": 13,
+      "pos": 76,
+      "candidatos": 514,
+      "nominais": 24850
+     },
+     {
+      "municipio": "PARAMBU",
+      "votos": 13,
+      "pos": 40,
+      "candidatos": 514,
+      "nominais": 17268
+     },
+     {
+      "municipio": "AURORA",
+      "votos": 13,
+      "pos": 34,
+      "candidatos": 514,
+      "nominais": 12710
+     },
+     {
+      "municipio": "PACOTI",
+      "votos": 12,
+      "pos": 54,
+      "candidatos": 514,
+      "nominais": 7193
+     },
+     {
+      "municipio": "PALMÁCIA",
+      "votos": 12,
+      "pos": 45,
+      "candidatos": 514,
+      "nominais": 6533
+     },
+     {
+      "municipio": "MOMBAÇA",
+      "votos": 12,
+      "pos": 71,
+      "candidatos": 514,
+      "nominais": 20289
+     },
+     {
+      "municipio": "IPUEIRAS",
+      "votos": 12,
+      "pos": 52,
+      "candidatos": 514,
+      "nominais": 19641
+     },
+     {
+      "municipio": "ITAPIÚNA",
+      "votos": 12,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 10899
+     },
+     {
+      "municipio": "MARCO",
+      "votos": 11,
+      "pos": 50,
+      "candidatos": 514,
+      "nominais": 15375
+     },
+     {
+      "municipio": "CAMPOS SALES",
+      "votos": 11,
+      "pos": 42,
+      "candidatos": 514,
+      "nominais": 13455
+     },
+     {
+      "municipio": "JAGUARIBARA",
+      "votos": 11,
+      "pos": 28,
+      "candidatos": 514,
+      "nominais": 6100
+     },
+     {
+      "municipio": "IRAUÇUBA",
+      "votos": 10,
+      "pos": 56,
+      "candidatos": 514,
+      "nominais": 13837
+     },
+     {
+      "municipio": "PALHANO",
+      "votos": 10,
+      "pos": 41,
+      "candidatos": 514,
+      "nominais": 6695
+     },
+     {
+      "municipio": "FORQUILHA",
+      "votos": 10,
+      "pos": 39,
+      "candidatos": 514,
+      "nominais": 13344
+     },
+     {
+      "municipio": "BELA CRUZ",
+      "votos": 10,
+      "pos": 56,
+      "candidatos": 514,
+      "nominais": 13264
+     },
+     {
+      "municipio": "BARBALHA",
+      "votos": 10,
+      "pos": 94,
+      "candidatos": 514,
+      "nominais": 33167
+     },
+     {
+      "municipio": "SANTA QUITÉRIA",
+      "votos": 10,
+      "pos": 78,
+      "candidatos": 514,
+      "nominais": 22724
+     },
+     {
+      "municipio": "ALTO SANTO",
+      "votos": 9,
+      "pos": 47,
+      "candidatos": 514,
+      "nominais": 8767
+     },
+     {
+      "municipio": "ITAIÇABA",
+      "votos": 9,
+      "pos": 35,
+      "candidatos": 514,
+      "nominais": 5239
+     },
+     {
+      "municipio": "CAMOCIM",
+      "votos": 9,
+      "pos": 81,
+      "candidatos": 514,
+      "nominais": 33178
+     },
+     {
+      "municipio": "FRECHEIRINHA",
+      "votos": 8,
+      "pos": 42,
+      "candidatos": 514,
+      "nominais": 8442
+     },
+     {
+      "municipio": "MISSÃO VELHA",
+      "votos": 8,
+      "pos": 71,
+      "candidatos": 514,
+      "nominais": 19409
+     },
+     {
+      "municipio": "INDEPENDÊNCIA",
+      "votos": 8,
+      "pos": 66,
+      "candidatos": 514,
+      "nominais": 14461
+     },
+     {
+      "municipio": "NOVO ORIENTE",
+      "votos": 8,
+      "pos": 57,
+      "candidatos": 514,
+      "nominais": 14316
+     },
+     {
+      "municipio": "PEREIRO",
+      "votos": 8,
+      "pos": 40,
+      "candidatos": 514,
+      "nominais": 9579
+     },
+     {
+      "municipio": "ITATIRA",
+      "votos": 8,
+      "pos": 49,
+      "candidatos": 514,
+      "nominais": 12533
+     },
+     {
+      "municipio": "QUIXERÉ",
+      "votos": 7,
+      "pos": 65,
+      "candidatos": 514,
+      "nominais": 12989
+     },
+     {
+      "municipio": "TABULEIRO DO NORTE",
+      "votos": 7,
+      "pos": 79,
+      "candidatos": 514,
+      "nominais": 17403
+     },
+     {
+      "municipio": "SÃO LUÍS DO CURU",
+      "votos": 7,
+      "pos": 61,
+      "candidatos": 514,
+      "nominais": 7130
+     },
+     {
+      "municipio": "BANABUIÚ",
+      "votos": 7,
+      "pos": 66,
+      "candidatos": 514,
+      "nominais": 10920
+     },
+     {
+      "municipio": "COREAÚ",
+      "votos": 7,
+      "pos": 64,
+      "candidatos": 514,
+      "nominais": 13125
+     },
+     {
+      "municipio": "IBIAPINA",
+      "votos": 7,
+      "pos": 68,
+      "candidatos": 514,
+      "nominais": 11803
+     },
+     {
+      "municipio": "ARATUBA",
+      "votos": 6,
+      "pos": 65,
+      "candidatos": 514,
+      "nominais": 8229
+     },
+     {
+      "municipio": "GUARAMIRANGA",
+      "votos": 6,
+      "pos": 61,
+      "candidatos": 514,
+      "nominais": 4117
+     },
+     {
+      "municipio": "UBAJARA",
+      "votos": 6,
+      "pos": 84,
+      "candidatos": 514,
+      "nominais": 16569
+     },
+     {
+      "municipio": "ACARAPE",
+      "votos": 6,
+      "pos": 87,
+      "candidatos": 514,
+      "nominais": 8519
+     },
+     {
+      "municipio": "SOLONÓPOLE",
+      "votos": 6,
+      "pos": 47,
+      "candidatos": 514,
+      "nominais": 10448
+     },
+     {
+      "municipio": "CHORÓ",
+      "votos": 6,
+      "pos": 61,
+      "candidatos": 514,
+      "nominais": 8213
+     },
+     {
+      "municipio": "MAURITI",
+      "votos": 5,
+      "pos": 77,
+      "candidatos": 514,
+      "nominais": 23373
+     },
+     {
+      "municipio": "UMIRIM",
+      "votos": 5,
+      "pos": 94,
+      "candidatos": 514,
+      "nominais": 10587
+     },
+     {
+      "municipio": "ORÓS",
+      "votos": 5,
+      "pos": 53,
+      "candidatos": 514,
+      "nominais": 12156
+     },
+     {
+      "municipio": "TAMBORIL",
+      "votos": 5,
+      "pos": 66,
+      "candidatos": 514,
+      "nominais": 14742
+     },
+     {
+      "municipio": "POTIRETAMA",
+      "votos": 5,
+      "pos": 28,
+      "candidatos": 514,
+      "nominais": 4533
+     },
+     {
+      "municipio": "CARNAUBAL",
+      "votos": 5,
+      "pos": 47,
+      "candidatos": 514,
+      "nominais": 8591
+     },
+     {
+      "municipio": "IBICUITINGA",
+      "votos": 5,
+      "pos": 72,
+      "candidatos": 514,
+      "nominais": 8795
+     },
+     {
+      "municipio": "HIDROLÂNDIA",
+      "votos": 5,
+      "pos": 68,
+      "candidatos": 514,
+      "nominais": 10557
+     },
+     {
+      "municipio": "VARJOTA",
+      "votos": 4,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 11083
+     },
+     {
+      "municipio": "JARDIM",
+      "votos": 4,
+      "pos": 74,
+      "candidatos": 514,
+      "nominais": 13594
+     },
+     {
+      "municipio": "MILAGRES",
+      "votos": 4,
+      "pos": 80,
+      "candidatos": 514,
+      "nominais": 14728
+     },
+     {
+      "municipio": "ARARIPE",
+      "votos": 4,
+      "pos": 65,
+      "candidatos": 514,
+      "nominais": 10996
+     },
+     {
+      "municipio": "MERUOCA",
+      "votos": 4,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 8499
+     },
+     {
+      "municipio": "CATARINA",
+      "votos": 4,
+      "pos": 50,
+      "candidatos": 514,
+      "nominais": 5843
+     },
+     {
+      "municipio": "MONSENHOR TABOSA",
+      "votos": 4,
+      "pos": 60,
+      "candidatos": 514,
+      "nominais": 9829
+     },
+     {
+      "municipio": "ICAPUÍ",
+      "votos": 4,
+      "pos": 79,
+      "candidatos": 514,
+      "nominais": 12496
+     },
+     {
+      "municipio": "MORAÚJO",
+      "votos": 4,
+      "pos": 39,
+      "candidatos": 514,
+      "nominais": 5521
+     },
+     {
+      "municipio": "BARRO",
+      "votos": 4,
+      "pos": 65,
+      "candidatos": 514,
+      "nominais": 10673
+     },
+     {
+      "municipio": "MUCAMBO",
+      "votos": 3,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 7600
+     },
+     {
+      "municipio": "QUIXELÔ",
+      "votos": 3,
+      "pos": 57,
+      "candidatos": 514,
+      "nominais": 10440
+     },
+     {
+      "municipio": "SENADOR SÁ",
+      "votos": 3,
+      "pos": 36,
+      "candidatos": 514,
+      "nominais": 4953
+     },
+     {
+      "municipio": "MILHÃ",
+      "votos": 3,
+      "pos": 77,
+      "candidatos": 514,
+      "nominais": 7993
+     },
+     {
+      "municipio": "ALCÂNTARAS",
+      "votos": 3,
+      "pos": 56,
+      "candidatos": 514,
+      "nominais": 6334
+     },
+     {
+      "municipio": "URUBURETAMA",
+      "votos": 3,
+      "pos": 122,
+      "candidatos": 514,
+      "nominais": 12061
+     },
+     {
+      "municipio": "TEJUÇUOCA",
+      "votos": 3,
+      "pos": 99,
+      "candidatos": 514,
+      "nominais": 11124
+     },
+     {
+      "municipio": "NOVA OLINDA",
+      "votos": 3,
+      "pos": 76,
+      "candidatos": 514,
+      "nominais": 8215
+     },
+     {
+      "municipio": "PARAMOTI",
+      "votos": 2,
+      "pos": 108,
+      "candidatos": 514,
+      "nominais": 7139
+     },
+     {
+      "municipio": "PENAFORTE",
+      "votos": 2,
+      "pos": 46,
+      "candidatos": 514,
+      "nominais": 5751
+     },
+     {
+      "municipio": "PORTEIRAS",
+      "votos": 2,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 9417
+     },
+     {
+      "municipio": "IRACEMA",
+      "votos": 2,
+      "pos": 81,
+      "candidatos": 514,
+      "nominais": 8008
+     },
+     {
+      "municipio": "CATUNDA",
+      "votos": 2,
+      "pos": 69,
+      "candidatos": 514,
+      "nominais": 6199
+     },
+     {
+      "municipio": "MORRINHOS",
+      "votos": 2,
+      "pos": 115,
+      "candidatos": 514,
+      "nominais": 12662
+     },
+     {
+      "municipio": "TURURU",
+      "votos": 2,
+      "pos": 134,
+      "candidatos": 514,
+      "nominais": 10221
+     },
+     {
+      "municipio": "ASSARÉ",
+      "votos": 2,
+      "pos": 93,
+      "candidatos": 514,
+      "nominais": 11787
+     },
+     {
+      "municipio": "ARNEIROZ",
+      "votos": 2,
+      "pos": 62,
+      "candidatos": 514,
+      "nominais": 4674
+     },
+     {
+      "municipio": "GENERAL SAMPAIO",
+      "votos": 2,
+      "pos": 95,
+      "candidatos": 514,
+      "nominais": 5235
+     },
+     {
+      "municipio": "CEDRO",
+      "votos": 2,
+      "pos": 121,
+      "candidatos": 514,
+      "nominais": 13390
+     },
+     {
+      "municipio": "PACUJÁ",
+      "votos": 2,
+      "pos": 58,
+      "candidatos": 514,
+      "nominais": 4219
+     },
+     {
+      "municipio": "PORANGA",
+      "votos": 1,
+      "pos": 96,
+      "candidatos": 514,
+      "nominais": 6341
+     },
+     {
+      "municipio": "MIRAÍMA",
+      "votos": 1,
+      "pos": 148,
+      "candidatos": 514,
+      "nominais": 8406
+     },
+     {
+      "municipio": "ARARENDÁ",
+      "votos": 1,
+      "pos": 91,
+      "candidatos": 514,
+      "nominais": 6375
+     },
+     {
+      "municipio": "SALITRE",
+      "votos": 1,
+      "pos": 94,
+      "candidatos": 514,
+      "nominais": 9592
+     },
+     {
+      "municipio": "CROATÁ",
+      "votos": 1,
+      "pos": 102,
+      "candidatos": 514,
+      "nominais": 9174
+     },
+     {
+      "municipio": "DEPUTADO IRAPUAN PINHEIRO",
+      "votos": 1,
+      "pos": 91,
+      "candidatos": 514,
+      "nominais": 5232
+     },
+     {
+      "municipio": "POTENGI",
+      "votos": 1,
+      "pos": 94,
+      "candidatos": 514,
+      "nominais": 4997
+     },
+     {
+      "municipio": "JUCÁS",
+      "votos": 1,
+      "pos": 131,
+      "candidatos": 514,
+      "nominais": 11860
+     },
+     {
+      "municipio": "MADALENA",
+      "votos": 1,
+      "pos": 135,
+      "candidatos": 514,
+      "nominais": 10018
+     },
+     {
+      "municipio": "CARIRIAÇU",
+      "votos": 1,
+      "pos": 140,
+      "candidatos": 514,
+      "nominais": 16643
+     },
+     {
+      "municipio": "FARIAS BRITO",
+      "votos": 1,
+      "pos": 108,
+      "candidatos": 514,
+      "nominais": 11648
+     },
+     {
+      "municipio": "GRANJEIRO",
+      "votos": 1,
+      "pos": 79,
+      "candidatos": 514,
+      "nominais": 3945
+     },
+     {
+      "municipio": "GROAÍRAS",
+      "votos": 1,
+      "pos": 112,
+      "candidatos": 514,
+      "nominais": 5989
+     },
+     {
+      "municipio": "PIQUET CARNEIRO",
+      "votos": 1,
+      "pos": 126,
+      "candidatos": 514,
+      "nominais": 7976
+     }
+    ]
+   }
+  ],
+  "2020": [
+   {
+    "sq": "60000680180",
+    "urna": "DANILO LOPES",
+    "numero": "19119",
+    "partido": "PODE",
+    "situacao": "ELEITO POR MÉDIA",
+    "cargo": "Vereador",
+    "turno": "1",
+    "total": 3782,
+    "pos_estado": 95,
+    "candidatos_estado": 13830,
+    "municipios_com_voto": 1,
+    "municipios_total": 184,
+    "primeiro_lugar_em": [],
+    "municipios": [
+     {
+      "municipio": "FORTALEZA",
+      "votos": 3782,
+      "pos": 89,
+      "candidatos": 1294,
+      "nominais": 1202365
+     }
+    ]
+   }
+  ]
+ }
+}
