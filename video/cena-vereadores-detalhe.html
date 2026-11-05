@@ -16,7 +16,7 @@
  * Números de dados-vereadores-detalhe.json (TSE 2020 e 2024, votação por local), gerado por video/dados-vereadores-detalhe.mjs. */
 (async () => {
   const W = 1080, H = 1920, cv = document.getElementById("c"), ctx = cv.getContext("2d");
-  const D = await (await fetch("dados-vereadores-detalhe.json")).json(), G = await (await fetch("geo-ce.json")).json();
+  const D = await (await fetch(new URLSearchParams(location.search).get("d") || "dados-vereadores-detalhe.json")).json(), G = await (await fetch("geo-ce.json")).json();
   const AC = "#d4ff3a", FONT = "Inter, 'Inter Display', sans-serif";
   const fmt = (n) => Math.round(n).toLocaleString("pt-BR");
   const pc = (x, d = 1) => (x * 100).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
@@ -28,9 +28,9 @@
   const vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
   let seed = 11; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  const CORP = { MDB: "#ff7a45", PSB: AC, PT: "#ff4d6d" }, corP = (p) => CORP[p] || "#a8a59c";
-  const E = D.eleitos, NE = E.length, LOC = Object.fromEntries(D.locais.map((l) => [l.id, l]));
-  const nomeC = (n) => { const f = n.split(" ")[0]; return n.length > 13 && E.filter((x) => x.urna.split(" ")[0] === f).length === 1 ? f : n; };
+  const CORP = { MDB: "#ff7a45", PSB: AC, PT: "#ff4d6d", PDT: "#4da3ff", PSDB: "#7cc4ff", PL: "#3b6dff", PP: "#8bd3ff", PSD: "#f5c542", "União": "#2dd4bf", Republicanos: "#a78bfa", Cidadania: "#f472b6", Podemos: "#34d399", Avante: "#fb923c", Solidariedade: "#facc15", "PC do B": "#ef4444", PV: "#4ade80", PRD: "#e7e5df", DC: "#d4a72c", Novo: "#ff9f1c" }, corP = (p) => CORP[p] || "#a8a59c";
+  const E = D.eleitos.map((e) => ({ ...e, locais: e.locais.filter(([l]) => D.locais.some((x) => x.id === l)) })), NE = E.length, LOC = Object.fromEntries(D.locais.map((l) => [l.id, l])), CID = D.municipio || "Varjota";
+  const nomeC = (n) => { const ws = n.split(" "), f = /^(dra?\.?|prof(essora?)?\.?|pastor|irm[aã]o?)$/i.test(ws[0]) && ws[1] ? ws[1] : ws[0]; if (f !== ws[0]) return n.length > 13 ? f : n; return n.length > 13 && E.filter((x) => x.urna.split(" ")[0] === f).length === 1 ? f : n; };
   const curtoLocal = (n) => n.split("-")[0].replace(/^E\.?\s?e\.?\s?[a-z]*\.?\s*/i, "").replace(/^E\.e\.[a-z]+\.\s*/i, "").trim();
 
   // ---------------- tempos (cena): abertura, visão geral, 1 bloco por vereador, quociente, final
@@ -38,8 +38,8 @@
   window.DURACAO = FIM;
 
   // ---------------- mapa de Varjota (polígono IBGE + locais de votação)
-  const poly = G.poly["2313955"], lons = poly.map((p) => p[0]), lats = poly.map((p) => p[1]);
-  const kx = Math.cos((4.17 * Math.PI) / 180), B = [Math.min(...lons), Math.max(...lons), Math.min(...lats), Math.max(...lats)];
+  const poly = G.poly[D.cd_ibge || "2313955"], lons = poly.map((p) => p[0]), lats = poly.map((p) => p[1]);
+  const kx = Math.cos((Math.abs((Math.min(...lats) + Math.max(...lats)) / 2) * Math.PI) / 180), B = [Math.min(...lons), Math.max(...lons), Math.min(...lats), Math.max(...lats)];
   const vista = (cx, cy, w, h) => { const s = Math.min(w / ((B[1] - B[0]) * kx), h / (B[3] - B[2])); return { cx, cy, s, lon: (B[0] + B[1]) / 2, lat: (B[2] + B[3]) / 2 }; };
   const proj = (lon, lat, v) => [v.cx + (lon - v.lon) * v.s * kx, v.cy - (lat - v.lat) * v.s];
   const V0 = vista(W / 2, 1010, 900, 760), VV = vista(W / 2, 1330, 760, 330);
@@ -68,13 +68,14 @@
   const totLoc = {}; E.forEach((e) => e.locais.forEach(([l, x]) => (totLoc[l] = (totLoc[l] || 0) + x)));
   forma.mapa = completa(nuvens(Object.entries(totLoc).sort((a, b) => b[1] - a[1]), V0, N * 0.9, AC, false));
   // visão geral: 11 anéis (4-4-3)
-  const GRADE = E.map((e, i) => { const row = i < 4 ? 0 : i < 8 ? 1 : 2, col = row < 2 ? i % 4 : i - 8, nrow = row < 2 ? 4 : 3; return [W / 2 + (col - (nrow - 1) / 2) * 230, 640 + row * 300]; });
-  forma.grade = completa(E.flatMap((e, i) => anel(GRADE[i][0], GRADE[i][1], 88, Math.floor((N * 0.9) / NE), corP(e.partido), 14)));
+  const LIN = NE <= 9 ? [3, 3, 3] : NE <= 12 ? [4, 4, NE - 8] : [5, 4, NE - 9], GS = NE > 12 ? 190 : 230, GR = NE > 12 ? 62 : 72;
+  const GRADE = E.map((e, i) => { let row = 0, j = i; while (j >= LIN[row]) { j -= LIN[row]; row++; } return [W / 2 + (j - (LIN[row] - 1) / 2) * GS, 640 + row * 300]; });
+  forma.grade = completa(E.flatMap((e, i) => anel(GRADE[i][0], GRADE[i][1], GR + 16, Math.floor((N * 0.9) / NE), corP(e.partido), 14)));
   // um por vereador: anel na foto + nuvens no mapa
   const FY = 520;
   E.forEach((e, k) => { forma["v" + k] = completa([...anel(W / 2, FY, 160, Math.floor(N * 0.42), corP(e.partido), 26), ...nuvens(e.locais, VV, N * 0.5, corP(e.partido), true)]); });
   // quociente: barras horizontais
-  const QB0 = 360, QBW = 600, QY0 = 470, QDY = 96, vmax = E[0].votos, QEX = QB0 + (QBW * D.qe) / vmax;
+  const QB0 = 360, QBW = 600, QY0 = 470, QDY = Math.min(96, 1040 / NE), vmax = Math.max(E[0].votos, D.qe) * 1.04, QEX = QB0 + (QBW * D.qe) / vmax;
   forma.quociente = completa(E.flatMap((e, i) => { const w = (QBW * e.votos) / vmax, n = Math.floor((N * 0.92 * e.votos) / E.reduce((t, x) => t + x.votos, 0)); return Array.from({ length: n }, () => [QB0 + rnd() * w, QY0 + i * QDY + gauss() * 9, corP(e.partido)]); }));
   forma.fim = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 300 + gauss() * 18; return [W / 2 + Math.cos(a) * r, 900 + Math.sin(a) * r * 0.32, rnd() < 0.3 ? AC : "#fff"]; });
 
@@ -136,17 +137,19 @@
     particulas(t);
 
     // 1 · abertura
-    texto("OS 11 VEREADORES", W / 2, 290, { tam: 92, w: 900, ls: 4, a: vis(t, 0.5, 7.1), brilho: 30, sobe: 1 });
-    texto("VARJOTA · ELEITOS EM 2024 · UM POR UM", W / 2, 360, { tam: 30, w: 700, ls: 4, a: vis(t, 1.1, 7.1), cor: AC });
+    texto(`OS ${NE} VEREADORES`, W / 2, 290, { tam: 88, w: 900, ls: 4, a: vis(t, 0.5, 7.1), brilho: 30, sobe: 1 });
+    texto(`${CID.toUpperCase()} · ELEITOS EM 2024 · UM POR UM`, W / 2, 360, { tam: 30, w: 700, ls: 4, a: vis(t, 1.1, 7.1), cor: AC });
     texto("cada ponto = votos dos eleitos, por local de votação", W / 2, 1520, { tam: 28, w: 500, a: vis(t, 2.4, 7.1), cor: "#8d8b82" });
     // 2 · visão geral
-    texto("CÂMARA DE VARJOTA", W / 2, 280, { tam: 40, w: 800, ls: 8, a: vis(t, 7.4, 15.1), cor: "#bdbab0" });
+    texto(`CÂMARA DE ${CID.toUpperCase()}`, W / 2, 280, { tam: 40, w: 800, ls: 8, a: vis(t, 7.4, 15.1), cor: "#bdbab0" });
     texto("2025–2028", W / 2, 360, { tam: 60, w: 900, a: vis(t, 7.6, 15.1), cor: AC, brilho: 18 });
     E.forEach((e, i) => { const a = vis(t, 8 + i * 0.12, 15.1), [x, y] = GRADE[i];
-      foto(e.urna, x, y, 72, a, corP(e.partido)); texto(nomeC(e.urna), x, y + 128, { tam: 24, w: 800, a }); texto(fmt(e.votos), x, y + 160, { tam: 24, w: 700, a, cor: corP(e.partido) }); });
+      foto(e.urna, x, y, GR, a, corP(e.partido)); texto(nomeC(e.urna), x, y + GR + 56, { tam: 24, w: 800, a }); texto(fmt(e.votos), x, y + GR + 88, { tam: 24, w: 700, a, cor: corP(e.partido) }); });
     { const a = vis(t, 10.5, 15.1); const ps = {}; E.forEach((e) => (ps[e.partido] = (ps[e.partido] || 0) + 1));
       texto(`${D.candidatos} candidatos · ${D.cadeiras} cadeiras · ${E.filter((e) => !e.eleito20).length} caras novas`, W / 2, 1600, { tam: 36, w: 700, a, sobe: 1 });
-      const lst = Object.entries(ps).sort((a, b) => b[1] - a[1]); lst.forEach(([p, n], i) => texto(`${p} ${n}`, W / 2 + (i - (lst.length - 1) / 2) * 220, 1690, { tam: 44, w: 900, a, cor: corP(p) }));
+      const lst = Object.entries(ps).sort((a, b) => b[1] - a[1]), tam = lst.length > 4 ? 34 : 44; ctx.save(); ctx.font = `900 ${tam}px ${FONT}`; const ws = lst.map(([p, n]) => ctx.measureText(`${p} ${n}`).width + 44); ctx.restore();
+      const linhas = [[]]; let acc = 0; lst.forEach((x, i) => { if (acc + ws[i] > W - 160 && linhas[linhas.length - 1].length) { linhas.push([]); acc = 0; } linhas[linhas.length - 1].push(i); acc += ws[i]; });
+      linhas.forEach((ln, r) => { const tot = ln.reduce((t2, i) => t2 + ws[i], 0); let x = W / 2 - tot / 2; ln.forEach((i) => { texto(`${lst[i][0]} ${lst[i][1]}`, x + ws[i] / 2, 1680 + r * (tam + 14) - (linhas.length - 1) * 20, { tam, w: 900, a, cor: corP(lst[i][0]) }); x += ws[i]; }); });
       texto(`quociente: ${fmt(D.qe)} votos`, W / 2, 1770, { tam: 30, w: 600, a, cor: "#bdbab0" }); }
     // 3 · um por um
     E.forEach((e, k) => { const t0 = TV(k), t1 = TV(k + 1) + 0.1, cor = corP(e.partido);
@@ -160,13 +163,14 @@
       texto("votos", W / 2, 945, { tam: 34, w: 700, al: "left", a: vis(t, t0 + 1.3, t1) }); texto(`${pc(e.pct)} dos válidos`, W / 2, 985, { tam: 26, w: 500, al: "left", a: vis(t, t0 + 1.3, t1), cor: "#bdbab0" });
       const [h1, h2, hc] = hist(e); texto(h1, W / 2, 1060, { tam: 32, w: 700, a: vis(t, t0 + 2.2, t1) }); texto(h2, W / 2, 1102, { tam: 26, w: 700, a: vis(t, t0 + 2.3, t1), cor: hc });
       // reduto no mapa
-      const top = e.locais[0], [rx, ry] = proj(LOC[top[0]].lon, LOC[top[0]].lat, VV), ar = vis(t, t0 + 3.2, t1);
+      const top = e.locais[0], [rx, ry] = top ? proj(LOC[top[0]].lon, LOC[top[0]].lat, VV) : [0, 0], ar = top ? vis(t, t0 + 3.2, t1) : 0;
       if (ar > 0.01) { ctx.save(); ctx.globalAlpha = ar; ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; const lx = rx < W / 2 ? 150 : W - 150; ctx.beginPath(); ctx.arc(rx, ry, 18 + 4 * Math.sin(t * 4), 0, 6.283); ctx.stroke(); ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(lx, 1180); ctx.stroke(); ctx.restore();
         texto(`maior reduto: ${fmt(top[1])}`, rx < W / 2 ? 110 : W - 110, 1168, { tam: 26, w: 800, al: rx < W / 2 ? "left" : "right", a: ar }); }
       // três números
-      const tiles = [[`${e.venceu} de ${D.nlocais}`, "locais onde\nliderou a votação"], [pc(e.conc, 0), `dos votos vieram de\n${curtoLocal(e.top[0].nome)}`], [pc(e.top3, 0), "dos votos nos\n3 maiores locais"]];
+      const tiles = [[`${e.venceu} de ${D.nlocais}`, "locais onde\nliderou a votação"], [pc(e.conc, 0), `dos votos vieram de\n${(e.top[0].curto || curtoLocal(e.top[0].nome)).slice(0, 30)}`], [pc(e.top3, 0), "dos votos nos\n3 maiores locais"]];
       tiles.forEach(([v, d], i) => { const a = vis(t, t0 + 4 + i * 0.35, t1), x = 110 + i * 293; caixa(x, 1560, 273, 220, a, cor + "66");
         texto(v, x + 136, 1650, { tam: 52, w: 900, a, cor: i === 0 ? cor : "#f3f1ea" }); texto(d, x + 136, 1700, { tam: 21, w: 600, a, cor: "#bdbab0", lh: 26 }); });
+      if (e.obs) texto(e.obs, W / 2, 1495, { tam: 26, w: 800, a: vis(t, t0 + 5, t1), cor: "#ffd166" });
       if (!e.qp) texto("entrou pela média (sobras)", W / 2, 1530, { tam: 26, w: 700, a: vis(t, t0 + 5, t1), cor: "#bdbab0" });
     });
     // 4 · quociente
@@ -174,14 +178,14 @@
     texto("sozinho, com os próprios votos", W / 2, 335, { tam: 28, w: 500, a: vis(t, TQ + 0.6, TF), cor: "#8d8b82" });
     E.forEach((e, i) => { const a = vis(t, TQ + 0.8 + i * 0.08, TF), y = QY0 + i * QDY; foto(e.urna, 130, y, 32, a, corP(e.partido));
       texto(nomeC(e.urna), 180, y + 9, { tam: 26, w: 800, al: "left", a }); texto(fmt(e.votos), QB0 + (QBW * e.votos) / vmax + 14, y + 9, { tam: 24, w: 800, al: "left", a, cor: e.votos >= D.qe ? AC : "#bdbab0" }); });
-    texto(`quociente ${fmt(D.qe)}`, QEX, QY0 - 75, { tam: 26, w: 800, a: vis(t, TQ + 1.4, TF) });
-    { const so = E.filter((e) => e.votos >= D.qe); texto(`Só ${so.length === 1 ? so[0].urna : so.length + " eleitos"} passou sozinha.\nOs outros ${NE - so.length} dependeram do partido.`.replace("passou sozinha", so.length === 1 ? "passou sozinha" : "passaram sozinhos"), W / 2, 1620, { tam: 42, w: 800, a: vis(t, TQ + 3, TF), sobe: 1 }); }
+    texto(`quociente ${fmt(D.qe)}`, Math.min(QEX, W - 130), QY0 - 75, { tam: 26, w: 800, a: vis(t, TQ + 1.4, TF) });
+    { const so = E.filter((e) => e.votos >= D.qe); texto(so.length === 0 ? "Nenhum eleito passou do quociente\ncom os próprios votos." : `${so.length === 1 ? "Só " + so[0].urna + " passou" : so.map((e) => nomeC(e.urna)).join(" e ") + " passaram"}.\n${NE - so.length === 1 ? "Só 1 dependeu" : "Os outros " + (NE - so.length) + " dependeram"} do partido.`, W / 2, 1620, { tam: 42, w: 800, a: vis(t, TQ + 3, TF), sobe: 1 }); }
     // 5 · final
     texto("2028", W / 2, 920, { tam: 150, w: 900, a: vis(t, TF + 0.3, FIM, 0.6), cor: AC, brilho: 30, sobe: 1 });
     texto(`≈ ${fmt(Math.round(D.qe2028 / 50) * 50)} votos por cadeira`, W / 2, 1180, { tam: 46, w: 800, a: vis(t, TF + 0.7, FIM, 0.6) });
     texto("tendência do quociente, não pesquisa", W / 2, 1235, { tam: 26, w: 500, a: vis(t, TF + 0.9, FIM, 0.6), cor: "#8d8b82" });
     texto("PLENÁRIA CE", W / 2, 360, { tam: 104, w: 900, ls: 8, a: vis(t, TF + 1.5, FIM, 0.6), brilho: 30, sobe: 1 });
-    texto("Inteligência eleitoral de Varjota", W / 2, 430, { tam: 38, w: 600, a: vis(t, TF + 1.8, FIM, 0.6) });
+    texto(`Inteligência eleitoral de ${CID}`, W / 2, 430, { tam: 38, w: 600, a: vis(t, TF + 1.8, FIM, 0.6) });
     texto("Fonte: TSE · eleições municipais 2020 e 2024", W / 2, 1700, { tam: 24, w: 500, a: vis(t, TF + 2, FIM, 0.6), cor: "#8d8b82" });
     marca();
   };

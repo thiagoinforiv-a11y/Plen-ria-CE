@@ -1,0 +1,3245 @@
+{
+ "municipio": "Santa Quitéria",
+ "cd_ibge": "2312205",
+ "cadeiras": 13,
+ "validos": 27601,
+ "qe": 2123,
+ "nlocais": 53,
+ "candidatos": 79,
+ "locais": [
+  {
+   "id": "54-1023",
+   "nome": "Creche Geracina Lôbo de Mesquita",
+   "curto": "Creche Geracina Lôbo de Mesquita",
+   "bairro": "Centro",
+   "lat": -4.33477,
+   "lon": -40.155117
+  },
+  {
+   "id": "54-1031",
+   "nome": "Colégio Paulo Freire",
+   "curto": "Colégio Paulo Freire",
+   "bairro": "Centro",
+   "lat": -4.330862,
+   "lon": -40.157668
+  },
+  {
+   "id": "54-1058",
+   "nome": "Escola de Ensino Fundamental Francisca Geracina Lôbo Mesquita",
+   "curto": "Francisca Geracina Lôbo Mesquita",
+   "bairro": "Centro",
+   "lat": -4.333429,
+   "lon": -40.153444
+  },
+  {
+   "id": "54-1090",
+   "nome": "Colégio Dom Bosco",
+   "curto": "Colégio Dom Bosco",
+   "bairro": "Boa Vida",
+   "lat": -4.325629,
+   "lon": -40.151592
+  },
+  {
+   "id": "54-1104",
+   "nome": "E. E. M. Aracy Magalhães Martins",
+   "curto": "Aracy Magalhães Martins",
+   "bairro": "Piracicaba",
+   "lat": -4.34139,
+   "lon": -40.154079
+  },
+  {
+   "id": "54-1112",
+   "nome": "E.m.e.f. João Rodrigues Pinto",
+   "curto": "João Rodrigues Pinto",
+   "bairro": "Boa Vida",
+   "lat": -4.325926,
+   "lon": -40.151058
+  },
+  {
+   "id": "54-1120",
+   "nome": "E. E. F. M. Júlia Catunda",
+   "curto": "Júlia Catunda",
+   "bairro": "Centro",
+   "lat": -4.332147,
+   "lon": -40.155191
+  },
+  {
+   "id": "54-1139",
+   "nome": "E.e.e.p. Monsenhor Luiz Ximenes Freire",
+   "curto": "Monsenhor Luiz Ximenes Freire",
+   "bairro": "Boa Vida",
+   "lat": -4.319165,
+   "lon": -40.15336
+  },
+  {
+   "id": "54-1155",
+   "nome": "Escola Municipal Quiteriense",
+   "curto": "Quiteriense",
+   "bairro": "Piracicaba",
+   "lat": -4.338337,
+   "lon": -40.155824
+  },
+  {
+   "id": "54-1171",
+   "nome": "Escola Municipal Justino Ferreira de Mendonça",
+   "curto": "Justino Ferreira de Mendonça",
+   "bairro": "Povoado Purga de Leite",
+   "lat": -4.730734,
+   "lon": -39.838037
+  },
+  {
+   "id": "54-1198",
+   "nome": "Escola Municipal Francisco de Assis Parente",
+   "curto": "Francisco de Assis Parente",
+   "bairro": "Vila São Damião",
+   "lat": -4.301903,
+   "lon": -40.043428
+  },
+  {
+   "id": "54-1260",
+   "nome": "Escola de Ensino Médio João de Mesquita Braga",
+   "curto": "João de Mesquita Braga",
+   "bairro": "Distrito de Trapiá",
+   "lat": -4.191886,
+   "lon": -40.322694
+  },
+  {
+   "id": "54-1341",
+   "nome": "E.e.f. Salustiano Pinto",
+   "curto": "Salustiano Pinto",
+   "bairro": "Distrito de Macaraú",
+   "lat": -4.10194,
+   "lon": -40.427979
+  },
+  {
+   "id": "54-1350",
+   "nome": "Escola Municipal Maria de Nazaré",
+   "curto": "Maria de Nazaré",
+   "bairro": "Distrito de Malhada Grande",
+   "lat": -4.070787,
+   "lon": -40.31614
+  },
+  {
+   "id": "54-1376",
+   "nome": "Escola Municipal Antonia Donato de Araújo",
+   "curto": "Antonia Donato de Araújo",
+   "bairro": "Povoado Areal",
+   "lat": -3.981021,
+   "lon": -40.332454
+  },
+  {
+   "id": "54-1406",
+   "nome": "E.m.e.f. Professor Paulo Bertoldo Duarte",
+   "curto": "Professor Paulo Bertoldo Duarte",
+   "bairro": "Distrito de Raimundo Martins",
+   "lat": -4.64793,
+   "lon": -40.068347
+  },
+  {
+   "id": "54-1430",
+   "nome": "E.e.f. Dona Livramento Araújo",
+   "curto": "Dona Livramento Araújo",
+   "bairro": "Distrito de Lisieux",
+   "lat": -4.002543,
+   "lon": -40.188709
+  },
+  {
+   "id": "54-1449",
+   "nome": "Escola Municipal João Rodrigues Martins",
+   "curto": "João Rodrigues Martins",
+   "bairro": "Povoado São José dos Mocós",
+   "lat": -4.353702,
+   "lon": -39.760082
+  },
+  {
+   "id": "54-1481",
+   "nome": "E.m.e.f. Raimundo Alves Freitas",
+   "curto": "Raimundo Alves Freitas",
+   "bairro": "Vila de Sangradouro",
+   "lat": -4.216262,
+   "lon": -40.433532
+  },
+  {
+   "id": "54-1490",
+   "nome": "Escola Municipal Gustavo Rodrigues Rosa",
+   "curto": "Gustavo Rodrigues Rosa",
+   "bairro": "Distrito de Logradouro",
+   "lat": -4.176151,
+   "lon": -40.095344
+  },
+  {
+   "id": "54-1511",
+   "nome": "Escola Municipal Coronel Artur Themóteo",
+   "curto": "Coronel Artur Themóteo",
+   "bairro": "Assentamento Saco do Belém",
+   "lat": -4.45928,
+   "lon": -39.799969
+  },
+  {
+   "id": "54-1554",
+   "nome": "Escola Municipal Conceição Catunda",
+   "curto": "Conceição Catunda",
+   "bairro": "Flores",
+   "lat": -4.332251,
+   "lon": -40.147838
+  },
+  {
+   "id": "54-1562",
+   "nome": "E. E. F. Luiz Dermeval de Andrade",
+   "curto": "Luiz Dermeval de Andrade",
+   "bairro": "Primavera",
+   "lat": -4.333492,
+   "lon": -40.162049
+  },
+  {
+   "id": "54-1600",
+   "nome": "Associação Maria da Cunha",
+   "curto": "Associação Maria da Cunha",
+   "bairro": "Povoado Passagem",
+   "lat": -4.050466,
+   "lon": -40.284048
+  },
+  {
+   "id": "54-1627",
+   "nome": "E. M. Adoralice Pereira Damasceno",
+   "curto": "Adoralice Pereira Damasceno",
+   "bairro": "Povoado Permuta",
+   "lat": -4.344659,
+   "lon": -40.278042
+  },
+  {
+   "id": "54-1643",
+   "nome": "Escola Municipal Francisco Chagas de Oliveira",
+   "curto": "Francisco Chagas de Oliveira",
+   "bairro": "Assentamento Três Barras",
+   "lat": -4.748103,
+   "lon": -39.866369
+  },
+  {
+   "id": "54-1660",
+   "nome": "Igreja São João Batista",
+   "curto": "Igreja São João Batista",
+   "bairro": "Povoado de Muribeca",
+   "lat": -4.424185,
+   "lon": -39.904317
+  },
+  {
+   "id": "54-1740",
+   "nome": "Capela Nossa Senhora de Fátima",
+   "curto": "Capela Nossa Senhora de Fátima",
+   "bairro": "Povoado Palestina",
+   "lat": -4.675206,
+   "lon": -39.768151
+  },
+  {
+   "id": "54-1759",
+   "nome": "Escola Municipal Francisco Paiva Rodrigues",
+   "curto": "Francisco Paiva Rodrigues",
+   "bairro": "Vila Riacho das Pedras",
+   "lat": -4.585054,
+   "lon": -39.947193
+  },
+  {
+   "id": "54-1783",
+   "nome": "Escola Municipal Luiz Menezes Pimentel",
+   "curto": "Luiz Menezes Pimentel",
+   "bairro": "Assentamento Morrinhos",
+   "lat": -4.570553,
+   "lon": -39.825363
+  },
+  {
+   "id": "54-1791",
+   "nome": "Posto Beneficio Inss (especial)",
+   "curto": "Posto Beneficio Inss (especial)",
+   "bairro": "Piracicaba",
+   "lat": -4.340571,
+   "lon": -40.154129
+  },
+  {
+   "id": "54-1805",
+   "nome": "Escola Municipal Senador Paula Pessoa",
+   "curto": "Senador Paula Pessoa",
+   "bairro": "Vila São Cosme",
+   "lat": -4.245493,
+   "lon": -40.065918
+  },
+  {
+   "id": "54-1813",
+   "nome": "Escola Municipal Benedita Albuquerque",
+   "curto": "Benedita Albuquerque",
+   "bairro": "Assentamento Valparaíso",
+   "lat": -4.239652,
+   "lon": -39.806652
+  },
+  {
+   "id": "54-1821",
+   "nome": "Escola Municipal Francisco Galdino",
+   "curto": "Francisco Galdino",
+   "bairro": "Povoado Santa Rita dos Galdinos",
+   "lat": -4.327901,
+   "lon": -39.821229
+  },
+  {
+   "id": "54-1830",
+   "nome": "Escola Municipal Nossa Senhora da Paz",
+   "curto": "Nossa Senhora da Paz",
+   "bairro": "Assentamento Riacho Novo",
+   "lat": -4.176296,
+   "lon": -40.247823
+  },
+  {
+   "id": "54-1848",
+   "nome": "Escola Municipal Pompeu Arruda",
+   "curto": "Pompeu Arruda",
+   "bairro": "Assentamento Galante",
+   "lat": -4.151103,
+   "lon": -39.931011
+  },
+  {
+   "id": "54-1856",
+   "nome": "E. E. F. Deputado Chico Figueredo",
+   "curto": "Deputado Chico Figueredo",
+   "bairro": "Pereiros",
+   "lat": -4.340961,
+   "lon": -40.145885
+  },
+  {
+   "id": "54-1864",
+   "nome": "Escola Maria Almerinda Jucá Magalhães",
+   "curto": "Maria Almerinda Jucá Magalhães",
+   "bairro": "Cohab",
+   "lat": -4.3236,
+   "lon": -40.159542
+  },
+  {
+   "id": "54-1880",
+   "nome": "Escola Dona Iolanda Queiroz",
+   "curto": "Dona Iolanda Queiroz",
+   "bairro": "Assentamento Juá",
+   "lat": -4.288342,
+   "lon": -39.944272
+  },
+  {
+   "id": "54-1899",
+   "nome": "E. E. F. Ernesto Rodrigues de Mesquita",
+   "curto": "Ernesto Rodrigues de Mesquita",
+   "bairro": "Assentamento Grossos",
+   "lat": -4.384635,
+   "lon": -39.89295
+  },
+  {
+   "id": "54-1902",
+   "nome": "Escola Municipal José Inácio de Mesquita",
+   "curto": "José Inácio de Mesquita",
+   "bairro": "Povoado Poço Comprido",
+   "lat": -4.252051,
+   "lon": -40.310321
+  },
+  {
+   "id": "54-1929",
+   "nome": "E. E. F. Paulo Ferreira Braga",
+   "curto": "Paulo Ferreira Braga",
+   "bairro": "Assentamento Raposa",
+   "lat": -4.084111,
+   "lon": -40.142375
+  },
+  {
+   "id": "54-1937",
+   "nome": "E. E. F. Francisco Agostinho Feijó",
+   "curto": "Francisco Agostinho Feijó",
+   "bairro": "Assentamento Groaíras",
+   "lat": -4.013972,
+   "lon": -40.302955
+  },
+  {
+   "id": "54-1945",
+   "nome": "Escola Cosme e Damião",
+   "curto": "Cosme e Damião",
+   "bairro": "Povoado Picos de Baixo",
+   "lat": -4.099017,
+   "lon": -40.258518
+  },
+  {
+   "id": "54-1953",
+   "nome": "E. E. F. Abílio Mesquita Martins",
+   "curto": "Abílio Mesquita Martins",
+   "bairro": "Assentamento Alegre Tatajuba",
+   "lat": -4.699721,
+   "lon": -39.849101
+  },
+  {
+   "id": "54-1970",
+   "nome": "E. E. F. Heloísa Miranda de Paula Pessoa",
+   "curto": "Heloísa Miranda de Paula Pessoa",
+   "bairro": "Povoado Boa Vista dos Mirandas",
+   "lat": -4.450747,
+   "lon": -40.044551
+  },
+  {
+   "id": "54-1996",
+   "nome": "Creche Comunitaria Maria do Socorro Pessoa Catunda",
+   "curto": "Creche Comunitaria Maria do Socorro Pessoa Catunda",
+   "bairro": "Pereiros",
+   "lat": -4.34265,
+   "lon": -40.144149
+  },
+  {
+   "id": "54-2003",
+   "nome": "E. E. F. Neide Ribeiro Ponte Arruda",
+   "curto": "Neide Ribeiro Ponte Arruda",
+   "bairro": "Assentamento Batoque",
+   "lat": -4.177712,
+   "lon": -39.999241
+  },
+  {
+   "id": "54-2011",
+   "nome": "Capela Santo Antônio",
+   "curto": "Capela Santo Antônio",
+   "bairro": "Povoado Quiéto",
+   "lat": -4.702863,
+   "lon": -39.912537
+  },
+  {
+   "id": "54-2020",
+   "nome": "Escola Municipal Haroldo Martins",
+   "curto": "Haroldo Martins",
+   "bairro": "Assentamento Barra do Juá",
+   "lat": -4.313026,
+   "lon": -39.86118
+  },
+  {
+   "id": "54-2038",
+   "nome": "E.e.m. Maria Neusa Araújo Moura",
+   "curto": "Maria Neusa Araújo Moura",
+   "bairro": "Distrito de Lisieux",
+   "lat": -4.001001,
+   "lon": -40.182605
+  },
+  {
+   "id": "54-2100",
+   "nome": "Posto de Saúde Francisca Juracir Martins Pinto",
+   "curto": "Posto de Saúde Francisca Juracir Martins Pinto",
+   "bairro": "Flores",
+   "lat": -4.332585,
+   "lon": -40.145433
+  },
+  {
+   "id": "54-2119",
+   "nome": "Creche Dona Júlia de Mesquita Lôbo",
+   "curto": "Creche Dona Júlia de Mesquita Lôbo",
+   "bairro": "Piracicaba",
+   "lat": -4.336502,
+   "lon": -40.155347
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Danio Braga",
+   "partido": "PSB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030973.jpg",
+   "votos": 1887,
+   "pos": 1,
+   "pct": 0.06836708814898011,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 970,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1511",
+     245
+    ],
+    [
+     "54-1856",
+     122
+    ],
+    [
+     "54-1104",
+     82
+    ],
+    [
+     "54-1830",
+     80
+    ],
+    [
+     "54-1562",
+     76
+    ],
+    [
+     "54-1864",
+     76
+    ],
+    [
+     "54-2038",
+     74
+    ],
+    [
+     "54-1996",
+     69
+    ],
+    [
+     "54-1945",
+     68
+    ],
+    [
+     "54-1430",
+     64
+    ],
+    [
+     "54-1554",
+     60
+    ],
+    [
+     "54-1139",
+     55
+    ],
+    [
+     "54-1090",
+     55
+    ],
+    [
+     "54-1821",
+     48
+    ],
+    [
+     "54-1031",
+     48
+    ],
+    [
+     "54-2100",
+     44
+    ],
+    [
+     "54-1058",
+     44
+    ],
+    [
+     "54-1350",
+     40
+    ],
+    [
+     "54-1341",
+     39
+    ],
+    [
+     "54-2119",
+     39
+    ],
+    [
+     "54-2020",
+     35
+    ],
+    [
+     "54-1260",
+     32
+    ],
+    [
+     "54-1880",
+     32
+    ],
+    [
+     "54-1112",
+     32
+    ],
+    [
+     "54-1120",
+     30
+    ],
+    [
+     "54-1490",
+     29
+    ],
+    [
+     "54-1660",
+     24
+    ],
+    [
+     "54-1155",
+     24
+    ],
+    [
+     "54-1813",
+     23
+    ],
+    [
+     "54-1023",
+     23
+    ],
+    [
+     "54-1198",
+     22
+    ],
+    [
+     "54-1449",
+     20
+    ],
+    [
+     "54-1805",
+     18
+    ],
+    [
+     "54-1899",
+     14
+    ],
+    [
+     "54-1937",
+     13
+    ],
+    [
+     "54-1929",
+     13
+    ],
+    [
+     "54-1759",
+     12
+    ],
+    [
+     "54-1627",
+     10
+    ],
+    [
+     "54-1970",
+     8
+    ],
+    [
+     "54-1953",
+     8
+    ],
+    [
+     "54-2011",
+     5
+    ],
+    [
+     "54-1783",
+     5
+    ],
+    [
+     "54-2003",
+     5
+    ],
+    [
+     "54-1171",
+     4
+    ],
+    [
+     "54-1406",
+     4
+    ],
+    [
+     "54-1481",
+     3
+    ],
+    [
+     "54-1791",
+     3
+    ],
+    [
+     "54-1376",
+     3
+    ],
+    [
+     "54-1643",
+     2
+    ],
+    [
+     "54-1902",
+     2
+    ],
+    [
+     "54-1600",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Municipal Coronel Artur Themóteo",
+     "curto": "Coronel Artur Themóteo",
+     "bairro": "Assentamento Saco do Belém",
+     "votos": 245
+    },
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 122
+    },
+    {
+     "nome": "E. E. M. Aracy Magalhães Martins",
+     "curto": "Aracy Magalhães Martins",
+     "bairro": "Piracicaba",
+     "votos": 82
+    }
+   ],
+   "conc": 0.12983571807101218,
+   "top3": 0.2379438261791203,
+   "venceu": 8,
+   "presente": 51
+  },
+  {
+   "urna": "Joel Barroso",
+   "partido": "PSB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030969.jpg",
+   "votos": 1767,
+   "pos": 2,
+   "pct": 0.06401941958624688,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 869,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1430",
+     351
+    ],
+    [
+     "54-2038",
+     237
+    ],
+    [
+     "54-1260",
+     209
+    ],
+    [
+     "54-1376",
+     109
+    ],
+    [
+     "54-1554",
+     61
+    ],
+    [
+     "54-1856",
+     57
+    ],
+    [
+     "54-1562",
+     52
+    ],
+    [
+     "54-1350",
+     51
+    ],
+    [
+     "54-1759",
+     47
+    ],
+    [
+     "54-1104",
+     44
+    ],
+    [
+     "54-1929",
+     42
+    ],
+    [
+     "54-1864",
+     37
+    ],
+    [
+     "54-1406",
+     34
+    ],
+    [
+     "54-1090",
+     32
+    ],
+    [
+     "54-1902",
+     28
+    ],
+    [
+     "54-2119",
+     28
+    ],
+    [
+     "54-1031",
+     27
+    ],
+    [
+     "54-2100",
+     26
+    ],
+    [
+     "54-1023",
+     25
+    ],
+    [
+     "54-1996",
+     23
+    ],
+    [
+     "54-1120",
+     22
+    ],
+    [
+     "54-1937",
+     21
+    ],
+    [
+     "54-1112",
+     20
+    ],
+    [
+     "54-1139",
+     19
+    ],
+    [
+     "54-1481",
+     14
+    ],
+    [
+     "54-1511",
+     14
+    ],
+    [
+     "54-1058",
+     14
+    ],
+    [
+     "54-1155",
+     14
+    ],
+    [
+     "54-1490",
+     13
+    ],
+    [
+     "54-1813",
+     12
+    ],
+    [
+     "54-1899",
+     10
+    ],
+    [
+     "54-1880",
+     9
+    ],
+    [
+     "54-1627",
+     8
+    ],
+    [
+     "54-1198",
+     8
+    ],
+    [
+     "54-1660",
+     6
+    ],
+    [
+     "54-1341",
+     6
+    ],
+    [
+     "54-1953",
+     6
+    ],
+    [
+     "54-2020",
+     6
+    ],
+    [
+     "54-1805",
+     5
+    ],
+    [
+     "54-1848",
+     4
+    ],
+    [
+     "54-1600",
+     3
+    ],
+    [
+     "54-1945",
+     3
+    ],
+    [
+     "54-1449",
+     2
+    ],
+    [
+     "54-2011",
+     2
+    ],
+    [
+     "54-1830",
+     2
+    ],
+    [
+     "54-1821",
+     2
+    ],
+    [
+     "54-1791",
+     1
+    ],
+    [
+     "54-1970",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Dona Livramento Araújo",
+     "curto": "Dona Livramento Araújo",
+     "bairro": "Distrito de Lisieux",
+     "votos": 351
+    },
+    {
+     "nome": "E.e.m. Maria Neusa Araújo Moura",
+     "curto": "Maria Neusa Araújo Moura",
+     "bairro": "Distrito de Lisieux",
+     "votos": 237
+    },
+    {
+     "nome": "Escola de Ensino Médio João de Mesquita Braga",
+     "curto": "João de Mesquita Braga",
+     "bairro": "Distrito de Trapiá",
+     "votos": 209
+    }
+   ],
+   "conc": 0.19864176570458403,
+   "top3": 0.4510469722693831,
+   "venceu": 5,
+   "presente": 48,
+   "obs": "hoje: prefeito (eleito na suplementar de out/2025)"
+  },
+  {
+   "urna": "Cesário Júnior",
+   "partido": "PP",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030530.jpg",
+   "votos": 1545,
+   "pos": 3,
+   "pct": 0.05597623274519039,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1033,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1864",
+     207
+    ],
+    [
+     "54-1929",
+     127
+    ],
+    [
+     "54-1562",
+     102
+    ],
+    [
+     "54-1856",
+     102
+    ],
+    [
+     "54-1090",
+     82
+    ],
+    [
+     "54-1490",
+     70
+    ],
+    [
+     "54-1139",
+     68
+    ],
+    [
+     "54-1554",
+     67
+    ],
+    [
+     "54-1104",
+     67
+    ],
+    [
+     "54-1112",
+     56
+    ],
+    [
+     "54-2119",
+     49
+    ],
+    [
+     "54-1198",
+     47
+    ],
+    [
+     "54-1341",
+     44
+    ],
+    [
+     "54-1155",
+     44
+    ],
+    [
+     "54-1996",
+     40
+    ],
+    [
+     "54-1627",
+     31
+    ],
+    [
+     "54-2100",
+     29
+    ],
+    [
+     "54-1031",
+     28
+    ],
+    [
+     "54-2038",
+     26
+    ],
+    [
+     "54-1260",
+     25
+    ],
+    [
+     "54-1430",
+     23
+    ],
+    [
+     "54-1830",
+     22
+    ],
+    [
+     "54-1023",
+     22
+    ],
+    [
+     "54-1880",
+     21
+    ],
+    [
+     "54-1813",
+     16
+    ],
+    [
+     "54-1945",
+     16
+    ],
+    [
+     "54-1350",
+     15
+    ],
+    [
+     "54-1899",
+     15
+    ],
+    [
+     "54-1120",
+     15
+    ],
+    [
+     "54-1805",
+     14
+    ],
+    [
+     "54-1058",
+     14
+    ],
+    [
+     "54-1481",
+     8
+    ],
+    [
+     "54-1791",
+     5
+    ],
+    [
+     "54-2020",
+     5
+    ],
+    [
+     "54-1821",
+     4
+    ],
+    [
+     "54-1511",
+     3
+    ],
+    [
+     "54-1759",
+     3
+    ],
+    [
+     "54-1449",
+     2
+    ],
+    [
+     "54-1660",
+     2
+    ],
+    [
+     "54-1600",
+     2
+    ],
+    [
+     "54-1953",
+     2
+    ],
+    [
+     "54-2003",
+     2
+    ],
+    [
+     "54-1902",
+     2
+    ],
+    [
+     "54-1970",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Maria Almerinda Jucá Magalhães",
+     "curto": "Maria Almerinda Jucá Magalhães",
+     "bairro": "Cohab",
+     "votos": 207
+    },
+    {
+     "nome": "E. E. F. Paulo Ferreira Braga",
+     "curto": "Paulo Ferreira Braga",
+     "bairro": "Assentamento Raposa",
+     "votos": 127
+    },
+    {
+     "nome": "E. E. F. Luiz Dermeval de Andrade",
+     "curto": "Luiz Dermeval de Andrade",
+     "bairro": "Primavera",
+     "votos": 102
+    }
+   ],
+   "conc": 0.13398058252427184,
+   "top3": 0.2822006472491909,
+   "venceu": 8,
+   "presente": 44
+  },
+  {
+   "urna": "Eliandro Mesquita",
+   "partido": "PSB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030974.jpg",
+   "votos": 1482,
+   "pos": 4,
+   "pct": 0.053693706749755446,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1000,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1856",
+     200
+    ],
+    [
+     "54-1104",
+     125
+    ],
+    [
+     "54-1759",
+     125
+    ],
+    [
+     "54-1996",
+     111
+    ],
+    [
+     "54-1805",
+     87
+    ],
+    [
+     "54-1970",
+     87
+    ],
+    [
+     "54-1945",
+     65
+    ],
+    [
+     "54-1562",
+     55
+    ],
+    [
+     "54-1155",
+     49
+    ],
+    [
+     "54-1554",
+     43
+    ],
+    [
+     "54-1864",
+     42
+    ],
+    [
+     "54-1198",
+     33
+    ],
+    [
+     "54-1090",
+     30
+    ],
+    [
+     "54-2100",
+     29
+    ],
+    [
+     "54-1171",
+     28
+    ],
+    [
+     "54-2119",
+     28
+    ],
+    [
+     "54-1406",
+     28
+    ],
+    [
+     "54-1058",
+     24
+    ],
+    [
+     "54-1350",
+     23
+    ],
+    [
+     "54-1112",
+     23
+    ],
+    [
+     "54-2011",
+     22
+    ],
+    [
+     "54-1643",
+     21
+    ],
+    [
+     "54-1139",
+     21
+    ],
+    [
+     "54-1023",
+     20
+    ],
+    [
+     "54-1031",
+     17
+    ],
+    [
+     "54-1120",
+     17
+    ],
+    [
+     "54-1830",
+     15
+    ],
+    [
+     "54-1953",
+     15
+    ],
+    [
+     "54-1627",
+     12
+    ],
+    [
+     "54-1511",
+     12
+    ],
+    [
+     "54-1791",
+     10
+    ],
+    [
+     "54-1260",
+     10
+    ],
+    [
+     "54-1899",
+     8
+    ],
+    [
+     "54-1490",
+     7
+    ],
+    [
+     "54-1341",
+     7
+    ],
+    [
+     "54-1600",
+     6
+    ],
+    [
+     "54-1449",
+     5
+    ],
+    [
+     "54-1880",
+     4
+    ],
+    [
+     "54-1481",
+     3
+    ],
+    [
+     "54-2038",
+     3
+    ],
+    [
+     "54-1430",
+     2
+    ],
+    [
+     "54-1783",
+     2
+    ],
+    [
+     "54-2003",
+     2
+    ],
+    [
+     "54-1902",
+     2
+    ],
+    [
+     "54-1821",
+     1
+    ],
+    [
+     "54-1937",
+     1
+    ],
+    [
+     "54-1929",
+     1
+    ],
+    [
+     "54-2020",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 200
+    },
+    {
+     "nome": "E. E. M. Aracy Magalhães Martins",
+     "curto": "Aracy Magalhães Martins",
+     "bairro": "Piracicaba",
+     "votos": 125
+    },
+    {
+     "nome": "Escola Municipal Francisco Paiva Rodrigues",
+     "curto": "Francisco Paiva Rodrigues",
+     "bairro": "Vila Riacho das Pedras",
+     "votos": 125
+    }
+   ],
+   "conc": 0.1349527665317139,
+   "top3": 0.30364372469635625,
+   "venceu": 9,
+   "presente": 48
+  },
+  {
+   "urna": "Douglas Lira",
+   "partido": "PP",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030522.jpg",
+   "votos": 1429,
+   "pos": 5,
+   "pct": 0.051773486467881595,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 975,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1511",
+     183
+    ],
+    [
+     "54-1864",
+     112
+    ],
+    [
+     "54-1341",
+     87
+    ],
+    [
+     "54-1856",
+     75
+    ],
+    [
+     "54-1104",
+     72
+    ],
+    [
+     "54-1562",
+     62
+    ],
+    [
+     "54-1090",
+     59
+    ],
+    [
+     "54-1554",
+     54
+    ],
+    [
+     "54-1376",
+     50
+    ],
+    [
+     "54-1139",
+     41
+    ],
+    [
+     "54-1783",
+     41
+    ],
+    [
+     "54-1805",
+     40
+    ],
+    [
+     "54-2038",
+     37
+    ],
+    [
+     "54-1880",
+     37
+    ],
+    [
+     "54-1112",
+     37
+    ],
+    [
+     "54-1155",
+     35
+    ],
+    [
+     "54-1996",
+     33
+    ],
+    [
+     "54-1937",
+     29
+    ],
+    [
+     "54-1929",
+     29
+    ],
+    [
+     "54-2100",
+     28
+    ],
+    [
+     "54-2119",
+     27
+    ],
+    [
+     "54-1430",
+     25
+    ],
+    [
+     "54-1759",
+     23
+    ],
+    [
+     "54-1198",
+     20
+    ],
+    [
+     "54-1120",
+     19
+    ],
+    [
+     "54-1023",
+     17
+    ],
+    [
+     "54-1031",
+     17
+    ],
+    [
+     "54-1260",
+     15
+    ],
+    [
+     "54-1627",
+     15
+    ],
+    [
+     "54-1740",
+     12
+    ],
+    [
+     "54-1813",
+     11
+    ],
+    [
+     "54-1058",
+     10
+    ],
+    [
+     "54-2003",
+     9
+    ],
+    [
+     "54-1490",
+     8
+    ],
+    [
+     "54-1899",
+     8
+    ],
+    [
+     "54-1481",
+     7
+    ],
+    [
+     "54-1830",
+     7
+    ],
+    [
+     "54-1902",
+     7
+    ],
+    [
+     "54-1953",
+     6
+    ],
+    [
+     "54-1449",
+     5
+    ],
+    [
+     "54-1600",
+     5
+    ],
+    [
+     "54-1821",
+     3
+    ],
+    [
+     "54-1848",
+     3
+    ],
+    [
+     "54-2020",
+     2
+    ],
+    [
+     "54-1350",
+     2
+    ],
+    [
+     "54-2011",
+     1
+    ],
+    [
+     "54-1643",
+     1
+    ],
+    [
+     "54-1660",
+     1
+    ],
+    [
+     "54-1791",
+     1
+    ],
+    [
+     "54-1970",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Municipal Coronel Artur Themóteo",
+     "curto": "Coronel Artur Themóteo",
+     "bairro": "Assentamento Saco do Belém",
+     "votos": 183
+    },
+    {
+     "nome": "Escola Maria Almerinda Jucá Magalhães",
+     "curto": "Maria Almerinda Jucá Magalhães",
+     "bairro": "Cohab",
+     "votos": 112
+    },
+    {
+     "nome": "E.e.f. Salustiano Pinto",
+     "curto": "Salustiano Pinto",
+     "bairro": "Distrito de Macaraú",
+     "votos": 87
+    }
+   ],
+   "conc": 0.12806158152554234,
+   "top3": 0.26731980405878236,
+   "venceu": 0,
+   "presente": 50
+  },
+  {
+   "urna": "Jarina Cavalcante",
+   "partido": "PSB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030977.jpg",
+   "votos": 1177,
+   "pos": 6,
+   "pct": 0.04264338248614181,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 661,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1856",
+     153
+    ],
+    [
+     "54-1341",
+     93
+    ],
+    [
+     "54-1996",
+     71
+    ],
+    [
+     "54-1783",
+     67
+    ],
+    [
+     "54-1104",
+     59
+    ],
+    [
+     "54-1562",
+     52
+    ],
+    [
+     "54-1554",
+     43
+    ],
+    [
+     "54-1864",
+     43
+    ],
+    [
+     "54-2119",
+     41
+    ],
+    [
+     "54-1023",
+     36
+    ],
+    [
+     "54-1031",
+     36
+    ],
+    [
+     "54-1430",
+     28
+    ],
+    [
+     "54-2038",
+     28
+    ],
+    [
+     "54-1643",
+     25
+    ],
+    [
+     "54-1171",
+     25
+    ],
+    [
+     "54-1090",
+     24
+    ],
+    [
+     "54-1155",
+     24
+    ],
+    [
+     "54-1120",
+     23
+    ],
+    [
+     "54-1953",
+     22
+    ],
+    [
+     "54-1481",
+     21
+    ],
+    [
+     "54-1260",
+     19
+    ],
+    [
+     "54-1139",
+     19
+    ],
+    [
+     "54-1627",
+     18
+    ],
+    [
+     "54-1198",
+     18
+    ],
+    [
+     "54-1112",
+     18
+    ],
+    [
+     "54-1058",
+     18
+    ],
+    [
+     "54-2100",
+     16
+    ],
+    [
+     "54-2003",
+     15
+    ],
+    [
+     "54-1759",
+     10
+    ],
+    [
+     "54-1899",
+     10
+    ],
+    [
+     "54-1970",
+     10
+    ],
+    [
+     "54-1740",
+     9
+    ],
+    [
+     "54-1490",
+     9
+    ],
+    [
+     "54-2011",
+     9
+    ],
+    [
+     "54-1376",
+     9
+    ],
+    [
+     "54-1791",
+     7
+    ],
+    [
+     "54-1880",
+     7
+    ],
+    [
+     "54-1902",
+     6
+    ],
+    [
+     "54-1449",
+     5
+    ],
+    [
+     "54-1350",
+     4
+    ],
+    [
+     "54-1511",
+     3
+    ],
+    [
+     "54-1660",
+     3
+    ],
+    [
+     "54-1830",
+     3
+    ],
+    [
+     "54-1600",
+     3
+    ],
+    [
+     "54-1937",
+     3
+    ],
+    [
+     "54-2020",
+     3
+    ],
+    [
+     "54-1813",
+     2
+    ],
+    [
+     "54-1805",
+     2
+    ],
+    [
+     "54-1929",
+     2
+    ],
+    [
+     "54-1821",
+     1
+    ],
+    [
+     "54-1848",
+     1
+    ],
+    [
+     "54-1406",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 153
+    },
+    {
+     "nome": "E.e.f. Salustiano Pinto",
+     "curto": "Salustiano Pinto",
+     "bairro": "Distrito de Macaraú",
+     "votos": 93
+    },
+    {
+     "nome": "Creche Comunitaria Maria do Socorro Pessoa Catunda",
+     "curto": "Creche Comunitaria Maria do Socorro Pessoa Catunda",
+     "bairro": "Pereiros",
+     "votos": 71
+    }
+   ],
+   "conc": 0.12999150382327954,
+   "top3": 0.26932880203908244,
+   "venceu": 4,
+   "presente": 52
+  },
+  {
+   "urna": "Pé de Mola",
+   "partido": "PT",
+   "foto": "fotos/ce/santa-quiteria/2024/60002223953.jpeg",
+   "votos": 1085,
+   "pos": 7,
+   "pct": 0.03931016992137966,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 664,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1511",
+     130
+    ],
+    [
+     "54-1198",
+     119
+    ],
+    [
+     "54-1899",
+     119
+    ],
+    [
+     "54-1813",
+     89
+    ],
+    [
+     "54-1805",
+     58
+    ],
+    [
+     "54-1880",
+     53
+    ],
+    [
+     "54-1554",
+     49
+    ],
+    [
+     "54-1856",
+     31
+    ],
+    [
+     "54-1660",
+     28
+    ],
+    [
+     "54-1864",
+     25
+    ],
+    [
+     "54-1430",
+     24
+    ],
+    [
+     "54-1112",
+     23
+    ],
+    [
+     "54-1481",
+     21
+    ],
+    [
+     "54-1104",
+     21
+    ],
+    [
+     "54-1090",
+     20
+    ],
+    [
+     "54-2038",
+     20
+    ],
+    [
+     "54-1929",
+     20
+    ],
+    [
+     "54-2020",
+     20
+    ],
+    [
+     "54-1996",
+     20
+    ],
+    [
+     "54-2100",
+     18
+    ],
+    [
+     "54-1562",
+     17
+    ],
+    [
+     "54-1821",
+     17
+    ],
+    [
+     "54-1155",
+     16
+    ],
+    [
+     "54-2119",
+     15
+    ],
+    [
+     "54-1120",
+     15
+    ],
+    [
+     "54-1139",
+     14
+    ],
+    [
+     "54-1759",
+     13
+    ],
+    [
+     "54-1023",
+     12
+    ],
+    [
+     "54-1058",
+     10
+    ],
+    [
+     "54-1449",
+     8
+    ],
+    [
+     "54-1341",
+     7
+    ],
+    [
+     "54-1031",
+     7
+    ],
+    [
+     "54-1260",
+     6
+    ],
+    [
+     "54-1627",
+     5
+    ],
+    [
+     "54-1490",
+     4
+    ],
+    [
+     "54-1791",
+     3
+    ],
+    [
+     "54-1848",
+     2
+    ],
+    [
+     "54-1937",
+     2
+    ],
+    [
+     "54-1830",
+     1
+    ],
+    [
+     "54-1783",
+     1
+    ],
+    [
+     "54-1970",
+     1
+    ],
+    [
+     "54-2003",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Municipal Coronel Artur Themóteo",
+     "curto": "Coronel Artur Themóteo",
+     "bairro": "Assentamento Saco do Belém",
+     "votos": 130
+    },
+    {
+     "nome": "Escola Municipal Francisco de Assis Parente",
+     "curto": "Francisco de Assis Parente",
+     "bairro": "Vila São Damião",
+     "votos": 119
+    },
+    {
+     "nome": "E. E. F. Ernesto Rodrigues de Mesquita",
+     "curto": "Ernesto Rodrigues de Mesquita",
+     "bairro": "Assentamento Grossos",
+     "votos": 119
+    }
+   ],
+   "conc": 0.11981566820276497,
+   "top3": 0.3391705069124424,
+   "venceu": 4,
+   "presente": 42
+  },
+  {
+   "urna": "Miúdo",
+   "partido": "MDB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002071379.jpg",
+   "votos": 863,
+   "pos": 8,
+   "pct": 0.03126698308032318,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 806,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1430",
+     72
+    ],
+    [
+     "54-1511",
+     63
+    ],
+    [
+     "54-1350",
+     56
+    ],
+    [
+     "54-2038",
+     54
+    ],
+    [
+     "54-1104",
+     47
+    ],
+    [
+     "54-1856",
+     45
+    ],
+    [
+     "54-1562",
+     42
+    ],
+    [
+     "54-1996",
+     32
+    ],
+    [
+     "54-1031",
+     31
+    ],
+    [
+     "54-1864",
+     30
+    ],
+    [
+     "54-2119",
+     27
+    ],
+    [
+     "54-1813",
+     26
+    ],
+    [
+     "54-1090",
+     25
+    ],
+    [
+     "54-1023",
+     23
+    ],
+    [
+     "54-1627",
+     22
+    ],
+    [
+     "54-1759",
+     19
+    ],
+    [
+     "54-1155",
+     19
+    ],
+    [
+     "54-1880",
+     18
+    ],
+    [
+     "54-1058",
+     18
+    ],
+    [
+     "54-2020",
+     17
+    ],
+    [
+     "54-1120",
+     17
+    ],
+    [
+     "54-1821",
+     16
+    ],
+    [
+     "54-1554",
+     15
+    ],
+    [
+     "54-1139",
+     14
+    ],
+    [
+     "54-1376",
+     13
+    ],
+    [
+     "54-1260",
+     11
+    ],
+    [
+     "54-1198",
+     11
+    ],
+    [
+     "54-1902",
+     10
+    ],
+    [
+     "54-1449",
+     9
+    ],
+    [
+     "54-1112",
+     9
+    ],
+    [
+     "54-1481",
+     8
+    ],
+    [
+     "54-1783",
+     8
+    ],
+    [
+     "54-2100",
+     6
+    ],
+    [
+     "54-1899",
+     5
+    ],
+    [
+     "54-1937",
+     5
+    ],
+    [
+     "54-1805",
+     4
+    ],
+    [
+     "54-1830",
+     3
+    ],
+    [
+     "54-1791",
+     3
+    ],
+    [
+     "54-1600",
+     2
+    ],
+    [
+     "54-1945",
+     2
+    ],
+    [
+     "54-2003",
+     2
+    ],
+    [
+     "54-1490",
+     1
+    ],
+    [
+     "54-1970",
+     1
+    ],
+    [
+     "54-1929",
+     1
+    ],
+    [
+     "54-1406",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Dona Livramento Araújo",
+     "curto": "Dona Livramento Araújo",
+     "bairro": "Distrito de Lisieux",
+     "votos": 72
+    },
+    {
+     "nome": "Escola Municipal Coronel Artur Themóteo",
+     "curto": "Coronel Artur Themóteo",
+     "bairro": "Assentamento Saco do Belém",
+     "votos": 63
+    },
+    {
+     "nome": "Escola Municipal Maria de Nazaré",
+     "curto": "Maria de Nazaré",
+     "bairro": "Distrito de Malhada Grande",
+     "votos": 56
+    }
+   ],
+   "conc": 0.08342989571263036,
+   "top3": 0.2213209733487833,
+   "venceu": 0,
+   "presente": 45
+  },
+  {
+   "urna": "Renato Catunda",
+   "partido": "PT",
+   "foto": "fotos/ce/santa-quiteria/2024/60002223954.jpg",
+   "votos": 809,
+   "pos": 9,
+   "pct": 0.029310532227093223,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 738,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1554",
+     78
+    ],
+    [
+     "54-1376",
+     45
+    ],
+    [
+     "54-1856",
+     44
+    ],
+    [
+     "54-1430",
+     41
+    ],
+    [
+     "54-1104",
+     41
+    ],
+    [
+     "54-1090",
+     39
+    ],
+    [
+     "54-1120",
+     37
+    ],
+    [
+     "54-1511",
+     36
+    ],
+    [
+     "54-1341",
+     36
+    ],
+    [
+     "54-1562",
+     35
+    ],
+    [
+     "54-1031",
+     34
+    ],
+    [
+     "54-1481",
+     32
+    ],
+    [
+     "54-2038",
+     32
+    ],
+    [
+     "54-2100",
+     32
+    ],
+    [
+     "54-1112",
+     26
+    ],
+    [
+     "54-2119",
+     24
+    ],
+    [
+     "54-1996",
+     24
+    ],
+    [
+     "54-1058",
+     22
+    ],
+    [
+     "54-1155",
+     21
+    ],
+    [
+     "54-1864",
+     20
+    ],
+    [
+     "54-1848",
+     19
+    ],
+    [
+     "54-1023",
+     18
+    ],
+    [
+     "54-1139",
+     15
+    ],
+    [
+     "54-1490",
+     10
+    ],
+    [
+     "54-1970",
+     6
+    ],
+    [
+     "54-1260",
+     5
+    ],
+    [
+     "54-1350",
+     4
+    ],
+    [
+     "54-1198",
+     4
+    ],
+    [
+     "54-1791",
+     3
+    ],
+    [
+     "54-1880",
+     3
+    ],
+    [
+     "54-1945",
+     3
+    ],
+    [
+     "54-1953",
+     3
+    ],
+    [
+     "54-1937",
+     3
+    ],
+    [
+     "54-1902",
+     3
+    ],
+    [
+     "54-1759",
+     2
+    ],
+    [
+     "54-1805",
+     2
+    ],
+    [
+     "54-1899",
+     2
+    ],
+    [
+     "54-1929",
+     2
+    ],
+    [
+     "54-1813",
+     1
+    ],
+    [
+     "54-2003",
+     1
+    ],
+    [
+     "54-2020",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Municipal Conceição Catunda",
+     "curto": "Conceição Catunda",
+     "bairro": "Flores",
+     "votos": 78
+    },
+    {
+     "nome": "Escola Municipal Antonia Donato de Araújo",
+     "curto": "Antonia Donato de Araújo",
+     "bairro": "Povoado Areal",
+     "votos": 45
+    },
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 44
+    }
+   ],
+   "conc": 0.09641532756489493,
+   "top3": 0.20642768850432633,
+   "venceu": 3,
+   "presente": 41
+  },
+  {
+   "urna": "Lino Paiva",
+   "partido": "PSB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002030971.jpg",
+   "votos": 724,
+   "pos": 10,
+   "pct": 0.026230933661823847,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 633,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1104",
+     69
+    ],
+    [
+     "54-1864",
+     61
+    ],
+    [
+     "54-1139",
+     50
+    ],
+    [
+     "54-1856",
+     49
+    ],
+    [
+     "54-1490",
+     43
+    ],
+    [
+     "54-1562",
+     42
+    ],
+    [
+     "54-1830",
+     42
+    ],
+    [
+     "54-1260",
+     36
+    ],
+    [
+     "54-1090",
+     31
+    ],
+    [
+     "54-1627",
+     29
+    ],
+    [
+     "54-1996",
+     29
+    ],
+    [
+     "54-1112",
+     23
+    ],
+    [
+     "54-1554",
+     22
+    ],
+    [
+     "54-1058",
+     20
+    ],
+    [
+     "54-1155",
+     20
+    ],
+    [
+     "54-1481",
+     16
+    ],
+    [
+     "54-2119",
+     16
+    ],
+    [
+     "54-1120",
+     15
+    ],
+    [
+     "54-1511",
+     14
+    ],
+    [
+     "54-1023",
+     13
+    ],
+    [
+     "54-2100",
+     10
+    ],
+    [
+     "54-1341",
+     8
+    ],
+    [
+     "54-1848",
+     8
+    ],
+    [
+     "54-1791",
+     7
+    ],
+    [
+     "54-1031",
+     6
+    ],
+    [
+     "54-1350",
+     6
+    ],
+    [
+     "54-2020",
+     5
+    ],
+    [
+     "54-1449",
+     4
+    ],
+    [
+     "54-1198",
+     4
+    ],
+    [
+     "54-1821",
+     4
+    ],
+    [
+     "54-1880",
+     4
+    ],
+    [
+     "54-1929",
+     4
+    ],
+    [
+     "54-1813",
+     3
+    ],
+    [
+     "54-1945",
+     3
+    ],
+    [
+     "54-1430",
+     2
+    ],
+    [
+     "54-1805",
+     2
+    ],
+    [
+     "54-1740",
+     1
+    ],
+    [
+     "54-1376",
+     1
+    ],
+    [
+     "54-1970",
+     1
+    ],
+    [
+     "54-1902",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. M. Aracy Magalhães Martins",
+     "curto": "Aracy Magalhães Martins",
+     "bairro": "Piracicaba",
+     "votos": 69
+    },
+    {
+     "nome": "Escola Maria Almerinda Jucá Magalhães",
+     "curto": "Maria Almerinda Jucá Magalhães",
+     "bairro": "Cohab",
+     "votos": 61
+    },
+    {
+     "nome": "E.e.e.p. Monsenhor Luiz Ximenes Freire",
+     "curto": "Monsenhor Luiz Ximenes Freire",
+     "bairro": "Boa Vida",
+     "votos": 50
+    }
+   ],
+   "conc": 0.09530386740331492,
+   "top3": 0.24861878453038674,
+   "venceu": 0,
+   "presente": 40
+  },
+  {
+   "urna": "Dra Emanuela Barbosa",
+   "partido": "Republicanos",
+   "foto": "fotos/ce/santa-quiteria/2024/60002203670.jpg",
+   "votos": 666,
+   "pos": 12,
+   "pct": 0.02412956052316945,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "54-1562",
+     87
+    ],
+    [
+     "54-1856",
+     52
+    ],
+    [
+     "54-1198",
+     49
+    ],
+    [
+     "54-1554",
+     39
+    ],
+    [
+     "54-1104",
+     37
+    ],
+    [
+     "54-1627",
+     36
+    ],
+    [
+     "54-1139",
+     31
+    ],
+    [
+     "54-1090",
+     29
+    ],
+    [
+     "54-1864",
+     29
+    ],
+    [
+     "54-1996",
+     29
+    ],
+    [
+     "54-2100",
+     29
+    ],
+    [
+     "54-1058",
+     29
+    ],
+    [
+     "54-1112",
+     27
+    ],
+    [
+     "54-2119",
+     24
+    ],
+    [
+     "54-1759",
+     20
+    ],
+    [
+     "54-1031",
+     17
+    ],
+    [
+     "54-1155",
+     16
+    ],
+    [
+     "54-1490",
+     15
+    ],
+    [
+     "54-1023",
+     14
+    ],
+    [
+     "54-1120",
+     13
+    ],
+    [
+     "54-1260",
+     7
+    ],
+    [
+     "54-1902",
+     6
+    ],
+    [
+     "54-1783",
+     5
+    ],
+    [
+     "54-1805",
+     4
+    ],
+    [
+     "54-1945",
+     4
+    ],
+    [
+     "54-2038",
+     3
+    ],
+    [
+     "54-1740",
+     2
+    ],
+    [
+     "54-1953",
+     2
+    ],
+    [
+     "54-1880",
+     2
+    ],
+    [
+     "54-1350",
+     2
+    ],
+    [
+     "54-1430",
+     1
+    ],
+    [
+     "54-1449",
+     1
+    ],
+    [
+     "54-1481",
+     1
+    ],
+    [
+     "54-1791",
+     1
+    ],
+    [
+     "54-1821",
+     1
+    ],
+    [
+     "54-1899",
+     1
+    ],
+    [
+     "54-1341",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. F. Luiz Dermeval de Andrade",
+     "curto": "Luiz Dermeval de Andrade",
+     "bairro": "Primavera",
+     "votos": 87
+    },
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 52
+    },
+    {
+     "nome": "Escola Municipal Francisco de Assis Parente",
+     "curto": "Francisco de Assis Parente",
+     "bairro": "Vila São Damião",
+     "votos": 49
+    }
+   ],
+   "conc": 0.13063063063063063,
+   "top3": 0.2822822822822823,
+   "venceu": 1,
+   "presente": 37
+  },
+  {
+   "urna": "Aurismenia Chaves",
+   "partido": "MDB",
+   "foto": "fotos/ce/santa-quiteria/2024/60002071373.jpg",
+   "votos": 635,
+   "pos": 13,
+   "pct": 0.02300641281113003,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 693,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "54-1104",
+     56
+    ],
+    [
+     "54-1562",
+     48
+    ],
+    [
+     "54-1856",
+     45
+    ],
+    [
+     "54-1090",
+     37
+    ],
+    [
+     "54-1627",
+     33
+    ],
+    [
+     "54-2119",
+     31
+    ],
+    [
+     "54-1864",
+     29
+    ],
+    [
+     "54-1821",
+     27
+    ],
+    [
+     "54-1155",
+     27
+    ],
+    [
+     "54-1554",
+     25
+    ],
+    [
+     "54-1031",
+     24
+    ],
+    [
+     "54-1058",
+     23
+    ],
+    [
+     "54-1112",
+     22
+    ],
+    [
+     "54-1830",
+     18
+    ],
+    [
+     "54-1996",
+     18
+    ],
+    [
+     "54-1139",
+     17
+    ],
+    [
+     "54-1430",
+     14
+    ],
+    [
+     "54-2100",
+     14
+    ],
+    [
+     "54-1880",
+     12
+    ],
+    [
+     "54-2038",
+     10
+    ],
+    [
+     "54-1198",
+     10
+    ],
+    [
+     "54-1449",
+     9
+    ],
+    [
+     "54-1759",
+     9
+    ],
+    [
+     "54-1805",
+     9
+    ],
+    [
+     "54-1120",
+     9
+    ],
+    [
+     "54-1490",
+     8
+    ],
+    [
+     "54-1260",
+     8
+    ],
+    [
+     "54-1813",
+     8
+    ],
+    [
+     "54-2020",
+     8
+    ],
+    [
+     "54-1023",
+     8
+    ],
+    [
+     "54-1929",
+     5
+    ],
+    [
+     "54-1902",
+     4
+    ],
+    [
+     "54-1481",
+     2
+    ],
+    [
+     "54-1791",
+     2
+    ],
+    [
+     "54-1937",
+     2
+    ],
+    [
+     "54-1341",
+     2
+    ],
+    [
+     "54-1511",
+     1
+    ],
+    [
+     "54-1350",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. M. Aracy Magalhães Martins",
+     "curto": "Aracy Magalhães Martins",
+     "bairro": "Piracicaba",
+     "votos": 56
+    },
+    {
+     "nome": "E. E. F. Luiz Dermeval de Andrade",
+     "curto": "Luiz Dermeval de Andrade",
+     "bairro": "Primavera",
+     "votos": 48
+    },
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 45
+    }
+   ],
+   "conc": 0.08818897637795275,
+   "top3": 0.2346456692913386,
+   "venceu": 0,
+   "presente": 38
+  },
+  {
+   "urna": "Possidônio",
+   "partido": "União",
+   "foto": "fotos/ce/santa-quiteria/2024/60002108224.jpeg",
+   "votos": 475,
+   "pos": 18,
+   "pct": 0.017209521394152386,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "54-1953",
+     87
+    ],
+    [
+     "54-1740",
+     69
+    ],
+    [
+     "54-1856",
+     64
+    ],
+    [
+     "54-1759",
+     56
+    ],
+    [
+     "54-1996",
+     28
+    ],
+    [
+     "54-1783",
+     19
+    ],
+    [
+     "54-1171",
+     14
+    ],
+    [
+     "54-1341",
+     12
+    ],
+    [
+     "54-1880",
+     11
+    ],
+    [
+     "54-1260",
+     9
+    ],
+    [
+     "54-2011",
+     9
+    ],
+    [
+     "54-1139",
+     8
+    ],
+    [
+     "54-1490",
+     7
+    ],
+    [
+     "54-1481",
+     7
+    ],
+    [
+     "54-1120",
+     7
+    ],
+    [
+     "54-1511",
+     6
+    ],
+    [
+     "54-1864",
+     6
+    ],
+    [
+     "54-1112",
+     6
+    ],
+    [
+     "54-1155",
+     6
+    ],
+    [
+     "54-1643",
+     5
+    ],
+    [
+     "54-1554",
+     5
+    ],
+    [
+     "54-1104",
+     4
+    ],
+    [
+     "54-1970",
+     4
+    ],
+    [
+     "54-2100",
+     4
+    ],
+    [
+     "54-1058",
+     4
+    ],
+    [
+     "54-1562",
+     3
+    ],
+    [
+     "54-1902",
+     3
+    ],
+    [
+     "54-2119",
+     3
+    ],
+    [
+     "54-1198",
+     2
+    ],
+    [
+     "54-1791",
+     2
+    ],
+    [
+     "54-1023",
+     2
+    ],
+    [
+     "54-1830",
+     1
+    ],
+    [
+     "54-2020",
+     1
+    ],
+    [
+     "54-1031",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E. E. F. Abílio Mesquita Martins",
+     "curto": "Abílio Mesquita Martins",
+     "bairro": "Assentamento Alegre Tatajuba",
+     "votos": 87
+    },
+    {
+     "nome": "Capela Nossa Senhora de Fátima",
+     "curto": "Capela Nossa Senhora de Fátima",
+     "bairro": "Povoado Palestina",
+     "votos": 69
+    },
+    {
+     "nome": "E. E. F. Deputado Chico Figueredo",
+     "curto": "Deputado Chico Figueredo",
+     "bairro": "Pereiros",
+     "votos": 64
+    }
+   ],
+   "conc": 0.1831578947368421,
+   "top3": 0.4631578947368421,
+   "venceu": 2,
+   "presente": 34
+  }
+ ],
+ "qe2028": 2271,
+ "fala": [
+  "Santa Quitéria. Os treze vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram setenta e nove candidatos para treze cadeiras. Quatro são caras novas. PSB, cinco; PP, dois; PT, dois; MDB, dois; Republicanos, um; União, um. E o quociente: dois mil cento e vinte e três votos.",
+  "Danio Braga, do PSB. Mil oitocentos e oitenta e sete votos: a maior votação da cidade. Em dois mil e vinte, tinha feito novecentos e setenta: ganhou novecentos e dezessete votos e renovou o mandato. O maior reduto é na escola Coronel Artur Themóteo, no assentamento Saco do Belém: duzentos e quarenta e cinco votos. Liderou a votação em oito dos cinquenta e três locais.",
+  "Joel Barroso, do PSB. Mil setecentos e sessenta e sete votos: segundo lugar. Em dois mil e vinte, tinha feito oitocentos e sessenta e nove: ganhou oitocentos e noventa e oito votos e renovou o mandato. O maior reduto é na escola Dona Livramento Araújo, no distrito de Lisieux: trezentos e cinquenta e um votos. Liderou a votação em cinco dos cinquenta e três locais. Depois, como presidente da Câmara, assumiu a prefeitura e venceu a eleição suplementar de dois mil e vinte e cinco.",
+  "Cesário Júnior, do PP. Mil quinhentos e quarenta e cinco votos: terceiro lugar. Em dois mil e vinte, tinha feito mil e trinta e três: ganhou quinhentos e doze votos e renovou o mandato. O maior reduto é na escola Maria Almerinda Jucá Magalhães, em Cohab: duzentos e sete votos. Liderou a votação em oito dos cinquenta e três locais.",
+  "Eliandro Mesquita, do PSB. Mil quatrocentos e oitenta e dois votos: quarto lugar. Em dois mil e vinte, tinha feito mil: ganhou quatrocentos e oitenta e dois votos e renovou o mandato. O maior reduto é na escola Deputado Chico Figueredo, em Pereiros: duzentos votos. Liderou a votação em nove dos cinquenta e três locais.",
+  "Douglas Lira, do PP. Mil quatrocentos e vinte e nove votos: quinto lugar. Em dois mil e vinte, tinha feito novecentos e setenta e cinco: ganhou quatrocentos e cinquenta e quatro votos e renovou o mandato. O maior reduto é na escola Coronel Artur Themóteo, no assentamento Saco do Belém: cento e oitenta e três votos.",
+  "Jarina Cavalcante, do PSB. Mil cento e setenta e sete votos: sexto lugar. Em dois mil e vinte, tinha feito seiscentos e sessenta e um: ganhou quinhentos e dezesseis votos e renovou o mandato. O maior reduto é na escola Deputado Chico Figueredo, em Pereiros: cento e cinquenta e três votos. Liderou a votação em quatro dos cinquenta e três locais.",
+  "Pé de Mola, do PT. Mil e oitenta e cinco votos: sétimo lugar. Em dois mil e vinte, teve seiscentos e sessenta e quatro votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Coronel Artur Themóteo, no assentamento Saco do Belém: cento e trinta votos. Liderou a votação em quatro dos cinquenta e três locais.",
+  "Miúdo, do MDB. Oitocentos e sessenta e três votos: oitavo lugar. Em dois mil e vinte, tinha feito oitocentos e seis: ganhou cinquenta e sete votos e renovou o mandato. O maior reduto é na escola Dona Livramento Araújo, no distrito de Lisieux: setenta e dois votos.",
+  "Renato Catunda, do PT. Oitocentos e nove votos: nono lugar. Em dois mil e vinte, tinha feito setecentos e trinta e oito: ganhou setenta e um votos e renovou o mandato. O maior reduto é na escola Conceição Catunda, em Flores: setenta e oito votos. Liderou a votação em três dos cinquenta e três locais. Entrou pela média, na distribuição das sobras.",
+  "Lino Paiva, do PSB. Setecentos e vinte e quatro votos: décimo lugar. Em dois mil e vinte, teve seiscentos e trinta e três votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Aracy Magalhães Martins, em Piracicaba: sessenta e nove votos. Entrou pela média, na distribuição das sobras.",
+  "Dra Emanuela Barbosa, do Republicanos. Seiscentos e sessenta e seis votos: décimo segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Luiz Dermeval de Andrade, em Primavera: oitenta e sete votos.",
+  "Aurismenia Chaves, do MDB. Seiscentos e trinta e cinco votos: décimo terceiro lugar. Em dois mil e vinte, tinha feito seiscentos e noventa e três: perdeu cinquenta e oito votos e renovou o mandato. O maior reduto é na escola Aracy Magalhães Martins, em Piracicaba: cinquenta e seis votos.",
+  "Possidônio, do União. Quatrocentos e setenta e cinco votos. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Abílio Mesquita Martins, no assentamento Alegre Tatajuba: oitenta e sete votos. Três locais somam quase metade dos votos. Ficou em décimo oitavo lugar, mas a vaga é do partido: com a soma do União, entrou.",
+  "Nenhum eleito passou do quociente com os próprios votos: todos dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de dois mil duzentos e cinquenta votos. Plenária CE. Inteligência eleitoral de Santa Quitéria."
+ ]
+}

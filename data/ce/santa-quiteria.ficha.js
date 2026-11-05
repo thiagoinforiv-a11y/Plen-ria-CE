@@ -9,6 +9,10 @@ window.PLENARIA_FICHAS["ce/santa-quiteria"] = {
     ultimasEleicoes: { municipal: 2024, geral: 2026 },
     interrupcoes: [{ eleicao: 2024, nome: "Braguinha", motivo: "cassado pela Justiça Eleitoral", curto: "cassado", depois: "Em outubro de dois mil e vinte e cinco, Joel Barroso venceu a eleição suplementar.", atual: "Joel Barroso", quando: "out/2025" }],
   },
+  // observações sobre vereadores eleitos em 2024 (entram no vídeo "vereadores, um por um")
+  vereadoresObs: {
+    "Joel Barroso": { curto: "hoje: prefeito (eleito na suplementar de out/2025)", fala: "Depois, como presidente da Câmara, assumiu a prefeitura e venceu a eleição suplementar de dois mil e vinte e cinco." },
+  },
   poder: [],
   fatos: [
     {
