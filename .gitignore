@@ -4,3 +4,4 @@ fotos/manual/
 node_modules/
 entregas/
 video/*.local.json
+video/audio/
