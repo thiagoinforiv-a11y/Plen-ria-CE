@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-rosa-paulino",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002136565.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Rosa Paulino, vereadora de Varjota",
+   "fala": "Rosa Paulino, vereadora de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "1.774 VOTOS",
+   "sub": "A MAIOR VOTAÇÃO",
+   "tarja": "1.774 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve mil setecentos e setenta e quatro votos: a maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "12,9%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "12,9% dos votos válidos para vereador",
+   "fala": "Isso dá doze vírgula nove por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "1ª VEZ",
+   "sub": "NA DISPUTA",
+   "tarja": "Primeira candidatura a vereador na cidade (desde 2000)",
+   "fala": "Foi a primeira vez como candidata a vereador em Varjota, nos dados do TSE desde dois mil."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Mandato até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

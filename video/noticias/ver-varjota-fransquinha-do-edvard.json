@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-fransquinha-do-edvard",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042098.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Fransquinha do Edvard, vereadora de Varjota",
+   "fala": "Fransquinha do Edvard, vereadora de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "682 VOTOS",
+   "sub": "8ª MAIOR VOTAÇÃO",
+   "tarja": "682 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve seiscentos e oitenta e dois votos: a oitava maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "5,0%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "5,0% dos votos válidos para vereador",
+   "fala": "Isso dá cinco por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "2020",
+   "sub": "414 VOTOS",
+   "tarja": "Em 2020: 414 votos",
+   "fala": "Na disputa anterior, em dois mil e vinte, ficou como suplente com quatrocentos e catorze votos. Agora, duzentos e sessenta e oito votos a mais."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "SEGUNDO MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Cumpre o segundo mandato, até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

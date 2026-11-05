@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-eudes-do-croata",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002136562.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Eudes do Croatá, vereador de Varjota",
+   "fala": "Eudes do Croatá, vereador de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "280 VOTOS",
+   "sub": "VAGA PELA SOMA DO PARTIDO",
+   "tarja": "280 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve duzentos e oitenta votos e ficou com a vaga pela soma dos votos do partido."
+  },
+  {
+   "grande": "2,0%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "2,0% dos votos válidos para vereador",
+   "fala": "Isso dá dois por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "2020",
+   "sub": "291 VOTOS",
+   "tarja": "Em 2020: 291 votos",
+   "fala": "Na disputa anterior, em dois mil e vinte, ficou como suplente com duzentos e noventa e um votos. Agora, onze votos a menos."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Mandato até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

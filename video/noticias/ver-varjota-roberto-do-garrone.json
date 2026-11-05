@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-roberto-do-garrone",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042391.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Roberto do Garrone, vereador de Varjota",
+   "fala": "Roberto do Garrone, vereador de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "783 VOTOS",
+   "sub": "7ª MAIOR VOTAÇÃO",
+   "tarja": "783 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve setecentos e oitenta e três votos: a sétima maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "5,7%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "5,7% dos votos válidos para vereador",
+   "fala": "Isso dá cinco vírgula sete por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "2020",
+   "sub": "835 VOTOS",
+   "tarja": "Em 2020: 835 votos",
+   "fala": "Na disputa anterior, em dois mil e vinte, foi eleito com oitocentos e trinta e cinco votos. Agora, cinquenta e dois votos a menos."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "TERCEIRO MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Cumpre o terceiro mandato, até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

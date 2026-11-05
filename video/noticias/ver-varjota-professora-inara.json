@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-professora-inara",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042394.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Professora Inara, vereadora de Varjota",
+   "fala": "Professora Inara, vereadora de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "599 VOTOS",
+   "sub": "10ª MAIOR VOTAÇÃO",
+   "tarja": "599 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve quinhentos e noventa e nove votos: a décima maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "4,4%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "4,4% dos votos válidos para vereador",
+   "fala": "Isso dá quatro vírgula quatro por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "1ª VEZ",
+   "sub": "NA DISPUTA",
+   "tarja": "Primeira candidatura a vereador na cidade (desde 2000)",
+   "fala": "Foi a primeira vez como candidata a vereador em Varjota, nos dados do TSE desde dois mil."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Mandato até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

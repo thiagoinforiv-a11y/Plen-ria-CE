@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-regio-ximenes",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042092.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Regio Ximenes, vereador de Varjota",
+   "fala": "Regio Ximenes, vereador de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "884 VOTOS",
+   "sub": "4ª MAIOR VOTAÇÃO",
+   "tarja": "884 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve oitocentos e oitenta e quatro votos: a quarta maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "6,4%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "6,4% dos votos válidos para vereador",
+   "fala": "Isso dá seis vírgula quatro por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "2020",
+   "sub": "726 VOTOS",
+   "tarja": "Em 2020: 726 votos",
+   "fala": "Na disputa anterior, em dois mil e vinte, foi eleito com setecentos e vinte e seis votos. Agora, cento e cinquenta e oito votos a mais."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "QUINTO MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Cumpre o quinto mandato, até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

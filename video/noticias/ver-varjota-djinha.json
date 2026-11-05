@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-djinha",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042094.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Djinha, vereadora de Varjota",
+   "fala": "Djinha, vereadora de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "672 VOTOS",
+   "sub": "9ª MAIOR VOTAÇÃO",
+   "tarja": "672 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve seiscentos e setenta e dois votos: a nona maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "4,9%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "4,9% dos votos válidos para vereador",
+   "fala": "Isso dá quatro vírgula nove por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "2020",
+   "sub": "539 VOTOS",
+   "tarja": "Em 2020: 539 votos",
+   "fala": "Na disputa anterior, em dois mil e vinte, foi eleita com quinhentos e trinta e nove votos. Agora, cento e trinta e três votos a mais."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "SEGUNDO MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Cumpre o segundo mandato, até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}

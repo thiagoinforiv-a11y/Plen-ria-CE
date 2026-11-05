@@ -1,0 +1,37 @@
+{
+ "id": "ver-varjota-eudes-mesquita",
+ "tempo": 1.35,
+ "fontes": "Fonte: TSE, eleições 2000 a 2024",
+ "cenas": [
+  {
+   "midia": "fotos/ce/varjota/2024/60002042096.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Eudes Mesquita, vereador de Varjota",
+   "fala": "Eudes Mesquita, vereador de Varjota. Os números da eleição, direto do TSE."
+  },
+  {
+   "grande": "992 VOTOS",
+   "sub": "2ª MAIOR VOTAÇÃO",
+   "tarja": "992 votos em 2024",
+   "fala": "Em dois mil e vinte e quatro, teve novecentos e noventa e dois votos: a segunda maior votação entre trinta e três candidatos."
+  },
+  {
+   "grande": "7,2%",
+   "sub": "DOS VOTOS VÁLIDOS",
+   "tarja": "7,2% dos votos válidos para vereador",
+   "fala": "Isso dá sete vírgula dois por cento dos votos válidos para vereador na cidade."
+  },
+  {
+   "grande": "1ª VEZ",
+   "sub": "NA DISPUTA",
+   "tarja": "Primeira candidatura a vereador na cidade (desde 2000)",
+   "fala": "Foi a primeira vez como candidato a vereador em Varjota, nos dados do TSE desde dois mil."
+  },
+  {
+   "grande": "2025–2028",
+   "sub": "MANDATO",
+   "tarja": "Siga @plenariace: todos os vereadores, um por um",
+   "fala": "Mandato até dois mil e vinte e oito. Siga para conhecer todos os vereadores."
+  }
+ ]
+}
