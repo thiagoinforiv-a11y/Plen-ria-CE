@@ -1,0 +1,48 @@
+{
+ "id": "curta2-santa-quiteria",
+ "fontes": "Fonte: TSE, eleições 2020 e 2024",
+ "cenas": [
+  {
+   "grande": "668 VOTOS",
+   "sub": "E FICOU DE FORA",
+   "tarja": "Parte 2: as surpresas da eleição em Santa Quitéria",
+   "fala": "Seiscentos e sessenta e oito votos, e ficou de fora da Câmara de Santa Quitéria. As surpresas da eleição de vereador."
+  },
+  {
+   "midia": "fotos/ce/santa-quiteria/2024/60002030528.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Irmão Pereira: 668 votos, suplente",
+   "fala": "Irmão Pereira teve seiscentos e sessenta e oito votos e ficou como suplente."
+  },
+  {
+   "midia": "fotos/ce/santa-quiteria/2024/60002108224.jpeg",
+   "credito": "Foto: TSE",
+   "tarja": "Possidônio: eleito com 475 votos",
+   "fala": "Possidônio se elegeu com quatrocentos e setenta e cinco. Ao todo, cinco suplentes tiveram mais votos que ele."
+  },
+  {
+   "grande": "1º O PARTIDO",
+   "sub": "DEPOIS O CANDIDATO",
+   "tarja": "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
+   "fala": "Por quê? As vagas vão primeiro para os partidos, pela soma dos votos. Depois, para os mais votados de cada um."
+  },
+  {
+   "grande": "2 DE 11",
+   "sub": "NÃO VOLTARAM",
+   "tarja": "Dois vereadores não voltaram à Câmara",
+   "fala": "Outra surpresa: dos treze vereadores eleitos em dois mil e vinte, onze tentaram de novo. Dois não voltaram."
+  },
+  {
+   "midia": "fotos/ce/santa-quiteria/2024/60002223953.jpeg",
+   "credito": "Foto: TSE",
+   "tarja": "Pé de Mola: 1.085 votos",
+   "fala": "Entre os quatro que chegaram agora, o mais votado foi Pé de Mola: mil e oitenta e cinco votos."
+  },
+  {
+   "grande": "?",
+   "sub": "QUAL VOCÊ NÃO ESPERAVA",
+   "tarja": "Qual dessas surpresas você não esperava? Comenta aqui",
+   "fala": "Qual você não esperava? Comenta aqui."
+  }
+ ]
+}
