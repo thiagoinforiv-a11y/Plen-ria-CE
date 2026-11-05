@@ -1,0 +1,21 @@
+{
+ "id": "noticia-tijuca",
+ "selo": "CEARÁ · NOTÍCIA",
+ "tarja": "Alece aprova R$ 2,5 milhões do Governo do Ceará para a Unidos da Tijuca",
+ "fontes": "Fontes: Diário do Nordeste, O Povo, GC Mais · Alece, PL 92/2026",
+ "S": [0, 5, 10.5, 17, 22.5, 31, 37],
+ "cenas": [
+  { "tipo": "numero", "topo": "GOVERNO DO CEARÁ", "grande": "R$ 2,5", "sub": "MILHÕES", "rodape": "para a Unidos da Tijuca, escola de samba do Rio",
+    "fala": "Dois milhões e meio de reais do Governo do Ceará para uma escola de samba do Rio de Janeiro." },
+  { "tipo": "numero", "topo": "ASSEMBLEIA LEGISLATIVA · 03/11", "grande": "21 × 10", "sub": "APROVADO", "rodape": "projeto do governador Elmano de Freitas · PL 92/2026",
+    "fala": "A Assembleia aprovou na terça, por vinte e um votos a dez, o projeto do governador Elmano de Freitas." },
+  { "tipo": "texto", "topo": "CARNAVAL 2027", "titulo": "“A Cabeça\ndo Santo”", "rodape": "enredo inspirado no livro da cearense Socorro Acioli\ndinheiro da Secretaria do Turismo",
+    "fala": "O dinheiro sai da Secretaria do Turismo e patrocina o desfile de dois mil e vinte e sete, com o enredo A Cabeça do Santo, livro da cearense Socorro Acioli." },
+  { "tipo": "texto", "topo": "A HISTÓRIA REAL", "titulo": "Caridade (CE)", "rodape": "a estátua de Santo Antônio ficou décadas\ncom a cabeça separada do corpo",
+    "fala": "O livro se inspira em Caridade, onde a estátua de Santo Antônio ficou décadas com a cabeça separada do corpo." },
+  { "tipo": "lados", "esq": { "rotulo": "GOVERNO", "texto": "promover o turismo\ne a cultura do Ceará" }, "dir": { "rotulo": "OPOSIÇÃO", "texto": "questiona o gasto;\nCláudio Pinho (PSDB) cita\nrisco de seca em 2027" },
+    "fala": "O governo diz que o patrocínio promove o turismo e a cultura do Ceará. A oposição questionou o gasto: o deputado Cláudio Pinho, do PSDB, citou o risco de seca em dois mil e vinte e sete." },
+  { "tipo": "pergunta", "titulo": "Divulgar o Ceará\nou gasto fora de hora?", "rodape": "COMENTA AQUI ↓",
+    "fala": "E você: é investimento para divulgar o Ceará, ou gasto fora de hora? Comenta aqui." }
+ ]
+}
