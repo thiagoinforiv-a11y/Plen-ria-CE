@@ -53,16 +53,16 @@ if (acima.length) {
   cenas.push({ midia: u.foto, credito: "Foto: TSE", tarja: `${nome(u)}: ${fem(u) ? "eleita" : "eleito"} com ${fmt(u.votos)} votos`,
     fala: `${nome(u)}, do mesmo partido, ficou com a vaga: ${ext(u.votos)} votos.` });
 }
-cenas.push({ grande: "1º O PARTIDO", sub: "DEPOIS O CANDIDATO", tarja: "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
+cenas.push({ grande: "PARTIDO", sub: "PRIMEIRO A SOMA DOS VOTOS", tarja: "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
   fala: "Por quê? As vagas vão primeiro para os partidos, pela soma dos votos. Depois, para os mais votados de cada um." });
-if (perd.length) cenas.push({ grande: `${perd.length} DE ${tent.length}`, sub: "NÃO VOLTARAM", tarja: `${Cap(ext(perd.length))} ${perd.length === 1 ? "vereador não voltou" : "vereadores não voltaram"} à Câmara`,
-  fala: `Outra surpresa: dos ${ext(E20.length)} vereadores eleitos em dois mil e vinte, ${ext(tent.length)} tentaram de novo. ${Cap(ext(perd.length))} não ${perd.length === 1 ? "voltou" : "voltaram"}.` });
+if (perd.length) cenas.push({ grande: `${perd.length} DE ${tent.length}`, sub: perd.length === 1 ? "NÃO VOLTOU" : "NÃO VOLTARAM", tarja: `${Cap(ext(perd.length))} ${perd.length === 1 ? "vereador não voltou" : "vereadores não voltaram"} à Câmara`,
+  fala: `Dos ${ext(E20.length)} eleitos em dois mil e vinte, ${ext(tent.length)} tentaram de novo. ${Cap(ext(perd.length))} não ${perd.length === 1 ? "voltou" : "voltaram"}.` });
 if (nv) cenas.push({ midia: nv.foto, credito: "Foto: TSE", tarja: `${nome(nv)}: ${fmt(nv.votos)} votos${nv === top ? `, ${fem(nv) ? "a mais votada" : "o mais votado"}` : ""}`,
   fala: `Entre os ${ext(novos.length)} que chegaram agora, ${fem(nv) ? "a mais votada" : "o mais votado"} foi ${nome(nv)}: ${ext(nv.votos)} votos` + (nv === top ? `, a maior votação da cidade.` : ".") });
 cenas.push({ grande: "?", sub: "QUAL VOCÊ NÃO ESPERAVA", tarja: "Qual dessas surpresas você não esperava? Comenta aqui",
   fala: "Qual você não esperava? Comenta aqui." });
 
-const id = `curta2-${SLUG}`, pauta = { id, fontes: "Fonte: TSE, eleições 2020 e 2024", cenas };
+const id = `curta2-${SLUG}`, pauta = { id, tempo: 1.2, fontes: "Fonte: TSE, eleições 2020 e 2024", cenas };
 fs.mkdirSync(new URL("./noticias/", import.meta.url), { recursive: true });
 fs.writeFileSync(new URL(`./noticias/${id}.json`, import.meta.url), JSON.stringify(pauta, null, 1) + "\n");
 const nf = new URL("./narracao.json", import.meta.url), N = JSON.parse(fs.readFileSync(nf)); N.videos[id] = cenas.map((c) => c.fala); fs.writeFileSync(nf, JSON.stringify(N, null, 2) + "\n");

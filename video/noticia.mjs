@@ -44,7 +44,7 @@ await b.close();
 const partes = [];
 for (const [i, c] of D.cenas.entries()) {
   const voz = path.join(RAIZ, "video/audio", D.id, "antonio", String(i).padStart(2, "0") + ".mp3"), wav = path.join(tmp, `v${i}.wav`);
-  ff("-i", voz, "-af", `atempo=${TEMPO},apad=pad_dur=0.25`, "-ar", "48000", "-ac", "2", wav);
+  ff("-i", voz, "-af", `atempo=${D.tempo || TEMPO},apad=pad_dur=0.25`, "-ar", "48000", "-ac", "2", wav);
   const T = dur(wav).toFixed(2), out = path.join(tmp, `c${i}.mp4`), arte = path.join(tmp, `a${i}.png`);
   const m = c.midia && path.resolve(RAIZ, c.midia), video = m && /\.(mp4|mov|webm|mkv)$/i.test(m);
   const fundo = `split[a][b];[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:2,eq=brightness=-0.15[f];[b]scale=${W}:${H}:force_original_aspect_ratio=decrease[c];[f][c]overlay=(W-w)/2:(H-h)/2*0.8`;

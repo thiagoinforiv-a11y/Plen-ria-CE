@@ -1,5 +1,6 @@
 {
  "id": "curta2-ipu",
+ "tempo": 1.2,
  "fontes": "Fonte: TSE, eleições 2020 e 2024",
  "cenas": [
   {
@@ -21,8 +22,8 @@
    "fala": "Chagas Teteu se elegeu com seiscentos e quarenta e sete. Ao todo, quatro suplentes tiveram mais votos que ele."
   },
   {
-   "grande": "1º O PARTIDO",
-   "sub": "DEPOIS O CANDIDATO",
+   "grande": "PARTIDO",
+   "sub": "PRIMEIRO A SOMA DOS VOTOS",
    "tarja": "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
    "fala": "Por quê? As vagas vão primeiro para os partidos, pela soma dos votos. Depois, para os mais votados de cada um."
   },
@@ -30,7 +31,7 @@
    "grande": "4 DE 11",
    "sub": "NÃO VOLTARAM",
    "tarja": "Quatro vereadores não voltaram à Câmara",
-   "fala": "Outra surpresa: dos treze vereadores eleitos em dois mil e vinte, onze tentaram de novo. Quatro não voltaram."
+   "fala": "Dos treze eleitos em dois mil e vinte, onze tentaram de novo. Quatro não voltaram."
   },
   {
    "midia": "fotos/ce/ipu/2024/60002309618.jpg",

@@ -1,5 +1,6 @@
 {
  "id": "curta2-pacuja",
+ "tempo": 1.2,
  "fontes": "Fonte: TSE, eleições 2020 e 2024",
  "cenas": [
   {
@@ -21,8 +22,8 @@
    "fala": "Orlando Rodrigues se elegeu com duzentos e quarenta e quatro. Ao todo, dois suplentes tiveram mais votos que ele."
   },
   {
-   "grande": "1º O PARTIDO",
-   "sub": "DEPOIS O CANDIDATO",
+   "grande": "PARTIDO",
+   "sub": "PRIMEIRO A SOMA DOS VOTOS",
    "tarja": "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
    "fala": "Por quê? As vagas vão primeiro para os partidos, pela soma dos votos. Depois, para os mais votados de cada um."
   },
@@ -30,7 +31,7 @@
    "grande": "5 DE 6",
    "sub": "NÃO VOLTARAM",
    "tarja": "Cinco vereadores não voltaram à Câmara",
-   "fala": "Outra surpresa: dos nove vereadores eleitos em dois mil e vinte, seis tentaram de novo. Cinco não voltaram."
+   "fala": "Dos nove eleitos em dois mil e vinte, seis tentaram de novo. Cinco não voltaram."
   },
   {
    "midia": "fotos/ce/pacuja/2024/60002036650.jpg",

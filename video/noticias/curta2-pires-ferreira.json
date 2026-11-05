@@ -1,5 +1,6 @@
 {
  "id": "curta2-pires-ferreira",
+ "tempo": 1.2,
  "fontes": "Fonte: TSE, eleições 2020 e 2024",
  "cenas": [
   {
@@ -21,16 +22,16 @@
    "fala": "Nilton Anastácio, do mesmo partido, ficou com a vaga: quatrocentos e um votos."
   },
   {
-   "grande": "1º O PARTIDO",
-   "sub": "DEPOIS O CANDIDATO",
+   "grande": "PARTIDO",
+   "sub": "PRIMEIRO A SOMA DOS VOTOS",
    "tarja": "Vagas vão primeiro aos partidos, depois aos mais votados de cada um",
    "fala": "Por quê? As vagas vão primeiro para os partidos, pela soma dos votos. Depois, para os mais votados de cada um."
   },
   {
    "grande": "1 DE 6",
-   "sub": "NÃO VOLTARAM",
+   "sub": "NÃO VOLTOU",
    "tarja": "Um vereador não voltou à Câmara",
-   "fala": "Outra surpresa: dos nove vereadores eleitos em dois mil e vinte, seis tentaram de novo. Um não voltou."
+   "fala": "Dos nove eleitos em dois mil e vinte, seis tentaram de novo. Um não voltou."
   },
   {
    "midia": "fotos/ce/pires-ferreira/2024/60002188682.jpeg",
