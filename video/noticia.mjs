@@ -12,7 +12,7 @@ import { execFileSync as run } from "child_process";
 const require = createRequire(import.meta.url);
 let pw; try { pw = require("playwright"); } catch { pw = require("/opt/node-tools/node_modules/playwright"); }
 
-const RAIZ = path.resolve(path.dirname(new URL(import.meta.url).pathname), ".."), W = 1080, H = 1920, AZUL = "#1f3fae", TEMPO = 1.12;
+const RAIZ = path.resolve(path.dirname(new URL(import.meta.url).pathname), ".."), W = 1080, H = 1920, AZUL = "#1f3fae", TEMPO = 1.35;
 const arq = process.argv[2], D = JSON.parse(fs.readFileSync(arq, "utf8")), saida = process.argv[3] || path.join(RAIZ, "entregas", D.id + ".mp4");
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "noticia-")), q = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\n/g, "<br>");
 const ff = (...a) => run("ffmpeg", ["-v", "error", "-y", ...a], { stdio: "inherit" });

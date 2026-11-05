@@ -62,7 +62,7 @@ if (nv) cenas.push({ midia: nv.foto, credito: "Foto: TSE", tarja: `${nome(nv)}: 
 cenas.push({ grande: "?", sub: "QUAL VOCÊ NÃO ESPERAVA", tarja: "Qual dessas surpresas você não esperava? Comenta aqui",
   fala: "Qual você não esperava? Comenta aqui." });
 
-const id = `curta2-${SLUG}`, pauta = { id, tempo: 1.2, fontes: "Fonte: TSE, eleições 2020 e 2024", cenas };
+const id = `curta2-${SLUG}`, pauta = { id, tempo: 1.35, fontes: "Fonte: TSE, eleições 2020 e 2024", cenas };
 fs.mkdirSync(new URL("./noticias/", import.meta.url), { recursive: true });
 fs.writeFileSync(new URL(`./noticias/${id}.json`, import.meta.url), JSON.stringify(pauta, null, 1) + "\n");
 const nf = new URL("./narracao.json", import.meta.url), N = JSON.parse(fs.readFileSync(nf)); N.videos[id] = cenas.map((c) => c.fala); fs.writeFileSync(nf, JSON.stringify(N, null, 2) + "\n");
