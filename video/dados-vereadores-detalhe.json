@@ -1,0 +1,1814 @@
+{
+ "cadeiras": 11,
+ "validos": 13768,
+ "qe": 1252,
+ "nlocais": 28,
+ "candidatos": 33,
+ "locais": [
+  {
+   "id": "65-1023",
+   "nome": "Liceu Waldir Leopércio",
+   "bairro": "Empréstimos",
+   "lat": -4.188648,
+   "lon": -40.480831
+  },
+  {
+   "id": "65-1040",
+   "nome": "E.e.f. Deputado Manoel Rodrigues",
+   "bairro": "Centro",
+   "lat": -4.191144,
+   "lon": -40.475999
+  },
+  {
+   "id": "65-1058",
+   "nome": "E.e.f. Francisco Pio de Farias",
+   "bairro": "Pedreira",
+   "lat": -4.199795,
+   "lon": -40.482778
+  },
+  {
+   "id": "65-1066",
+   "nome": "E.e.i.f. Manoel Rodrigues Tavares",
+   "bairro": "Angelim",
+   "lat": -4.226162,
+   "lon": -40.511916
+  },
+  {
+   "id": "65-1074",
+   "nome": "E.e.i.f. Melquíades Muniz Farrapo",
+   "bairro": "Transval",
+   "lat": -4.157284,
+   "lon": -40.441695
+  },
+  {
+   "id": "65-1090",
+   "nome": "E.e.f. Odilon Nobre",
+   "bairro": "Croatá dos Martins",
+   "lat": -4.210669,
+   "lon": -40.550497
+  },
+  {
+   "id": "65-1112",
+   "nome": "E.e.f. Waldir Leopércio",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.202123,
+   "lon": -40.460921
+  },
+  {
+   "id": "65-1139",
+   "nome": "Secretaria de Assistência Social",
+   "bairro": "Centro",
+   "lat": -4.195504,
+   "lon": -40.477303
+  },
+  {
+   "id": "65-1147",
+   "nome": "E.e.f. Vicente Trajano de Mesquita",
+   "bairro": "Olho Dágua dos Trajanos",
+   "lat": -4.121744,
+   "lon": -40.480539
+  },
+  {
+   "id": "65-1155",
+   "nome": "E.e.i. Teodoro Sales de Oliveira-creche Pedacinho do Céu",
+   "bairro": "Pedreira",
+   "lat": -4.199129,
+   "lon": -40.484917
+  },
+  {
+   "id": "65-1171",
+   "nome": "E.e.f. Tereza Aragão Ximenes",
+   "bairro": "Ararinha",
+   "lat": -4.202835,
+   "lon": -40.46881
+  },
+  {
+   "id": "65-1180",
+   "nome": "E.e.f. Antônio Manoel de Araújo (antigo Ceru)",
+   "bairro": "Centro",
+   "lat": -4.19323,
+   "lon": -40.480972
+  },
+  {
+   "id": "65-1201",
+   "nome": "E.e.f. Francisca Ezequiel de Sousa",
+   "bairro": "Jatobá",
+   "lat": -4.248843,
+   "lon": -40.519659
+  },
+  {
+   "id": "65-1228",
+   "nome": "Creche Comunitária João Balbino",
+   "bairro": "Acampamento",
+   "lat": -4.202876,
+   "lon": -40.468865
+  },
+  {
+   "id": "65-1236",
+   "nome": "E.e.i.f. Naiara Macedo Vasconcelos",
+   "bairro": "Vila Naiara",
+   "lat": -4.096904,
+   "lon": -40.440671
+  },
+  {
+   "id": "65-1244",
+   "nome": "Associação Comunitária Várzea da Palha",
+   "bairro": "Várzea da Palha",
+   "lat": -4.1779,
+   "lon": -40.465871
+  },
+  {
+   "id": "65-1252",
+   "nome": "E.e.f. Florência Ferreira Neta",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.198676,
+   "lon": -40.467963
+  },
+  {
+   "id": "65-1260",
+   "nome": "Centro de Referência de Assist Social-cras-casa do Idoso",
+   "bairro": "Pedreira",
+   "lat": -4.19899,
+   "lon": -40.482378
+  },
+  {
+   "id": "65-1279",
+   "nome": "E.e.i. Rosa Paiva Nobre",
+   "bairro": "Croatá dos Martins",
+   "lat": -4.211739,
+   "lon": -40.551918
+  },
+  {
+   "id": "65-1295",
+   "nome": "E.e.i. José Neves Damasceno - Creche Balneário",
+   "bairro": "Balneario",
+   "lat": -4.200936,
+   "lon": -40.476335
+  },
+  {
+   "id": "65-1317",
+   "nome": "E.e.f. Emiliano Ribeiro da Cunha",
+   "bairro": "Empréstimos",
+   "lat": -4.186793,
+   "lon": -40.483964
+  },
+  {
+   "id": "65-1325",
+   "nome": "C.e.i. Edson Bernardino Bezerra Teixeira",
+   "bairro": "Empréstimos",
+   "lat": -4.186051,
+   "lon": -40.491721
+  },
+  {
+   "id": "65-1333",
+   "nome": "Centro Digital",
+   "bairro": "Centro",
+   "lat": -4.19591,
+   "lon": -40.476409
+  },
+  {
+   "id": "65-1350",
+   "nome": "E.e.f. Benjamim Rodrigues Macedo",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.19882,
+   "lon": -40.465217
+  },
+  {
+   "id": "65-1368",
+   "nome": "C.e.i. Cândida Ferreira de Paula",
+   "bairro": "Pedreira",
+   "lat": -4.199752,
+   "lon": -40.484039
+  },
+  {
+   "id": "65-1376",
+   "nome": "Cheche Pro-infância Euclides Pinto de Macedo Neto - Varjota",
+   "bairro": "Ararinha",
+   "lat": -4.2012,
+   "lon": -40.469384
+  },
+  {
+   "id": "65-1406",
+   "nome": "Centro Educacional Especializado (apae Varjota)",
+   "bairro": "Empréstimos",
+   "lat": -4.187588,
+   "lon": -40.486519
+  },
+  {
+   "id": "65-1414",
+   "nome": "Ubs - Teodorico Rodrigues Lopes",
+   "bairro": "Centro",
+   "lat": -4.191834,
+   "lon": -40.471799
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Rosa Paulino",
+   "partido": "MDB",
+   "foto": "fotos/ce/varjota/2024/60002136565.jpg",
+   "votos": 1774,
+   "pos": 1,
+   "pct": 0.12884950610110402,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1252",
+     153
+    ],
+    [
+     "65-1040",
+     152
+    ],
+    [
+     "65-1295",
+     147
+    ],
+    [
+     "65-1171",
+     109
+    ],
+    [
+     "65-1376",
+     109
+    ],
+    [
+     "65-1023",
+     101
+    ],
+    [
+     "65-1058",
+     96
+    ],
+    [
+     "65-1112",
+     94
+    ],
+    [
+     "65-1155",
+     90
+    ],
+    [
+     "65-1180",
+     73
+    ],
+    [
+     "65-1228",
+     62
+    ],
+    [
+     "65-1333",
+     56
+    ],
+    [
+     "65-1368",
+     54
+    ],
+    [
+     "65-1260",
+     49
+    ],
+    [
+     "65-1139",
+     48
+    ],
+    [
+     "65-1317",
+     45
+    ],
+    [
+     "65-1074",
+     43
+    ],
+    [
+     "65-1090",
+     38
+    ],
+    [
+     "65-1414",
+     38
+    ],
+    [
+     "65-1201",
+     38
+    ],
+    [
+     "65-1350",
+     35
+    ],
+    [
+     "65-1244",
+     35
+    ],
+    [
+     "65-1147",
+     32
+    ],
+    [
+     "65-1325",
+     27
+    ],
+    [
+     "65-1066",
+     26
+    ],
+    [
+     "65-1279",
+     11
+    ],
+    [
+     "65-1406",
+     8
+    ],
+    [
+     "65-1236",
+     5
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 153
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 152
+    },
+    {
+     "nome": "E.e.i. José Neves Damasceno - Creche Balneário",
+     "bairro": "Balneario",
+     "votos": 147
+    }
+   ],
+   "conc": 0.08624577226606539,
+   "top3": 0.2547914317925592,
+   "venceu": 15,
+   "presente": 28
+  },
+  {
+   "urna": "Eudes Mesquita",
+   "partido": "PSB",
+   "foto": "fotos/ce/varjota/2024/60002042096.jpg",
+   "votos": 992,
+   "pos": 2,
+   "pct": 0.07205113306217316,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1090",
+     191
+    ],
+    [
+     "65-1023",
+     91
+    ],
+    [
+     "65-1279",
+     81
+    ],
+    [
+     "65-1252",
+     66
+    ],
+    [
+     "65-1040",
+     64
+    ],
+    [
+     "65-1201",
+     59
+    ],
+    [
+     "65-1317",
+     42
+    ],
+    [
+     "65-1325",
+     37
+    ],
+    [
+     "65-1112",
+     33
+    ],
+    [
+     "65-1228",
+     32
+    ],
+    [
+     "65-1171",
+     31
+    ],
+    [
+     "65-1295",
+     30
+    ],
+    [
+     "65-1376",
+     28
+    ],
+    [
+     "65-1180",
+     28
+    ],
+    [
+     "65-1244",
+     26
+    ],
+    [
+     "65-1236",
+     21
+    ],
+    [
+     "65-1350",
+     18
+    ],
+    [
+     "65-1074",
+     17
+    ],
+    [
+     "65-1058",
+     16
+    ],
+    [
+     "65-1368",
+     14
+    ],
+    [
+     "65-1414",
+     12
+    ],
+    [
+     "65-1155",
+     11
+    ],
+    [
+     "65-1066",
+     10
+    ],
+    [
+     "65-1333",
+     9
+    ],
+    [
+     "65-1139",
+     8
+    ],
+    [
+     "65-1147",
+     8
+    ],
+    [
+     "65-1260",
+     6
+    ],
+    [
+     "65-1406",
+     3
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Odilon Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 191
+    },
+    {
+     "nome": "Liceu Waldir Leopércio",
+     "bairro": "Empréstimos",
+     "votos": 91
+    },
+    {
+     "nome": "E.e.i. Rosa Paiva Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 81
+    }
+   ],
+   "conc": 0.19254032258064516,
+   "top3": 0.3659274193548387,
+   "venceu": 0,
+   "presente": 28
+  },
+  {
+   "urna": "Gonçalinho",
+   "partido": "PSB",
+   "foto": "fotos/ce/varjota/2024/60002042093.jpg",
+   "votos": 915,
+   "pos": 3,
+   "pct": 0.0664584543869843,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 784,
+   "eleito20": true,
+   "locais": [
+    [
+     "65-1090",
+     219
+    ],
+    [
+     "65-1201",
+     103
+    ],
+    [
+     "65-1279",
+     92
+    ],
+    [
+     "65-1040",
+     70
+    ],
+    [
+     "65-1171",
+     42
+    ],
+    [
+     "65-1023",
+     41
+    ],
+    [
+     "65-1252",
+     39
+    ],
+    [
+     "65-1112",
+     37
+    ],
+    [
+     "65-1295",
+     34
+    ],
+    [
+     "65-1376",
+     29
+    ],
+    [
+     "65-1317",
+     28
+    ],
+    [
+     "65-1180",
+     19
+    ],
+    [
+     "65-1414",
+     17
+    ],
+    [
+     "65-1333",
+     17
+    ],
+    [
+     "65-1325",
+     16
+    ],
+    [
+     "65-1350",
+     16
+    ],
+    [
+     "65-1066",
+     16
+    ],
+    [
+     "65-1139",
+     16
+    ],
+    [
+     "65-1244",
+     15
+    ],
+    [
+     "65-1147",
+     13
+    ],
+    [
+     "65-1228",
+     12
+    ],
+    [
+     "65-1074",
+     9
+    ],
+    [
+     "65-1058",
+     3
+    ],
+    [
+     "65-1368",
+     3
+    ],
+    [
+     "65-1155",
+     3
+    ],
+    [
+     "65-1236",
+     3
+    ],
+    [
+     "65-1260",
+     2
+    ],
+    [
+     "65-1406",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Odilon Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 219
+    },
+    {
+     "nome": "E.e.f. Francisca Ezequiel de Sousa",
+     "bairro": "Jatobá",
+     "votos": 103
+    },
+    {
+     "nome": "E.e.i. Rosa Paiva Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 92
+    }
+   ],
+   "conc": 0.23934426229508196,
+   "top3": 0.4524590163934426,
+   "venceu": 3,
+   "presente": 28
+  },
+  {
+   "urna": "Regio Ximenes",
+   "partido": "PSB",
+   "foto": "fotos/ce/varjota/2024/60002042092.jpg",
+   "votos": 884,
+   "pos": 4,
+   "pct": 0.0642068564787914,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 726,
+   "eleito20": true,
+   "locais": [
+    [
+     "65-1040",
+     193
+    ],
+    [
+     "65-1295",
+     96
+    ],
+    [
+     "65-1252",
+     70
+    ],
+    [
+     "65-1023",
+     62
+    ],
+    [
+     "65-1074",
+     48
+    ],
+    [
+     "65-1376",
+     41
+    ],
+    [
+     "65-1317",
+     39
+    ],
+    [
+     "65-1180",
+     30
+    ],
+    [
+     "65-1171",
+     27
+    ],
+    [
+     "65-1058",
+     25
+    ],
+    [
+     "65-1112",
+     25
+    ],
+    [
+     "65-1333",
+     23
+    ],
+    [
+     "65-1155",
+     23
+    ],
+    [
+     "65-1244",
+     23
+    ],
+    [
+     "65-1325",
+     22
+    ],
+    [
+     "65-1414",
+     20
+    ],
+    [
+     "65-1139",
+     19
+    ],
+    [
+     "65-1147",
+     15
+    ],
+    [
+     "65-1350",
+     14
+    ],
+    [
+     "65-1228",
+     13
+    ],
+    [
+     "65-1260",
+     13
+    ],
+    [
+     "65-1406",
+     11
+    ],
+    [
+     "65-1236",
+     10
+    ],
+    [
+     "65-1066",
+     9
+    ],
+    [
+     "65-1368",
+     7
+    ],
+    [
+     "65-1090",
+     4
+    ],
+    [
+     "65-1201",
+     1
+    ],
+    [
+     "65-1279",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 193
+    },
+    {
+     "nome": "E.e.i. José Neves Damasceno - Creche Balneário",
+     "bairro": "Balneario",
+     "votos": 96
+    },
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 70
+    }
+   ],
+   "conc": 0.21832579185520362,
+   "top3": 0.4061085972850679,
+   "venceu": 2,
+   "presente": 28
+  },
+  {
+   "urna": "Patricia Ximenes",
+   "partido": "PT",
+   "foto": "fotos/ce/varjota/2024/60002042397.jpg",
+   "votos": 847,
+   "pos": 5,
+   "pct": 0.06151946542707728,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 403,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1040",
+     105
+    ],
+    [
+     "65-1023",
+     100
+    ],
+    [
+     "65-1252",
+     82
+    ],
+    [
+     "65-1295",
+     53
+    ],
+    [
+     "65-1112",
+     45
+    ],
+    [
+     "65-1180",
+     39
+    ],
+    [
+     "65-1139",
+     38
+    ],
+    [
+     "65-1325",
+     33
+    ],
+    [
+     "65-1333",
+     30
+    ],
+    [
+     "65-1376",
+     30
+    ],
+    [
+     "65-1317",
+     29
+    ],
+    [
+     "65-1414",
+     28
+    ],
+    [
+     "65-1155",
+     28
+    ],
+    [
+     "65-1058",
+     26
+    ],
+    [
+     "65-1368",
+     25
+    ],
+    [
+     "65-1066",
+     25
+    ],
+    [
+     "65-1171",
+     21
+    ],
+    [
+     "65-1244",
+     21
+    ],
+    [
+     "65-1260",
+     20
+    ],
+    [
+     "65-1228",
+     17
+    ],
+    [
+     "65-1147",
+     16
+    ],
+    [
+     "65-1350",
+     10
+    ],
+    [
+     "65-1236",
+     10
+    ],
+    [
+     "65-1406",
+     4
+    ],
+    [
+     "65-1279",
+     4
+    ],
+    [
+     "65-1090",
+     3
+    ],
+    [
+     "65-1201",
+     3
+    ],
+    [
+     "65-1074",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 105
+    },
+    {
+     "nome": "Liceu Waldir Leopércio",
+     "bairro": "Empréstimos",
+     "votos": 100
+    },
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 82
+    }
+   ],
+   "conc": 0.12396694214876033,
+   "top3": 0.33884297520661155,
+   "venceu": 0,
+   "presente": 28
+  },
+  {
+   "urna": "Lucas da Célia",
+   "partido": "MDB",
+   "foto": "fotos/ce/varjota/2024/60002136561.jpg",
+   "votos": 834,
+   "pos": 6,
+   "pct": 0.060575246949448,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1023",
+     232
+    ],
+    [
+     "65-1325",
+     87
+    ],
+    [
+     "65-1317",
+     83
+    ],
+    [
+     "65-1040",
+     82
+    ],
+    [
+     "65-1180",
+     57
+    ],
+    [
+     "65-1295",
+     44
+    ],
+    [
+     "65-1112",
+     29
+    ],
+    [
+     "65-1406",
+     26
+    ],
+    [
+     "65-1252",
+     23
+    ],
+    [
+     "65-1171",
+     20
+    ],
+    [
+     "65-1376",
+     20
+    ],
+    [
+     "65-1139",
+     14
+    ],
+    [
+     "65-1228",
+     14
+    ],
+    [
+     "65-1090",
+     13
+    ],
+    [
+     "65-1155",
+     13
+    ],
+    [
+     "65-1333",
+     12
+    ],
+    [
+     "65-1414",
+     9
+    ],
+    [
+     "65-1279",
+     9
+    ],
+    [
+     "65-1058",
+     8
+    ],
+    [
+     "65-1244",
+     8
+    ],
+    [
+     "65-1368",
+     7
+    ],
+    [
+     "65-1350",
+     6
+    ],
+    [
+     "65-1066",
+     4
+    ],
+    [
+     "65-1074",
+     4
+    ],
+    [
+     "65-1147",
+     4
+    ],
+    [
+     "65-1260",
+     4
+    ],
+    [
+     "65-1236",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Liceu Waldir Leopércio",
+     "bairro": "Empréstimos",
+     "votos": 232
+    },
+    {
+     "nome": "C.e.i. Edson Bernardino Bezerra Teixeira",
+     "bairro": "Empréstimos",
+     "votos": 87
+    },
+    {
+     "nome": "E.e.f. Emiliano Ribeiro da Cunha",
+     "bairro": "Empréstimos",
+     "votos": 83
+    }
+   ],
+   "conc": 0.27817745803357313,
+   "top3": 0.48201438848920863,
+   "venceu": 3,
+   "presente": 27
+  },
+  {
+   "urna": "Roberto do Garrone",
+   "partido": "PT",
+   "foto": "fotos/ce/varjota/2024/60002042391.jpg",
+   "votos": 783,
+   "pos": 7,
+   "pct": 0.05687100522951772,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 835,
+   "eleito20": true,
+   "locais": [
+    [
+     "65-1023",
+     126
+    ],
+    [
+     "65-1040",
+     86
+    ],
+    [
+     "65-1252",
+     56
+    ],
+    [
+     "65-1325",
+     50
+    ],
+    [
+     "65-1406",
+     43
+    ],
+    [
+     "65-1317",
+     42
+    ],
+    [
+     "65-1295",
+     40
+    ],
+    [
+     "65-1155",
+     38
+    ],
+    [
+     "65-1058",
+     37
+    ],
+    [
+     "65-1139",
+     30
+    ],
+    [
+     "65-1171",
+     30
+    ],
+    [
+     "65-1180",
+     30
+    ],
+    [
+     "65-1112",
+     24
+    ],
+    [
+     "65-1414",
+     24
+    ],
+    [
+     "65-1368",
+     21
+    ],
+    [
+     "65-1147",
+     19
+    ],
+    [
+     "65-1333",
+     18
+    ],
+    [
+     "65-1244",
+     14
+    ],
+    [
+     "65-1260",
+     12
+    ],
+    [
+     "65-1376",
+     11
+    ],
+    [
+     "65-1228",
+     11
+    ],
+    [
+     "65-1350",
+     9
+    ],
+    [
+     "65-1074",
+     3
+    ],
+    [
+     "65-1090",
+     3
+    ],
+    [
+     "65-1279",
+     3
+    ],
+    [
+     "65-1066",
+     2
+    ],
+    [
+     "65-1236",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Liceu Waldir Leopércio",
+     "bairro": "Empréstimos",
+     "votos": 126
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 86
+    },
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 56
+    }
+   ],
+   "conc": 0.16091954022988506,
+   "top3": 0.34227330779054915,
+   "venceu": 1,
+   "presente": 27
+  },
+  {
+   "urna": "Fransquinha do Edvard",
+   "partido": "PSB",
+   "foto": "fotos/ce/varjota/2024/60002042098.jpg",
+   "votos": 682,
+   "pos": 8,
+   "pct": 0.049535153980244044,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 414,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1155",
+     67
+    ],
+    [
+     "65-1040",
+     65
+    ],
+    [
+     "65-1058",
+     58
+    ],
+    [
+     "65-1023",
+     56
+    ],
+    [
+     "65-1260",
+     50
+    ],
+    [
+     "65-1368",
+     47
+    ],
+    [
+     "65-1252",
+     36
+    ],
+    [
+     "65-1112",
+     35
+    ],
+    [
+     "65-1074",
+     31
+    ],
+    [
+     "65-1317",
+     30
+    ],
+    [
+     "65-1171",
+     30
+    ],
+    [
+     "65-1376",
+     30
+    ],
+    [
+     "65-1295",
+     29
+    ],
+    [
+     "65-1228",
+     19
+    ],
+    [
+     "65-1139",
+     18
+    ],
+    [
+     "65-1180",
+     16
+    ],
+    [
+     "65-1325",
+     12
+    ],
+    [
+     "65-1333",
+     12
+    ],
+    [
+     "65-1414",
+     10
+    ],
+    [
+     "65-1244",
+     8
+    ],
+    [
+     "65-1350",
+     6
+    ],
+    [
+     "65-1066",
+     6
+    ],
+    [
+     "65-1090",
+     5
+    ],
+    [
+     "65-1147",
+     3
+    ],
+    [
+     "65-1406",
+     1
+    ],
+    [
+     "65-1236",
+     1
+    ],
+    [
+     "65-1279",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i. Teodoro Sales de Oliveira-creche Pedacinho do Céu",
+     "bairro": "Pedreira",
+     "votos": 67
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 65
+    },
+    {
+     "nome": "E.e.f. Francisco Pio de Farias",
+     "bairro": "Pedreira",
+     "votos": 58
+    }
+   ],
+   "conc": 0.09824046920821114,
+   "top3": 0.2785923753665689,
+   "venceu": 1,
+   "presente": 27
+  },
+  {
+   "urna": "Djinha",
+   "partido": "PSB",
+   "foto": "fotos/ce/varjota/2024/60002042094.jpg",
+   "votos": 672,
+   "pos": 9,
+   "pct": 0.04880883207437536,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 539,
+   "eleito20": true,
+   "locais": [
+    [
+     "65-1147",
+     112
+    ],
+    [
+     "65-1040",
+     91
+    ],
+    [
+     "65-1252",
+     51
+    ],
+    [
+     "65-1023",
+     41
+    ],
+    [
+     "65-1376",
+     36
+    ],
+    [
+     "65-1295",
+     35
+    ],
+    [
+     "65-1112",
+     35
+    ],
+    [
+     "65-1171",
+     34
+    ],
+    [
+     "65-1180",
+     29
+    ],
+    [
+     "65-1317",
+     22
+    ],
+    [
+     "65-1058",
+     22
+    ],
+    [
+     "65-1244",
+     21
+    ],
+    [
+     "65-1368",
+     19
+    ],
+    [
+     "65-1333",
+     19
+    ],
+    [
+     "65-1139",
+     19
+    ],
+    [
+     "65-1155",
+     14
+    ],
+    [
+     "65-1228",
+     13
+    ],
+    [
+     "65-1325",
+     12
+    ],
+    [
+     "65-1414",
+     11
+    ],
+    [
+     "65-1236",
+     8
+    ],
+    [
+     "65-1074",
+     7
+    ],
+    [
+     "65-1350",
+     6
+    ],
+    [
+     "65-1260",
+     4
+    ],
+    [
+     "65-1066",
+     3
+    ],
+    [
+     "65-1406",
+     3
+    ],
+    [
+     "65-1090",
+     2
+    ],
+    [
+     "65-1201",
+     2
+    ],
+    [
+     "65-1279",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Vicente Trajano de Mesquita",
+     "bairro": "Olho Dágua dos Trajanos",
+     "votos": 112
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 91
+    },
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 51
+    }
+   ],
+   "conc": 0.16666666666666666,
+   "top3": 0.37797619047619047,
+   "venceu": 1,
+   "presente": 28
+  },
+  {
+   "urna": "Professora Inara",
+   "partido": "PT",
+   "foto": "fotos/ce/varjota/2024/60002042394.jpg",
+   "votos": 599,
+   "pos": 10,
+   "pct": 0.04350668216153399,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": null,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1040",
+     85
+    ],
+    [
+     "65-1023",
+     72
+    ],
+    [
+     "65-1252",
+     56
+    ],
+    [
+     "65-1112",
+     49
+    ],
+    [
+     "65-1295",
+     35
+    ],
+    [
+     "65-1171",
+     29
+    ],
+    [
+     "65-1317",
+     25
+    ],
+    [
+     "65-1325",
+     24
+    ],
+    [
+     "65-1180",
+     24
+    ],
+    [
+     "65-1147",
+     23
+    ],
+    [
+     "65-1414",
+     21
+    ],
+    [
+     "65-1139",
+     21
+    ],
+    [
+     "65-1333",
+     17
+    ],
+    [
+     "65-1058",
+     15
+    ],
+    [
+     "65-1376",
+     15
+    ],
+    [
+     "65-1350",
+     14
+    ],
+    [
+     "65-1236",
+     14
+    ],
+    [
+     "65-1244",
+     13
+    ],
+    [
+     "65-1260",
+     12
+    ],
+    [
+     "65-1228",
+     10
+    ],
+    [
+     "65-1406",
+     5
+    ],
+    [
+     "65-1155",
+     5
+    ],
+    [
+     "65-1201",
+     4
+    ],
+    [
+     "65-1368",
+     3
+    ],
+    [
+     "65-1090",
+     3
+    ],
+    [
+     "65-1066",
+     2
+    ],
+    [
+     "65-1074",
+     2
+    ],
+    [
+     "65-1279",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 85
+    },
+    {
+     "nome": "Liceu Waldir Leopércio",
+     "bairro": "Empréstimos",
+     "votos": 72
+    },
+    {
+     "nome": "E.e.f. Florência Ferreira Neta",
+     "bairro": "Acampamento Dnocs",
+     "votos": 56
+    }
+   ],
+   "conc": 0.1419031719532554,
+   "top3": 0.3555926544240401,
+   "venceu": 0,
+   "presente": 28
+  },
+  {
+   "urna": "Eudes do Croatá",
+   "partido": "MDB",
+   "foto": "fotos/ce/varjota/2024/60002136562.jpg",
+   "votos": 280,
+   "pos": 16,
+   "pct": 0.02033701336432307,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 291,
+   "eleito20": false,
+   "locais": [
+    [
+     "65-1090",
+     148
+    ],
+    [
+     "65-1279",
+     49
+    ],
+    [
+     "65-1040",
+     11
+    ],
+    [
+     "65-1147",
+     8
+    ],
+    [
+     "65-1023",
+     7
+    ],
+    [
+     "65-1260",
+     7
+    ],
+    [
+     "65-1155",
+     6
+    ],
+    [
+     "65-1058",
+     5
+    ],
+    [
+     "65-1317",
+     4
+    ],
+    [
+     "65-1376",
+     4
+    ],
+    [
+     "65-1295",
+     3
+    ],
+    [
+     "65-1066",
+     3
+    ],
+    [
+     "65-1112",
+     3
+    ],
+    [
+     "65-1333",
+     3
+    ],
+    [
+     "65-1201",
+     3
+    ],
+    [
+     "65-1252",
+     3
+    ],
+    [
+     "65-1325",
+     2
+    ],
+    [
+     "65-1350",
+     2
+    ],
+    [
+     "65-1368",
+     2
+    ],
+    [
+     "65-1074",
+     2
+    ],
+    [
+     "65-1228",
+     2
+    ],
+    [
+     "65-1406",
+     1
+    ],
+    [
+     "65-1139",
+     1
+    ],
+    [
+     "65-1171",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Odilon Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 148
+    },
+    {
+     "nome": "E.e.i. Rosa Paiva Nobre",
+     "bairro": "Croatá dos Martins",
+     "votos": 49
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "bairro": "Centro",
+     "votos": 11
+    }
+   ],
+   "conc": 0.5285714285714286,
+   "top3": 0.7428571428571429,
+   "venceu": 0,
+   "presente": 24
+  }
+ ],
+ "qe2028": 1305,
+ "fala": [
+  "Varjota. Os onze vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram trinta e três candidatos para onze cadeiras. Sete são caras novas. PSB, cinco; MDB, três; PT, três. E o quociente: mil duzentos e cinquenta e dois votos.",
+  "Rosa Paulino, do MDB. Mil setecentos e setenta e quatro votos: a maior votação da cidade. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Florência Ferreira Neta, no Acampamento do Dnocs: cento e cinquenta e três votos. Liderou a votação em quinze dos vinte e oito locais.",
+  "Eudes Mesquita, do PSB. Novecentos e noventa e dois votos: segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Odilon Nobre, em Croatá dos Martins: cento e noventa e um votos. Voto espalhado: teve eleitor nos vinte e oito locais.",
+  "Gonçalinho, do PSB. Novecentos e quinze votos: terceiro lugar. Em dois mil e vinte, tinha feito setecentos e oitenta e quatro: ganhou cento e trinta e um votos e segue na Câmara. O maior reduto é na escola Odilon Nobre, em Croatá dos Martins: duzentos e dezenove votos. Liderou a votação em três dos vinte e oito locais.",
+  "Regio Ximenes, do PSB. Oitocentos e oitenta e quatro votos: quarto lugar. Em dois mil e vinte, tinha feito setecentos e vinte e seis: ganhou cento e cinquenta e oito votos e segue na Câmara. O maior reduto é na escola Deputado Manoel Rodrigues, no Centro: cento e noventa e três votos. Voto espalhado: teve eleitor nos vinte e oito locais.",
+  "Patricia Ximenes, do PT. Oitocentos e quarenta e sete votos: quinto lugar. Em dois mil e vinte, teve quatrocentos e três votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Deputado Manoel Rodrigues, no Centro: cento e cinco votos. Voto espalhado: teve eleitor nos vinte e oito locais.",
+  "Lucas da Célia, do MDB. Oitocentos e trinta e quatro votos: sexto lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é no Liceu Waldir Leopércio, em Empréstimos: duzentos e trinta e dois votos. Liderou a votação em três dos vinte e oito locais.",
+  "Roberto do Garrone, do PT. Setecentos e oitenta e três votos: sétimo lugar. Em dois mil e vinte, tinha feito oitocentos e trinta e cinco: perdeu cinquenta e dois votos e segue na Câmara. O maior reduto é no Liceu Waldir Leopércio, em Empréstimos: cento e vinte e seis votos.",
+  "Fransquinha do Edvard, do PSB. Seiscentos e oitenta e dois votos: oitavo lugar. Em dois mil e vinte, teve quatrocentos e catorze votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Teodoro Sales de Oliveira, em Pedreira: sessenta e sete votos.",
+  "Djinha, do PSB. Seiscentos e setenta e dois votos: nono lugar. Em dois mil e vinte, tinha feito quinhentos e trinta e nove: ganhou cento e trinta e três votos e segue na Câmara. O maior reduto é na escola Vicente Trajano de Mesquita, em Olho Dágua dos Trajanos: cento e doze votos. Voto espalhado: teve eleitor nos vinte e oito locais.",
+  "Professora Inara, do PT. Quinhentos e noventa e nove votos: décimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Deputado Manoel Rodrigues, no Centro: oitenta e cinco votos. Voto espalhado: teve eleitor nos vinte e oito locais. Entrou pela média, na distribuição das sobras.",
+  "Eudes do Croatá, do MDB. Duzentos e oitenta votos. Em dois mil e vinte, teve duzentos e noventa e um votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Odilon Nobre, em Croatá dos Martins: cento e quarenta e oito votos. Mais da metade dos votos veio desse único local. Ficou em décimo sexto lugar, mas a vaga é do partido: com a soma do MDB, entrou.",
+  "Só Rosa Paulino passou do quociente com os próprios votos. Os outros dez dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de mil e trezentos votos. Plenária CE. Inteligência eleitoral de Varjota."
+ ]
+}
