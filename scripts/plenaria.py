@@ -344,6 +344,11 @@ def ler_csv_zip(caminho, filtro_nome=None):
             with z.open(n) as bruto:
                 texto = io.TextIOWrapper(bruto, encoding="latin-1", newline="")
                 for linha in csv.DictReader(texto, delimiter=";"):
+                    # o arquivo do ano também traz eleições suplementares (ex.: Santa Quitéria, out/2025);
+                    # misturar as duas soma eleitorado e candidatos de disputas diferentes — fica só a ordinária
+                    tipo = (linha.get("NM_TIPO_ELEICAO") or "") + " " + (linha.get("DS_ELEICAO") or "")
+                    if "SUPLEMENTAR" in tipo.upper():
+                        continue
                     yield linha
 
 
