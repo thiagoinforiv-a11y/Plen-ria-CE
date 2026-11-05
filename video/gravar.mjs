@@ -21,10 +21,16 @@ if (args[0] === "--provas") {
   fs.mkdirSync(args[1], { recursive: true });
   for (const t of args[2].split(",").map(Number)) fs.writeFileSync(path.join(args[1], `t${String(t).padStart(5, "0")}.jpg`), await quadro(t));
 } else {
-  const saida = args[0] || "varjota-raio-x.mp4", fps = +(args[1] || 30), dur = await p.evaluate(() => window.DURACAO);
-  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-preset", "medium", "-movflags", "+faststart", saida], { stdio: ["pipe", "inherit", "inherit"] });
+  // opcional: --mapa mapa.json (tempo da animação × tempo do vídeo) e --audio trilha.wav
+  const opt = (k) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 2)[1] : null; };
+  const mapa = opt("--mapa"), audio = opt("--audio");
+  const saida = args[0] || "varjota-raio-x.mp4", fps = +(args[1] || 30);
+  const M = mapa ? JSON.parse(fs.readFileSync(mapa, "utf8")) : null;
+  const dur = M ? M.V[M.V.length - 1] : await p.evaluate(() => window.DURACAO);
+  const ts = (t) => { if (!M) return t; let k = 0; while (k + 2 < M.V.length && t >= M.V[k + 1]) k++; return Math.min(M.S[k + 1], M.S[k] + ((t - M.V[k]) * (M.S[k + 1] - M.S[k])) / (M.V[k + 1] - M.V[k])); };
+  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-", ...(audio ? ["-i", audio, "-c:a", "aac", "-b:a", "192k", "-shortest"] : []), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-preset", "medium", "-movflags", "+faststart", saida], { stdio: ["pipe", "inherit", "inherit"] });
   const n = Math.round(dur * fps);
-  for (let i = 0; i < n; i++) { const buf = await quadro(i / fps); if (!ff.stdin.write(buf)) await new Promise((ok) => ff.stdin.once("drain", ok)); if (i % 300 === 0) console.log(`${i}/${n}`); }
+  for (let i = 0; i < n; i++) { const buf = await quadro(ts(i / fps)); if (!ff.stdin.write(buf)) await new Promise((ok) => ff.stdin.once("drain", ok)); if (i % 300 === 0) console.log(`${i}/${n}`); }
   ff.stdin.end(); await new Promise((ok) => ff.on("close", ok));
   console.log("✔", saida);
 }
