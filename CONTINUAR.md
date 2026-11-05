@@ -50,3 +50,4 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
 - Rede da sessão bloqueia litterbox/catbox; .claude/settings.json tem a regra, mas falta liberar o domínio no ambiente.
 - Próximos passos: Parte 2 "As surpresas"; vídeo por vereador (collab); clipes reais com tarja (pauta do Thiago); rotina diária de métricas (oferecida).
 - Rotina diária de métricas: scheduled task `trig_01Tiwng3pbYxi1ezWKwx3jay`, 7h43 Fortaleza, dispara na sessão session_01HG11nb4K6fTzP98Tv79TRZ (só leitura no Metricool).
+- Informação local (apoios, grupos): cópia no repositório PRIVADO thiagoinforiv-a11y/plenaria-local (subido pelo Thiago). Em sessão nova: varjota.local.js → data/ce/; lados.local.json e historico-varjota.local.json → video/. Nunca no repositório público.
