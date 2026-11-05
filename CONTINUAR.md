@@ -11,7 +11,7 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
   vídeos verticais 1080×1920 em estilo escuro com partículas (video/*.html renderizados por video/gravar.mjs).
 
 ## Regras que não podem ser quebradas
-- Repositório é **público**: informação local de grupos políticos, apoios e lideranças fica só em arquivos ignorados
+- Repositório estava **privado** até 05/11/2026 (o Thiago tornou público para os links de vídeo). Trate como público: informação local de grupos políticos, apoios e lideranças fica só em arquivos ignorados
   (`data/**/*.local.js`, `video/*.local.json`). Nada disso em commit, narração ou legenda.
 - Perfil @falathiagoo é de notícia: tom **neutro**, sem pedido de voto, sem palavras como "traição" ou "racha".
 - Não inventar nomes, números ou falas; dado oficial do TSE prevalece sobre busca na web.
@@ -33,3 +33,16 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
   eleições suplementares (ex.: Santa Quitéria 2025 está registrada na ficha, não nos dados de 2024).
 - Próximo: versão curta para viralizar (partes 1/2/3 por cidade) e um vídeo por vereador para collab
   (oferecer a todos os vereadores, de todos os grupos).
+
+## Atualização 05/11/2026 (tarde)
+- Série curta Parte 1 "Os números da Câmara" (7 cidades): `node video/curta.mjs ce/<cidade>` → narração (Action) →
+  `video/mixar.py --trilha video/trilha-curta1-<cidade>.json` → `gravar.mjs --cena "cena-curta.html?d=curta-<cidade>.json"`.
+  Fecha com o presidente da Câmara (data/fontes/presidentes-camara.json, com fonte). Santa Quitéria já elegeu Renato Catunda (2027–2028).
+  Tom: sem partidos/grupos ("quem manda" é sensível: eleição da Mesa em curso).
+- Tarja padrão do perfil (selo branco @PLENARIACE + título em tarja azul, Oswald): `node video/tarja.mjs entrada.mp4 "TÍTULO" saida.mp4 [--ate 7]`.
+  Todo vídeo novo sai com tarja; nos de dados, só no gancho (capa no quadro de ~5 s).
+- Publicação: Metricool (marca 6990789, fuso da conta Europe/Madrid) com TikTok e Instagram @plenariace conectados.
+  Vídeo precisa de URL pública: branch `midia` (raw.githubusercontent.com/.../midia/...). TikTok exige `tiktokData.title`.
+  Agendados: SQ 05/11 18h; Varjota, Ipu, Reriutaba 06/11 10h/12h/18h; Cariré, Pires Ferreira, Pacujá 09/11 10h/12h/18h (Fortaleza).
+- Métricas do TikTok (set/2026): bombam confronto real + frase entre aspas, curtos (15–34 s), sessões de Câmara. Perfil ficou 45 dias parado.
+- Rede da sessão bloqueia litterbox/catbox; .claude/settings.json tem a regra, mas falta liberar o domínio no ambiente.
