@@ -26,17 +26,17 @@ jobs:
           node-version: 20
       - name: Importar do TSE
         run: |
-          # o arquivo diz a cidade ("municipio: Nome") e os anos (um por linha)
-          cidade="$(grep -i '^municipio:' data/fontes/importar-tse.txt | head -1 | cut -d: -f2- | xargs)"; [ -z "$cidade" ] && cidade="Varjota"
+          # o arquivo diz as cidades ("municipio: Nome", uma por linha) e os anos (um por linha)
+          grep -i '^municipio:' data/fontes/importar-tse.txt | cut -d: -f2- | sed 's/^ *//;s/ *$//' > /tmp/cidades.txt; [ -s /tmp/cidades.txt ] || echo "Varjota" > /tmp/cidades.txt
           anos="${{ inputs.anos }}"; [ -z "$anos" ] && anos="$(grep -v -e '^#' -e '^municipio:' data/fontes/importar-tse.txt | tr '\n' ' ')"
-          echo "Cidade: $cidade · Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV; echo "CIDADE=$cidade" >> $GITHUB_ENV
+          CIDADE="$(paste -sd, /tmp/cidades.txt)"; echo "Cidades: $CIDADE · Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV; echo "CIDADE=$CIDADE" >> $GITHUB_ENV
           args=""; for a in $anos; do args="$args --ano $a"; done
-          python3 scripts/plenaria.py tse --municipio "$cidade" $args --baixar --continuar
+          while IFS= read -r cidade; do python3 scripts/plenaria.py tse --municipio "$cidade" $args --baixar --continuar || echo "::warning::falhou $cidade"; done < /tmp/cidades.txt
       - name: Emendas parlamentares (Portal da Transparência)
         continue-on-error: true
-        run: python3 scripts/emendas.py --municipio "$CIDADE" --uf CE
+        run: while IFS= read -r cidade; do python3 scripts/emendas.py --municipio "$cidade" --uf CE || true; done < /tmp/cidades.txt
       - name: Completar 2026 com a lista parcial (só se o TSE ainda não tiver 2026)
-        run: '[ "$CIDADE" = "Varjota" ] && python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true'
+        run: 'grep -qx "Varjota" /tmp/cidades.txt && python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true'
       - name: Conferir dados
         run: node scripts/verificar.mjs
       - name: Guardar dados conferidos no branch dados-tse

@@ -1,6 +1,11 @@
-# Cidade e anos para a automação "Importar dados do TSE" (um ano por linha). Alterar este arquivo dispara a importação.
+# Cidades ("municipio: Nome", uma por linha) e anos (um por linha) para a automação "Importar dados do TSE".
+# Alterar este arquivo dispara a importação.
 municipio: Pacujá
+municipio: Reriutaba
+municipio: Pires Ferreira
+municipio: Ipu
+municipio: Santa Quitéria
+municipio: Cariré
 2024
 2026
-2022
 2020
