@@ -1,5 +1,14 @@
 # Para continuar o trabalho (sessão nova)
 
+## FLUXO ENXUTO (leia só isto para postar; economiza créditos)
+1. Pauta → `video/noticias/<id>.json`: `{id, fontes, cenas:[{fala, tarja, midia?, ini?, credito?, grande?, sub?}]}`.
+   Cenas curtas (1 frase), 5–7 cenas, 30–45 s. `midia` = foto/vídeo real enviado pelo Thiago (pasta entregas/ ou uploads).
+2. Fala em narracao.json (`videos[id]`) → commit/push → Action gera a voz (branch narracao) → `git checkout origin/narracao -- video/audio`.
+3. `node video/noticia.mjs video/noticias/<id>.json` → MP4 pronto (tarja azul, só ela na tela; sem partículas).
+4. Copiar para o worktree da branch `midia` (noticias/), push, e agendar no Metricool (blogId 6990789, TikTok+IG,
+   tiktokData.title obrigatório, isAigc/isAiGenerated true por causa da voz sintética, horário America/Fortaleza).
+Não usar Action para baixar mídia de sites bloqueados (bloqueado por segurança). Mídia real vem do Thiago.
+
 Leia este arquivo e depois `video/PROXIMOS-PASSOS.md` e `video/estudio/LEIAME.md`.
 Branch de trabalho: `claude/mapa-politico-varjota`.
 
