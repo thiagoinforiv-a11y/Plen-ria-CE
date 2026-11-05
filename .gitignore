@@ -2,3 +2,5 @@ tse_raw/
 data/**/*.local.js
 fotos/manual/
 node_modules/
+entregas/
+video/*.local.json
