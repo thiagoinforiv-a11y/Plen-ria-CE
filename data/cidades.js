@@ -60,6 +60,8 @@ window.PLENARIA_CIDADES = [
   "nome": "Santa Quitéria",
   "arquivo": "data/ce/santa-quiteria.js",
   "anos": [
+   "2026",
+   "2024",
    "2020",
    "2016",
    "2012"
