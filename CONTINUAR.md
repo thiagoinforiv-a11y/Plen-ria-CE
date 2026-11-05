@@ -11,7 +11,7 @@ Horário: notícia sai NA HORA; só conteúdo estratégico (séries de dados) se
 Não usar Action para baixar mídia de sites bloqueados (bloqueado por segurança). Mídia real vem do Thiago.
 
 Leia este arquivo e depois `video/PROXIMOS-PASSOS.md` e `video/estudio/LEIAME.md`.
-Branch de trabalho: `claude/mapa-politico-varjota`.
+Branch de trabalho: `claude/plenaria-ce-video-xgo76v` (contém todo o `claude/mapa-politico-varjota`).
 
 ## Quem e o quê
 - Thiago Costa (@falathiagoo, Kroma.mov, Varjota-CE). Fala pelo celular, muitas vezes por áudio transcrito
@@ -61,3 +61,14 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
 - Próximos passos: Parte 2 "As surpresas"; vídeo por vereador (collab); clipes reais com tarja (pauta do Thiago); rotina diária de métricas (oferecida).
 - Rotina diária de métricas: scheduled task `trig_01Tiwng3pbYxi1ezWKwx3jay`, 7h43 Fortaleza, dispara na sessão session_01HG11nb4K6fTzP98Tv79TRZ (só leitura no Metricool).
 - Informação local (apoios, grupos): cópia no repositório PRIVADO thiagoinforiv-a11y/plenaria-local (subido pelo Thiago). Em sessão nova: varjota.local.js → data/ce/; lados.local.json e historico-varjota.local.json → video/. Nunca no repositório público.
+
+## Atualização 05/11/2026 (noite)
+- Parte 2 "As surpresas" PRONTA (7 cidades, ~40 s): `node video/curta2.mjs ce/<cidade>` → pauta em video/noticias/curta2-<cidade>.json
+  → narração (Action) → `node video/noticia.mjs video/noticias/curta2-<cidade>.json`. Vídeos na branch `midia`, pasta parte2/
+  (raw.githubusercontent.com/thiagoinforiv-a11y/Plen-ria-CE/midia/parte2/curta2-<cidade>.mp4). FALTA agendar (Thiago escolhe dia/hora).
+  Só "suplente" conta como "ficou de fora". Reriutaba: Débora Janne tem 812 votos com situação "não eleito" (pendência?) — ficou fora; aguardando o Thiago.
+- Voz padrão agora 1,35× (noticia.mjs, TEMPO; pauta pode trazer "tempo"). Foto pequena do TSE aparece menor, sem esticar.
+- Horário: notícia sai na hora; só série/estratégico segue agenda. Tendências e regras de uso de imagem: video/TENDENCIAS.md.
+- Rede: domínios de bancos de imagem liberados no ambiente. Chave PIXABAY_API_KEY nas variáveis do ambiente (vale em sessão nova):
+  testar com `curl "https://pixabay.com/api/?key=$PIXABAY_API_KEY&q=..."`. Pexels não emite chave nova; Wikimedia limita o IP compartilhado.
+- Próximo: vídeos por vereador (collab); "Fim de um ciclo em Pacujá" (aguarda mídia).
