@@ -88,6 +88,10 @@
  "reeleitos": 4,
  "novos": 7,
  "eleitos20": 11,
+ "presidente": {
+  "urna": "Roberto do Garrone",
+  "foto": "fotos/ce/varjota/2024/60002042391.jpg"
+ },
  "top": {
   "urna": "Rosa Paulino",
   "foto": "fotos/ce/varjota/2024/60002136565.jpg",
@@ -106,6 +110,6 @@
   "Esses são os onze eleitos de dois mil e vinte e quatro.",
   "Sete não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Rosa Paulino. E Patricia Ximenes mais que dobrou de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Roberto do Garrone. E o próximo presidente, quem será? Comenta aqui."
  ]
 }

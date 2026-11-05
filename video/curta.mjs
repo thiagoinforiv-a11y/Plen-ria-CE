@@ -2,6 +2,8 @@
 // sem grupos, sem partidos e sem "quem manda" (período de eleição da Mesa da Câmara).
 // Uso: node video/curta.mjs ce/<cidade>   → video/curta-<cidade>.json e a fala em narracao.json (chave curta1-<cidade>)
 import fs from "fs";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
 const ID = process.argv[2] || "ce/varjota", SLUG = ID.split("/")[1];
 const ARQ = SLUG === "varjota" ? "dados-vereadores-detalhe.json" : `dados-vereadores-${SLUG}.json`;
 const V = JSON.parse(fs.readFileSync(new URL("./" + ARQ, import.meta.url)));
@@ -24,10 +26,16 @@ const comV20 = V.eleitos.filter((e) => e.v20 && e !== top).sort((a, b) => b.voto
 const cresceu = comV20[0] && comV20[0].votos > comV20[0].v20 ? comV20[0] : null;
 const r20 = (H.renov || []).find((r) => r.ano === "2024");
 
+// presidente da Câmara: só se estiver nos relatórios com fonte "confirmado" (sem datas de mandato no vídeo)
+global.window = {}; try { require(`../data/${ID}.relatorios.js`); } catch (er) {}
+const REL = ((window.PLENARIA_RELATORIOS || {})[ID] || {}).pessoas || Object.values((window.PLENARIA_RELATORIOS || {})[ID] || {}).find(Array.isArray) || [];
+const pres = REL.find((r) => /^Presidente da Câmara/i.test(r.papel || "") && (r.destaques || []).some((d) => d.selo === "confirmado" && /Presidente da Câmara/i.test(d.titulo)));
+const presE = pres && V.eleitos.find((e) => pres.nomes.includes(e.urna));
 const out = {
   video: "curta1", municipio: CID, cd_ibge: V.cd_ibge || H.cd_ibge, cadeiras: n, candidatos: V.candidatos, validos: V.validos, qe: V.qe,
   eleitos: [...V.eleitos].sort((a, b) => b.votos - a.votos).map((e) => ({ urna: e.urna, foto: e.foto, votos: e.votos, eleito20: !!e.eleito20, v20: e.v20 })),
   reeleitos: reeleitos.length, novos, eleitos20: r20 ? r20.cadeiras : n,
+  presidente: presE ? { urna: presE.urna, foto: presE.foto } : null,
   top: { urna: top.urna, foto: top.foto, votos: top.votos },
   cresceu: cresceu && { urna: cresceu.urna, foto: cresceu.foto, votos: cresceu.votos, v20: cresceu.v20, mult: cresceu.votos / cresceu.v20 },
 };
@@ -38,7 +46,7 @@ out.fala = [
   `Esses são os ${ext(n)} eleitos de ${anoExt(2024)}.`,
   `${Cap(ext(novos))} não tinham sido eleitos em ${anoExt(2020)}.`,
   `Maior votação: ${top.urna}.` + (cresceu ? ` E ${cresceu.urna} ${multFala(out.cresceu.mult)} de voto.` : ""),
-  `Qual vereador você quer ver no próximo vídeo? Comenta aqui.`,
+  presE ? `Hoje, quem preside a Câmara é ${presE.urna}. E o próximo presidente, quem será? Comenta aqui.` : `Qual vereador você quer ver no próximo vídeo? Comenta aqui.`,
 ];
 fs.writeFileSync(new URL(`./curta-${SLUG}.json`, import.meta.url), JSON.stringify(out, null, 1));
 const nf = new URL("./narracao.json", import.meta.url), N = JSON.parse(fs.readFileSync(nf)); N.videos[`curta1-${SLUG}`] = out.fala; fs.writeFileSync(nf, JSON.stringify(N, null, 2) + "\n");
