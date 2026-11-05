@@ -26,9 +26,28 @@ window.PLENARIA_FICHAS["ce/pacuja"] = {
         { nome: "O Povo", url: "https://mais.opovo.com.br/jornal/politica/2024/10/17/com-60-anos-de-diferenca-quem-sao-e-o-que-querem-o-prefeito-mais-novo-e-mais-velho-do-ceara.html" },
       ],
     },
+    {
+      papel: "Vice-prefeita",
+      nome: "Milena Melo",
+      detalhe: "PT. Eleita em 2024 na chapa de Pedro Allan. Em 03/11/2026 anunciou que deixa o grupo político da gestão.",
+      selo: "declaracao",
+      fontes: [{ nome: "Instagram @milenamelopacuja", url: "https://www.instagram.com/milenamelopacuja/" }],
+    },
   ],
 
   fatos: [
+    {
+      data: "2026-11-03",
+      titulo: "Ex-prefeito Alex Melo e vice-prefeita Milena Melo anunciam saída do grupo da gestão municipal",
+      resumo: "Em vídeos, Alex disse que a decisão foi refletida e amadurecida e que, segundo ele, o povo não está sendo tratado com a prioridade e o respeito que merece; o post fala em oposição responsável. Milena disse que sua história não começou na vice-prefeitura e que encerra o ciclo com serenidade. No mesmo dia, Raimundo Filho publicou vídeo dizendo que o contato do grupo com o povo é olho no olho, com trabalho e com verdade. O prefeito Pedro Allan não havia se manifestado até então.",
+      selo: "declaracao",
+      cartao2028: ["A gestão perdeu aliados", "ex-prefeito Alex Melo e a vice Milena deixaram o grupo (nov/2026)"],
+      fontes: [
+        { nome: "Instagram @alexmelopacuja", url: "https://www.instagram.com/alexmelopacuja/" },
+        { nome: "Instagram @milenamelopacuja", url: "https://www.instagram.com/milenamelopacuja/" },
+        { nome: "Instagram @raimundofilhorf", url: "https://www.instagram.com/raimundofilhorf/" },
+      ],
+    },
     {
       data: "2024-10-06",
       titulo: "Pedro Allan (PSB) é eleito prefeito com 71,43% contra João Paulo da Elma (Cidadania)",

@@ -219,8 +219,8 @@
     texto("COMO SERÁ", W / 2, 380, { tam: 40, w: 800, ls: 10, a: vis(t, 64.4, 75.1), cor: "#bdbab0" });
     texto("2028?", W / 2, 620, { tam: 150, w: 900, a: vis(t, 64.6, 75.1), brilho: 30, cor: AC, sobe: 1 });
     const itens = [D.semReeleicao ? ["Prefeitura aberta", `${D.prefeito[2].venc.nome} cumpre o segundo mandato`] : ["Reeleição em jogo", `${D.prefeito[2].venc.nome} pode concorrer`],
-      ...(D.precedentes || []).map((x) => [`${x.ano}: sem ${x.saiu.split(" ")[0]}${x.interrompido ? ` (${x.interrompido})` : ""} na disputa`, x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} (${x.partidoVenceu}) venceu e virou o jogo`]),
-      ...LOCAL.cartoes,
+      ...(D.precedentes || []).map((x) => [`${x.ano}: sem ${x.saiu.split(" ")[0]}${x.interrompido ? ` (${x.interrompido})` : ""} na disputa`, x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} venceu, pelo ${x.partidoVenceu}`]),
+      ...(D.cartoes2028 || []), ...LOCAL.cartoes,
       [`≈ ${fmt(Math.round(D.qe2028 / 50) * 50)} votos por cadeira`, "quociente na tendência"], [`≈ ${D.novosMedia} vereadores novos`, "se a renovação seguir a média"]].filter(Boolean);
     const passo = Math.min(190, 860 / itens.length);
     itens.forEach(([tt, sb], i) => { const a = vis(t, 66 + i * (7 / itens.length), 75.1), y = 880 + i * passo;
