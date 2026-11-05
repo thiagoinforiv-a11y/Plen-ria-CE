@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Raio-X de candidato</title>
+<style>
+  html, body { margin: 0; background: #070707; }
+  canvas { display: block; width: 540px; height: 960px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Raio-X de um candidato (estilo do raio-X de Varjota): trajetória em pontos + mapa do Ceará.
+ * Dados: video/candidato-<slug>.json (TSE, votacao_candidato_munzona). Uso: cena-candidato.html?d=candidato-danilo-lopes.json
+ * T = início de cada fala da narração (7 falas: abertura, 4 eleições, mapa, pergunta). */
+(async () => {
+  const W = 1080, H = 1920, cv = document.getElementById("c"), ctx = cv.getContext("2d");
+  const arq = new URLSearchParams(location.search).get("d") || "candidato-danilo-lopes.json";
+  const D = await (await fetch(arq)).json(), G = await (await fetch("geo-ce.json")).json(), T = D.T;
+  const AC = "#d4ff3a", CINZA = "#8d8b82", FONT = "Inter, 'Inter Display', sans-serif";
+  const fmt = (n) => Math.round(n).toLocaleString("pt-BR");
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const eout = (x) => 1 - Math.pow(1 - x, 3);
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  const vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+  let seed = 11; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+  const foto = new Image(); await new Promise((ok) => { foto.onload = ok; foto.onerror = ok; foto.src = "../" + D.foto; });
+  await document.fonts.load("900 60px Inter").catch(() => {});
+
+  // ---------------- formas das partículas
+  const N = 2400;
+  const P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
+  const poeira = () => [rnd() * W, rnd() * H, "dust"];
+  const forma = {};
+  forma.poeira = Array.from({ length: N }, poeira);
+  const FY = 760;
+  forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 230 + Math.abs(gauss()) * 40; return [W / 2 + Math.cos(a) * r, FY + Math.sin(a) * r, rnd() < 0.5 ? AC : "#fff"]; });
+  // trajetória: 4 colunas, cada ponto = POR votos; na fala i, as colunas 0..i aparecem (a atual em destaque)
+  const POR = 50, cw = W / 5, per = 8, gap = 17, BASE = 1360;
+  const colunas = (ate) => { const out = []; D.anos.forEach((a, ci) => { if (ci > ate) return; const n = Math.round(a.votos / POR); for (let k = 0; k < n; k++)
+    out.push([cw * (ci + 1) - ((per - 1) * gap) / 2 + (k % per) * gap, BASE - Math.floor(k / per) * gap, ci === ate ? AC : "#fff"]); });
+    while (out.length < N) out.push(poeira()); return out.slice(0, N); };
+  D.anos.forEach((_, i) => (forma["ano" + i] = colunas(i)));
+  // mapa do Ceará: partículas por município, proporcionais aos votos de 2026
+  const CEF = { lon: -39.35, lat: -5.25, s: 205 }, MAPY = H * 0.43, kx = Math.cos((4.5 * Math.PI) / 180);
+  const proj = (lon, lat) => [W / 2 + (lon - CEF.lon) * CEF.s * kx, MAPY - (lat - CEF.lat) * CEF.s];
+  const centro = {}; G.ids.forEach((id, i) => { const r = G.mun[i]; centro[id] = proj(r.reduce((s, p) => s + p[0], 0) / r.length, r.reduce((s, p) => s + p[1], 0) / r.length); });
+  const FOR = "2304400", RER = "2311702";
+  forma.mapa = (() => { const out = [], tot = D.total26, ids = Object.keys(D.mapa).sort((a, b) => D.mapa[a] - D.mapa[b]);
+    ids.forEach((id) => { const v = D.mapa[id], n = id === FOR ? 0 : Math.max(1, Math.round((N * 0.82 * v) / tot)), [x, y] = centro[id] || [W / 2, H / 2], r = 3 + Math.sqrt(v) * 0.5;
+      for (let k = 0; k < n && out.length < N; k++) out.push([x + gauss() * r, y + gauss() * r, id === RER ? "#ff7a45" : "#fff"]); });
+    const [fx, fy] = centro[FOR]; while (out.length < N) out.push([fx + gauss() * 22, fy + gauss() * 22, AC]); return out; })();
+  forma.fim = Array.from({ length: N }, () => { const [lon, lat] = G.mun[Math.floor(rnd() * G.mun.length)][0]; const [x, y] = proj(lon, lat); return [x + gauss() * 30, y + gauss() * 30, "dust"]; });
+
+  const KF = [[0, "poeira", 0], [0.4, "halo", 2.0], [T[1] - 0.3, "ano0", 1.8], [T[2] - 0.2, "ano1", 1.6], [T[3] - 0.2, "ano2", 1.6], [T[4] - 0.2, "ano3", 1.6], [T[5] - 0.3, "mapa", 2.2], [T[6] - 0.2, "fim", 1.8]];
+  const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
+
+  // ---------------- desenho
+  const fundo = (t) => { const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8); g.addColorStop(0, "#1b1c1a"); g.addColorStop(1, "#060606"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    for (let i = 0; i < 9; i++) { const x = (i * 263 + t * 9 * (i % 3 + 1)) % (W + 200) - 100, y = (i * 517) % H + Math.sin(t * 0.3 + i) * 30, r = 50 + (i % 4) * 30; const b = ctx.createRadialGradient(x, y, 0, x, y, r); b.addColorStop(0, "rgba(255,255,255,.035)"); b.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = b; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill(); } };
+  const texto = (s, x, y, o = {}) => { const a = o.a == null ? 1 : o.a; if (a <= 0.01) return;
+    ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center"; ctx.font = `${o.w || 700} ${o.tam || 56}px ${FONT}`; ctx.letterSpacing = (o.ls || 0) + "px";
+    if (o.brilho) { ctx.shadowColor = o.cor || "rgba(255,255,255,.6)"; ctx.shadowBlur = o.brilho; }
+    const dy = o.sobe ? (1 - a) * 24 : 0; String(s).split("\n").forEach((l, i) => ctx.fillText(l, x, y + dy + i * (o.lh || (o.tam || 56) * 1.18))); ctx.restore(); };
+  const retrato = (x, y, r, a, cor) => { if (a <= 0.01 || !foto.width) return; const s = 0.85 + 0.15 * eout(a);
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s); ctx.shadowColor = cor; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = Math.max((2 * r) / foto.width, (2 * r) / foto.height); ctx.drawImage(foto, -foto.width * sc / 2, -foto.height * sc * 0.42, foto.width * sc, foto.height * sc); ctx.restore();
+    ctx.lineWidth = 5; ctx.strokeStyle = cor; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); };
+  const marca = () => { ctx.save(); ctx.font = `700 19px ${FONT}`; ctx.letterSpacing = "4px"; const s = "PLENÁRIA CE", w = ctx.measureText(s).width + 36, x = W - w - 60, y = H - 120;
+    ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(x, y, w, 40, 20); ctx.stroke(); ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.textAlign = "left"; ctx.fillText(s, x + 18, y + 27); ctx.restore(); };
+  const contornos = (a) => { if (a <= 0.01) return; ctx.save(); ctx.lineWidth = 1.4; ctx.strokeStyle = `rgba(255,255,255,${0.16 * a})`;
+    G.mun.forEach((r) => { ctx.beginPath(); r.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.stroke(); }); ctx.restore(); };
+  const particulas = (t) => { const { ant, cur, t0, dur } = posicao(t); ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < N; i++) { const p = P[i], k = dur ? ease(clamp(((t - t0) / dur - p.d) / (1 - 0.35))) : 1, a0 = ant[i], a1 = cur[i];
+      let x = lerp(a0[0], a1[0], k) + Math.sin(t * 0.9 + p.ph) * 1.6, y = lerp(a0[1], a1[1], k) + Math.cos(t * 0.8 + p.ph) * 1.6; const curva = Math.sin(k * Math.PI) * 60 * (p.d - 0.17); x += curva; y -= curva * 0.6;
+      const c = (k > 0.5 ? a1[2] : a0[2]) || "#fff"; let al = p.a * (0.55 + 0.45 * Math.sin(t * 2 + p.ph * 3) ** 2); if (c === "dust") al *= 0.14;
+      ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c; ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill(); }
+    ctx.restore(); };
+
+  window.DURACAO = D.dur;
+  window.render = (t) => {
+    ctx.clearRect(0, 0, W, H); fundo(t);
+    contornos(vis(t, T[5] - 0.4, T[6] + 1.5, 0.8));
+    particulas(t);
+    // 1 · abertura
+    texto(D.nome, W / 2, 330, { tam: 112, w: 900, ls: 6, a: vis(t, 0.3, T[1] - 0.2, 0.6), brilho: 26, sobe: 1 });
+    texto("RAIO-X ELEITORAL · CEARÁ", W / 2, 400, { tam: 34, w: 700, ls: 6, a: vis(t, 0.8, T[1] - 0.2), cor: AC });
+    retrato(W / 2, FY, 200, vis(t, 0.8, T[1] - 0.1), AC);
+    // 2–5 · trajetória
+    const aT = vis(t, T[1], T[5] - 0.2);
+    texto("A TRAJETÓRIA NAS URNAS", W / 2, 300, { tam: 34, w: 800, ls: 5, a: aT, cor: "#bdbab0" });
+    texto(`cada ponto = ${POR} votos`, W / 2, 360, { tam: 30, w: 500, a: aT, cor: CINZA });
+    retrato(W / 2, 520, 90, aT, AC);
+    D.anos.forEach((a, i) => { const ai = vis(t, T[i + 1] + 0.3, T[5] - 0.2), cur = t >= T[i + 1] && t < T[i + 2], x = cw * (i + 1);
+      texto(fmt(a.votos * eout(prog(t, T[i + 1] + 0.3, T[i + 1] + 2))), x, BASE + 80, { tam: 44, w: 900, a: ai, cor: cur ? AC : "#f3f1ea", brilho: cur ? 14 : 0 });
+      texto(a.ano, x, BASE + 128, { tam: 30, w: 800, a: ai, cor: "#f3f1ea" });
+      texto(a.cargo, x, BASE + 168, { tam: 21, w: 600, ls: 1, a: ai, cor: "#bdbab0" });
+      texto(a.eleito ? "ELEITO" : "SUPLENTE", x, BASE + 204, { tam: 22, w: 800, ls: 2, a: ai, cor: a.eleito ? AC : CINZA }); });
+    // 6 · mapa
+    const aM = vis(t, T[5] + 0.6, T[6] - 0.1);
+    texto("ONDE VIERAM OS VOTOS · 2026", W / 2, 300, { tam: 34, w: 800, ls: 4, a: aM, cor: "#bdbab0" });
+    texto(`${D.muns26} de 184 cidades`, W / 2, 360, { tam: 32, w: 600, a: aM, cor: CINZA });
+    const pf = D.fortaleza / D.total26;
+    texto(Math.round(pf * 100 * eout(prog(t, T[5] + 1, T[5] + 3))) + "%", W / 2, 1450, { tam: 150, w: 900, a: aM, cor: AC, brilho: 30 });
+    texto(`em Fortaleza · ${fmt(D.fortaleza)} de ${fmt(D.total26)} votos`, W / 2, 1530, { tam: 36, w: 600, a: aM });
+    texto(`Reriutaba · ${D.reriutaba} votos, o maior da nossa região`, W / 2, 1610, { tam: 30, w: 600, a: vis(t, T[5] + 3.5, T[6] - 0.1), cor: "#ff7a45" });
+    // 7 · pergunta + assinatura
+    const aF = vis(t, T[6], D.dur + 1, 0.6);
+    texto("4 eleições.\n1 vitória.\nQual o próximo passo?", W / 2, 760, { tam: 76, w: 900, a: aF, sobe: 1, lh: 96 });
+    texto("Comenta aqui", W / 2, 1110, { tam: 40, w: 700, a: aF, cor: AC });
+    texto("Fonte: TSE · eleições 2020, 2022, 2024 e 2026", W / 2, 1700, { tam: 24, w: 500, a: aF, cor: CINZA });
+    marca();
+  };
+  window.render(0);
+  window.pronto = true;
+})();
+</script>
+</body>
+</html>
