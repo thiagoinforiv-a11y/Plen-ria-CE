@@ -51,7 +51,10 @@ for (const [i, c] of D.cenas.entries()) {
   let ent, vf;
   if (!m) { ent = ["-f", "lavfi", "-i", `color=c=0x0b0f1f:s=${W}x${H}:r=30:d=${T}`]; vf = "null"; }
   else if (video) { ent = ["-ss", String(c.ini || 0), "-t", T, "-i", m]; vf = `${fundo},fps=30`; }
-  else { ent = ["-loop", "1", "-t", T, "-i", m]; vf = `scale=${W * 1.2}:${H * 1.2}:force_original_aspect_ratio=increase,${fundo.replace(`scale=${W}:${H}:force_original_aspect_ratio=decrease`, `scale=${W}:${H}:force_original_aspect_ratio=decrease`)},zoompan=z='min(1+0.0009*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=30`; }
+  else { // foto pequena (ex.: foto de candidato do TSE, 161×225): menor na tela, sem esticar até a borda
+    const lw = +run("ffprobe", ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width", "-of", "csv=p=0", m]).toString();
+    const fg = lw < 600 ? `scale=${Math.round(W * 0.62)}:-2:flags=lanczos` : `scale=${W}:${H}:force_original_aspect_ratio=decrease`;
+    ent = ["-loop", "1", "-t", T, "-i", m]; vf = `scale=${W * 1.2}:${H * 1.2}:force_original_aspect_ratio=increase,${fundo.replace(`scale=${W}:${H}:force_original_aspect_ratio=decrease`, fg)},zoompan=z='min(1+0.0009*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=30`; }
   const fc = `[0:v]${vf},setsar=1,format=yuv420p[v];[v][1:v]overlay=0:0[o];` + (video ? `[0:a]volume=0.12,aresample=48000,aformat=channel_layouts=stereo[x];[2:a][x]amix=inputs=2:duration=first:normalize=0[s]` : `[2:a]anull[s]`);
   try { ff(...ent, "-i", arte, "-i", wav, "-filter_complex", fc, "-map", "[o]", "-map", "[s]", "-t", T, "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", "-ar", "48000", out); }
   catch (e) { // vídeo sem áudio: refaz só com a fala
