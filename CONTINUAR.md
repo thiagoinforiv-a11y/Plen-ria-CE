@@ -7,6 +7,7 @@
 3. `node video/noticia.mjs video/noticias/<id>.json` → MP4 pronto (tarja azul, só ela na tela; sem partículas).
 4. Copiar para o worktree da branch `midia` (noticias/), push, e agendar no Metricool (blogId 6990789, TikTok+IG,
    tiktokData.title obrigatório, isAigc/isAiGenerated true por causa da voz sintética, horário America/Fortaleza).
+Horário: notícia sai NA HORA; só conteúdo estratégico (séries de dados) segue agenda. Tendências: video/TENDENCIAS.md.
 Não usar Action para baixar mídia de sites bloqueados (bloqueado por segurança). Mídia real vem do Thiago.
 
 Leia este arquivo e depois `video/PROXIMOS-PASSOS.md` e `video/estudio/LEIAME.md`.
