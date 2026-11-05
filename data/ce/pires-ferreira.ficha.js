@@ -5,7 +5,7 @@ window.PLENARIA_FICHAS["ce/pires-ferreira"] = {
   observacao: "Ficha inicial. Prefeito de 2024 conferido por busca (NDMais / A Voz de Santa Quitéria); confirmar com o TSE na importação.",
   referencias: {
     municipio: { ibge: "2310951", tse: "13048" },
-    prefeitos: { 2024: "Dra. Lívia" },
+    prefeitos: { 2024: "Dra Lívia" },
     ultimasEleicoes: { municipal: 2024, geral: 2026 },
   },
   poder: [],

@@ -83,10 +83,14 @@ for (const c of ctx.window.PLENARIA_CIDADES || []) {
       const tot = Object.values(cg.partidos).reduce((t, p) => t + p.total, 0);
       if (cg.totais && tot !== cg.totais.validos) erros.push(`${tag}: ${ano} ${k}: votos por partido ${tot} ≠ válidos ${cg.totais.validos}`);
       const q = Q.quociente(cg, ano);
+      // eleito oficial com menos votos que um não eleito do mesmo partido = votos anulados ou candidatura
+      // indeferida depois da eleição (retotalização): o recálculo pelos votos brutos não tem como bater.
+      const elt = (x) => (x.situacao || "").startsWith("eleito");
+      const retot = cg.candidatos.some((x) => elt(x) && cg.candidatos.some((y) => y.partido === x.partido && !elt(y) && y.votos > x.votos));
       if (q && q.simulado) for (const p of q.partidos) {
         const reais = cg.candidatos.filter((x) => x.partido === p.sigla && (x.situacao || "").startsWith("eleito")).map((x) => x.urna).sort().join(", ");
         const sim = p.eleitos.map((x) => x.urna).sort().join(", ");
-        if (reais !== sim) (+ano >= 2022 ? avisos : erros).push(`${tag}: ${ano} ${k}: recálculo das cadeiras do ${p.sigla} dá [${sim}], oficial é [${reais}]${+ano >= 2022 ? " (regra de sobras pós-2021: conferir)" : ""}`);
+        if (reais !== sim) (+ano >= 2022 || retot ? avisos : erros).push(`${tag}: ${ano} ${k}: recálculo das cadeiras do ${p.sigla} dá [${sim}], oficial é [${reais}]${+ano >= 2022 ? " (regra de sobras pós-2021: conferir)" : ""}${retot ? " (houve retotalização: eleito com menos votos que não eleito do mesmo partido — conferir no TSE)" : ""}`);
       }
     }
     for (let i = 1; i < cg.candidatos.length; i++) if (cg.candidatos[i].votos > cg.candidatos[i - 1].votos) { erros.push(`${tag}: ${ano} ${k}: ranking fora de ordem`); break; }

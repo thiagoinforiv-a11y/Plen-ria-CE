@@ -9,3 +9,4 @@ municipio: Cariré
 2024
 2026
 2020
+# 05/11/2026: reimportar após corrigir referências (Pires Ferreira, Santa Quitéria) e retotalização 2020
