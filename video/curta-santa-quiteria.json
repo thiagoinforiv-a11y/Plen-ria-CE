@@ -112,6 +112,12 @@
  "novos": 4,
  "eleitos20": 13,
  "presidente": null,
+ "fontePres": "Blog do Amaury Alencar",
+ "proximo": {
+  "urna": "Renato Catunda",
+  "foto": "fotos/ce/santa-quiteria/2024/60002223954.jpg",
+  "bienio": "2027–2028"
+ },
  "top": {
   "urna": "Danio Braga",
   "foto": "fotos/ce/santa-quiteria/2024/60002030973.jpg",
@@ -130,6 +136,6 @@
   "Esses são os treze eleitos de dois mil e vinte e quatro.",
   "Quatro não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Danio Braga. E Joel Barroso mais que dobrou de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "E a Câmara já escolheu o próximo presidente: Renato Catunda, para dois mil e vinte e sete e dois mil e vinte e oito. O que você espera? Comenta aqui."
  ]
 }

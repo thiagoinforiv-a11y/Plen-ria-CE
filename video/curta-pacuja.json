@@ -83,7 +83,12 @@
  "reeleitos": 1,
  "novos": 8,
  "eleitos20": 9,
- "presidente": null,
+ "presidente": {
+  "urna": "Lourinho",
+  "foto": "fotos/ce/pacuja/2024/60002036651.jpg"
+ },
+ "fontePres": "Portal da Câmara de Pacujá",
+ "proximo": null,
  "top": {
   "urna": "Carlos Júnior",
   "foto": "fotos/ce/pacuja/2024/60002036650.jpg",
@@ -96,6 +101,6 @@
   "Esses são os nove eleitos de dois mil e vinte e quatro.",
   "Oito não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Carlos Júnior.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Lourinho. E o próximo presidente, quem será? Comenta aqui."
  ]
 }

@@ -83,7 +83,12 @@
  "reeleitos": 5,
  "novos": 4,
  "eleitos20": 9,
- "presidente": null,
+ "presidente": {
+  "urna": "Samara Pereira",
+  "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg"
+ },
+ "fontePres": "Portal da Câmara de Pires Ferreira",
+ "proximo": null,
  "top": {
   "urna": "Samara Pereira",
   "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg",
@@ -102,6 +107,6 @@
   "Esses são os nove eleitos de dois mil e vinte e quatro.",
   "Quatro não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Samara Pereira. E Anastácio Neto cresceu cinquenta por cento de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Samara Pereira. E o próximo presidente, quem será? Comenta aqui."
  ]
 }

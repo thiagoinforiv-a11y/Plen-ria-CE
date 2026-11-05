@@ -26,7 +26,7 @@
   const vis = (t, a, b, f = 0.4) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
   let seed = 11; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  const n = D.cadeiras, E = D.eleitos;
+  const n = D.cadeiras, E = D.eleitos, PR = D.proximo || D.presidente;
   // tempos das cenas (a narração estica cada uma; ver trilha-curta1-<cidade>.json)
   const S = D.S;
   window.DURACAO = S[S.length - 1];
@@ -70,8 +70,8 @@
   const poly = G.poly[D.cd_ibge] || [];
   const dentro = (x, y, pl) => { let c = false; for (let i = 0, j = pl.length - 1; i < pl.length; j = i++) { const [xi, yi] = pl[i], [xj, yj] = pl[j]; if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
   forma.cidade = (() => { if (!poly.length) return forma.anel; const lons = poly.map((p) => p[0]), lats = poly.map((p) => p[1]); const [a, b, c, d] = [Math.min(...lons), Math.max(...lons), Math.min(...lats), Math.max(...lats)];
-    const kx = Math.cos(((c + d) / 2) * Math.PI / 180), s = Math.min(760 / ((b - a) * kx), 720 / (d - c)) * (D.presidente ? 0.62 : 1), cx = (a + b) / 2, cy = (c + d) / 2, out = [];
-    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, poly)) out.push([W / 2 + (lon - cx) * s * kx, (D.presidente ? 1090 : 1080) - (lat - cy) * s, rnd() < 0.3 ? AC : "#fff"]); } return out; })();
+    const kx = Math.cos(((c + d) / 2) * Math.PI / 180), s = Math.min(760 / ((b - a) * kx), 720 / (d - c)) * (PR ? 0.62 : 1), cx = (a + b) / 2, cy = (c + d) / 2, out = [];
+    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, poly)) out.push([W / 2 + (lon - cx) * s * kx, (PR ? 1100 : 1080) - (lat - cy) * s, rnd() < 0.3 ? AC : "#fff"]); } return out; })();
 
   const KF = [[0, "poeira", 0], [0.2, "cand", 1.6], [2.4, "candEl", 0.8], [S[1] - 0.35, "anel", 1.5], [S[2] - 0.35, "grade", 1.5], [S[3] - 0.35, "renov", 1.5], [S[4] - 0.35, "dest", 1.5], [S[5] - 0.35, "cidade", 1.7]];
   const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
@@ -169,15 +169,21 @@
       texto("2020 → 2024", x, FY + 360, { tam: 26, w: 600, a: vis(t, a0 + 0.5, S[5]), cor: "#8d8b82" }); }
     // 6 · pergunta e assinatura (com o presidente atual da Câmara, quando confirmado)
     const fim = (a, b) => vis(t, S[5] + a, S[6] + 1, 0.5) * (b || 1);
-    if (D.presidente) {
+    if (D.proximo) {
+      texto("PRÓXIMO PRESIDENTE DA CÂMARA", W / 2, 300, { tam: 32, w: 800, ls: 5, a: fim(0.2), cor: CINZA });
+      foto(D.proximo.urna, W / 2, 560, 150, fim(0.3), { cor: AC });
+      texto(D.proximo.urna, W / 2, 790, { tam: 50, w: 900, a: fim(0.5) });
+      texto(`eleito para ${D.proximo.bienio}`, W / 2, 850, { tam: 34, w: 600, a: fim(0.7), cor: AC });
+      texto("O que você espera\nda nova Mesa?", W / 2, 1420, { tam: 66, w: 900, a: fim(1.6), sobe: 1, lh: 80, brilho: 10 });
+    } else if (D.presidente) {
       texto("PRESIDENTE DA CÂMARA HOJE", W / 2, 300, { tam: 32, w: 800, ls: 5, a: fim(0.2), cor: CINZA });
       foto(D.presidente.urna, W / 2, 560, 150, fim(0.3), { cor: AC });
       texto(D.presidente.urna, W / 2, 790, { tam: 50, w: 900, a: fim(0.5) });
       texto("E o próximo presidente,\nquem será?", W / 2, 1420, { tam: 66, w: 900, a: fim(1.4), sobe: 1, lh: 80, brilho: 10 });
     } else texto("Qual vereador você quer\nver no próximo vídeo?", W / 2, 330, { tam: 64, w: 900, a: fim(0.3), sobe: 1, lh: 78 });
-    texto("COMENTA AQUI ↓", W / 2, 1640, { tam: 50, w: 900, ls: 6, a: fim(D.presidente ? 2.2 : 1.2, 0.75 + 0.25 * Math.sin(t * 6)), cor: AC, brilho: 20 });
+    texto("COMENTA AQUI ↓", W / 2, 1640, { tam: 50, w: 900, ls: 6, a: fim(PR ? 2.2 : 1.2, 0.75 + 0.25 * Math.sin(t * 6)), cor: AC, brilho: 20 });
     texto("PLENÁRIA CE", W / 2, 1730, { tam: 34, w: 800, ls: 8, a: fim(1.6) });
-    texto("Fonte: TSE · vereadores 2020 e 2024", W / 2, 1780, { tam: 22, w: 500, a: fim(1.8), cor: "#8d8b82" });
+    texto("Fonte: TSE · vereadores 2020 e 2024" + (D.fontePres ? " · presidência: " + D.fontePres : ""), W / 2, 1780, { tam: 22, w: 500, max: 980, a: fim(1.8), cor: "#8d8b82" });
     if (t < S[5]) marca();
   };
   window.render(0);

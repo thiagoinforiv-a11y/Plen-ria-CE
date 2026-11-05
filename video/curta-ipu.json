@@ -111,7 +111,12 @@
  "reeleitos": 7,
  "novos": 6,
  "eleitos20": 13,
- "presidente": null,
+ "presidente": {
+  "urna": "Cristina Peres",
+  "foto": "fotos/ce/ipu/2024/60002309618.jpg"
+ },
+ "fontePres": "Portal da Câmara de Ipu",
+ "proximo": null,
  "top": {
   "urna": "Nonato Filho",
   "foto": "fotos/ce/ipu/2024/60002205467.jpeg",
@@ -130,6 +135,6 @@
   "Esses são os treze eleitos de dois mil e vinte e quatro.",
   "Seis não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Nonato Filho. E Ivan Moreira cresceu cinquenta e três por cento de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Cristina Peres. E o próximo presidente, quem será? Comenta aqui."
  ]
 }

@@ -97,7 +97,12 @@
  "reeleitos": 5,
  "novos": 6,
  "eleitos20": 11,
- "presidente": null,
+ "presidente": {
+  "urna": "Luciana Miranda",
+  "foto": "fotos/ce/carire/2024/60001965880.jpg"
+ },
+ "fontePres": "Câmara de Cariré",
+ "proximo": null,
  "top": {
   "urna": "Robson Pessoa",
   "foto": "fotos/ce/carire/2024/60001965879.jpg",
@@ -116,6 +121,6 @@
   "Esses são os onze eleitos de dois mil e vinte e quatro.",
   "Seis não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Robson Pessoa. E Edilson Brito quase dobrou de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Luciana Miranda. E o próximo presidente, quem será? Comenta aqui."
  ]
 }

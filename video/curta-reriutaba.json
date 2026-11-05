@@ -97,7 +97,12 @@
  "reeleitos": 6,
  "novos": 5,
  "eleitos20": 11,
- "presidente": null,
+ "presidente": {
+  "urna": "Socorro Hermínio",
+  "foto": "fotos/ce/reriutaba/2024/60002187941.jpg"
+ },
+ "fontePres": "Portal da Câmara de Reriutaba",
+ "proximo": null,
  "top": {
   "urna": "Galego Honório",
   "foto": "fotos/ce/reriutaba/2024/60002187938.jpg",
@@ -116,6 +121,6 @@
   "Esses são os onze eleitos de dois mil e vinte e quatro.",
   "Cinco não tinham sido eleitos em dois mil e vinte.",
   "Maior votação: Galego Honório. E Gislanny Oliveira cresceu quarenta e cinco por cento de voto.",
-  "Qual vereador você quer ver no próximo vídeo? Comenta aqui."
+  "Hoje, quem preside a Câmara é Socorro Hermínio. E o próximo presidente, quem será? Comenta aqui."
  ]
 }
