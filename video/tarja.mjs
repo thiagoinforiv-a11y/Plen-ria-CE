@@ -1,6 +1,7 @@
 // Tarja de notícia do @plenariace (padrão dos vídeos que mais performaram): vídeo real + selo "@PLENARIACE"
 // (branco, letra azul) + título em caixa alta numa tarja azul (letra branca, fonte condensada).
-// Uso: node video/tarja.mjs entrada.mp4 "TÍTULO DA NOTÍCIA" saida.mp4 [--pos 0.66] [--ini 3.2] [--fim 27] [--zoom 1.0]
+// Uso: node video/tarja.mjs entrada.mp4 "TÍTULO DA NOTÍCIA" saida.mp4 [--pos 0.66] [--ini 3.2] [--fim 27] [--zoom 1.0] [--ate 4]
+//   --ate  a tarja some depois desses segundos (gancho/capa em vídeos de dados)
 //   --pos  altura do centro da tarja (0 = topo, 1 = base)      --ini/--fim  corte do trecho (segundos)
 //   --zoom aproxima o vídeo (vídeo deitado vira em pé com fundo desfocado; zoom > 1 corta as bordas)
 import { createRequire } from "module";
@@ -12,7 +13,7 @@ const require = createRequire(import.meta.url);
 let pw; try { pw = require("playwright"); } catch { pw = require("/opt/node-tools/node_modules/playwright"); }
 
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 2)[1] : d; };
-const pos = +opt("--pos", 0.66), ini = opt("--ini", null), fim = opt("--fim", null), zoom = +opt("--zoom", 1);
+const pos = +opt("--pos", 0.66), ini = opt("--ini", null), fim = opt("--fim", null), zoom = +opt("--zoom", 1), ate = opt("--ate", null);
 const [entrada, titulo, saida] = args;
 if (!entrada || !titulo || !saida) { console.error('uso: node video/tarja.mjs entrada.mp4 "TÍTULO" saida.mp4 [--pos 0.66] [--ini s] [--fim s]'); process.exit(1); }
 const W = 1080, H = 1920, AZUL = "#1f3fae", FONTES = path.join(path.dirname(new URL(import.meta.url).pathname), "fontes");
@@ -39,7 +40,7 @@ const info = JSON.parse(execFileSync("ffprobe", ["-v", "error", "-select_streams
 let vw = info.width, vh = info.height; const rot = Math.abs(((info.side_data_list || [])[0] || {}).rotation || 0); if (rot === 90 || rot === 270) [vw, vh] = [vh, vw];
 const emPe = vh / vw > 1.4;
 const filtro = emPe
-  ? `[0:v]scale=${W * zoom}:${H * zoom}:force_original_aspect_ratio=increase,crop=${W}:${H},setsar=1[v];[v][1:v]overlay=0:0,format=yuv420p[o]`
+  ? `[0:v]scale=${W * zoom}:${H * zoom}:force_original_aspect_ratio=increase,crop=${W}:${H},setsar=1[v];[v][1:v]overlay=0:0${ate ? `:enable='lte(t,${ate})'` : ""},format=yuv420p[o]`
   : `[0:v]split[a][b];[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=28:2,eq=brightness=-0.12[f];` +
     `[b]scale=${Math.round(W * zoom)}:-2,crop='min(iw,${W})':ih[c];[f][c]overlay=(W-w)/2:${Math.round(H * 0.36)}-h/2[v];[v][1:v]overlay=0:0,format=yuv420p[o]`;
 const corte = [...(ini ? ["-ss", ini] : []), ...(fim ? ["-to", fim] : [])];
