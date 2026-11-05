@@ -1,6 +1,6 @@
-# Anos para a automação "Importar dados do TSE" (um por linha). Alterar este arquivo dispara a importação.
+# Cidade e anos para a automação "Importar dados do TSE" (um ano por linha). Alterar este arquivo dispara a importação.
+municipio: Pacujá
 2024
 2026
 2022
-# pedido 2: com fotos
-# pedido 3
+2020

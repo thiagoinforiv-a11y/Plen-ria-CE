@@ -26,15 +26,17 @@ jobs:
           node-version: 20
       - name: Importar do TSE
         run: |
-          anos="${{ inputs.anos }}"; [ -z "$anos" ] && anos="$(grep -v '^#' data/fontes/importar-tse.txt | tr '\n' ' ')"
-          echo "Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV
+          # o arquivo diz a cidade ("municipio: Nome") e os anos (um por linha)
+          cidade="$(grep -i '^municipio:' data/fontes/importar-tse.txt | head -1 | cut -d: -f2- | xargs)"; [ -z "$cidade" ] && cidade="Varjota"
+          anos="${{ inputs.anos }}"; [ -z "$anos" ] && anos="$(grep -v -e '^#' -e '^municipio:' data/fontes/importar-tse.txt | tr '\n' ' ')"
+          echo "Cidade: $cidade · Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV; echo "CIDADE=$cidade" >> $GITHUB_ENV
           args=""; for a in $anos; do args="$args --ano $a"; done
-          python3 scripts/plenaria.py tse --municipio Varjota $args --baixar --continuar
+          python3 scripts/plenaria.py tse --municipio "$cidade" $args --baixar --continuar
       - name: Emendas parlamentares (Portal da Transparência)
         continue-on-error: true
-        run: python3 scripts/emendas.py --municipio Varjota --uf CE
+        run: python3 scripts/emendas.py --municipio "$CIDADE" --uf CE
       - name: Completar 2026 com a lista parcial (só se o TSE ainda não tiver 2026)
-        run: python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true
+        run: '[ "$CIDADE" = "Varjota" ] && python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true'
       - name: Conferir dados
         run: node scripts/verificar.mjs
       - name: Guardar dados conferidos no branch dados-tse
@@ -43,7 +45,7 @@ jobs:
           git config user.email "plenaria-bot@users.noreply.github.com"
           git checkout -B dados-tse
           git add data fotos
-          git commit -m "Dados oficiais do TSE ($ANOS) conferidos — base para revisão" || true
+          git commit -m "Dados oficiais do TSE: $CIDADE ($ANOS) conferidos — base para revisão" || true
           git push -f origin dados-tse
           git checkout -
       - name: Testar a página
@@ -57,5 +59,5 @@ jobs:
           git config user.email "plenaria-bot@users.noreply.github.com"
           git add data fotos
           git diff --cached --quiet && { echo "Nada novo."; exit 0; }
-          git commit -m "Dados oficiais do TSE ($ANOS) com fotos — importação automática"
+          git commit -m "Dados oficiais do TSE: $CIDADE ($ANOS) com fotos — importação automática"
           git push
