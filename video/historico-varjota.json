@@ -234,13 +234,34 @@
  ],
  "semReeleicao": true,
  "precedente": {
-  "ano": "2016",
-  "saiu": "Rosa Paulino",
+  "ano": "2020",
+  "saiu": "Célia",
+  "motivo": "não disputou",
   "partidoSaiu": "MDB",
-  "venceu": "Célia",
-  "partidoVenceu": "MDB",
-  "mesmoPartido": true
+  "venceu": "Elmo Monte",
+  "partidoVenceu": "PDT",
+  "mesmoPartido": false
  },
+ "precedentes": [
+  {
+   "ano": "2016",
+   "saiu": "Rosa Paulino",
+   "motivo": "fim do segundo mandato",
+   "partidoSaiu": "MDB",
+   "venceu": "Célia",
+   "partidoVenceu": "MDB",
+   "mesmoPartido": true
+  },
+  {
+   "ano": "2020",
+   "saiu": "Célia",
+   "motivo": "não disputou",
+   "partidoSaiu": "MDB",
+   "venceu": "Elmo Monte",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": false
+  }
+ ],
  "qe2028": 1305,
  "novosMedia": 6,
  "fala": [
@@ -253,7 +274,7 @@
   "Na Câmara, o MDB fez cinco cadeiras em dois mil e dezesseis e em dois mil e vinte. E em dois mil e vinte e quatro, o PSB passou a liderar com cinco cadeiras, e o MDB caiu para três.",
   "A renovação é alta. Caras novas em cada eleição: sete, quatro e sete, de onze cadeiras.",
   "Para se eleger, o preço subiu. O quociente foi de mil cento e quatro para mil duzentos e cinquenta e dois votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de mil e trezentos.",
-  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Na última vez que isso aconteceu, em dois mil e dezesseis, o MDB manteve a prefeitura com Célia. E se a renovação seguir a média, cerca de seis vereadores novos.",
+  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Isso já aconteceu duas vezes. Em dois mil e dezesseis, sem Rosa Paulino na disputa, o MDB manteve a prefeitura com Célia. Em dois mil e vinte, sem Célia na disputa, Elmo Monte venceu e virou o jogo. E os grupos mudaram desde então. Se a renovação seguir a média, cerca de seis vereadores novos.",
   "Plenária CE. Inteligência eleitoral de Varjota. A história de cada eleição, para decidir a próxima."
  ]
 }

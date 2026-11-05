@@ -30,6 +30,9 @@
   let seed = 7; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
 
+  // cartões extras de conhecimento local (arquivo fora do GitHub, opcional)
+  let LOCAL = { cartoes: [] };
+  try { const q = new URLSearchParams(location.search).get("d") || "historico-varjota.json"; const rr = await fetch(q.replace(".json", ".local.json")); if (rr.ok) LOCAL = { cartoes: [], ...(await rr.json()) }; } catch (e) {}
   // ---------------- cidade e câmera (genérico: qualquer município do CE pelo código IBGE)
   const cityPoly = G.poly[D.cd_ibge], vjPoly = cityPoly;
   const lons = cityPoly.map((p) => p[0]), lats = cityPoly.map((p) => p[1]);
@@ -192,7 +195,8 @@
     // 6 · linha dos prefeitos
     texto("QUEM GANHOU A PREFEITURA", W / 2, 300, { tam: 34, w: 800, ls: 6, a: vis(t, 34.4, 42.1), cor: "#bdbab0" });
     D.prefeito.forEach((p, i) => { const a = vis(t, 35 + i * 0.5, 42.1); fotoOu(p.venc.nome, LX[i], LY, 78, a, corP(p.venc.partido));
-      texto(p.ano, LX[i], LY - 130, { tam: 34, w: 900, a }); texto(curto(p.venc.nome), LX[i], LY + 120, { tam: 26, w: 800, a }); texto(`+${fmt(p.margem)}`, LX[i], LY + 200, { tam: 30, w: 800, a, cor: corP(p.venc.partido) }); });
+      texto(p.ano, LX[i], LY - 130, { tam: 34, w: 900, a }); texto(curto(p.venc.nome), LX[i], LY + 120, { tam: 26, w: 800, a }); texto(`+${fmt(p.margem)}`, LX[i], LY + 200, { tam: 30, w: 800, a, cor: corP(p.venc.partido) });
+      if ((D.precedentes || []).some((x) => x.ano === p.ano)) texto("prefeitura\naberta", LX[i], LY + 250, { tam: 22, w: 700, a, cor: "#bdbab0", lh: 26 }); });
     { const a = vis(t, 36.6, 42.1), pul = 1 + 0.06 * Math.sin(t * 4); texto("2028", LX[3], LY - 130, { tam: 34, w: 900, a, cor: AC }); texto("?", LX[3], LY + 40 * pul, { tam: 130 * pul, w: 900, a, cor: AC, brilho: 26 }); }
     texto(D.semReeleicao ? `${D.prefeito[2].venc.nome} não pode\nconcorrer em 2028` : `${D.prefeito[2].venc.nome} pode\ntentar a reeleição`, W / 2, 1420, { tam: 50, w: 800, a: vis(t, 38, 42.1), sobe: 1 });
     // 7 · câmara por partido
@@ -213,10 +217,12 @@
     texto("COMO SERÁ", W / 2, 380, { tam: 40, w: 800, ls: 10, a: vis(t, 64.4, 75.1), cor: "#bdbab0" });
     texto("2028?", W / 2, 620, { tam: 150, w: 900, a: vis(t, 64.6, 75.1), brilho: 30, cor: AC, sobe: 1 });
     const itens = [D.semReeleicao ? ["Prefeitura aberta", `${D.prefeito[2].venc.nome} cumpre o segundo mandato`] : ["Reeleição em jogo", `${D.prefeito[2].venc.nome} pode concorrer`],
-      D.precedente ? [`O precedente: ${D.precedente.ano}`, D.precedente.mesmoPartido ? `prefeitura aberta e o ${D.precedente.partidoSaiu} manteve com ${D.precedente.venceu}` : `prefeitura aberta e ${D.precedente.venceu} (${D.precedente.partidoVenceu}) virou`] : null,
+      ...(D.precedentes || []).map((x) => [`${x.ano}: sem ${x.saiu.split(" ")[0]} na disputa`, x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} (${x.partidoVenceu}) venceu e virou o jogo`]),
+      ...LOCAL.cartoes,
       [`≈ ${fmt(Math.round(D.qe2028 / 50) * 50)} votos por cadeira`, "quociente na tendência"], [`≈ ${D.novosMedia} vereadores novos`, "se a renovação seguir a média"]].filter(Boolean);
-    itens.forEach(([tt, sb], i) => { const a = vis(t, 66 + i * 1.6, 75.1), y = 900 + i * 190;
-      ctx.save(); ctx.globalAlpha = a * 0.9; ctx.fillStyle = "rgba(255,255,255,.04)"; ctx.strokeStyle = "rgba(212,255,58,.35)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(110, y - 70, W - 220, 150, 26); ctx.fill(); ctx.stroke(); ctx.restore();
+    const passo = Math.min(190, 860 / itens.length);
+    itens.forEach(([tt, sb], i) => { const a = vis(t, 66 + i * (7 / itens.length), 75.1), y = 880 + i * passo;
+      ctx.save(); ctx.globalAlpha = a * 0.9; ctx.fillStyle = "rgba(255,255,255,.04)"; ctx.strokeStyle = "rgba(212,255,58,.35)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(110, y - 66, W - 220, passo - 22, 26); ctx.fill(); ctx.stroke(); ctx.restore();
       texto(tt, W / 2, y, { tam: 42, w: 800, a }); texto(sb, W / 2, y + 48, { tam: 27, w: 500, a, cor: "#bdbab0" }); });
     texto("projeções = tendência dos números, não pesquisa", W / 2, 1720, { tam: 24, w: 500, a: vis(t, 68, 75.1), cor: "#8d8b82" });
     // 11 · encerramento

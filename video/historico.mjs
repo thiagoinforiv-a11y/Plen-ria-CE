@@ -30,9 +30,14 @@ const ult = prefeito[prefeito.length - 1], pen = prefeito[prefeito.length - 2];
 const todosPref = Object.keys(D.eleicoes).filter((a) => D.eleicoes[a].cargos.prefeito).sort().map((a) => ({ ano: a, p: D.eleicoes[a].cargos.prefeito.candidatos[0] }));
 const bisado = (i) => i > 0 && todosPref[i].p.pid === todosPref[i - 1].p.pid;
 const semReeleicao = bisado(todosPref.length - 1);
-// precedente: última vez em que o prefeito de dois mandatos saiu de cena
-let precedente = null;
-for (let i = todosPref.length - 2; i >= 1; i--) if (bisado(i) && todosPref[i + 1]) { const sai = todosPref[i].p, entra = todosPref[i + 1].p; precedente = { ano: todosPref[i + 1].ano, saiu: sai.urna, partidoSaiu: part(sai.partido), venceu: entra.urna, partidoVenceu: part(entra.partido), mesmoPartido: part(sai.partido) === part(entra.partido) }; break; }
+// prefeitura aberta: o prefeito no cargo não estava na disputa (fim do segundo mandato ou não concorreu)
+const aberturas = [];
+for (let i = 1; i < todosPref.length; i++) {
+  const a = todosPref[i].ano, sai = todosPref[i - 1].p, cands = D.eleicoes[a].cargos.prefeito.candidatos, entra = todosPref[i].p;
+  if (cands.some((x) => x.pid === sai.pid)) continue;
+  aberturas.push({ ano: a, saiu: sai.urna, motivo: bisado(i - 1) ? "fim do segundo mandato" : "não disputou", partidoSaiu: part(sai.partido), venceu: entra.urna, partidoVenceu: part(entra.partido), mesmoPartido: part(sai.partido) === part(entra.partido) });
+}
+const precedentes = aberturas.filter((x) => anos.includes(x.ano)), precedente = precedentes[precedentes.length - 1] || null;
 const tend = (xs) => Math.round(xs[xs.length - 1] + (xs[xs.length - 1] - xs[xs.length - 2]));
 const qe2028 = tend(camara.map((c) => c.qe));
 const novosMedia = Math.round(renov.reduce((s, r) => s + r.novos, 0) / renov.length);
@@ -51,6 +56,9 @@ const fem = (nome) => /a$/i.test(nome.split(" ")[0]) || /^(Rosa|Célia|Loura|Dji
 // ---------- roteiro (uma fala por cena)
 const seqVenc = () => { const g = []; prefeito.forEach((p) => { const u = g[g.length - 1]; if (u && u.pid === p.venc.pid) u.n++; else g.push({ pid: p.venc.pid, nome: p.venc.nome, n: 1 }); });
   const vezes = ["", "", "duas vezes", "três vezes"]; return "Em três eleições: " + g.map((x, i) => (i ? "depois " : "") + x.nome + (x.n > 1 ? ", " + vezes[x.n] : "")).join("; "); };
+const fraseAberturas = () => { if (!precedentes.length) return "";
+  const qtd = ["", "uma vez", "duas vezes", "três vezes"][precedentes.length] || precedentes.length + " vezes";
+  return `Isso já aconteceu ${qtd}. ` + precedentes.map((x) => `Em ${anoExt(x.ano)}, sem ${x.saiu} na disputa, ${x.mesmoPartido ? `o ${x.partidoSaiu} manteve a prefeitura com ${x.venceu}` : `${x.venceu} venceu e virou o jogo`}.`).join(" ") + " "; };
 const frasePartidos = () => { const lid = camara.map((c) => ({ ano: c.ano, p: c.partidos[0][0], n: c.partidos[0][1] })); const partes = []; let i = 0;
   while (i < lid.length) { let j = i; while (j + 1 < lid.length && lid[j + 1].p === lid[i].p && lid[j + 1].n === lid[i].n) j++;
     const anosTxt = lid.slice(i, j + 1).map((x) => anoExt(x.ano)).join(" e em "); partes.push(`${i ? "em " + anosTxt + ", o " + lid[i].p + " passou a liderar com " : "o " + lid[i].p + " fez " }${ext(lid[i].n)} cadeiras${i ? "" : " em " + anosTxt}`); i = j + 1; }
@@ -65,10 +73,10 @@ const fala = [
   `Na Câmara, ${frasePartidos()}.`,
   `A renovação é alta. Caras novas em cada eleição: ${renov.map((r) => ext(r.novos)).join(", ").replace(/, ([^,]*)$/, " e $1")}, de ${ext(renov[0].cadeiras)} cadeiras.`,
   `Para se eleger, o preço subiu. O quociente foi de ${ext(camara[0].qe)} para ${ext(camara[2].qe)} votos por cadeira. Na tendência, ${anoExt(2028)} pede perto de ${ext(Math.round(qe2028 / 50) * 50)}.`,
-  `Então, como será ${anoExt(2028)}? ${semReeleicao ? "Prefeitura aberta. " : ""}${precedente ? `Na última vez que isso aconteceu, em ${anoExt(precedente.ano)}, ${precedente.mesmoPartido ? `o ${precedente.partidoSaiu} manteve a prefeitura com ${precedente.venceu}` : `${precedente.venceu} virou o jogo pelo ${precedente.partidoVenceu}`}. ` : ""}E se a renovação seguir a média, cerca de ${ext(novosMedia)} vereadores novos.`,
+  `Então, como será ${anoExt(2028)}? ${semReeleicao ? "Prefeitura aberta. " : ""}${fraseAberturas()}${precedentes.length ? "E os grupos mudaram desde então. " : ""}Se a renovação seguir a média, cerca de ${ext(novosMedia)} vereadores novos.`,
   `Plenária CE. Inteligência eleitoral de ${C}. A história de cada eleição, para decidir a próxima.`,
 ];
-const out = { id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, qe2028, novosMedia, fala };
+const out = { id, municipio: C, cd_ibge: M.cd_ibge, anos, eleitorado, prefeito, camara, renov, semReeleicao, precedente, precedentes, qe2028, novosMedia, fala };
 const slug = id.split("/")[1];
 fs.writeFileSync(new URL(`./historico-${slug}.json`, import.meta.url), JSON.stringify(out, null, 1));
 // roteiro também vai para a narração
