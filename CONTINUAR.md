@@ -1,5 +1,16 @@
 # Para continuar o trabalho (sessão nova)
 
+## AO RECEBER ESTE ARQUIVO, FAÇA SOZINHO (sem perguntar):
+1. `git fetch origin claude/plenaria-ce-video-xgo76v midia narracao` e `git checkout -B claude/plenaria-ce-video-xgo76v origin/claude/plenaria-ce-video-xgo76v`
+   (se o branch da sessão tiver outro nome, trabalhe nele a partir deste). Copie o áudio: `git checkout origin/narracao -- video/audio && git reset -q video/audio`.
+2. Teste a chave de imagens: `curl -s "https://pixabay.com/api/?key=$PIXABAY_API_KEY&q=assembleia&per_page=3"`. Diga ao Thiago em 1 linha se funcionou.
+3. Agende a Parte 2 no Metricool (blogId 6990789, TikTok+IG, America/Fortaleza), uma cidade por hora no próximo dia útil,
+   começando 11h50: Varjota, Pacujá, Reriutaba, Pires Ferreira, Ipu, Santa Quitéria, Cariré. Mídia:
+   https://raw.githubusercontent.com/thiagoinforiv-a11y/Plen-ria-CE/midia/parte2/curta2-<cidade>.mp4 · tiktokData.title obrigatório ·
+   isAigc/isAiGenerated true · legenda em 1 linha, neutra, com pergunta e #Cidade #PlenáriaCE. Mostre a agenda ao Thiago (ele pode mudar).
+4. Comece os vídeos por vereador (collab), um por vereador, 20–30 s, só dados TSE, tom neutro; entregue os de Varjota primeiro como anexo.
+Responda sempre em português, curto. Economize créditos (limite semanal perto do fim).
+
 ## FLUXO ENXUTO (leia só isto para postar; economiza créditos)
 1. Pauta → `video/noticias/<id>.json`: `{id, fontes, cenas:[{fala, tarja, midia?, ini?, credito?, grande?, sub?}]}`.
    Cenas curtas (1 frase), 5–7 cenas, 30–45 s. `midia` = foto/vídeo real enviado pelo Thiago (pasta entregas/ ou uploads).
