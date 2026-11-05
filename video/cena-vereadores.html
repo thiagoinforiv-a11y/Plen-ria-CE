@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Raio-X da Câmara de Varjota</title>
+<style>
+  html, body { margin: 0; background: #070707; }
+  canvas { display: block; width: 540px; height: 960px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Vídeo "Raio-X da Câmara de Varjota" — cena desenhada quadro a quadro: render(t) desenha o instante t (segundos).
+ * Todos os números vêm de dados-vereadores.json (gerado de dados oficiais do TSE por video/dados-vereadores.mjs). */
+(async () => {
+  const W = 1080, H = 1920, cv = document.getElementById("c"), ctx = cv.getContext("2d");
+  const D = await (await fetch("dados-vereadores.json")).json(), G = await (await fetch("geo.json")).json();
+  const AC = "#d4ff3a", FONT = "Inter, 'Inter Display', sans-serif";
+  const fmt = (n) => Math.round(n).toLocaleString("pt-BR");
+  const pc = (x, d = 1) => (x * 100).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const eout = (x) => 1 - Math.pow(1 - x, 3);
+  const prog = (t, a, b) => clamp((t - a) / (b - a));
+  // aparece em a, some em b (com fade de f segundos)
+  const vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+  let seed = 7; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+  // ---------------- câmera / projeção (equirretangular com correção de latitude)
+  const CE = { lon: -39.35, lat: -5.25, s: 205 }, VJ = { lon: -40.52, lat: -4.172, s: 4700 };
+  const kx = Math.cos((4.5 * Math.PI) / 180);
+  const proj = (lon, lat, v, cy = H * 0.5) => [W / 2 + (lon - v.lon) * v.s * kx, cy - (lat - v.lat) * v.s];
+  const camera = (t) => { const k = ease(prog(t, 5.6, 8.4)); return { lon: lerp(CE.lon, VJ.lon, k), lat: lerp(CE.lat, VJ.lat, k), s: Math.exp(lerp(Math.log(CE.s), Math.log(VJ.s), k)) }; };
+  const dentro = (x, y, poly) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
+  const MAPY = H * 0.52;
+  // ---------------- imagens
+  const img = {};
+  const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = () => ok(); i.src = "../" + src; });
+  const E = D.eleitos;
+  await Promise.all([...E.map((e) => carregar(e.urna, e.foto)), carregar("ciro", D.cidade.fotoCiro), carregar("elmano", D.cidade.fotoElmano)]);
+  await document.fonts.load("900 60px Inter"); await document.fonts.load("500 30px Inter");
+  const COR = { PSB: AC, MDB: "#ff7a45", PT: "#ff4d6d" };
+  const corP = (p) => COR[p] || "#fff";
+  const primeiro = (s) => s.split(" ")[0];
+
+  // ---------------- formas
+  const N = 2400;
+  const P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
+  const forma = {};
+  const poeira = () => [rnd() * W, rnd() * H, "dust"];
+  forma.poeira = Array.from({ length: N }, () => [rnd() * W, rnd() * H]);
+  const vjPoly = G.varjota;
+  const amostraVJ = (v, cy) => { const out = []; const lons = vjPoly.map((p) => p[0]), lats = vjPoly.map((p) => p[1]); const [a, b, c, d] = [Math.min(...lons), Math.max(...lons), Math.min(...lats), Math.max(...lats)];
+    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, vjPoly)) out.push(proj(lon, lat, v, cy)); } return out; };
+  forma.vjPequena = amostraVJ(CE, MAPY);
+  forma.vjCheia = amostraVJ(VJ, MAPY);
+  // hemiciclo: 11 cadeiras, da esquerda para a direita PT · PSB · MDB
+  const ordemP = ["PT", "PSB", "MDB"];
+  const cadeiras = ordemP.flatMap((p) => Array(D.partidos[p] || 0).fill(p));
+  const HC = { x: W / 2, y: 1150, r: 360 };
+  const posCad = cadeiras.map((p, i) => { const a = Math.PI + (i / (cadeiras.length - 1)) * Math.PI; return { p, x: HC.x + Math.cos(a) * HC.r, y: HC.y + Math.sin(a) * HC.r }; });
+  forma.hemiciclo = Array.from({ length: N }, (_, i) => { const c = posCad[i % posCad.length], a = rnd() * 6.283, r = Math.sqrt(rnd()) * 52; return [c.x + Math.cos(a) * r, c.y + Math.sin(a) * r, corP(c.p)]; });
+  // grade de rostos 3-4-4
+  const linhas = [3, 4, 4], GR = [];
+  { let k = 0; linhas.forEach((n, li) => { for (let j = 0; j < n; j++) GR.push({ e: E[k++], x: W / 2 + (j - (n - 1) / 2) * 230, y: 600 + li * 380 }); }); }
+  forma.grade = Array.from({ length: N }, (_, i) => { const g = GR[i % GR.length], a = rnd() * 6.283, r = 98 + Math.abs(gauss()) * 16; return [g.x + Math.cos(a) * r, g.y + Math.sin(a) * r, corP(g.e.partido)]; });
+  // Rosa × quociente: colunas de pontos (1 ponto = 5 votos)
+  const rosa = E.find((e) => e.urna === "Rosa Paulino"), croata = E.find((e) => e.urna === "Eudes do Croatá");
+  const COLS = [{ e: rosa, x: W * 0.33 }, { e: croata, x: W * 0.67 }], BASEY = 1500, GAP = 15, PER = 14;
+  const alturaVotos = (v) => BASEY - Math.floor(v / 5 / PER) * GAP;
+  forma.quociente = (() => { const out = []; COLS.forEach(({ e, x }) => { const n = Math.round(e.votos / 5); for (let k = 0; k < n; k++) out.push([x - ((PER - 1) * GAP) / 2 + (k % PER) * GAP, BASEY - Math.floor(k / PER) * GAP, corP(e.partido)]); }); while (out.length < N) out.push(poeira()); return out.slice(0, N); })();
+  // renovação: 11 de 2020 (esquerda) × 11 de 2024 (direita)
+  const RN = { x0: W * 0.27, x1: W * 0.73, y0: 560, gap: 88 };
+  const reeleitos = E.filter((e) => e.v20 != null && /^eleit/i.test(e.sit20 || ""));
+  forma.renov = Array.from({ length: N }, (_, i) => { const lado = i % 2, j = Math.floor(i / 2) % 11; const re = lado ? !!E[j] && reeleitos.includes(E[j]) : j < reeleitos.length; const a = rnd() * 6.283, r = Math.sqrt(rnd()) * 22;
+    return [(lado ? RN.x1 : RN.x0) + Math.cos(a) * r, RN.y0 + j * RN.gap + Math.sin(a) * r, re ? AC : "#fff"]; });
+  // inclinação 2020 → 2024 (quem disputou as duas e se elegeu em 2024)
+  const SL = E.filter((e) => e.v20 != null).sort((a, b) => b.votos / b.v20 - a.votos / a.v20);
+  const SLX = [230, 690], vmax = Math.max(...SL.flatMap((e) => [e.votos, e.v20])), sly = (v) => 1420 - (v / vmax) * 820;
+  forma.inclinacao = Array.from({ length: N }, (_, i) => { const e = SL[i % SL.length], k = rnd(); return [lerp(SLX[0], SLX[1], k) + gauss() * 2, lerp(sly(e.v20), sly(e.votos), k) + gauss() * 2, e.votos >= e.v20 ? AC : "#ff4d6d"]; });
+  const espalhar = (ys, gap = 38) => { const ix = ys.map((y, i) => [y, i]).sort((p, q) => p[0] - q[0]), out = []; let ult = -1e9; ix.forEach(([y, i]) => { const v = Math.max(y, ult + gap); out[i] = v; ult = v; }); return out; };
+  const ROT1 = espalhar(SL.map((e) => sly(e.votos))), ROT0 = espalhar(SL.map((e) => sly(e.v20)));
+  // governador na cidade
+  const FOTO_Y = 760, FX = [W * 0.29, W * 0.71];
+  forma.governador = Array.from({ length: N }, (_, i) => { const esq = i < N * D.cidade.ciro / (D.cidade.ciro + D.cidade.elmano), cx = esq ? FX[0] : FX[1], a = rnd() * 6.283, r = 170 + Math.abs(gauss()) * 34; return [cx + Math.cos(a) * r, FOTO_Y + Math.sin(a) * r, esq ? "#fff" : AC]; });
+  // barras: Elmano na base de cada vereador
+  const BR = { x0: 330, w: 620, y0: 470, gap: 100 };
+  const EB = [...E].sort((a, b) => b.elmano - a.elmano);
+  forma.barras = (() => { const out = []; const tot = EB.reduce((s, e) => s + e.elmano, 0); EB.forEach((e, i) => { const n = Math.round((N * 0.9 * e.elmano) / tot); for (let k = 0; k < n; k++) out.push([BR.x0 + rnd() * BR.w * e.elmano, BR.y0 + i * BR.gap + gauss() * 9, AC]); }); while (out.length < N) out.push(poeira()); return out.slice(0, N); })();
+  // PT: três halos
+  const PT = E.filter((e) => e.partido === "PT"), PTX = PT.map((_, i) => W * (0.2 + 0.3 * i));
+  forma.pt = Array.from({ length: N }, (_, i) => { const j = i % PT.length, a = rnd() * 6.283, r = 118 + Math.abs(gauss()) * 22; return [PTX[j] + Math.cos(a) * r, 760 + Math.sin(a) * r, "#ff4d6d"]; });
+  const CEF = { lon: -39.35, lat: -5.25, s: 190 };
+  forma.ceara = (() => { const verts = G.mun.flat(); const out = []; for (let i = 0; i < N; i++) { const [lon, lat] = verts[Math.floor(rnd() * verts.length)]; const [x, y] = proj(lon, lat, CEF, H * 0.5); out.push([x + gauss() * 2, y + gauss() * 2]); } return out; })();
+
+  const KF = [[0, "poeira", 0], [2.2, "vjPequena", 2.2], [6.0, "vjCheia", 2.4], [11.4, "hemiciclo", 2.0], [19.2, "grade", 1.8], [27.2, "quociente", 2.0], [34.2, "renov", 1.8], [43.2, "inclinacao", 2.0], [52.2, "governador", 1.8], [60.2, "barras", 2.0], [71.2, "pt", 1.8], [78.2, "ceara", 2.4]];
+
+  const posicao = (t) => {
+    let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++;
+    const [t0, nome, dur] = KF[k], ant = k ? forma[KF[k - 1][1]] : forma[nome], cur = forma[nome];
+    return { ant, cur, t0, dur };
+  };
+
+  // ---------------- desenho
+  const fundo = (t) => {
+    const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8);
+    g.addColorStop(0, "#1b1c1a"); g.addColorStop(1, "#060606"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // bokeh suave
+    for (let i = 0; i < 9; i++) { const x = (i * 263 + t * 9 * (i % 3 + 1)) % (W + 200) - 100, y = (i * 517) % H + Math.sin(t * 0.3 + i) * 30, r = 50 + (i % 4) * 30;
+      const b = ctx.createRadialGradient(x, y, 0, x, y, r); b.addColorStop(0, "rgba(255,255,255,.035)"); b.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = b; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill(); }
+  };
+  const texto = (s, x, y, o = {}) => {
+    const a = o.a == null ? 1 : o.a; if (a <= 0.01) return;
+    ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center"; ctx.textBaseline = "alphabetic";
+    ctx.font = `${o.w || 700} ${o.tam || 56}px ${FONT}`; ctx.letterSpacing = (o.ls || 0) + "px";
+    if (o.brilho) { ctx.shadowColor = o.cor || "rgba(255,255,255,.6)"; ctx.shadowBlur = o.brilho; }
+    const dy = o.sobe ? (1 - a) * 24 : 0;
+    String(s).split("\n").forEach((l, i) => ctx.fillText(l, x, y + dy + i * (o.lh || (o.tam || 56) * 1.18)));
+    ctx.restore();
+  };
+  const foto = (k, x, y, r, a, o = {}) => {
+    if (a <= 0.01 || !img[k]) return;
+    const s = 0.85 + 0.15 * eout(a);
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+    ctx.shadowColor = o.cor || "rgba(255,255,255,.35)"; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip();
+    const i = img[k], sc = Math.max((2 * r) / i.width, (2 * r) / i.height); ctx.drawImage(i, -i.width * sc / 2, -i.height * sc * 0.42, i.width * sc, i.height * sc); ctx.restore();
+    ctx.lineWidth = 5; ctx.strokeStyle = o.cor || "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke();
+    ctx.restore();
+  };
+  const marca = () => { ctx.save(); ctx.font = `700 19px ${FONT}`; ctx.letterSpacing = "4px"; const s = "PLENÁRIA CE", w = ctx.measureText(s).width + 36; const x = W - w - 60, y = H - 120;
+    ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(x, y, w, 40, 20); ctx.stroke(); ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.textAlign = "left"; ctx.fillText(s, x + 18, y + 27); ctx.restore(); };
+  const contornos = (t, v, cy, a, realce) => {
+    if (a <= 0.01) return;
+    ctx.save(); ctx.lineWidth = 1.4; ctx.strokeStyle = `rgba(255,255,255,${0.16 * a})`;
+    const k = prog(t, 0.2, 2.4);
+    G.mun.forEach((r, ri) => { if (ri / G.mun.length > k * 1.02) return; ctx.beginPath(); r.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.stroke(); });
+    if (realce > 0) { ctx.beginPath(); vjPoly.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath();
+      ctx.shadowColor = AC; ctx.shadowBlur = 24 * realce; ctx.strokeStyle = `rgba(212,255,58,${0.9 * realce})`; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = `rgba(212,255,58,${0.08 * realce})`; ctx.fill(); }
+    ctx.restore();
+  };
+  const particulas = (t, brilhoY) => {
+    const { ant, cur, t0, dur } = posicao(t);
+    ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < N; i++) {
+      const p = P[i], k = dur ? ease(clamp(((t - t0) / dur - p.d) / (1 - 0.35))) : 1;
+      const a0 = ant[i], a1 = cur[i];
+      let x = lerp(a0[0], a1[0], k) + Math.sin(t * 0.9 + p.ph) * 1.6, y = lerp(a0[1], a1[1], k) + Math.cos(t * 0.8 + p.ph) * 1.6;
+      // na transição, as partículas fazem uma curva em vez de linha reta
+      const curva = Math.sin(k * Math.PI) * 60 * (p.d - 0.17); x += curva; y -= curva * 0.6;
+      const c = (k > 0.5 ? a1[2] : a0[2]) || "#fff";
+      let al = p.a * (0.55 + 0.45 * Math.sin(t * 2 + p.ph * 3) ** 2);
+      if (c === "dust") al *= 0.14;
+      if (brilhoY != null) al *= 1 + 2.5 * Math.exp(-((y - brilhoY) ** 2) / 900);
+      ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c;
+      ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill();
+    }
+    ctx.restore();
+  };
+  window.DURACAO = 84;
+  window.render = (t) => {
+    ctx.clearRect(0, 0, W, H); fundo(t);
+    const cam = camera(t);
+    const aMapa = 1 - prog(t, 11.0, 12.0);
+    contornos(t, cam, MAPY, aMapa, prog(t, 1.6, 3.2) * aMapa);
+    if (t > 77.8) contornos(t, CEF, H * 0.5, prog(t, 78, 80), prog(t, 80, 81.5));
+    // linhas de apoio desenhadas antes das partículas
+    ctx.save();
+    if (t > 27 && t < 34.3) { const a = vis(t, 28.4, 34.2), y = alturaVotos(D.qe24); ctx.globalAlpha = a; ctx.setLineDash([12, 10]); ctx.strokeStyle = "#f3f1ea"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(90, y); ctx.lineTo(lerp(90, W - 90, eout(prog(t, 28.4, 29.6))), y); ctx.stroke(); ctx.setLineDash([]); }
+    if (t > 34 && t < 43.3) { const a = vis(t, 36.2, 43.2); ctx.globalAlpha = a * 0.9; ctx.strokeStyle = AC; ctx.lineWidth = 3; ctx.shadowColor = AC; ctx.shadowBlur = 12;
+      reeleitos.forEach((e, i) => { const j = E.indexOf(e), k = eout(prog(t, 36.4 + i * 0.3, 37.4 + i * 0.3)); const y0 = RN.y0 + i * RN.gap, y1 = RN.y0 + j * RN.gap; ctx.beginPath(); ctx.moveTo(RN.x0 + 30, y0); ctx.lineTo(lerp(RN.x0 + 30, RN.x1 - 30, k), lerp(y0, y1, k)); ctx.stroke(); }); ctx.shadowBlur = 0; }
+    if (t > 60 && t < 71.3) { const a = vis(t, 61, 71.2); ctx.globalAlpha = a; ctx.lineWidth = 2;
+      const x50 = BR.x0 + BR.w * 0.5, xc = BR.x0 + BR.w * D.cidade.elmano, yA = BR.y0 - 50, yB = BR.y0 + (E.length - 1) * BR.gap + 40;
+      ctx.setLineDash([10, 8]); ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.beginPath(); ctx.moveTo(x50, yA); ctx.lineTo(x50, yB); ctx.stroke();
+      ctx.strokeStyle = "rgba(212,255,58,.55)"; ctx.beginPath(); ctx.moveTo(xc, yA); ctx.lineTo(xc, yB); ctx.stroke(); ctx.setLineDash([]); }
+    ctx.restore();
+    particulas(t, null);
+
+    // 1 · abertura
+    texto("CÂMARA DE", W / 2, 230, { tam: 40, w: 700, ls: 12, a: vis(t, 0.6, 5.6), cor: "#bdbab0" });
+    texto("VARJOTA", W / 2, 340, { tam: 118, w: 900, ls: 14, a: vis(t, 0.8, 5.6), brilho: 30, sobe: 1 });
+    texto("RAIO-X DOS VEREADORES", W / 2, 410, { tam: 30, w: 600, ls: 9, a: vis(t, 1.4, 5.6), cor: AC });
+    // 2 · cadeiras
+    texto(fmt(11 * eout(prog(t, 7.0, 8.4))), W / 2, 340, { tam: 150, w: 900, a: vis(t, 6.8, 11.2), brilho: 26 });
+    texto("cadeiras na Câmara", W / 2, 410, { tam: 40, w: 500, a: vis(t, 7.2, 11.2), sobe: 1 });
+    texto(`${D.candidatos24} candidatos em 2024 · ${D.candidatos20} em 2020`, W / 2, 1600, { tam: 36, w: 600, a: vis(t, 8.2, 11.2), cor: "#bdbab0", sobe: 1 });
+    // 3 · quociente e partidos
+    texto("QUOCIENTE ELEITORAL · 2024", W / 2, 300, { tam: 32, w: 700, ls: 6, a: vis(t, 11.6, 19.1), cor: "#bdbab0" });
+    texto(`${fmt(D.validos24)} votos ÷ 11`, W / 2, 400, { tam: 52, w: 700, a: vis(t, 12.2, 19.1), sobe: 1 });
+    texto(fmt(D.qe24 * eout(prog(t, 13.0, 14.6))), W / 2, 540, { tam: 140, w: 900, a: vis(t, 12.8, 19.1), brilho: 24, cor: AC });
+    texto("votos por cadeira", W / 2, 600, { tam: 36, w: 500, a: vis(t, 13.2, 19.1) });
+    ordemP.forEach((p, i) => { const cs = posCad.filter((c) => c.p === p), x = cs.reduce((s, c) => s + c.x, 0) / cs.length;
+      texto(`${p} · ${D.partidos[p]}`, x, 1290 + (i === 1 ? 0 : 40), { tam: 44, w: 900, a: vis(t, 14.6 + i * 0.4, 19.1), cor: corP(p) }); });
+    // 4 · grade de rostos
+    texto("OS 11 ELEITOS DE 2024", W / 2, 300, { tam: 34, w: 700, ls: 6, a: vis(t, 19.4, 27.1), cor: "#bdbab0" });
+    GR.forEach((g, i) => { const a = vis(t, 19.8 + i * 0.12, 27.1); foto(g.e.urna, g.x, g.y, 82, a, { cor: corP(g.e.partido) });
+      texto(g.e.urna.length > 15 ? primeiro(g.e.urna) + (g.e.urna.includes("Croatá") ? " do Croatá" : "") : g.e.urna, g.x, g.y + 130, { tam: 25, w: 700, a });
+      texto(fmt(g.e.votos * eout(prog(t, 20.6 + i * 0.1, 22.4 + i * 0.1))), g.x, g.y + 168, { tam: 34, w: 900, a, cor: corP(g.e.partido) }); });
+    // 5 · Rosa e o quociente
+    texto("SOZINHA, ACIMA DO QUOCIENTE", W / 2, 280, { tam: 34, w: 800, ls: 4, a: vis(t, 27.4, 34.2), cor: "#bdbab0" });
+    COLS.forEach(({ e, x }, i) => { const a = vis(t, 28.2 + i * 1.6, 34.2), yt = alturaVotos(e.votos) - (i ? 90 : 120); foto(e.urna, x, yt, i ? 70 : 92, a, { cor: corP(e.partido) });
+      texto(fmt(e.votos * eout(prog(t, 28.6 + i * 1.6, 30.4 + i * 1.6))), x, BASEY + 80, { tam: 60, w: 900, a, cor: corP(e.partido) }); texto(e.urna, x, BASEY + 125, { tam: 30, w: 600, a }); });
+    texto(`quociente: ${fmt(D.qe24)} votos`, 96, alturaVotos(D.qe24) - 16, { tam: 28, w: 700, al: "left", a: vis(t, 29, 34.2) });
+    texto("Eudes do Croatá se elegeu\ncom a soma dos votos do MDB", W / 2, 1745, { tam: 34, w: 600, a: vis(t, 31.2, 34.2), cor: "#bdbab0", lh: 42 });
+    // 6 · renovação
+    texto("2020", RN.x0, 470, { tam: 44, w: 900, a: vis(t, 34.6, 43.2), cor: "#bdbab0" }); texto("2024", RN.x1, 470, { tam: 44, w: 900, a: vis(t, 34.6, 43.2) });
+    texto(`SÓ ${reeleitos.length} DE 11\nSE REELEGERAM`, W / 2, 230, { tam: 64, w: 900, a: vis(t, 37.6, 43.2), brilho: 20, sobe: 1 });
+    texto(`${D.renovados} caras novas na Câmara`, W / 2, 1620, { tam: 46, w: 800, a: vis(t, 38.6, 43.2), cor: AC, sobe: 1 });
+    texto(reeleitos.map((e) => e.urna).join(" · "), W / 2, 1690, { tam: 26, w: 500, a: vis(t, 39.2, 43.2), cor: "#bdbab0" });
+    // 7 · quem cresceu
+    texto("2020 → 2024 · VOTOS DE CADA UM", W / 2, 290, { tam: 32, w: 700, ls: 4, a: vis(t, 43.4, 52.2), cor: "#bdbab0" });
+    texto("2020", SLX[0], 1500, { tam: 36, w: 800, a: vis(t, 43.8, 52.2), cor: "#bdbab0" }); texto("2024", SLX[1], 1500, { tam: 36, w: 800, a: vis(t, 43.8, 52.2) });
+    SL.forEach((e, i) => { const a = vis(t, 45 + i * 0.25, 52.2), d = e.votos / e.v20 - 1, y = ROT1[i];
+      texto(`${primeiro(e.urna)} ${d >= 0 ? "+" : "−"}${Math.round(Math.abs(d) * 100)}%`, SLX[1] + 30, y + 10, { tam: 28, w: 800, al: "left", a, cor: d >= 0 ? AC : "#ff4d6d" });
+      texto(`${primeiro(e.urna)} ${fmt(e.v20)}`, SLX[0] - 24, ROT0[i] + 10, { tam: 22, w: 600, al: "right", a: a * 0.8, cor: "#bdbab0" }); });
+    texto("Patrícia mais que dobrou.\nRoberto e Eudes do Croatá perderam voto.", W / 2, 1640, { tam: 40, w: 700, a: vis(t, 47.6, 52.2), sobe: 1 });
+    // 8 · governador
+    texto("2026 · GOVERNADOR", W / 2, 300, { tam: 34, w: 700, ls: 8, a: vis(t, 52.4, 60.2), cor: "#bdbab0" });
+    foto("ciro", FX[0], FOTO_Y, 150, vis(t, 53, 60.2)); foto("elmano", FX[1], FOTO_Y, 150, vis(t, 53.3, 60.2), { cor: AC });
+    texto("CIRO GOMES", FX[0], 1060, { tam: 34, w: 700, ls: 5, a: vis(t, 53.6, 60.2) }); texto("ELMANO", FX[1], 1060, { tam: 34, w: 700, ls: 5, a: vis(t, 53.8, 60.2) });
+    texto(pc(D.cidade.ciro * eout(prog(t, 53.8, 55.6))), FX[0], 1150, { tam: 84, w: 900, a: vis(t, 53.8, 60.2) });
+    texto(pc(D.cidade.elmano * eout(prog(t, 54, 55.8))), FX[1], 1150, { tam: 84, w: 900, a: vis(t, 54, 60.2), cor: AC, brilho: 20 });
+    texto("E nas urnas de cada vereador?", W / 2, 1400, { tam: 50, w: 700, a: vis(t, 56, 60.2), sobe: 1 });
+    // 9 · Elmano na base de cada vereador
+    texto("ELMANO NA BASE DE CADA VEREADOR", W / 2, 250, { tam: 32, w: 800, ls: 4, a: vis(t, 60.4, 71.2), cor: "#bdbab0" });
+    texto("voto no governador nas urnas onde cada um teve voto", W / 2, 300, { tam: 27, w: 500, a: vis(t, 60.6, 71.2), cor: "#8d8b82" });
+    texto("50%", BR.x0 + BR.w * 0.5, BR.y0 - 62, { tam: 26, w: 800, a: vis(t, 61.2, 71.2) });
+    texto(`cidade ${pc(D.cidade.elmano)}`, BR.x0 + BR.w * D.cidade.elmano, BR.y0 + (E.length - 1) * BR.gap + 80, { tam: 26, w: 800, a: vis(t, 61.4, 71.2), cor: AC });
+    EB.forEach((e, i) => { const a = vis(t, 61 + i * 0.12, 71.2), y = BR.y0 + i * BR.gap; foto(e.urna, 120, y, 34, a, { cor: corP(e.partido) });
+      texto(primeiro(e.urna) + (e.urna.includes("Croatá") ? " C." : e.urna.includes("Mesquita") ? " M." : ""), 170, y - 8, { tam: 24, w: 700, al: "left", a });
+      texto(e.partido, 170, y + 22, { tam: 20, w: 700, al: "left", a, cor: corP(e.partido) });
+      texto(pc(e.elmano), BR.x0 + BR.w * e.elmano + 16, y + 10, { tam: 28, w: 800, al: "left", a }); });
+    texto("Em nenhuma base de vereador\no Elmano chegou a 50%.", W / 2, 1660, { tam: 46, w: 800, a: vis(t, 64.6, 71.2), sobe: 1 });
+    // 10 · PT
+    texto("OS VEREADORES DO PT", W / 2, 300, { tam: 34, w: 800, ls: 6, a: vis(t, 71.4, 78.2), cor: "#bdbab0" });
+    texto("partido do Elmano", W / 2, 360, { tam: 32, w: 500, a: vis(t, 71.6, 78.2), cor: "#8d8b82" });
+    PT.forEach((e, i) => { const a = vis(t, 72 + i * 0.3, 78.2); foto(e.urna, PTX[i], 760, 100, a, { cor: "#ff4d6d" }); texto(e.urna.replace("Professora", "Prof."), PTX[i], 940, { tam: 28, w: 700, a });
+      texto(pc(e.elmano * eout(prog(t, 72.6 + i * 0.3, 74.4 + i * 0.3))), PTX[i], 1030, { tam: 58, w: 900, a, cor: "#ff4d6d" }); });
+    texto(`Elmano ficou abaixo da média\nda cidade (${pc(D.cidade.elmano)}) na base dos três.`, W / 2, 1300, { tam: 44, w: 800, a: vis(t, 74.6, 78.2), sobe: 1 });
+    // 11 · encerramento
+    texto("PLENÁRIA CE", W / 2, 360, { tam: 104, w: 900, ls: 8, a: vis(t, 80, 84.2, 0.6), brilho: 30, sobe: 1 });
+    texto("Inteligência eleitoral de Varjota", W / 2, 430, { tam: 38, w: 600, a: vis(t, 80.4, 84.2, 0.6) });
+    texto("vereador a vereador · urna a urna", W / 2, 1600, { tam: 36, w: 600, ls: 3, a: vis(t, 80.8, 84.2, 0.6), cor: AC });
+    texto("Fonte: TSE · vereadores 2020 e 2024 · governador 2026 por seção", W / 2, 1700, { tam: 23, w: 500, a: vis(t, 81, 84.2, 0.6), cor: "#8d8b82" });
+    marca();
+  };
+  window.render(0);
+  window.pronto = true;
+})();
+</script>
+</body>
+</html>

@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """Monta a trilha do vídeo: narração (uma faixa por cena) + efeitos sonoros sintetizados (sem música).
 Cada cena estica para caber a fala; o mapa de tempo (cena → vídeo) vai para o gravador.
-Uso: python3 video/mixar.py --voz antonio --saida trilha.wav --mapa mapa.json"""
+Uso: python3 video/mixar.py --trilha video/trilha-raiox.json --voz antonio --musica --saida trilha.wav --mapa mapa.json
+O arquivo de trilha diz o tempo de cada cena (S) e onde entra cada efeito (tempos da animação)."""
 import argparse, json, os, subprocess
 import numpy as np
 from scipy.signal import butter, sosfilt
 
 SR = 48000
 RAIZ = os.path.dirname(os.path.abspath(__file__))
-# início de cada cena no tempo da animação (cena.html), e fim
-S = [0, 5.6, 11.2, 16.6, 20.6, 28.2, 35.2, 44.3, 52.3, 61.3, 68.3, 75.3, 82.0]
 rng = np.random.default_rng(3)
 
 def ler(arq):
@@ -63,14 +62,14 @@ def radar(d):  # varredura: tom fino que sobe e "pings" espaçados
         i = int(k * SR); m = min(n - i, int(0.5 * SR)); tt = np.arange(m) / SR; base[i:i + m] += np.sin(2 * np.pi * 1900 * tt) * np.exp(-tt * 9) * 0.25
     return base
 
-def musica(V, tv, tot):
+def musica(V, tv, tot, intensidade):
     """Trilha original (sem direitos): pad em lá menor, pulso grave e arpejo; intensidade segue as cenas."""
     bpm = 84; beat = 60 / bpm; bar = 4 * beat
     acordes = [(57, [57, 60, 64]), (53, [53, 57, 60]), (50, [50, 53, 57]), (52, [52, 56, 59])]  # Am F Dm E
     hz = lambda m: 440 * 2 ** ((m - 69) / 12)
     t = np.arange(tot) / SR
     # curva de intensidade (0–1) ao longo do vídeo
-    pts = [(0, .25), (tv(5.6), .35), (tv(16.6), .45), (tv(20.4), .85), (tv(35.2), .8), (tv(52.3), .45), (tv(61.3), .8), (tv(75.3), 1), (V[-1] - 2, .7), (V[-1], 0)]
+    pts = [(tv(a), b) for a, b in intensidade] + [(V[-1] - 2, .7), (V[-1], 0)]
     inten = np.interp(t, [a for a, _ in pts], [b for _, b in pts])
     pad = np.zeros(tot); baixo = np.zeros(tot); arp = np.zeros(tot)
     nb = int(np.ceil(V[-1] / bar)) + 1
@@ -98,9 +97,10 @@ def musica(V, tv, tot):
     return m
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--voz", default="antonio"); ap.add_argument("--saida", required=True); ap.add_argument("--mapa", required=True); ap.add_argument("--musica", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--trilha", default=os.path.join(RAIZ, "trilha-raiox.json")); ap.add_argument("--voz", default="antonio"); ap.add_argument("--saida", required=True); ap.add_argument("--mapa", required=True); ap.add_argument("--musica", action="store_true")
     a = ap.parse_args()
-    pasta = os.path.join(RAIZ, "audio", a.voz)
+    C = json.load(open(a.trilha, encoding="utf-8")); S = C["S"]
+    pasta = os.path.join(RAIZ, "audio", C["video"], a.voz)
     falas = [ler(os.path.join(pasta, f"{i:02d}.mp3")) for i in range(len(S) - 1)]
     lead = [0.9] + [0.45] * (len(S) - 2)
     V = [0.0]
@@ -114,16 +114,16 @@ def main():
         i = int(t * SR); j = min(tot, i + len(x)); buf[i:j] += x[: j - i] * g
     for k, f in enumerate(falas): por(voz, f, V[k] + lead[k])
     for k in range(1, len(S) - 1): por(fx, whoosh(), max(0, tv(S[k]) - 0.35), 0.55)
-    for t in (0.6, 16.7, 77.2): por(fx, boom(), tv(t), 0.8)
-    por(fx, riser(tv(20.2) - tv(16.9)), tv(16.9), 0.35)
-    por(fx, radar(tv(20.2) - tv(17.0)), tv(17.0), 0.6)
-    for a0, a1 in ((7.0, 9.4), (22.4, 24.2), (29.8, 31.6), (45.6, 48.4), (62.4, 64.6), (69.8, 71.4)):
+    for t in C["boom"]: por(fx, boom(), tv(t), 0.8)
+    if C.get("riser"): r0, r1 = C["riser"]; por(fx, riser(tv(r1) - tv(r0)), tv(r0), 0.35)
+    if C.get("radar"): r0, r1 = C["radar"]; por(fx, radar(tv(r1) - tv(r0)), tv(r0), 0.6)
+    for a0, a1 in C["ticks"]:
         x0, x1 = tv(a0), tv(a1); t = x0; passo = 0.05
         while t < x1: por(fx, tick(), t, 0.5); passo *= 1.07; t += passo
-    for t in (12.6, 13.5, 14.4): por(fx, bip(), tv(t), 0.8)          # pontos da linha do tempo: bipe da urna
-    por(fx, urna(), tv(52.9), 0.9)                                    # maior local: confirmação da urna
-    for t in (21.4, 21.7, 29.0, 29.3, 57.0, 62.0, 62.3): por(fx, pop(), tv(t), 0.45)
-    for t, b in ((38.4, 196), (58.2, 175), (75.4, 220)): por(fx, swell(base=b), tv(t), 0.8)
+    for t in C["bips"]: por(fx, bip(), tv(t), 0.8)        # bipe da urna eletrônica
+    for t in C["urna"]: por(fx, urna(), tv(t), 0.9)       # confirmação da urna
+    for t in C["pops"]: por(fx, pop(), tv(t), 0.45)
+    for t, b in C["swells"]: por(fx, swell(base=b), tv(t), 0.8)
     # níveis: voz na frente; efeitos ~15 dB abaixo e ainda mais baixos (ducking) enquanto a voz fala
     voz /= max(1e-6, np.sqrt(np.mean(voz[np.abs(voz) > 1e-3] ** 2)))
     fx /= max(1e-6, np.sqrt(np.mean(fx[np.abs(fx) > 1e-3] ** 2)))
@@ -131,7 +131,7 @@ def main():
     duck = 1 - 0.5 * np.clip(e / (np.percentile(e[e > 1e-3], 60) + 1e-9), 0, 1)
     mix = voz + fx * 10 ** (-15 / 20) * duck
     if a.musica:
-        mu = musica(V, tv, tot); mu /= max(1e-6, np.sqrt(np.mean(mu ** 2)))
+        mu = musica(V, tv, tot, C["intensidade"]); mu /= max(1e-6, np.sqrt(np.mean(mu ** 2)))
         duck_m = 1 - 0.6 * np.clip(e / (np.percentile(e[e > 1e-3], 60) + 1e-9), 0, 1)   # música baixa mais que os efeitos sob a voz
         mix += mu * 10 ** (-17 / 20) * duck_m
     mix /= max(1e-6, np.abs(mix).max()) / 0.9

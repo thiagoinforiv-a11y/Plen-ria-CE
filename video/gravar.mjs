@@ -11,12 +11,13 @@ const raiz = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const tipos = { ".html": "text/html", ".json": "application/json", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".js": "text/javascript" };
 const srv = http.createServer((q, r) => { const f = path.join(raiz, decodeURIComponent(q.url.split("?")[0])); if (!f.startsWith(raiz) || !fs.existsSync(f)) { r.writeHead(404); return r.end(); } r.writeHead(200, { "content-type": tipos[path.extname(f).toLowerCase()] || "application/octet-stream" }); fs.createReadStream(f).pipe(r); });
 await new Promise((ok) => srv.listen(0, ok));
+const argv = process.argv.slice(2), ic = argv.indexOf("--cena"), cena = ic >= 0 ? argv.splice(ic, 2)[1] : "cena.html";
 const b = await pw.chromium.launch();
 const p = await b.newPage({ viewport: { width: 540, height: 960 } });
-await p.goto(`http://127.0.0.1:${srv.address().port}/video/cena.html`);
+await p.goto(`http://127.0.0.1:${srv.address().port}/video/${cena}`);
 await p.waitForFunction(() => window.pronto === true, null, { timeout: 60000 });
 const quadro = async (t) => Buffer.from((await p.evaluate((t) => { window.render(t); return document.getElementById("c").toDataURL("image/jpeg", 0.93); }, t)).split(",")[1], "base64");
-const args = process.argv.slice(2);
+const args = argv;
 if (args[0] === "--provas") {
   fs.mkdirSync(args[1], { recursive: true });
   for (const t of args[2].split(",").map(Number)) fs.writeFileSync(path.join(args[1], `t${String(t).padStart(5, "0")}.jpg`), await quadro(t));

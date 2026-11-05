@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gera a narração do vídeo com vozes neurais (Microsoft Edge TTS), uma faixa por cena e por voz.
 Roda na automação do GitHub (este ambiente não alcança o serviço de voz).
-Saída: video/audio/<voz>/NN.mp3 e NN.json (tempo de cada palavra, em segundos)."""
+Saída: video/audio/<vídeo>/<voz>/NN.mp3 e NN.json (tempo de cada palavra, em segundos)."""
 import asyncio, json, os, sys
 import edge_tts
 
@@ -20,10 +20,11 @@ async def cena(texto, v, base):
 
 async def main():
     cfg = json.load(open(os.path.join(RAIZ, "narracao.json"), encoding="utf-8"))
-    for v in cfg["vozes"]:
-        pasta = os.path.join(RAIZ, "audio", v["id"]); os.makedirs(pasta, exist_ok=True)
-        for i, t in enumerate(cfg["cenas"]):
-            await cena(t, v, os.path.join(pasta, f"{i:02d}"))
-            print("✔", v["id"], i)
+    for vid, cenas in cfg["videos"].items():
+        for v in cfg["vozes"]:
+            pasta = os.path.join(RAIZ, "audio", vid, v["id"]); os.makedirs(pasta, exist_ok=True)
+            for i, t in enumerate(cenas):
+                await cena(t, v, os.path.join(pasta, f"{i:02d}"))
+                print("✔", vid, v["id"], i)
 
 asyncio.run(main())

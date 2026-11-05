@@ -1,0 +1,208 @@
+{
+ "cadeiras": 11,
+ "candidatos24": 33,
+ "candidatos20": 48,
+ "validos24": 13768,
+ "qe24": 1252,
+ "partidos": {
+  "MDB": 3,
+  "PSB": 5,
+  "PT": 3
+ },
+ "renovados": 7,
+ "eleitos": [
+  {
+   "urna": "Rosa Paulino",
+   "partido": "MDB",
+   "votos": 1774,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002136565.jpg",
+   "v20": null,
+   "sit20": null,
+   "elmano": 0.4092421361526052,
+   "ciro": 0.5868163914359124,
+   "reduto": {
+    "nome": "E.e.f. Florência Ferreira Neta",
+    "bairro": "Acampamento Dnocs",
+    "votos": 153,
+    "elmano26": 0.3858093126385809
+   }
+  },
+  {
+   "urna": "Eudes Mesquita",
+   "partido": "PSB",
+   "votos": 992,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042096.jpg",
+   "v20": null,
+   "sit20": null,
+   "elmano": 0.4371980398766086,
+   "ciro": 0.5596783409505355,
+   "reduto": {
+    "nome": "E.e.f. Odilon Nobre",
+    "bairro": "Croatá dos Martins",
+    "votos": 191,
+    "elmano26": 0.49263502454991814
+   }
+  },
+  {
+   "urna": "Gonçalinho",
+   "partido": "PSB",
+   "votos": 915,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042093.jpg",
+   "v20": 784,
+   "sit20": "eleito por qp",
+   "elmano": 0.44817299174847075,
+   "ciro": 0.548735890509565,
+   "reduto": {
+    "nome": "E.e.f. Odilon Nobre",
+    "bairro": "Croatá dos Martins",
+    "votos": 219,
+    "elmano26": 0.49263502454991814
+   }
+  },
+  {
+   "urna": "Regio Ximenes",
+   "partido": "PSB",
+   "votos": 884,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042092.jpg",
+   "v20": 726,
+   "sit20": "eleito por qp",
+   "elmano": 0.4022142503951099,
+   "ciro": 0.5937001791009023,
+   "reduto": {
+    "nome": "E.e.f. Deputado Manoel Rodrigues",
+    "bairro": "Centro",
+    "votos": 193,
+    "elmano26": 0.3568111455108359
+   }
+  },
+  {
+   "urna": "Patricia Ximenes",
+   "partido": "PT",
+   "votos": 847,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042397.jpg",
+   "v20": 403,
+   "sit20": "suplente",
+   "elmano": 0.4026520319171835,
+   "ciro": 0.5933094408814007,
+   "reduto": {
+    "nome": "E.e.f. Deputado Manoel Rodrigues",
+    "bairro": "Centro",
+    "votos": 105,
+    "elmano26": 0.3568111455108359
+   }
+  },
+  {
+   "urna": "Lucas da Célia",
+   "partido": "MDB",
+   "votos": 834,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002136561.jpg",
+   "v20": null,
+   "sit20": null,
+   "elmano": 0.40325185885724574,
+   "ciro": 0.5937198880577343,
+   "reduto": {
+    "nome": "Liceu Waldir Leopércio",
+    "bairro": "Empréstimos",
+    "votos": 232,
+    "elmano26": 0.4043478260869565
+   }
+  },
+  {
+   "urna": "Roberto do Garrone",
+   "partido": "PT",
+   "votos": 783,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042391.jpg",
+   "v20": 835,
+   "sit20": "eleito por qp",
+   "elmano": 0.40353218946623237,
+   "ciro": 0.5927675411777159,
+   "reduto": {
+    "nome": "Liceu Waldir Leopércio",
+    "bairro": "Empréstimos",
+    "votos": 126,
+    "elmano26": 0.4043478260869565
+   }
+  },
+  {
+   "urna": "Fransquinha do Edvard",
+   "partido": "PSB",
+   "votos": 682,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042098.jpg",
+   "v20": 414,
+   "sit20": "suplente",
+   "elmano": 0.4083484681272206,
+   "ciro": 0.5875526986997294,
+   "reduto": {
+    "nome": "E.e.i. Teodoro Sales de Oliveira-creche Pedacinho do Céu",
+    "bairro": "Pedreira",
+    "votos": 67,
+    "elmano26": 0.4136986301369863
+   }
+  },
+  {
+   "urna": "Djinha",
+   "partido": "PSB",
+   "votos": 672,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002042094.jpg",
+   "v20": 539,
+   "sit20": "eleito por media",
+   "elmano": 0.4164894812585086,
+   "ciro": 0.5793898224727733,
+   "reduto": {
+    "nome": "E.e.f. Vicente Trajano de Mesquita",
+    "bairro": "Olho Dágua dos Trajanos",
+    "votos": 112,
+    "elmano26": 0.47608695652173916
+   }
+  },
+  {
+   "urna": "Professora Inara",
+   "partido": "PT",
+   "votos": 599,
+   "situacao": "eleito por média",
+   "foto": "fotos/ce/varjota/2024/60002042394.jpg",
+   "v20": null,
+   "sit20": null,
+   "elmano": 0.40168395741893487,
+   "ciro": 0.5948364741015096,
+   "reduto": {
+    "nome": "E.e.f. Deputado Manoel Rodrigues",
+    "bairro": "Centro",
+    "votos": 85,
+    "elmano26": 0.3568111455108359
+   }
+  },
+  {
+   "urna": "Eudes do Croatá",
+   "partido": "MDB",
+   "votos": 280,
+   "situacao": "eleito por qp",
+   "foto": "fotos/ce/varjota/2024/60002136562.jpg",
+   "v20": 291,
+   "sit20": "suplente",
+   "elmano": 0.465215380117337,
+   "ciro": 0.5317912602110358,
+   "reduto": {
+    "nome": "E.e.f. Odilon Nobre",
+    "bairro": "Croatá dos Martins",
+    "votos": 148,
+    "elmano26": 0.49263502454991814
+   }
+  }
+ ],
+ "cidade": {
+  "elmano": 0.4155635780184517,
+  "ciro": 0.5809065383072604,
+  "fotoElmano": "fotos/ce/varjota/2026/60002543969.jpg",
+  "fotoCiro": "fotos/ce/varjota/2026/60002531351.jpg"
+ }
+}

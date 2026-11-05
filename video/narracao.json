@@ -1,21 +1,51 @@
 {
   "vozes": [
-    { "id": "antonio", "voz": "pt-BR-AntonioNeural", "rate": "-6%", "pitch": "-3Hz" },
-    { "id": "thalita", "voz": "pt-BR-ThalitaMultilingualNeural", "rate": "-4%", "pitch": "+0Hz" },
-    { "id": "francisca", "voz": "pt-BR-FranciscaNeural", "rate": "-5%", "pitch": "-1Hz" }
+    {
+      "id": "antonio",
+      "voz": "pt-BR-AntonioNeural",
+      "rate": "-6%",
+      "pitch": "-3Hz"
+    },
+    {
+      "id": "thalita",
+      "voz": "pt-BR-ThalitaMultilingualNeural",
+      "rate": "-4%",
+      "pitch": "+0Hz"
+    },
+    {
+      "id": "francisca",
+      "voz": "pt-BR-FranciscaNeural",
+      "rate": "-5%",
+      "pitch": "-1Hz"
+    }
   ],
-  "cenas": [
-    "Varjota. Um raio-xis eleitoral, feito só com os dados oficiais do TSE.",
-    "São dezesseis mil e vinte e dois eleitores. Cinquenta e nove urnas, em vinte e oito locais de votação.",
-    "A gente olhou urna por urna. Em dois mil e vinte e dois, vinte e quatro e vinte e seis.",
-    "E o raio-xis mostra o que pouca gente percebeu.",
-    "Em dois mil e vinte e quatro, Elmo Monte venceu com sessenta e quatro por cento. Quase dois votos para cada um do Silvino.",
-    "Dois anos depois, o grupo do prefeito pediu voto para Elmano. Mas a cidade escolheu Ciro. Cinquenta e oito a quarenta e dois.",
-    "Cada nuvem é um local de votação. E onde o Elmo foi mais forte... o Elmano não cresceu.",
-    "Elmano teve cinco mil quatrocentos e vinte e nove votos em vinte e dois. Agora, cinco mil cento e oitenta. Repetiu o próprio voto. O voto do prefeito não somou.",
-    "No maior local da cidade, no Centro, o Elmo fez sessenta e oito por cento. O Elmano, trinta e seis. Trinta e dois pontos a menos.",
-    "No voto para deputado, cada lado entregou. Lia Gomes, a estadual mais votada. Yury do Paredão, o federal mais votado.",
-    "Para dois mil e vinte e oito, o tabuleiro está aberto. E quem lê os números primeiro, decide primeiro.",
-    "Plenária CE. Inteligência eleitoral de Varjota. Bairro a bairro, urna a urna."
-  ]
+  "videos": {
+    "raiox": [
+      "Varjota. Um raio-xis eleitoral, feito só com os dados oficiais do TSE.",
+      "São dezesseis mil e vinte e dois eleitores. Cinquenta e nove urnas, em vinte e oito locais de votação.",
+      "A gente olhou urna por urna. Em dois mil e vinte e dois, vinte e quatro e vinte e seis.",
+      "E o raio-xis mostra o que pouca gente percebeu.",
+      "Em dois mil e vinte e quatro, Elmo Monte venceu com sessenta e quatro por cento. Quase dois votos para cada um do Silvino.",
+      "Dois anos depois, o grupo do prefeito pediu voto para Elmano. Mas a cidade escolheu Ciro. Cinquenta e oito a quarenta e dois.",
+      "Cada nuvem é um local de votação. E onde o Elmo foi mais forte... o Elmano não cresceu.",
+      "Elmano teve cinco mil quatrocentos e vinte e nove votos em vinte e dois. Agora, cinco mil cento e oitenta. Repetiu o próprio voto. O voto do prefeito não somou.",
+      "No maior local da cidade, no Centro, o Elmo fez sessenta e oito por cento. O Elmano, trinta e seis. Trinta e dois pontos a menos.",
+      "No voto para deputado, cada lado entregou. Lia Gomes, a estadual mais votada. Yury do Paredão, o federal mais votado.",
+      "Para dois mil e vinte e oito, o tabuleiro está aberto. E quem lê os números primeiro, decide primeiro.",
+      "Plenária CE. Inteligência eleitoral de Varjota. Bairro a bairro, urna a urna."
+    ],
+    "vereadores": [
+      "Câmara de Varjota. O raio-xis dos vereadores, com os dados oficiais do TSE.",
+      "São onze cadeiras. Trinta e três candidatos em dois mil e vinte e quatro. Quarenta e oito em dois mil e vinte.",
+      "Treze mil setecentos e sessenta e oito votos válidos, divididos por onze. Mil duzentos e cinquenta e dois votos por cadeira. O PSB fez cinco. MDB e PT, três cada.",
+      "Esses são os onze eleitos de dois mil e vinte e quatro.",
+      "Rosa Paulino, sozinha, passou do quociente: mil setecentos e setenta e quatro votos. E o MDB levou junto Eudes do Croatá, com duzentos e oitenta.",
+      "Dos onze vereadores eleitos em dois mil e vinte, só quatro se reelegeram. Sete caras novas na Câmara.",
+      "Entre quem disputou as duas eleições, Patrícia mais que dobrou de voto. Roberto e Eudes do Croatá perderam.",
+      "Em dois mil e vinte e seis, para governador, Ciro venceu Elmano na cidade. Mas... e nas urnas de cada vereador?",
+      "Em nenhuma base de vereador o Elmano chegou a cinquenta por cento. O melhor resultado foi na base do Eudes do Croatá: quarenta e seis.",
+      "Nem na base dos vereadores do PT, o partido do Elmano. Nos três, ele ficou abaixo da média da cidade.",
+      "Plenária CE. Inteligência eleitoral de Varjota. Vereador a vereador, urna a urna."
+    ]
+  }
 }
