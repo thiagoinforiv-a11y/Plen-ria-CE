@@ -1,0 +1,688 @@
+{
+ "municipio": "Pacujá",
+ "cd_ibge": "2309904",
+ "cadeiras": 9,
+ "validos": 5564,
+ "qe": 618,
+ "nlocais": 7,
+ "candidatos": 30,
+ "locais": [
+  {
+   "id": "79-1023",
+   "nome": "E.e.i.f. Coriolano Alves de Brito",
+   "curto": "Coriolano Alves de Brito",
+   "bairro": "Centro",
+   "lat": -3.978825,
+   "lon": -40.7012
+  },
+  {
+   "id": "79-1031",
+   "nome": "E.e.m. Placido Aderaldo Castelo",
+   "curto": "Plácido Aderaldo Castelo",
+   "bairro": "Centro",
+   "lat": -3.979417,
+   "lon": -40.69702
+  },
+  {
+   "id": "79-1040",
+   "nome": "E.e.i.f. Valfrido Salmito de Almeida",
+   "curto": "Valfrido Salmito de Almeida",
+   "bairro": "Bom Gosto",
+   "lat": -4.045916,
+   "lon": -40.714003
+  },
+  {
+   "id": "79-1058",
+   "nome": "E.e.f. Sao Joao Batista",
+   "curto": "São João Batista",
+   "bairro": "Centro",
+   "lat": -3.978578,
+   "lon": -40.695875
+  },
+  {
+   "id": "79-1090",
+   "nome": "E.e.f. Vicente Alves de Sousa Filho",
+   "curto": "Vicente Alves de Sousa Filho",
+   "bairro": "Milhãs",
+   "lat": -3.972082,
+   "lon": -40.724113
+  },
+  {
+   "id": "79-1104",
+   "nome": "E.e.f. Achilles Barreto",
+   "curto": "Achilles Barreto",
+   "bairro": "Zipu",
+   "lat": -4.009333,
+   "lon": -40.646073
+  },
+  {
+   "id": "79-1112",
+   "nome": "E.e.i Francisco Joaquim Cordeiro",
+   "curto": "Francisco Joaquim Cordeiro",
+   "bairro": "Batoque",
+   "lat": -3.965631,
+   "lon": -40.69476
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Carlos Júnior",
+   "partido": "PSB",
+   "foto": "fotos/ce/pacuja/2024/60002036650.jpg",
+   "votos": 633,
+   "pos": 1,
+   "pct": 0.11376707404744787,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1031",
+     176
+    ],
+    [
+     "79-1058",
+     167
+    ],
+    [
+     "79-1023",
+     121
+    ],
+    [
+     "79-1040",
+     76
+    ],
+    [
+     "79-1090",
+     54
+    ],
+    [
+     "79-1104",
+     26
+    ],
+    [
+     "79-1112",
+     13
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 176
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 167
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 121
+    }
+   ],
+   "conc": 0.27804107424960506,
+   "top3": 0.7330173775671406,
+   "venceu": 1,
+   "presente": 7
+  },
+  {
+   "urna": "Lourinho",
+   "partido": "PSB",
+   "foto": "fotos/ce/pacuja/2024/60002036651.jpg",
+   "votos": 582,
+   "pos": 2,
+   "pct": 0.10460100647016535,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1058",
+     189
+    ],
+    [
+     "79-1031",
+     183
+    ],
+    [
+     "79-1023",
+     136
+    ],
+    [
+     "79-1040",
+     40
+    ],
+    [
+     "79-1104",
+     13
+    ],
+    [
+     "79-1090",
+     11
+    ],
+    [
+     "79-1112",
+     10
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 189
+    },
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 183
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 136
+    }
+   ],
+   "conc": 0.3247422680412371,
+   "top3": 0.872852233676976,
+   "venceu": 3,
+   "presente": 7
+  },
+  {
+   "urna": "Liduína Fernandes",
+   "partido": "Republicanos",
+   "foto": "fotos/ce/pacuja/2024/60002006523.jpg",
+   "votos": 409,
+   "pos": 3,
+   "pct": 0.07350826743350108,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1031",
+     132
+    ],
+    [
+     "79-1058",
+     114
+    ],
+    [
+     "79-1023",
+     87
+    ],
+    [
+     "79-1104",
+     35
+    ],
+    [
+     "79-1040",
+     26
+    ],
+    [
+     "79-1112",
+     13
+    ],
+    [
+     "79-1090",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 132
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 114
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 87
+    }
+   ],
+   "conc": 0.32273838630806845,
+   "top3": 0.8141809290953546,
+   "venceu": 0,
+   "presente": 7
+  },
+  {
+   "urna": "João Hernando",
+   "partido": "Republicanos",
+   "foto": "fotos/ce/pacuja/2024/60002006522.jpg",
+   "votos": 375,
+   "pos": 4,
+   "pct": 0.06739755571531272,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1031",
+     119
+    ],
+    [
+     "79-1058",
+     108
+    ],
+    [
+     "79-1023",
+     87
+    ],
+    [
+     "79-1040",
+     29
+    ],
+    [
+     "79-1090",
+     17
+    ],
+    [
+     "79-1104",
+     9
+    ],
+    [
+     "79-1112",
+     6
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 119
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 108
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 87
+    }
+   ],
+   "conc": 0.31733333333333336,
+   "top3": 0.8373333333333334,
+   "venceu": 0,
+   "presente": 7
+  },
+  {
+   "urna": "Vinícius Araújo",
+   "partido": "PSB",
+   "foto": "fotos/ce/pacuja/2024/60002036656.jpg",
+   "votos": 358,
+   "pos": 5,
+   "pct": 0.06434219985621854,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1090",
+     110
+    ],
+    [
+     "79-1031",
+     82
+    ],
+    [
+     "79-1023",
+     79
+    ],
+    [
+     "79-1058",
+     68
+    ],
+    [
+     "79-1040",
+     14
+    ],
+    [
+     "79-1112",
+     3
+    ],
+    [
+     "79-1104",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Vicente Alves de Sousa Filho",
+     "curto": "Vicente Alves de Sousa Filho",
+     "bairro": "Milhãs",
+     "votos": 110
+    },
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 82
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 79
+    }
+   ],
+   "conc": 0.30726256983240224,
+   "top3": 0.7569832402234636,
+   "venceu": 1,
+   "presente": 7
+  },
+  {
+   "urna": "Marli Melo",
+   "partido": "Republicanos",
+   "foto": "fotos/ce/pacuja/2024/60002006524.jpg",
+   "votos": 353,
+   "pos": 6,
+   "pct": 0.06344356578001438,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1031",
+     122
+    ],
+    [
+     "79-1058",
+     115
+    ],
+    [
+     "79-1023",
+     73
+    ],
+    [
+     "79-1104",
+     14
+    ],
+    [
+     "79-1090",
+     12
+    ],
+    [
+     "79-1112",
+     10
+    ],
+    [
+     "79-1040",
+     7
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 122
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 115
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 73
+    }
+   ],
+   "conc": 0.34560906515580736,
+   "top3": 0.8781869688385269,
+   "venceu": 0,
+   "presente": 7
+  },
+  {
+   "urna": "Natália do Mão Calejada",
+   "partido": "União",
+   "foto": "fotos/ce/pacuja/2024/60002006442.jpg",
+   "votos": 300,
+   "pos": 7,
+   "pct": 0.05391804457225018,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1104",
+     76
+    ],
+    [
+     "79-1058",
+     67
+    ],
+    [
+     "79-1031",
+     54
+    ],
+    [
+     "79-1023",
+     45
+    ],
+    [
+     "79-1040",
+     40
+    ],
+    [
+     "79-1090",
+     14
+    ],
+    [
+     "79-1112",
+     4
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Achilles Barreto",
+     "curto": "Achilles Barreto",
+     "bairro": "Zipu",
+     "votos": 76
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 67
+    },
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 54
+    }
+   ],
+   "conc": 0.25333333333333335,
+   "top3": 0.6566666666666666,
+   "venceu": 1,
+   "presente": 7
+  },
+  {
+   "urna": "Luiz Fernando",
+   "partido": "Cidadania",
+   "foto": "fotos/ce/pacuja/2024/60002396910.jpg",
+   "votos": 293,
+   "pos": 8,
+   "pct": 0.05265995686556434,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1058",
+     78
+    ],
+    [
+     "79-1031",
+     65
+    ],
+    [
+     "79-1090",
+     59
+    ],
+    [
+     "79-1023",
+     47
+    ],
+    [
+     "79-1040",
+     30
+    ],
+    [
+     "79-1104",
+     8
+    ],
+    [
+     "79-1112",
+     6
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 78
+    },
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 65
+    },
+    {
+     "nome": "E.e.f. Vicente Alves de Sousa Filho",
+     "curto": "Vicente Alves de Sousa Filho",
+     "bairro": "Milhãs",
+     "votos": 59
+    }
+   ],
+   "conc": 0.26621160409556316,
+   "top3": 0.689419795221843,
+   "venceu": 0,
+   "presente": 7
+  },
+  {
+   "urna": "Orlando Rodrigues",
+   "partido": "União",
+   "foto": "fotos/ce/pacuja/2024/60002006436.jpg",
+   "votos": 244,
+   "pos": 11,
+   "pct": 0.04385334291876348,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 432,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1031",
+     83
+    ],
+    [
+     "79-1058",
+     76
+    ],
+    [
+     "79-1023",
+     66
+    ],
+    [
+     "79-1090",
+     14
+    ],
+    [
+     "79-1112",
+     3
+    ],
+    [
+     "79-1040",
+     1
+    ],
+    [
+     "79-1104",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.m. Placido Aderaldo Castelo",
+     "curto": "Plácido Aderaldo Castelo",
+     "bairro": "Centro",
+     "votos": 83
+    },
+    {
+     "nome": "E.e.f. Sao Joao Batista",
+     "curto": "São João Batista",
+     "bairro": "Centro",
+     "votos": 76
+    },
+    {
+     "nome": "E.e.i.f. Coriolano Alves de Brito",
+     "curto": "Coriolano Alves de Brito",
+     "bairro": "Centro",
+     "votos": 66
+    }
+   ],
+   "conc": 0.3401639344262295,
+   "top3": 0.9221311475409836,
+   "venceu": 0,
+   "presente": 7
+  }
+ ],
+ "qe2028": 685,
+ "fala": [
+  "Pacujá. Os nove vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram trinta candidatos para nove cadeiras. Oito são caras novas. PSB, três; Republicanos, três; União, dois; Cidadania, um. E o quociente: seiscentos e dezoito votos.",
+  "Carlos Júnior, do PSB. Seiscentos e trinta e três votos: a maior votação da cidade. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Plácido Aderaldo Castelo, no Centro: cento e setenta e seis votos.",
+  "Lourinho, do PSB. Quinhentos e oitenta e dois votos: segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola São João Batista, no Centro: cento e oitenta e nove votos. Liderou a votação em três dos sete locais.",
+  "Liduína Fernandes, do Republicanos. Quatrocentos e nove votos: terceiro lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Plácido Aderaldo Castelo, no Centro: cento e trinta e dois votos.",
+  "João Hernando, do Republicanos. Trezentos e setenta e cinco votos: quarto lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Plácido Aderaldo Castelo, no Centro: cento e dezenove votos.",
+  "Vinícius Araújo, do PSB. Trezentos e cinquenta e oito votos: quinto lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Vicente Alves de Sousa Filho, em Milhãs: cento e dez votos.",
+  "Marli Melo, do Republicanos. Trezentos e cinquenta e três votos: sexto lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Plácido Aderaldo Castelo, no Centro: cento e vinte e dois votos. Entrou pela média, na distribuição das sobras.",
+  "Natália do Mão Calejada, do União. Trezentos votos: sétimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Achilles Barreto, em Zipu: setenta e seis votos.",
+  "Luiz Fernando, do Cidadania. Duzentos e noventa e três votos: oitavo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola São João Batista, no Centro: setenta e oito votos. Entrou pela média, na distribuição das sobras.",
+  "Orlando Rodrigues, do União. Duzentos e quarenta e quatro votos. Em dois mil e vinte, tinha feito quatrocentos e trinta e dois: perdeu cento e oitenta e oito votos e renovou o mandato. O maior reduto é na escola Plácido Aderaldo Castelo, no Centro: oitenta e três votos. Ficou em décimo primeiro lugar, mas a vaga é do partido: com a soma do União, entrou.",
+  "Só Carlos Júnior passou do quociente com os próprios votos. Os outros oito dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de setecentos votos. Plenária CE. Inteligência eleitoral de Pacujá."
+ ]
+}

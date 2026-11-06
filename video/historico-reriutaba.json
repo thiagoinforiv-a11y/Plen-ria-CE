@@ -1,0 +1,267 @@
+{
+ "cartoes2028": [],
+ "interrupcoes": [],
+ "id": "ce/reriutaba",
+ "municipio": "Reriutaba",
+ "cd_ibge": "2311702",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 16718,
+   "comparecimento": 12399,
+   "abstencoes": 4319
+  },
+  {
+   "ano": "2020",
+   "aptos": 16503,
+   "comparecimento": 12913,
+   "abstencoes": 3590
+  },
+  {
+   "ano": "2024",
+   "aptos": 15842,
+   "comparecimento": 13965,
+   "abstencoes": 1877
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Osvaldo Neto",
+    "partido": "PDT",
+    "votos": 8660,
+    "pct": 0.7592495177976504,
+    "pid": "03cede1963",
+    "foto": "fotos/ce/reriutaba/2024/60002310937.jpg"
+   },
+   "seg": {
+    "nome": "Clerton Furtado",
+    "partido": "PT",
+    "votos": 2746,
+    "pct": 0.24075048220234965,
+    "pid": "319198ed1d",
+    "foto": "fotos/ce/reriutaba/2020/60000997962.jpg"
+   },
+   "margem": 5914
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Pedro Humberto",
+    "partido": "PSB",
+    "votos": 6389,
+    "pct": 0.514329415553051,
+    "pid": "0dcfb0262f",
+    "foto": "fotos/ce/reriutaba/2024/60002186598.jpg"
+   },
+   "seg": {
+    "nome": "Osvaldo Neto",
+    "partido": "PDT",
+    "votos": 5940,
+    "pct": 0.4781838673321526,
+    "pid": "03cede1963",
+    "foto": "fotos/ce/reriutaba/2024/60002310937.jpg"
+   },
+   "margem": 449
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Pedro Humberto",
+    "partido": "PSB",
+    "votos": 8477,
+    "pct": 0.6287642782969886,
+    "pid": "0dcfb0262f",
+    "foto": "fotos/ce/reriutaba/2024/60002186598.jpg"
+   },
+   "seg": {
+    "nome": "Osvaldo Neto",
+    "partido": "PT",
+    "votos": 5005,
+    "pct": 0.37123572170301145,
+    "pid": "03cede1963",
+    "foto": "fotos/ce/reriutaba/2024/60002310937.jpg"
+   },
+   "margem": 3472
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 11,
+   "candidatos": 25,
+   "validos": 11927,
+   "qe": 1084,
+   "partidos": [
+    [
+     "PDT",
+     5
+    ],
+    [
+     "PROS",
+     2
+    ],
+    [
+     "PRP",
+     1
+    ],
+    [
+     "Cidadania",
+     1
+    ],
+    [
+     "PT",
+     1
+    ],
+    [
+     "PC do B",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "João Veras",
+    "votos": 1104,
+    "partido": "PROS",
+    "foto": "fotos/ce/reriutaba/2024/60002187936.jpg"
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 11,
+   "candidatos": 41,
+   "validos": 12330,
+   "qe": 1121,
+   "partidos": [
+    [
+     "PSB",
+     6
+    ],
+    [
+     "PDT",
+     5
+    ]
+   ],
+   "top": {
+    "nome": "João Veras",
+    "votos": 985,
+    "partido": "PSB",
+    "foto": "fotos/ce/reriutaba/2024/60002187936.jpg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 11,
+   "candidatos": 22,
+   "validos": 13396,
+   "qe": 1218,
+   "partidos": [
+    [
+     "PSB",
+     8
+    ],
+    [
+     "PT",
+     3
+    ]
+   ],
+   "top": {
+    "nome": "Galego Honório",
+    "votos": 1473,
+    "partido": "PSB",
+    "foto": "fotos/ce/reriutaba/2024/60002187938.jpg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 11,
+   "reeleitos": 5,
+   "novos": 6,
+   "nomes": [
+    "João Veras",
+    "Socorro Hermínio",
+    "Chico Braga",
+    "Sá Júnior",
+    "Chiquinho Carnaúba"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 11,
+   "reeleitos": 8,
+   "novos": 3,
+   "nomes": [
+    "João Veras",
+    "Galego Honório",
+    "Chico Braga",
+    "Luizinho da Carnaúba",
+    "Socorro Hermínio",
+    "Luzia do Orlandinho",
+    "Luciélio Paiva",
+    "Chiquinho Carnaúba"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 11,
+   "reeleitos": 6,
+   "novos": 5,
+   "nomes": [
+    "Galego Honório",
+    "João Veras",
+    "Socorro Hermínio",
+    "Djane Castro",
+    "Luzia do Orlandinho",
+    "Luciélio Paiva"
+   ]
+  }
+ ],
+ "semReeleicao": true,
+ "precedente": {
+  "ano": "2016",
+  "saiu": "Dr. Galeno",
+  "interrompido": null,
+  "motivo": "não disputou",
+  "partidoSaiu": "PSB",
+  "venceu": "Osvaldo Neto",
+  "partidoVenceu": "PDT",
+  "mesmoPartido": false
+ },
+ "precedentes": [
+  {
+   "ano": "2016",
+   "saiu": "Dr. Galeno",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "PSB",
+   "venceu": "Osvaldo Neto",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": false
+  }
+ ],
+ "qe2028": 1315,
+ "novosMedia": 5,
+ "fala": [
+  "Reriutaba. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de dezesseis mil setecentos e dezoito para quinze mil oitocentos e quarenta e dois. E a abstenção caiu: de quatro mil trezentos e dezenove para mil oitocentos e setenta e sete eleitores.",
+  "Em dois mil e dezesseis, Osvaldo Neto venceu com setenta e seis por cento. Clerton Furtado ficou com vinte e quatro. Diferença de cinco mil novecentos e catorze votos.",
+  "Em dois mil e vinte, Pedro Humberto venceu com cinquenta e um por cento. Osvaldo Neto ficou com quarenta e oito. Diferença de quatrocentos e quarenta e nove votos.",
+  "Em dois mil e vinte e quatro, Pedro Humberto venceu com sessenta e três por cento. Osvaldo Neto ficou com trinta e sete. Diferença de três mil quatrocentos e setenta e dois votos.",
+  "Em três eleições: Osvaldo Neto; depois Pedro Humberto, duas vezes. Em dois mil e vinte e oito, Pedro Humberto não pode concorrer de novo: a cadeira de prefeito fica aberta.",
+  "Na Câmara, o PDT fez cinco cadeiras em dois mil e dezesseis. E em dois mil e vinte, o PSB passou a liderar com seis cadeiras. E em dois mil e vinte e quatro, o PSB seguiu na frente, com oito cadeiras, e o PDT ficou sem cadeira.",
+  "A renovação é alta. Caras novas em cada eleição: seis, três e cinco, de onze cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de mil e oitenta e quatro para mil duzentos e dezoito votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de mil e trezentos.",
+  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Isso já aconteceu uma vez. Em dois mil e dezesseis, sem Doutor Galeno na disputa, Osvaldo Neto venceu, pelo PDT. Se a renovação seguir a média, cerca de cinco vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Reriutaba. A história de cada eleição, para decidir a próxima."
+ ]
+}

@@ -1,0 +1,262 @@
+{
+ "cartoes2028": [],
+ "interrupcoes": [],
+ "id": "ce/carire",
+ "municipio": "Cariré",
+ "cd_ibge": "2303105",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 13134,
+   "comparecimento": 12420,
+   "abstencoes": 714
+  },
+  {
+   "ano": "2020",
+   "aptos": 14272,
+   "comparecimento": 12237,
+   "abstencoes": 2035
+  },
+  {
+   "ano": "2024",
+   "aptos": 15557,
+   "comparecimento": 13250,
+   "abstencoes": 2307
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Elmo Aguiar",
+    "partido": "PDT",
+    "votos": 9042,
+    "pct": 0.7670512385476757,
+    "pid": "4193299009",
+    "foto": null
+   },
+   "seg": {
+    "nome": "Eriberto Ponte",
+    "partido": "PSDB",
+    "votos": 2746,
+    "pct": 0.2329487614523244,
+    "pid": "abbd1e15a4",
+    "foto": null
+   },
+   "margem": 6296
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Antonio Martins",
+    "partido": "PDT",
+    "votos": 8172,
+    "pct": 0.6994778738337756,
+    "pid": "9c0611ccff",
+    "foto": "fotos/ce/carire/2024/60001965870.jpg"
+   },
+   "seg": {
+    "nome": "Rômulo Ponte",
+    "partido": "PL",
+    "votos": 3411,
+    "pct": 0.29196268081828297,
+    "pid": "58e995ff82",
+    "foto": "fotos/ce/carire/2026/60002532978.jpg"
+   },
+   "margem": 4761
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Antonio Martins",
+    "partido": "PDT",
+    "votos": 9502,
+    "pct": 0.7468951422732275,
+    "pid": "9c0611ccff",
+    "foto": "fotos/ce/carire/2024/60001965870.jpg"
+   },
+   "seg": {
+    "nome": "Luyza Ponte",
+    "partido": "PRD",
+    "votos": 3220,
+    "pct": 0.25310485772677255,
+    "pid": "a646ecea95",
+    "foto": "fotos/ce/carire/2024/60002246723.jpg"
+   },
+   "margem": 6282
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 11,
+   "candidatos": 21,
+   "validos": 11822,
+   "qe": 1075,
+   "partidos": [
+    [
+     "PDT",
+     9
+    ],
+    [
+     "PSD",
+     1
+    ],
+    [
+     "PSDB",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Eduardo Miranda",
+    "votos": 1615,
+    "partido": "PDT",
+    "foto": null
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 11,
+   "candidatos": 31,
+   "validos": 11759,
+   "qe": 1069,
+   "partidos": [
+    [
+     "PDT",
+     8
+    ],
+    [
+     "PL",
+     3
+    ]
+   ],
+   "top": {
+    "nome": "Virginia Aguiar",
+    "votos": 1168,
+    "partido": "PDT",
+    "foto": "fotos/ce/carire/2020/60000961311.jpg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 11,
+   "candidatos": 20,
+   "validos": 12772,
+   "qe": 1161,
+   "partidos": [
+    [
+     "PDT",
+     9
+    ],
+    [
+     "PL",
+     2
+    ]
+   ],
+   "top": {
+    "nome": "Robson Pessoa",
+    "votos": 1360,
+    "partido": "PDT",
+    "foto": "fotos/ce/carire/2024/60001965879.jpg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 11,
+   "reeleitos": 7,
+   "novos": 4,
+   "nomes": [
+    "Nery",
+    "Robson Pessoa",
+    "Guarani Martins",
+    "Márcio Brito",
+    "Eduardo Brito",
+    "Doriedes",
+    "Lucy Ximenes"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 11,
+   "reeleitos": 4,
+   "novos": 7,
+   "nomes": [
+    "Robson Pessoa",
+    "Márcio Brito",
+    "Guarani Martins",
+    "Lucy Ximenes"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 11,
+   "reeleitos": 5,
+   "novos": 6,
+   "nomes": [
+    "Robson Pessoa",
+    "Professora Sandra Aguiar",
+    "Lucy Ximenes",
+    "Marcio Brito",
+    "Flavio do Ozir"
+   ]
+  }
+ ],
+ "semReeleicao": true,
+ "precedente": {
+  "ano": "2020",
+  "saiu": "Elmo Aguiar",
+  "interrompido": null,
+  "motivo": "não disputou",
+  "partidoSaiu": "PDT",
+  "venceu": "Antonio Martins",
+  "partidoVenceu": "PDT",
+  "mesmoPartido": true
+ },
+ "precedentes": [
+  {
+   "ano": "2016",
+   "saiu": "Antonio Martins",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "Republicanos",
+   "venceu": "Elmo Aguiar",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": false
+  },
+  {
+   "ano": "2020",
+   "saiu": "Elmo Aguiar",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "PDT",
+   "venceu": "Antonio Martins",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": true
+  }
+ ],
+ "qe2028": 1253,
+ "novosMedia": 6,
+ "fala": [
+  "Cariré. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de treze mil cento e trinta e quatro para quinze mil quinhentos e cinquenta e sete. E a abstenção subiu: de setecentos e catorze para dois mil trezentos e sete eleitores.",
+  "Em dois mil e dezesseis, Elmo Aguiar venceu com setenta e sete por cento. Eriberto Ponte ficou com vinte e três. Diferença de seis mil duzentos e noventa e seis votos.",
+  "Em dois mil e vinte, Antonio Martins venceu com setenta por cento. Rômulo Ponte ficou com vinte e nove. Diferença de quatro mil setecentos e sessenta e um votos.",
+  "Em dois mil e vinte e quatro, Antonio Martins venceu com setenta e cinco por cento. Luyza Ponte ficou com vinte e cinco. Diferença de seis mil duzentos e oitenta e dois votos.",
+  "Em três eleições: Elmo Aguiar; depois Antonio Martins, duas vezes. Em dois mil e vinte e oito, Antonio Martins não pode concorrer de novo: a cadeira de prefeito fica aberta.",
+  "Na Câmara, o PDT fez nove cadeiras em dois mil e dezesseis. E em dois mil e vinte, o PDT seguiu na frente, com oito cadeiras. E em dois mil e vinte e quatro, o PDT seguiu na frente, com nove cadeiras.",
+  "A renovação é alta. Caras novas em cada eleição: quatro, sete e seis, de onze cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de mil e setenta e cinco para mil cento e sessenta e um votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de mil duzentos e cinquenta.",
+  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Isso já aconteceu duas vezes. Em dois mil e dezesseis, sem Antonio Martins na disputa, Elmo Aguiar venceu, pelo PDT. Em dois mil e vinte, sem Elmo Aguiar na disputa, o PDT manteve a prefeitura com Antonio Martins. Se a renovação seguir a média, cerca de seis vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Cariré. A história de cada eleição, para decidir a próxima."
+ ]
+}

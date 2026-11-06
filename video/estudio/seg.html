@@ -1,0 +1,11 @@
+<!doctype html><html><body><canvas id="c" width="576" height="1024"></canvas>
+<script src="mp/selfie_segmentation.js"></script>
+<script>
+const seg = new SelfieSegmentation({ locateFile: (f) => "mp/" + f });
+seg.setOptions({ modelSelection: 0, selfieMode: false });
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+let res = null; seg.onResults((r) => { res = r; });
+window.mascara = async (src) => { const im = new Image(); im.src = src; await im.decode(); res = null; await seg.send({ image: im });
+  ctx.clearRect(0, 0, 576, 1024); ctx.drawImage(res.segmentationMask, 0, 0, 576, 1024); return cv.toDataURL("image/png"); };
+window.pronto = true;
+</script></body></html>

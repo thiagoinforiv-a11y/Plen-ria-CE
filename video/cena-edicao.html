@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Camada de edição</title>
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Camada transparente por cima do vídeo gravado (estilo "análise política"): legenda palavra a palavra,
+ * fotos que entram com mola, números que contam, tarja azul @PLENARIACE no gancho. render(t) desenha o instante t. */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const E = await (await fetch(new URLSearchParams(location.search).get("d"))).json();
+  const P = await (await fetch("../" + E.palavras)).json();
+  const AZ = E.cor || "#1f3fae", AM = "#ffd84a", CANTOS = E.layout === "cantos";
+  const fonte = async (nome, arq) => { const f = new FontFace(nome, `url(fontes/${arq})`); await f.load(); document.fonts.add(f); };
+  await fonte("Oswald", "oswald-latin-700-normal.woff2"); await fonte("Anton", "anton-latin-400-normal.woff2");
+  const img = {}; await Promise.all(E.cartoes.filter((c) => c.img).map((c) => new Promise((ok) => { const i = new Image(); i.onload = () => { img[c.img] = i; ok(); }; i.onerror = ok; i.src = "../" + c.img; })));
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), prog = (t, a, b) => clamp((t - a) / (b - a));
+  const mola = (x) => (x >= 1 ? 1 : 1 - Math.exp(-6 * x) * Math.cos(10 * x)); // entra passando um pouco e volta
+  const eout = (x) => 1 - Math.pow(1 - x, 3);
+  // palavras corrigidas e agrupadas em blocos de até 3 (quebra na pontuação)
+  const C = E.correcoes || {}; const pal = P.map((w) => ({ ...w, p: C[String(w.t)] ?? w.p })).filter((w) => w.p !== "");
+  const blocos = []; let b = [];
+  pal.forEach((w, i) => { b.push(w); if (b.length === 3 || /[.,?!]$/.test(w.p) || i === pal.length - 1) { blocos.push(b); b = []; } });
+  blocos.forEach((b, i) => { b.ini = b[0].t; b.fim = blocos[i + 1] ? Math.min(blocos[i + 1][0].t, b[b.length - 1].f + 0.6) : b[b.length - 1].f + 0.8; });
+
+  const legenda = (t) => {
+    const bl = blocos.find((b) => t >= b.ini && t < b.fim); if (!bl) return;
+    const y = t < (E.tarja ? E.tarja.ate : 0) ? H * 0.6 : CANTOS ? H * (E.legendaY || 0.9) : H * 0.83, k = eout(prog(t, bl.ini, bl.ini + 0.12));
+    ctx.save(); ctx.font = `700 ${E.legendaTam || 74}px Oswald`; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+    const ws = bl.map((w) => w.p.toUpperCase()), larg = ws.map((s) => ctx.measureText(s).width), esp = 34, tot = larg.reduce((a, b) => a + b, 0) + esp * (ws.length - 1);
+    let s = Math.min(1, 980 / tot); ctx.translate(W / 2, y + (1 - k) * 30); ctx.scale(s * (0.9 + 0.1 * k), s * (0.9 + 0.1 * k)); ctx.globalAlpha = k;
+    let x = -tot / 2;
+    bl.forEach((w, i) => { const at = t >= w.t && t < (bl[i + 1] ? bl[i + 1].t : bl.fim), cx = x + larg[i] / 2;
+      ctx.save(); ctx.translate(cx, 0); if (at) ctx.scale(1.06, 1.06);
+      ctx.lineWidth = 14; ctx.strokeStyle = "rgba(0,0,0,.85)"; ctx.strokeText(ws[i], -larg[i] / 2, 0);
+      ctx.fillStyle = at ? AM : "#fff"; ctx.fillText(ws[i], -larg[i] / 2, 0); ctx.restore(); x += larg[i] + esp; });
+    ctx.restore();
+  };
+  const tarja = (t) => { if (!E.tarja || t > E.tarja.ate + 0.3) return; const a = Math.min(eout(prog(t, 0.05, 0.4)), 1 - prog(t, E.tarja.ate, E.tarja.ate + 0.3));
+    ctx.save(); ctx.globalAlpha = a; ctx.translate((1 - a) * -60, 0);
+    ctx.font = "700 44px Oswald"; const sw = ctx.measureText("@PLENARIACE").width + 32, y0 = H * 0.68;
+    ctx.fillStyle = "#fff"; ctx.fillRect(W / 2 - sw / 2, y0, sw, 60); ctx.fillStyle = AZ; ctx.textBaseline = "middle"; ctx.textAlign = "center"; ctx.fillText("@PLENARIACE", W / 2, y0 + 32);
+    ctx.font = "700 56px Oswald"; const pal = E.tarja.texto.toUpperCase().split(" "), lin = [""]; pal.forEach((p) => { const l = lin[lin.length - 1]; if (ctx.measureText(l + " " + p).width > 860 && l) lin.push(p); else lin[lin.length - 1] = (l + " " + p).trim(); });
+    const lw = Math.max(...lin.map((l) => ctx.measureText(l).width)) + 52, lh = 62, yb = y0 + 60;
+    ctx.fillStyle = AZ; ctx.shadowColor = "rgba(0,0,0,.4)"; ctx.shadowBlur = 24; ctx.fillRect(W / 2 - lw / 2, yb, lw, lin.length * lh + 26); ctx.shadowBlur = 0;
+    ctx.fillStyle = "#fff"; lin.forEach((l, i) => ctx.fillText(l, W / 2, yb + 13 + lh / 2 + i * lh + 2)); ctx.restore(); };
+  const cartao = (c, t) => {
+    const a = prog(t, c.de, c.de + 0.5), s = 1 - prog(t, c.ate - 0.25, c.ate); if (t < c.de || t > c.ate) return; const k = mola(a) * s;
+    ctx.save();
+    if (c.tipo === "foto") {
+      const cx = CANTOS ? (c.lado === "esq" ? W * 0.17 : W * 0.83) : c.lado === "esq" ? W * 0.27 : c.lado === "dir" ? W * 0.73 : W / 2, cy = CANTOS ? H * 0.2 : H * 0.6, r = CANTOS ? 105 : c.lado === "centro" ? 170 : 140, i = img[c.img];
+      ctx.translate(cx, cy); ctx.scale(k, k); ctx.rotate((1 - Math.min(1, a * 1.5)) * (c.lado === "dir" ? 0.25 : -0.25));
+      ctx.shadowColor = "rgba(0,0,0,.5)"; ctx.shadowBlur = 40; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(0, 0, r + 10, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+      if (i) { ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = Math.max((2 * r) / i.width, (2 * r) / i.height); ctx.drawImage(i, -i.width * sc / 2, -r - Math.max(0, i.height * sc - 2 * r) * 0.1, i.width * sc, i.height * sc); ctx.restore(); }
+      ctx.lineWidth = 8; ctx.strokeStyle = AZ; ctx.beginPath(); ctx.arc(0, 0, r + 4, 0, 6.283); ctx.stroke();
+      ctx.font = "700 40px Oswald"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; const nw = ctx.measureText(c.nome.toUpperCase()).width + 36;
+      ctx.fillStyle = AZ; ctx.fillRect(-nw / 2, r + 22, nw, 56); ctx.fillStyle = "#fff"; ctx.fillText(c.nome.toUpperCase(), 0, r + 52);
+      ctx.font = "700 28px Oswald"; const pw = ctx.measureText(c.papel.toUpperCase()).width + 24; ctx.fillStyle = "#fff"; ctx.fillRect(-pw / 2, r + 78, pw, 40); ctx.fillStyle = AZ; ctx.fillText(c.papel.toUpperCase(), 0, r + 99);
+    } else {
+      const txt = c.valor != null ? Math.round(c.valor * eout(prog(t, c.de, c.de + 0.9))).toLocaleString("pt-BR") : c.texto;
+      if (CANTOS) { ctx.translate(c.lado === "esq" ? W * 0.18 : W * 0.82, H * 0.2); ctx.scale(k * 0.6, k * 0.6); } else { ctx.translate(W / 2, H * 0.6); ctx.scale(k, k); } ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.font = "400 250px Anton"; ctx.lineWidth = 18; ctx.strokeStyle = AZ; ctx.lineJoin = "round"; ctx.strokeText(txt, 0, 0); ctx.fillStyle = "#fff"; ctx.fillText(txt, 0, 0);
+      ctx.font = "700 46px Oswald"; const rw = ctx.measureText(c.rotulo).width + 40; ctx.fillStyle = AZ; ctx.fillRect(-rw / 2, 150, rw, 66); ctx.fillStyle = "#fff"; ctx.fillText(c.rotulo, 0, 185);
+    }
+    ctx.restore();
+  };
+  const fimT = Math.max(...pal.map((w) => w.f)) + 1;
+  window.DURACAO = fimT;
+  window.render = (t) => { ctx.clearRect(0, 0, W, H); tarja(t); E.cartoes.forEach((c) => cartao(c, t)); legenda(t);
+    if (E.creditos && t > fimT - 6) { ctx.save(); ctx.globalAlpha = 0.85; ctx.font = "700 24px Oswald"; ctx.fillStyle = "#fff"; ctx.shadowColor = "#000"; ctx.shadowBlur = 6; ctx.textAlign = "center"; ctx.fillText(E.creditos, W / 2, H - 60); ctx.restore(); } };
+  window.render(0); window.pronto = true;
+})();
+</script></body></html>

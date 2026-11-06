@@ -1,0 +1,1116 @@
+{
+ "municipio": "Pires Ferreira",
+ "cd_ibge": "2310951",
+ "cadeiras": 9,
+ "validos": 7523,
+ "qe": 836,
+ "nlocais": 17,
+ "candidatos": 23,
+ "locais": [
+  {
+   "id": "21-1090",
+   "nome": "E.e.f. Centro Educacional Rural",
+   "curto": "Centro Educacional Rural",
+   "bairro": "Distrito",
+   "lat": -4.268804,
+   "lon": -40.56126
+  },
+  {
+   "id": "21-1228",
+   "nome": "E.e.f.m. Francisco Soares de Oliveira",
+   "curto": "Francisco Soares de Oliveira",
+   "bairro": "Sede",
+   "lat": -4.242776,
+   "lon": -40.644206
+  },
+  {
+   "id": "21-1350",
+   "nome": "Eem Inácio Gomes de Vasconcelos",
+   "curto": "Inácio Gomes de Vasconcelos",
+   "bairro": "Distrito",
+   "lat": -4.300583,
+   "lon": -40.516822
+  },
+  {
+   "id": "21-1368",
+   "nome": "E.e.f. Joaquim Rosa Barbosa",
+   "curto": "Joaquim Rosa Barbosa",
+   "bairro": "Distrito",
+   "lat": -4.305545,
+   "lon": -40.544508
+  },
+  {
+   "id": "21-1384",
+   "nome": "E.e.f. Manoel Farias (anexo)",
+   "curto": "Manoel Farias (anexo)",
+   "bairro": "Distrito",
+   "lat": -4.295443,
+   "lon": -40.658858
+  },
+  {
+   "id": "21-1414",
+   "nome": "E.e.f. Joao Vitorino de Farias",
+   "curto": "João Vitorino de Farias",
+   "bairro": "Distrito",
+   "lat": -4.23899,
+   "lon": -40.684205
+  },
+  {
+   "id": "21-1457",
+   "nome": "E.e.f. Francisco Ferreira Santiago",
+   "curto": "Francisco Ferreira Santiago",
+   "bairro": "Distrito",
+   "lat": -4.256901,
+   "lon": -40.541605
+  },
+  {
+   "id": "21-1511",
+   "nome": "E.e.f. Alzira Maria de Araujo",
+   "curto": "Alzira Maria de Araújo",
+   "bairro": "Centro",
+   "lat": -4.243375,
+   "lon": -40.641284
+  },
+  {
+   "id": "21-1643",
+   "nome": "E.e.f. Joaquim Gomes de Lima",
+   "curto": "Joaquim Gomes de Lima",
+   "bairro": "Distrito",
+   "lat": -4.263259,
+   "lon": -40.472565
+  },
+  {
+   "id": "21-1759",
+   "nome": "E.e.f. Quiteria Dias de Oliveira",
+   "curto": "Quitéria Dias de Oliveira",
+   "bairro": "Distrito",
+   "lat": -4.215989,
+   "lon": -40.674452
+  },
+  {
+   "id": "21-1767",
+   "nome": "E.m.e.b. Raimunda Madalena de Oliveira",
+   "curto": "Raimunda Madalena de Oliveira",
+   "bairro": "Distrito",
+   "lat": -4.224476,
+   "lon": -40.569493
+  },
+  {
+   "id": "21-1783",
+   "nome": "E.e.f. Joao Ferreira de Abreu",
+   "curto": "João Ferreira de Abreu",
+   "bairro": "Distrito",
+   "lat": -4.305704,
+   "lon": -40.578331
+  },
+  {
+   "id": "21-1805",
+   "nome": "Capela de Aroeiras",
+   "curto": "Capela de Aroeiras",
+   "bairro": "Distrito",
+   "lat": -4.225126,
+   "lon": -40.619551
+  },
+  {
+   "id": "21-1813",
+   "nome": "E.e.f. Raimundo Ferreira Passos",
+   "curto": "Raimundo Ferreira Passos",
+   "bairro": "Distrito",
+   "lat": -4.212849,
+   "lon": -40.647619
+  },
+  {
+   "id": "21-1848",
+   "nome": "E.e.f. Jesuino Francisco de Lima",
+   "curto": "Jesuino Francisco de Lima",
+   "bairro": "Distrito",
+   "lat": -4.264471,
+   "lon": -40.680093
+  },
+  {
+   "id": "21-1910",
+   "nome": "E.e.f. Manoel Farias Mororo",
+   "curto": "Manoel Farias Mororó",
+   "bairro": "Distrito",
+   "lat": -4.254874,
+   "lon": -40.614497
+  },
+  {
+   "id": "21-1929",
+   "nome": "E.e.f. João Penha de Paiva",
+   "curto": "João Penha de Paiva",
+   "bairro": "Distrito",
+   "lat": -4.22358,
+   "lon": -40.548588
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Samara Pereira",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg",
+   "votos": 1140,
+   "pos": 1,
+   "pct": 0.1515352917718995,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1090",
+     466
+    ],
+    [
+     "21-1368",
+     124
+    ],
+    [
+     "21-1350",
+     87
+    ],
+    [
+     "21-1457",
+     80
+    ],
+    [
+     "21-1511",
+     61
+    ],
+    [
+     "21-1643",
+     59
+    ],
+    [
+     "21-1228",
+     56
+    ],
+    [
+     "21-1783",
+     45
+    ],
+    [
+     "21-1910",
+     33
+    ],
+    [
+     "21-1384",
+     28
+    ],
+    [
+     "21-1805",
+     26
+    ],
+    [
+     "21-1414",
+     23
+    ],
+    [
+     "21-1929",
+     18
+    ],
+    [
+     "21-1813",
+     9
+    ],
+    [
+     "21-1848",
+     9
+    ],
+    [
+     "21-1767",
+     8
+    ],
+    [
+     "21-1759",
+     8
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Centro Educacional Rural",
+     "curto": "Centro Educacional Rural",
+     "bairro": "Distrito",
+     "votos": 466
+    },
+    {
+     "nome": "E.e.f. Joaquim Rosa Barbosa",
+     "curto": "Joaquim Rosa Barbosa",
+     "bairro": "Distrito",
+     "votos": 124
+    },
+    {
+     "nome": "Eem Inácio Gomes de Vasconcelos",
+     "curto": "Inácio Gomes de Vasconcelos",
+     "bairro": "Distrito",
+     "votos": 87
+    }
+   ],
+   "conc": 0.4087719298245614,
+   "top3": 0.593859649122807,
+   "venceu": 1,
+   "presente": 17
+  },
+  {
+   "urna": "Fabiana",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188679.jpg",
+   "votos": 961,
+   "pos": 2,
+   "pct": 0.12774159244982056,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1511",
+     235
+    ],
+    [
+     "21-1228",
+     193
+    ],
+    [
+     "21-1414",
+     80
+    ],
+    [
+     "21-1848",
+     66
+    ],
+    [
+     "21-1384",
+     55
+    ],
+    [
+     "21-1910",
+     45
+    ],
+    [
+     "21-1090",
+     43
+    ],
+    [
+     "21-1350",
+     42
+    ],
+    [
+     "21-1813",
+     39
+    ],
+    [
+     "21-1759",
+     34
+    ],
+    [
+     "21-1368",
+     32
+    ],
+    [
+     "21-1805",
+     29
+    ],
+    [
+     "21-1767",
+     22
+    ],
+    [
+     "21-1457",
+     16
+    ],
+    [
+     "21-1783",
+     12
+    ],
+    [
+     "21-1929",
+     12
+    ],
+    [
+     "21-1643",
+     6
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 235
+    },
+    {
+     "nome": "E.e.f.m. Francisco Soares de Oliveira",
+     "curto": "Francisco Soares de Oliveira",
+     "bairro": "Sede",
+     "votos": 193
+    },
+    {
+     "nome": "E.e.f. Joao Vitorino de Farias",
+     "curto": "João Vitorino de Farias",
+     "bairro": "Distrito",
+     "votos": 80
+    }
+   ],
+   "conc": 0.2445369406867846,
+   "top3": 0.5286160249739854,
+   "venceu": 3,
+   "presente": 17
+  },
+  {
+   "urna": "Jamile Mororó",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188681.jpg",
+   "votos": 776,
+   "pos": 3,
+   "pct": 0.10315033896052107,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 521,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1090",
+     183
+    ],
+    [
+     "21-1350",
+     138
+    ],
+    [
+     "21-1511",
+     78
+    ],
+    [
+     "21-1457",
+     70
+    ],
+    [
+     "21-1228",
+     57
+    ],
+    [
+     "21-1767",
+     56
+    ],
+    [
+     "21-1910",
+     51
+    ],
+    [
+     "21-1929",
+     36
+    ],
+    [
+     "21-1368",
+     28
+    ],
+    [
+     "21-1643",
+     21
+    ],
+    [
+     "21-1384",
+     15
+    ],
+    [
+     "21-1813",
+     14
+    ],
+    [
+     "21-1783",
+     10
+    ],
+    [
+     "21-1805",
+     7
+    ],
+    [
+     "21-1759",
+     5
+    ],
+    [
+     "21-1414",
+     4
+    ],
+    [
+     "21-1848",
+     3
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Centro Educacional Rural",
+     "curto": "Centro Educacional Rural",
+     "bairro": "Distrito",
+     "votos": 183
+    },
+    {
+     "nome": "Eem Inácio Gomes de Vasconcelos",
+     "curto": "Inácio Gomes de Vasconcelos",
+     "bairro": "Distrito",
+     "votos": 138
+    },
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 78
+    }
+   ],
+   "conc": 0.23582474226804123,
+   "top3": 0.5141752577319587,
+   "venceu": 2,
+   "presente": 17
+  },
+  {
+   "urna": "Francisca",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188678.jpg",
+   "votos": 686,
+   "pos": 4,
+   "pct": 0.09118702645221322,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 503,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1228",
+     106
+    ],
+    [
+     "21-1511",
+     102
+    ],
+    [
+     "21-1783",
+     101
+    ],
+    [
+     "21-1929",
+     99
+    ],
+    [
+     "21-1384",
+     51
+    ],
+    [
+     "21-1767",
+     50
+    ],
+    [
+     "21-1350",
+     43
+    ],
+    [
+     "21-1090",
+     24
+    ],
+    [
+     "21-1759",
+     22
+    ],
+    [
+     "21-1805",
+     17
+    ],
+    [
+     "21-1643",
+     15
+    ],
+    [
+     "21-1910",
+     15
+    ],
+    [
+     "21-1457",
+     12
+    ],
+    [
+     "21-1368",
+     11
+    ],
+    [
+     "21-1813",
+     9
+    ],
+    [
+     "21-1414",
+     7
+    ],
+    [
+     "21-1848",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f.m. Francisco Soares de Oliveira",
+     "curto": "Francisco Soares de Oliveira",
+     "bairro": "Sede",
+     "votos": 106
+    },
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 102
+    },
+    {
+     "nome": "E.e.f. Joao Ferreira de Abreu",
+     "curto": "João Ferreira de Abreu",
+     "bairro": "Distrito",
+     "votos": 101
+    }
+   ],
+   "conc": 0.15451895043731778,
+   "top3": 0.45043731778425655,
+   "venceu": 2,
+   "presente": 17
+  },
+  {
+   "urna": "Chico Ana",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188675.jpg",
+   "votos": 679,
+   "pos": 5,
+   "pct": 0.09025654659045594,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 524,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1457",
+     416
+    ],
+    [
+     "21-1090",
+     32
+    ],
+    [
+     "21-1368",
+     31
+    ],
+    [
+     "21-1414",
+     31
+    ],
+    [
+     "21-1511",
+     29
+    ],
+    [
+     "21-1350",
+     22
+    ],
+    [
+     "21-1228",
+     21
+    ],
+    [
+     "21-1910",
+     18
+    ],
+    [
+     "21-1767",
+     14
+    ],
+    [
+     "21-1848",
+     13
+    ],
+    [
+     "21-1759",
+     12
+    ],
+    [
+     "21-1805",
+     11
+    ],
+    [
+     "21-1813",
+     10
+    ],
+    [
+     "21-1929",
+     9
+    ],
+    [
+     "21-1643",
+     6
+    ],
+    [
+     "21-1384",
+     3
+    ],
+    [
+     "21-1783",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Francisco Ferreira Santiago",
+     "curto": "Francisco Ferreira Santiago",
+     "bairro": "Distrito",
+     "votos": 416
+    },
+    {
+     "nome": "E.e.f. Centro Educacional Rural",
+     "curto": "Centro Educacional Rural",
+     "bairro": "Distrito",
+     "votos": 32
+    },
+    {
+     "nome": "E.e.f. Joaquim Rosa Barbosa",
+     "curto": "Joaquim Rosa Barbosa",
+     "bairro": "Distrito",
+     "votos": 31
+    }
+   ],
+   "conc": 0.6126656848306333,
+   "top3": 0.7054491899852725,
+   "venceu": 1,
+   "presente": 17
+  },
+  {
+   "urna": "Luciano",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188684.jpg",
+   "votos": 654,
+   "pos": 6,
+   "pct": 0.08693340422703709,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 499,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1350",
+     302
+    ],
+    [
+     "21-1368",
+     129
+    ],
+    [
+     "21-1384",
+     88
+    ],
+    [
+     "21-1643",
+     52
+    ],
+    [
+     "21-1457",
+     28
+    ],
+    [
+     "21-1090",
+     17
+    ],
+    [
+     "21-1228",
+     10
+    ],
+    [
+     "21-1414",
+     6
+    ],
+    [
+     "21-1783",
+     5
+    ],
+    [
+     "21-1929",
+     5
+    ],
+    [
+     "21-1511",
+     3
+    ],
+    [
+     "21-1813",
+     3
+    ],
+    [
+     "21-1910",
+     3
+    ],
+    [
+     "21-1805",
+     1
+    ],
+    [
+     "21-1767",
+     1
+    ],
+    [
+     "21-1848",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Eem Inácio Gomes de Vasconcelos",
+     "curto": "Inácio Gomes de Vasconcelos",
+     "bairro": "Distrito",
+     "votos": 302
+    },
+    {
+     "nome": "E.e.f. Joaquim Rosa Barbosa",
+     "curto": "Joaquim Rosa Barbosa",
+     "bairro": "Distrito",
+     "votos": 129
+    },
+    {
+     "nome": "E.e.f. Manoel Farias (anexo)",
+     "curto": "Manoel Farias (anexo)",
+     "bairro": "Distrito",
+     "votos": 88
+    }
+   ],
+   "conc": 0.4617737003058104,
+   "top3": 0.7935779816513762,
+   "venceu": 3,
+   "presente": 16
+  },
+  {
+   "urna": "Anastácio Neto",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188683.jpg",
+   "votos": 472,
+   "pos": 7,
+   "pct": 0.06274092782134787,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 315,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1759",
+     133
+    ],
+    [
+     "21-1511",
+     63
+    ],
+    [
+     "21-1228",
+     61
+    ],
+    [
+     "21-1457",
+     38
+    ],
+    [
+     "21-1414",
+     36
+    ],
+    [
+     "21-1805",
+     22
+    ],
+    [
+     "21-1350",
+     20
+    ],
+    [
+     "21-1813",
+     19
+    ],
+    [
+     "21-1910",
+     18
+    ],
+    [
+     "21-1767",
+     16
+    ],
+    [
+     "21-1384",
+     13
+    ],
+    [
+     "21-1848",
+     11
+    ],
+    [
+     "21-1643",
+     9
+    ],
+    [
+     "21-1090",
+     6
+    ],
+    [
+     "21-1368",
+     5
+    ],
+    [
+     "21-1929",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Quiteria Dias de Oliveira",
+     "curto": "Quitéria Dias de Oliveira",
+     "bairro": "Distrito",
+     "votos": 133
+    },
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 63
+    },
+    {
+     "nome": "E.e.f.m. Francisco Soares de Oliveira",
+     "curto": "Francisco Soares de Oliveira",
+     "bairro": "Sede",
+     "votos": 61
+    }
+   ],
+   "conc": 0.2817796610169492,
+   "top3": 0.5444915254237288,
+   "venceu": 1,
+   "presente": 16
+  },
+  {
+   "urna": "Torrim",
+   "partido": "PT",
+   "foto": "fotos/ce/pires-ferreira/2024/60002241209.jpg",
+   "votos": 445,
+   "pos": 8,
+   "pct": 0.05915193406885551,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1511",
+     107
+    ],
+    [
+     "21-1228",
+     68
+    ],
+    [
+     "21-1457",
+     65
+    ],
+    [
+     "21-1090",
+     38
+    ],
+    [
+     "21-1910",
+     27
+    ],
+    [
+     "21-1759",
+     24
+    ],
+    [
+     "21-1767",
+     22
+    ],
+    [
+     "21-1805",
+     21
+    ],
+    [
+     "21-1384",
+     18
+    ],
+    [
+     "21-1813",
+     10
+    ],
+    [
+     "21-1368",
+     9
+    ],
+    [
+     "21-1848",
+     9
+    ],
+    [
+     "21-1643",
+     8
+    ],
+    [
+     "21-1414",
+     6
+    ],
+    [
+     "21-1783",
+     5
+    ],
+    [
+     "21-1350",
+     4
+    ],
+    [
+     "21-1929",
+     4
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 107
+    },
+    {
+     "nome": "E.e.f.m. Francisco Soares de Oliveira",
+     "curto": "Francisco Soares de Oliveira",
+     "bairro": "Sede",
+     "votos": 68
+    },
+    {
+     "nome": "E.e.f. Francisco Ferreira Santiago",
+     "curto": "Francisco Ferreira Santiago",
+     "bairro": "Distrito",
+     "votos": 65
+    }
+   ],
+   "conc": 0.24044943820224718,
+   "top3": 0.5393258426966292,
+   "venceu": 0,
+   "presente": 17
+  },
+  {
+   "urna": "Nilton Anastácio",
+   "partido": "PSB",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188680.jpg",
+   "votos": 401,
+   "pos": 9,
+   "pct": 0.05330320350923833,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 331,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1228",
+     83
+    ],
+    [
+     "21-1511",
+     76
+    ],
+    [
+     "21-1813",
+     71
+    ],
+    [
+     "21-1805",
+     60
+    ],
+    [
+     "21-1759",
+     28
+    ],
+    [
+     "21-1457",
+     14
+    ],
+    [
+     "21-1414",
+     13
+    ],
+    [
+     "21-1643",
+     10
+    ],
+    [
+     "21-1910",
+     10
+    ],
+    [
+     "21-1848",
+     8
+    ],
+    [
+     "21-1368",
+     7
+    ],
+    [
+     "21-1767",
+     6
+    ],
+    [
+     "21-1783",
+     6
+    ],
+    [
+     "21-1350",
+     5
+    ],
+    [
+     "21-1090",
+     2
+    ],
+    [
+     "21-1929",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f.m. Francisco Soares de Oliveira",
+     "curto": "Francisco Soares de Oliveira",
+     "bairro": "Sede",
+     "votos": 83
+    },
+    {
+     "nome": "E.e.f. Alzira Maria de Araujo",
+     "curto": "Alzira Maria de Araújo",
+     "bairro": "Centro",
+     "votos": 76
+    },
+    {
+     "nome": "E.e.f. Raimundo Ferreira Passos",
+     "curto": "Raimundo Ferreira Passos",
+     "bairro": "Distrito",
+     "votos": 71
+    }
+   ],
+   "conc": 0.20698254364089774,
+   "top3": 0.57356608478803,
+   "venceu": 2,
+   "presente": 16
+  }
+ ],
+ "qe2028": 936,
+ "fala": [
+  "Pires Ferreira. Os nove vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram vinte e três candidatos para nove cadeiras. Quatro são caras novas. PSB, oito; PT, um. E o quociente: oitocentos e trinta e seis votos.",
+  "Samara Pereira, do PSB. Mil cento e quarenta votos: a maior votação da cidade. Não disputou a Câmara em dois mil e vinte. O maior reduto é no Centro Educacional Rural: quatrocentos e sessenta e seis votos. Quase metade dos votos veio desse único local.",
+  "Fabiana, do PSB. Novecentos e sessenta e um votos: segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Alzira Maria de Araújo, no Centro: duzentos e trinta e cinco votos. Liderou a votação em três dos dezessete locais.",
+  "Jamile Mororó, do PSB. Setecentos e setenta e seis votos: terceiro lugar. Em dois mil e vinte, tinha feito quinhentos e vinte e um: ganhou duzentos e cinquenta e cinco votos e renovou o mandato. O maior reduto é no Centro Educacional Rural: cento e oitenta e três votos. Três locais somam quase metade dos votos.",
+  "Francisca, do PSB. Seiscentos e oitenta e seis votos: quarto lugar. Em dois mil e vinte, tinha feito quinhentos e três: ganhou cento e oitenta e três votos e renovou o mandato. O maior reduto é na escola Francisco Soares de Oliveira: cento e seis votos. Três locais somam quase metade dos votos.",
+  "Chico Ana, do PSB. Seiscentos e setenta e nove votos: quinto lugar. Em dois mil e vinte, tinha feito quinhentos e vinte e quatro: ganhou cento e cinquenta e cinco votos e renovou o mandato. O maior reduto é na escola Francisco Ferreira Santiago: quatrocentos e dezesseis votos. Mais da metade dos votos veio desse único local.",
+  "Luciano, do PSB. Seiscentos e cinquenta e quatro votos: sexto lugar. Em dois mil e vinte, tinha feito quatrocentos e noventa e nove: ganhou cento e cinquenta e cinco votos e renovou o mandato. O maior reduto é na escola Inácio Gomes de Vasconcelos: trezentos e dois votos. Quase metade dos votos veio desse único local.",
+  "Anastácio Neto, do PSB. Quatrocentos e setenta e dois votos: sétimo lugar. Em dois mil e vinte, teve trezentos e quinze votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Quitéria Dias de Oliveira: cento e trinta e três votos. Três locais somam quase metade dos votos.",
+  "Torrim, do PT. Quatrocentos e quarenta e cinco votos: oitavo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Alzira Maria de Araújo, no Centro: cento e sete votos. Três locais somam quase metade dos votos.",
+  "Nilton Anastácio, do PSB. Quatrocentos e um votos: nono lugar. Em dois mil e vinte, tinha feito trezentos e trinta e um: ganhou setenta votos e renovou o mandato. O maior reduto é na escola Francisco Soares de Oliveira: oitenta e três votos. Três locais somam cinquenta e sete por cento dos votos. Entrou pela média, na distribuição das sobras.",
+  "Samara Pereira e Fabiana passaram do quociente com os próprios votos. Os outros sete dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de novecentos e cinquenta votos. Plenária CE. Inteligência eleitoral de Pires Ferreira."
+ ]
+}

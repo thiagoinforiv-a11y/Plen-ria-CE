@@ -1,0 +1,1720 @@
+{
+ "municipio": "Reriutaba",
+ "cd_ibge": "2311702",
+ "cadeiras": 11,
+ "validos": 13396,
+ "qe": 1218,
+ "nlocais": 26,
+ "candidatos": 22,
+ "locais": [
+  {
+   "id": "79-1058",
+   "nome": "E.e.f. Alaíde Ramos",
+   "curto": "Alaíde Ramos",
+   "bairro": "Barro Vermelho",
+   "lat": -4.145113,
+   "lon": -40.58301
+  },
+  {
+   "id": "79-1082",
+   "nome": "E.e.f. Raimundo Mesquita",
+   "curto": "Raimundo Mesquita",
+   "bairro": "Centro",
+   "lat": -4.141639,
+   "lon": -40.581825
+  },
+  {
+   "id": "79-1090",
+   "nome": "E.e.i.f. Alexandrina Gomes de Carvalho",
+   "curto": "Alexandrina Gomes de Carvalho",
+   "bairro": "Carnaúba",
+   "lat": -4.17662,
+   "lon": -40.563278
+  },
+  {
+   "id": "79-1104",
+   "nome": "E.e.e.m. Alfredo Silvano Gomes",
+   "curto": "Alfredo Silvano Gomes",
+   "bairro": "Barro Vermelho",
+   "lat": -4.144964,
+   "lon": -40.579453
+  },
+  {
+   "id": "79-1112",
+   "nome": "E.e.i.f. Antônio Alves de Sousa",
+   "curto": "Antônio Alves de Sousa",
+   "bairro": "Campo Lindo",
+   "lat": -4.06006,
+   "lon": -40.618938
+  },
+  {
+   "id": "79-1139",
+   "nome": "E.e.i.f. Antônio Agapito Filho",
+   "curto": "Antônio Agapito Filho",
+   "bairro": "Oiticica dos Agapitos",
+   "lat": -4.182302,
+   "lon": -40.663842
+  },
+  {
+   "id": "79-1155",
+   "nome": "E.e.f. Deputado Manoel Rodrigues",
+   "curto": "Deputado Manoel Rodrigues",
+   "bairro": "Amanaiara",
+   "lat": -4.066265,
+   "lon": -40.52779
+  },
+  {
+   "id": "79-1163",
+   "nome": "E.e.f. Domingos Araújo",
+   "curto": "Domingos Araújo",
+   "bairro": "Santa Cruz Velha",
+   "lat": -4.136284,
+   "lon": -40.582601
+  },
+  {
+   "id": "79-1171",
+   "nome": "E.e.i.f. Francisco Ângelo da Silveira",
+   "curto": "Francisco Ângelo da Silveira",
+   "bairro": "Primeira Várzea",
+   "lat": -4.176631,
+   "lon": -40.606757
+  },
+  {
+   "id": "79-1201",
+   "nome": "E.e.i.f. Marcelo da Cunha Araújo",
+   "curto": "Marcelo da Cunha Araújo",
+   "bairro": "Oitizeiro",
+   "lat": -4.13198,
+   "lon": -40.638347
+  },
+  {
+   "id": "79-1210",
+   "nome": "E.e.i.f. Maria de Lourdes Costa e Silva",
+   "curto": "Maria de Lourdes Costa e Silva",
+   "bairro": "Palmeira",
+   "lat": -4.074608,
+   "lon": -40.685806
+  },
+  {
+   "id": "79-1228",
+   "nome": "E.e.i.f. Hermínio Alves",
+   "curto": "Hermínio Alves",
+   "bairro": "Cabaceiras",
+   "lat": -4.090758,
+   "lon": -40.612166
+  },
+  {
+   "id": "79-1236",
+   "nome": "E.e.i.f. Zacarias Cordeiro de Paulo",
+   "curto": "Zacarias Cordeiro de Paulo",
+   "bairro": "Mufumbal",
+   "lat": -4.100097,
+   "lon": -40.667091
+  },
+  {
+   "id": "79-1317",
+   "nome": "Sindicato dos Trabalhadores Rurais",
+   "curto": "Sindicato dos Trabalhadores Rurais",
+   "bairro": "Barro Vermelho",
+   "lat": -4.145656,
+   "lon": -40.583046
+  },
+  {
+   "id": "79-1368",
+   "nome": "E.e.i.f. Antônio Carlos de Mesquita",
+   "curto": "Antônio Carlos de Mesquita",
+   "bairro": "Riacho das Flores",
+   "lat": -4.149121,
+   "lon": -40.532133
+  },
+  {
+   "id": "79-1376",
+   "nome": "E.e.i.f. Manoel Honorato",
+   "curto": "Manoel Honorato",
+   "bairro": "Sassá",
+   "lat": -4.073041,
+   "lon": -40.64794
+  },
+  {
+   "id": "79-1384",
+   "nome": "E.e.i.f. Severiano Rodrigues da Rocha",
+   "curto": "Severiano Rodrigues da Rocha",
+   "bairro": "Lagoa Grande",
+   "lat": -4.181201,
+   "lon": -40.633896
+  },
+  {
+   "id": "79-1392",
+   "nome": "E.e.i.f. João da Cunha Sobrinho",
+   "curto": "João da Cunha Sobrinho",
+   "bairro": "Quandu",
+   "lat": -4.118997,
+   "lon": -40.637546
+  },
+  {
+   "id": "79-1430",
+   "nome": "E.e.i.f. Clodoaldo Rodrigues da Cunha",
+   "curto": "Clodoaldo Rodrigues da Cunha",
+   "bairro": "Angicos",
+   "lat": -4.118299,
+   "lon": -40.566971
+  },
+  {
+   "id": "79-1473",
+   "nome": "E.e.f. Nossa Senhora das Gracas",
+   "curto": "Nossa Senhora das Graças",
+   "bairro": "Açude do Mato",
+   "lat": -4.139721,
+   "lon": -40.586385
+  },
+  {
+   "id": "79-1481",
+   "nome": "E.e.f. Raimundo Doroteus Pereira",
+   "curto": "Raimundo Doroteus Pereira",
+   "bairro": "São José dos Doroteus",
+   "lat": -4.141616,
+   "lon": -40.572998
+  },
+  {
+   "id": "79-1538",
+   "nome": "E.e.f. Horizonte do Saber",
+   "curto": "Horizonte do Saber",
+   "bairro": "Barro Vermelho",
+   "lat": -4.144333,
+   "lon": -40.584334
+  },
+  {
+   "id": "79-1546",
+   "nome": "Cras - Centro de Referência de Assistência Social",
+   "curto": "Cras",
+   "bairro": "Praça da Estação",
+   "lat": -4.140788,
+   "lon": -40.579594
+  },
+  {
+   "id": "79-1554",
+   "nome": "Centro de Formação Missionária Dom Walfrido Teixeira Vieira",
+   "curto": "Centro de Formação Missionária Dom Walfrido Teixeira Vieira",
+   "bairro": "Centro",
+   "lat": -4.141554,
+   "lon": -40.583726
+  },
+  {
+   "id": "79-1570",
+   "nome": "Creche Vó Sinhá",
+   "curto": "Creche Vó Sinhá",
+   "bairro": "Vila Nova",
+   "lat": -4.140265,
+   "lon": -40.5784
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Galego Honório",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187938.jpg",
+   "votos": 1473,
+   "pos": 1,
+   "pct": 0.10995819647656016,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 954,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1112",
+     506
+    ],
+    [
+     "79-1171",
+     130
+    ],
+    [
+     "79-1236",
+     107
+    ],
+    [
+     "79-1228",
+     96
+    ],
+    [
+     "79-1104",
+     81
+    ],
+    [
+     "79-1473",
+     68
+    ],
+    [
+     "79-1570",
+     64
+    ],
+    [
+     "79-1368",
+     56
+    ],
+    [
+     "79-1163",
+     55
+    ],
+    [
+     "79-1082",
+     54
+    ],
+    [
+     "79-1546",
+     48
+    ],
+    [
+     "79-1481",
+     46
+    ],
+    [
+     "79-1058",
+     32
+    ],
+    [
+     "79-1201",
+     20
+    ],
+    [
+     "79-1155",
+     18
+    ],
+    [
+     "79-1430",
+     18
+    ],
+    [
+     "79-1554",
+     16
+    ],
+    [
+     "79-1376",
+     15
+    ],
+    [
+     "79-1210",
+     12
+    ],
+    [
+     "79-1317",
+     12
+    ],
+    [
+     "79-1538",
+     10
+    ],
+    [
+     "79-1384",
+     4
+    ],
+    [
+     "79-1090",
+     2
+    ],
+    [
+     "79-1392",
+     2
+    ],
+    [
+     "79-1503",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i.f. Antônio Alves de Sousa",
+     "curto": "Antônio Alves de Sousa",
+     "bairro": "Campo Lindo",
+     "votos": 506
+    },
+    {
+     "nome": "E.e.i.f. Francisco Ângelo da Silveira",
+     "curto": "Francisco Ângelo da Silveira",
+     "bairro": "Primeira Várzea",
+     "votos": 130
+    },
+    {
+     "nome": "E.e.i.f. Zacarias Cordeiro de Paulo",
+     "curto": "Zacarias Cordeiro de Paulo",
+     "bairro": "Mufumbal",
+     "votos": 107
+    }
+   ],
+   "conc": 0.34351663272233535,
+   "top3": 0.5044127630685675,
+   "venceu": 6,
+   "presente": 25
+  },
+  {
+   "urna": "Renê Morais",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187945.jpg",
+   "votos": 1454,
+   "pos": 2,
+   "pct": 0.10853986264556584,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1090",
+     151
+    ],
+    [
+     "79-1104",
+     145
+    ],
+    [
+     "79-1082",
+     140
+    ],
+    [
+     "79-1112",
+     113
+    ],
+    [
+     "79-1473",
+     107
+    ],
+    [
+     "79-1570",
+     89
+    ],
+    [
+     "79-1554",
+     87
+    ],
+    [
+     "79-1171",
+     85
+    ],
+    [
+     "79-1546",
+     77
+    ],
+    [
+     "79-1228",
+     70
+    ],
+    [
+     "79-1163",
+     54
+    ],
+    [
+     "79-1201",
+     52
+    ],
+    [
+     "79-1538",
+     43
+    ],
+    [
+     "79-1058",
+     40
+    ],
+    [
+     "79-1155",
+     37
+    ],
+    [
+     "79-1317",
+     37
+    ],
+    [
+     "79-1236",
+     24
+    ],
+    [
+     "79-1430",
+     24
+    ],
+    [
+     "79-1368",
+     18
+    ],
+    [
+     "79-1384",
+     17
+    ],
+    [
+     "79-1481",
+     13
+    ],
+    [
+     "79-1392",
+     11
+    ],
+    [
+     "79-1210",
+     9
+    ],
+    [
+     "79-1376",
+     7
+    ],
+    [
+     "79-1139",
+     4
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i.f. Alexandrina Gomes de Carvalho",
+     "curto": "Alexandrina Gomes de Carvalho",
+     "bairro": "Carnaúba",
+     "votos": 151
+    },
+    {
+     "nome": "E.e.e.m. Alfredo Silvano Gomes",
+     "curto": "Alfredo Silvano Gomes",
+     "bairro": "Barro Vermelho",
+     "votos": 145
+    },
+    {
+     "nome": "E.e.f. Raimundo Mesquita",
+     "curto": "Raimundo Mesquita",
+     "bairro": "Centro",
+     "votos": 140
+    }
+   ],
+   "conc": 0.10385144429160935,
+   "top3": 0.2998624484181568,
+   "venceu": 9,
+   "presente": 25
+  },
+  {
+   "urna": "João Veras",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187936.jpg",
+   "votos": 1020,
+   "pos": 3,
+   "pct": 0.07614213197969544,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 985,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1155",
+     839
+    ],
+    [
+     "79-1503",
+     64
+    ],
+    [
+     "79-1368",
+     15
+    ],
+    [
+     "79-1082",
+     15
+    ],
+    [
+     "79-1104",
+     12
+    ],
+    [
+     "79-1570",
+     12
+    ],
+    [
+     "79-1546",
+     10
+    ],
+    [
+     "79-1473",
+     10
+    ],
+    [
+     "79-1430",
+     9
+    ],
+    [
+     "79-1228",
+     7
+    ],
+    [
+     "79-1554",
+     5
+    ],
+    [
+     "79-1163",
+     4
+    ],
+    [
+     "79-1058",
+     4
+    ],
+    [
+     "79-1201",
+     3
+    ],
+    [
+     "79-1538",
+     3
+    ],
+    [
+     "79-1317",
+     2
+    ],
+    [
+     "79-1112",
+     2
+    ],
+    [
+     "79-1481",
+     1
+    ],
+    [
+     "79-1090",
+     1
+    ],
+    [
+     "79-1210",
+     1
+    ],
+    [
+     "79-1376",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "curto": "Deputado Manoel Rodrigues",
+     "bairro": "Amanaiara",
+     "votos": 839
+    },
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "curto": "Deputado Manoel Rodrigues",
+     "bairro": "Não informado",
+     "votos": 64
+    },
+    {
+     "nome": "E.e.i.f. Antônio Carlos de Mesquita",
+     "curto": "Antônio Carlos de Mesquita",
+     "bairro": "Riacho das Flores",
+     "votos": 15
+    }
+   ],
+   "conc": 0.8225490196078431,
+   "top3": 0.9,
+   "venceu": 2,
+   "presente": 21
+  },
+  {
+   "urna": "Socorro Hermínio",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187941.jpg",
+   "votos": 900,
+   "pos": 4,
+   "pct": 0.06718423409973126,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 717,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1104",
+     105
+    ],
+    [
+     "79-1236",
+     96
+    ],
+    [
+     "79-1570",
+     89
+    ],
+    [
+     "79-1082",
+     77
+    ],
+    [
+     "79-1473",
+     56
+    ],
+    [
+     "79-1546",
+     54
+    ],
+    [
+     "79-1163",
+     49
+    ],
+    [
+     "79-1392",
+     45
+    ],
+    [
+     "79-1139",
+     41
+    ],
+    [
+     "79-1201",
+     37
+    ],
+    [
+     "79-1058",
+     35
+    ],
+    [
+     "79-1538",
+     31
+    ],
+    [
+     "79-1554",
+     26
+    ],
+    [
+     "79-1317",
+     25
+    ],
+    [
+     "79-1228",
+     20
+    ],
+    [
+     "79-1155",
+     19
+    ],
+    [
+     "79-1481",
+     18
+    ],
+    [
+     "79-1384",
+     16
+    ],
+    [
+     "79-1171",
+     11
+    ],
+    [
+     "79-1112",
+     11
+    ],
+    [
+     "79-1368",
+     10
+    ],
+    [
+     "79-1376",
+     10
+    ],
+    [
+     "79-1090",
+     9
+    ],
+    [
+     "79-1210",
+     5
+    ],
+    [
+     "79-1430",
+     3
+    ],
+    [
+     "79-1503",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.e.m. Alfredo Silvano Gomes",
+     "curto": "Alfredo Silvano Gomes",
+     "bairro": "Barro Vermelho",
+     "votos": 105
+    },
+    {
+     "nome": "E.e.i.f. Zacarias Cordeiro de Paulo",
+     "curto": "Zacarias Cordeiro de Paulo",
+     "bairro": "Mufumbal",
+     "votos": 96
+    },
+    {
+     "nome": "Creche Vó Sinhá",
+     "curto": "Creche Vó Sinhá",
+     "bairro": "Vila Nova",
+     "votos": 89
+    }
+   ],
+   "conc": 0.11666666666666667,
+   "top3": 0.32222222222222224,
+   "venceu": 0,
+   "presente": 26
+  },
+  {
+   "urna": "Lili Lemos",
+   "partido": "PT",
+   "foto": "fotos/ce/reriutaba/2024/60002311131.jpg",
+   "votos": 770,
+   "pos": 6,
+   "pct": 0.05747984472977008,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1104",
+     143
+    ],
+    [
+     "79-1082",
+     94
+    ],
+    [
+     "79-1368",
+     57
+    ],
+    [
+     "79-1570",
+     55
+    ],
+    [
+     "79-1210",
+     52
+    ],
+    [
+     "79-1473",
+     48
+    ],
+    [
+     "79-1546",
+     40
+    ],
+    [
+     "79-1155",
+     37
+    ],
+    [
+     "79-1376",
+     36
+    ],
+    [
+     "79-1163",
+     35
+    ],
+    [
+     "79-1090",
+     29
+    ],
+    [
+     "79-1112",
+     24
+    ],
+    [
+     "79-1058",
+     21
+    ],
+    [
+     "79-1538",
+     21
+    ],
+    [
+     "79-1481",
+     16
+    ],
+    [
+     "79-1430",
+     16
+    ],
+    [
+     "79-1554",
+     13
+    ],
+    [
+     "79-1236",
+     8
+    ],
+    [
+     "79-1201",
+     6
+    ],
+    [
+     "79-1317",
+     6
+    ],
+    [
+     "79-1228",
+     5
+    ],
+    [
+     "79-1171",
+     3
+    ],
+    [
+     "79-1139",
+     2
+    ],
+    [
+     "79-1384",
+     2
+    ],
+    [
+     "79-1503",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.e.m. Alfredo Silvano Gomes",
+     "curto": "Alfredo Silvano Gomes",
+     "bairro": "Barro Vermelho",
+     "votos": 143
+    },
+    {
+     "nome": "E.e.f. Raimundo Mesquita",
+     "curto": "Raimundo Mesquita",
+     "bairro": "Centro",
+     "votos": 94
+    },
+    {
+     "nome": "E.e.i.f. Antônio Carlos de Mesquita",
+     "curto": "Antônio Carlos de Mesquita",
+     "bairro": "Riacho das Flores",
+     "votos": 57
+    }
+   ],
+   "conc": 0.18571428571428572,
+   "top3": 0.38181818181818183,
+   "venceu": 2,
+   "presente": 25
+  },
+  {
+   "urna": "Djane Castro",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187934.jpg",
+   "votos": 733,
+   "pos": 7,
+   "pct": 0.05471782621678113,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 648,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1171",
+     84
+    ],
+    [
+     "79-1104",
+     81
+    ],
+    [
+     "79-1384",
+     72
+    ],
+    [
+     "79-1570",
+     51
+    ],
+    [
+     "79-1082",
+     48
+    ],
+    [
+     "79-1473",
+     43
+    ],
+    [
+     "79-1210",
+     43
+    ],
+    [
+     "79-1139",
+     37
+    ],
+    [
+     "79-1236",
+     32
+    ],
+    [
+     "79-1481",
+     31
+    ],
+    [
+     "79-1368",
+     28
+    ],
+    [
+     "79-1538",
+     26
+    ],
+    [
+     "79-1546",
+     25
+    ],
+    [
+     "79-1155",
+     25
+    ],
+    [
+     "79-1554",
+     17
+    ],
+    [
+     "79-1163",
+     13
+    ],
+    [
+     "79-1058",
+     12
+    ],
+    [
+     "79-1376",
+     11
+    ],
+    [
+     "79-1090",
+     9
+    ],
+    [
+     "79-1112",
+     9
+    ],
+    [
+     "79-1392",
+     9
+    ],
+    [
+     "79-1317",
+     8
+    ],
+    [
+     "79-1228",
+     8
+    ],
+    [
+     "79-1201",
+     6
+    ],
+    [
+     "79-1430",
+     4
+    ],
+    [
+     "79-1503",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i.f. Francisco Ângelo da Silveira",
+     "curto": "Francisco Ângelo da Silveira",
+     "bairro": "Primeira Várzea",
+     "votos": 84
+    },
+    {
+     "nome": "E.e.e.m. Alfredo Silvano Gomes",
+     "curto": "Alfredo Silvano Gomes",
+     "bairro": "Barro Vermelho",
+     "votos": 81
+    },
+    {
+     "nome": "E.e.i.f. Severiano Rodrigues da Rocha",
+     "curto": "Severiano Rodrigues da Rocha",
+     "bairro": "Lagoa Grande",
+     "votos": 72
+    }
+   ],
+   "conc": 0.1145975443383356,
+   "top3": 0.32332878581173263,
+   "venceu": 1,
+   "presente": 26
+  },
+  {
+   "urna": "Gislanny Oliveira",
+   "partido": "PT",
+   "foto": "fotos/ce/reriutaba/2024/60002311127.jpg",
+   "votos": 637,
+   "pos": 8,
+   "pct": 0.04755150791280979,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 439,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1155",
+     381
+    ],
+    [
+     "79-1570",
+     39
+    ],
+    [
+     "79-1082",
+     30
+    ],
+    [
+     "79-1503",
+     28
+    ],
+    [
+     "79-1104",
+     26
+    ],
+    [
+     "79-1430",
+     24
+    ],
+    [
+     "79-1546",
+     18
+    ],
+    [
+     "79-1368",
+     17
+    ],
+    [
+     "79-1058",
+     16
+    ],
+    [
+     "79-1163",
+     11
+    ],
+    [
+     "79-1554",
+     10
+    ],
+    [
+     "79-1473",
+     9
+    ],
+    [
+     "79-1481",
+     5
+    ],
+    [
+     "79-1236",
+     4
+    ],
+    [
+     "79-1538",
+     4
+    ],
+    [
+     "79-1317",
+     4
+    ],
+    [
+     "79-1228",
+     4
+    ],
+    [
+     "79-1090",
+     3
+    ],
+    [
+     "79-1112",
+     2
+    ],
+    [
+     "79-1171",
+     1
+    ],
+    [
+     "79-1376",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Deputado Manoel Rodrigues",
+     "curto": "Deputado Manoel Rodrigues",
+     "bairro": "Amanaiara",
+     "votos": 381
+    },
+    {
+     "nome": "Creche Vó Sinhá",
+     "curto": "Creche Vó Sinhá",
+     "bairro": "Vila Nova",
+     "votos": 39
+    },
+    {
+     "nome": "E.e.f. Raimundo Mesquita",
+     "curto": "Raimundo Mesquita",
+     "bairro": "Centro",
+     "votos": 30
+    }
+   ],
+   "conc": 0.598116169544741,
+   "top3": 0.706436420722135,
+   "venceu": 0,
+   "presente": 21
+  },
+  {
+   "urna": "Luzia do Orlandinho",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187943.jpg",
+   "votos": 636,
+   "pos": 9,
+   "pct": 0.047476858763810095,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 650,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1139",
+     135
+    ],
+    [
+     "79-1384",
+     59
+    ],
+    [
+     "79-1473",
+     45
+    ],
+    [
+     "79-1104",
+     41
+    ],
+    [
+     "79-1082",
+     41
+    ],
+    [
+     "79-1570",
+     41
+    ],
+    [
+     "79-1546",
+     38
+    ],
+    [
+     "79-1368",
+     37
+    ],
+    [
+     "79-1201",
+     32
+    ],
+    [
+     "79-1171",
+     22
+    ],
+    [
+     "79-1538",
+     22
+    ],
+    [
+     "79-1481",
+     21
+    ],
+    [
+     "79-1155",
+     20
+    ],
+    [
+     "79-1554",
+     17
+    ],
+    [
+     "79-1163",
+     12
+    ],
+    [
+     "79-1058",
+     11
+    ],
+    [
+     "79-1090",
+     10
+    ],
+    [
+     "79-1430",
+     10
+    ],
+    [
+     "79-1210",
+     7
+    ],
+    [
+     "79-1317",
+     6
+    ],
+    [
+     "79-1503",
+     2
+    ],
+    [
+     "79-1236",
+     2
+    ],
+    [
+     "79-1376",
+     2
+    ],
+    [
+     "79-1228",
+     2
+    ],
+    [
+     "79-1112",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i.f. Antônio Agapito Filho",
+     "curto": "Antônio Agapito Filho",
+     "bairro": "Oiticica dos Agapitos",
+     "votos": 135
+    },
+    {
+     "nome": "E.e.i.f. Severiano Rodrigues da Rocha",
+     "curto": "Severiano Rodrigues da Rocha",
+     "bairro": "Lagoa Grande",
+     "votos": 59
+    },
+    {
+     "nome": "E.e.f. Nossa Senhora das Gracas",
+     "curto": "Nossa Senhora das Graças",
+     "bairro": "Açude do Mato",
+     "votos": 45
+    }
+   ],
+   "conc": 0.21226415094339623,
+   "top3": 0.3757861635220126,
+   "venceu": 1,
+   "presente": 25
+  },
+  {
+   "urna": "Bodó",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187935.jpg",
+   "votos": 609,
+   "pos": 10,
+   "pct": 0.04546133174081816,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1201",
+     199
+    ],
+    [
+     "79-1392",
+     103
+    ],
+    [
+     "79-1236",
+     50
+    ],
+    [
+     "79-1473",
+     49
+    ],
+    [
+     "79-1104",
+     38
+    ],
+    [
+     "79-1082",
+     23
+    ],
+    [
+     "79-1139",
+     19
+    ],
+    [
+     "79-1058",
+     16
+    ],
+    [
+     "79-1570",
+     15
+    ],
+    [
+     "79-1376",
+     14
+    ],
+    [
+     "79-1368",
+     13
+    ],
+    [
+     "79-1546",
+     9
+    ],
+    [
+     "79-1155",
+     9
+    ],
+    [
+     "79-1210",
+     7
+    ],
+    [
+     "79-1554",
+     7
+    ],
+    [
+     "79-1228",
+     7
+    ],
+    [
+     "79-1090",
+     6
+    ],
+    [
+     "79-1163",
+     4
+    ],
+    [
+     "79-1171",
+     4
+    ],
+    [
+     "79-1112",
+     4
+    ],
+    [
+     "79-1430",
+     4
+    ],
+    [
+     "79-1538",
+     3
+    ],
+    [
+     "79-1317",
+     3
+    ],
+    [
+     "79-1481",
+     2
+    ],
+    [
+     "79-1384",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.i.f. Marcelo da Cunha Araújo",
+     "curto": "Marcelo da Cunha Araújo",
+     "bairro": "Oitizeiro",
+     "votos": 199
+    },
+    {
+     "nome": "E.e.i.f. João da Cunha Sobrinho",
+     "curto": "João da Cunha Sobrinho",
+     "bairro": "Quandu",
+     "votos": 103
+    },
+    {
+     "nome": "E.e.i.f. Zacarias Cordeiro de Paulo",
+     "curto": "Zacarias Cordeiro de Paulo",
+     "bairro": "Mufumbal",
+     "votos": 50
+    }
+   ],
+   "conc": 0.32676518883415434,
+   "top3": 0.5779967159277504,
+   "venceu": 2,
+   "presente": 25
+  },
+  {
+   "urna": "Raimundo do Pretinho",
+   "partido": "PT",
+   "foto": "fotos/ce/reriutaba/2024/60002311130.jpg",
+   "votos": 596,
+   "pos": 11,
+   "pct": 0.044490892803822034,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "79-1104",
+     115
+    ],
+    [
+     "79-1473",
+     97
+    ],
+    [
+     "79-1570",
+     72
+    ],
+    [
+     "79-1171",
+     64
+    ],
+    [
+     "79-1082",
+     43
+    ],
+    [
+     "79-1546",
+     37
+    ],
+    [
+     "79-1368",
+     35
+    ],
+    [
+     "79-1430",
+     20
+    ],
+    [
+     "79-1201",
+     16
+    ],
+    [
+     "79-1554",
+     16
+    ],
+    [
+     "79-1538",
+     15
+    ],
+    [
+     "79-1163",
+     12
+    ],
+    [
+     "79-1481",
+     11
+    ],
+    [
+     "79-1236",
+     8
+    ],
+    [
+     "79-1058",
+     8
+    ],
+    [
+     "79-1090",
+     8
+    ],
+    [
+     "79-1384",
+     5
+    ],
+    [
+     "79-1155",
+     4
+    ],
+    [
+     "79-1317",
+     3
+    ],
+    [
+     "79-1112",
+     3
+    ],
+    [
+     "79-1228",
+     3
+    ],
+    [
+     "79-1139",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.e.m. Alfredo Silvano Gomes",
+     "curto": "Alfredo Silvano Gomes",
+     "bairro": "Barro Vermelho",
+     "votos": 115
+    },
+    {
+     "nome": "E.e.f. Nossa Senhora das Gracas",
+     "curto": "Nossa Senhora das Graças",
+     "bairro": "Açude do Mato",
+     "votos": 97
+    },
+    {
+     "nome": "Creche Vó Sinhá",
+     "curto": "Creche Vó Sinhá",
+     "bairro": "Vila Nova",
+     "votos": 72
+    }
+   ],
+   "conc": 0.1929530201342282,
+   "top3": 0.47651006711409394,
+   "venceu": 0,
+   "presente": 22
+  },
+  {
+   "urna": "Luciélio Paiva",
+   "partido": "PSB",
+   "foto": "fotos/ce/reriutaba/2024/60002187942.jpg",
+   "votos": 471,
+   "pos": 12,
+   "pct": 0.03515974917885936,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 592,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "79-1473",
+     169
+    ],
+    [
+     "79-1570",
+     45
+    ],
+    [
+     "79-1082",
+     35
+    ],
+    [
+     "79-1163",
+     33
+    ],
+    [
+     "79-1104",
+     30
+    ],
+    [
+     "79-1546",
+     23
+    ],
+    [
+     "79-1155",
+     23
+    ],
+    [
+     "79-1554",
+     17
+    ],
+    [
+     "79-1058",
+     15
+    ],
+    [
+     "79-1481",
+     14
+    ],
+    [
+     "79-1538",
+     12
+    ],
+    [
+     "79-1228",
+     10
+    ],
+    [
+     "79-1112",
+     8
+    ],
+    [
+     "79-1201",
+     7
+    ],
+    [
+     "79-1430",
+     6
+    ],
+    [
+     "79-1236",
+     5
+    ],
+    [
+     "79-1171",
+     4
+    ],
+    [
+     "79-1210",
+     4
+    ],
+    [
+     "79-1368",
+     3
+    ],
+    [
+     "79-1392",
+     3
+    ],
+    [
+     "79-1139",
+     2
+    ],
+    [
+     "79-1090",
+     1
+    ],
+    [
+     "79-1317",
+     1
+    ],
+    [
+     "79-1384",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.e.f. Nossa Senhora das Gracas",
+     "curto": "Nossa Senhora das Graças",
+     "bairro": "Açude do Mato",
+     "votos": 169
+    },
+    {
+     "nome": "Creche Vó Sinhá",
+     "curto": "Creche Vó Sinhá",
+     "bairro": "Vila Nova",
+     "votos": 45
+    },
+    {
+     "nome": "E.e.f. Raimundo Mesquita",
+     "curto": "Raimundo Mesquita",
+     "bairro": "Centro",
+     "votos": 35
+    }
+   ],
+   "conc": 0.35881104033970274,
+   "top3": 0.5286624203821656,
+   "venceu": 1,
+   "presente": 24
+  }
+ ],
+ "qe2028": 1315,
+ "fala": [
+  "Reriutaba. Os onze vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram vinte e dois candidatos para onze cadeiras. Cinco são caras novas. PSB, oito; PT, três. E o quociente: mil duzentos e dezoito votos.",
+  "Galego Honório, do PSB. Mil quatrocentos e setenta e três votos: a maior votação da cidade. Em dois mil e vinte, tinha feito novecentos e cinquenta e quatro: ganhou quinhentos e dezenove votos e renovou o mandato. O maior reduto é na escola Antônio Alves de Sousa, em Campo Lindo: quinhentos e seis votos. Liderou a votação em seis dos vinte e seis locais.",
+  "Renê Morais, do PSB. Mil quatrocentos e cinquenta e quatro votos: segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Alexandrina Gomes de Carvalho, em Carnaúba: cento e cinquenta e um votos. Liderou a votação em nove dos vinte e seis locais.",
+  "João Veras, do PSB. Mil e vinte votos: terceiro lugar. Em dois mil e vinte, tinha feito novecentos e oitenta e cinco: ganhou trinta e cinco votos e renovou o mandato. O maior reduto é na escola Deputado Manoel Rodrigues, em Amanaiara: oitocentos e trinta e nove votos. Mais da metade dos votos veio desse único local.",
+  "Socorro Hermínio, do PSB. Novecentos votos: quarto lugar. Em dois mil e vinte, tinha feito setecentos e dezessete: ganhou cento e oitenta e três votos e renovou o mandato. O maior reduto é na escola Alfredo Silvano Gomes, em Barro Vermelho: cento e cinco votos. Voto espalhado: teve eleitor nos vinte e seis locais.",
+  "Lili Lemos, do PT. Setecentos e setenta votos: sexto lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Alfredo Silvano Gomes, em Barro Vermelho: cento e quarenta e três votos.",
+  "Djane Castro, do PSB. Setecentos e trinta e três votos: sétimo lugar. Em dois mil e vinte, tinha feito seiscentos e quarenta e oito: ganhou oitenta e cinco votos e renovou o mandato. O maior reduto é na escola Francisco Ângelo da Silveira, em Primeira Várzea: oitenta e quatro votos. Voto espalhado: teve eleitor nos vinte e seis locais.",
+  "Gislanny Oliveira, do PT. Seiscentos e trinta e sete votos: oitavo lugar. Em dois mil e vinte, teve quatrocentos e trinta e nove votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Deputado Manoel Rodrigues, em Amanaiara: trezentos e oitenta e um votos. Mais da metade dos votos veio desse único local.",
+  "Luzia do Orlandinho, do PSB. Seiscentos e trinta e seis votos: nono lugar. Em dois mil e vinte, tinha feito seiscentos e cinquenta: perdeu catorze votos e renovou o mandato. O maior reduto é na escola Antônio Agapito Filho, em Oiticica dos Agapitos: cento e trinta e cinco votos.",
+  "Bodó, do PSB. Seiscentos e nove votos: décimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Marcelo da Cunha Araújo, em Oitizeiro: cento e noventa e nove votos. Três locais somam cinquenta e oito por cento dos votos.",
+  "Raimundo do Pretinho, do PT. Quinhentos e noventa e seis votos: décimo primeiro lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Alfredo Silvano Gomes, em Barro Vermelho: cento e quinze votos. Três locais somam quase metade dos votos.",
+  "Luciélio Paiva, do PSB. Quatrocentos e setenta e um votos. Em dois mil e vinte, tinha feito quinhentos e noventa e dois: perdeu cento e vinte e um votos e renovou o mandato. O maior reduto é na escola Nossa Senhora das Graças, em Açude do Mato: cento e sessenta e nove votos. Três locais somam quase metade dos votos. Ficou em décimo segundo lugar, mas a vaga é do partido: com a soma do PSB, entrou.",
+  "Galego Honório e Renê Morais passaram do quociente com os próprios votos. Os outros nove dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de mil e trezentos votos. Plenária CE. Inteligência eleitoral de Reriutaba."
+ ]
+}
