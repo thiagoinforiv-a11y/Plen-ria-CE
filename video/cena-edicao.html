@@ -24,8 +24,8 @@
 
   const legenda = (t) => {
     const bl = blocos.find((b) => t >= b.ini && t < b.fim); if (!bl) return;
-    const y = t < (E.tarja ? E.tarja.ate : 0) ? H * 0.6 : CANTOS ? H * 0.9 : H * 0.83, k = eout(prog(t, bl.ini, bl.ini + 0.12));
-    ctx.save(); ctx.font = "700 74px Oswald"; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+    const y = t < (E.tarja ? E.tarja.ate : 0) ? H * 0.6 : CANTOS ? H * (E.legendaY || 0.9) : H * 0.83, k = eout(prog(t, bl.ini, bl.ini + 0.12));
+    ctx.save(); ctx.font = `700 ${E.legendaTam || 74}px Oswald`; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
     const ws = bl.map((w) => w.p.toUpperCase()), larg = ws.map((s) => ctx.measureText(s).width), esp = 34, tot = larg.reduce((a, b) => a + b, 0) + esp * (ws.length - 1);
     let s = Math.min(1, 980 / tot); ctx.translate(W / 2, y + (1 - k) * 30); ctx.scale(s * (0.9 + 0.1 * k), s * (0.9 + 0.1 * k)); ctx.globalAlpha = k;
     let x = -tot / 2;

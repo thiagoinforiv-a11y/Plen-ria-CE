@@ -112,5 +112,7 @@
   ]
  ],
  "arquivo": "pessoal",
- "layout": "cantos"
+ "layout": "cantos",
+ "legendaTam": 104,
+ "legendaY": 0.74
 }
