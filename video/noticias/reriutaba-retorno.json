@@ -1,0 +1,33 @@
+{
+ "id": "noticia-reriutaba-retorno",
+ "fontes": "Fontes: Blog Lucas Oliveira · TSE (eleição 2024)",
+ "cenas": [
+  {
+   "midia": "entregas/midia/reriutaba/djane.jpg",
+   "tarja": "O bom filho à casa torna: vice e vereadora voltam à base de Pedro Humberto",
+   "fala": "O bom filho à casa torna!"
+  },
+  {
+   "grande": "TARCIANO",
+   "sub": "VICE-PREFEITO DE RERIUTABA",
+   "tarja": "Vice-prefeito Tarciano Castro volta ao grupo da situação",
+   "fala": "O vice-prefeito Tarciano Castro e a vereadora Djane Castro retornaram à base do prefeito Pedro Humberto, em Reriutaba."
+  },
+  {
+   "midia": "entregas/midia/reriutaba/djane.jpg",
+   "tarja": "Djane Castro foi eleita vereadora em 2024 com 733 votos",
+   "fala": "Um movimento que fortalece ainda mais o grupo da situação. Djane foi eleita em dois mil e vinte e quatro com setecentos e trinta e três votos."
+  },
+  {
+   "tarja": "Realinhamento de olho em 2028",
+   "fala": "E de olho em dois mil e vinte e oito, esse realinhamento conta muito. Quem se organiza cedo chega mais forte.",
+   "midia": "fotos/ce/reriutaba/2024/60002186598.jpg",
+   "credito": "Prefeito Pedro Humberto · Foto: TSE"
+  },
+  {
+   "grande": "?",
+   "tarja": "Quem será o próximo a mudar de lado?",
+   "fala": "Agora, a pergunta que não quer calar: qual será o próximo da oposição a vir pra situação? Ou vai ser o contrário? Comenta aqui."
+  }
+ ]
+}
