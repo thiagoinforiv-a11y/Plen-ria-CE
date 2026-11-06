@@ -7,6 +7,9 @@
 3. `node video/noticia.mjs video/noticias/<id>.json` → MP4 pronto (tarja azul, só ela na tela; sem partículas).
 4. Copiar para o worktree da branch `midia` (noticias/), push, e agendar no Metricool (blogId 6990789, TikTok+IG,
    tiktokData.title obrigatório, isAigc/isAiGenerated true por causa da voz sintética, horário America/Fortaleza).
+5. Vídeo gravado pelo Thiago (estilo análise política): `python3 video/transcrever.py bruto.mov entregas/brutos/X.words.json` →
+   plano em video/edicoes/X.json (correções de palavras, tarja, cartões foto/número, zooms) → `node video/editar.mjs video/edicoes/X.json`.
+   Legenda palavra a palavra + punch-in + fotos/números com mola + SFX sintetizados. Brutos e transcrições ficam em entregas/ (fora do git).
 Não usar Action para baixar mídia de sites bloqueados (bloqueado por segurança). Mídia real vem do Thiago.
 
 Leia este arquivo e depois `video/PROXIMOS-PASSOS.md` e `video/estudio/LEIAME.md`.
