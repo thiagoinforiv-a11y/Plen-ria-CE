@@ -85,15 +85,13 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 
 /* ---------- Cena da barragem ---------- */
 .scene{display:block;width:100%;height:100%}
-.anim .scene .shimmer{animation:shimmer 2.4s ease-in-out infinite alternate}
+.scene .shimmer{animation:none!important}
 
 /* ======================= 1. ABERTURA ======================= */
 .hero{color:#fff;text-align:center;padding-top:56px;padding-bottom:0;align-items:stretch}
 .sky{position:absolute;inset:0;z-index:-1;
   background:linear-gradient(180deg,#2A1240 0%,#5B2A86 22%,#C2367E 44%,#FF4F8B 56%,#FF7A1A 72%,#FFC93C 86%,#FFE38A 100%);
   background-size:100% 140%;background-position:50% 0%}
-.anim .sky{animation:skyShift 16s ease-in-out infinite alternate}
-@keyframes skyShift{to{background-position:50% 100%}}
 .sun{position:absolute;left:50%;bottom:28%;width:min(78vw,420px);aspect-ratio:1;margin-left:calc(min(78vw,420px)/-2);
   border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFF3B0 0%,#FFC93C 45%,rgba(255,122,26,.0) 72%);z-index:-1}
 .anim .sun{animation:sunGlow 5s ease-in-out infinite alternate}
@@ -120,7 +118,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
   text-shadow:0 2px 8px rgba(42,18,64,.8)}
 .anim .slogan{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.7s both}
 @keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-.scroll-hint{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));width:44px;height:44px;z-index:4;color:var(--tinta);background:var(--amarelo);border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(42,18,64,.35)}
+.scroll-hint{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));width:44px;height:44px;z-index:4;color:var(--tinta);background:var(--amarelo);border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(42,18,64,.35)}
 .anim .scroll-hint{animation:up .8s ease 2.1s both}
 .scroll-hint svg{width:22px;height:22px}
 .anim .scroll-hint svg{animation:bob 1.4s ease-in-out infinite}
@@ -128,7 +126,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 
 /* Confete e serpentina */
 .confetti{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;opacity:.95;
+.confetti i{position:absolute;top:-20px;will-change:transform;width:9px;height:14px;border-radius:2px;opacity:.95;
   animation:fall linear infinite}
 .confetti i.c{border-radius:50%;width:10px;height:10px}
 @keyframes fall{
@@ -431,7 +429,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 
 <!-- Ilustração da parede do Açude Araras (redesenhada a partir de fotos): reaproveitada em várias seções -->
 <template id="tpl-barragem">
-  <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Parede do Açude Araras com o letreiro do DNOCS, a guarita na água e a serra ao fundo, no pôr do sol">
+  <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Parede do Açude Araras com o letreiro do DNOCS, a Brinquedopraça da Guarita, a tomada d’água e a serra ao fundo, no pôr do sol">
     <defs>
       <linearGradient id="scSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A1240"/><stop offset=".35" stop-color="#5B2A86"/><stop offset=".65" stop-color="#FF4F8B"/><stop offset="1" stop-color="#FFC93C"/></linearGradient>
       <linearGradient id="scWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C2367E"/><stop offset=".3" stop-color="#5B6FB8"/><stop offset=".7" stop-color="#1E7FC2"/><stop offset="1" stop-color="#0B3D66"/></linearGradient>
@@ -477,29 +475,32 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
     <g stroke="#FFF6E5" stroke-width="1.6" stroke-linecap="round">
       <path d="M50 228 V214 h4"/><path d="M120 224 V210 h4"/><path d="M200 222 V208 h4"/><path d="M280 224 V210 h4"/><path d="M350 228 V214 h4"/>
     </g>
-    <!-- carro passando na parede -->
-    <g class="car" data-static="210,229">
-      <g transform="translate(-9,-6)">
-        <rect x="0" y="2" width="18" height="6" rx="2.5" fill="#FF4F8B"/>
-        <rect x="4" y="-1" width="10" height="4" rx="1.5" fill="#CFF4FF"/>
-        <circle cx="4.5" cy="8.5" r="2" fill="#1E0F2E"/><circle cx="13.5" cy="8.5" r="2" fill="#1E0F2E"/>
-      </g>
-      <animateMotion dur="9s" repeatCount="indefinite" path="M-20 236 C 120 224, 280 224, 420 236"/>
-    </g>
     <!-- talude da parede, de frente pra gente -->
     <path d="M0 243 C 120 232, 280 232, 400 243 V300 H0Z" fill="url(#scSlope)"/>
     <g stroke="#5E7A2C" stroke-width="2" stroke-linecap="round" opacity=".7">
       <path d="M30 262 l3 -6 M34 262 l-2 -5"/><path d="M78 288 l3 -6 M82 288 l-2 -5"/><path d="M330 268 l3 -6 M334 268 l-2 -5"/><path d="M370 292 l3 -6 M374 292 l-2 -5"/><path d="M150 294 l3 -6 M154 294 l-2 -5"/>
     </g>
+    <!-- Brinquedopraça da Guarita -->
+    <g class="praca">
+      <path d="M296 262 h76 l6 10 h-88z" fill="#2FA37A"/>
+      <path d="M306 262 V242 M314 262 V242" stroke="#FFC93C" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M306 248 h8 M306 254 h8" stroke="#FFC93C" stroke-width="1.6"/>
+      <rect x="304" y="238" width="12" height="5" rx="1.5" fill="#1E7FC2"/>
+      <path d="M316 241 C 326 243, 330 258, 340 262" stroke="#FF4F8B" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M348 262 L354 240 L372 240 L378 262" stroke="#FFF6E5" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+      <path d="M358 240 V254 M362 240 V254 M366 240 V250 M370 240 V250" stroke="#FFF6E5" stroke-width="1"/>
+      <rect x="356.5" y="254" width="7" height="2.4" rx="1" fill="#FF7A1A"/>
+      <rect x="364.5" y="250" width="7" height="2.4" rx="1" fill="#B07CFF"/>
+    </g>
     <!-- letreiro DNOCS no talude -->
-    <text x="200" y="279" text-anchor="middle" font-family="system-ui,sans-serif" font-size="38" font-weight="900" letter-spacing="9" fill="#FFF6E5" stroke="#6B3A1E" stroke-width="1.2" transform="translate(0 56) scale(1 .8)">DNOCS</text>
+    <text x="172" y="279" text-anchor="middle" font-family="system-ui,sans-serif" font-size="38" font-weight="900" letter-spacing="9" fill="#FFF6E5" stroke="#6B3A1E" stroke-width="1.2" transform="translate(0 56) scale(1 .8)">DNOCS</text>
   </svg>
 </template>
 
 <!-- ============ 1. ABERTURA ============ -->
 <section class="s hero" id="inicio" data-pause>
   <div class="sky" aria-hidden="true"></div>
-  <div class="hero-scene" data-barragem data-smil></div>
+  <div class="hero-scene" data-barragem></div>
   <a class="scroll-hint" href="#memoria" aria-label="Rolar para a próxima seção">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
   </a>
@@ -782,7 +783,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
           </svg>
         </div>
         <h3>As famílias</h3>
-        <p>Fim de tarde, pôr do sol, criança no ombro. Festa pra curtir com calma e voltar pra casa cedo.</p>
+        <p>Fim de tarde, pôr do sol, criança no ombro. Na Guarita tem Brinquedopraça: a meninada brinca, a família curte com calma e volta pra casa cedo.</p>
       </article>
     </div>
     <p class="big rv" style="color:#5B2A86">Perto de casa, no horário certo, com o preço que cabe no bolso.</p>
@@ -1008,7 +1009,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
       <div class="screen">
         <div class="bar"><div class="av"><div><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1E7FC2"/><path d="M2 13 C 8 10, 16 10, 22 13 V22 H2Z" fill="#C9733A"/></svg></div></div><span class="ph" style="font-size:.78rem">[@ PERFIL DO BLOCO]</span></div>
         <div class="post">
-          <div class="post-scene" data-barragem data-smil></div>
+          <div class="post-scene" data-barragem></div>
           <b>Esquenta<br>Varjota</b>
           <span>Faltam <span data-days>—</span> dias</span>
         </div>
@@ -1045,7 +1046,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
   <div class="confetti" aria-hidden="true"></div>
   <div class="wrap stack">
     <div class="scene-card rv z">
-      <div data-barragem data-smil></div>
+      <div data-barragem></div>
       <div class="notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♪</span></div>
     </div>
     <h2 class="rv" style="--d:1">O carnaval é da cidade.</h2>
@@ -1106,7 +1107,7 @@ const CONFIG = {
   const cores = ['#FFC93C','#FF4F8B','#FF7A1A','#7FD3FF','#FFFFFF','#B07CFF'];
   if (!reduce) {
     document.querySelectorAll('.confetti').forEach(box => {
-      const n = window.innerWidth < 500 ? 22 : 34;
+      const n = window.innerWidth < 500 ? 12 : 20;
       for (let i = 0; i < n; i++) {
         const c = document.createElement('i');
         if (Math.random() < .35) c.className = 'c';
@@ -1121,7 +1122,7 @@ const CONFIG = {
     });
   }
   const stars = document.querySelector('.stars');
-  if (stars) for (let i = 0; i < 40; i++) {
+  if (stars) for (let i = 0; i < 24; i++) {
     const s = document.createElement('i');
     s.style.left = Math.random() * 100 + '%';
     s.style.top = Math.random() * 45 + '%';
