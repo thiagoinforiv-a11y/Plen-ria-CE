@@ -1276,125 +1276,130 @@ const CONFIG = {
   tickCount(); setInterval(tickCount, 1000);
 })();
 
-/* ===== Marchinha original, gerada no próprio navegador (sem arquivo de áudio, funciona offline) ===== */
+/* ===== Marchinha original, gerada no próprio navegador (sem arquivo de áudio, funciona offline) =====
+   A música é "gravada" uma vez em memória e tocada por um <audio> comum em loop.
+   Assim ela toca também no iPhone com a chave do silencioso ligada. */
 (function(){
   const btns = [...document.querySelectorAll('[data-music]')];
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) { btns.forEach(b => b.hidden = true); return; }
+  const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  if (!OAC || !window.Blob || !window.URL) { btns.forEach(b => b.hidden = true); return; }
   const ui = on => btns.forEach(b => {
     b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
     b.setAttribute('aria-label', on ? 'Desligar a música' : 'Ligar a música');
   });
-  const VOL = .12;                                   // volume baixinho (~37% do anterior)
+  const LEVEL = .45;                                 // volume final: ~45% do máximo (baixinho, de fundo)
   const BPM = 132, E = 60 / BPM / 2;                 // duração de uma colcheia
   const hz = m => 440 * Math.pow(2, (m - 69) / 12);
-  // [nota MIDI, colcheias]  (0 = pausa) — compasso 2/4, 4 colcheias por compasso
+  // [nota MIDI, colcheias]  (0 = pausa) — compasso 2/4
   const MEL = [
     [67,1],[72,1],[76,1],[79,1], [81,1],[79,1],[76,1],[72,1], [74,1],[76,1],[77,1],[74,1], [76,2],[72,2],
     [67,1],[72,1],[76,1],[79,1], [81,1],[79,1],[76,1],[79,1], [77,1],[76,1],[74,1],[71,1], [72,3],[0,1],
     [79,1],[79,1],[81,1],[79,1], [77,2],[74,2], [76,1],[76,1],[77,1],[76,1], [74,2],[72,2],
     [74,1],[76,1],[77,1],[79,1], [81,1],[79,1],[77,1],[74,1], [71,1],[74,1],[79,1],[71,1], [72,3],[0,1]
   ];
-  // baixo "um-pá": fundamental e quinta, uma por tempo (2 tempos por compasso)
+  // baixo "um-pá": uma nota por tempo
   const CH = [48,43, 53,48, 43,50, 48,43,  48,43, 53,48, 43,50, 48,48,
               48,43, 50,45, 48,43, 43,50,  50,45, 53,48, 43,50, 48,48];
-  const LOOP = MEL.reduce((t,n)=>t+n[1],0);           // 64 colcheias
-  let ctx, master, noise, timer, nextT, step = 0, events = [];
+  const LOOP = MEL.reduce((t,n)=>t+n[1],0);         // 64 colcheias
 
-  // monta a lista de eventos de um ciclo (em colcheias)
-  (function(){
-    let t = 0; MEL.forEach(([m,d]) => { if (m) events.push({t, k:'mel', m, d}); t += d; });
-    CH.forEach((m,i) => events.push({t:i*2, k:'bass', m}));
+  function render(){
+    const SR = 22050, len = Math.ceil(LOOP * E * SR);
+    const ctx = new OAC(1, len, SR);
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -26; comp.ratio.value = 4; comp.attack.value = .005; comp.release.value = .15;
+    comp.connect(ctx.destination);
+    const master = ctx.createGain(); master.gain.value = 1; master.connect(comp);
+    const noise = ctx.createBuffer(1, SR * .3, SR);
+    const nd = noise.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1;
+    const env = (g, t, a, peak, dur) => {
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(peak, t + a);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    };
+    let t = 0;
+    MEL.forEach(([m,d]) => {
+      if (m) {
+        const at = t * E, dur = d * E * .92;
+        [-7, 7].forEach(det => {
+          const o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter();
+          o.type = 'sawtooth'; o.frequency.value = hz(m); o.detune.value = det;
+          f.type = 'lowpass'; f.frequency.value = 2200;
+          env(g, at, .02, .11, dur); o.connect(f); f.connect(g); g.connect(master);
+          o.start(at); o.stop(Math.min(at + dur + .05, LOOP * E));
+        });
+      }
+      t += d;
+    });
+    CH.forEach((m, i) => {
+      const at = i * 2 * E, o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'triangle'; o.frequency.value = hz(m);
+      env(g, at, .01, .45, E * 1.6); o.connect(g); g.connect(master); o.start(at); o.stop(at + E * 1.7);
+    });
     for (let i = 0; i < LOOP; i++) {
-      if (i % 2 === 0) events.push({t:i, k:'kick'});
-      else events.push({t:i, k:'snare'});
-      if (i % 4 === 3) events.push({t:i + .5, k:'snare', soft:true});
-    }
-    events.sort((a,b)=>a.t-b.t);
-  })();
-
-  function setup(){
-    ctx = new AC();
-    master = ctx.createGain(); master.gain.value = VOL; master.connect(ctx.destination);
-    noise = ctx.createBuffer(1, ctx.sampleRate * .3, ctx.sampleRate);
-    const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-  }
-  function env(g, t, a, peak, dur){
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(peak, t + a);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  }
-  function play(ev, t){
-    if (ev.k === 'mel') {
-      const dur = ev.d * E * .92;
-      [0, 7].forEach((det, i) => {                      // dois "metais" levemente desafinados
-        const o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter();
-        o.type = 'sawtooth'; o.frequency.value = hz(ev.m); o.detune.value = i ? det : -det;
-        f.type = 'lowpass'; f.frequency.value = 2200;
-        env(g, t, .02, .11, dur); o.connect(f); f.connect(g); g.connect(master);
-        o.start(t); o.stop(t + dur + .05);
+      const at = i * E;
+      if (i % 2 === 0) {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.setValueAtTime(130, at); o.frequency.exponentialRampToValueAtTime(45, at + .15);
+        env(g, at, .005, .7, .2); o.connect(g); g.connect(master); o.start(at); o.stop(at + .22);
+      }
+      const hits = i % 2 ? [[at, false]] : [];
+      if (i % 4 === 3) hits.push([at + E / 2, true]);
+      hits.forEach(([ht, soft]) => {
+        const src = ctx.createBufferSource(), g = ctx.createGain(), f = ctx.createBiquadFilter();
+        src.buffer = noise; f.type = 'highpass'; f.frequency.value = soft ? 4000 : 1800;
+        env(g, ht, .003, soft ? .06 : .16, soft ? .05 : .11);
+        src.connect(f); f.connect(g); g.connect(master); src.start(ht); src.stop(ht + .15);
       });
-    } else if (ev.k === 'bass') {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.type = 'triangle'; o.frequency.value = hz(ev.m);
-      env(g, t, .01, .45, E * 1.6); o.connect(g); g.connect(master); o.start(t); o.stop(t + E * 1.7);
-    } else if (ev.k === 'kick') {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.frequency.setValueAtTime(130, t); o.frequency.exponentialRampToValueAtTime(45, t + .15);
-      env(g, t, .005, .7, .2); o.connect(g); g.connect(master); o.start(t); o.stop(t + .22);
-    } else {
-      const src = ctx.createBufferSource(), g = ctx.createGain(), f = ctx.createBiquadFilter();
-      src.buffer = noise; f.type = 'highpass'; f.frequency.value = ev.soft ? 4000 : 1800;
-      env(g, t, .003, ev.soft ? .06 : .16, ev.soft ? .05 : .11);
-      src.connect(f); f.connect(g); g.connect(master); src.start(t); src.stop(t + .15);
     }
+    return new Promise((ok, fail) => {
+      ctx.oncomplete = e => ok(e.renderedBuffer);
+      const r = ctx.startRendering(); if (r && r.then) r.then(ok, fail);
+    });
   }
-  let cycleStart, idx;
-  function tick(){
-    const ahead = ctx.currentTime + .15;
-    while (true) {
-      const ev = events[idx];
-      const t = cycleStart + ev.t * E;
-      if (t > ahead) break;
-      play(ev, t);
-      idx++;
-      if (idx >= events.length) { idx = 0; cycleStart += LOOP * E; }
-    }
+  function toWav(buf){
+    const d = buf.getChannelData(0), n = d.length;
+    let pk = 0; for (let i = 0; i < n; i++) pk = Math.max(pk, Math.abs(d[i]));
+    const k = pk ? LEVEL / pk : 1;                   // normaliza e aplica o volume
+    const out = new DataView(new ArrayBuffer(44 + n * 2));
+    const w = (o, s) => { for (let i = 0; i < s.length; i++) out.setUint8(o + i, s.charCodeAt(i)); };
+    w(0,'RIFF'); out.setUint32(4, 36 + n * 2, true); w(8,'WAVE'); w(12,'fmt ');
+    out.setUint32(16,16,true); out.setUint16(20,1,true); out.setUint16(22,1,true);
+    out.setUint32(24,buf.sampleRate,true); out.setUint32(28,buf.sampleRate*2,true);
+    out.setUint16(32,2,true); out.setUint16(34,16,true); w(36,'data'); out.setUint32(40,n*2,true);
+    for (let i = 0; i < n; i++) { const v = Math.max(-1, Math.min(1, d[i] * k)); out.setInt16(44 + i * 2, v * 32767, true); }
+    return new Blob([out], {type:'audio/wav'});
   }
-  let offTimer, wanted = false;
-  function start(){
-    wanted = true;
-    if (!ctx) setup();
-    clearTimeout(offTimer);
-    ctx.resume();
-    cycleStart = ctx.currentTime + .08; idx = 0;
-    master.gain.cancelScheduledValues(ctx.currentTime);
-    master.gain.setValueAtTime(VOL, ctx.currentTime);
-    clearInterval(timer); timer = setInterval(tick, 40); tick();
-    ui(true);
+
+  const audio = new Audio(); audio.loop = true; audio.preload = 'auto';
+  audio.setAttribute('playsinline', '');
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch(e) {}
+  let wanted = true, ready = false;
+  ui(true);
+
+  function tryPlay(){
+    if (!wanted || !ready) return;
+    const p = audio.play();
+    if (p && p.catch) p.catch(() => {});            // navegador ainda esperando um toque
   }
-  function stop(){
-    wanted = false;
-    clearInterval(timer); timer = null;
-    if (ctx) { master.gain.setTargetAtTime(0.0001, ctx.currentTime, .05); offTimer = setTimeout(()=>ctx && ctx.suspend(), 200); }
-    ui(false);
-  }
-  // Começa sozinha ao abrir. Se o navegador segurar o som até o primeiro toque, ela solta nesse toque.
-  let unlockedNow = false;
+  render().then(buf => { audio.src = URL.createObjectURL(toWav(buf)); ready = true; tryPlay(); })
+          .catch(() => btns.forEach(b => b.hidden = true));
+
+  // Se o navegador bloquear o som até o primeiro toque, qualquer toque na tela solta a música.
+  let releasedByTap = false;
   const unlock = () => {
-    if (wanted && ctx && ctx.state !== 'running') { unlockedNow = true; ctx.resume(); setTimeout(()=>unlockedNow = false, 400); }
-    if (ctx && ctx.state === 'running') ['pointerdown','touchend','keydown','click'].forEach(e => document.removeEventListener(e, unlock, true));
+    if (wanted && ready && audio.paused) { releasedByTap = true; tryPlay(); setTimeout(() => releasedByTap = false, 400); }
+    if (!audio.paused) ['pointerdown','touchend','keydown','click'].forEach(e => document.removeEventListener(e, unlock, true));
   };
   ['pointerdown','touchend','keydown','click'].forEach(e => document.addEventListener(e, unlock, true));
+
   btns.forEach(b => b.addEventListener('click', () => {
-    if (unlockedNow) return;                         // esse toque só liberou o som
-    timer ? stop() : start();
+    if (releasedByTap) return;                       // esse toque só soltou a música
+    wanted = !wanted; ui(wanted);
+    wanted ? tryPlay() : audio.pause();
   }));
   document.addEventListener('visibilitychange', () => {
-    if (!ctx || !wanted) return;
-    document.hidden ? ctx.suspend() : ctx.resume();
+    if (document.hidden) audio.pause(); else tryPlay();
   });
-  start();
 })();
 </script>
 </body>
