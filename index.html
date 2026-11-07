@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bloco da Cigarra</title>
-<meta name="description" content="Bloco da Cigarra — o carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
+<title>Bloco da Barragem</title>
+<meta name="description" content="Bloco da Barragem — o carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
 <meta name="theme-color" content="#2A1240">
-<meta property="og:title" content="Bloco da Cigarra — Varjota-CE">
+<meta property="og:title" content="Bloco da Barragem — Varjota-CE">
 <meta property="og:description" content="O carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23FFC93C'/%3E%3Ccircle cx='34' cy='44' r='10' fill='%232A1240'/%3E%3Ccircle cx='66' cy='44' r='10' fill='%232A1240'/%3E%3Cpath d='M38 64 Q50 74 62 64' stroke='%232A1240' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
 /* =========================================================
-   BLOCO DA CIGARRA — landing page de apresentação
+   BLOCO DA BARRAGEM — landing page de apresentação
    Tudo em um arquivo, sem dependências, funciona offline.
    Campos entre [COLCHETES] são para preencher depois.
    ========================================================= */
@@ -203,7 +203,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
   font:700 .68rem/1.2 ui-monospace,Menlo,Consolas,monospace}
 .tribute small{display:block;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:var(--rosa)}
 .tribute h3{font-size:1.6rem;line-height:1.1;color:#fff}
-.tribute h3 span{display:block;color:var(--amarelo);font-size:1.15em}
+.tribute h3 span{display:block;color:var(--amarelo)}
 .tribute p{font-size:1.15rem}
 .tribute .pra{font-weight:900;font-size:1.3rem;color:var(--amarelo)}
 .years{display:grid;gap:0;padding:0;margin:0;border-left:4px solid rgba(255,201,60,.5);margin-left:8px}
@@ -459,7 +459,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 
 <!-- Mascote reaproveitada em várias seções (o JS copia para cada [data-cigarra]) -->
 <template id="tpl-cigarra">
-  <svg class="cig" viewBox="0 0 200 200" role="img" aria-label="Cigarra, mascote do bloco">
+  <svg class="cig" viewBox="0 0 200 200" role="img" aria-label="Cigarra, mascote do Bloco da Barragem">
     <!-- asas -->
     <g class="wing wing-l">
       <path d="M96 100 C 60 62, 10 74, 14 122 C 18 158, 66 152, 98 116 Z" fill="#CFF4FF" fill-opacity=".82" stroke="#fff" stroke-width="3"/>
@@ -530,7 +530,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
   <div class="hero-content" data-par="-0.12">
     <p class="kicker">Varjota · Ceará</p>
     <div class="cig-wrap"><div class="cig-float" data-cigarra></div></div>
-    <h1><span class="l1">Bloco da</span><span class="l2">Cigarra</span></h1>
+    <h1><span class="l1">Bloco da</span><span class="l2">Barragem</span></h1>
     <p class="sub">O carnaval de Varjota está de volta</p>
     <p class="slogan">“Quando a cigarra canta, a festa começa.”</p>
   </div>
@@ -561,16 +561,17 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
       <li class="rv l" style="--d:3"><b>Agora</b><span>A juventude quer devolver o carnaval à beira do açude.</span></li>
     </ul>
 
-    <!-- Homenagem: dados confirmados em artigo da Revista Historiar (UVA), entrevista de 2015 -->
+    <!-- Origem do nome: Revista Historiar (UVA), entrevista de 2015; DNOCS -->
     <article class="tribute rv z">
-      <small>Homenagem</small>
+      <small>Por que “Barragem”?</small>
       <div class="head">
-        <div class="foto">[FOTO DE ZÉ NECO]</div>
-        <h3>José Gerardo Gomes, <span>o Zé Neco</span></h3>
+        <div class="foto">[FOTO DA OBRA OU DE ZÉ NECO]</div>
+        <h3>Porque Varjota <span>nasceu dela.</span></h3>
       </div>
-      <p>Funcionário do DNOCS, foi um dos primeiros trabalhadores a chegar à obra do Açude Araras, em 1952. Ficou, criou raízes e viu a cidade crescer na beira da água.</p>
+      <p>Foi a obra da barragem do Araras, tocada pelo DNOCS, que trouxe gente pra cá e fez a cidade crescer.</p>
+      <p>José Gerardo Gomes, o Zé Neco, funcionário do DNOCS, foi um dos primeiros trabalhadores a chegar, em 1952. Ficou e criou raízes, como tanta gente que fez Varjota.</p>
       <p><span class="ph">[HISTÓRIA OU FRASE DE ZÉ NECO, CONTADA PELA FAMÍLIA]</span></p>
-      <p class="pra">O Bloco da Cigarra também é pra ele.</p>
+      <p class="pra">O bloco leva o nome da barragem pra lembrar de onde a gente veio.</p>
     </article>
 
     <!-- Troque este bloco por: <video src="depoimentos.mp4" controls playsinline poster="capa.jpg"></video> -->
@@ -1087,7 +1088,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 </section>
 
 <footer class="foot">
-  <b>Bloco da Cigarra</b> · Varjota-CE<br>
+  <b>Bloco da Barragem</b> · Varjota-CE<br>
   Um projeto da sociedade civil, sem cor política.
 </footer>
 
@@ -1096,7 +1097,7 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 const CONFIG = {
   // Número do WhatsApp só com dígitos: 55 + DDD + número. Ex.: '5588999999999'
   whatsapp: '',
-  mensagemWhatsapp: 'Olá! Vi a apresentação do Bloco da Cigarra e quero conversar.',
+  mensagemWhatsapp: 'Olá! Vi a apresentação do Bloco da Barragem e quero conversar.',
   // Início do primeiro dia do bloco. Sexta-feira de carnaval de 2027 = 05/02/2027 (confirmar).
   dataEvento: '2027-02-05T16:30:00-03:00'
 };

@@ -1,5 +1,5 @@
 # Plen-ria-CE
-## Bloco da Cigarra — landing page
+## Bloco da Barragem — landing page
 
 `index.html` é a página de apresentação do projeto (arquivo único, funciona offline).
 
