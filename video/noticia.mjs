@@ -32,10 +32,10 @@ html,body{margin:0;width:${W}px;height:${H}px;background:transparent}
 .n{font:inherit}.g small{display:block;font:700 56px O;letter-spacing:6px;margin-top:18px;color:#fff}`;
 for (const [i, c] of D.cenas.entries()) {
   await p.setContent(`<style>${css}</style>${c.grande ? `<div class="g"><span class="n">${q(c.grande)}</span>${c.sub ? `<small>${q(c.sub)}</small>` : ""}</div>` : ""}` +
-    `<div class="t"><div class="s">@PLENARIACE</div><div class="x">${q(c.tarja)}</div></div>${c.credito || (i === D.cenas.length - 1 && D.fontes) ? `<div class="c">${q(c.credito || D.fontes)}</div>` : ""}`);
+    (D.semTarja ? "" : `<div class="t"><div class="s">@PLENARIACE</div><div class="x">${q(c.tarja)}</div></div>`) + `${c.credito || (i === D.cenas.length - 1 && D.fontes) ? `<div class="c">${q(c.credito || D.fontes)}</div>` : ""}`);
   await p.evaluate(() => document.fonts.ready);
   await p.evaluate(() => { const g = document.querySelector(".n"); if (g) { let f = 230; while (g.getBoundingClientRect().width > 980 && f > 90) { f -= 10; g.style.fontSize = f + "px"; } } });
-  await p.evaluate(() => { const t = document.querySelector(".x"); let f = 54; while (t.getBoundingClientRect().height > 3 * f * 1.08 + 34 && f > 34) { f -= 2; t.style.fontSize = f + "px"; } });
+  await p.evaluate(() => { const t = document.querySelector(".x"); if (!t) return; let f = 54; while (t.getBoundingClientRect().height > 3 * f * 1.08 + 34 && f > 34) { f -= 2; t.style.fontSize = f + "px"; } });
   await p.screenshot({ path: path.join(tmp, `a${i}.png`), omitBackground: true });
 }
 await b.close();
