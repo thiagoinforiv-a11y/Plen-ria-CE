@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#2A1240">
 <meta property="og:title" content="Bloco da Barragem — Varjota-CE">
 <meta property="og:description" content="O carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23FFC93C'/%3E%3Ccircle cx='34' cy='44' r='10' fill='%232A1240'/%3E%3Ccircle cx='66' cy='44' r='10' fill='%232A1240'/%3E%3Cpath d='M38 64 Q50 74 62 64' stroke='%232A1240' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23FF7A1A'/%3E%3Crect x='2' y='44' width='96' height='20' fill='%231E7FC2'/%3E%3Cpath d='M2 62 C 30 54, 70 54, 98 62 V80 H2Z' fill='%238E4526'/%3E%3Ccircle cx='62' cy='40' r='12' fill='%23FFE38A'/%3E%3C/svg%3E">
 <style>
 /* =========================================================
    BLOCO DA BARRAGEM — landing page de apresentação
@@ -83,58 +83,31 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
   background:linear-gradient(90deg,var(--amarelo),var(--laranja),var(--rosa),var(--roxo));
   transform-origin:0 50%;transform:scaleX(0)}
 
-/* ---------- Cigarra (mascote) ---------- */
-.cig{width:100%;height:auto}
-.cig .wing{transform-box:fill-box}
-.cig .wing-l{transform-origin:100% 20%}
-.cig .wing-r{transform-origin:0% 20%}
-.anim .cig .wing-l{animation:flapL 2.4s ease-in-out infinite}
-.anim .cig .wing-r{animation:flapR 2.4s ease-in-out infinite}
-@keyframes flapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-9deg)}}
-@keyframes flapR{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
-.cig .eye-shine{transform-box:fill-box;transform-origin:center}
-.anim .cig .blink{animation:blink 5s infinite;transform-box:fill-box;transform-origin:center}
-@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+/* ---------- Cena da barragem ---------- */
+.scene{display:block;width:100%;height:100%}
+.anim .scene .shimmer{animation:shimmer 2.4s ease-in-out infinite alternate}
 
 /* ======================= 1. ABERTURA ======================= */
-.hero{color:#fff;text-align:center;padding-top:72px;padding-bottom:0;align-items:stretch}
+.hero{color:#fff;text-align:center;padding-top:56px;padding-bottom:0;align-items:stretch}
 .sky{position:absolute;inset:0;z-index:-1;
   background:linear-gradient(180deg,#2A1240 0%,#5B2A86 22%,#C2367E 44%,#FF4F8B 56%,#FF7A1A 72%,#FFC93C 86%,#FFE38A 100%);
   background-size:100% 140%;background-position:50% 0%}
 .anim .sky{animation:skyShift 16s ease-in-out infinite alternate}
 @keyframes skyShift{to{background-position:50% 100%}}
-.sun{position:absolute;left:50%;bottom:20%;width:min(78vw,420px);aspect-ratio:1;margin-left:calc(min(78vw,420px)/-2);
+.sun{position:absolute;left:50%;bottom:28%;width:min(78vw,420px);aspect-ratio:1;margin-left:calc(min(78vw,420px)/-2);
   border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFF3B0 0%,#FFC93C 45%,rgba(255,122,26,.0) 72%);z-index:-1}
 .anim .sun{animation:sunGlow 5s ease-in-out infinite alternate}
 @keyframes sunGlow{to{filter:brightness(1.12)}}
-.hills{position:absolute;left:0;right:0;bottom:14%;height:26%;z-index:-1}
-.hills svg{width:100%;height:100%}
-.water{position:absolute;left:0;right:0;bottom:0;height:17%;z-index:0;overflow:hidden;
-  background:linear-gradient(180deg,#1E7FC2,#0B3D66)}
-.water .wv{position:absolute;left:0;width:200%;height:30px}
-.water .wv1{top:-4px}
-.water .wv2{top:16px;opacity:.6}
-.anim .water .wv1{animation:waveX 9s linear infinite}
-.anim .water .wv2{animation:waveX 14s linear infinite reverse}
-@keyframes waveX{to{transform:translateX(-50%)}}
-.glint{position:absolute;left:50%;top:22%;width:46%;height:6px;margin-left:-23%;border-radius:6px;
-  background:rgba(255,227,138,.75)}
-.glint.g2{top:48%;width:30%;margin-left:-15%;opacity:.6}
-.glint.g3{top:72%;width:18%;margin-left:-9%;opacity:.45}
-.anim .glint{animation:glint 2.8s ease-in-out infinite alternate}
-.anim .glint.g2{animation-delay:.6s}.anim .glint.g3{animation-delay:1.2s}
-@keyframes glint{to{transform:scaleX(.6);opacity:.25}}
+.hero-scene{position:absolute;left:0;right:0;bottom:0;height:40vh;height:40svh;z-index:0}
+.hero-scene .sc-sky{display:none}
+.hero-scene .sc-glow{opacity:1}
 
 .hero-content{position:relative;z-index:2;max-width:640px;margin:0 auto;display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;padding-bottom:calc(17vh + 90px);width:100%}
+  align-items:center;justify-content:flex-start;padding-bottom:calc(40svh + 8px);width:100%}
 .kicker{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.95rem;
   background:rgba(42,18,64,.6);padding:8px 16px;border-radius:99px}
-.hero .cig-wrap{width:min(42vw,220px);margin:12px auto 4px}
-.anim .hero .cig-wrap{animation:rise 1.6s cubic-bezier(.2,.8,.2,1) .2s both}
-.anim .hero .cig-float{animation:float 4s ease-in-out 1.8s infinite}
-@keyframes rise{from{opacity:0;transform:translateY(120px) scale(.6)}to{opacity:1;transform:none}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.hero h1{font-size:clamp(3.4rem,17vw,7rem);line-height:.9;
+.hero h1{margin-top:16px;font-size:clamp(3rem,15.5vw,6.4rem);line-height:.9;
   text-shadow:0 4px 0 var(--roxo-escuro),0 10px 30px rgba(42,18,64,.55)}
 .hero h1 .l1{display:block;font-size:.52em;letter-spacing:.02em}
 .hero h1 .l2{display:block;color:var(--amarelo)}
@@ -147,11 +120,9 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
   text-shadow:0 2px 8px rgba(42,18,64,.8)}
 .anim .slogan{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.7s both}
 @keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-.scroll-hint{position:absolute;left:0;right:0;margin:0 auto;width:max-content;bottom:calc(17% + 14px);z-index:4;
-  color:var(--tinta);background:var(--amarelo);text-decoration:none;font-weight:800;font-size:1rem;
-  padding:10px 18px;border-radius:99px;display:flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:0 6px 18px rgba(42,18,64,.35)}
+.scroll-hint{position:absolute;right:max(16px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));width:44px;height:44px;z-index:4;color:var(--tinta);background:var(--amarelo);border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(42,18,64,.35)}
 .anim .scroll-hint{animation:up .8s ease 2.1s both}
-.scroll-hint svg{width:18px;height:18px}
+.scroll-hint svg{width:22px;height:22px}
 .anim .scroll-hint svg{animation:bob 1.4s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(4px)}}
 
@@ -381,7 +352,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 .phone .av div{width:100%;height:100%;border-radius:50%;background:#fff;display:grid;place-items:center}
 .phone .post{aspect-ratio:4/5;background:linear-gradient(180deg,#5B2A86,#FF4F8B 55%,#FFC93C);display:flex;flex-direction:column;
   align-items:center;justify-content:center;color:#fff;text-align:center;padding:16px;gap:6px}
-.phone .post .cig-wrap{width:46%}
+.phone .post .post-scene{width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.7)}
 .phone .post b{font-size:1.6rem;line-height:1;text-shadow:0 3px 0 var(--roxo-escuro)}
 .phone .post span{background:var(--roxo-escuro);padding:6px 12px;border-radius:99px;font-weight:800;font-size:.95rem}
 .phone .acts{display:flex;gap:14px;padding:10px 14px}
@@ -408,9 +379,10 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.8}
 .anim .stars i{animation:twinkle 3s ease-in-out infinite alternate}
 @keyframes twinkle{to{opacity:.15}}
-.fim .cig-wrap{width:min(48vw,220px);margin:0 auto;position:relative}
-.anim .fim .cig-wrap{animation:float 4s ease-in-out infinite}
-.notes{position:absolute;inset:-20% -30%;pointer-events:none}
+.fim .scene-card{position:relative;width:100%;max-width:420px;margin:0 auto;aspect-ratio:4/3;border-radius:var(--radius);
+  border:3px solid rgba(255,255,255,.6);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+.fim .scene-card>div{width:100%;height:100%;border-radius:calc(var(--radius) - 3px);overflow:hidden}
+.notes{position:absolute;inset:-14% 0 auto;height:60%;pointer-events:none}
 .notes span{position:absolute;font-size:2rem;font-weight:900;color:var(--amarelo);opacity:0}
 .anim .notes span{animation:note 3s ease-out infinite}
 .notes span:nth-child(1){left:72%;top:30%}
@@ -457,68 +429,80 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 
 <div class="progress" aria-hidden="true"></div>
 
-<!-- Mascote reaproveitada em várias seções (o JS copia para cada [data-cigarra]) -->
-<template id="tpl-cigarra">
-  <svg class="cig" viewBox="0 0 200 200" role="img" aria-label="Cigarra, mascote do Bloco da Barragem">
-    <!-- asas -->
-    <g class="wing wing-l">
-      <path d="M96 100 C 60 62, 10 74, 14 122 C 18 158, 66 152, 98 116 Z" fill="#CFF4FF" fill-opacity=".82" stroke="#fff" stroke-width="3"/>
-      <path d="M92 106 C 70 104, 44 110, 26 126 M90 112 C 72 124, 54 136, 40 146 M86 100 C 66 90, 46 88, 30 94" stroke="#8FD8F5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<!-- Ilustração da parede do Açude Araras (redesenhada a partir de fotos): reaproveitada em várias seções -->
+<template id="tpl-barragem">
+  <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Parede do Açude Araras com o letreiro do DNOCS, a guarita na água e a serra ao fundo, no pôr do sol">
+    <defs>
+      <linearGradient id="scSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A1240"/><stop offset=".35" stop-color="#5B2A86"/><stop offset=".65" stop-color="#FF4F8B"/><stop offset="1" stop-color="#FFC93C"/></linearGradient>
+      <linearGradient id="scWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C2367E"/><stop offset=".3" stop-color="#5B6FB8"/><stop offset=".7" stop-color="#1E7FC2"/><stop offset="1" stop-color="#0B3D66"/></linearGradient>
+      <linearGradient id="scSlope" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D98445"/><stop offset="1" stop-color="#8E4526"/></linearGradient>
+    </defs>
+    <rect class="sc-sky" width="400" height="140" fill="url(#scSky)"/>
+    <circle class="sc-glow" cx="250" cy="122" r="58" fill="#FFC93C" opacity="0"/>
+    <circle class="sc-sun" cx="250" cy="122" r="30" fill="#FFE38A"/>
+    <!-- serra ao fundo -->
+    <path d="M0 122 C 40 106, 70 114, 100 103 C 130 93, 160 110, 200 106 C 240 102, 270 88, 310 100 C 350 110, 380 102, 400 106 V134 H0Z" fill="#7A2E86" opacity=".85"/>
+    <path d="M0 128 C 100 122, 300 124, 400 127 V136 H0Z" fill="#3B1A5C"/>
+    <!-- água do açude -->
+    <rect y="132" width="400" height="96" fill="url(#scWater)"/>
+    <g class="shimmer" fill="#FFE38A">
+      <rect x="222" y="138" width="56" height="3" rx="1.5"/>
+      <rect x="230" y="148" width="40" height="3" rx="1.5" opacity=".8"/>
+      <rect x="238" y="160" width="24" height="3" rx="1.5" opacity=".6"/>
+      <rect x="244" y="174" width="12" height="3" rx="1.5" opacity=".45"/>
     </g>
-    <g class="wing wing-r">
-      <path d="M104 100 C 140 62, 190 74, 186 122 C 182 158, 134 152, 102 116 Z" fill="#CFF4FF" fill-opacity=".82" stroke="#fff" stroke-width="3"/>
-      <path d="M108 106 C 130 104, 156 110, 174 126 M110 112 C 128 124, 146 136, 160 146 M114 100 C 134 90, 154 88, 170 94" stroke="#8FD8F5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- serrote dentro d'água -->
+    <path d="M40 134 C 58 120, 74 114, 90 124 C 102 129, 114 131, 126 135Z" fill="#3B1A5C"/>
+    <!-- guarita / tomada d'água -->
+    <g class="guarita" transform="translate(150 146) scale(1.35)">
+      <rect x="-15" y="22" width="30" height="6" fill="#fff" opacity=".18"/>
+      <rect x="-12" y="4" width="3" height="22" fill="#F2EEE6"/>
+      <rect x="9" y="4" width="3" height="22" fill="#F2EEE6"/>
+      <rect x="-1.5" y="4" width="3" height="22" fill="#D9D3C7"/>
+      <rect x="-16" y="12" width="32" height="3" fill="#fff"/>
+      <path d="M-16 8 H16" stroke="#2F5BD3" stroke-width="1.2"/>
+      <path d="M-16 8 V12 M-8 8 V12 M8 8 V12 M16 8 V12" stroke="#2F5BD3" stroke-width="1.2"/>
+      <rect x="-17" y="0" width="34" height="4" fill="#fff"/>
+      <rect x="-17" y="4" width="34" height="1.5" fill="#9A93A8"/>
+      <circle cx="-7" cy="-3" r="3" fill="none" stroke="#2F5BD3" stroke-width="1.8"/>
+      <circle cx="-1" cy="-3" r="3" fill="none" stroke="#2F5BD3" stroke-width="1.8"/>
+      <rect x="6" y="-4" width="6" height="4" fill="#F2EEE6"/>
     </g>
-    <!-- pernas -->
-    <path d="M76 130 L58 146 M76 146 L60 164 M124 130 L142 146 M124 146 L140 164" stroke="#2A1240" stroke-width="6" stroke-linecap="round"/>
-    <!-- corpo -->
-    <ellipse cx="100" cy="132" rx="30" ry="46" fill="#FF8A1F" stroke="#2A1240" stroke-width="4"/>
-    <path d="M74 126 Q100 138 126 126 M76 144 Q100 156 124 144 M82 160 Q100 170 118 160" stroke="#C9521A" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <!-- antenas -->
-    <path d="M86 52 Q78 26 60 22" stroke="#2A1240" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path d="M114 52 Q122 26 140 22" stroke="#2A1240" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <circle cx="58" cy="21" r="7" fill="#FF4F8B" stroke="#2A1240" stroke-width="3"/>
-    <circle cx="142" cy="21" r="7" fill="#FF4F8B" stroke="#2A1240" stroke-width="3"/>
-    <!-- cabeça -->
-    <ellipse cx="100" cy="80" rx="46" ry="34" fill="#FFC93C" stroke="#2A1240" stroke-width="4"/>
-    <g class="blink">
-      <circle cx="68" cy="74" r="17" fill="#2A1240"/>
-      <circle cx="132" cy="74" r="17" fill="#2A1240"/>
-      <circle cx="62" cy="68" r="6" fill="#fff"/>
-      <circle cx="126" cy="68" r="6" fill="#fff"/>
-      <circle cx="73" cy="80" r="2.5" fill="#fff"/>
-      <circle cx="137" cy="80" r="2.5" fill="#fff"/>
+    <!-- enrocamento (pedras) na beira da água -->
+    <path d="M0 226 C 120 214, 280 214, 400 226 L400 233 C 280 222, 120 222, 0 233Z" fill="#EDE5D6"/>
+    <!-- estrada em cima da parede -->
+    <path d="M0 232 C 120 221, 280 221, 400 232 L400 243 C 280 232, 120 232, 0 243Z" fill="#4A3B55"/>
+    <path d="M0 237.5 C 120 226.5, 280 226.5, 400 237.5" stroke="#FFE38A" stroke-width="1.4" stroke-dasharray="7 7" fill="none"/>
+    <!-- postes -->
+    <g stroke="#FFF6E5" stroke-width="1.6" stroke-linecap="round">
+      <path d="M50 228 V214 h4"/><path d="M120 224 V210 h4"/><path d="M200 222 V208 h4"/><path d="M280 224 V210 h4"/><path d="M350 228 V214 h4"/>
     </g>
-    <ellipse cx="80" cy="96" rx="8" ry="4.5" fill="#FF4F8B" opacity=".75"/>
-    <ellipse cx="120" cy="96" rx="8" ry="4.5" fill="#FF4F8B" opacity=".75"/>
-    <path d="M88 94 Q100 108 112 94" stroke="#2A1240" stroke-width="4.5" fill="#fff" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- confete na cabeça -->
-    <rect x="94" y="40" width="8" height="12" rx="2" fill="#FF4F8B" transform="rotate(18 98 46)"/>
-    <circle cx="80" cy="50" r="3.5" fill="#1E7FC2"/>
-    <circle cx="118" cy="48" r="3.5" fill="#5B2A86"/>
+    <!-- carro passando na parede -->
+    <g class="car" data-static="210,229">
+      <g transform="translate(-9,-6)">
+        <rect x="0" y="2" width="18" height="6" rx="2.5" fill="#FF4F8B"/>
+        <rect x="4" y="-1" width="10" height="4" rx="1.5" fill="#CFF4FF"/>
+        <circle cx="4.5" cy="8.5" r="2" fill="#1E0F2E"/><circle cx="13.5" cy="8.5" r="2" fill="#1E0F2E"/>
+      </g>
+      <animateMotion dur="9s" repeatCount="indefinite" path="M-20 236 C 120 224, 280 224, 420 236"/>
+    </g>
+    <!-- talude da parede, de frente pra gente -->
+    <path d="M0 243 C 120 232, 280 232, 400 243 V300 H0Z" fill="url(#scSlope)"/>
+    <g stroke="#5E7A2C" stroke-width="2" stroke-linecap="round" opacity=".7">
+      <path d="M30 262 l3 -6 M34 262 l-2 -5"/><path d="M78 288 l3 -6 M82 288 l-2 -5"/><path d="M330 268 l3 -6 M334 268 l-2 -5"/><path d="M370 292 l3 -6 M374 292 l-2 -5"/><path d="M150 294 l3 -6 M154 294 l-2 -5"/>
+    </g>
+    <!-- letreiro DNOCS no talude -->
+    <text x="200" y="279" text-anchor="middle" font-family="system-ui,sans-serif" font-size="38" font-weight="900" letter-spacing="9" fill="#FFF6E5" stroke="#6B3A1E" stroke-width="1.2" transform="translate(0 56) scale(1 .8)">DNOCS</text>
   </svg>
 </template>
 
 <!-- ============ 1. ABERTURA ============ -->
 <section class="s hero" id="inicio" data-pause>
   <div class="sky" aria-hidden="true"></div>
-  <div class="sun" data-par="0.35" aria-hidden="true"></div>
-  <div class="hills" aria-hidden="true" data-par="0.18">
-    <svg viewBox="0 0 400 100" preserveAspectRatio="none">
-      <path d="M0 70 C 40 40, 70 50, 110 30 C 150 12, 180 46, 220 38 C 260 30, 290 10, 330 26 C 360 38, 380 30, 400 34 L400 100 L0 100Z" fill="#7A2E86" opacity=".85"/>
-      <path d="M0 84 C 50 64, 90 76, 140 62 C 190 48, 230 74, 280 64 C 330 54, 360 70, 400 60 L400 100 L0 100Z" fill="#3B1A5C"/>
-      <!-- mandacarus -->
-      <g fill="#2A1240">
-        <rect x="60" y="56" width="5" height="26" rx="2.5"/><rect x="54" y="62" width="4" height="12" rx="2"/><rect x="67" y="60" width="4" height="10" rx="2"/>
-        <rect x="320" y="50" width="5" height="26" rx="2.5"/><rect x="314" y="56" width="4" height="12" rx="2"/><rect x="327" y="54" width="4" height="10" rx="2"/>
-      </g>
-    </svg>
-  </div>
-  <div class="water" aria-hidden="true">
-    <svg class="wv wv1" viewBox="0 0 800 30" preserveAspectRatio="none"><path d="M0 15 Q 50 0 100 15 T 200 15 T 300 15 T 400 15 T 500 15 T 600 15 T 700 15 T 800 15 V30 H0Z" fill="#3A9BDB"/></svg>
-    <svg class="wv wv2" viewBox="0 0 800 30" preserveAspectRatio="none"><path d="M0 15 Q 50 30 100 15 T 200 15 T 300 15 T 400 15 T 500 15 T 600 15 T 700 15 T 800 15 V30 H0Z" fill="#7FD3FF"/></svg>
-    <span class="glint"></span><span class="glint g2"></span><span class="glint g3"></span>
-  </div>
+  <div class="hero-scene" data-barragem data-smil></div>
+  <a class="scroll-hint" href="#memoria" aria-label="Rolar para a próxima seção">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
   <div class="confetti" aria-hidden="true"></div>
   <svg class="serp" viewBox="0 0 120 200" style="left:-10px;top:60px;width:90px" aria-hidden="true">
     <path d="M10 0 C 80 30, -20 60, 60 90 S 0 150, 70 190" stroke="#FFC93C"/>
@@ -529,14 +513,11 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 
   <div class="hero-content" data-par="-0.12">
     <p class="kicker">Varjota · Ceará</p>
-    <div class="cig-wrap"><div class="cig-float" data-cigarra></div></div>
     <h1><span class="l1">Bloco da</span><span class="l2">Barragem</span></h1>
     <p class="sub">O carnaval de Varjota está de volta</p>
     <p class="slogan">“Quando a cigarra canta, a festa começa.”</p>
+
   </div>
-  <a class="scroll-hint" href="#memoria">Vem com a gente
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-  </a>
 </section>
 
 <!-- ============ 2. MEMÓRIA ============ -->
@@ -1025,9 +1006,9 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 
     <div class="phone rv">
       <div class="screen">
-        <div class="bar"><div class="av"><div><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#FFC93C"/><circle cx="8.5" cy="11" r="2.2" fill="#2A1240"/><circle cx="15.5" cy="11" r="2.2" fill="#2A1240"/></svg></div></div><span class="ph" style="font-size:.78rem">[@ PERFIL DO BLOCO]</span></div>
+        <div class="bar"><div class="av"><div><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1E7FC2"/><path d="M2 13 C 8 10, 16 10, 22 13 V22 H2Z" fill="#C9733A"/></svg></div></div><span class="ph" style="font-size:.78rem">[@ PERFIL DO BLOCO]</span></div>
         <div class="post">
-          <div class="cig-wrap" data-cigarra></div>
+          <div class="post-scene" data-barragem data-smil></div>
           <b>Esquenta<br>Varjota</b>
           <span>Faltam <span data-days>—</span> dias</span>
         </div>
@@ -1063,8 +1044,8 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
   <div class="stars" aria-hidden="true"></div>
   <div class="confetti" aria-hidden="true"></div>
   <div class="wrap stack">
-    <div class="cig-wrap rv z">
-      <div data-cigarra></div>
+    <div class="scene-card rv z">
+      <div data-barragem data-smil></div>
       <div class="notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♪</span></div>
     </div>
     <h2 class="rv" style="--d:1">O carnaval é da cidade.</h2>
@@ -1110,8 +1091,8 @@ const CONFIG = {
   else root.classList.add('no-anim');
 
   /* Mascote: copia o SVG para cada ponto marcado */
-  const tpl = document.getElementById('tpl-cigarra');
-  document.querySelectorAll('[data-cigarra]').forEach(el => el.appendChild(tpl.content.cloneNode(true)));
+  const tpl = document.getElementById('tpl-barragem');
+  document.querySelectorAll('[data-barragem]').forEach(el => el.appendChild(tpl.content.cloneNode(true)));
 
   /* WhatsApp */
   const cta = document.getElementById('cta');
