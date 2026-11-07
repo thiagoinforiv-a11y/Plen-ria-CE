@@ -49,7 +49,8 @@ for (const [i, c] of D.cenas.entries()) {
   const m = c.midia && path.resolve(RAIZ, c.midia), video = m && /\.(mp4|mov|webm|mkv)$/i.test(m);
   const fundo = `split[a][b];[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:2,eq=brightness=-0.15[f];[b]scale=${W}:${H}:force_original_aspect_ratio=decrease[c];[f][c]overlay=(W-w)/2:(H-h)/2*0.8`;
   let ent, vf;
-  if (!m) { ent = ["-f", "lavfi", "-i", `color=c=0x0b0f1f:s=${W}x${H}:r=30:d=${T}`]; vf = "null"; }
+  if (!m && D.fundo) { ent = ["-loop", "1", "-t", T, "-i", path.resolve(RAIZ, D.fundo)]; vf = `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=40:3,eq=brightness=-0.32:saturation=1.2,zoompan=z='min(1+0.0006*on,1.06)':d=1:s=${W}x${H}:fps=30`; }
+  else if (!m) { ent = ["-f", "lavfi", "-i", `color=c=0x0b0f1f:s=${W}x${H}:r=30:d=${T}`]; vf = "null"; }
   else if (video) { ent = ["-ss", String(c.ini || 0), "-t", T, "-i", m]; vf = `${fundo},fps=30`; }
   else { ent = ["-loop", "1", "-t", T, "-i", m]; vf = `scale=${W * 1.2}:${H * 1.2}:force_original_aspect_ratio=increase,${fundo.replace(`scale=${W}:${H}:force_original_aspect_ratio=decrease`, `scale=${W}:${H}:force_original_aspect_ratio=decrease`)},zoompan=z='min(1+0.0009*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=30`; }
   const fc = `[0:v]${vf},setsar=1,format=yuv420p[v];[v][1:v]overlay=0:0[o];` + (video ? `[0:a]volume=0.12,aresample=48000,aformat=channel_layouts=stereo[x];[2:a][x]amix=inputs=2:duration=first:normalize=0[s]` : `[2:a]anull[s]`);
