@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bloco da Cigarra</title>
+<meta name="description" content="Bloco da Cigarra — o carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
+<meta name="theme-color" content="#2A1240">
+<meta property="og:title" content="Bloco da Cigarra — Varjota-CE">
+<meta property="og:description" content="O carnaval de Varjota está de volta. Quando a cigarra canta, a festa começa.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23FFC93C'/%3E%3Ccircle cx='34' cy='44' r='10' fill='%232A1240'/%3E%3Ccircle cx='66' cy='44' r='10' fill='%232A1240'/%3E%3Cpath d='M38 64 Q50 74 62 64' stroke='%232A1240' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+/* =========================================================
+   BLOCO DA CIGARRA — landing page de apresentação
+   Tudo em um arquivo, sem dependências, funciona offline.
+   Campos entre [COLCHETES] são para preencher depois.
+   ========================================================= */
+:root{
+  --laranja:#FF7A1A;
+  --amarelo:#FFC93C;
+  --amarelo-claro:#FFE38A;
+  --rosa:#FF4F8B;
+  --roxo:#5B2A86;
+  --roxo-medio:#3B1A5C;
+  --roxo-escuro:#2A1240;
+  --acude:#1E7FC2;
+  --acude-escuro:#0B3D66;
+  --creme:#FFF6E5;
+  --tinta:#1E0F2E;
+  --branco:#FFFFFF;
+  --radius:22px;
+  --gutter:20px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);font-size:1.25rem;line-height:1.45;
+  color:var(--tinta);background:var(--roxo-escuro);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+h1,h2,h3{margin:0;line-height:1.02;font-weight:900;letter-spacing:-.02em}
+p{margin:0}
+strong{font-weight:800}
+
+/* ---------- Estrutura de seção (uma por tela) ---------- */
+.s{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;
+   padding:88px var(--gutter) 96px;overflow:hidden;isolation:isolate}
+.wrap{width:100%;max-width:640px;margin:0 auto;position:relative;z-index:2}
+.stack>*+*{margin-top:22px}
+.tag{display:inline-flex;align-items:center;gap:10px;font-size:.95rem;font-weight:800;
+     letter-spacing:.14em;text-transform:uppercase}
+.tag::before{content:"";width:28px;height:4px;border-radius:4px;background:currentColor}
+.tag b{font-variant-numeric:tabular-nums;opacity:.8}
+h2{font-size:clamp(2.5rem,11vw,4.6rem)}
+.lead{font-size:clamp(1.45rem,6vw,2rem);font-weight:700;line-height:1.25}
+.big{font-size:clamp(1.7rem,7.6vw,2.6rem);font-weight:900;line-height:1.12}
+.muted{opacity:.88}
+.hl{background:linear-gradient(transparent 58%, var(--amarelo) 58%);padding:0 .08em}
+.hl-rosa{background:linear-gradient(transparent 58%, var(--rosa) 58%);padding:0 .08em}
+
+/* Campos para preencher */
+.ph{display:inline-block;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    font-weight:700;font-size:.92em;color:var(--tinta);background:#FFF3B0;
+    border:2px dashed var(--tinta);border-radius:10px;padding:.12em .5em;line-height:1.3}
+
+/* Ondas entre seções */
+.wave{position:absolute;left:0;right:0;bottom:-1px;height:56px;z-index:3;pointer-events:none}
+.wave svg{width:100%;height:100%}
+
+/* ---------- Animação de entrada (só com JS e movimento liberado) ---------- */
+.anim .rv{opacity:0;transform:translate3d(0,38px,0);
+  transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);
+  transition-delay:calc(var(--d,0) * 110ms)}
+.anim .rv.l{transform:translate3d(-46px,0,0)}
+.anim .rv.r{transform:translate3d(46px,0,0)}
+.anim .rv.z{transform:scale(.86)}
+.anim .rv.in{opacity:1;transform:none}
+
+/* Barra de progresso */
+.progress{position:fixed;top:0;left:0;right:0;height:5px;z-index:50;
+  background:linear-gradient(90deg,var(--amarelo),var(--laranja),var(--rosa),var(--roxo));
+  transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- Cigarra (mascote) ---------- */
+.cig{width:100%;height:auto}
+.cig .wing{transform-box:fill-box}
+.cig .wing-l{transform-origin:100% 20%}
+.cig .wing-r{transform-origin:0% 20%}
+.anim .cig .wing-l{animation:flapL 2.4s ease-in-out infinite}
+.anim .cig .wing-r{animation:flapR 2.4s ease-in-out infinite}
+@keyframes flapL{0%,100%{transform:rotate(0)}50%{transform:rotate(-9deg)}}
+@keyframes flapR{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+.cig .eye-shine{transform-box:fill-box;transform-origin:center}
+.anim .cig .blink{animation:blink 5s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+
+/* ======================= 1. ABERTURA ======================= */
+.hero{color:#fff;text-align:center;padding-top:72px;padding-bottom:0;align-items:stretch}
+.sky{position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,#2A1240 0%,#5B2A86 22%,#C2367E 44%,#FF4F8B 56%,#FF7A1A 72%,#FFC93C 86%,#FFE38A 100%);
+  background-size:100% 140%;background-position:50% 0%}
+.anim .sky{animation:skyShift 16s ease-in-out infinite alternate}
+@keyframes skyShift{to{background-position:50% 100%}}
+.sun{position:absolute;left:50%;bottom:20%;width:min(78vw,420px);aspect-ratio:1;margin-left:calc(min(78vw,420px)/-2);
+  border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFF3B0 0%,#FFC93C 45%,rgba(255,122,26,.0) 72%);z-index:-1}
+.anim .sun{animation:sunGlow 5s ease-in-out infinite alternate}
+@keyframes sunGlow{to{filter:brightness(1.12)}}
+.hills{position:absolute;left:0;right:0;bottom:14%;height:26%;z-index:-1}
+.hills svg{width:100%;height:100%}
+.water{position:absolute;left:0;right:0;bottom:0;height:17%;z-index:0;overflow:hidden;
+  background:linear-gradient(180deg,#1E7FC2,#0B3D66)}
+.water .wv{position:absolute;left:0;width:200%;height:30px}
+.water .wv1{top:-4px}
+.water .wv2{top:16px;opacity:.6}
+.anim .water .wv1{animation:waveX 9s linear infinite}
+.anim .water .wv2{animation:waveX 14s linear infinite reverse}
+@keyframes waveX{to{transform:translateX(-50%)}}
+.glint{position:absolute;left:50%;top:22%;width:46%;height:6px;margin-left:-23%;border-radius:6px;
+  background:rgba(255,227,138,.75)}
+.glint.g2{top:48%;width:30%;margin-left:-15%;opacity:.6}
+.glint.g3{top:72%;width:18%;margin-left:-9%;opacity:.45}
+.anim .glint{animation:glint 2.8s ease-in-out infinite alternate}
+.anim .glint.g2{animation-delay:.6s}.anim .glint.g3{animation-delay:1.2s}
+@keyframes glint{to{transform:scaleX(.6);opacity:.25}}
+
+.hero-content{position:relative;z-index:2;max-width:640px;margin:0 auto;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;padding-bottom:calc(17vh + 90px);width:100%}
+.kicker{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.95rem;
+  background:rgba(42,18,64,.6);padding:8px 16px;border-radius:99px}
+.hero .cig-wrap{width:min(42vw,220px);margin:12px auto 4px}
+.anim .hero .cig-wrap{animation:rise 1.6s cubic-bezier(.2,.8,.2,1) .2s both}
+.anim .hero .cig-float{animation:float 4s ease-in-out 1.8s infinite}
+@keyframes rise{from{opacity:0;transform:translateY(120px) scale(.6)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(3.4rem,17vw,7rem);line-height:.9;
+  text-shadow:0 4px 0 var(--roxo-escuro),0 10px 30px rgba(42,18,64,.55)}
+.hero h1 .l1{display:block;font-size:.52em;letter-spacing:.02em}
+.hero h1 .l2{display:block;color:var(--amarelo)}
+.anim .hero h1 .l1{animation:up .9s cubic-bezier(.2,.8,.2,1) .9s both}
+.anim .hero h1 .l2{animation:up 1s cubic-bezier(.2,.8,.2,1) 1.1s both}
+.sub{margin-top:18px;font-size:clamp(1.25rem,5.4vw,1.7rem);font-weight:800;
+  background:var(--roxo-escuro);color:#fff;padding:10px 18px;border-radius:14px;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.anim .sub{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.4s both}
+.slogan{margin-top:16px;font-size:1.15rem;font-weight:700;font-style:italic;color:#fff;
+  text-shadow:0 2px 8px rgba(42,18,64,.8)}
+.anim .slogan{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.7s both}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.scroll-hint{position:absolute;left:0;right:0;margin:0 auto;width:max-content;bottom:calc(17% + 14px);z-index:4;
+  color:var(--tinta);background:var(--amarelo);text-decoration:none;font-weight:800;font-size:1rem;
+  padding:10px 18px;border-radius:99px;display:flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:0 6px 18px rgba(42,18,64,.35)}
+.anim .scroll-hint{animation:up .8s ease 2.1s both}
+.scroll-hint svg{width:18px;height:18px}
+.anim .scroll-hint svg{animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+
+/* Confete e serpentina */
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;opacity:.95;
+  animation:fall linear infinite}
+.confetti i.c{border-radius:50%;width:10px;height:10px}
+@keyframes fall{
+  0%{transform:translate3d(0,-20px,0) rotate(0)}
+  100%{transform:translate3d(var(--x,30px),110vh,0) rotate(var(--r,540deg))}}
+.paused .confetti i,.paused *{animation-play-state:paused!important}
+.serp{position:absolute;pointer-events:none;z-index:1}
+.serp path{fill:none;stroke-width:5;stroke-linecap:round}
+.anim .serp path{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 2.2s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ======================= 2. MEMÓRIA ======================= */
+.memoria{background:radial-gradient(120% 80% at 50% 0%,#4A2470 0%,var(--roxo-escuro) 60%);color:#fff}
+.memoria h2{color:var(--amarelo)}
+.polaroids{display:flex;justify-content:center;gap:14px;margin:8px 0 4px}
+.polaroid{background:#FFF6E5;padding:10px 10px 30px;border-radius:6px;width:46%;max-width:220px;
+  box-shadow:0 14px 30px rgba(0,0,0,.35);position:relative}
+.polaroid:nth-child(1){transform:rotate(-5deg)}
+.polaroid:nth-child(2){transform:rotate(4deg);margin-top:26px}
+.anim .polaroid.rv{transform:translateY(40px) rotate(0)}
+.anim .polaroid.rv.in:nth-child(1){transform:rotate(-5deg)}
+.anim .polaroid.rv.in:nth-child(2){transform:rotate(4deg)}
+.polaroid .ph-img{aspect-ratio:1;border-radius:3px;display:grid;place-items:center;text-align:center;padding:8px;
+  background:repeating-linear-gradient(45deg,#E9D6B4 0 10px,#E2CBA4 10px 20px);color:#4a3520;
+  font:700 .78rem/1.25 ui-monospace,Menlo,Consolas,monospace}
+.polaroid figcaption{position:absolute;left:0;right:0;bottom:7px;text-align:center;color:#4a3520;font-size:.8rem;font-weight:700}
+.video{position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(135deg,#1a0b29,#3B1A5C);border:3px dashed rgba(255,201,60,.8);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:18px}
+.play{width:74px;height:74px;border-radius:50%;background:var(--amarelo);display:grid;place-items:center;position:relative}
+.play svg{width:30px;height:30px;margin-left:5px}
+.anim .play::after{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--amarelo);animation:ring 2s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(1.7);opacity:0}}
+.video .ph{font-size:.85rem}
+.video small{font-size:1rem;opacity:.9}
+.quote{font-size:clamp(1.55rem,6.6vw,2.2rem);font-weight:800;line-height:1.2;border-left:6px solid var(--rosa);padding-left:16px}
+.quote em{font-style:normal;color:var(--amarelo)}
+
+/* ======================= 3. PROBLEMA ======================= */
+.problema{background:var(--creme)}
+.road-scene{border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg,#FFE3B8,#FFD08A);
+  box-shadow:inset 0 0 0 3px rgba(30,15,46,.08)}
+.road-scene svg{width:100%;height:auto}
+.leak{display:grid;gap:12px}
+.leak li{list-style:none;display:flex;gap:12px;align-items:flex-start;font-weight:700}
+.leak ul{padding:0;margin:0;display:grid;gap:12px}
+.leak .x{flex:0 0 34px;height:34px;border-radius:50%;background:var(--rosa);color:#fff;display:grid;place-items:center;font-weight:900}
+.problema .big{color:var(--roxo)}
+
+/* ======================= 4. IDEIA ======================= */
+.ideia{background:var(--amarelo)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--tinta);color:#fff;font-weight:800;font-size:1.05rem;padding:10px 16px;border-radius:99px}
+.chip.alt{background:#fff;color:var(--tinta);border:3px solid var(--tinta)}
+.ticket{background:#fff;border-radius:var(--radius);position:relative;box-shadow:0 10px 0 var(--tinta);border:3px solid var(--tinta)}
+.ticket .row{display:flex;gap:16px;align-items:center;padding:18px 20px}
+.ticket .row+.row{border-top:3px dashed rgba(30,15,46,.25)}
+.ticket .ic{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center}
+.ticket .ic svg{width:28px;height:28px}
+.ticket small{display:block;font-size:.85rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.ticket b{display:block;font-size:1.4rem;line-height:1.15}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:26px;height:26px;border-radius:50%;
+  background:var(--amarelo);border:3px solid var(--tinta);transform:translateY(-50%)}
+.ticket::before{left:-15px;clip-path:inset(0 0 0 50%)}
+.ticket::after{right:-15px;clip-path:inset(0 50% 0 0)}
+
+/* ======================= 5. DIFERENCIAL ======================= */
+.diferencial{background:linear-gradient(180deg,#FF7A1A 0%,#FF4F8B 22%,#5B2A86 46%,#1E5E9C 60%,#0B3D66 100%);color:#fff}
+.lake{border-radius:var(--radius);overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.35);border:3px solid rgba(255,255,255,.5)}
+.lake svg{width:100%;height:auto}
+.anim .boat{animation:boat 13s linear infinite}
+.anim .jet{animation:jet 8s linear infinite}
+@keyframes boat{from{transform:translateX(-90px)}to{transform:translateX(420px)}}
+@keyframes jet{from{transform:translateX(420px)}to{transform:translateX(-80px)}}
+.anim .shimmer{animation:shimmer 2.4s ease-in-out infinite alternate}
+@keyframes shimmer{to{opacity:.35}}
+.rank{display:flex;align-items:center;gap:18px}
+.rank .num{font-size:clamp(5rem,26vw,8rem);font-weight:900;line-height:.85;color:var(--amarelo);
+  text-shadow:0 6px 0 rgba(0,0,0,.25);font-variant-numeric:tabular-nums}
+.rank p{font-size:1.35rem;font-weight:800;line-height:1.2}
+.pills{display:grid;gap:10px}
+.pill{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.35);
+  border-radius:16px;padding:12px 16px;font-weight:800}
+.pill span{font-size:1.5rem}
+.callout{background:var(--amarelo);color:var(--tinta);border-radius:var(--radius);padding:22px;
+  font-size:clamp(1.6rem,7vw,2.3rem);font-weight:900;line-height:1.1;box-shadow:0 10px 0 rgba(0,0,0,.25);transform:rotate(-1.2deg)}
+.anim .callout.rv.in{transform:rotate(-1.2deg)}
+.sound{display:flex;gap:16px;align-items:center;background:rgba(11,61,102,.75);border:2px solid rgba(255,255,255,.4);
+  border-radius:var(--radius);padding:16px}
+.sound svg{flex:0 0 108px;height:72px}
+.anim .arc{animation:arc 1.8s ease-out infinite;transform-box:fill-box;transform-origin:0% 50%}
+.anim .arc.a2{animation-delay:.3s}.anim .arc.a3{animation-delay:.6s}
+@keyframes arc{0%{opacity:0;transform:translateX(-6px)}40%{opacity:1}100%{opacity:0;transform:translateX(10px)}}
+.sound p{font-weight:700;font-size:1.15rem}
+
+/* ======================= 6. PARA QUEM ======================= */
+.quem{background:var(--creme)}
+.cards{display:grid;gap:18px}
+.card{border-radius:var(--radius);padding:22px;border:3px solid var(--tinta);box-shadow:0 8px 0 var(--tinta);background:#fff}
+.card h3{font-size:1.7rem;margin:12px 0 8px}
+.card .art{height:120px;border-radius:16px;display:grid;place-items:center;overflow:hidden}
+.card .art svg{height:100%;width:auto}
+.card.c1 .art{background:linear-gradient(135deg,#FFC93C,#FF7A1A)}
+.card.c2 .art{background:linear-gradient(135deg,#FF4F8B,#5B2A86)}
+.anim .card .art .hop{animation:hop 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+.anim .card .art .hop.h2{animation-delay:.2s}.anim .card .art .hop.h3{animation-delay:.4s}.anim .card .art .hop.h4{animation-delay:.6s}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.anim .coin-drop{animation:coinDrop 2.4s ease-in infinite;transform-box:fill-box;transform-origin:center}
+@keyframes coinDrop{0%{transform:translateY(-40px);opacity:0}20%{opacity:1}70%{transform:translateY(0);opacity:1}100%{transform:translateY(0);opacity:0}}
+
+/* ======================= 7. MAPA ======================= */
+.mapa{background:radial-gradient(100% 70% at 50% 40%,#5B2A86 0%,var(--roxo-medio) 55%,var(--roxo-escuro) 100%);color:#fff}
+.map{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.18);border-radius:var(--radius);padding:6px}
+.map svg{width:100%;height:auto}
+.map .link{stroke-dasharray:200;stroke-dashoffset:0}
+.anim .map .link{stroke-dashoffset:200;transition:stroke-dashoffset 1.2s ease}
+.anim .map.in .link{stroke-dashoffset:0}
+.anim .map .city{opacity:0;transition:opacity .6s ease}
+.anim .map.in .city{opacity:1}
+.anim .map .pulse{animation:pulse 2.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{from{transform:scale(.6);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.note{font-size:.95rem;opacity:.8}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{border-radius:18px;padding:16px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3)}
+.stat .n{display:block;font-size:clamp(2.6rem,12vw,3.6rem);font-weight:900;line-height:1;color:var(--amarelo);font-variant-numeric:tabular-nums}
+.stat span{font-weight:700;font-size:1.05rem}
+
+/* ======================= 8. ECONOMIA ======================= */
+.economia{background:var(--laranja)}
+.economia h2 .fica{color:#fff;text-shadow:0 4px 0 var(--tinta)}
+.icons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ico{background:#fff;border:3px solid var(--tinta);border-radius:20px;padding:16px 12px 14px;text-align:center;position:relative;
+  box-shadow:0 6px 0 var(--tinta)}
+.ico:last-child{grid-column:1/-1}
+.ico svg{width:58px;height:58px;margin:0 auto 8px;overflow:visible}
+.ico b{font-size:1.05rem;line-height:1.2;display:block}
+.anim .ico.in .bump{animation:bump .7s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--d,0)*120ms + .5s);
+  transform-box:fill-box;transform-origin:center bottom}
+@keyframes bump{0%{transform:scale(.4)}100%{transform:scale(1)}}
+.money{display:grid;gap:12px}
+.money .box{background:var(--tinta);color:#fff;border-radius:20px;padding:18px}
+.money small{display:block;font-size:.9rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amarelo)}
+.money .ph{margin-top:8px;font-size:1.05rem}
+
+/* ======================= 9. COMO ======================= */
+.como{background:var(--creme)}
+.timeline{position:relative;padding-left:62px;display:grid;gap:22px}
+.timeline::before{content:"";position:absolute;left:23px;top:8px;bottom:8px;width:6px;border-radius:6px;background:rgba(30,15,46,.12)}
+.timeline .fill{position:absolute;left:23px;top:8px;width:6px;border-radius:6px;height:calc((100% - 16px) * var(--p,1));
+  background:linear-gradient(180deg,var(--amarelo),var(--laranja),var(--rosa),var(--roxo))}
+.step{position:relative}
+.step .dot{position:absolute;left:-62px;top:0;width:52px;height:52px;border-radius:50%;background:var(--tinta);color:var(--amarelo);
+  display:grid;place-items:center;font-weight:900;font-size:1.3rem;border:4px solid var(--creme)}
+.step h3{font-size:1.55rem;margin-bottom:4px}
+.step p{font-size:1.15rem}
+.price{display:flex;align-items:baseline;gap:8px;background:var(--rosa);color:var(--tinta);border-radius:18px;padding:14px 18px;margin-top:10px}
+.price .n{font-size:3rem;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+
+/* ======================= 10. SEGURANÇA ======================= */
+.seguranca{background:linear-gradient(180deg,var(--acude-escuro),#082B49);color:#fff}
+.seguranca h2 span{color:var(--amarelo)}
+.safe{display:grid;gap:12px}
+.safe .it{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.25);
+  border-radius:18px;padding:14px 16px}
+.safe .it svg{flex:0 0 46px;height:46px}
+.safe .it b{font-size:1.2rem;line-height:1.2}
+.buoy{width:120px;height:120px;margin:0 auto}
+.anim .buoy{animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ======================= 11. PEDIDO ======================= */
+.pedido{background:var(--amarelo)}
+.checks{display:grid;gap:10px;padding:0;margin:0}
+.checks li{list-style:none;display:flex;align-items:center;gap:14px;background:#fff;border:3px solid var(--tinta);border-radius:16px;
+  padding:12px 16px;font-weight:800;font-size:1.25rem}
+.checks svg{flex:0 0 34px;height:34px}
+.checks .tick{stroke-dasharray:30;stroke-dashoffset:0}
+.anim .checks li .tick{stroke-dashoffset:30;transition:stroke-dashoffset .5s ease;transition-delay:calc(var(--d,0)*140ms + .4s)}
+.anim .checks li.in .tick{stroke-dashoffset:0}
+.no-cost{background:var(--tinta);color:#fff;border-radius:var(--radius);padding:20px}
+.no-cost .big{color:var(--amarelo)}
+
+/* ======================= 12. GANHOS ======================= */
+.ganhos{background:linear-gradient(160deg,var(--roxo) 0%,var(--roxo-escuro) 70%);color:#fff}
+.gains{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gain{border-radius:20px;padding:18px 14px;color:var(--tinta);min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.gain svg{width:44px;height:44px}
+.gain b{font-size:1.2rem;line-height:1.15}
+.gain:nth-child(1){background:var(--amarelo)}
+.gain:nth-child(2){background:var(--rosa)}
+.gain:nth-child(3){background:var(--laranja)}
+.gain:nth-child(4){background:#7FD3FF}
+.seal{border:3px solid var(--amarelo);border-radius:var(--radius);padding:20px}
+.seal .big{color:var(--amarelo)}
+
+/* ======================= 13. DIVULGAÇÃO ======================= */
+.divulgacao{background:linear-gradient(170deg,var(--rosa) 0%,#FF6A5C 50%,var(--laranja) 100%)}
+.hashtag{font-size:clamp(2.2rem,11vw,4rem);font-weight:900;color:#fff;text-shadow:0 4px 0 var(--tinta);line-height:1;word-break:break-word}
+.phone{width:min(74vw,300px);margin:0 auto;background:var(--tinta);border-radius:38px;padding:12px;box-shadow:0 20px 40px rgba(30,15,46,.4)}
+.phone .screen{border-radius:28px;overflow:hidden;background:#fff}
+.phone .bar{display:flex;align-items:center;gap:10px;padding:10px 12px;font-weight:800;font-size:.95rem}
+.phone .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--amarelo),var(--rosa),var(--roxo));padding:2px}
+.phone .av div{width:100%;height:100%;border-radius:50%;background:#fff;display:grid;place-items:center}
+.phone .post{aspect-ratio:4/5;background:linear-gradient(180deg,#5B2A86,#FF4F8B 55%,#FFC93C);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;color:#fff;text-align:center;padding:16px;gap:6px}
+.phone .post .cig-wrap{width:46%}
+.phone .post b{font-size:1.6rem;line-height:1;text-shadow:0 3px 0 var(--roxo-escuro)}
+.phone .post span{background:var(--roxo-escuro);padding:6px 12px;border-radius:99px;font-weight:800;font-size:.95rem}
+.phone .acts{display:flex;gap:14px;padding:10px 14px}
+.phone .acts svg{width:24px;height:24px}
+.anim .heart{animation:heart 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes heart{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}}
+.steps3{display:grid;gap:12px;counter-reset:n}
+.steps3 .s3{background:#fff;border:3px solid var(--tinta);border-radius:18px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start}
+.steps3 .s3::before{counter-increment:n;content:counter(n);flex:0 0 40px;height:40px;border-radius:50%;background:var(--tinta);color:var(--amarelo);
+  display:grid;place-items:center;font-weight:900}
+.steps3 b{display:block;font-size:1.2rem}
+.steps3 p{font-size:1.05rem}
+.count{background:var(--tinta);color:#fff;border-radius:var(--radius);padding:20px;text-align:center}
+.count small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amarelo);font-size:.9rem}
+.clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.clock div{background:rgba(255,255,255,.1);border-radius:14px;padding:10px 4px}
+.clock b{display:block;font-size:clamp(1.9rem,9vw,2.8rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--amarelo)}
+.clock span{font-size:.8rem;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.06em}
+.count p{font-size:1rem}
+
+/* ======================= 14. FECHAMENTO ======================= */
+.fim{color:#fff;text-align:center;background:linear-gradient(180deg,#120720 0%,var(--roxo-escuro) 30%,#5B2A86 60%,#FF4F8B 85%,#FF7A1A 100%)}
+.stars{position:absolute;inset:0;z-index:-1}
+.stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.8}
+.anim .stars i{animation:twinkle 3s ease-in-out infinite alternate}
+@keyframes twinkle{to{opacity:.15}}
+.fim .cig-wrap{width:min(48vw,220px);margin:0 auto;position:relative}
+.anim .fim .cig-wrap{animation:float 4s ease-in-out infinite}
+.notes{position:absolute;inset:-20% -30%;pointer-events:none}
+.notes span{position:absolute;font-size:2rem;font-weight:900;color:var(--amarelo);opacity:0}
+.anim .notes span{animation:note 3s ease-out infinite}
+.notes span:nth-child(1){left:72%;top:30%}
+.notes span:nth-child(2){left:20%;top:26%;animation-delay:1s;color:var(--rosa)}
+.notes span:nth-child(3){left:80%;top:50%;animation-delay:2s;color:#7FD3FF}
+@keyframes note{0%{opacity:0;transform:translateY(20px) rotate(-10deg)}25%{opacity:1}100%{opacity:0;transform:translateY(-70px) rotate(15deg)}}
+.no-anim .notes span{opacity:1}
+.fim h2{font-size:clamp(2.6rem,12vw,5rem);text-shadow:0 4px 0 rgba(0,0,0,.3)}
+.fim .bora{font-size:clamp(2.2rem,10vw,4rem);font-weight:900;color:var(--amarelo);line-height:1;text-shadow:0 4px 0 var(--roxo-escuro)}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:420px;min-height:68px;
+  background:#1FAF5A;color:#fff;font-size:1.3rem;font-weight:900;text-decoration:none;border-radius:99px;padding:14px 24px;
+  box-shadow:0 8px 0 #0E6B35,0 18px 40px rgba(0,0,0,.35);border:3px solid #fff;transition:transform .15s ease,box-shadow .15s ease}
+.cta:active{transform:translateY(5px);box-shadow:0 3px 0 #0E6B35}
+.cta svg{width:30px;height:30px;flex:0 0 30px}
+.anim .cta{animation:ctaPulse 2.6s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+.cta-ph{display:block;margin-top:10px}
+.org{background:rgba(42,18,64,.75);border:2px solid rgba(255,255,255,.35);border-radius:var(--radius);padding:18px}
+.org small{display:block;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;color:var(--amarelo);margin-bottom:8px}
+footer.foot{background:var(--tinta);color:#fff;text-align:center;padding:28px var(--gutter) 40px;font-size:1rem}
+footer.foot b{color:var(--amarelo)}
+
+/* Foco visível */
+a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radius:8px}
+
+/* Telas maiores: só dá mais respiro */
+@media (min-width:760px){
+  :root{--gutter:40px}
+  .cards{grid-template-columns:1fr 1fr}
+  .icons{grid-template-columns:repeat(3,1fr)}
+  .ico:last-child{grid-column:auto}
+  .gains{grid-template-columns:repeat(4,1fr)}
+}
+
+/* Menos movimento: tudo parado, tudo visível */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .notes span{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+
+<!-- Mascote reaproveitada em várias seções (o JS copia para cada [data-cigarra]) -->
+<template id="tpl-cigarra">
+  <svg class="cig" viewBox="0 0 200 200" role="img" aria-label="Cigarra, mascote do bloco">
+    <!-- asas -->
+    <g class="wing wing-l">
+      <path d="M96 100 C 60 62, 10 74, 14 122 C 18 158, 66 152, 98 116 Z" fill="#CFF4FF" fill-opacity=".82" stroke="#fff" stroke-width="3"/>
+      <path d="M92 106 C 70 104, 44 110, 26 126 M90 112 C 72 124, 54 136, 40 146 M86 100 C 66 90, 46 88, 30 94" stroke="#8FD8F5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <g class="wing wing-r">
+      <path d="M104 100 C 140 62, 190 74, 186 122 C 182 158, 134 152, 102 116 Z" fill="#CFF4FF" fill-opacity=".82" stroke="#fff" stroke-width="3"/>
+      <path d="M108 106 C 130 104, 156 110, 174 126 M110 112 C 128 124, 146 136, 160 146 M114 100 C 134 90, 154 88, 170 94" stroke="#8FD8F5" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- pernas -->
+    <path d="M76 130 L58 146 M76 146 L60 164 M124 130 L142 146 M124 146 L140 164" stroke="#2A1240" stroke-width="6" stroke-linecap="round"/>
+    <!-- corpo -->
+    <ellipse cx="100" cy="132" rx="30" ry="46" fill="#FF8A1F" stroke="#2A1240" stroke-width="4"/>
+    <path d="M74 126 Q100 138 126 126 M76 144 Q100 156 124 144 M82 160 Q100 170 118 160" stroke="#C9521A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- antenas -->
+    <path d="M86 52 Q78 26 60 22" stroke="#2A1240" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M114 52 Q122 26 140 22" stroke="#2A1240" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="58" cy="21" r="7" fill="#FF4F8B" stroke="#2A1240" stroke-width="3"/>
+    <circle cx="142" cy="21" r="7" fill="#FF4F8B" stroke="#2A1240" stroke-width="3"/>
+    <!-- cabeça -->
+    <ellipse cx="100" cy="80" rx="46" ry="34" fill="#FFC93C" stroke="#2A1240" stroke-width="4"/>
+    <g class="blink">
+      <circle cx="68" cy="74" r="17" fill="#2A1240"/>
+      <circle cx="132" cy="74" r="17" fill="#2A1240"/>
+      <circle cx="62" cy="68" r="6" fill="#fff"/>
+      <circle cx="126" cy="68" r="6" fill="#fff"/>
+      <circle cx="73" cy="80" r="2.5" fill="#fff"/>
+      <circle cx="137" cy="80" r="2.5" fill="#fff"/>
+    </g>
+    <ellipse cx="80" cy="96" rx="8" ry="4.5" fill="#FF4F8B" opacity=".75"/>
+    <ellipse cx="120" cy="96" rx="8" ry="4.5" fill="#FF4F8B" opacity=".75"/>
+    <path d="M88 94 Q100 108 112 94" stroke="#2A1240" stroke-width="4.5" fill="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- confete na cabeça -->
+    <rect x="94" y="40" width="8" height="12" rx="2" fill="#FF4F8B" transform="rotate(18 98 46)"/>
+    <circle cx="80" cy="50" r="3.5" fill="#1E7FC2"/>
+    <circle cx="118" cy="48" r="3.5" fill="#5B2A86"/>
+  </svg>
+</template>
+
+<!-- ============ 1. ABERTURA ============ -->
+<section class="s hero" id="inicio" data-pause>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="sun" data-par="0.35" aria-hidden="true"></div>
+  <div class="hills" aria-hidden="true" data-par="0.18">
+    <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+      <path d="M0 70 C 40 40, 70 50, 110 30 C 150 12, 180 46, 220 38 C 260 30, 290 10, 330 26 C 360 38, 380 30, 400 34 L400 100 L0 100Z" fill="#7A2E86" opacity=".85"/>
+      <path d="M0 84 C 50 64, 90 76, 140 62 C 190 48, 230 74, 280 64 C 330 54, 360 70, 400 60 L400 100 L0 100Z" fill="#3B1A5C"/>
+      <!-- mandacarus -->
+      <g fill="#2A1240">
+        <rect x="60" y="56" width="5" height="26" rx="2.5"/><rect x="54" y="62" width="4" height="12" rx="2"/><rect x="67" y="60" width="4" height="10" rx="2"/>
+        <rect x="320" y="50" width="5" height="26" rx="2.5"/><rect x="314" y="56" width="4" height="12" rx="2"/><rect x="327" y="54" width="4" height="10" rx="2"/>
+      </g>
+    </svg>
+  </div>
+  <div class="water" aria-hidden="true">
+    <svg class="wv wv1" viewBox="0 0 800 30" preserveAspectRatio="none"><path d="M0 15 Q 50 0 100 15 T 200 15 T 300 15 T 400 15 T 500 15 T 600 15 T 700 15 T 800 15 V30 H0Z" fill="#3A9BDB"/></svg>
+    <svg class="wv wv2" viewBox="0 0 800 30" preserveAspectRatio="none"><path d="M0 15 Q 50 30 100 15 T 200 15 T 300 15 T 400 15 T 500 15 T 600 15 T 700 15 T 800 15 V30 H0Z" fill="#7FD3FF"/></svg>
+    <span class="glint"></span><span class="glint g2"></span><span class="glint g3"></span>
+  </div>
+  <div class="confetti" aria-hidden="true"></div>
+  <svg class="serp" viewBox="0 0 120 200" style="left:-10px;top:60px;width:90px" aria-hidden="true">
+    <path d="M10 0 C 80 30, -20 60, 60 90 S 0 150, 70 190" stroke="#FFC93C"/>
+  </svg>
+  <svg class="serp" viewBox="0 0 120 200" style="right:-6px;top:120px;width:80px;transform:scaleX(-1)" aria-hidden="true">
+    <path d="M10 0 C 80 30, -20 60, 60 90 S 0 150, 70 190" stroke="#FF4F8B" style="animation-delay:.4s"/>
+  </svg>
+
+  <div class="hero-content" data-par="-0.12">
+    <p class="kicker">Varjota · Ceará</p>
+    <div class="cig-wrap"><div class="cig-float" data-cigarra></div></div>
+    <h1><span class="l1">Bloco da</span><span class="l2">Cigarra</span></h1>
+    <p class="sub">O carnaval de Varjota está de volta</p>
+    <p class="slogan">“Quando a cigarra canta, a festa começa.”</p>
+  </div>
+  <a class="scroll-hint" href="#memoria">Vem com a gente
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
+</section>
+
+<!-- ============ 2. MEMÓRIA ============ -->
+<section class="s memoria" id="memoria">
+  <div class="wrap stack">
+    <p class="tag rv"><b>01</b> Memória</p>
+    <h2 class="rv" style="--d:1">Varjota já teve carnaval.</h2>
+    <p class="lead rv" style="--d:2">Os mais velhos lembram. Os mais novos só ouviram contar.</p>
+
+    <div class="polaroids" aria-hidden="false">
+      <figure class="polaroid rv" style="--d:2;margin:0"><div class="ph-img">[FOTO ANTIGA DO CARNAVAL]</div><figcaption>[ANO]</figcaption></figure>
+      <figure class="polaroid rv" style="--d:3;margin:0"><div class="ph-img">[FOTO ANTIGA DO CARNAVAL]</div><figcaption>[ANO]</figcaption></figure>
+    </div>
+
+    <p class="rv">A rua cheia. A cidade inteira junta.<br>Um dia a festa parou.<br><strong class="hl-rosa">A saudade, não.</strong></p>
+
+    <!-- Troque este bloco por: <video src="depoimentos.mp4" controls playsinline poster="capa.jpg"></video> -->
+    <div class="video rv z" role="img" aria-label="Espaço reservado para vídeo de depoimentos">
+      <div class="play"><svg viewBox="0 0 24 24" fill="#2A1240" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></div>
+      <span class="ph">[VÍDEO: DEPOIMENTOS DOS MAIS VELHOS]</span>
+      <small>Quem viveu conta como era.</small>
+    </div>
+
+    <p class="quote rv">Agora é a juventude que pede: <em>deixa a gente trazer de volta.</em></p>
+  </div>
+  <div class="wave" style="color:#FFF6E5"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 3. O PROBLEMA ============ -->
+<section class="s problema" id="problema">
+  <div class="wrap stack">
+    <p class="tag rv" style="color:#C2367E"><b>02</b> O problema</p>
+    <h2 class="rv" style="--d:1">Hoje, quem quer brincar o carnaval <span class="hl">pega a estrada.</span></h2>
+    <p class="lead rv" style="--d:2">E o dinheiro vai junto.</p>
+
+    <div class="road-scene rv z" data-smil>
+      <svg viewBox="0 0 360 230" role="img" aria-label="Animação: moedas saindo de Varjota pela estrada rumo a outras cidades">
+        <circle cx="300" cy="46" r="26" fill="#FFF3B0"/>
+        <path d="M0 150 C 80 130, 160 150, 360 120 V230 H0Z" fill="#E8B563"/>
+        <!-- estrada -->
+        <path id="estrada" d="M118 182 C 190 182, 230 128, 370 118" stroke="#4A3B55" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M118 182 C 190 182, 230 128, 370 118" stroke="#FFE38A" stroke-width="3" stroke-dasharray="10 10" fill="none"/>
+        <!-- cidade -->
+        <g>
+          <rect x="14" y="140" width="34" height="46" fill="#FF7A1A" stroke="#2A1240" stroke-width="3"/>
+          <path d="M10 142 L31 120 L52 142Z" fill="#C2367E" stroke="#2A1240" stroke-width="3" stroke-linejoin="round"/>
+          <rect x="25" y="164" width="12" height="22" fill="#2A1240"/>
+          <rect x="54" y="118" width="26" height="68" fill="#FFF6E5" stroke="#2A1240" stroke-width="3"/>
+          <path d="M50 120 L67 96 L84 120Z" fill="#5B2A86" stroke="#2A1240" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M67 84 V96 M62 89 H72" stroke="#2A1240" stroke-width="3" stroke-linecap="round"/>
+          <rect x="62" y="164" width="10" height="22" rx="5" fill="#2A1240"/>
+          <rect x="86" y="150" width="30" height="36" fill="#FFC93C" stroke="#2A1240" stroke-width="3"/>
+          <path d="M82 152 L101 134 L120 152Z" fill="#FF4F8B" stroke="#2A1240" stroke-width="3" stroke-linejoin="round"/>
+          <rect x="95" y="166" width="10" height="10" fill="#2A1240"/>
+        </g>
+        <text x="62" y="212" text-anchor="middle" font-size="17" font-weight="900" fill="#2A1240" font-family="system-ui,sans-serif">Varjota</text>
+        <!-- placa -->
+        <g>
+          <rect x="262" y="70" width="5" height="44" fill="#2A1240"/>
+          <rect x="214" y="54" width="128" height="28" rx="6" fill="#1FAF5A" stroke="#fff" stroke-width="2.5"/>
+          <text x="278" y="73" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="system-ui,sans-serif">Outras cidades →</text>
+        </g>
+        <!-- moedas indo embora -->
+        <g class="coins">
+          <g class="coin" data-static="120,165"><circle r="10" fill="#FFC93C" stroke="#B8741A" stroke-width="3"/><text y="4.5" text-anchor="middle" font-size="11" font-weight="900" fill="#8A4E0E" font-family="system-ui,sans-serif">R$</text>
+            <animateMotion dur="4s" repeatCount="indefinite" begin="0s" path="M100 160 C 180 160, 220 106, 380 96"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="4s" repeatCount="indefinite" begin="0s"/></g>
+          <g class="coin" data-static="190,150"><circle r="10" fill="#FFC93C" stroke="#B8741A" stroke-width="3"/><text y="4.5" text-anchor="middle" font-size="11" font-weight="900" fill="#8A4E0E" font-family="system-ui,sans-serif">R$</text>
+            <animateMotion dur="4s" repeatCount="indefinite" begin="-1s" path="M100 160 C 180 160, 220 106, 380 96"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="4s" repeatCount="indefinite" begin="-1s"/></g>
+          <g class="coin" data-static="250,118"><circle r="10" fill="#FFC93C" stroke="#B8741A" stroke-width="3"/><text y="4.5" text-anchor="middle" font-size="11" font-weight="900" fill="#8A4E0E" font-family="system-ui,sans-serif">R$</text>
+            <animateMotion dur="4s" repeatCount="indefinite" begin="-2s" path="M100 160 C 180 160, 220 106, 380 96"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="4s" repeatCount="indefinite" begin="-2s"/></g>
+          <g class="coin" data-static="315,102"><circle r="10" fill="#FFC93C" stroke="#B8741A" stroke-width="3"/><text y="4.5" text-anchor="middle" font-size="11" font-weight="900" fill="#8A4E0E" font-family="system-ui,sans-serif">R$</text>
+            <animateMotion dur="4s" repeatCount="indefinite" begin="-3s" path="M100 160 C 180 160, 220 106, 380 96"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="4s" repeatCount="indefinite" begin="-3s"/></g>
+        </g>
+        <!-- carro saindo -->
+        <g class="car" data-static="160,176">
+          <g transform="translate(-20,-14)">
+            <rect x="0" y="6" width="40" height="14" rx="5" fill="#FF4F8B" stroke="#2A1240" stroke-width="2.5"/>
+            <path d="M8 6 L13 0 H27 L32 6Z" fill="#CFF4FF" stroke="#2A1240" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="10" cy="21" r="4.5" fill="#2A1240"/><circle cx="30" cy="21" r="4.5" fill="#2A1240"/>
+          </g>
+          <animateMotion dur="6s" repeatCount="indefinite" path="M118 176 C 190 176, 230 122, 390 112"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="leak">
+      <ul>
+        <li class="rv" style="--d:1"><span class="x">✕</span>O abadá é comprado fora.</li>
+        <li class="rv" style="--d:2"><span class="x">✕</span>O lanche, a bebida e a dormida também.</li>
+        <li class="rv" style="--d:3"><span class="x">✕</span>E aqui o comércio fica esperando um movimento que foi embora.</li>
+      </ul>
+    </div>
+    <p class="big rv">Varjota faz a festa dos outros.<br>Tá na hora de fazer a nossa.</p>
+  </div>
+  <div class="wave" style="color:#FFC93C"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C 70 50, 150 4, 230 30 S 350 50, 400 22 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 4. A IDEIA ============ -->
+<section class="s ideia" id="ideia">
+  <div class="wrap stack">
+    <p class="tag rv"><b>03</b> A ideia</p>
+    <h2 class="rv" style="--d:1">Um bloco da cidade. Não de um grupo.</h2>
+    <div class="chips">
+      <span class="chip rv z" style="--d:1">Da sociedade civil</span>
+      <span class="chip alt rv z" style="--d:2">Apoiado pela prefeitura</span>
+      <span class="chip rv z" style="--d:3">Sem cor política</span>
+      <span class="chip alt rv z" style="--d:4">Pra virar tradição todo ano</span>
+    </div>
+
+    <div class="ticket rv" style="--d:2">
+      <div class="row">
+        <div class="ic" style="background:#FF4F8B"><svg viewBox="0 0 24 24" fill="none" stroke="#1E0F2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+        <div><small>Quando</small><b>Sexta e sábado de carnaval</b></div>
+      </div>
+      <div class="row">
+        <div class="ic" style="background:#FFC93C"><svg viewBox="0 0 24 24" fill="none" stroke="#1E0F2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><small>Horário</small><b>Das 16h30 às 21h</b></div>
+      </div>
+      <div class="row">
+        <div class="ic" style="background:#7FD3FF"><svg viewBox="0 0 24 24" fill="none" stroke="#1E0F2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+        <div><small>Onde</small><b>Na Guarita, às margens do Açude Araras</b></div>
+      </div>
+    </div>
+
+    <p class="big rv">Sem dono, sem partido.<br>Com a cara de Varjota.</p>
+  </div>
+  <div class="wave" style="color:#FF7A1A"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 5. O DIFERENCIAL ============ -->
+<section class="s diferencial" id="diferencial">
+  <div class="wrap stack">
+    <p class="tag rv"><b>04</b> O diferencial</p>
+    <h2 class="rv" style="--d:1">Carnaval na beira do açude.</h2>
+
+    <div class="lake rv z" data-par="-0.06">
+      <svg viewBox="0 0 360 200" role="img" aria-label="Pôr do sol no Açude Araras com lancha e jet ski passando">
+        <defs>
+          <linearGradient id="lkSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B2A86"/><stop offset=".55" stop-color="#FF4F8B"/><stop offset="1" stop-color="#FFC93C"/></linearGradient>
+          <linearGradient id="lkWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E7FC2"/><stop offset="1" stop-color="#0B3D66"/></linearGradient>
+          <clipPath id="lkClip"><rect width="360" height="200"/></clipPath>
+        </defs>
+        <g clip-path="url(#lkClip)">
+          <rect width="360" height="110" fill="url(#lkSky)"/>
+          <circle cx="180" cy="110" r="44" fill="#FFE38A"/>
+          <path d="M0 104 C 50 86, 90 96, 130 90 L 150 110 H0Z" fill="#3B1A5C"/>
+          <path d="M240 108 C 270 88, 320 86, 360 96 V110 H230Z" fill="#3B1A5C"/>
+          <rect y="110" width="360" height="90" fill="url(#lkWater)"/>
+          <g class="shimmer" fill="#FFE38A">
+            <rect x="140" y="118" width="80" height="4" rx="2"/>
+            <rect x="152" y="130" width="56" height="4" rx="2" opacity=".8"/>
+            <rect x="162" y="142" width="36" height="4" rx="2" opacity=".6"/>
+            <rect x="170" y="154" width="20" height="4" rx="2" opacity=".45"/>
+          </g>
+          <!-- lancha -->
+          <g class="boat">
+            <path d="M20 158 L74 158 L64 170 L28 170Z" fill="#fff" stroke="#2A1240" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M36 158 L44 148 H60 L64 158Z" fill="#FF4F8B" stroke="#2A1240" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M0 170 Q 10 166 22 170" stroke="#CFF4FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- jet ski -->
+          <g class="jet">
+            <path d="M8 134 L36 134 L32 141 L12 141Z" fill="#FFC93C" stroke="#2A1240" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle cx="22" cy="126" r="4" fill="#2A1240"/><path d="M22 130 L22 134" stroke="#2A1240" stroke-width="3"/>
+            <path d="M38 140 Q 48 136 58 140" stroke="#CFF4FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- beira com gente -->
+          <path d="M0 188 C 90 176, 270 176, 360 188 V200 H0Z" fill="#E8B563"/>
+          <g fill="#2A1240">
+            <circle cx="60" cy="176" r="4"/><rect x="57" y="180" width="6" height="10" rx="3"/>
+            <circle cx="80" cy="174" r="4"/><rect x="77" y="178" width="6" height="11" rx="3"/>
+            <circle cx="280" cy="176" r="4"/><rect x="277" y="180" width="6" height="10" rx="3"/>
+            <circle cx="300" cy="175" r="4"/><rect x="297" y="179" width="6" height="11" rx="3"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="rank rv">
+      <span class="num"><span data-count="4">4</span>º</span>
+      <p>O Açude Araras é o quarto maior açude do Ceará.</p>
+    </div>
+
+    <div class="pills">
+      <div class="pill rv l" style="--d:1"><span aria-hidden="true">🌅</span>Pôr do sol na água</div>
+      <div class="pill rv l" style="--d:2"><span aria-hidden="true">🚤</span>Lancha e jet ski passando</div>
+      <div class="pill rv l" style="--d:3"><span aria-hidden="true">🎉</span>O bloco animando a beira</div>
+    </div>
+
+    <p class="callout rv z">Nenhuma cidade da região tem isso.</p>
+
+    <div class="sound rv">
+      <svg viewBox="0 0 108 72" aria-hidden="true">
+        <rect x="4" y="16" width="30" height="40" rx="6" fill="#FFC93C" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="19" cy="30" r="6" fill="#2A1240"/><circle cx="19" cy="46" r="4" fill="#2A1240"/>
+        <path class="arc" d="M42 24 Q52 36 42 48" stroke="#7FD3FF" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path class="arc a2" d="M52 16 Q66 36 52 56" stroke="#7FD3FF" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path class="arc a3" d="M62 8 Q80 36 62 64" stroke="#7FD3FF" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M78 54 Q86 48 94 54 T 108 54" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M78 64 Q86 58 94 64 T 108 64" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>
+      </svg>
+      <p><strong>O som fica virado pra água.</strong><br>Menos barulho pros moradores, mais festa pra quem veio.</p>
+    </div>
+  </div>
+  <div class="wave" style="color:#FFF6E5"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C 70 50, 150 4, 230 30 S 350 50, 400 22 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 6. PARA QUEM É ============ -->
+<section class="s quem" id="quem">
+  <div class="wrap stack">
+    <p class="tag rv" style="color:#C2367E"><b>05</b> Pra quem é</p>
+    <h2 class="rv" style="--d:1">No mesmo bloco cabe todo mundo.</h2>
+
+    <div class="cards">
+      <article class="card c1 rv l" style="--d:1">
+        <div class="art">
+          <svg viewBox="0 0 220 120" aria-hidden="true">
+            <g class="hop"><circle cx="40" cy="54" r="12" fill="#2A1240"/><rect x="28" y="68" width="24" height="40" rx="12" fill="#2A1240"/></g>
+            <g class="hop h2"><circle cx="85" cy="48" r="12" fill="#5B2A86"/><rect x="73" y="62" width="24" height="46" rx="12" fill="#5B2A86"/></g>
+            <g class="hop h3"><circle cx="135" cy="48" r="12" fill="#2A1240"/><rect x="123" y="62" width="24" height="46" rx="12" fill="#2A1240"/></g>
+            <g class="hop h4"><circle cx="180" cy="54" r="12" fill="#5B2A86"/><rect x="168" y="68" width="24" height="40" rx="12" fill="#5B2A86"/></g>
+            <g class="coin-drop"><circle cx="110" cy="20" r="11" fill="#FFF3B0" stroke="#2A1240" stroke-width="3"/><text x="110" y="24.5" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1240" font-family="system-ui,sans-serif">R$</text></g>
+          </svg>
+        </div>
+        <h3>A turma da vaquinha</h3>
+        <p>O jovem que trabalha a semana toda, junta os amigos, cada um bota um pouco e pronto: carnaval garantido, sem pegar estrada.</p>
+      </article>
+      <article class="card c2 rv r" style="--d:2">
+        <div class="art">
+          <svg viewBox="0 0 220 120" aria-hidden="true">
+            <circle cx="180" cy="34" r="16" fill="#FFE38A"/>
+            <g class="hop"><circle cx="60" cy="40" r="13" fill="#fff"/><rect x="47" y="56" width="26" height="54" rx="13" fill="#fff"/></g>
+            <g class="hop h3"><circle cx="105" cy="44" r="13" fill="#FFC93C"/><rect x="92" y="60" width="26" height="50" rx="13" fill="#FFC93C"/></g>
+            <g class="hop h2"><circle cx="140" cy="68" r="9" fill="#fff"/><rect x="131" y="80" width="18" height="30" rx="9" fill="#fff"/></g>
+            <path d="M70 70 L95 70" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+            <path d="M115 76 L134 86" stroke="#FFC93C" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>As famílias</h3>
+        <p>Fim de tarde, pôr do sol, criança no ombro. Festa pra curtir com calma e voltar pra casa cedo.</p>
+      </article>
+    </div>
+    <p class="big rv" style="color:#5B2A86">Perto de casa, no horário certo, com o preço que cabe no bolso.</p>
+  </div>
+  <div class="wave" style="color:#3B1A5C"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 7. VARJOTA NO CENTRO ============ -->
+<section class="s mapa" id="mapa">
+  <div class="wrap stack">
+    <p class="tag rv"><b>06</b> A região</p>
+    <h2 class="rv" style="--d:1">Varjota no centro da região.</h2>
+    <p class="lead rv" style="--d:2">Quando a festa é aqui, a região vem pra cá.</p>
+
+    <div class="map rv z">
+      <svg viewBox="0 0 360 320" role="img" aria-label="Mapa ilustrativo: Varjota no centro, cercada por Cariré, Reriutaba, Pires Ferreira e Hidrolândia, e a cerca de 40 minutos de Guaraciaba do Norte, Ipu e Santa Quitéria">
+        <circle cx="180" cy="160" r="138" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="6 8"/>
+        <circle cx="180" cy="160" r="82" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+        <text x="180" y="16" text-anchor="middle" font-size="12" font-weight="800" fill="#FFE38A" font-family="system-ui,sans-serif" letter-spacing="1">≈ 40 MIN</text>
+        <!-- ligações -->
+        <g stroke-linecap="round" fill="none">
+          <path class="link" d="M180 160 L180 84" stroke="#FFC93C" stroke-width="4"/>
+          <path class="link" d="M180 160 L108 128" stroke="#FFC93C" stroke-width="4"/>
+          <path class="link" d="M180 160 L112 202" stroke="#FFC93C" stroke-width="4"/>
+          <path class="link" d="M180 160 L196 240" stroke="#FFC93C" stroke-width="4"/>
+          <path class="link" d="M180 160 L48 110" stroke="#FF4F8B" stroke-width="3" stroke-dasharray="4 7"/>
+          <path class="link" d="M180 160 L62 236" stroke="#FF4F8B" stroke-width="3" stroke-dasharray="4 7"/>
+          <path class="link" d="M180 160 L312 214" stroke="#FF4F8B" stroke-width="3" stroke-dasharray="4 7"/>
+        </g>
+        <!-- vizinhas -->
+        <g font-family="system-ui,sans-serif" font-weight="800" font-size="13" fill="#fff">
+          <g class="city"><circle cx="180" cy="84" r="8" fill="#FFC93C"/><text x="180" y="70" text-anchor="middle">Cariré</text></g>
+          <g class="city"><circle cx="108" cy="128" r="8" fill="#FFC93C"/><text x="108" y="114" text-anchor="middle">Reriutaba</text></g>
+          <g class="city"><circle cx="112" cy="202" r="8" fill="#FFC93C"/><text x="112" y="224" text-anchor="middle">Pires Ferreira</text></g>
+          <g class="city"><circle cx="196" cy="240" r="8" fill="#FFC93C"/><text x="196" y="262" text-anchor="middle">Hidrolândia</text></g>
+          <g class="city"><circle cx="48" cy="110" r="7" fill="#FF4F8B"/><text x="48" y="94" text-anchor="middle" font-size="12">Guaraciaba</text></g>
+          <g class="city"><circle cx="62" cy="236" r="7" fill="#FF4F8B"/><text x="62" y="258" text-anchor="middle" font-size="12">Ipu</text></g>
+          <g class="city"><circle cx="312" cy="214" r="7" fill="#FF4F8B"/><text x="312" y="236" text-anchor="middle" font-size="12">Santa Quitéria</text></g>
+        </g>
+        <!-- Varjota -->
+        <circle class="pulse" cx="180" cy="160" r="18" fill="#FFC93C" opacity=".6"/>
+        <circle cx="180" cy="160" r="18" fill="#FFC93C" stroke="#fff" stroke-width="4"/>
+        <rect x="128" y="182" width="104" height="30" rx="15" fill="#fff"/>
+        <text x="180" y="203" text-anchor="middle" font-size="17" font-weight="900" fill="#2A1240" font-family="system-ui,sans-serif">VARJOTA</text>
+      </svg>
+    </div>
+    <p class="note rv">Mapa ilustrativo, fora de escala. Amarelo: cidades vizinhas. Rosa: a cerca de 40 minutos (Guaraciaba do Norte, Ipu e Santa Quitéria).</p>
+
+    <div class="stats">
+      <div class="stat rv" style="--d:1"><span class="n" data-count="4">4</span><span>cidades vizinhas</span></div>
+      <div class="stat rv" style="--d:2"><span class="n" data-count="3">3</span><span>a cerca de 40&nbsp;min</span></div>
+    </div>
+  </div>
+  <div class="wave" style="color:#FF7A1A"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C 70 50, 150 4, 230 30 S 350 50, 400 22 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 8. ECONOMIA ============ -->
+<section class="s economia" id="economia">
+  <div class="wrap stack">
+    <p class="tag rv"><b>07</b> Economia</p>
+    <h2 class="rv" style="--d:1">O dinheiro que ia embora <span class="fica">fica em casa.</span></h2>
+
+    <div class="icons">
+      <div class="ico rv z" style="--d:0">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="bump"><path d="M16 18h26v32a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z" fill="#FFC93C"/><path d="M42 26h5a6 6 0 0 1 0 12h-5"/><path d="M16 26h26" stroke="#fff"/><path d="M20 12c2-4 6-4 8 0 2-4 6-4 8 0" /></g>
+        </svg>
+        <b>Bares e barracas</b>
+      </div>
+      <div class="ico rv z" style="--d:1">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="bump" style="--d:1"><circle cx="32" cy="34" r="16" fill="#FF4F8B"/><circle cx="32" cy="34" r="9" fill="#fff"/><path d="M8 18v12a4 4 0 0 0 4 4v18M8 18v8M14 18v8"/><path d="M56 18c-5 2-6 10-6 16h6v18"/></g>
+        </svg>
+        <b>Restaurantes</b>
+      </div>
+      <div class="ico rv z" style="--d:2">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="bump" style="--d:2"><path d="M6 48V18M6 38h52v10M58 48V32a6 6 0 0 0-6-6H28v12" fill="#7FD3FF"/><circle cx="16" cy="30" r="5" fill="#FFC93C"/><path d="M46 10l4-4M50 14h6M42 8V2" stroke="#FF7A1A"/></g>
+        </svg>
+        <b>Hospedagens</b>
+      </div>
+      <div class="ico rv z" style="--d:3">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="bump" style="--d:3"><path d="M10 28a22 22 0 0 1 44 0z" fill="#FF7A1A"/><path d="M32 28v22"/><path d="M4 52q7-5 14 0t14 0 14 0 14 0" stroke="#1E7FC2"/><path d="M4 60q7-5 14 0t14 0 14 0 14 0" stroke="#1E7FC2"/></g>
+        </svg>
+        <b>Beira-rios no dia seguinte</b>
+      </div>
+      <div class="ico rv z" style="--d:4">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="bump" style="--d:4"><path d="M8 26h48v30H8z" fill="#fff"/><path d="M6 14h52l-4 12H10z" fill="#5B2A86"/><path d="M18 14l-2 12M30 14v12M42 14l2 12" stroke="#fff"/><path d="M26 56V40h12v16"/></g>
+        </svg>
+        <b>Comércio em geral</b>
+      </div>
+    </div>
+
+    <div class="money">
+      <div class="box rv l"><small>Público estimado</small><span class="ph">[PÚBLICO ESTIMADO]</span></div>
+      <div class="box rv r"><small>Valor movimentado na cidade</small><span class="ph">[VALOR MOVIMENTADO]</span></div>
+    </div>
+    <p class="big rv">Cada real gasto aqui gira de novo no comércio de Varjota.</p>
+  </div>
+  <div class="wave" style="color:#FFF6E5"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 9. COMO VAI ACONTECER ============ -->
+<section class="s como" id="como">
+  <div class="wrap stack">
+    <p class="tag rv" style="color:#C2367E"><b>08</b> Como vai acontecer</p>
+    <h2 class="rv" style="--d:1">Festa grande, custo pequeno.</h2>
+    <p class="lead rv" style="--d:2">Um modelo em parceria: cada um entra com o que já tem.</p>
+
+    <div class="timeline" data-progress>
+      <span class="fill" aria-hidden="true"></span>
+      <div class="step rv r"><span class="dot">1</span><h3>Palco</h3><p>Com a estrutura que a prefeitura já tem contratada.</p></div>
+      <div class="step rv r"><span class="dot">2</span><h3>Som</h3><p>Paredões de empresários locais.</p></div>
+      <div class="step rv r"><span class="dot">3</span><h3>Atrações</h3><p>DJs e cantores da terra, em troca de visibilidade.<br><span class="ph">[ATRAÇÕES A CONFIRMAR]</span></p></div>
+      <div class="step rv r"><span class="dot">4</span><h3>Abadá acessível</h3><p>Pensado pra divulgar o bloco e vestir a cidade.</p>
+        <div class="price"><span>até</span><span class="n">R$&nbsp;<span data-count="30">30</span></span></div></div>
+      <div class="step rv r"><span class="dot">5</span><h3>Contas abertas</h3><p>Prestação de contas transparente: o que entrou, o que saiu e pra onde foi.</p></div>
+    </div>
+  </div>
+  <div class="wave" style="color:#0B3D66"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C 70 50, 150 4, 230 30 S 350 50, 400 22 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 10. SEGURANÇA ============ -->
+<section class="s seguranca" id="seguranca">
+  <div class="wrap stack">
+    <p class="tag rv"><b>09</b> Segurança</p>
+    <svg class="buoy rv z" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#fff" stroke-width="20"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#FF4F8B" stroke-width="20" stroke-dasharray="31.4 31.4"/>
+    </svg>
+    <h2 class="rv" style="--d:1">Segurança <span>em primeiro lugar.</span></h2>
+
+    <div class="safe">
+      <div class="it rv l" style="--d:1">
+        <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#FF4F8B"/><path d="M24 12c4 6 8 9 8 15a8 8 0 0 1-16 0c0-4 2-6 4-8 0 3 1 5 3 5 0-4 0-8 1-12z" fill="#FFC93C" stroke="#2A1240" stroke-width="2.5"/></svg>
+        <b>Bombeiros de prontidão perto do açude</b>
+      </div>
+      <div class="it rv l" style="--d:2">
+        <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#1E7FC2"/><path d="M10 28q4-4 7 0t7 0 7 0 7 0M10 35q4-4 7 0t7 0 7 0 7 0" stroke="#fff" stroke-width="3"/><path d="M12 12l24 24" stroke="#FF4F8B" stroke-width="4.5"/></svg>
+        <b>Banho no açude proibido durante o evento</b>
+      </div>
+      <div class="it rv l" style="--d:3">
+        <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#FFC93C"/><path d="M24 10l11 4v9c0 7-5 12-11 15-6-3-11-8-11-15v-9z" fill="#fff" stroke="#2A1240" stroke-width="3"/><path d="M19 24l4 4 7-8" stroke="#2A1240" stroke-width="3"/></svg>
+        <b>Apoio das secretarias e da Guarda</b>
+      </div>
+      <div class="it rv l" style="--d:4">
+        <svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fff"/><circle cx="24" cy="24" r="13" stroke="#2A1240" stroke-width="3"/><path d="M24 17v7l5 3" stroke="#2A1240" stroke-width="3"/></svg>
+        <b>Encerramento cedo: às 21h, todo mundo pra casa</b>
+      </div>
+    </div>
+    <p class="big rv">Festa boa é festa que termina bem.</p>
+  </div>
+  <div class="wave" style="color:#FFC93C"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 11. O QUE PEDIMOS ============ -->
+<section class="s pedido" id="pedido">
+  <div class="wrap stack">
+    <p class="tag rv"><b>10</b> O que pedimos</p>
+    <h2 class="rv" style="--d:1">Apoio que não pesa no caixa.</h2>
+    <p class="lead rv" style="--d:2">A gente sabe: o FPM caiu e cada real conta. Por isso o pedido é de apoio e estrutura.</p>
+
+    <ul class="checks">
+      <li class="rv" style="--d:0"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Palco e estrutura</li>
+      <li class="rv" style="--d:1"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Licenças</li>
+      <li class="rv" style="--d:2"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Bombeiros</li>
+      <li class="rv" style="--d:3"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Guarda</li>
+      <li class="rv" style="--d:4"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Limpeza</li>
+      <li class="rv" style="--d:5"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#1E0F2E"/><path class="tick" d="M10 17.5l5 5 9-10" stroke="#FFC93C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Divulgação</li>
+    </ul>
+
+    <div class="no-cost rv z">
+      <p class="big">O resto, a sociedade faz.</p>
+      <p style="margin-top:8px">Som, atrações, abadá e organização ficam com a comissão do bloco e os parceiros locais.</p>
+    </div>
+  </div>
+  <div class="wave" style="color:#5B2A86"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C 70 50, 150 4, 230 30 S 350 50, 400 22 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 12. GANHOS PARA A GESTÃO ============ -->
+<section class="s ganhos" id="ganhos">
+  <div class="wrap stack">
+    <p class="tag rv"><b>11</b> Ganhos para a gestão</p>
+    <h2 class="rv" style="--d:1">Todo mundo ganha. A cidade, primeiro.</h2>
+
+    <div class="gains">
+      <div class="gain rv z" style="--d:1">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 40V18l16-10 16 10v22z"/><path d="M18 40V28h12v12"/><path d="M24 8v-4"/></svg>
+        <b>Uma tradição cultural resgatada</b>
+      </div>
+      <div class="gain rv z" style="--d:2">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/></svg>
+        <b>A cidade em evidência na região</b>
+      </div>
+      <div class="gain rv z" style="--d:3">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 40h36"/><path d="M8 32l10-10 8 6 14-16"/><path d="M32 12h8v8"/></svg>
+        <b>A economia aquecida</b>
+      </div>
+      <div class="gain rv z" style="--d:4">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1E0F2E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z"/></svg>
+        <b>A juventude valorizada</b>
+      </div>
+    </div>
+
+    <div class="seal rv">
+      <p class="big">Um projeto da sociedade.</p>
+      <p class="lead" style="margin-top:8px">Que qualquer gestão pode abraçar — e manter.</p>
+    </div>
+  </div>
+  <div class="wave" style="color:#FF4F8B"><svg viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 80 0, 160 56, 240 26 S 360 10, 400 28 V56 H0Z" fill="currentColor"/></svg></div>
+</section>
+
+<!-- ============ 13. DIVULGAÇÃO ============ -->
+<section class="s divulgacao" id="divulgacao">
+  <div class="wrap stack">
+    <p class="tag rv"><b>12</b> Divulgação</p>
+    <h2 class="rv" style="--d:1">Antes da festa, o esquenta.</h2>
+    <p class="hashtag rv z" style="--d:2">#Esquenta<br>Varjota</p>
+
+    <div class="phone rv">
+      <div class="screen">
+        <div class="bar"><div class="av"><div><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="#FFC93C"/><circle cx="8.5" cy="11" r="2.2" fill="#2A1240"/><circle cx="15.5" cy="11" r="2.2" fill="#2A1240"/></svg></div></div><span class="ph" style="font-size:.78rem">[@ PERFIL DO BLOCO]</span></div>
+        <div class="post">
+          <div class="cig-wrap" data-cigarra></div>
+          <b>Esquenta<br>Varjota</b>
+          <span>Faltam <span data-days>—</span> dias</span>
+        </div>
+        <div class="acts">
+          <svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z" fill="#FF4F8B"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1E0F2E" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1E0F2E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps3">
+      <div class="s3 rv" style="--d:0"><div><b>Campanha no Instagram</b><p>O “Esquenta Varjota” aquece a cidade semanas antes. <span class="ph">[@ PERFIL DO BLOCO]</span></p></div></div>
+      <div class="s3 rv" style="--d:1"><div><b>Grupo da galera</b><p>Um grupo pra medir o interesse de verdade, antes de gastar qualquer real. <span class="ph">[LINK DO GRUPO]</span></p></div></div>
+      <div class="s3 rv" style="--d:2"><div><b>Contagem regressiva</b><p>Todo dia um motivo pra falar do bloco.</p></div></div>
+    </div>
+
+    <div class="count rv z" aria-live="off">
+      <small>Faltam</small>
+      <div class="clock">
+        <div><b data-cd="d">--</b><span>dias</span></div>
+        <div><b data-cd="h">--</b><span>horas</span></div>
+        <div><b data-cd="m">--</b><span>min</span></div>
+        <div><b data-cd="s">--</b><span>seg</span></div>
+      </div>
+      <p>pro primeiro dia do bloco · <span data-date></span> <span class="ph" style="font-size:.8rem">[CONFIRMAR DATA]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14. FECHAMENTO ============ -->
+<section class="s fim" id="fim" data-pause>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="confetti" aria-hidden="true"></div>
+  <div class="wrap stack">
+    <div class="cig-wrap rv z">
+      <div data-cigarra></div>
+      <div class="notes" aria-hidden="true"><span>♪</span><span>♫</span><span>♪</span></div>
+    </div>
+    <h2 class="rv" style="--d:1">O carnaval é da cidade.</h2>
+    <p class="bora rv" style="--d:2">Bora fazer história?</p>
+
+    <div class="rv" style="--d:3">
+      <a class="cta" id="cta" href="#fim">
+        <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.3-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+        Falar com a comissão
+      </a>
+      <span class="ph cta-ph">[CONTATO / WHATSAPP]</span>
+    </div>
+
+    <div class="org rv" style="--d:4">
+      <small>Quem faz o bloco</small>
+      <span class="ph">[ORGANIZAÇÃO / COMISSÃO DO BLOCO]</span>
+    </div>
+
+    <p class="slogan rv" style="font-size:1.3rem">“Quando a cigarra canta, a festa começa.”</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <b>Bloco da Cigarra</b> · Varjota-CE<br>
+  Um projeto da sociedade civil, sem cor política.
+</footer>
+
+<script>
+/* ================== CONFIGURAÇÃO (preencha aqui) ================== */
+const CONFIG = {
+  // Número do WhatsApp só com dígitos: 55 + DDD + número. Ex.: '5588999999999'
+  whatsapp: '',
+  mensagemWhatsapp: 'Olá! Vi a apresentação do Bloco da Cigarra e quero conversar.',
+  // Início do primeiro dia do bloco. Sexta-feira de carnaval de 2027 = 05/02/2027 (confirmar).
+  dataEvento: '2027-02-05T16:30:00-03:00'
+};
+/* ================================================================= */
+
+(function(){
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) root.classList.add('anim');
+  else root.classList.add('no-anim');
+
+  /* Mascote: copia o SVG para cada ponto marcado */
+  const tpl = document.getElementById('tpl-cigarra');
+  document.querySelectorAll('[data-cigarra]').forEach(el => el.appendChild(tpl.content.cloneNode(true)));
+
+  /* WhatsApp */
+  const cta = document.getElementById('cta');
+  if (CONFIG.whatsapp) {
+    cta.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(CONFIG.mensagemWhatsapp);
+    cta.target = '_blank'; cta.rel = 'noopener';
+    const ph = document.querySelector('.cta-ph'); if (ph) ph.remove();
+  }
+
+  /* Confete e estrelas (só com movimento liberado) */
+  const cores = ['#FFC93C','#FF4F8B','#FF7A1A','#7FD3FF','#FFFFFF','#B07CFF'];
+  if (!reduce) {
+    document.querySelectorAll('.confetti').forEach(box => {
+      const n = window.innerWidth < 500 ? 22 : 34;
+      for (let i = 0; i < n; i++) {
+        const c = document.createElement('i');
+        if (Math.random() < .35) c.className = 'c';
+        c.style.left = (Math.random() * 100) + '%';
+        c.style.background = cores[i % cores.length];
+        c.style.animationDuration = (6 + Math.random() * 7) + 's';
+        c.style.animationDelay = (-Math.random() * 12) + 's';
+        c.style.setProperty('--x', (Math.random() * 120 - 60) + 'px');
+        c.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+        box.appendChild(c);
+      }
+    });
+  }
+  const stars = document.querySelector('.stars');
+  if (stars) for (let i = 0; i < 40; i++) {
+    const s = document.createElement('i');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 45 + '%';
+    s.style.animationDelay = (-Math.random() * 3) + 's';
+    stars.appendChild(s);
+  }
+
+  /* SMIL: sem movimento, deixa moedas e carro parados no meio da estrada */
+  document.querySelectorAll('[data-smil] svg').forEach(svg => {
+    if (reduce) {
+      svg.querySelectorAll('animateMotion, animate').forEach(a => a.remove());
+      svg.querySelectorAll('[data-static]').forEach(g => {
+        g.setAttribute('transform', 'translate(' + g.dataset.static + ')');
+      });
+    }
+  });
+
+  /* Contadores */
+  function countUp(el){
+    const end = parseFloat(el.dataset.count);
+    if (reduce) { el.textContent = end; return; }
+    const dur = 1400, t0 = performance.now();
+    el.textContent = '0';
+    (function tick(t){
+      const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(end * e);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* Revelação ao rolar */
+  if (root.classList.contains('anim')) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        const el = en.target;
+        el.classList.add('in');
+        el.querySelectorAll('[data-count]').forEach(countUp);
+        io.unobserve(el);
+      });
+    }, {threshold: .18, rootMargin: '0px 0px -6% 0px'});
+    document.querySelectorAll('.rv, .map').forEach(el => io.observe(el));
+    // contadores fora de .rv
+    document.querySelectorAll('[data-count]').forEach(el => { if (!el.closest('.rv')) io.observe(el); });
+
+    /* Pausa animações pesadas quando a seção sai da tela */
+    const pio = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        en.target.classList.toggle('paused', !en.isIntersecting);
+        en.target.querySelectorAll('svg').forEach(s => {
+          if (s.pauseAnimations) en.isIntersecting ? s.unpauseAnimations() : s.pauseAnimations();
+        });
+      });
+    }, {threshold: 0});
+    document.querySelectorAll('[data-pause], [data-smil], .diferencial').forEach(el => pio.observe(el));
+  }
+
+  /* Parallax leve + barra de progresso + linha do tempo */
+  const bar = document.querySelector('.progress');
+  const pars = [...document.querySelectorAll('[data-par]')];
+  const timeline = document.querySelector('[data-progress]');
+  let ticking = false;
+  function onScroll(){
+    const vh = window.innerHeight;
+    const max = document.documentElement.scrollHeight - vh;
+    bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    if (!reduce) {
+      pars.forEach(el => {
+        const sec = el.closest('section');
+        const r = sec.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        const offset = (r.top + r.height / 2 - vh / 2);
+        el.style.transform = 'translate3d(0,' + (offset * parseFloat(el.dataset.par)).toFixed(1) + 'px,0)';
+      });
+      if (timeline) {
+        const r = timeline.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, (vh * .75 - r.top) / r.height));
+        timeline.style.setProperty('--p', p.toFixed(3));
+      }
+    }
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  onScroll();
+
+  /* Contagem regressiva */
+  const alvo = new Date(CONFIG.dataEvento).getTime();
+  const dEl = document.querySelector('[data-date]');
+  if (dEl && !isNaN(alvo)) {
+    dEl.textContent = new Date(alvo).toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'2-digit', year:'numeric', timeZone:'America/Fortaleza'});
+  }
+  const cd = k => document.querySelector('[data-cd="' + k + '"]');
+  const daysEls = document.querySelectorAll('[data-days]');
+  const pad = n => String(n).padStart(2, '0');
+  function tickCount(){
+    if (isNaN(alvo)) return;
+    let diff = Math.max(0, alvo - Date.now());
+    const d = Math.floor(diff / 864e5); diff -= d * 864e5;
+    const h = Math.floor(diff / 36e5);  diff -= h * 36e5;
+    const m = Math.floor(diff / 6e4);   diff -= m * 6e4;
+    const s = Math.floor(diff / 1e3);
+    cd('d').textContent = d; cd('h').textContent = pad(h); cd('m').textContent = pad(m); cd('s').textContent = pad(s);
+    daysEls.forEach(e => e.textContent = d);
+  }
+  tickCount(); setInterval(tickCount, 1000);
+})();
+</script>
+</body>
+</html>
