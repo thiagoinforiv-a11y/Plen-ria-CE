@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bloco da Barragem</title>
-<meta name="description" content="Bloco da Barragem — o carnaval de Varjota está de volta. A água a gente segura. A festa, não.">
+<meta name="description" content="Bloco da Barragem — o carnaval de Varjota está de volta, na beira do Açude Araras.">
 <meta name="theme-color" content="#2A1240">
 <meta property="og:title" content="Bloco da Barragem — Varjota-CE">
-<meta property="og:description" content="O carnaval de Varjota está de volta. A água a gente segura. A festa, não.">
+<meta property="og:description" content="O carnaval de Varjota está de volta, na beira do Açude Araras.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23FF7A1A'/%3E%3Crect x='2' y='44' width='96' height='20' fill='%231E7FC2'/%3E%3Cpath d='M2 62 C 30 54, 70 54, 98 62 V80 H2Z' fill='%238E4526'/%3E%3Ccircle cx='62' cy='40' r='12' fill='%23FFE38A'/%3E%3C/svg%3E">
 <style>
 /* =========================================================
@@ -112,7 +112,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 .hero-scene .sc-glow{opacity:1}
 
 .hero-content{position:relative;z-index:2;max-width:640px;margin:0 auto;display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;padding-bottom:calc(36svh + 4px);width:100%}
+  align-items:center;justify-content:center;padding-bottom:calc(36svh + 4px);width:100%}
 .kicker{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.95rem;
   background:rgba(42,18,64,.6);padding:8px 16px;border-radius:99px}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -415,22 +415,18 @@ footer.foot{background:var(--tinta);color:#fff;text-align:center;padding:28px va
 footer.foot b{color:var(--amarelo)}
 
 /* Botão da marchinha */
-.music{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 12px;border-radius:99px;border:3px solid #fff;
-  background:var(--rosa);color:var(--tinta);font:800 1rem/1 var(--font);cursor:pointer;box-shadow:0 8px 22px rgba(30,15,46,.4)}
+.music{position:fixed;z-index:60;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right));
+  width:48px;height:48px;border-radius:50%;border:3px solid #fff;display:grid;place-items:center;padding:0;cursor:pointer;
+  background:var(--rosa);color:var(--tinta);box-shadow:0 6px 18px rgba(30,15,46,.4)}
 .music svg{width:24px;height:24px}
 .music .bars{display:none;gap:3px;align-items:flex-end;height:18px}
 .music .bars i{width:4px;background:var(--tinta);border-radius:2px;height:40%}
 .music.on{background:var(--amarelo)}
 .music.on .bars{display:flex}
-.music.on .note{display:none}
+.music.on .mute{display:none}
 .anim .music.on .bars i{animation:eq .5s ease-in-out infinite alternate}
 .anim .music.on .bars i:nth-child(2){animation-delay:.15s}.anim .music.on .bars i:nth-child(3){animation-delay:.3s}
 @keyframes eq{from{height:25%}to{height:100%}}
-
-.music.float{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));
-  opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .3s,transform .3s,visibility .3s}
-.music.float.show{opacity:1;visibility:visible;transform:none}
-.music.inline{margin-top:12px;position:relative;z-index:4}
 
 /* Foco visível */
 a:focus-visible,button:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radius:8px}
@@ -456,10 +452,9 @@ a:focus-visible,button:focus-visible{outline:4px solid var(--amarelo);outline-of
 
 <div class="progress" aria-hidden="true"></div>
 
-<button class="music float" type="button" data-music aria-pressed="false">
-  <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 17.5A3.5 3.5 0 1 1 7 14.3V4l12-2v13.5a3.5 3.5 0 1 1-2-3.2V6.3L9 7.6z"/></svg>
+<button class="music" type="button" data-music aria-pressed="true" aria-label="Desligar a música">
+  <svg class="mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
   <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
-  <span class="lbl">Tocar marchinha</span>
 </button>
 
 <!-- Ilustração da parede do Açude Araras (redesenhada a partir de fotos): reaproveitada em várias seções -->
@@ -569,12 +564,6 @@ a:focus-visible,button:focus-visible{outline:4px solid var(--amarelo);outline-of
     <p class="kicker">Varjota · Ceará</p>
     <h1><span class="l1">Bloco da</span><span class="l2">Barragem</span></h1>
     <p class="sub">O carnaval de Varjota<br>está de volta!</p>
-    <p class="slogan">“A água a gente segura. A festa, não.”</p>
-    <button class="music inline" type="button" data-music aria-pressed="false">
-      <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 17.5A3.5 3.5 0 1 1 7 14.3V4l12-2v13.5a3.5 3.5 0 1 1-2-3.2V6.3L9 7.6z"/></svg>
-      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="lbl">Tocar marchinha</span>
-    </button>
   </div>
 </section>
 
@@ -1122,7 +1111,6 @@ a:focus-visible,button:focus-visible{outline:4px solid var(--amarelo);outline-of
       <span class="ph">[ORGANIZAÇÃO / COMISSÃO DO BLOCO]</span>
     </div>
 
-    <p class="slogan rv" style="font-size:1.3rem">“A água a gente segura. A festa, não.”</p>
   </div>
 </section>
 
@@ -1293,13 +1281,9 @@ const CONFIG = {
   const btns = [...document.querySelectorAll('[data-music]')];
   const AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) { btns.forEach(b => b.hidden = true); return; }
-  const floatBtn = document.querySelector('.music.float');
-  const hero = document.getElementById('inicio');
-  const showFloat = () => floatBtn.classList.toggle('show', hero.getBoundingClientRect().bottom < window.innerHeight * .35);
-  window.addEventListener('scroll', showFloat, {passive:true}); showFloat();
   const ui = on => btns.forEach(b => {
     b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
-    b.querySelector('.lbl').textContent = on ? 'Parar música' : 'Tocar marchinha';
+    b.setAttribute('aria-label', on ? 'Desligar a música' : 'Ligar a música');
   });
   const BPM = 132, E = 60 / BPM / 2;                 // duração de uma colcheia
   const hz = m => 440 * Math.pow(2, (m - 69) / 12);
@@ -1376,22 +1360,40 @@ const CONFIG = {
       if (idx >= events.length) { idx = 0; cycleStart += LOOP * E; }
     }
   }
+  let offTimer, wanted = false;
   function start(){
+    wanted = true;
     if (!ctx) setup();
+    clearTimeout(offTimer);
     ctx.resume();
     cycleStart = ctx.currentTime + .08; idx = 0;
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.setValueAtTime(.32, ctx.currentTime);
-    timer = setInterval(tick, 40); tick();
+    clearInterval(timer); timer = setInterval(tick, 40); tick();
     ui(true);
   }
   function stop(){
+    wanted = false;
     clearInterval(timer); timer = null;
-    if (ctx) { master.gain.setTargetAtTime(0.0001, ctx.currentTime, .05); setTimeout(()=>ctx && ctx.suspend(), 200); }
+    if (ctx) { master.gain.setTargetAtTime(0.0001, ctx.currentTime, .05); offTimer = setTimeout(()=>ctx && ctx.suspend(), 200); }
     ui(false);
   }
-  btns.forEach(b => b.addEventListener('click', () => timer ? stop() : start()));
-  document.addEventListener('visibilitychange', () => { if (document.hidden && timer) stop(); });
+  // Começa sozinha ao abrir. Se o navegador segurar o som até o primeiro toque, ela solta nesse toque.
+  let unlockedNow = false;
+  const unlock = () => {
+    if (wanted && ctx && ctx.state !== 'running') { unlockedNow = true; ctx.resume(); setTimeout(()=>unlockedNow = false, 400); }
+    if (ctx && ctx.state === 'running') ['pointerdown','touchend','keydown','click'].forEach(e => document.removeEventListener(e, unlock, true));
+  };
+  ['pointerdown','touchend','keydown','click'].forEach(e => document.addEventListener(e, unlock, true));
+  btns.forEach(b => b.addEventListener('click', () => {
+    if (unlockedNow) return;                         // esse toque só liberou o som
+    timer ? stop() : start();
+  }));
+  document.addEventListener('visibilitychange', () => {
+    if (!ctx || !wanted) return;
+    document.hidden ? ctx.suspend() : ctx.resume();
+  });
+  start();
 })();
 </script>
 </body>
