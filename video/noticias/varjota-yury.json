@@ -1,0 +1,21 @@
+{
+ "id": "noticia-varjota-yury",
+ "semTarja": true,
+ "fontes": "Fonte: TSE · votação por seção, deputado federal 2022 e 2026",
+ "cenas": [
+  { "midia": "fotos/ce/varjota/2026/60002542442.jpg", "credito": "Foto: TSE", "tarja": "",
+    "fala": "Yury do Paredão foi o deputado federal mais votado em Varjota em dois mil e vinte e seis." },
+  { "grande": "2.387", "sub": "VOTOS · 18,6% DOS VÁLIDOS", "tarja": "",
+    "fala": "Foram dois mil trezentos e oitenta e sete votos, dezoito vírgula seis por cento dos válidos. À frente de Denis Bezerra, com dois mil e noventa e nove." },
+  { "grande": "28 → 2.387", "sub": "2022 (PL) → 2026 (MDB)", "tarja": "",
+    "fala": "Em dois mil e vinte e dois, ainda pelo PL, ele tinha feito vinte e oito votos aqui. Quatro anos depois, já no MDB, multiplicou por oitenta e cinco." },
+  { "grande": "59 DE 59", "sub": "URNAS COM VOTO", "tarja": "",
+    "fala": "E o voto veio da cidade inteira: ele teve voto em todas as cinquenta e nove urnas. Em nenhuma ficou abaixo de dez por cento." },
+  { "grande": "212", "sub": "MAIOR LOCAL · CENTRO", "tarja": "",
+    "fala": "Em número, o maior local foi a escola Deputado Manoel Rodrigues, no Centro: duzentos e doze votos." },
+  { "grande": "36%", "sub": "OLHO D'ÁGUA DOS TRAJANOS", "tarja": "",
+    "fala": "Mas a força maior, em proporção, foi em Olho d'Água dos Trajanos: numa urna, mais de um em cada três votos foi dele." },
+  { "grande": "?", "sub": "MARCA OU LIDERANÇA?", "tarja": "",
+    "fala": "Voto de marca ou voto de liderança? O que explica esse resultado em Varjota? Comenta aqui." }
+ ]
+}
