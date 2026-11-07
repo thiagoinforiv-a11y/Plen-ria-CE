@@ -29,7 +29,7 @@
   const MAPY = H * 0.52, vj = G.varjota;
   // imagens
   const img = {}; const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = ok; i.src = "../" + src; });
-  await Promise.all([["jm", D.jm.foto], ["bi", D.bi.foto], ["raony", D.foto1], ["raony2", D.foto2]].map(([k, f]) => carregar(k, f)));
+  await Promise.all([["jm", D.jm.foto], ["bi", D.bi.foto], ["raony", D.foto1], ["raony2", D.foto2], ["cheia", D.fotoCheia]].map(([k, f]) => carregar(k, f)));
   for (const [n, f, w] of [["Oswald", "oswald-latin-700-normal.woff2", "700"], ["Oswald", "oswald-latin-600-normal.woff2", "500"]]) { const ff = new FontFace(n, `url(fontes/${f})`, { weight: w }); await ff.load(); document.fonts.add(ff); }
   // formas
   const N = 2400, P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
@@ -101,10 +101,16 @@
     NEG.forEach((x, i) => { const al = vis(t, S[5] + 0.6 + i * 0.4, S[6]); texto(`${x.j} → ${x.bi}`, NX[i], 880, { tam: 52, w: 700, a: al, cor: RED }); texto(x.b, NX[i], 1080, { tam: 32, w: 600, a: al, max: 400 });
       texto(`mais votado: ${x.lider} (${x.liderV})`, NX[i], 1124, { tam: 26, w: 500, a: al, cor: "#8fa6bb", max: 420 }); });
     texto("Os dois pontos para trabalhar", W / 2, 1600, { tam: 42, w: 700, a: vis(t, S[5] + 2.2, S[6]), sobe: 1 });
-    raony(W / 2, RY, 180, vis(t, S[6] + 0.4, S[7] + 1, 0.6));
-    texto(`Cresceu em ${D.cresceu} de ${D.nb} bairros.`, W / 2, 330, { tam: 66, w: 700, a: vis(t, S[6] + 0.2, S[7] + 1, 0.6), sobe: 1 });
-    texto("RAONY VIANA", W / 2, 1160, { tam: 72, w: 700, ls: 4, a: vis(t, S[6] + 1, S[7] + 1, 0.6), brilho: 18, cor: AC });
-    texto("Fonte dos votos: TSE · votação por seção, 2022 e 2026", W / 2, 1720, { tam: 23, w: 500, a: vis(t, S[6] + 1.6, S[7] + 1, 0.6), cor: "#8fa6bb" });
+    // fecho: foto em tela cheia, zoom lento, sombra e nome em dourado
+    const af = vis(t, S[6] + 0.1, S[7] + 1, 0.7);
+    if (af > 0.01 && img.cheia) { const i = img.cheia, z = 1.04 + 0.08 * prog(t, S[6], S[7] + 1), sc = Math.max(W / i.width, H / i.height) * z;
+      ctx.save(); ctx.globalAlpha = af; ctx.drawImage(i, (W - i.width * sc) / 2, (H - i.height * sc) * 0.35, i.width * sc, i.height * sc);
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "rgba(3,8,14,.75)"); g.addColorStop(0.22, "rgba(3,8,14,0)"); g.addColorStop(0.62, "rgba(3,8,14,0)"); g.addColorStop(1, "rgba(3,8,14,.92)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = AC; ctx.lineWidth = 10; ctx.globalAlpha = af * 0.9; ctx.strokeRect(28, 28, W - 56, H - 56); ctx.restore(); }
+    texto(`Cresceu em ${D.cresceu} de ${D.nb} bairros.`, W / 2, 200, { tam: 64, w: 700, a: vis(t, S[6] + 0.4, S[7] + 1, 0.6), sobe: 1 });
+    texto("RAONY VIANA", W / 2, 1610, { tam: 120, w: 700, ls: 6, a: vis(t, S[6] + 1, S[7] + 1, 0.6), brilho: 24, cor: AC, sobe: 1 });
+    texto("liderança com raiz em Varjota", W / 2, 1690, { tam: 40, w: 500, a: vis(t, S[6] + 1.4, S[7] + 1, 0.6) });
+    texto("Fonte dos votos: TSE · votação por seção, 2022 e 2026", W / 2, 1800, { tam: 23, w: 500, a: vis(t, S[6] + 1.6, S[7] + 1, 0.6), cor: "#c9d6e3" });
   };
   window.render(0); window.pronto = true;
 })();
