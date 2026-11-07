@@ -36,7 +36,7 @@ for ano in range(a.de, a.ate + 1):
         if x["coluna"] == "Despesas Empenhadas" and re.match(r"^\d{2} - ", x["conta"]): L["Área: " + x["conta"][5:].strip()] = x["valor"]
     dados[ano] = L; print(ano, "ok", flush=True)
 # contratos do TCE por categoria (só contratos originais, sem aditivos)
-CAT = [("Festas, shows e eventos", r"show|festa|evento|carnaval|banda|palco|som e ilumina|reveillon|festiv|atracao musical"), ("Consultoria, assessoria, jurídico e contábil", r"consultor|assessor|juridic|advoca|contab|auditori"),
+CAT = [("Festas, shows e eventos", r"show|festa|evento|carnaval|banda|palco|som e ilumina|reveillon|festiv|atracao musical"), ("Consultoria, assessoria, jurídico e contábil", r"consultori|assessori|servicos juridicos|advocac|advogad|contabilidade|auditoria\b"),
        ("Saúde", r"saude|hospital|medic|odonto|exame|laborator|organizacao social|o\.s\.|ubs|farmac"), ("Obras, reformas e pavimentação", r"obra|pavimenta|reforma|constru|amplia|engenharia|calcament|drenag"),
        ("Educação, merenda e transporte escolar", r"escola|ensino|merenda|aliment.*escolar|pnae|educa|creche|transporte escolar"), ("Combustível e veículos", r"combust|gasolina|diesel|locacao de veiculo|pecas|pneu|veicul"),
        ("Limpeza e coleta de lixo", r"limpeza|lixo|residuo|coleta"), ("Publicidade e comunicação", r"publicidade|propaganda|divulgac|comunicacao|marketing")]
