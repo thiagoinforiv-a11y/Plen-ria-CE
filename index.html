@@ -88,7 +88,7 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 .scene .shimmer{animation:none!important}
 
 /* ======================= 1. ABERTURA ======================= */
-.hero{color:#fff;text-align:center;padding-top:56px;padding-bottom:0;align-items:stretch}
+.hero{color:#fff;text-align:center;padding-top:44px;padding-bottom:0;align-items:stretch}
 .sky{position:absolute;inset:0;z-index:-1;
   background:linear-gradient(180deg,#2A1240 0%,#5B2A86 22%,#C2367E 44%,#FF4F8B 56%,#FF7A1A 72%,#FFC93C 86%,#FFE38A 100%);
   background-size:100% 140%;background-position:50% 0%}
@@ -96,12 +96,12 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
   border-radius:50%;background:radial-gradient(circle at 50% 50%,#FFF3B0 0%,#FFC93C 45%,rgba(255,122,26,.0) 72%);z-index:-1}
 .anim .sun{animation:sunGlow 5s ease-in-out infinite alternate}
 @keyframes sunGlow{to{filter:brightness(1.12)}}
-.hero-scene{position:absolute;left:0;right:0;bottom:0;height:40vh;height:40svh;z-index:0}
+.hero-scene{position:absolute;left:0;right:0;bottom:0;height:36vh;height:36svh;z-index:0}
 .hero-scene .sc-sky{display:none}
 .hero-scene .sc-glow{opacity:1}
 
 .hero-content{position:relative;z-index:2;max-width:640px;margin:0 auto;display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;padding-bottom:calc(40svh + 8px);width:100%}
+  align-items:center;justify-content:flex-start;padding-bottom:calc(36svh + 4px);width:100%}
 .kicker{font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:.95rem;
   background:rgba(42,18,64,.6);padding:8px 16px;border-radius:99px}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -111,10 +111,10 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 .hero h1 .l2{display:block;color:var(--amarelo)}
 .anim .hero h1 .l1{animation:up .9s cubic-bezier(.2,.8,.2,1) .9s both}
 .anim .hero h1 .l2{animation:up 1s cubic-bezier(.2,.8,.2,1) 1.1s both}
-.sub{margin-top:18px;font-size:clamp(1.25rem,5.4vw,1.7rem);font-weight:800;
+.sub{text-wrap:balance;margin-top:18px;font-size:clamp(1.25rem,5.4vw,1.7rem);font-weight:800;
   background:var(--roxo-escuro);color:#fff;padding:10px 18px;border-radius:14px;box-shadow:0 6px 0 rgba(0,0,0,.18)}
 .anim .sub{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.4s both}
-.slogan{margin-top:16px;font-size:1.15rem;font-weight:700;font-style:italic;color:#fff;
+.slogan{margin-top:12px;font-size:1.1rem;font-weight:700;font-style:italic;color:#fff;
   text-shadow:0 2px 8px rgba(42,18,64,.8)}
 .anim .slogan{animation:up .9s cubic-bezier(.2,.8,.2,1) 1.7s both}
 @keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
@@ -403,8 +403,26 @@ h2{font-size:clamp(2.5rem,11vw,4.6rem)}
 footer.foot{background:var(--tinta);color:#fff;text-align:center;padding:28px var(--gutter) 40px;font-size:1rem}
 footer.foot b{color:var(--amarelo)}
 
+/* Botão da marchinha */
+.music{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 16px 0 12px;border-radius:99px;border:3px solid #fff;
+  background:var(--rosa);color:var(--tinta);font:800 1rem/1 var(--font);cursor:pointer;box-shadow:0 8px 22px rgba(30,15,46,.4)}
+.music svg{width:24px;height:24px}
+.music .bars{display:none;gap:3px;align-items:flex-end;height:18px}
+.music .bars i{width:4px;background:var(--tinta);border-radius:2px;height:40%}
+.music.on{background:var(--amarelo)}
+.music.on .bars{display:flex}
+.music.on .note{display:none}
+.anim .music.on .bars i{animation:eq .5s ease-in-out infinite alternate}
+.anim .music.on .bars i:nth-child(2){animation-delay:.15s}.anim .music.on .bars i:nth-child(3){animation-delay:.3s}
+@keyframes eq{from{height:25%}to{height:100%}}
+
+.music.float{position:fixed;z-index:60;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));
+  opacity:0;visibility:hidden;transform:translateY(16px);transition:opacity .3s,transform .3s,visibility .3s}
+.music.float.show{opacity:1;visibility:visible;transform:none}
+.music.inline{margin-top:12px;position:relative;z-index:4}
+
 /* Foco visível */
-a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radius:8px}
+a:focus-visible,button:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radius:8px}
 
 /* Telas maiores: só dá mais respiro */
 @media (min-width:760px){
@@ -426,6 +444,12 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
 <body>
 
 <div class="progress" aria-hidden="true"></div>
+
+<button class="music float" type="button" data-music aria-pressed="false">
+  <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 17.5A3.5 3.5 0 1 1 7 14.3V4l12-2v13.5a3.5 3.5 0 1 1-2-3.2V6.3L9 7.6z"/></svg>
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="lbl">Tocar marchinha</span>
+</button>
 
 <!-- Ilustração da parede do Açude Araras (redesenhada a partir de fotos): reaproveitada em várias seções -->
 <template id="tpl-barragem">
@@ -515,9 +539,13 @@ a:focus-visible{outline:4px solid var(--amarelo);outline-offset:4px;border-radiu
   <div class="hero-content" data-par="-0.12">
     <p class="kicker">Varjota · Ceará</p>
     <h1><span class="l1">Bloco da</span><span class="l2">Barragem</span></h1>
-    <p class="sub">O carnaval de Varjota está de volta</p>
+    <p class="sub">O carnaval de Varjota<br>está de volta!</p>
     <p class="slogan">“Quando a cigarra canta, a festa começa.”</p>
-
+    <button class="music inline" type="button" data-music aria-pressed="false">
+      <svg class="note" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 17.5A3.5 3.5 0 1 1 7 14.3V4l12-2v13.5a3.5 3.5 0 1 1-2-3.2V6.3L9 7.6z"/></svg>
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="lbl">Tocar marchinha</span>
+    </button>
   </div>
 </section>
 
@@ -1229,6 +1257,112 @@ const CONFIG = {
     daysEls.forEach(e => e.textContent = d);
   }
   tickCount(); setInterval(tickCount, 1000);
+})();
+
+/* ===== Marchinha original, gerada no próprio navegador (sem arquivo de áudio, funciona offline) ===== */
+(function(){
+  const btns = [...document.querySelectorAll('[data-music]')];
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { btns.forEach(b => b.hidden = true); return; }
+  const floatBtn = document.querySelector('.music.float');
+  const hero = document.getElementById('inicio');
+  const showFloat = () => floatBtn.classList.toggle('show', hero.getBoundingClientRect().bottom < window.innerHeight * .35);
+  window.addEventListener('scroll', showFloat, {passive:true}); showFloat();
+  const ui = on => btns.forEach(b => {
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
+    b.querySelector('.lbl').textContent = on ? 'Parar música' : 'Tocar marchinha';
+  });
+  const BPM = 132, E = 60 / BPM / 2;                 // duração de uma colcheia
+  const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+  // [nota MIDI, colcheias]  (0 = pausa) — compasso 2/4, 4 colcheias por compasso
+  const MEL = [
+    [67,1],[72,1],[76,1],[79,1], [81,1],[79,1],[76,1],[72,1], [74,1],[76,1],[77,1],[74,1], [76,2],[72,2],
+    [67,1],[72,1],[76,1],[79,1], [81,1],[79,1],[76,1],[79,1], [77,1],[76,1],[74,1],[71,1], [72,3],[0,1],
+    [79,1],[79,1],[81,1],[79,1], [77,2],[74,2], [76,1],[76,1],[77,1],[76,1], [74,2],[72,2],
+    [74,1],[76,1],[77,1],[79,1], [81,1],[79,1],[77,1],[74,1], [71,1],[74,1],[79,1],[71,1], [72,3],[0,1]
+  ];
+  // baixo "um-pá": fundamental e quinta, uma por tempo (2 tempos por compasso)
+  const CH = [48,43, 53,48, 43,50, 48,43,  48,43, 53,48, 43,50, 48,48,
+              48,43, 50,45, 48,43, 43,50,  50,45, 53,48, 43,50, 48,48];
+  const LOOP = MEL.reduce((t,n)=>t+n[1],0);           // 64 colcheias
+  let ctx, master, noise, timer, nextT, step = 0, events = [];
+
+  // monta a lista de eventos de um ciclo (em colcheias)
+  (function(){
+    let t = 0; MEL.forEach(([m,d]) => { if (m) events.push({t, k:'mel', m, d}); t += d; });
+    CH.forEach((m,i) => events.push({t:i*2, k:'bass', m}));
+    for (let i = 0; i < LOOP; i++) {
+      if (i % 2 === 0) events.push({t:i, k:'kick'});
+      else events.push({t:i, k:'snare'});
+      if (i % 4 === 3) events.push({t:i + .5, k:'snare', soft:true});
+    }
+    events.sort((a,b)=>a.t-b.t);
+  })();
+
+  function setup(){
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = .32; master.connect(ctx.destination);
+    noise = ctx.createBuffer(1, ctx.sampleRate * .3, ctx.sampleRate);
+    const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  function env(g, t, a, peak, dur){
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + a);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  }
+  function play(ev, t){
+    if (ev.k === 'mel') {
+      const dur = ev.d * E * .92;
+      [0, 7].forEach((det, i) => {                      // dois "metais" levemente desafinados
+        const o = ctx.createOscillator(), g = ctx.createGain(), f = ctx.createBiquadFilter();
+        o.type = 'sawtooth'; o.frequency.value = hz(ev.m); o.detune.value = i ? det : -det;
+        f.type = 'lowpass'; f.frequency.value = 2200;
+        env(g, t, .02, .11, dur); o.connect(f); f.connect(g); g.connect(master);
+        o.start(t); o.stop(t + dur + .05);
+      });
+    } else if (ev.k === 'bass') {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'triangle'; o.frequency.value = hz(ev.m);
+      env(g, t, .01, .45, E * 1.6); o.connect(g); g.connect(master); o.start(t); o.stop(t + E * 1.7);
+    } else if (ev.k === 'kick') {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.setValueAtTime(130, t); o.frequency.exponentialRampToValueAtTime(45, t + .15);
+      env(g, t, .005, .7, .2); o.connect(g); g.connect(master); o.start(t); o.stop(t + .22);
+    } else {
+      const src = ctx.createBufferSource(), g = ctx.createGain(), f = ctx.createBiquadFilter();
+      src.buffer = noise; f.type = 'highpass'; f.frequency.value = ev.soft ? 4000 : 1800;
+      env(g, t, .003, ev.soft ? .06 : .16, ev.soft ? .05 : .11);
+      src.connect(f); f.connect(g); g.connect(master); src.start(t); src.stop(t + .15);
+    }
+  }
+  let cycleStart, idx;
+  function tick(){
+    const ahead = ctx.currentTime + .15;
+    while (true) {
+      const ev = events[idx];
+      const t = cycleStart + ev.t * E;
+      if (t > ahead) break;
+      play(ev, t);
+      idx++;
+      if (idx >= events.length) { idx = 0; cycleStart += LOOP * E; }
+    }
+  }
+  function start(){
+    if (!ctx) setup();
+    ctx.resume();
+    cycleStart = ctx.currentTime + .08; idx = 0;
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(.32, ctx.currentTime);
+    timer = setInterval(tick, 40); tick();
+    ui(true);
+  }
+  function stop(){
+    clearInterval(timer); timer = null;
+    if (ctx) { master.gain.setTargetAtTime(0.0001, ctx.currentTime, .05); setTimeout(()=>ctx && ctx.suspend(), 200); }
+    ui(false);
+  }
+  btns.forEach(b => b.addEventListener('click', () => timer ? stop() : start()));
+  document.addEventListener('visibilitychange', () => { if (document.hidden && timer) stop(); });
 })();
 </script>
 </body>
