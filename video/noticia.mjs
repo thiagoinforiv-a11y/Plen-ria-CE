@@ -28,8 +28,8 @@ html,body{margin:0;width:${W}px;height:${H}px;background:transparent}
 .s{background:#fff;color:${AZUL};font:700 42px/1 O;padding:8px 16px 9px}
 .x{background:${AZUL};color:#fff;font:700 54px/1.08 O;text-transform:uppercase;text-align:center;max-width:900px;padding:14px 26px 16px;box-shadow:0 6px 24px rgba(0,0,0,.35);text-wrap:balance}
 .c{position:absolute;right:40px;bottom:70px;color:rgba(255,255,255,.75);font:700 24px O;text-shadow:0 1px 4px #000}
-.g{position:absolute;left:0;right:0;top:${Math.round(H * 0.3)}px;text-align:center;color:#fff;font:400 230px/1 A;text-shadow:0 8px 40px rgba(0,0,0,.5)}
-.n{font:inherit}.g small{display:block;font:700 64px O;letter-spacing:8px;margin-top:20px;color:#cfd8ff}`;
+.g{position:absolute;left:50%;transform:translateX(-50%);top:${Math.round(H * 0.28)}px;text-align:center;color:#fff;font:400 230px/1 A;text-shadow:0 8px 40px rgba(0,0,0,.5);background:rgba(8,12,30,.72);padding:30px 44px 34px;border-radius:24px;border-bottom:10px solid ${AZUL};white-space:nowrap}
+.n{font:inherit}.g small{display:block;font:700 56px O;letter-spacing:6px;margin-top:18px;color:#fff}`;
 for (const [i, c] of D.cenas.entries()) {
   await p.setContent(`<style>${css}</style>${c.grande ? `<div class="g"><span class="n">${q(c.grande)}</span>${c.sub ? `<small>${q(c.sub)}</small>` : ""}</div>` : ""}` +
     `<div class="t"><div class="s">@PLENARIACE</div><div class="x">${q(c.tarja)}</div></div>${c.credito || (i === D.cenas.length - 1 && D.fontes) ? `<div class="c">${q(c.credito || D.fontes)}</div>` : ""}`);
