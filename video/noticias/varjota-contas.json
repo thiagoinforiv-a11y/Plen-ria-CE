@@ -2,17 +2,47 @@
  "id": "noticia-varjota-contas",
  "fontes": "Fonte: Tesouro Nacional (Siconfi) · RREO jan–ago e DCA 2025",
  "cenas": [
-  { "grande": "FIM DE ANO", "sub": "A CONTA VAI FECHAR?", "tarja": "Varjota: como está o dinheiro que chega na prefeitura?",
-    "fala": "Fim de ano é a hora mais pesada pra qualquer prefeitura: folha, décimo terceiro, fornecedor. E em Varjota, como está o dinheiro que chega?" },
-  { "grande": "+8,5%", "sub": "FPM · JAN A AGO DE 2026", "tarja": "FPM de Varjota subiu 8,5% em 2026",
-    "fala": "O FPM, principal repasse da União, subiu. De janeiro a agosto foram vinte e nove milhões de reais, oito e meio por cento a mais que em dois mil e vinte e cinco." },
-  { "grande": "−4,6%", "sub": "FUNDEB · JAN A AGO DE 2026", "tarja": "Já o FUNDEB, que paga os professores, caiu 4,6%",
-    "fala": "Mas o FUNDEB, que paga os professores, caiu quase cinco por cento. Um milhão e setecentos mil reais a menos." },
-  { "grande": "+0,8%", "sub": "FPM + FUNDEB JUNTOS", "tarja": "Somando os dois, o dinheiro quase não cresceu",
-    "fala": "Somando os dois, o dinheiro praticamente não cresceu. E com a inflação, ficou menor." },
-  { "grande": "88%", "sub": "DA RECEITA VEM DE REPASSES", "tarja": "Impostos da própria cidade são só 2,4% da receita",
-    "fala": "E Varjota depende disso: oitenta e oito por cento da receita vem de repasses. Os impostos da própria cidade são só dois vírgula quatro por cento." },
-  { "grande": "?", "sub": "ATÉ DEZEMBRO", "tarja": "A conta vai fechar? Comenta",
-    "fala": "Será que a conta fecha até dezembro? Comenta aqui o que você acha." }
+  {
+   "grande": "FIM DE ANO",
+   "sub": "A CONTA VAI FECHAR?",
+   "tarja": "Varjota: como está o dinheiro que chega na prefeitura?",
+   "fala": "Fim de ano é a hora mais pesada pra qualquer prefeitura: folha, décimo terceiro, fornecedor. E em Varjota, como está o dinheiro que chega?",
+   "midia": "entregas/midia/contas/calculadora.jpg",
+   "credito": "Foto: Pixabay"
+  },
+  {
+   "grande": "+8,5%",
+   "sub": "FPM · JAN A AGO DE 2026",
+   "tarja": "FPM de Varjota subiu 8,5% em 2026",
+   "fala": "O FPM, principal repasse da União, subiu. De janeiro a agosto foram vinte e nove milhões de reais, oito e meio por cento a mais que em dois mil e vinte e cinco.",
+   "midia": "entregas/midia/contas/dinheiro.jpg",
+   "credito": "Foto: Pixabay"
+  },
+  {
+   "grande": "−4,6%",
+   "sub": "FUNDEB · JAN A AGO DE 2026",
+   "tarja": "Já o FUNDEB, que paga os professores, caiu 4,6%",
+   "fala": "Mas o FUNDEB, que paga os professores, caiu quase cinco por cento. Um milhão e setecentos mil reais a menos.",
+   "midia": "entregas/midia/contas/escola.jpg",
+   "credito": "Foto: Pixabay"
+  },
+  {
+   "grande": "+0,8%",
+   "sub": "FPM + FUNDEB JUNTOS",
+   "tarja": "Somando os dois, o dinheiro quase não cresceu",
+   "fala": "Somando os dois, o dinheiro praticamente não cresceu. E com a inflação, ficou menor."
+  },
+  {
+   "grande": "88%",
+   "sub": "DA RECEITA VEM DE REPASSES",
+   "tarja": "Impostos da própria cidade são só 2,4% da receita",
+   "fala": "E Varjota depende disso: oitenta e oito por cento da receita vem de repasses. Os impostos da própria cidade são só dois vírgula quatro por cento."
+  },
+  {
+   "grande": "?",
+   "sub": "ATÉ DEZEMBRO",
+   "tarja": "A conta vai fechar? Comenta",
+   "fala": "Será que a conta fecha até dezembro? Comenta aqui o que você acha."
+  }
  ]
 }
