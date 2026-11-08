@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cleuton Ribeiro · Dr. Jaziel e Dra. Silvana em Varjota</title>
+<style>html, body { margin: 0; background: #070707; } canvas { display: block; width: 540px; height: 960px; }</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="efeitos.js"></script>
+<script>
+/* Raio-X da liderança de Cleuton Ribeiro: Dr. Jaziel (federal) e Dra. Silvana (estadual) em Varjota, 2022 × 2026. Só dados do TSE (dados-cleuton.json). Identidade própria (verde), sem marca. */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const D = await (await fetch("dados-cleuton.json")).json(), G = await (await fetch("geo.json")).json();
+  const AC = "#46d68c", LR = "#ffd166", FONT = "Oswald, sans-serif", CINZA = "#c9d6e3";
+  const fmt = (n) => Math.round(n).toLocaleString("pt-BR"), pc = (x, d = 1) => (x * 100).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2), eout = (x) => 1 - Math.pow(1 - x, 3);
+  const prog = (t, a, b) => clamp((t - a) / (b - a)), vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+  let seed = 3; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const S = [0, 6, 12, 19, 26, 33, 40, 47, 54, 61, 68]; window.DURACAO = S[S.length - 1];
+  // projeção
+  const CE = { lon: -39.35, lat: -5.25, s: 205 }, VJ = { lon: -40.52, lat: -4.172, s: 4700 }, kx = Math.cos((4.5 * Math.PI) / 180);
+  const proj = (lon, lat, v, cy = H * 0.5) => [W / 2 + (lon - v.lon) * v.s * kx, cy - (lat - v.lat) * v.s];
+  const camera = (t) => { const k = ease(prog(t, 5.6, 8.4)); return { lon: lerp(CE.lon, VJ.lon, k), lat: lerp(CE.lat, VJ.lat, k), s: Math.exp(lerp(Math.log(CE.s), Math.log(VJ.s), k)) }; };
+  const dentro = (x, y, p) => { let c = false; for (let i = 0, j = p.length - 1; i < p.length; j = i++) { const [xi, yi] = p[i], [xj, yj] = p[j]; if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
+  const MAPY = H * 0.52, vj = G.varjota;
+  // imagens
+  const img = {}; const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = ok; i.src = "../" + src; });
+  await Promise.all([["jz", D.jz.foto], ["sv", D.sv.foto], ["cl", D.fotoCleuton]].map(([k, f]) => carregar(k, f)));
+  for (const [n, f, w] of [["Oswald", "oswald-latin-700-normal.woff2", "700"], ["Oswald", "oswald-latin-600-normal.woff2", "500"]]) { const ff = new FontFace(n, `url(fontes/${f})`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+  // formas
+  const N = 2400, P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
+  const poeira = () => [rnd() * W, rnd() * H, "dust"], forma = {}, encher = (out) => { while (out.length < N) out.push(poeira()); return out.slice(0, N); };
+  forma.poeira = Array.from({ length: N }, () => [rnd() * W, rnd() * H]);
+  const amostraVJ = (v, cy, cor) => { const out = []; const lo = vj.map((p) => p[0]), la = vj.map((p) => p[1]); const [a, b, c, d] = [Math.min(...lo), Math.max(...lo), Math.min(...la), Math.max(...la)];
+    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, vj)) out.push([...proj(lon, lat, v, cy), cor]); } return out; };
+  forma.vjPequena = amostraVJ(CE, MAPY, AC);
+  // 1 · contra a maré: Ceará (branco, caiu) × Varjota (verde, subiu). Contorno pontilhado = 2022
+  const HB = 560, BB = 1400, CW = 170, MX = [W * 0.3, W * 0.7];
+  forma.mare = (() => { const out = [], kk = [D.jz.ce26 / D.jz.ce22, D.jz.v26 / D.jz.v22];
+    kk.forEach((k, j) => { const h = HB * k, n = Math.round(N * 0.42 * k / 1.1); for (let i = 0; i < n; i++) out.push([MX[j] - CW / 2 + rnd() * CW, BB - rnd() * h, j ? AC : "#fff"]);
+      for (let i = 0; i < 110; i++) { const u = rnd() * (2 * CW + 2 * HB); const [x, y] = u < CW ? [MX[j] - CW / 2 + u, BB - HB] : u < CW + HB ? [MX[j] + CW / 2, BB - (u - CW)] : u < CW + 2 * HB ? [MX[j] - CW / 2, BB - (u - CW - HB)] : [MX[j] - CW / 2 + rnd() * CW, BB]; out.push([x, y, "#8fa6bb"]); } });
+    return encher(out); })();
+  // 2 e 3 · colunas 2022 × 2026 (1 ponto = 3 votos)
+  const BASE = 1420, GAP = 24, PER = 9, CX2 = [W * 0.3, W * 0.7], VP = 3;
+  const colunas = (a, b, cor) => { const out = []; [a, b].forEach((v, j) => { const n = Math.round(v / VP); for (let k = 0; k < n; k++) for (let r = 0; r < 4; r++) out.push([CX2[j] - ((PER - 1) * GAP) / 2 + (k % PER) * GAP + gauss() * 1.5, BASE - Math.floor(k / PER) * GAP + gauss() * 1.5, j ? cor : "#fff"]); }); return encher(out); };
+  forma.colJ = colunas(D.jz.v22, D.jz.v26, AC); forma.colS = colunas(D.sv.v22, D.sv.v26, AC);
+  const topo = (v) => BASE - Math.floor(Math.round(v / VP) / PER) * GAP;
+  // 4 · mapa: bolha por bairro (tamanho = votos 2026; verde = cresceu)
+  const BA = D.bairros.filter((x) => x.lat).map((x) => ({ ...x, xy: proj(x.lon, x.lat, VJ, MAPY) })), totV = BA.reduce((a, x) => a + x.jz, 0);
+  forma.mapa = (() => { const out = []; BA.forEach((x) => { const n = Math.max(30, Math.round((N * 0.85 * x.jz) / totV)), r = 12 + Math.sqrt(x.jz) * 4.2; for (let k = 0; k < n; k++) { const a = rnd() * 6.283, rr = Math.sqrt(rnd()) * r; out.push([x.xy[0] + Math.cos(a) * rr, x.xy[1] + Math.sin(a) * rr, x.d > 0 ? AC : "#9fb3c2"]); } }); return encher(out); })();
+  // 5 · onde mais aumentou: barras 2022 (branco) → 2026 (verde)
+  const T3 = D.bairros.slice(0, 3), LX0 = 110, LW = 700, LY = 600, LG = 260, LM = Math.max(...T3.map((x) => x.jz));
+  forma.ganhos = (() => { const out = []; const tot = T3.reduce((a, x) => a + x.jz, 0); T3.forEach((x, i) => { const n = Math.round((N * 0.9 * x.jz) / tot); for (let k = 0; k < n; k++) { const ant = k < n * (x.j / x.jz); out.push([LX0 + rnd() * LW * ((ant ? x.j : x.jz) / LM), LY + i * LG + 70 + gauss() * 9, ant ? "#ffffff" : AC]); } }); return encher(out); })();
+  // 6 · Jatobá: anel de 54 pontos acesos ao redor do número
+  const RY = 860; forma.jatoba = Array.from({ length: N }, (_, i) => { const a = rnd() * 6.283, r = 250 + Math.abs(gauss()) * 34; return i < N * 0.82 ? [W / 2 + Math.cos(a) * r, RY + Math.sin(a) * r, rnd() < 0.75 ? AC : "#fff"] : poeira(); });
+  // 7 · Croatá dos Martins: Silvana 42 → 53 (1 ponto = 1 voto)
+  const CG = 26, CP = 7, CB = 1380;
+  forma.croata = (() => { const out = []; [42, 53].forEach((v, j) => { for (let k = 0; k < v; k++) for (let r = 0; r < 14; r++) out.push([CX2[j] - ((CP - 1) * CG) / 2 + (k % CP) * CG + gauss() * 2.2, CB - Math.floor(k / CP) * CG + gauss() * 2.2, j ? AC : "#fff"]); }); return encher(out); })();
+  const ctop = (v) => CB - Math.floor((v - 1) / CP) * CG;
+  // 8 · 1 em cada 143: grade 11 × 13, uma célula acesa
+  const GC = 11, GR = 13, GS = 74, GX = W / 2 - ((GC - 1) * GS) / 2, GY = 520, ALVO = 6 * GC + 5;
+  forma.grade = Array.from({ length: N }, (_, i) => { const c = i < 420 ? ALVO : i % 143, cx = GX + (c % GC) * GS, cy = GY + Math.floor(c / GC) * GS, on = c === ALVO; return [cx + gauss() * (on ? 9 : 5), cy + gauss() * (on ? 9 : 5), on ? AC : "#9fb3c2"]; });
+  // 9 · fecho
+  forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 230 + Math.abs(gauss()) * 42; return [W / 2 + Math.cos(a) * r, 800 + Math.sin(a) * r, rnd() < 0.65 ? AC : "#fff"]; });
+  const KF = [[0, "poeira", 0], [1.6, "vjPequena", 2.4], [S[1] + 0.2, "mare", 2.0], [S[2] + 0.2, "colJ", 2.0], [S[3] + 0.2, "colS", 1.8], [S[4] + 0.2, "mapa", 2.2], [S[5] + 0.2, "ganhos", 1.8], [S[6] + 0.2, "jatoba", 1.8], [S[7] + 0.2, "croata", 1.8], [S[8] + 0.2, "grade", 2.0], [S[9] + 0.2, "halo", 2.0]];
+  const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
+  // desenho
+  const fundo = () => { const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8); g.addColorStop(0, "#0d2b22"); g.addColorStop(1, "#020806"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalAlpha = 0.05; ctx.strokeStyle = "#fff"; ctx.lineWidth = 1; for (let x = 60; x < W; x += 120) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); } ctx.restore(); };
+  const texto = (s, x, y, o = {}) => { const a = o.a == null ? 1 : o.a; if (a <= 0.01) return; ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center";
+    let tam = o.tam || 56; ctx.font = `${o.w || 700} ${tam}px ${FONT}`; ctx.letterSpacing = (o.ls || 0) + "px"; const ls = String(s).split("\n"), lg = Math.max(...ls.map((l) => ctx.measureText(l).width));
+    if (lg > (o.max || 980)) { tam *= (o.max || 980) / lg; ctx.font = `${o.w || 700} ${tam}px ${FONT}`; } if (o.brilho) { ctx.shadowColor = o.cor || "rgba(255,255,255,.6)"; ctx.shadowBlur = o.brilho; }
+    const dy = o.sobe ? (1 - a) * 24 : 0; ls.forEach((l, i) => ctx.fillText(l, x, y + dy + i * (o.lh || tam * 1.18))); ctx.restore(); };
+  const foto = (k, x, y, r, a, cor) => { if (a <= 0.01 || !img[k]) return; const s = 0.85 + 0.15 * eout(a); ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+    ctx.shadowColor = cor || "rgba(255,255,255,.35)"; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const i = img[k], sc = Math.max((2 * r) / i.width, (2 * r) / i.height); ctx.drawImage(i, -i.width * sc / 2, -i.height * sc * 0.42, i.width * sc, i.height * sc); ctx.restore();
+    ctx.lineWidth = 5; ctx.strokeStyle = cor || "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); };
+  const fonte = (t, a) => texto("Fonte: TSE · votação por seção, 2022 e 2026", W / 2, H - 70, { tam: 22, w: 500, a: a * 0.8, cor: "#8fa6bb" });
+  const contornos = (t, v, cy, a, realce) => { if (a <= 0.01) return; ctx.save(); ctx.lineWidth = 1.4; ctx.strokeStyle = `rgba(255,255,255,${0.16 * a})`; const k = prog(t, 0.2, 2.4);
+    G.mun.forEach((r, ri) => { if (ri / G.mun.length > k * 1.02) return; ctx.beginPath(); r.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.stroke(); });
+    if (realce > 0) { ctx.beginPath(); vj.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.shadowColor = AC; ctx.shadowBlur = 24 * realce; ctx.strokeStyle = `rgba(70,214,140,${0.9 * realce})`; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = `rgba(70,214,140,${0.10 * realce})`; ctx.fill(); }
+    ctx.restore(); };
+  const particulas = (t) => { const { ant, cur, t0, dur } = posicao(t); ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < N; i++) { const p = P[i], k = dur ? ease(clamp(((t - t0) / dur - p.d) / 0.65)) : 1, a0 = ant[i], a1 = cur[i];
+      let x = lerp(a0[0], a1[0], k) + Math.sin(t * 0.9 + p.ph) * 1.6, y = lerp(a0[1], a1[1], k) + Math.cos(t * 0.8 + p.ph) * 1.6; const cv = Math.sin(k * Math.PI) * 60 * (p.d - 0.17); x += cv; y -= cv * 0.6;
+      const c = (k > 0.5 ? a1[2] : a0[2]) || "#fff"; let al = p.a * (0.55 + 0.45 * Math.sin(t * 2 + p.ph * 3) ** 2); if (c === "dust") al *= 0.14; if (c === "#9fb3c2" || c === "#8fa6bb") al *= 0.45;
+      ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c; ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill();
+      if (dur && k > 0 && k < 1) { const k2 = ease(clamp(((t - 0.06 - t0) / dur - p.d) / 0.65)), xb = lerp(a0[0], a1[0], k2), yb = lerp(a0[1], a1[1], k2); if (Math.hypot(x - xb, y - yb) > 3) { ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = p.s * 0.9; ctx.globalAlpha = clamp(al * 0.3); ctx.beginPath(); ctx.moveTo(xb, yb); ctx.lineTo(x, y); ctx.stroke(); } } }
+    ctx.restore(); };
+  const sel = (t, i, a = 0.3) => vis(t, S[i] + a, S[i + 1]);
+  const conta = (t, i, de, ate, v) => fmt(v * eout(prog(t, S[i] + de, S[i] + ate)));
+  window.render = (t) => {
+    ctx.clearRect(0, 0, W, H); fundo();
+    const aMapa = t < S[1] ? 1 - prog(t, S[1] - 1, S[1]) : t > S[4] && t < S[5] ? vis(t, S[4], S[5]) : 0;
+    contornos(t, t < S[1] ? CE : VJ, MAPY, aMapa, (t < S[1] ? prog(t, 1.6, 3.2) : 1) * aMapa);
+    particulas(t);
+    // 0 · abertura
+    texto("VARJOTA", W / 2, 330, { tam: 118, w: 700, ls: 14, a: vis(t, 0.8, S[1]), brilho: 30, sobe: 1 });
+    texto("2022 × 2026 · RAIO-X DA LIDERANÇA", W / 2, 400, { tam: 34, w: 700, ls: 6, a: vis(t, 1.4, S[1]), cor: AC });
+    texto("Dr. Jaziel (federal) · Dra. Silvana (estadual)", W / 2, 1600, { tam: 38, w: 500, a: vis(t, 2.2, S[1]) });
+    texto("CLEUTON RIBEIRO", W / 2, 1670, { tam: 46, w: 700, ls: 8, a: vis(t, 2.8, S[1]), cor: AC, brilho: 12 });
+    // 1 · contra a maré
+    texto("CONTRA A MARÉ", W / 2, 330, { tam: 64, w: 700, ls: 8, a: sel(t, 1), brilho: 18 });
+    texto("Dr. Jaziel · votos 2022 → 2026", W / 2, 395, { tam: 32, w: 500, a: sel(t, 1, 0.6), cor: CINZA });
+    [["CEARÁ", "−" + pc(1 - D.jz.ce26 / D.jz.ce22, 0), "#fff", `${fmt(D.jz.ce22)} → ${fmt(D.jz.ce26)}`], ["VARJOTA", "+" + pc(D.jz.v26 / D.jz.v22 - 1, 0), AC, `${D.jz.v22} → ${D.jz.v26}`]].forEach(([n, v, cor, d], j) => {
+      const al = vis(t, S[1] + 1 + j * 0.8, S[2]); texto(v, MX[j], BB - HB * (j ? 1.25 : 1) - 70, { tam: 110, w: 700, a: al, cor, brilho: j ? 22 : 0 }); texto(n, MX[j], BB + 80, { tam: 44, w: 700, ls: 6, a: al }); texto(d, MX[j], BB + 130, { tam: 30, w: 500, a: al, cor: CINZA }); });
+    fonte(t, sel(t, 1));
+    // 2 · Jaziel
+    texto("DEPUTADO FEDERAL EM VARJOTA", W / 2, 330, { tam: 42, w: 700, ls: 5, a: sel(t, 2), cor: CINZA });
+    [[D.jz.v22, "2022", "#fff"], [D.jz.v26, "2026", AC]].forEach(([v, ano, cor], j) => { const al = vis(t, S[2] + 0.6 + j * 0.4, S[3]);
+      foto("jz", CX2[j], topo(v) - 130, 84, al, j ? AC : null); texto(conta(t, 2, 1, 2.6, v), CX2[j], BASE + 90, { tam: 76, w: 700, a: al, cor }); texto(`Dr. Jaziel · ${ano}`, CX2[j], BASE + 140, { tam: 30, w: 500, a: al }); });
+    texto(`+${D.jz.v26 - D.jz.v22} votos em Varjota`, W / 2, 1700, { tam: 52, w: 700, a: vis(t, S[2] + 2.8, S[3]), cor: AC, brilho: 14, sobe: 1 });
+    fonte(t, sel(t, 2));
+    // 3 · Silvana
+    texto("DEPUTADA ESTADUAL EM VARJOTA", W / 2, 330, { tam: 42, w: 700, ls: 5, a: sel(t, 3), cor: CINZA });
+    [[D.sv.v22, "2022", "#fff"], [D.sv.v26, "2026", AC]].forEach(([v, ano, cor], j) => { const al = vis(t, S[3] + 0.6 + j * 0.4, S[4]);
+      foto("sv", CX2[j], topo(v) - 130, 84, al, j ? AC : null); texto(conta(t, 3, 1, 2.6, v), CX2[j], BASE + 90, { tam: 76, w: 700, a: al, cor }); texto(`Dra. Silvana · ${ano}`, CX2[j], BASE + 140, { tam: 30, w: 500, a: al }); });
+    texto(`Manteve a votação. No Ceará: −${pc(1 - D.sv.ce26 / D.sv.ce22, 0)}`, W / 2, 1700, { tam: 46, w: 700, a: vis(t, S[3] + 2.6, S[4]), sobe: 1 });
+    fonte(t, sel(t, 3));
+    // 4 · mapa
+    texto("BAIRRO A BAIRRO", W / 2, 300, { tam: 46, w: 700, ls: 6, a: sel(t, 4), cor: CINZA });
+    texto("Dr. Jaziel 2026 · verde = cresceu desde 2022", W / 2, 352, { tam: 28, w: 500, a: sel(t, 4, 0.5), cor: "#8fa6bb" });
+    { const al = vis(t, S[4] + 1.6, S[5]), L = (b) => BA.find((x) => x.b === b), sede = ["Centro", "Pedreira", "Empréstimos", "Acampamento DNOCS"].map(L).filter(Boolean);
+      const sx = sede.reduce((a, x) => a + x.xy[0], 0) / sede.length, sy = Math.min(...sede.map((x) => x.xy[1]));
+      texto("SEDE", sx, sy - 95, { tam: 30, w: 700, ls: 4, a: al }); for (const b of ["Jatobá", "Croatá dos Martins"]) { const x = L(b); if (x) texto(b, x.xy[0], x.xy[1] - 22 - Math.sqrt(x.jz) * 4.2, { tam: 28, w: 600, a: al, max: 300 }); } }
+    texto(`Cresceu em ${D.cresceu} de ${D.nb} bairros`, W / 2, 1620, { tam: 54, w: 700, a: vis(t, S[4] + 2.6, S[5]), cor: AC, brilho: 14, sobe: 1 });
+    fonte(t, sel(t, 4));
+    // 5 · onde mais aumentou
+    texto("ONDE MAIS AUMENTOU", W / 2, 380, { tam: 50, w: 700, ls: 5, a: sel(t, 5), cor: AC });
+    T3.forEach((x, i) => { const al = vis(t, S[5] + 0.6 + i * 0.25, S[6]), y = LY + i * LG; texto(x.b, LX0, y, { tam: 44, w: 700, al: "left", a: al, max: 520 });
+      texto(`${x.j} → ${x.jz}  (+${x.d})`, W - 110, y, { tam: 40, w: 700, al: "right", a: al, cor: AC, max: 360 }); });
+    fonte(t, sel(t, 5));
+    // 6 · Jatobá
+    const jt = D.bairros.find((x) => x.b === "Jatobá");
+    texto("JATOBÁ", W / 2, 420, { tam: 70, w: 700, ls: 10, a: sel(t, 6), brilho: 18 });
+    texto(`${jt.j} → ${fmt(jt.jz * eout(prog(t, S[6] + 1, S[6] + 2.6)))}`, W / 2, RY + 50, { tam: 170, w: 700, a: vis(t, S[6] + 0.8, S[7]), cor: AC, brilho: 26 });
+    texto("votos do Dr. Jaziel", W / 2, RY + 130, { tam: 34, w: 500, a: vis(t, S[6] + 1.2, S[7]), cor: CINZA });
+    texto("3º mais votado no local", W / 2, 1330, { tam: 50, w: 700, a: vis(t, S[6] + 2.4, S[7]), sobe: 1 });
+    texto("1 em cada 6 eleitores do local", W / 2, 1410, { tam: 42, w: 500, a: vis(t, S[6] + 3.2, S[7]), cor: AC, sobe: 1 });
+    fonte(t, sel(t, 6));
+    // 7 · Croatá dos Martins (Silvana)
+    texto("CROATÁ DOS MARTINS", W / 2, 360, { tam: 58, w: 700, ls: 6, a: sel(t, 7), brilho: 14 });
+    texto("Dra. Silvana · deputada estadual", W / 2, 420, { tam: 32, w: 500, a: sel(t, 7, 0.5), cor: CINZA });
+    [[42, "2022", "#fff"], [53, "2026", AC]].forEach(([v, ano, cor], j) => { const al = vis(t, S[7] + 0.8 + j * 0.4, S[8]); foto("sv", CX2[j], ctop(v) - 120, 70, al, j ? AC : null);
+      texto(conta(t, 7, 1, 2.4, v), CX2[j], CB + 90, { tam: 72, w: 700, a: al, cor }); texto(ano, CX2[j], CB + 136, { tam: 30, w: 500, a: al }); });
+    texto("+26% · 4ª mais votada no bairro", W / 2, 1700, { tam: 50, w: 700, a: vis(t, S[7] + 2.6, S[8]), cor: AC, sobe: 1 });
+    fonte(t, sel(t, 7));
+    // 8 · peso de Varjota
+    texto("O PESO DE VARJOTA", W / 2, 330, { tam: 58, w: 700, ls: 6, a: sel(t, 8), brilho: 14 });
+    texto("% dos votos do Dr. Jaziel no Ceará que saíram daqui", W / 2, 395, { tam: 30, w: 500, a: sel(t, 8, 0.5), cor: CINZA });
+    texto(`${pc(D.jz.v22 / D.jz.ce22, 2)}  →  ${pc(D.jz.v26 / D.jz.ce26, 2)}`, W / 2, 1560, { tam: 84, w: 700, a: vis(t, S[8] + 1.2, S[9]), cor: AC, brilho: 18, sobe: 1 });
+    texto(`1 em cada ${Math.round(D.jz.ce26 / D.jz.v26)} votos dele em 2026`, W / 2, 1650, { tam: 44, w: 700, a: vis(t, S[8] + 2.4, S[9]), sobe: 1 });
+    fonte(t, sel(t, 8));
+    // 9 · fecho
+    const af = vis(t, S[9] + 0.2, S[10] + 1, 0.6);
+    if (img.cl) foto("cl", W / 2, 800, 210, af, AC);
+    else { texto(`+${pc(D.jz.v26 / D.jz.v22 - 1, 0)}`, W / 2, 850, { tam: 190, w: 700, a: af, cor: AC, brilho: 30 }); texto("enquanto o estado caiu 18%", W / 2, 1140, { tam: 34, w: 500, a: af, cor: CINZA }); }
+    texto("Contra a maré, Varjota cresceu.", W / 2, 320, { tam: 62, w: 700, a: vis(t, S[9] + 0.4, S[10] + 1, 0.6), sobe: 1 });
+    texto("CLEUTON RIBEIRO", W / 2, 1450, { tam: 110, w: 700, ls: 6, a: vis(t, S[9] + 1, S[10] + 1, 0.6), brilho: 24, cor: AC, sobe: 1 });
+    texto("liderança que trabalha perto das pessoas", W / 2, 1530, { tam: 40, w: 500, a: vis(t, S[9] + 1.4, S[10] + 1, 0.6) });
+    texto("Fonte dos votos: TSE · votação por seção, 2022 e 2026 · totais do Ceará: TSE", W / 2, H - 70, { tam: 22, w: 500, a: vis(t, S[9] + 1.6, S[10] + 1, 0.6) * 0.8, cor: "#8fa6bb" });
+  };
+  window.render(0); window.pronto = true;
+})();
+</script>
+</body>
+</html>
