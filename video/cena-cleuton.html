@@ -102,6 +102,7 @@
     texto("VARJOTA", W / 2, 330, { tam: 118, w: 700, ls: 14, a: vis(t, 0.8, S[1]), brilho: 30, sobe: 1 });
     texto("2022 × 2026 · RAIO-X DA LIDERANÇA", W / 2, 400, { tam: 34, w: 700, ls: 6, a: vis(t, 1.4, S[1]), cor: AC });
     texto("Dr. Jaziel (federal) · Dra. Silvana (estadual)", W / 2, 1600, { tam: 38, w: 500, a: vis(t, 2.2, S[1]) });
+    foto("cl", W / 2, 1430, 92, vis(t, 2.6, S[1]), AC);
     texto("CLEUTON RIBEIRO", W / 2, 1670, { tam: 46, w: 700, ls: 8, a: vis(t, 2.8, S[1]), cor: AC, brilho: 12 });
     // 1 · contra a maré
     texto("CONTRA A MARÉ", W / 2, 330, { tam: 64, w: 700, ls: 8, a: sel(t, 1), brilho: 18 });
@@ -157,7 +158,7 @@
     fonte(t, sel(t, 8));
     // 9 · fecho
     const af = vis(t, S[9] + 0.2, S[10] + 1, 0.6);
-    if (img.cl) foto("cl", W / 2, 800, 210, af, AC);
+    if (img.cl) { foto("cl", W / 2, 800, 210, af, AC); texto(`+${pc(D.jz.v26 / D.jz.v22 - 1, 0)} em Varjota  ·  −${pc(1 - D.jz.ce26 / D.jz.ce22, 0)} no Ceará`, W / 2, 1150, { tam: 44, w: 700, a: vis(t, S[9] + 0.8, S[10] + 1, 0.6), cor: AC }); }
     else { texto(`+${pc(D.jz.v26 / D.jz.v22 - 1, 0)}`, W / 2, 850, { tam: 190, w: 700, a: af, cor: AC, brilho: 30 }); texto("enquanto o estado caiu 18%", W / 2, 1140, { tam: 34, w: 500, a: af, cor: CINZA }); }
     texto("Contra a maré, Varjota cresceu.", W / 2, 320, { tam: 62, w: 700, a: vis(t, S[9] + 0.4, S[10] + 1, 0.6), sobe: 1 });
     texto("CLEUTON RIBEIRO", W / 2, 1450, { tam: 110, w: 700, ls: 6, a: vis(t, S[9] + 1, S[10] + 1, 0.6), brilho: 24, cor: AC, sobe: 1 });
