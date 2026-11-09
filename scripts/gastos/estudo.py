@@ -93,8 +93,27 @@ def main():
         if c["cnpj"] and not c["aditivo"]: IDX.setdefault(c["cnpj"], []).append(f"{nome_org}: {c['fornecedor']} — {c['objeto'][:70]} ({BR(c['valor'] or 0)})")
     json.dump({k: v for k, v in IDX.items() if v}, open(arq_idx, "w"), ensure_ascii=False, indent=0)
     planilha(base + ".xlsx", nome_org, anos, comp, ri, tce, F, AL, a.orgao)
+    exportar(base + ".painel.json", nome_org, anos, comp, ri, tce, F, AL, a.orgao)
     print(f"✔ {base}.xlsx · {len(comp)} processos · {len(ri)} itens · {len(tce)} contratos TCE · {len(AL)} alertas", flush=True)
     for x in AL[:12]: print(f"  [{x['gravidade']}] {x['tipo']}: {x['fato'][:150]}")
+
+def exportar(arq, nome_org, anos, comp, ri, tce, F, AL, orgao):
+    """Dados prontos para o painel (uma linha por processo, item e alerta, com o órgão)."""
+    P = [dict(orgao=nome_org, processo=c["k"], ano=c["ano"], publicado=c["pub"], modalidade="Pregão" if "Preg" in c["mod"] else c["mod"].split(" - ")[0], categoria=c["cat"], objeto=c["obj"][:300],
+              estimado=c["est"], contratado=c["hom"], fornecedor="; ".join(n for n, cn, v in c["forn_list"]) or "Sem resultado publicado", cnpj=";".join(cn for n, cn, v in c["forn_list"] if cn), link=c["link"]) for c in comp]
+    semres = sum(1 for c in comp if not c["hom"]) / len(comp) if comp else 1
+    if not comp or semres >= 0.3:  # sem resultado no PNCP: entram os contratos do TCE-CE
+        P += [dict(orgao=nome_org, processo=f"TCE-{i}-{c['data']}", ano=int(c["data"][:4]), publicado=c["data"], modalidade="Contrato (TCE-CE)", categoria=cat(c["objeto"]), objeto=c["objeto"][:300],
+                   estimado=None, contratado=c["valor"], fornecedor=c["fornecedor"], cnpj=c["cnpj"], link="") for i, c in enumerate(tce) if not c["aditivo"]]
+    I = [dict(id=f"{r['k']}#{n}", orgao=nome_org, ano=r["ano"], categoria=r["cat"], item=r["item"][:220], qtd=r["qtd"], unid=r["unid"], fornecedor=r["fornecedor"], preco_unit=r["v_unit"], total=r["v_total"],
+              preco_est=r["v_est"], processo=r["k"], link=r["link"]) for n, r in enumerate(ri)]
+    A = [dict(id=f"{nome_org}#{n}", orgao=nome_org, **{k: (v if not isinstance(v, str) else v[:900]) for k, v in x.items()}) for n, x in enumerate(AL)]
+    E = []
+    for y in [str(anos[0] - 1)] + [str(y) for y in anos]:
+        a = F.get(y) or {}
+        v = (a.get("funcoes") or {}).get("Legislativa") if orgao == "camara" else a.get("receita_corrente")
+        if v: E.append(dict(orgao=nome_org, ano=int(y), valor=v, indicador="Repasse da Prefeitura" if orgao == "camara" else "Receita corrente", fonte=a.get("fonte", "DCA")))
+    json.dump(dict(processos=P, itens=I, alertas=A, entradas=E), open(arq, "w"), ensure_ascii=False)
 
 def planilha(arq, nome_org, anos, comp, ri, tce, F, AL, orgao):
     wb = Workbook(); H = Font(bold=True, color="FFFFFF"); FL = PatternFill("solid", fgColor="1F3FAE"); M = '"R$" #,##0.00'
