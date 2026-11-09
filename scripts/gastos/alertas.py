@@ -15,6 +15,12 @@ TEXTOS = {
   defesa="Problema de sistema ou de integração com o PNCP; publicação feita no portal próprio ou no Diário Oficial; processos em fase de envio.",
   pedir="Cópia integral dos processos de contratação do período (termo de referência, pesquisa de preços, propostas, contrato, notas fiscais) e o motivo da não publicação no PNCP.",
   base="Lei 14.133/2021, arts. 54, 72, parágrafo único, 94 e 174; Lei 12.527/2011 (LAI), art. 8º."),
+ "sem_resultado": dict(gravidade="Alta", titulo="Processos sem resultado publicado",
+  por_que="{n} de {t} processos ({pct}) estão no PNCP sem o resultado (vencedor e preço final). Sem isso não dá para saber quem ganhou nem quanto vai receber; a lei manda publicar a homologação e o contrato.",
+  ataque="Quem ganhou essas {n} licitações e por quanto? Por que o resultado não foi publicado no portal nacional?",
+  defesa="Processos em andamento, desertos ou fracassados; resultado publicado no Diário Oficial ou no portal próprio.",
+  pedir="Atas de julgamento, termos de homologação e contratos dos processos listados.",
+  base="Lei 14.133/2021, arts. 71, 94 e 174."),
  "dispensa_alta": dict(gravidade="Média", titulo="Quase tudo sem licitação",
   por_que="Dispensa é exceção. Quando a grande maioria das compras sai sem disputa, o órgão perde a chance de pagar menos e fica mais fácil direcionar para conhecidos.",
   ataque="{n} de {t} contratações ({pct}) foram feitas sem licitação. Por que não houve disputa, se a lei manda licitar como regra?",
@@ -75,7 +81,7 @@ TEXTOS = {
   defesa="Profissional autônomo qualificado, formalizado como MEI ou empresa individual.",
   pedir="Comprovação da capacidade técnica e o enquadramento do fornecedor (consulta do CNPJ na Receita).",
   base="LC 123/2006 (limite do MEI); Lei 14.133/2021, arts. 14 e 67."),
- "mesmo_cnpj_outro_lugar": dict(gravidade="Média", titulo="Mesmo fornecedor em outra cidade",
+ "mesmo_cnpj_outro_lugar": dict(gravidade="Média", titulo="Mesmo fornecedor em outro órgão",
   por_que="O CNPJ {cnpj} também tem contrato em {onde}. Empresas que circulam entre prefeituras e câmaras vizinhas com objetos parecidos podem indicar uma rede de assessorias que se repete.",
   ataque="Por que a mesma empresa vende o mesmo tipo de serviço, pelo mesmo valor, para órgãos diferentes da região? Quem indica?",
   defesa="Empresa especializada no setor público, que atende vários municípios.",
@@ -105,7 +111,7 @@ def _a(tipo, fato, v_env=None, ref="", link="", **fmt):
     return {"gravidade": t["gravidade"], "tipo": t["titulo"], "fato": fato, "valor": v_env, "referencia": ref, "por_que": f(t["por_que"]), "ataque": f(t["ataque"]),
             "defesa": t["defesa"], "pedir": t["pedir"].format(**fmt) if "{" in t["pedir"] else t["pedir"], "base": t["base"], "link": link}
 
-def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None):
+def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None, contratos_pncp=None):
     """comp: processos (dict com org, ano, pub, mod, cat, obj, est, hom, forn_list[(nome, cnpj, valor)], k, link).
     itens_rows: dicts com item, unid, qtd, fornecedor, v_unit, v_total, v_est, ano, k, link.
     repasse: (ano_antes, valor_antes, ano_depois, valor_depois) para Câmara. outros: {cnpj: ["Órgão X: objeto (valor)"]}."""
@@ -120,6 +126,11 @@ def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None):
         tot = sum(c["hom"] or 0 for c in comp)
         if not itens_rows: itens_rows = [dict(item=c["obj"], unid="", qtd=None, fornecedor=c["forn_list"][0][0], cnpj=c["forn_list"][0][1], v_unit=None, v_total=c["hom"], v_est=None, ano=c["ano"], k=c["k"], link="") for c in comp]
     sem = [c for c in comp if re.search("Dispensa|Inexig", c["mod"])]
+    semres = [c for c in comp if not c["hom"] and c["mod"] != "Contrato (TCE-CE)" and not re.search("Credenciamento|Pré-qualifica", c["mod"])]
+    if len(semres) >= 5 and len(semres) / len(comp) >= 0.3:
+        v = sum(c["est"] or 0 for c in semres)
+        A.append(_a("sem_resultado", f"{len(semres)} processos sem vencedor/valor final publicados, somando {BR(v)} estimados. Maiores: " + "; ".join(f"{c['obj'][:60]} ({BR(c['est'] or 0)})" for c in sorted(semres, key=lambda c: -(c['est'] or 0))[:5]), v,
+                    n=len(semres), t=len(comp), pct=PCT(len(semres) / len(comp))))
     if comp and len(sem) / len(comp) >= 0.5:
         A.append(_a("dispensa_alta", f"{len(sem)} de {len(comp)} processos sem licitação ({PCT(len(sem) / len(comp))}).", sum(c["hom"] or 0 for c in sem), n=len(sem), t=len(comp), pct=PCT(len(sem) / len(comp))))
     soma = collections.defaultdict(list)
@@ -151,6 +162,10 @@ def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None):
     pf = collections.defaultdict(lambda: [0.0, ""])
     for r in itens_rows:
         if r["v_total"]: pf[r["fornecedor"]][0] += r["v_total"]; pf[r["fornecedor"]][1] = r.get("cnpj", "")
+    if contratos_pncp:
+        pc_ = collections.defaultdict(lambda: [0.0, ""])
+        for x in contratos_pncp: pc_[x["fornecedor"]][0] += x["valor"] or 0; pc_[x["fornecedor"]][1] = x["cnpj"]
+        if sum(v[0] for v in pc_.values()) > sum(v[0] for v in pf.values()): pf = pc_
     tit = sum(v[0] for v in pf.values())
     for f, (v, cn) in sorted(pf.items(), key=lambda z: -z[1][0])[:3]:
         if tit and v / tit >= 0.15 and len(pf) >= 4:
@@ -161,16 +176,19 @@ def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None):
     porf = collections.defaultdict(list)
     for c in comp:
         for n, cn, v in c["forn_list"]: porf[cn or n].append(c)
+    STOP = {"contratacao", "contratação", "servicos", "serviços", "prestacao", "prestação", "empresa", "especializada", "municipal", "camara", "câmara", "atender", "necessidades", "junto", "conforme", "secretaria", "municipio", "município", "destinados", "destinado", "aquisição", "aquisicao"}
+    pal = lambda c: set(w for w in re.findall(r"[a-zçãõáéíóúâê]{5,}", c["obj"].lower()) if w not in STOP)
     for cn, cs in porf.items():
         cs = [c for c in cs if SERV.search(c["obj"]) or re.search(r"plano|pca|sistema|licen", c["obj"], re.I)]
-        pal = lambda c: set(w for w in re.findall(r"[a-zçãõáéíóú]{5,}", c["obj"].lower()) if w not in {"contratacao", "contratação", "servicos", "serviços", "prestacao", "prestação", "empresa", "especializada", "municipal", "camara", "câmara", "varjota", "atender", "necessidades", "junto", "conforme"})
+        par = set()
         for i in range(len(cs)):
             for j in range(i + 1, len(cs)):
-                a, b = pal(cs[i]), pal(cs[j])
-                if a and b and len(a & b) / min(len(a), len(b)) >= 0.5:
-                    tema = " ".join(sorted(a & b, key=len, reverse=True)[:3])
-                    A.append(_a("objeto_repetido", f"{cs[i]['pub']} {cs[i]['obj'][:80]} ({BR(cs[i]['hom'] or 0)}) e {cs[j]['pub']} {cs[j]['obj'][:80]} ({BR(cs[j]['hom'] or 0)})", (cs[i]["hom"] or 0) + (cs[j]["hom"] or 0),
-                                f"{cs[i]['k']}, {cs[j]['k']}", n=2, valores=f"{BR(cs[i]['hom'] or 0)} e {BR(cs[j]['hom'] or 0)}", tema=tema))
+                a_, b_ = pal(cs[i]), pal(cs[j])
+                if cs[i]["k"] != cs[j]["k"] and a_ and b_ and len(a_ & b_) / min(len(a_), len(b_)) >= 0.5: par |= {i, j}
+        if len(par) >= 2:
+            g = [cs[i] for i in sorted(par)]; nome = next((n for n, c2, v in g[0]["forn_list"] if (c2 or n) == cn), cn)
+            A.append(_a("objeto_repetido", f"{nome}: " + "; ".join(f"{c['pub']} {c['obj'][:70]} ({BR(c['hom'] or 0)})" for c in g), sum(c["hom"] or 0 for c in g), ", ".join(c["k"] for c in g),
+                        n=len(g), valores=", ".join(BR(c["hom"] or 0) for c in g), tema=g[0]["obj"][:60].lower()))
     dez = collections.defaultdict(list)
     for c in comp:
         if c["pub"][5:7] == "12" and int(c["pub"][8:10]) >= 15: dez[c["pub"][:4]].append(c)
@@ -196,9 +214,9 @@ def gerar(comp, itens_rows, contratos_tce=None, repasse=None, outros=None):
                             cnpj=c["cnpj"], onde="; ".join(o.split(":")[0] for o in outros[c["cnpj"]][:3])))
     lit = [r for r in itens_rows if re.search(r"gasolina|diesel|etanol|combust", r["item"], re.I) and re.match(r"^l", (r["unid"] or "").lower())]
     if lit:
-        L = sum(r["qtd"] or 0 for r in lit); v = sum(r["v_total"] or 0 for r in lit)
+        L = sum(r["qtd"] or 0 for r in lit); v = sum(r["v_total"] or (r["qtd"] or 0) * (r["v_est"] or 0) for r in lit)
         N = lambda q: f"{q:,.0f}".replace(",", ".")
-        A.append(_a("combustivel", f"{N(L)} litros contratados ({BR(v)}): " + "; ".join(f"{r['ano']} {r['item'][:30]} {N(r['qtd'] or 0)} L a {BR(r['v_unit'] or 0)}" for r in lit[:6]), v,
+        A.append(_a("combustivel", f"{N(L)} litros contratados ({BR(v)}): " + "; ".join(f"{r['ano']} {r['item'][:30]} {N(r['qtd'] or 0)} L a {BR(r['v_unit'] or r['v_est'] or 0)}" for r in lit[:6]), v,
                     litros=f"{L:,.0f}".replace(",", "."), valor=BR(v), km=f"{L * 10:,.0f}".replace(",", ".")))
     if repasse and repasse[1] and repasse[3] and repasse[3] / repasse[1] - 1 >= 0.15:
         A.append(_a("repasse_alto", f"{repasse[0]}: {BR(repasse[1])} → {repasse[2]}: {BR(repasse[3])}.", repasse[3], antes=BR(repasse[1]), depois=BR(repasse[3]), pct=PCT(repasse[3] / repasse[1] - 1)))

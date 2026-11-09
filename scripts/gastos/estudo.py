@@ -53,7 +53,8 @@ def main():
         cnpjs = cam if a.orgao == "camara" else pref
         print("  CNPJs:", cnpjs, flush=True)
         D = coleta.pncp(cnpjs, anos)
-        D["tce"] = coleta.tce_contratos(cod, anos, filtro_camara=(a.orgao == "camara")) if (a.orgao == "camara" or not D["contratacoes"]) else []
+        semres = sum(1 for x in D["contratacoes"] if not x.get("valorTotalHomologado"))
+        D["tce"] = coleta.tce_contratos(cod, anos, filtro_camara=(a.orgao == "camara")) if (a.orgao == "camara" or not D["contratacoes"] or semres / len(D["contratacoes"]) >= 0.3) else []
         json.dump(D, open(base + ".json", "w"), ensure_ascii=False)
     F = financas(a.cidade, ibge, a.de)
     # processos e itens
@@ -77,13 +78,17 @@ def main():
         ys = sorted(y for y in F if (F[y].get("funcoes") or {}).get("Legislativa"))
         if len(ys) >= 2: rep = (ys[-2], F[ys[-2]]["funcoes"]["Legislativa"], ys[-1], F[ys[-1]]["funcoes"]["Legislativa"])
     outros, IDX, arq_idx = indice_outros(a.saida, nome_org)
-    AL = alertas.gerar(comp, ri, tce, rep, outros)
+    cp = [dict(fornecedor=x["nomeRazaoSocialFornecedor"], cnpj=(x.get("niFornecedor") or "").lstrip("0"), valor=x.get("valorGlobal"), objeto=x.get("objetoContrato"), data=x.get("dataAssinatura")) for x in D["contratos"]]
+    if a.cache and "tce" not in D: D["tce"] = []
+    AL = alertas.gerar(comp, ri, tce, rep, outros, cp)
     # índice de fornecedores para cruzar com os próximos estudos
     for k in list(IDX):
         IDX[k] = [o for o in IDX[k] if not o.startswith(nome_org + ":")]
     for c in comp:
         for n, cn, v in c["forn_list"]:
             if cn: IDX.setdefault(cn, []).append(f"{nome_org}: {n} — {c['obj'][:70]} ({BR(v or 0)})")
+    for x in cp:
+        if x["cnpj"]: IDX.setdefault(x["cnpj"], []).append(f"{nome_org}: {x['fornecedor']} — {(x['objeto'] or '')[:70]} ({BR(x['valor'] or 0)})")
     for c in tce:
         if c["cnpj"] and not c["aditivo"]: IDX.setdefault(c["cnpj"], []).append(f"{nome_org}: {c['fornecedor']} — {c['objeto'][:70]} ({BR(c['valor'] or 0)})")
     json.dump({k: v for k, v in IDX.items() if v}, open(arq_idx, "w"), ensure_ascii=False, indent=0)
