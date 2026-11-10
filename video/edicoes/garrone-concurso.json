@@ -6,7 +6,7 @@
  "destaque": "#ffc21a",
  "logo": "entregas/midia/garrone/logo.png",
  "marca": true,
- "fundo": true,
+ "fundo": false,
  "extra": 2.6,
  "correcoes": {
   "16.5": "",
