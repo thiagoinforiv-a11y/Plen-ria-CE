@@ -8,14 +8,99 @@
  "marca": true,
  "fundo": true,
  "extra": 2.6,
- "correcoes": { "16.32": "um", "16.46": "ideal", "28.72": "Varjota.", "34.76": "varjotense," },
- "tarja": { "texto": "Primeiro concurso público da história da Câmara de Varjota", "ate": 4.6 },
+ "correcoes": {
+  "16.5": "",
+  "16.64": "",
+  "31.3": "tá",
+  "33.18": "tá",
+  "34.88": "varjotense,"
+ },
+ "tarja": {
+  "texto": "Primeiro concurso público da história da Câmara de Varjota",
+  "ate": 4.6
+ },
  "cartoes": [
-  { "tipo": "nome", "de": 4.8, "ate": 9.4, "nome": "Roberto do Garrone", "papel": "Presidente da Câmara Municipal de Varjota" },
-  { "tipo": "lista", "de": 9.6, "ate": 15.2, "titulo": "CARGOS CRIADOS PELO PROJETO", "itens": ["AUXILIAR ADMINISTRATIVO", "AUXILIAR DE SERVIÇOS GERAIS", "MOTORISTA", "VIGIA"] },
-  { "tipo": "numero", "de": 19.9, "ate": 22.5, "texto": "✔", "tam": 230, "rotulo": "TRANSPARÊNCIA" },
-  { "tipo": "numero", "de": 25.7, "ate": 29.6, "texto": "1º", "tam": 300, "rotulo": "CONCURSO PÚBLICO DA CÂMARA" }
+  {
+   "tipo": "nome",
+   "de": 4.8,
+   "ate": 9.4,
+   "nome": "Roberto do Garrone",
+   "papel": "Presidente da Câmara Municipal de Varjota"
+  },
+  {
+   "tipo": "lista",
+   "de": 9.6,
+   "ate": 15.2,
+   "titulo": "CARGOS CRIADOS PELO PROJETO",
+   "itens": [
+    "AUXILIAR ADMINISTRATIVO",
+    "AUXILIAR DE SERVIÇOS GERAIS",
+    "MOTORISTA",
+    "VIGIA"
+   ]
+  },
+  {
+   "tipo": "numero",
+   "de": 19.9,
+   "ate": 22.5,
+   "texto": "✔",
+   "tam": 230,
+   "rotulo": "TRANSPARÊNCIA"
+  },
+  {
+   "tipo": "numero",
+   "de": 25.7,
+   "ate": 29.6,
+   "texto": "1º",
+   "tam": 300,
+   "rotulo": "CONCURSO PÚBLICO DA CÂMARA"
+  }
  ],
- "zooms": [[0, 1.0], [5.9, 1.1], [12.3, 1.0], [15.5, 1.14], [19.6, 1.0], [22.6, 1.12], [29.6, 1.0], [33.2, 1.12], [36.1, 1.0], [40.2, 1.1]],
- "fim": { "de": 44.9, "texto": "AÇÃO E COMPROMISSO", "sub": "@robertodogarrone" }
+ "zooms": [
+  [
+   0,
+   1.0
+  ],
+  [
+   5.9,
+   1.1
+  ],
+  [
+   12.3,
+   1.0
+  ],
+  [
+   15.5,
+   1.14
+  ],
+  [
+   19.6,
+   1.0
+  ],
+  [
+   22.6,
+   1.12
+  ],
+  [
+   29.6,
+   1.0
+  ],
+  [
+   33.2,
+   1.12
+  ],
+  [
+   36.1,
+   1.0
+  ],
+  [
+   40.2,
+   1.1
+  ]
+ ],
+ "fim": {
+  "de": 44.9,
+  "texto": "AÇÃO E COMPROMISSO",
+  "sub": "@robertodogarrone"
+ }
 }
