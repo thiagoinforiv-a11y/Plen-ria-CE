@@ -49,5 +49,31 @@ for i, c in enumerate(E["cartoes"]):
 for t, z in (E.get("zooms") or [])[1:]:
     if z > 1: por(whoosh(0.25), max(0, t - 0.1), 0.25)
 buf /= max(1e-6, np.abs(buf).max()) / 0.8
+
+for c in E["cartoes"]:
+    if c["tipo"] == "lista":
+        for j in range(len(c["itens"])): por(pop(), c["de"] + 0.4 + j * 0.3, 0.5, 0.3 if j % 2 else -0.3)
+    if c["tipo"] == "nome": por(whoosh(0.35), c["de"], 0.5, -0.6)
+
+# trilha de fundo sintetizada (opcional, "fundo": true): acordes suaves em loop, baixa sob a voz e sobe no fechamento
+if E.get("fundo"):
+    n = len(buf); t = np.arange(n) / SR; bed = np.zeros(n)
+    acordes = [[261.63, 329.63, 392.0, 493.88], [220.0, 261.63, 329.63, 392.0], [174.61, 220.0, 261.63, 329.63], [196.0, 246.94, 293.66, 392.0]]
+    dur_ac = 2.4
+    for k in range(int(n / SR / dur_ac) + 1):
+        i0 = int(k * dur_ac * SR); i1 = min(n, int((k + 1) * dur_ac * SR + 0.6 * SR)); tt = np.arange(i1 - i0) / SR
+        env = np.minimum(1, tt / 0.5) * np.exp(-np.maximum(0, tt - dur_ac) * 6)
+        for f in acordes[k % 4]: bed[i0:i1] += (np.sin(2 * np.pi * f * tt) + 0.3 * np.sin(4 * np.pi * f * tt)) * env * 0.05
+        bed[i0:i1] += np.sin(2 * np.pi * acordes[k % 4][0] / 2 * tt) * env * 0.08
+    # pulso leve (batida) para dar ritmo
+    for b in np.arange(0, n / SR, 0.6):
+        i = int(b * SR); m = min(n - i, int(0.15 * SR)); tt = np.arange(m) / SR
+        bed[i:i + m] += np.sin(2 * np.pi * (55 + 40 * np.exp(-tt * 30)) * tt) * np.exp(-tt * 18) * 0.12
+    fimde = E.get("fim", {}).get("de", 1e9)
+    g = np.where(t < fimde, 0.35, 0.35 + 0.65 * np.minimum(1, (t - fimde) / 0.6))
+    g *= np.minimum(1, (n / SR - t) / 1.0)
+    buf[:, 0] += bed * g; buf[:, 1] += bed * g
+    if fimde < 1e8: por(impacto(1.6), fimde, 0.8)
+
 with wave.open(saida, "wb") as w:
-    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((buf * 32767).astype(np.int16).tobytes())
+    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(buf, -1, 1) * 32767).astype(np.int16).tobytes())

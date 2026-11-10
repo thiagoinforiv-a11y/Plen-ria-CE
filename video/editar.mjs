@@ -21,7 +21,9 @@ const Z = E.zooms || [[0, 1]], partes = [];
 Z.forEach(([t0, z], i) => { const t1 = Z[i + 1] ? Z[i + 1][0] : dur, o = path.join(tmp, `z${i}.mp4`);
   ff("-ss", String(t0), "-to", String(t1), "-i", src, "-vf", `scale=${Math.round(W * z)}:${Math.round(H * z)}:force_original_aspect_ratio=increase,crop=${W}:${H}:(iw-${W})/2:(ih-${H})/2*0.6,fps=${FPS},setsar=1`, "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", o); partes.push(o); });
 fs.writeFileSync(path.join(tmp, "l.txt"), partes.map((p) => `file '${p}'`).join("\n"));
-const base = path.join(tmp, "base.mp4"); ff("-f", "concat", "-safe", "0", "-i", path.join(tmp, "l.txt"), "-c", "copy", base);
+const base0 = path.join(tmp, "base0.mp4"), base = path.join(tmp, "base.mp4"), extra = E.extra || 0, total = dur + extra;
+ff("-f", "concat", "-safe", "0", "-i", path.join(tmp, "l.txt"), "-c", "copy", base0);
+if (extra) ff("-i", base0, "-vf", `tpad=stop_mode=clone:stop_duration=${extra}`, "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", base); else fs.renameSync(base0, base);
 
 // 2 · camada animada (PNG com transparência) desenhada no navegador
 const tipos = { ".html": "text/html", ".json": "application/json", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".woff2": "font/woff2" };
@@ -30,18 +32,18 @@ await new Promise((ok) => srv.listen(0, ok));
 const b = await pw.chromium.launch(), p = await b.newPage({ viewport: { width: W, height: H } });
 await p.goto(`http://127.0.0.1:${srv.address().port}/video/cena-edicao.html?d=${encodeURIComponent("../" + path.relative(RAIZ, path.resolve(arq)))}`);
 await p.waitForFunction(() => window.pronto === true, null, { timeout: 60000 });
-const camada = path.join(tmp, "camada.mov"), n = Math.round(dur * FPS);
+const camada = path.join(tmp, "camada.mov"), n = Math.round(total * FPS);
 const enc = spawn("ffmpeg", ["-v", "error", "-y", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "png", "-i", "-", "-c:v", "qtrle", camada], { stdio: ["pipe", "inherit", "inherit"] });
 for (let i = 0; i < n; i++) { const png = Buffer.from((await p.evaluate((t) => { window.render(t); return document.getElementById("c").toDataURL("image/png"); }, i / FPS)).split(",")[1], "base64"); if (!enc.stdin.write(png)) await new Promise((ok) => enc.stdin.once("drain", ok)); }
 enc.stdin.end(); await new Promise((ok) => enc.on("close", ok)); await b.close(); srv.close();
 
 // 3 · efeitos sonoros nos momentos das animações (python + numpy, ver video/sfx_edicao.py)
 const efeitos = path.join(tmp, "sfx.wav");
-run("python3", [path.join(RAIZ, "video/sfx_edicao.py"), arq, efeitos, String(dur)], { stdio: "inherit" });
+run("python3", [path.join(RAIZ, "video/sfx_edicao.py"), arq, efeitos, String(total)], { stdio: "inherit" });
 
 // 4 · junta: base + camada + voz original (limpa e nivelada) + efeitos
 ff("-i", base, "-i", camada, "-i", src, "-i", efeitos, "-filter_complex",
-  "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v];[2:a]highpass=f=80,acompressor=threshold=-20dB:ratio=3:attack=5:release=80,volume=1.0[voz];[3:a]volume=0.55[fx];[voz][fx]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5[a]",
-  "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-preset", "medium", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", saida);
+  "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v];[2:a]apad,highpass=f=80,acompressor=threshold=-20dB:ratio=3:attack=5:release=80,volume=1.0[voz];[3:a]volume=0.55[fx];[voz][fx]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5[a]",
+  "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-preset", "medium", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-t", String(total), saida);
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log("✔", saida);
