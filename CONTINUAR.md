@@ -63,3 +63,48 @@ Branch de trabalho: `claude/mapa-politico-varjota`.
 - Próximos passos: Parte 2 "As surpresas"; vídeo por vereador (collab); clipes reais com tarja (pauta do Thiago); rotina diária de métricas (oferecida).
 - Rotina diária de métricas: scheduled task `trig_01Tiwng3pbYxi1ezWKwx3jay`, 7h43 Fortaleza, dispara na sessão session_01HG11nb4K6fTzP98Tv79TRZ (só leitura no Metricool).
 - Informação local (apoios, grupos): cópia no repositório PRIVADO thiagoinforiv-a11y/plenaria-local (subido pelo Thiago). Em sessão nova: varjota.local.js → data/ce/; lados.local.json e historico-varjota.local.json → video/. Nunca no repositório público.
+
+## Atualização 10/11/2026 (leia isto primeiro numa sessão nova)
+Economia: comece sessão nova por assunto; ao trocar, peça "atualiza o CONTINUAR.md". Desligue conectores sem uso
+(vidIQ está sem créditos). A rotina diária de métricas (trigger trig_01Tiwng3pbYxi1ezWKwx3jay, 7h43) roda nesta sessão antiga;
+se quiser, recriar com create_new_session_on_fire.
+
+### Estudo de gastos (qualquer cidade do CE) — `scripts/gastos/` (README lá)
+- `python3 scripts/gastos/estudo.py --cidade Ipu --orgao camara|prefeitura --de 2025 --ate 2026 [--cache]`
+  → entregas/estudos/<cidade>-<orgao>-<de>-<ate>.xlsx (aba 1 "Pontos de atenção": fato, por que, ataque, defesa, o que pedir, base legal)
+  + .json bruto + .painel.json + entregas/estudos/fornecedores.json (cruza CNPJ entre órgãos).
+- Fontes: PNCP (pncp.gov.br), TCE-CE (api-dados-abertos.tce.ce.gov.br; Varjota=177, Pacujá=125; valores de empenho NÃO vêm na API),
+  Siconfi (scripts/financas.py). Hosts liberados no ambiente: pncp.gov.br, cdn.tse.jus.br e os anteriores.
+- Feitos: Câmara e Prefeitura de Varjota e de Pacujá (biênio 2025–2026). Câmara de Pacujá não publica no PNCP;
+  Prefeitura de Pacujá quase não publica resultado (painel usa contratos do TCE-CE).
+- Painel (artifact tipo Dashboard): https://claude.ai/artifact/SGou5Lr2gnb2VBds5xAyCQ — seletor Cidade + Prefeitura|Câmara;
+  dados em datasets processos/itens/alertas/entradas (arquivos /_blob); página em files/index.html (fonte local entregas/camara/dash/v2/).
+  Para nova cidade: rodar estudo.py, juntar os *.painel.json, subir os 4 arquivos e trocar as URLs dos datasets; incluir a cidade no <select>.
+- Câmara de Varjota: repasse 2,60 mi (2024) → 3,88 mi (2025, +49%); 20 de 21 processos por dispensa; microfone de lapela R$ 2.009,89 (Alider, 2026);
+  combustível contratado 13 mil L/ano para 1 carro e 1 motorista (Thiago confirmou). Valores pagos ao posto: pedir no portal/LAI.
+  Portal da transparência da Câmara não foi encontrado (pedir o link ao Thiago).
+
+### Empresa do Thiago (para licitações)
+- T DA COSTA PEREIRA (Thiago's Assessoria Audiovisual), CNPJ 48.380.632/0001-54, ME, empresário individual, Varjota.
+  21 CNAEs: 59.11-1-02 (principal), 59.11-1-01/99, 59.12-0-99, 74.20-0-01/02/03/04, 73.11-4-00, 73.19-0-02/03, 74.10-2-99,
+  82.30-0-01, 90.01-9-02/06, 77.39-0-03/99, 77.11-0-00, 74.90-1-05.
+- Busca de editais abertos: entregas/oportunidades/ (abertas.py UF..., filtro.py, planilha2.py) → oportunidades-licitacoes-abertas.xlsx
+  e mapa-cnaes.png. Foco só Ceará. CENP: sem certificado não disputa publicidade; objeto social com eventos/promoção pode impedir
+  certificação "full service" (sugestão: empresa separada só de agência). Faltam CNAEs: 73.19-0-04, 63.91-7-00, 62.01-5-02, 63.19-4-00, 59.20-1-00, 73.19-0-99.
+- Conflito: se Thiago assumir cargo de comunicação num município, a empresa não pode contratar com ele (Lei 14.133, art. 14).
+
+### Outros entregues (arquivos em entregas/, fora do git)
+- Secretaria de Comunicação: entregas/secom/secom-proposta-e-recursos.pdf + secom-mapa.png (emendas Pix, Transferegov, PNAB, regras 2028).
+- Natal Solidário de Varjota (ação privada de doação, sem palanque): entregas/natal/ (mapa, plano PDF, planilha de controle).
+  2026 é ano eleitoral até 31/12: Prefeitura não pode distribuir bens (art. 73 §10).
+- Vídeos de lideranças locais (raio-X por bairro, sem marca Plenária): entregas/cleuton/, Raony em entregas/ (detalhes só nos arquivos locais).
+
+### Pautas em aberto (roteiros prontos na conversa de 10/11)
+- Concurso da Câmara de Varjota: PL 34/2026 (19/10/2026, presidente Francisco Roberto Lira de Farias): 5 vagas + 4 reserva
+  (aux. administrativo 2+1 médio; serv. gerais, motorista B, vigia 1+1 fund. incompleto), 40h, R$ 1.621. NÃO confirmado se já foi votado
+  (Thiago vai checar: Câmara (88) 3639-1792). Gancho: "Tem vaga na Câmara… e não é pra vereador." Vídeo do presidente em
+  entregas/midia/camara-presidente/ (transcrição .words.json).
+- Forquilha 2028: Tenente Linha Dura, pré-candidato a vereador (Rádio Pioneira FM, Programa Livre, 28/10). Frase: "eu tenho meu nome".
+  Áudio em entregas/midia/linha-dura/. Não confirmado: SBT / "alma sebosa" (não citar sem fonte). Duas versões de roteiro: A "Linha dura na
+  farda… e agora na Câmara?" e B "O nome que já mexeu em Forquilha". Aguardando escolha do Thiago.
+- @plenariace sem post desde 05/11; nada agendado. Métricas: CCJ 670 views (melhor), Tijuca única com comentários, Pacujá único com compartilhamentos.
