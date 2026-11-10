@@ -43,7 +43,7 @@ run("python3", [path.join(RAIZ, "video/sfx_edicao.py"), arq, efeitos, String(tot
 
 // 4 · junta: base + camada + voz original (limpa e nivelada) + efeitos
 ff("-i", base, "-i", camada, "-i", src, "-i", efeitos, "-filter_complex",
-  "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v];[2:a]apad,highpass=f=80,acompressor=threshold=-20dB:ratio=3:attack=5:release=80,volume=1.0[voz];[3:a]volume=0.55[fx];[voz][fx]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5[a]",
+  `[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v];[2:a]apad,highpass=f=80,acompressor=threshold=-20dB:ratio=3:attack=5:release=80,volume=1.0[voz];[3:a]volume=${E.volEfeitos ?? 0.55}[fx];[voz][fx]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5[a]`,
   "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-preset", "medium", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", "-t", String(total), saida);
 fs.rmSync(tmp, { recursive: true, force: true });
 console.log("✔", saida);
