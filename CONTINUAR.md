@@ -85,7 +85,7 @@ se quiser, recriar com create_new_session_on_fire.
   Portal da transparência da Câmara não foi encontrado (pedir o link ao Thiago).
 
 ### Empresa do Thiago (para licitações)
-- T DA COSTA PEREIRA (Thiago's Assessoria Audiovisual), CNPJ 48.380.632/0001-54, ME, empresário individual, Varjota.
+- Empresa do Thiago: ME, empresário individual, Varjota (CNPJ e cartão em entregas/oportunidades/, fora do git).
   21 CNAEs: 59.11-1-02 (principal), 59.11-1-01/99, 59.12-0-99, 74.20-0-01/02/03/04, 73.11-4-00, 73.19-0-02/03, 74.10-2-99,
   82.30-0-01, 90.01-9-02/06, 77.39-0-03/99, 77.11-0-00, 74.90-1-05.
 - Busca de editais abertos: entregas/oportunidades/ (abertas.py UF..., filtro.py, planilha2.py) → oportunidades-licitacoes-abertas.xlsx
