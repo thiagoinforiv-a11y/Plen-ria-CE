@@ -29,7 +29,7 @@
   const MAPY = H * 0.52, vj = G.varjota;
   // imagens
   const img = {}; const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = ok; i.src = "../" + src; });
-  await Promise.all([].map(([k, f]) => carregar(k, f)));
+  await Promise.all([["rg", D.foto]].map(([k, f]) => carregar(k, f)));
   for (const [n, f, w] of [["Oswald", "oswald-latin-700-normal.woff2", "700"], ["Oswald", "oswald-latin-600-normal.woff2", "500"]]) { const ff = new FontFace(n, `url(fontes/${f})`, { weight: w }); await ff.load(); document.fonts.add(ff); }
   // formas
   const N = 2400, P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
@@ -51,7 +51,7 @@
   forma.mapa = (() => { const out = []; BA.forEach((x) => { const n = Math.max(20, Math.round((N * 0.85 * x.v) / totV)), r = 10 + Math.sqrt(x.v) * 4; for (let k = 0; k < n; k++) { const a = rnd() * 6.283, rr = Math.sqrt(rnd()) * r; out.push([x.xy[0] + Math.cos(a) * rr, x.xy[1] + Math.sin(a) * rr, x.b === "Centro" ? LR : AC]); } }); return encher(out); })();
   const T3 = D.bairros.slice(0, 3), BX0 = 110, BW = 700, BY = 620, BG = 250, BM = T3[0].v;
   forma.barras = (() => { const out = [], tot = T3.reduce((a, x) => a + x.v, 0); T3.forEach((x, i) => { const n = Math.round((N * 0.9 * x.v) / tot); for (let k = 0; k < n; k++) out.push([BX0 + rnd() * BW * (x.v / BM), BY + i * BG + 70 + gauss() * 9, i ? AC : LR]); }); return encher(out); })();
-  forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 240 + Math.abs(gauss()) * 40; return [W / 2 + Math.cos(a) * r, 820 + Math.sin(a) * r, rnd() < 0.65 ? AC : LR]; });
+  forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 270 + Math.abs(gauss()) * 40; return [W / 2 + Math.cos(a) * r, 820 + Math.sin(a) * r, rnd() < 0.65 ? AC : LR]; });
   const KF = [[0, "poeira", 0], [1.6, "vjPequena", 2.4], [S[1] + 0.2, "linha", 2.2], [S[2] + 0.2, "dez", 1.8], [S[3] + 0.2, "cresce", 1.8], [S[4] + 0.2, "anel", 1.8], [S[5] + 0.2, "mapa", 2.2], [S[6] + 0.2, "barras", 1.8], [S[7] + 0.2, "anel", 1.6], [S[8] + 0.2, "halo", 2.0]];
   const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
   const fundo = () => { const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8); g.addColorStop(0, "#0f2a40"); g.addColorStop(1, "#03080e"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); };
@@ -107,11 +107,15 @@
     texto("o mais votado do bairro", W / 2, RY + 160, { tam: 36, w: 500, a: vis(t, S[7] + 1.2, S[8]), cor: "#c9d6e3" });
     texto(`${D.transval[0]} votos · ${String(D.transval[1]).replace(".", ",")}% do bairro`, W / 2, 1330, { tam: 46, w: 700, a: vis(t, S[7] + 2, S[8]), sobe: 1 });
     const af = vis(t, S[8] + 0.2, S[9] + 1, 0.6);
-    texto("5", W / 2, 880, { tam: 300, w: 700, a: af, cor: AC, brilho: 30 }); texto("MANDATOS", W / 2, 960, { tam: 48, w: 700, ls: 10, a: af });
-    texto("884 votos em 2024: a maior da carreira", W / 2, 1220, { tam: 44, w: 700, a: vis(t, S[8] + 1, S[9] + 1, 0.6), sobe: 1 });
-    texto("E EM 2028?", W / 2, 1420, { tam: 96, w: 700, a: vis(t, S[8] + 1.8, S[9] + 1, 0.6), cor: LR, brilho: 20, sobe: 1 });
-    texto("REGIO XIMENES", W / 2, 320, { tam: 80, w: 700, ls: 6, a: af });
-    texto("Fonte: TSE · eleições municipais 2000 a 2024", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
+    if (af > 0.01 && img.rg) { const i = img.rg, r = 210, s = 0.85 + 0.15 * eout(af); ctx.save(); ctx.globalAlpha = af; ctx.translate(W / 2, 820); ctx.scale(s, s);
+      ctx.shadowColor = AC; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
+      ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = Math.max((2 * r) / (i.width * 0.62), (2 * r) / (i.height * 0.62)); ctx.drawImage(i, -i.width * sc * 0.6, -i.height * sc * 0.335, i.width * sc, i.height * sc); ctx.restore();
+      ctx.lineWidth = 6; ctx.strokeStyle = LR; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); }
+    texto("REGIO XIMENES", W / 2, 360, { tam: 96, w: 700, ls: 6, a: af, brilho: 20 });
+    texto("5 mandatos · 884 votos em 2024, a maior da carreira", W / 2, 430, { tam: 32, w: 500, a: vis(t, S[8] + 0.6, S[9] + 1, 0.6), cor: "#c9d6e3" });
+    texto("CANDIDATO À PRESIDÊNCIA", W / 2, 1200, { tam: 66, w: 700, ls: 4, a: vis(t, S[8] + 1.4, S[9] + 1, 0.6), cor: LR, brilho: 16, sobe: 1 });
+    texto("DA CÂMARA DE VARJOTA · 2027–2028", W / 2, 1270, { tam: 42, w: 700, ls: 3, a: vis(t, S[8] + 1.8, S[9] + 1, 0.6), sobe: 1 });
+    texto("Fonte dos votos: TSE · eleições municipais 2000 a 2024", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
     marca();
   };
   window.render(0); window.pronto = true;
