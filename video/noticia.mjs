@@ -1,6 +1,6 @@
 // Vídeo-notícia com imagens/vídeos reais + tarja azul @PLENARIACE (identidade do perfil). Um comando por vídeo.
 // Uso: node video/noticia.mjs video/noticias/<pauta>.json [saida.mp4]
-// Pauta: { id, fontes, cenas: [{ fala, tarja, midia?, ini?, credito?, grande?, sub? }] }
+// Pauta: { id, fontes, cenas: [{ fala, tarja, midia?, ini?, credito?, grande?, sub?, semTarja?, original? (com ini e fim: fala original do vídeo, sem narração) }] }
 //   midia: imagem ou vídeo local (vídeo deitado/foto ganha fundo desfocado; foto ganha zoom lento). Sem midia: cartão escuro
 //   com "grande"/"sub" (número de impacto). A narração vem de video/audio/<id>/antonio/NN.mp3 (Action narracao.yml).
 // Regras visuais: só a tarja azul na tela (+ crédito pequeno), cortes curtos (a duração de cada cena = a fala), sem efeitos extras.
@@ -32,7 +32,7 @@ html,body{margin:0;width:${W}px;height:${H}px;background:transparent}
 .n{font:inherit}.g small{display:block;font:700 56px O;letter-spacing:6px;margin-top:18px;color:#fff}`;
 for (const [i, c] of D.cenas.entries()) {
   await p.setContent(`<style>${css}</style>${c.grande ? `<div class="g"><span class="n">${q(c.grande)}</span>${c.sub ? `<small>${q(c.sub)}</small>` : ""}</div>` : ""}` +
-    (D.semTarja ? "" : `<div class="t"><div class="s">@PLENARIACE</div><div class="x">${q(c.tarja)}</div></div>`) + `${c.credito || (i === D.cenas.length - 1 && D.fontes) ? `<div class="c">${q(c.credito || D.fontes)}</div>` : ""}`);
+    (D.semTarja || c.semTarja ? "" : `<div class="t"><div class="s">@PLENARIACE</div><div class="x">${q(c.tarja)}</div></div>`) + `${c.credito || (i === D.cenas.length - 1 && D.fontes) ? `<div class="c">${q(c.credito || D.fontes)}</div>` : ""}`);
   await p.evaluate(() => document.fonts.ready);
   await p.evaluate(() => { const g = document.querySelector(".n"); if (g) { let f = 230; while (g.getBoundingClientRect().width > 980 && f > 90) { f -= 10; g.style.fontSize = f + "px"; } } });
   await p.evaluate(() => { const t = document.querySelector(".x"); if (!t) return; let f = 54; while (t.getBoundingClientRect().height > 3 * f * 1.08 + 34 && f > 34) { f -= 2; t.style.fontSize = f + "px"; } });
@@ -41,10 +41,15 @@ for (const [i, c] of D.cenas.entries()) {
 await b.close();
 
 // 2 · cada cena: fala (acelerada) + fundo real + arte, com a duração exata da fala
-const partes = [];
+const partes = []; let kv = 0;
 for (const [i, c] of D.cenas.entries()) {
-  const voz = path.join(RAIZ, "video/audio", D.id, "antonio", String(i).padStart(2, "0") + ".mp3"), wav = path.join(tmp, `v${i}.wav`);
-  ff("-i", voz, "-af", `atempo=${TEMPO},apad=pad_dur=0.25`, "-ar", "48000", "-ac", "2", wav);
+  const wav = path.join(tmp, `v${i}.wav`);
+  if (c.original) { // trecho com a fala original da pessoa (sem narração): áudio do próprio vídeo, de ini a fim
+    ff("-ss", String(c.ini), "-t", String(c.fim - c.ini), "-i", path.resolve(RAIZ, c.midia), "-vn", "-af", "apad=pad_dur=0.15", "-ar", "48000", "-ac", "2", wav);
+  } else {
+    const voz = path.join(RAIZ, "video/audio", D.id, "antonio", String(kv++).padStart(2, "0") + ".mp3");
+    ff("-i", voz, "-af", `atempo=${TEMPO},apad=pad_dur=0.25`, "-ar", "48000", "-ac", "2", wav);
+  }
   const T = dur(wav).toFixed(2), out = path.join(tmp, `c${i}.mp4`), arte = path.join(tmp, `a${i}.png`);
   const m = c.midia && path.resolve(RAIZ, c.midia), video = m && /\.(mp4|mov|webm|mkv)$/i.test(m);
   const fundo = `split[a][b];[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:2,eq=brightness=-0.15[f];[b]scale=${W}:${H}:force_original_aspect_ratio=decrease[c];[f][c]overlay=(W-w)/2:(H-h)/2*0.8`;
@@ -53,7 +58,7 @@ for (const [i, c] of D.cenas.entries()) {
   else if (!m) { ent = ["-f", "lavfi", "-i", `color=c=0x0b0f1f:s=${W}x${H}:r=30:d=${T}`]; vf = "null"; }
   else if (video) { ent = ["-ss", String(c.ini || 0), "-t", T, "-i", m]; vf = `${fundo},fps=30`; }
   else { ent = ["-loop", "1", "-t", T, "-i", m]; vf = `scale=${W * 1.2}:${H * 1.2}:force_original_aspect_ratio=increase,${fundo.replace(`scale=${W}:${H}:force_original_aspect_ratio=decrease`, `scale=${W}:${H}:force_original_aspect_ratio=decrease`)},zoompan=z='min(1+0.0009*on,1.08)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=30`; }
-  const fc = `[0:v]${vf},setsar=1,format=yuv420p[v];[v][1:v]overlay=0:0[o];` + (video ? `[0:a]volume=0.12,aresample=48000,aformat=channel_layouts=stereo[x];[2:a][x]amix=inputs=2:duration=first:normalize=0[s]` : `[2:a]anull[s]`);
+  const fc = `[0:v]${vf},setsar=1,format=yuv420p[v];[v][1:v]overlay=0:0[o];` + (video && !c.original ? `[0:a]volume=0.12,aresample=48000,aformat=channel_layouts=stereo[x];[2:a][x]amix=inputs=2:duration=first:normalize=0[s]` : `[2:a]anull[s]`);
   try { ff(...ent, "-i", arte, "-i", wav, "-filter_complex", fc, "-map", "[o]", "-map", "[s]", "-t", T, "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", "-ar", "48000", out); }
   catch (e) { // vídeo sem áudio: refaz só com a fala
     ff(...ent, "-i", arte, "-i", wav, "-filter_complex", fc.replace(/\[0:a\].*$/, "[2:a]anull[s]"), "-map", "[o]", "-map", "[s]", "-t", T, "-r", "30", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", "-ar", "48000", out); }
