@@ -24,7 +24,7 @@ const b = await pw.chromium.launch(), p = await b.newPage({ viewport: { width: W
 const css = `@font-face{font-family:O;font-weight:700;src:url(${fonte("oswald-latin-700-normal.woff2")})}
 @font-face{font-family:A;src:url(${fonte("anton-latin-400-normal.woff2")})}
 html,body{margin:0;width:${W}px;height:${H}px;background:transparent}
-.t{position:absolute;left:0;right:0;top:${Math.round(H * 0.72)}px;display:flex;flex-direction:column;align-items:center}
+.t{position:absolute;left:0;right:0;top:${Math.round(H * (D.tarjaY || 0.72))}px;display:flex;flex-direction:column;align-items:center}
 .s{background:#fff;color:${AZUL};font:700 42px/1 O;padding:8px 16px 9px}
 .x{background:${AZUL};color:#fff;font:700 54px/1.08 O;text-transform:uppercase;text-align:center;max-width:900px;padding:14px 26px 16px;box-shadow:0 6px 24px rgba(0,0,0,.35);text-wrap:balance}
 .c{position:absolute;right:40px;bottom:70px;color:rgba(255,255,255,.75);font:700 24px O;text-shadow:0 1px 4px #000}
