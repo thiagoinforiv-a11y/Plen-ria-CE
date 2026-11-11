@@ -1,8 +1,8 @@
 {"id": "linha-dura-forquilha", "fontes": "Áudio: Programa Livre, Rádio Pioneira FM · imagens: reprodução das redes", "fundo": "entregas/midia/linha-dura/quadro.jpg",
  "cenas": [
   {"original": true, "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 41.0, "fim": 45.2, "tarja": "Eu tenho o meu nome"},
-  {"fala": "Ele é linha dura na farda…", "tarja": "Tenente Linha Dura", "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 2},
-  {"fala": "…e agora quer ser na Câmara de Forquilha.", "tarja": "Pré-candidato a vereador em 2028", "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 6},
+  {"fala": "Ele é linha dura na farda.", "tarja": "Tenente Linha Dura", "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 2},
+  {"fala": "E agora quer ser na Câmara de Forquilha.", "tarja": "Pré-candidato a vereador em 2028", "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 6},
   {"original": true, "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 12.8, "fim": 22.6, "tarja": "Na Rádio Pioneira FM"},
   {"original": true, "midia": "entregas/midia/linha-dura/fala.mp4", "ini": 39.2, "fim": 41.0, "tarja": "Partido A, B ou C?"},
   {"fala": "Partido A, B ou C? Nem ele disse. Mas o recado foi dado.", "tarja": "Partido ainda não definido", "grande": "A, B OU C?", "sub": "O PARTIDO AINDA NÃO FOI DITO"},

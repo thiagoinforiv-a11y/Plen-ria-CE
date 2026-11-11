@@ -1,6 +1,6 @@
 {"id": "concurso-camara-varjota", "fontes": "Fonte: Projeto de Lei 34/2026 · Câmara Municipal de Varjota", "fundo": "entregas/midia/camara-presidente/pl-p1.png",
  "cenas": [
-  {"fala": "Tem vaga na Câmara de Varjota… e não é pra vereador.", "tarja": "Tem vaga na Câmara de Varjota", "midia": "entregas/midia/camara-presidente/pl-p1.png"},
+  {"fala": "Tem vaga na Câmara de Varjota. E não é pra vereador.", "tarja": "Tem vaga na Câmara de Varjota", "midia": "entregas/midia/camara-presidente/pl-p1.png"},
   {"fala": "Pela primeira vez, a Câmara vai fazer concurso público. Quem anunciou foi o próprio presidente.", "tarja": "Primeiro concurso da história da Câmara", "midia": "entregas/midia/camara-presidente/fala.mov", "ini": 1},
   {"original": true, "midia": "entregas/midia/camara-presidente/fala.mov", "ini": 21.3, "fim": 29.5, "tarja": "Roberto do Garrone · presidente da Câmara"},
   {"fala": "São nove chances: cinco vagas e quatro de cadastro de reserva. Auxiliar administrativo, serviços gerais, motorista e vigia.", "tarja": "Auxiliar · serviços gerais · motorista · vigia", "grande": "9 VAGAS", "sub": "5 + 4 DE RESERVA"},
