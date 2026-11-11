@@ -108,8 +108,8 @@
     texto(`${D.transval[0]} votos · ${String(D.transval[1]).replace(".", ",")}% do bairro`, W / 2, 1330, { tam: 46, w: 700, a: vis(t, S[7] + 2, S[8]), sobe: 1 });
     const af = vis(t, S[8] + 0.2, S[9] + 1, 0.6);
     if (af > 0.01 && img.rg) { const i = img.rg, r = 210, s = 0.85 + 0.15 * eout(af); ctx.save(); ctx.globalAlpha = af; ctx.translate(W / 2, 820); ctx.scale(s, s);
-      ctx.shadowColor = AC; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 6, 0, 6.283); ctx.fillStyle = "#111"; ctx.fill(); ctx.shadowBlur = 0;
-      ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = Math.max((2 * r) / (i.width * 0.62), (2 * r) / (i.height * 0.62)); ctx.drawImage(i, -i.width * sc * 0.6, -i.height * sc * 0.335, i.width * sc, i.height * sc); ctx.restore();
+      ctx.shadowColor = AC; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.fillStyle = "#f2f2f2"; ctx.fill(); ctx.shadowBlur = 0;
+      ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = Math.max((2 * r) / (i.width * 0.62), (2 * r) / (i.height * 0.62)); ctx.drawImage(i, -i.width * sc * 0.6, -i.height * sc * 0.36, i.width * sc, i.height * sc); ctx.restore();
       ctx.lineWidth = 6; ctx.strokeStyle = LR; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); }
     texto("REGIO XIMENES", W / 2, 360, { tam: 96, w: 700, ls: 6, a: af, brilho: 20 });
     texto("5 mandatos · 884 votos em 2024, a maior da carreira", W / 2, 430, { tam: 32, w: 500, a: vis(t, S[8] + 0.6, S[9] + 1, 0.6), cor: "#c9d6e3" });
