@@ -32,7 +32,12 @@ async def main():
                 h = hashlib.sha1(json.dumps([t, v], ensure_ascii=False).encode()).hexdigest()
                 if os.path.exists(base + ".mp3") and os.path.exists(base + ".hash") and open(base + ".hash").read() == h:
                     continue
-                await cena(t, v, base)
+                for tent in range(4):  # o serviço de voz às vezes não devolve áudio; tenta de novo
+                    try:
+                        await cena(t, v, base); break
+                    except edge_tts.exceptions.NoAudioReceived:
+                        if tent == 3: raise
+                        print("… sem áudio, tentando de novo:", vid, i); await asyncio.sleep(5 * (tent + 1))
                 open(base + ".hash", "w").write(h)
                 print("✔", vid, v["id"], i)
 
