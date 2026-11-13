@@ -2,6 +2,8 @@
 
 | Arquivo | O que é |
 |---|---|
+| `video/varjota_2028_particulas_parte1.mp4` · `parte2.mp4` | **Versão em partículas** (voz 1,4×, 16,8 min no total), dividida em 2 partes por causa do limite de 100 MB do GitHub. Parte 1: abertura e capítulos 1–3; Parte 2: capítulos 4–7. Legendas `.srt` de cada parte e do vídeo completo |
+| `scripts/particulas.py` | Motor de partículas: ícones, números e infográficos que se formam a partir de partículas |
 | [`RAIO-X_VARJOTA_2028.md`](RAIO-X_VARJOTA_2028.md) | **Raio-X do Poder**: relatório investigativo em 22 capítulos com os 10 entregáveis (tabela eleitoral, ranking, mapa de lideranças, cenários, fontes, prompts de produção) |
 | `video/varjota_2028_raio-x_do_poder.mp4` | **Documentário** (cerca de 21 min, 1080p) com legendas embutidas, gráficos animados, mapas, partículas e trilha original |
 | `video/varjota_2028_raio-x_do_poder.srt` | Legendas em arquivo separado |

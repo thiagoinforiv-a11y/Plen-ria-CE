@@ -1,0 +1,555 @@
+1
+00:00:00,700 --> 00:00:03,402
+Varjota tem uma história política marcada por disputas,
+
+2
+00:00:03,402 --> 00:00:06,203
+alianças e lideranças que influenciam os rumos da cidade.
+
+3
+00:00:06,423 --> 00:00:09,546
+Mas o que realmente mudou entre 2020 e 2024?
+
+4
+00:00:09,766 --> 00:00:12,401
+Quem saiu fortalecido? Quem perdeu espaço?
+
+5
+00:00:12,621 --> 00:00:15,860
+E quais nomes podem entrar no centro da disputa de 2028?
+
+6
+00:00:17,780 --> 00:00:20,567
+Varjota fica no noroeste do Ceará, na região de Sobral.
+
+7
+00:00:20,787 --> 00:00:23,038
+São cerca de 18.700 habitantes,
+
+8
+00:00:23,038 --> 00:00:27,179
+segundo a estimativa oficial usada pelo Tesouro Nacional,
+
+9
+00:00:27,179 --> 00:00:29,576
+e 15.991 eleitores aptos em 2026.
+
+10
+00:00:29,796 --> 00:00:32,201
+Cada ponto que você vê é um local de votação,
+
+11
+00:00:32,201 --> 00:00:34,660
+posicionado pelas coordenadas oficiais do TSE.
+
+12
+00:00:34,880 --> 00:00:37,919
+A maior parte do eleitorado está na sede: Centro, Empréstimos,
+
+13
+00:00:37,919 --> 00:00:39,977
+Acampamento do DNOCS, Pedreira e Ararinha.
+
+14
+00:00:40,197 --> 00:00:43,304
+Mas os distritos e comunidades rurais, como Croatá dos Martins,
+
+15
+00:00:43,304 --> 00:00:46,362
+Olho d'Água dos Trajanos e Vila Naiara, também pesam na conta.
+
+16
+00:00:48,282 --> 00:00:49,930
+Antes de começar, uma regra.
+
+17
+00:00:50,150 --> 00:00:52,185
+Tudo o que for fato vem de dados oficiais:
+
+18
+00:00:52,185 --> 00:00:54,655
+o Tribunal Superior Eleitoral e o Tesouro Nacional.
+
+19
+00:00:54,875 --> 00:00:58,695
+Quando for interpretação, vamos chamar de leitura. Quando for possibilidade,
+
+20
+00:00:58,695 --> 00:00:59,298
+de hipótese.
+
+21
+00:00:59,518 --> 00:01:03,025
+E quando uma informação não puder ser confirmada, vamos dizer isso claramente.
+
+22
+00:01:04,945 --> 00:01:07,371
+Capítulo um. A eleição de 2020.
+
+23
+00:01:09,291 --> 00:01:11,927
+Para entender 2020, é preciso olhar para trás.
+
+24
+00:01:12,147 --> 00:01:15,653
+Segundo o jornal O Povo, o MDB comandou Varjota por doze anos.
+
+25
+00:01:15,873 --> 00:01:19,383
+Rosa Paulino governou por dois mandatos, e depois veio Célia Rodrigues,
+
+26
+00:01:19,383 --> 00:01:20,076
+também do MDB.
+
+27
+00:01:20,296 --> 00:01:23,291
+Em 2020, Rosa Paulino tentou voltar à prefeitura.
+
+28
+00:01:23,511 --> 00:01:26,379
+Do outro lado estava Elmo Monte, empresário, pelo PDT.
+
+29
+00:01:28,299 --> 00:01:33,001
+Em 2020, Varjota tinha 16.437 eleitores aptos.
+
+30
+00:01:33,221 --> 00:01:38,677
+13.726 foram votar. O comparecimento foi de 83,5%.
+
+31
+00:01:38,897 --> 00:01:44,586
+2.711 eleitores se abstiveram, e houve 420 votos brancos e nulos para prefeito.
+
+32
+00:01:46,506 --> 00:01:48,062
+O resultado foi apertado.
+
+33
+00:01:48,282 --> 00:01:54,359
+Elmo Monte, com a coligação de PSB, PDT, PT e PTB, fez 7.068 votos:
+
+34
+00:01:54,359 --> 00:01:55,991
+53,1% dos válidos.
+
+35
+00:01:56,211 --> 00:02:03,038
+Rosa Paulino, com PL, MDB e PSL, fez 6.238 votos: 46,9%.
+
+36
+00:02:03,258 --> 00:02:06,056
+A diferença foi de apenas 830 votos.
+
+37
+00:02:06,276 --> 00:02:08,422
+A vice eleita foi Alessandra Araújo Pinheiro,
+
+38
+00:02:08,422 --> 00:02:10,664
+conhecida como Loura do Povo. Guarde esse nome.
+
+39
+00:02:12,584 --> 00:02:14,117
+Na Câmara, a conta é outra.
+
+40
+00:02:14,337 --> 00:02:15,604
+O quociente eleitoral,
+
+41
+00:02:15,604 --> 00:02:20,211
+que é o total de votos válidos dividido por onze cadeiras, ficou em 1.199 votos.
+
+42
+00:02:20,431 --> 00:02:24,937
+O MDB fez 5.348 votos e cinco cadeiras. O PDT,
+
+43
+00:02:24,937 --> 00:02:28,953
+4.066 e quatro. PT e PL fizeram uma cada.
+
+44
+00:02:29,173 --> 00:02:33,202
+Um detalhe: o PT ficou a apenas 90 votos de tirar a última cadeira do PDT.
+
+45
+00:02:35,122 --> 00:02:37,014
+O resultado político foi curioso.
+
+46
+00:02:37,234 --> 00:02:40,369
+O prefeito eleito começou o mandato com cinco vereadores aliados.
+
+47
+00:02:40,589 --> 00:02:45,152
+A oposição, com MDB e PL, tinha seis. Era maioria, ao menos no papel.
+
+48
+00:02:47,072 --> 00:02:49,359
+Estes foram os onze eleitos em 2020.
+
+49
+00:02:49,579 --> 00:02:53,979
+O mais votado foi Roberto do Garrone, do PT, com 835 votos.
+
+50
+00:02:54,199 --> 00:02:57,984
+Logo atrás, três nomes do MDB: Antunino Martins, Molim e Jô do Silvino.
+
+51
+00:02:58,204 --> 00:03:00,760
+Repare nesses nomes da oposição. Quatro anos depois,
+
+52
+00:03:00,760 --> 00:03:02,186
+nenhum deles estaria na urna.
+
+53
+00:03:04,106 --> 00:03:06,742
+A eleição de 2020 também deixou processos.
+
+54
+00:03:06,962 --> 00:03:10,475
+O Ministério Público Eleitoral pediu a cassação do prefeito e da vice eleitos,
+
+55
+00:03:10,475 --> 00:03:12,592
+por abuso de poder econômico e compra de votos.
+
+56
+00:03:12,812 --> 00:03:18,246
+Não localizamos o desfecho desse processo. O fato verificável é que Elmo concluiu o mandato e se reelegeu.
+
+57
+00:03:18,466 --> 00:03:19,128
+Do outro lado,
+
+58
+00:03:19,128 --> 00:03:23,052
+o TRE do Ceará manteve uma multa a Rosa Paulino por aglomeração durante a campanha.
+
+59
+00:03:23,272 --> 00:03:24,568
+E em fevereiro de 2021,
+
+60
+00:03:24,568 --> 00:03:30,992
+o Ministério Público do Ceará deflagrou uma operação sobre contratos de coleta de lixo firmados entre 2016 e 2020.
+
+61
+00:03:31,212 --> 00:03:31,588
+Pedido,
+
+62
+00:03:31,588 --> 00:03:36,785
+denúncia e investigação não são condenação. Não localizamos decisão final em nenhum desses casos.
+
+63
+00:03:38,705 --> 00:03:41,585
+Capítulo dois. A mudança de 2024.
+
+64
+00:03:43,505 --> 00:03:47,359
+Em 2024, Elmo Monte disputou a reeleição, agora pelo PSB.
+
+65
+00:03:47,579 --> 00:03:52,269
+Fez 8.914 votos, 64,3% dos válidos.
+
+66
+00:03:52,489 --> 00:03:59,467
+O adversário, Silvino Oliveira, do MDB, fez 4.955 votos, 35,7%.
+
+67
+00:03:59,687 --> 00:04:04,354
+A margem saltou de 830 para 3.959 votos.
+
+68
+00:04:04,574 --> 00:04:10,426
+Elmo ganhou 1.846 votos novos. A oposição perdeu 1.283.
+
+69
+00:04:12,346 --> 00:04:13,901
+Aqui está a primeira entrelinha.
+
+70
+00:04:14,121 --> 00:04:16,082
+A vice eleita em 2020, Loura do Povo,
+
+71
+00:04:16,082 --> 00:04:19,845
+rompeu com o grupo e foi candidata a vice na chapa adversária, pelo PP.
+
+72
+00:04:20,065 --> 00:04:23,467
+Normalmente, isso enfraquece um prefeito. Aconteceu o contrário.
+
+73
+00:04:23,687 --> 00:04:24,999
+Elmo trocou o PDT pelo PSB,
+
+74
+00:04:24,999 --> 00:04:27,719
+acompanhando o movimento estadual do grupo de Cid Gomes,
+
+75
+00:04:27,719 --> 00:04:30,003
+e ampliou a coligação com Republicanos e União.
+
+76
+00:04:30,223 --> 00:04:33,253
+O novo vice foi o médico Erivaldo Mororó, do Republicanos.
+
+77
+00:04:35,173 --> 00:04:36,914
+Outro sinal: o comparecimento.
+
+78
+00:04:37,134 --> 00:04:42,563
+Na eleição municipal de 2024, 88,7% dos eleitores foram votar,
+
+79
+00:04:42,563 --> 00:04:44,402
+contra 83,5% em 2020.
+
+80
+00:04:44,622 --> 00:04:50,729
+A abstenção caiu em 872 pessoas, mesmo com 224 eleitores a menos no cadastro.
+
+81
+00:04:50,949 --> 00:04:51,353
+Leitura:
+
+82
+00:04:51,353 --> 00:04:56,252
+uma eleição desequilibrada não costuma atrair mais eleitores. Isso sugere mobilização organizada,
+
+83
+00:04:56,252 --> 00:04:58,020
+e não apenas entusiasmo espontâneo.
+
+84
+00:04:59,940 --> 00:05:02,680
+Para onde foram esses votos? O mapa responde.
+
+85
+00:05:02,900 --> 00:05:05,709
+Elmo cresceu em todos os locais de votação comparáveis.
+
+86
+00:05:05,929 --> 00:05:10,794
+Em 2020, a oposição venceu em sete locais. Em 2024, em nenhum.
+
+87
+00:05:11,014 --> 00:05:15,350
+As maiores viradas aconteceram na zona rural: no Jatobá, quase 30 pontos;
+
+88
+00:05:15,350 --> 00:05:16,656
+no Angelim, 24 pontos.
+
+89
+00:05:16,876 --> 00:05:19,210
+Os menores avanços também foram rurais: Transval,
+
+90
+00:05:19,210 --> 00:05:22,495
+Olho d'Água dos Trajanos e Várzea da Palha, com menos de seis pontos.
+
+91
+00:05:22,715 --> 00:05:25,581
+Leitura: é nesses lugares que a oposição ainda resiste,
+
+92
+00:05:25,581 --> 00:05:28,706
+e é por eles que qualquer estratégia para 2028 deve começar.
+
+93
+00:05:30,626 --> 00:05:33,436
+Separando a sede da zona rural, o avanço foi parecido.
+
+94
+00:05:33,656 --> 00:05:40,598
+Na sede, Elmo foi de 53,8 para 65,1%. Na zona rural e nos distritos,
+
+95
+00:05:40,598 --> 00:05:42,537
+de 50,9 para 61,3%.
+
+96
+00:05:42,757 --> 00:05:46,148
+Ou seja: o crescimento não foi localizado. Foi generalizado.
+
+97
+00:05:48,068 --> 00:05:51,864
+Na Câmara, o quociente subiu para 1.252 votos.
+
+98
+00:05:52,084 --> 00:05:55,114
+Só três listas disputaram, contra quatro em 2020.
+
+99
+00:05:55,334 --> 00:06:01,569
+O PSB fez 6.403 votos e cinco cadeiras. A federação do PT,
+
+100
+00:06:01,569 --> 00:06:06,515
+3.386 votos e três. O MDB, 3.979 votos e três.
+
+101
+00:06:06,735 --> 00:06:09,532
+A última cadeira foi para a federação do PT,
+
+102
+00:06:09,532 --> 00:06:13,410
+por maior média. Faltaram 371 votos para o PSB fazer a sexta.
+
+103
+00:06:15,330 --> 00:06:17,002
+O equilíbrio mudou completamente.
+
+104
+00:06:17,222 --> 00:06:21,146
+De cinco contra seis em 2020, a base do prefeito passou a oito contra três.
+
+105
+00:06:21,366 --> 00:06:25,198
+A oposição, que tinha maioria, ficou com três vereadores, todos do MDB.
+
+106
+00:06:27,118 --> 00:06:28,801
+Por que a oposição encolheu tanto?
+
+107
+00:06:29,021 --> 00:06:33,770
+Os cinco vereadores eleitos em 2020 que não concorreram em 2024 eram todos da oposição.
+
+108
+00:06:33,990 --> 00:06:37,322
+Juntos, eles tinham feito 3.311 votos.
+
+109
+00:06:37,542 --> 00:06:40,804
+Anchieta saiu do MDB, foi para o PSB e não se reelegeu.
+
+110
+00:06:41,024 --> 00:06:43,249
+E o PL deixou de existir como lista local:
+
+111
+00:06:43,249 --> 00:06:45,633
+seus candidatos foram para o MDB e para o PT.
+
+112
+00:06:45,853 --> 00:06:46,237
+Leitura:
+
+113
+00:06:46,237 --> 00:06:49,975
+a oposição perdeu os seus puxadores de voto antes mesmo de a campanha começar.
+
+114
+00:06:51,895 --> 00:06:54,414
+Capítulo três. Quem são os destaques?
+
+115
+00:06:56,334 --> 00:06:58,041
+Primeiro critério: votos.
+
+116
+00:06:58,261 --> 00:07:04,379
+A vereadora mais votada de 2024 foi Rosa Paulino, do MDB, com 1.774 votos.
+
+117
+00:07:04,599 --> 00:07:09,615
+É quase o dobro do segundo colocado, Eudes Mesquita, do PSB, com 992.
+
+118
+00:07:09,835 --> 00:07:13,805
+Rosa sozinha fez 45% de todos os votos do MDB para vereador.
+
+119
+00:07:14,025 --> 00:07:14,426
+Leitura:
+
+120
+00:07:14,426 --> 00:07:19,540
+o maior capital eleitoral individual da cidade está na oposição. E isso também revela uma dependência.
+
+121
+00:07:21,460 --> 00:07:24,339
+Segundo critério: crescimento entre uma eleição e outra.
+
+122
+00:07:24,559 --> 00:07:29,396
+O maior crescimento foi de Patrícia Ximenes, do PT: de 403 para 847 votos,
+
+123
+00:07:29,396 --> 00:07:32,860
+mais do que o dobro. Saiu da suplência para a Câmara.
+
+124
+00:07:33,080 --> 00:07:36,244
+Fransquinha do Edvard cresceu 65%. Djinha,
+
+125
+00:07:36,244 --> 00:07:39,559
+Regio e Gonçalinho cresceram entre 17 e 25%.
+
+126
+00:07:39,779 --> 00:07:42,195
+Agora repare no fim da lista. Anchieta, Carlim,
+
+127
+00:07:42,195 --> 00:07:45,433
+Lyderson e Irmã Fábia trocaram a oposição pela base do governo.
+
+128
+00:07:45,653 --> 00:07:48,695
+Os quatro perderam votos, entre 16 e 30%.
+
+129
+00:07:48,915 --> 00:07:51,991
+Leitura: aderir ao grupo vencedor não garantiu voto individual.
+
+130
+00:07:53,911 --> 00:07:57,127
+Terceiro critério: influência e capacidade de articulação.
+
+131
+00:07:57,347 --> 00:08:01,070
+O dado mais forte é o do prefeito: além de crescer 1.846 votos,
+
+132
+00:08:01,070 --> 00:08:05,265
+Elmo levou toda a bancada do PDT para o PSB sem perder nenhum vereador.
+
+133
+00:08:05,485 --> 00:08:09,255
+Entre as novas lideranças, três estreantes chegaram à Câmara: Eudes Mesquita,
+
+134
+00:08:09,255 --> 00:08:10,919
+Lucas da Célia e Professora Inara.
+
+135
+00:08:11,139 --> 00:08:13,002
+Lucas da Célia, o mais jovem dos eleitos,
+
+136
+00:08:13,002 --> 00:08:16,410
+concentrou mais da metade dos seus votos em um único bairro, o Empréstimos.
+
+137
+00:08:16,630 --> 00:08:20,333
+E um aviso importante: não conseguimos acessar os registros da Câmara Municipal.
+
+138
+00:08:20,553 --> 00:08:20,994
+Por isso,
+
+139
+00:08:20,994 --> 00:08:26,091
+este documentário não ranqueia a atuação legislativa dos vereadores. Essa informação não foi localizada.
