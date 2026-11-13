@@ -1,0 +1,1212 @@
+{
+  "eleitorado": {
+    "2020": 16437,
+    "2022": 16757,
+    "2024": 16213,
+    "2026": 15991
+  },
+  "comparecimento": {
+    "2020": {
+      "aptos": 16437,
+      "compareceram": 13726,
+      "abstencao": 2711,
+      "pct_comparecimento": 83.51,
+      "prefeito_validos": 13306,
+      "prefeito_brancos": 72,
+      "prefeito_nulos": 348,
+      "vereador_validos": 13184,
+      "vereador_nominais": 12576,
+      "vereador_legenda": 608,
+      "vereador_brancos": 115,
+      "vereador_nulos": 427,
+      "secoes": 61
+    },
+    "2024": {
+      "aptos": 16213,
+      "compareceram": 14374,
+      "abstencao": 1839,
+      "pct_comparecimento": 88.66,
+      "prefeito_validos": 13869,
+      "prefeito_brancos": 137,
+      "prefeito_nulos": 368,
+      "vereador_validos": 13768,
+      "vereador_nominais": 13425,
+      "vereador_legenda": 343,
+      "vereador_brancos": 152,
+      "vereador_nulos": 454,
+      "secoes": 66
+    },
+    "2022": {
+      "aptos": 16757,
+      "compareceram": 12855,
+      "pct_comparecimento": 76.71
+    },
+    "2026": {
+      "aptos": 15991,
+      "compareceram": 13452,
+      "pct_comparecimento": 84.12
+    }
+  },
+  "prefeito_2020": [
+    {
+      "nome": "ELMO MONTE",
+      "partido": "PDT",
+      "coligacao": "JUNTOS POR UMA VARJOTA MELHOR",
+      "composicao": "PSB / PDT / PT / PTB",
+      "votos": 7068,
+      "pct": 53.12,
+      "situacao": "ELEITO"
+    },
+    {
+      "nome": "ROSA PAULINO",
+      "partido": "MDB",
+      "coligacao": "VARJOTA, O PROGRESSO NÃO PODE PARAR",
+      "composicao": "PL / MDB / PSL",
+      "votos": 6238,
+      "pct": 46.88,
+      "situacao": "NÃO ELEITO"
+    }
+  ],
+  "vereador_2020": {
+    "validos": 13184,
+    "quociente_eleitoral": 1199,
+    "qe_exato": 1198.55,
+    "clausula_10pct_qe": 120,
+    "barreira_80pct_qe": 960,
+    "candidatos_votados": 48,
+    "listas": 4,
+    "votos_por_lista": {
+      "MDB": 5348,
+      "PDT": 4066,
+      "PT": 1944,
+      "PL": 1826
+    },
+    "legenda_por_lista": {
+      "MDB": 213,
+      "PDT": 289,
+      "PL": 50,
+      "PT": 56
+    },
+    "quociente_partidario": {
+      "PL": 1,
+      "PT": 1,
+      "PDT": 3,
+      "MDB": 4
+    },
+    "cadeiras": {
+      "PL": 1,
+      "PT": 1,
+      "PDT": 4,
+      "MDB": 5
+    },
+    "rodadas_sobras": [
+      {
+        "vencedor": "MDB",
+        "medias": {
+          "PL": 913.0,
+          "PT": 972.0,
+          "PDT": 1016.5,
+          "MDB": 1069.6
+        }
+      },
+      {
+        "vencedor": "PDT",
+        "medias": {
+          "PL": 913.0,
+          "PT": 972.0,
+          "PDT": 1016.5,
+          "MDB": 891.3
+        }
+      }
+    ],
+    "margem_ultima_cadeira": {
+      "PL": 208,
+      "PT": 90,
+      "MDB": 752
+    },
+    "eleitos": [
+      {
+        "nome": "ROBERTO DO GARRONE",
+        "partido": "PT",
+        "votos": 835,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "ANTUNINO MARTINS",
+        "partido": "MDB",
+        "votos": 818,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "GONÇALINHO",
+        "partido": "PDT",
+        "votos": 784,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "MOLIM",
+        "partido": "MDB",
+        "votos": 769,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "JÔ DO SILVINO",
+        "partido": "MDB",
+        "votos": 737,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "REGIO XIMENES",
+        "partido": "PDT",
+        "votos": 726,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "ANCHIETA",
+        "partido": "MDB",
+        "votos": 575,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "ARISTEU LINHARES",
+        "partido": "PDT",
+        "votos": 562,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "DJINHA",
+        "partido": "PDT",
+        "votos": 539,
+        "como": "ELEITO POR MÉDIA"
+      },
+      {
+        "nome": "EDGAR PROCÓPIO",
+        "partido": "PL",
+        "votos": 522,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "MARCOS CESAR",
+        "partido": "MDB",
+        "votos": 465,
+        "como": "ELEITO POR MÉDIA"
+      }
+    ],
+    "menos_votado_eleito": 465,
+    "mais_votado_nao_eleito": {
+      "nome": "JOAO PAULO DO ARARINHA",
+      "votos": 488
+    },
+    "pct_votos_em_eleitos": 55.6,
+    "candidatos_abaixo_100_votos": 19,
+    "top3_lista_concentracao": {
+      "MDB": 45.3,
+      "PDT": 54.9,
+      "PL": 62.6,
+      "PT": 73.6
+    }
+  },
+  "prefeito_2024": [
+    {
+      "nome": "ELMO MONTE",
+      "partido": "PSB",
+      "coligacao": "COMPETENCIA QUE TRANSFORMA, RESPEITO QUE CONQUISTA",
+      "composicao": "PSB / REPUBLICANOS / UNIÃO / Federação BRASIL DA ESPERANÇA - FE BRASIL (PT / PC do B / PV)",
+      "votos": 8914,
+      "pct": 64.27,
+      "situacao": "ELEITO"
+    },
+    {
+      "nome": "SILVINO OLIVEIRA",
+      "partido": "MDB",
+      "coligacao": "VARJOTA É NOSSA, É DO POVO",
+      "composicao": "PP / MDB",
+      "votos": 4955,
+      "pct": 35.73,
+      "situacao": "NÃO ELEITO"
+    }
+  ],
+  "vereador_2024": {
+    "validos": 13768,
+    "quociente_eleitoral": 1252,
+    "qe_exato": 1251.64,
+    "clausula_10pct_qe": 126,
+    "barreira_80pct_qe": 1002,
+    "candidatos_votados": 33,
+    "listas": 3,
+    "votos_por_lista": {
+      "PSB": 6403,
+      "MDB": 3979,
+      "FE BRASIL": 3386
+    },
+    "legenda_por_lista": {
+      "FE BRASIL": 47,
+      "MDB": 138,
+      "PSB": 158
+    },
+    "quociente_partidario": {
+      "FE BRASIL": 2,
+      "MDB": 3,
+      "PSB": 5
+    },
+    "cadeiras": {
+      "FE BRASIL": 3,
+      "MDB": 3,
+      "PSB": 5
+    },
+    "rodadas_sobras": [
+      {
+        "vencedor": "FE BRASIL",
+        "medias": {
+          "FE BRASIL": 1128.7,
+          "MDB": 994.8,
+          "PSB": 1067.2
+        }
+      }
+    ],
+    "margem_ultima_cadeira": {
+      "MDB": 537,
+      "PSB": 371
+    },
+    "eleitos": [
+      {
+        "nome": "ROSA PAULINO",
+        "partido": "MDB",
+        "votos": 1774,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "EUDES MESQUITA",
+        "partido": "PSB",
+        "votos": 992,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "GONÇALINHO",
+        "partido": "PSB",
+        "votos": 915,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "REGIO XIMENES",
+        "partido": "PSB",
+        "votos": 884,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "PATRICIA XIMENES",
+        "partido": "PT",
+        "votos": 847,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "LUCAS DA CÉLIA",
+        "partido": "MDB",
+        "votos": 834,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "ROBERTO DO GARRONE",
+        "partido": "PT",
+        "votos": 783,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "FRANSQUINHA DO EDVARD",
+        "partido": "PSB",
+        "votos": 682,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "DJINHA",
+        "partido": "PSB",
+        "votos": 672,
+        "como": "ELEITO POR QP"
+      },
+      {
+        "nome": "PROFESSORA INARA",
+        "partido": "PT",
+        "votos": 599,
+        "como": "ELEITO POR MÉDIA"
+      },
+      {
+        "nome": "EUDES DO CROATÁ",
+        "partido": "MDB",
+        "votos": 280,
+        "como": "ELEITO POR QP"
+      }
+    ],
+    "menos_votado_eleito": 280,
+    "mais_votado_nao_eleito": {
+      "nome": "ARISTEU LINHARES",
+      "votos": 553
+    },
+    "pct_votos_em_eleitos": 67.3,
+    "candidatos_abaixo_100_votos": 8,
+    "top3_lista_concentracao": {
+      "FE BRASIL": 66.8,
+      "MDB": 75.2,
+      "PSB": 44.7
+    }
+  },
+  "perfil_candidatos": {
+    "2020": {
+      "registrados": 48,
+      "mulheres_candidatas": 15,
+      "mulheres_eleitas": 2,
+      "idade_media_eleitos": 48.0,
+      "superior_eleitos": 4,
+      "candidatos_por_partido": {
+        "MDB": 16,
+        "PDT": 13,
+        "PT": 10,
+        "PL": 9
+      }
+    },
+    "2024": {
+      "registrados": 34,
+      "mulheres_candidatas": 13,
+      "mulheres_eleitas": 5,
+      "idade_media_eleitos": 47.5,
+      "superior_eleitos": 3,
+      "candidatos_por_partido": {
+        "PSB": 12,
+        "MDB": 12,
+        "PT": 10
+      }
+    }
+  },
+  "trajetorias": [
+    {
+      "nome": "GONÇALINHO",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO POR QP",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "IRMÃ MOÇA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PL",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "GISELE AMORIM",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "ROSA PAULINO",
+      "cargo_20": "PREFEITO",
+      "partido_20": "MDB",
+      "sit_20": "NÃO ELEITO",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "ELMO MONTE",
+      "cargo_20": "PREFEITO",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO",
+      "cargo_24": "PREFEITO",
+      "partido_24": "PSB",
+      "sit_24": "ELEITO"
+    },
+    {
+      "nome": "ANCHIETA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "ELEITO POR QP",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "FRANSQUINHA DO EDVARD",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PDT",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "PATRICIA XIMENES",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PT",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PT",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "CARLOS DJ",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "PROFESSOR LYDERSON",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "EUDES DO CROATÁ",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "CARLIM DO TATA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PT",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "PEXÉ IMPORTS",
+      "cargo_20": "VEREADOR",
+      "partido_20": "MDB",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "LOURA DO POVO",
+      "cargo_20": "VICE-PREFEITO",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO",
+      "cargo_24": "VICE-PREFEITO",
+      "partido_24": "PP",
+      "sit_24": "NÃO ELEITO"
+    },
+    {
+      "nome": "ADRIANO PAIVA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PL",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "MDB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "IRMÃ FABIA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PL",
+      "sit_20": "SUPLENTE",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PT",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "ROBERTO DO GARRONE",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PT",
+      "sit_20": "ELEITO POR QP",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PT",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "DJINHA",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO POR MÉDIA",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "ELEITO POR QP"
+    },
+    {
+      "nome": "ARISTEU LINHARES",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO POR QP",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "SUPLENTE"
+    },
+    {
+      "nome": "REGIO XIMENES",
+      "cargo_20": "VEREADOR",
+      "partido_20": "PDT",
+      "sit_20": "ELEITO POR QP",
+      "cargo_24": "VEREADOR",
+      "partido_24": "PSB",
+      "sit_24": "ELEITO POR QP"
+    }
+  ],
+  "renovacao": {
+    "eleitos_2020_que_concorreram_2024": 6,
+    "reeleitos": 4,
+    "novos_na_camara_2024": 7,
+    "nao_concorreram": [
+      "ANTUNINO MARTINS",
+      "MARCOS CESAR",
+      "EDGAR PROCÓPIO",
+      "JÔ DO SILVINO",
+      "MOLIM"
+    ]
+  },
+  "bens": {
+    "2020": {
+      "total": 3034839.51,
+      "declarantes": 27,
+      "top5": [
+        {
+          "nome": "ELMO MONTE",
+          "cargo": "PREFEITO",
+          "valor": 685192.33
+        },
+        {
+          "nome": "CLEONE XIMENES",
+          "cargo": "VICE-PREFEITO",
+          "valor": 611000.0
+        },
+        {
+          "nome": "LOURA DO POVO",
+          "cargo": "VICE-PREFEITO",
+          "valor": 552874.21
+        },
+        {
+          "nome": "ROSA PAULINO",
+          "cargo": "PREFEITO",
+          "valor": 457856.77
+        },
+        {
+          "nome": "EDGAR PROCÓPIO",
+          "cargo": "VEREADOR",
+          "valor": 115200.0
+        }
+      ]
+    },
+    "2024": {
+      "total": 6611291.09,
+      "declarantes": 27,
+      "top5": [
+        {
+          "nome": "LOURA DO POVO",
+          "cargo": "VICE-PREFEITO",
+          "valor": 1995079.39
+        },
+        {
+          "nome": "EUDES MESQUITA",
+          "cargo": "VEREADOR",
+          "valor": 1129020.0
+        },
+        {
+          "nome": "DR ERIVALDO MORORO",
+          "cargo": "VICE-PREFEITO",
+          "valor": 800261.68
+        },
+        {
+          "nome": "ELMO MONTE",
+          "cargo": "PREFEITO",
+          "valor": 796449.35
+        },
+        {
+          "nome": "GONÇALINHO",
+          "cargo": "VEREADOR",
+          "valor": 300000.0
+        }
+      ]
+    }
+  },
+  "geografia": {
+    "locais_2020": 30,
+    "locais_2024": 28,
+    "locais_oposicao_venceu_2020": [
+      "E.E.I.F. MANOEL RODRIGUES TAVARES",
+      "E.E.F. ODILON NOBRE",
+      "E.E.F. TEREZA ARAGÃO XIMENES",
+      "E.E.F. FRANCISCA EZEQUIEL DE SOUSA",
+      "CRECHE COMUNITÁRIA JOÃO BALBINO",
+      "E.E.I.F. NAIARA MACEDO VASCONCELOS",
+      "E.E.I. JOSÉ NEVES DAMASCENO - CRECHE BALNEÁRIO"
+    ],
+    "locais_oposicao_venceu_2024": [],
+    "maior_avanco": [
+      {
+        "NM_LOCAL_VOTACAO": "E.E.I. JOSÉ NEVES DAMASCENO - CRECHE BALNEÁRIO",
+        "pct_elmo_20": 46.7,
+        "pct_elmo_24": 63.7,
+        "swing": 17.0
+      },
+      {
+        "NM_LOCAL_VOTACAO": "CENTRO DE REFERÊNCIA DE ASSIST SOCIAL-CRAS-CASA DO IDOSO",
+        "pct_elmo_20": 54.4,
+        "pct_elmo_24": 71.8,
+        "swing": 17.3
+      },
+      {
+        "NM_LOCAL_VOTACAO": "SECRETARIA DE EDUCAÇÃO",
+        "pct_elmo_20": 51.7,
+        "pct_elmo_24": 69.1,
+        "swing": 17.4
+      },
+      {
+        "NM_LOCAL_VOTACAO": "E.E.I.F. MANOEL RODRIGUES TAVARES",
+        "pct_elmo_20": 38.6,
+        "pct_elmo_24": 63.1,
+        "swing": 24.4
+      },
+      {
+        "NM_LOCAL_VOTACAO": "E.E.F. FRANCISCA EZEQUIEL DE SOUSA",
+        "pct_elmo_20": 45.5,
+        "pct_elmo_24": 75.3,
+        "swing": 29.8
+      }
+    ],
+    "menor_avanco": [
+      {
+        "NM_LOCAL_VOTACAO": "E.E.I.F. MELQUÍADES MUNIZ FARRAPO",
+        "pct_elmo_20": 50.5,
+        "pct_elmo_24": 54.8,
+        "swing": 4.3
+      },
+      {
+        "NM_LOCAL_VOTACAO": "E.E.F. VICENTE TRAJANO DE MESQUITA",
+        "pct_elmo_20": 58.1,
+        "pct_elmo_24": 62.6,
+        "swing": 4.5
+      },
+      {
+        "NM_LOCAL_VOTACAO": "E.E.I.F.FRANCISCO PEREIRA DA COSTA",
+        "pct_elmo_20": 56.1,
+        "pct_elmo_24": 61.8,
+        "swing": 5.6
+      },
+      {
+        "NM_LOCAL_VOTACAO": "LICEU WALDIR LEOPÉRCIO",
+        "pct_elmo_20": 56.6,
+        "pct_elmo_24": 62.8,
+        "swing": 6.2
+      },
+      {
+        "NM_LOCAL_VOTACAO": "CENTRO DIGITAL",
+        "pct_elmo_20": 57.3,
+        "pct_elmo_24": 64.4,
+        "swing": 7.1
+      }
+    ]
+  },
+  "eleicao_2022": {
+    "presidente_1t": [
+      {
+        "nome": "LULA",
+        "partido": "PT",
+        "votos": 7366,
+        "pct": 59.5
+      },
+      {
+        "nome": "JAIR BOLSONARO",
+        "partido": "PL",
+        "votos": 2591,
+        "pct": 20.9
+      },
+      {
+        "nome": "CIRO GOMES",
+        "partido": "PDT",
+        "votos": 2233,
+        "pct": 18.1
+      },
+      {
+        "nome": "SIMONE TEBET",
+        "partido": "MDB",
+        "votos": 128,
+        "pct": 1.0
+      },
+      {
+        "nome": "SORAYA THRONICKE",
+        "partido": "UNIÃO",
+        "votos": 35,
+        "pct": 0.3
+      }
+    ],
+    "presidente_2t": [
+      {
+        "nome": "LULA",
+        "partido": "PT",
+        "votos": 8827,
+        "pct": 72.3
+      },
+      {
+        "nome": "JAIR BOLSONARO",
+        "partido": "PL",
+        "votos": 3381,
+        "pct": 27.7
+      }
+    ],
+    "governador": [
+      {
+        "nome": "ELMANO DE FREITAS",
+        "partido": "PT",
+        "votos": 5429,
+        "pct": 45.5
+      },
+      {
+        "nome": "ROBERTO CLÁUDIO",
+        "partido": "PDT",
+        "votos": 3772,
+        "pct": 31.6
+      },
+      {
+        "nome": "CAPITÃO WAGNER",
+        "partido": "UNIÃO",
+        "votos": 2725,
+        "pct": 22.8
+      },
+      {
+        "nome": "CHICO MALTA",
+        "partido": "PCB",
+        "votos": 7,
+        "pct": 0.1
+      },
+      {
+        "nome": "ZÉ BATISTA",
+        "partido": "PSTU",
+        "votos": 4,
+        "pct": 0.0
+      }
+    ],
+    "senador": [
+      {
+        "nome": "CAMILO",
+        "partido": "PT",
+        "votos": 8660,
+        "pct": 78.9
+      },
+      {
+        "nome": "KAMILA CARDOSO",
+        "partido": "AVANTE",
+        "votos": 2062,
+        "pct": 18.8
+      },
+      {
+        "nome": "ERIKA AMORIM",
+        "partido": "PSD",
+        "votos": 256,
+        "pct": 2.3
+      }
+    ],
+    "dep_federal": [
+      {
+        "nome": "LEÔNIDAS CRISTINO",
+        "partido": "PDT",
+        "votos": 3969,
+        "pct": 33.8
+      },
+      {
+        "nome": "EUNÍCIO",
+        "partido": "MDB",
+        "votos": 3116,
+        "pct": 26.6
+      },
+      {
+        "nome": "GUIMARÃES DO PT",
+        "partido": "PT",
+        "votos": 644,
+        "pct": 5.5
+      },
+      {
+        "nome": "DENIS BEZERRA",
+        "partido": "PSB",
+        "votos": 610,
+        "pct": 5.2
+      },
+      {
+        "nome": "JÚNIOR MANO",
+        "partido": "PL",
+        "votos": 464,
+        "pct": 4.0
+      },
+      {
+        "nome": "DR JAZIEL",
+        "partido": "PL",
+        "votos": 362,
+        "pct": 3.1
+      }
+    ],
+    "dep_estadual": [
+      {
+        "nome": "LIA GOMES",
+        "partido": "PDT",
+        "votos": 3801,
+        "pct": 34.3
+      },
+      {
+        "nome": "DANNIEL OLIVEIRA",
+        "partido": "MDB",
+        "votos": 2462,
+        "pct": 22.2
+      },
+      {
+        "nome": "AGENOR NETO",
+        "partido": "MDB",
+        "votos": 679,
+        "pct": 6.1
+      },
+      {
+        "nome": "ALYSSON AGUIAR",
+        "partido": "PC do B",
+        "votos": 534,
+        "pct": 4.8
+      },
+      {
+        "nome": "CLÁUDIO PINHO",
+        "partido": "PDT",
+        "votos": 492,
+        "pct": 4.4
+      },
+      {
+        "nome": "MOISES BRAZ",
+        "partido": "PT",
+        "votos": 385,
+        "pct": 3.5
+      }
+    ]
+  },
+  "eleicao_2026": {
+    "presidente_1t": [
+      {
+        "nome": "LULA",
+        "partido": "PT",
+        "votos": 7596,
+        "pct": 59.8
+      },
+      {
+        "nome": "FLAVIO BOLSONARO",
+        "partido": "PL",
+        "votos": 4355,
+        "pct": 34.3
+      },
+      {
+        "nome": "ESCRITOR AUGUSTO CURY",
+        "partido": "AVANTE",
+        "votos": 388,
+        "pct": 3.1
+      },
+      {
+        "nome": "RENAN SANTOS",
+        "partido": "MISSÃO",
+        "votos": 224,
+        "pct": 1.8
+      },
+      {
+        "nome": "RONALDO CAIADO",
+        "partido": "PSD",
+        "votos": 122,
+        "pct": 1.0
+      }
+    ],
+    "presidente_2t": [
+      {
+        "nome": "LULA",
+        "partido": "PT",
+        "votos": 8655,
+        "pct": 66.5
+      },
+      {
+        "nome": "FLAVIO BOLSONARO",
+        "partido": "PL",
+        "votos": 4363,
+        "pct": 33.5
+      }
+    ],
+    "governador": [
+      {
+        "nome": "CIRO GOMES",
+        "partido": "PSDB",
+        "votos": 7241,
+        "pct": 58.1
+      },
+      {
+        "nome": "ELMANO DE FREITAS",
+        "partido": "PT",
+        "votos": 5180,
+        "pct": 41.6
+      },
+      {
+        "nome": "DELEGADO HUGGO",
+        "partido": "MISSÃO",
+        "votos": 28,
+        "pct": 0.2
+      }
+    ],
+    "senador": [
+      {
+        "nome": "CAPITÃO WAGNER",
+        "partido": "UNIÃO",
+        "votos": 5990,
+        "pct": 26.6
+      },
+      {
+        "nome": "CID GOMES",
+        "partido": "PSB",
+        "votos": 5707,
+        "pct": 25.3
+      },
+      {
+        "nome": "ALCIDES FERNANDES",
+        "partido": "PL",
+        "votos": 5550,
+        "pct": 24.6
+      },
+      {
+        "nome": "LUIZIANNE",
+        "partido": "REDE",
+        "votos": 5224,
+        "pct": 23.2
+      }
+    ],
+    "dep_federal": [
+      {
+        "nome": "YURY DO PAREDÃO",
+        "partido": "MDB",
+        "votos": 2387,
+        "pct": 19.0
+      },
+      {
+        "nome": "DENIS BEZERRA",
+        "partido": "PSB",
+        "votos": 2099,
+        "pct": 16.7
+      },
+      {
+        "nome": "EDUARDO BISMARCK",
+        "partido": "PV",
+        "votos": 1160,
+        "pct": 9.2
+      },
+      {
+        "nome": "ANDRÉ FERNANDES",
+        "partido": "PL",
+        "votos": 1137,
+        "pct": 9.0
+      },
+      {
+        "nome": "IDILVAN",
+        "partido": "PSB",
+        "votos": 1018,
+        "pct": 8.1
+      },
+      {
+        "nome": "TAINAH MARINHO",
+        "partido": "PSB",
+        "votos": 588,
+        "pct": 4.7
+      }
+    ],
+    "dep_estadual": [
+      {
+        "nome": "LIA GOMES",
+        "partido": "PSB",
+        "votos": 3504,
+        "pct": 30.1
+      },
+      {
+        "nome": "DANNIEL OLIVEIRA",
+        "partido": "MDB",
+        "votos": 2573,
+        "pct": 22.1
+      },
+      {
+        "nome": "JAMES BEL",
+        "partido": "UNIÃO",
+        "votos": 828,
+        "pct": 7.1
+      },
+      {
+        "nome": "ROMEU ALDIGUERI",
+        "partido": "PSB",
+        "votos": 594,
+        "pct": 5.1
+      },
+      {
+        "nome": "MOISÉS BRAZ",
+        "partido": "PT",
+        "votos": 398,
+        "pct": 3.4
+      },
+      {
+        "nome": "TANCREDO DOS SANTOS",
+        "partido": "PL",
+        "votos": 397,
+        "pct": 3.4
+      }
+    ]
+  },
+  "eleitorado_perfil": {
+    "2020": {
+      "faixas": {
+        "16-24": 3106,
+        "25-44": 6560,
+        "45-59": 3305,
+        "60+": 3466,
+        "total": 16437
+      },
+      "escolaridade": {
+        "ANALFABETO": 10.0,
+        "ENSINO FUNDAMENTAL COMPLETO": 5.7,
+        "ENSINO FUNDAMENTAL INCOMPLETO": 22.6,
+        "ENSINO MÉDIO COMPLETO": 18.4,
+        "ENSINO MÉDIO INCOMPLETO": 15.2,
+        "LÊ E ESCREVE": 19.6,
+        "NÃO INFORMADO": 0.1,
+        "SUPERIOR COMPLETO": 5.4,
+        "SUPERIOR INCOMPLETO": 3.1
+      },
+      "mulheres_pct": 50.2
+    },
+    "2024": {
+      "faixas": {
+        "16-24": 2850,
+        "25-44": 6565,
+        "45-59": 3585,
+        "60+": 3213,
+        "total": 16213
+      },
+      "escolaridade": {
+        "ANALFABETO": 7.2,
+        "ENSINO FUNDAMENTAL COMPLETO": 5.8,
+        "ENSINO FUNDAMENTAL INCOMPLETO": 21.6,
+        "ENSINO MÉDIO COMPLETO": 21.2,
+        "ENSINO MÉDIO INCOMPLETO": 18.8,
+        "LÊ E ESCREVE": 16.0,
+        "NÃO INFORMADO": 0.0,
+        "SUPERIOR COMPLETO": 5.8,
+        "SUPERIOR INCOMPLETO": 3.7
+      },
+      "mulheres_pct": 50.4
+    }
+  },
+  "projecao_2028": {
+    "premissas": {
+      "aptos": {
+        "baixo": 15600,
+        "central": 15850,
+        "alto": 16100
+      },
+      "comparecimento": {
+        "baixo": 0.855,
+        "central": 0.875,
+        "alto": 0.89
+      },
+      "validos_sobre_comparecimento": 0.958
+    },
+    "cenarios_quociente": {
+      "baixo": {
+        "aptos": 15600,
+        "comparecimento": 13338,
+        "validos_vereador": 12778,
+        "quociente_eleitoral": 1162,
+        "barreira_80pct": 930,
+        "minimo_individual_10pct": 117,
+        "voto_para_sobra_20pct": 233
+      },
+      "central": {
+        "aptos": 15850,
+        "comparecimento": 13869,
+        "validos_vereador": 13286,
+        "quociente_eleitoral": 1208,
+        "barreira_80pct": 967,
+        "minimo_individual_10pct": 121,
+        "voto_para_sobra_20pct": 242
+      },
+      "alto": {
+        "aptos": 16100,
+        "comparecimento": 14329,
+        "validos_vereador": 13727,
+        "quociente_eleitoral": 1248,
+        "barreira_80pct": 999,
+        "minimo_individual_10pct": 125,
+        "voto_para_sobra_20pct": 250
+      }
+    },
+    "simulacao_cadeiras": {
+      "A_continuidade": {
+        "participacao": {
+          "PSB": 0.45,
+          "FE BRASIL": 0.25,
+          "MDB": 0.3
+        },
+        "votos": {
+          "PSB": 5978,
+          "FE BRASIL": 3321,
+          "MDB": 3985
+        },
+        "cadeiras": {
+          "PSB": 5,
+          "FE BRASIL": 3,
+          "MDB": 3
+        }
+      },
+      "B_fragmentacao": {
+        "participacao": {
+          "PSB": 0.33,
+          "FE BRASIL": 0.2,
+          "MDB": 0.25,
+          "REPUBLICANOS/UNIAO": 0.12,
+          "PL/PP": 0.1
+        },
+        "votos": {
+          "PSB": 4384,
+          "FE BRASIL": 2657,
+          "MDB": 3321,
+          "REPUBLICANOS/UNIAO": 1594,
+          "PL/PP": 1328
+        },
+        "cadeiras": {
+          "PSB": 4,
+          "FE BRASIL": 2,
+          "MDB": 3,
+          "REPUBLICANOS/UNIAO": 1,
+          "PL/PP": 1
+        }
+      },
+      "C_oposicao_cresce": {
+        "participacao": {
+          "PSB": 0.36,
+          "FE BRASIL": 0.2,
+          "MDB": 0.38,
+          "PP": 0.06
+        },
+        "votos": {
+          "PSB": 4782,
+          "FE BRASIL": 2657,
+          "MDB": 5048,
+          "PP": 797
+        },
+        "cadeiras": {
+          "PSB": 4,
+          "FE BRASIL": 2,
+          "MDB": 5,
+          "PP": 0
+        }
+      }
+    },
+    "max_candidatos_por_partido": 12
+  }
+}
