@@ -5,3 +5,5 @@ node_modules/
 entregas/
 video/*.local.json
 video/audio/
+
+video/*.local.html
