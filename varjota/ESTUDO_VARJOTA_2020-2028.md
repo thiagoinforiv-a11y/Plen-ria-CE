@@ -238,7 +238,7 @@ São os valores informados pelos próprios candidatos no registro. Servem só co
 8. **Os apelidos de urna mostram onde está a base de cada candidato.** São referências a família e lugar ("do Garrone", "do Silvino", "do João Paulo", "do Croatá", "da Célia", "do Edvard", "do Ararinha"). Vale mapear qual família e qual comunidade cada nome representa.
 9. **A abstenção caiu quando a eleição ficou desequilibrada.** Isso indica mobilização organizada (transporte, cabos eleitorais, programas sociais), não entusiasmo espontâneo. Os locais ligados a CRAS, Secretaria e creches tiveram avanços de 17 pontos ou mais.
 10. **A zona rural decide a eleição.** As maiores viradas aconteceram em sítios e povoados (Jatobá e Angelim). Os locais em que Elmo menos cresceu também são rurais (Transval e Olho d'Água dos Trajano). A disputa de 2028 passa por essas comunidades.
-11. **A vice saiu e a coligação cresceu.** Republicanos e União entraram e o novo vice é médico. **Leitura:** o vice de 2024 é candidato natural à sucessão em 2028, mas não tem voto próprio testado nas urnas.
+11. **A vice saiu e a coligação cresceu.** Republicanos e União entraram e o novo vice é médico. **Atualização (set/2026):** segundo um blog local, o vice Erivaldo Mororó anunciou rompimento com o prefeito. Se confirmado, é o segundo vice consecutivo a se afastar. Ver `RAIO-X_VARJOTA_2028.md`.
 12. **O eleitorado diminuiu e a maioria ficou mais barata.** Com cerca de 13.300 votos válidos em 2028, vencer para prefeito exige perto de 6.700 votos. Cada 100 votos virados entre os candidatos equivalem a 1,5 ponto de margem.
 
 ---
@@ -295,7 +295,7 @@ Elmo Monte não pode concorrer, porque já está no segundo mandato consecutivo.
 
 | Cenário | Descrição | Faixa provável |
 |---|---|---|
-| **Continuidade unida** | Um só nome da base (vice, vereador forte do PSB ou do PT, ou alguém da família ou do secretariado), com a coligação de 2024 mantida | Base com 55–62% |
+| **Continuidade unida** | Um só nome da base (vereador forte do PSB ou do PT, ou alguém da família ou do secretariado), com a coligação de 2024 mantida | Base com 55–62% |
 | **Base dividida** | PT ou Republicanos lançam candidato próprio. A divisão estadual entre Ciro e o PT pode chegar ao município | Disputa aberta, com 2 ou 3 candidatos |
 | **Oposição unificada** | MDB com Rosa Paulino (o maior voto pessoal) ou um nome novo, somando PP e PL, e aproveitando o desgaste natural de 8 anos e o voto anti-PT de 2026 | Oposição com 42–50% |
 
