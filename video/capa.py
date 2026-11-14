@@ -9,7 +9,8 @@ R = os.path.dirname(os.path.abspath(__file__)); FT = lambda w, s: ImageFont.true
 OURO, TX, T2, FUNDO = (245, 196, 81), (242, 245, 248), (147, 161, 176), (10, 14, 20)
 ap = argparse.ArgumentParser()
 for k in ("fundo", "kicker", "linha1", "linha2", "fotos", "nomes", "rodape", "saida"): ap.add_argument("--" + k, default="")
-ap.add_argument("--recorte", default="0,420,1080,1140"); a = ap.parse_args()
+ap.add_argument("--recorte", default="0,420,1080,1140"); ap.add_argument("--cor", default=""); ap.add_argument("--logo", default=""); a = ap.parse_args()
+if a.cor: OURO = tuple(int(a.cor.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
 W, H = 1080, 1920; cap = Image.new("RGB", (W, H), FUNDO)
 if a.fundo:
     x0, y0, x1, y1 = map(int, a.recorte.split(",")); bg = Image.open(a.fundo).convert("RGB").crop((x0, y0, x1, y1)).resize((W, int(W * (y1 - y0) / (x1 - x0))))
@@ -42,6 +43,8 @@ if fotos:
         tam = 38
         while d.textlength(nome, font=FT(800, tam)) > gap - 28: tam -= 1
         fn = FT(800, tam); w = d.textlength(nome, font=fn); d.text((cx - w / 2, cy + r + 26), nome, font=fn, fill=TX)
+if a.logo:
+    lg = Image.open(a.logo).convert("RGBA"); lw = 430; lg = lg.resize((lw, int(lg.height * lw / lg.width)), Image.LANCZOS); cap.paste(lg, ((W - lw) // 2, 1475 - lg.height - 20), lg)
 centro(a.rodape, 1500, FT(700, 30), T2)
 cap.save(a.saida, quality=97, subsampling=0); print("✔", a.saida)
 prev = cap.copy(); pd = ImageDraw.Draw(prev, "RGBA")
