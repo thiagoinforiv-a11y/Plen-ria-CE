@@ -81,7 +81,7 @@
         const lg = F0.logo && (await carregaImg(F0.logo)); if (lg) { const w = 760 * (0.85 + 0.15 * eback(clamp(v / 0.6))), h = (w * lg.height) / lg.width; ctx.drawImage(lg, W / 2 - w / 2, H * 0.36 - h / 2, w, h); }
         if (F0.slogan) { ctx.font = `700 34px ${F}`; ctx.letterSpacing = "4px"; ctx.fillStyle = BR; ctx.fillText(F0.slogan, W / 2, H * 0.47); }
         ctx.fillStyle = VM; ctx.fillRect(W / 2 - 80, H * 0.52, 160 * eout(clamp((v - 0.3) / 0.5)), 5);
-        if (F0.parceiroTexto) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText("EM PARCERIA COM", W / 2, H * 0.58); ctx.letterSpacing = "1px"; ctx.font = `900 84px ${F}`; ctx.fillStyle = BR; ctx.fillText(F0.parceiroTexto, W / 2, H * 0.58 + 110); }
+        if (F0.parceiroTexto) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText(F0.rotulo || "EM PARCERIA COM", W / 2, H * 0.58); ctx.letterSpacing = "1px"; ctx.font = `900 84px ${F}`; ctx.fillStyle = BR; ctx.fillText(F0.parceiroTexto, W / 2, H * 0.58 + 110); }
         if (F0.parceiro) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText("EM PARCERIA COM", W / 2, H * 0.58); const pg = await carregaImg(F0.parceiro); if (pg) { const w = 330, h = (w * pg.height) / pg.width; ctx.drawImage(pg, W / 2 - w / 2, H * 0.61, w, h); } }
         ctx.restore(); } }
   };

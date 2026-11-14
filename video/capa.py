@@ -50,7 +50,7 @@ if fotos:
         while d.textlength(nome, font=FT(800, tam)) > gap - 28: tam -= 1
         fn = FT(800, tam); w = d.textlength(nome, font=fn); d.text((cx - w / 2, cy + r + 26), nome, font=fn, fill=TX)
 if a.logo:
-    lg = Image.open(a.logo).convert("RGBA"); lw = 430; lg = lg.resize((lw, int(lg.height * lw / lg.width)), Image.LANCZOS); cap.paste(lg, ((W - lw) // 2, 1475 - lg.height - 20), lg)
+    lg = Image.open(a.logo).convert("RGBA"); lw = 430; lg = lg.resize((lw, int(lg.height * lw / lg.width)), Image.LANCZOS); cap.paste(lg, (70 if a.cheio else (W - lw) // 2, 330 if a.cheio else 1475 - lg.height - 20), lg)
 centro(a.rodape, 1500, FT(700, 30), T2)
 cap.save(a.saida, quality=97, subsampling=0); print("✔", a.saida)
 prev = cap.copy(); pd = ImageDraw.Draw(prev, "RGBA")
