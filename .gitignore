@@ -7,3 +7,4 @@ video/*.local.json
 video/audio/
 
 video/*.local.html
+__pycache__/
