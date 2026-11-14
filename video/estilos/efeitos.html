@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Estilo efeitos (máscara de IA)</title>
+<style>html,body{margin:0;background:#000}canvas{display:block;width:540px;height:960px}</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Estilo EFEITOS sobre vídeo falado, com a pessoa recortada do fundo (video/recortar.py). Inspirado no "/efeitos" (7 efeitos com IA):
+   holofote (texto gigante ATRÁS da pessoa), vidro (cartões de vidro flutuando em volta, uns atrás e uns na frente),
+   documentario (preto e branco + palavras carimbadas), dividida (gráfico em cima, pessoa embaixo), checklist (etapas sendo marcadas).
+   Roteiro: { frames, mascaras, n, fps, extra, alvo:[x,y], efeitos:[{tipo, t0, t1, ...}] } */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const R = await (await fetch(new URLSearchParams(location.search).get("d"))).json();
+  for (const w of ["700", "800", "900"]) { const ff = new FontFace("Montserrat", `url(../fontes/montserrat-latin-${w}-normal.woff2)`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+  const F = "Montserrat", clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), eout = (x) => 1 - Math.pow(1 - x, 3), eback = (x) => 1 + 2.4 * Math.pow(x - 1, 3) + 1.4 * Math.pow(x - 1, 2);
+  const ld = (src) => new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = "/" + src; });
+  const pessoa = document.createElement("canvas"); pessoa.width = W; pessoa.height = H; const pc = pessoa.getContext("2d");
+  const copia = document.createElement("canvas"); copia.width = W; copia.height = H; const cc = copia.getContext("2d");
+  const [AX, AY] = (R.alvo || [0.5, 0.35]).map((v, i) => v * (i ? H : W));
+  const ativo = (t, tipo) => (R.efeitos || []).find((e) => e.tipo === tipo && t >= e.t0 && t < e.t1);
+  const env = (t, e, f = 0.35) => Math.min(eout(clamp((t - e.t0) / f)), eout(clamp((e.t1 - t) / f)));
+  const vidroCard = (x, y, w, h, a, conteudo) => { ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.roundRect(x, y, w, h, 28); ctx.save(); ctx.clip(); ctx.filter = "blur(18px) brightness(1.15)"; ctx.drawImage(copia, 0, 0); ctx.filter = "none"; ctx.fillStyle = "rgba(255,255,255,.14)"; ctx.fillRect(x, y, w, h); ctx.restore();
+    ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.stroke(); conteudo(); ctx.restore(); };
+  window.quadro = async (t) => {
+    const i = Math.min(R.n - 1, Math.floor(t * R.fps)), nome = String(i + 1).padStart(5, "0");
+    const [fr, mk] = await Promise.all([ld(R.frames + nome + ".jpg"), R.mascaras ? ld(R.mascaras + nome + ".png") : null]);
+    const doc = ativo(t, "documentario"), hol = ativo(t, "holofote"), vid = ativo(t, "vidro"), div = ativo(t, "dividida"), chk = ativo(t, "checklist");
+    // camada da pessoa recortada
+    pc.clearRect(0, 0, W, H); if (fr) pc.drawImage(fr, 0, 0, W, H); if (mk) { pc.globalCompositeOperation = "destination-in"; pc.drawImage(mk, 0, 0, W, H); pc.globalCompositeOperation = "source-over"; }
+    // fundo
+    ctx.save(); let dy = 0;
+    if (div) { const k = env(t, div, 0.5); dy = H * 0.36 * k; }
+    ctx.filter = doc ? "grayscale(1) contrast(1.35) brightness(.95)" : hol ? `brightness(${1 - 0.55 * env(t, hol)}) saturate(.8)` : "contrast(1.06) saturate(1.08)";
+    if (fr) ctx.drawImage(fr, 0, dy, W, H); ctx.restore();
+    cc.clearRect(0, 0, W, H); cc.drawImage(ctx.canvas, 0, 0);
+    // HOLOFOTE: luz atrás + texto gigante entre o fundo e a pessoa
+    if (hol) { const k = env(t, hol, 0.5), g = ctx.createRadialGradient(AX, AY + 120, 40, AX, AY + 120, 760); g.addColorStop(0, `rgba(255,70,90,${0.55 * k})`); g.addColorStop(0.5, `rgba(120,20,60,${0.35 * k})`); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.save(); ctx.globalAlpha = k; ctx.textAlign = "center"; let tam = 330; ctx.font = `900 ${tam}px ${F}`; while (ctx.measureText(hol.texto).width > W * 1.02) { tam -= 10; ctx.font = `900 ${tam}px ${F}`; }
+      const yT = hol.y ? hol.y * H : AY - 30, s = 0.85 + 0.15 * eback(clamp((t - hol.t0) / 0.6)); ctx.translate(W / 2, yT); ctx.scale(s, s);
+      ctx.shadowColor = hol.cor || "#ff3d5a"; ctx.shadowBlur = 60; ctx.fillStyle = "#ffe9ee"; ctx.fillText(hol.texto, 0, 0); ctx.shadowBlur = 0; ctx.lineWidth = 6; ctx.strokeStyle = hol.cor || "#ff3d5a"; ctx.strokeText(hol.texto, 0, 0); ctx.restore(); }
+    // VIDRO: cartões atrás da pessoa
+    const cardsV = vid ? vid.cards.map((c, j) => ({ ...c, j })) : [];
+    const desenhaCard = (c) => { const k = eback(clamp((t - vid.t0 - c.j * 0.18) / 0.5)) * env(t, vid), bob = Math.sin(t * 1.6 + c.j * 1.7) * 10, w = c.w || 300, h = c.h || 220, x = c.x * W - w / 2, y = c.y * H - h / 2 + bob + (1 - k) * 60;
+      vidroCard(x, y, w, h, clamp(k), () => { ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.font = `900 ${c.tamN || 96}px ${F}`; ctx.fillText(c.n, x + 26, y + 26 + (c.tamN || 96) * 0.85); ctx.font = `700 26px ${F}`; ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.fillText(c.s, x + 28, y + h - 30); if (c.barras) { const bw = (w - 56) / c.barras.length; c.barras.forEach((b, q) => { const bh = b * (h - 120) * clamp((t - vid.t0 - 0.6 - q * 0.06) / 0.4); ctx.fillStyle = q ? "rgba(255,255,255,.5)" : "#ffd166"; ctx.fillRect(x + 28 + q * bw, y + h - 64 - bh, bw - 8, bh); }); } }); };
+    cardsV.filter((c) => c.atras).forEach(desenhaCard);
+    // pessoa por cima (com contorno de luz quando há efeito de profundidade)
+    if (hol || vid) { ctx.save(); if (hol) { ctx.shadowColor = "rgba(255,90,110,.65)"; ctx.shadowBlur = 40; } ctx.drawImage(pessoa, 0, dy); ctx.restore(); }
+    else if (doc) { ctx.save(); ctx.filter = "grayscale(1) contrast(1.35)"; ctx.drawImage(pessoa, 0, dy); ctx.restore(); }
+    cardsV.filter((c) => !c.atras).forEach(desenhaCard);
+    // DOCUMENTÁRIO: palavras carimbadas
+    if (doc) { const pal = (doc.palavras || []).filter(([tt]) => t >= tt).slice(-1)[0]; if (pal) { const k = clamp((t - pal[0]) / 0.12), s = 1.25 - 0.25 * k; ctx.save(); ctx.translate(W / 2, (pal[2] || 0.72) * H); ctx.rotate(-0.04); ctx.scale(s, s); ctx.globalAlpha = k; ctx.font = `900 ${pal[3] || 150}px ${F}`; ctx.textAlign = "center"; ctx.fillStyle = "#fff"; ctx.fillText(pal[1], 0, 0); ctx.fillStyle = "#e3262f"; ctx.fillRect(-ctx.measureText(pal[1]).width / 2, 26, ctx.measureText(pal[1]).width, 14); ctx.restore(); }
+      ctx.save(); ctx.globalAlpha = 0.06; for (let q = 0; q < 900; q++) { ctx.fillStyle = Math.random() > 0.5 ? "#fff" : "#000"; ctx.fillRect(Math.random() * W, Math.random() * H, 2, 2); } ctx.restore(); }
+    // DIVIDIDA: painel de dados em cima
+    if (div) { const k = env(t, div, 0.5), hP = H * 0.36 * k; ctx.save(); ctx.fillStyle = "#f6f1e7"; ctx.fillRect(0, 0, W, hP); ctx.beginPath(); ctx.rect(0, 0, W, hP); ctx.clip();
+      ctx.fillStyle = "#14161a"; ctx.textAlign = "left"; ctx.font = `900 60px ${F}`; ctx.fillText(div.titulo, 70, 140); ctx.fillStyle = "#e3262f"; ctx.font = `800 italic 52px ${F}`; ctx.fillText(div.sub || "", 70, 205);
+      const mx = Math.max(...div.barras.map((b) => b[1])), bw = (W - 140) / div.barras.length; div.barras.forEach(([n, v], q) => { const bh = (v / mx) * (hP - 330) * eout(clamp((t - div.t0 - 0.4 - q * 0.08) / 0.5)), x = 70 + q * bw, y = hP - 70 - bh; ctx.fillStyle = q ? "#e3262f" : "#e8b93a"; ctx.beginPath(); ctx.roundRect(x, y, bw - 22, bh, [8, 8, 0, 0]); ctx.fill(); ctx.fillStyle = "#14161a"; ctx.font = `800 26px ${F}`; ctx.textAlign = "center"; ctx.fillText(div.rot ? div.rot(v) : v.toLocaleString("pt-BR"), x + (bw - 22) / 2, y - 12); ctx.font = `700 22px ${F}`; ctx.fillStyle = "#5b6066"; ctx.fillText(n, x + (bw - 22) / 2, hP - 36); });
+      ctx.restore(); ctx.fillStyle = "#14161a"; ctx.fillRect(0, hP - 2, W, 4); }
+    // CHECKLIST: etapas sendo marcadas
+    if (chk) { const k = env(t, chk, 0.4), x = 70, w = W - 140, h = 120 + chk.itens.length * 74, y = H * 0.6; vidroCard(x, y + (1 - k) * 60, w, h, k, () => {
+        ctx.textAlign = "left"; ctx.font = `800 34px ${F}`; ctx.fillStyle = "#fff"; ctx.fillText(chk.titulo, x + 34, y + (1 - k) * 60 + 66);
+        chk.itens.forEach(([txt, tag], q) => { const feito = t > chk.t0 + 0.8 + q * ((chk.t1 - chk.t0 - 1.6) / chk.itens.length), yy = y + (1 - k) * 60 + 130 + q * 74; ctx.beginPath(); ctx.arc(x + 52, yy - 10, 18, 0, 6.283); ctx.fillStyle = feito ? "#3ddc97" : "rgba(255,255,255,.18)"; ctx.fill();
+          if (feito) { ctx.strokeStyle = "#0b1a12"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x + 43, yy - 10); ctx.lineTo(x + 50, yy - 3); ctx.lineTo(x + 62, yy - 18); ctx.stroke(); }
+          ctx.font = `700 30px ${F}`; ctx.fillStyle = feito ? "#fff" : "rgba(255,255,255,.55)"; ctx.fillText(txt, x + 88, yy); ctx.font = `700 22px ${F}`; ctx.textAlign = "right"; ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.fillText(tag || "", x + w - 34, yy); ctx.textAlign = "left"; }); }); }
+    // título fixo opcional
+    for (const tt of R.titulos || []) if (t >= tt.t0 && t < tt.t1) { const k = env(t, tt, 0.3); ctx.save(); ctx.globalAlpha = k; ctx.textAlign = "center"; ctx.font = `900 ${tt.tam || 74}px ${F}`; ctx.fillStyle = "#fff"; ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 20; tt.texto.split("\n").forEach((l, q) => ctx.fillText(l, W / 2, (tt.y || 0.18) * H + q * (tt.tam || 74) * 1.08)); ctx.restore(); }
+  };
+  await window.quadro(0); window.pronto = true;
+})();
+</script>
+</body>
+</html>
