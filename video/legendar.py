@@ -27,7 +27,7 @@ def destaque(p):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--video", required=True); ap.add_argument("--palavras", required=True); ap.add_argument("--saida", required=True)
-    ap.add_argument("--y", type=int, default=1480); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25")
+    ap.add_argument("--y", type=int, default=1480); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25"); ap.add_argument("--estilo", default="plenaria", choices=["plenaria", "tela"]); ap.add_argument("--titulo", default=""); ap.add_argument("--titulo-dur", type=float, default=4.0)
     a = ap.parse_args()
     d = json.load(open(a.palavras, encoding="utf-8")); pal = d["palavras"] if isinstance(d, dict) else d
     pal = [w for w in pal if w["p"].strip()]
@@ -36,7 +36,17 @@ def main():
            "[V4+ Styles]", "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
            f"Style: L,Oswald,{a.tam},{BRANCO},{BRANCO},&H00101010&,{SOMBRA},-1,0,0,0,100,100,1,0,1,5,3,5,60,60,0,1", "",
            "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
-    for g in grupos(pal):
+    if a.estilo == "tela":   # gravação de tela estilo TikTok: frase como foi falada, branca com contorno preto, sem destaque de cor
+        ass[ass.index(next(x for x in ass if x.startswith("Style: L,")))] = f"Style: L,Montserrat,{a.tam},&H00FFFFFF&,&H00FFFFFF&,&H00000000&,&H00000000&,-1,0,0,0,100,100,0,0,1,7,0,5,60,60,0,1"
+        ass.insert(ass.index("[Events]") - 1, f"Style: T,Montserrat,{int(a.tam * 1.15)},&H00111111&,&H00111111&,&H00FFFFFF&,&H00FFFFFF&,-1,0,0,0,100,100,0,0,3,14,0,5,60,60,0,1")
+        if a.titulo:
+            for k, linha in enumerate(a.titulo.split("|")):
+                ass.append(f"Dialogue: 1,{tempo(0)},{tempo(a.titulo_dur)},T,,0,0,0,,{{\\pos(540,{330 + k * int(a.tam * 1.75)})\\fad(150,250)}}{linha}")
+        for g in grupos(pal, maxp=3, maxc=22):
+            ini, fim = g[0]["t"], g[-1]["t"] + g[-1]["d"] + 0.1
+            ass.append(f"Dialogue: 0,{tempo(ini)},{tempo(fim)},L,,0,0,0,,{{\\pos(540,{a.y})\\fad(60,0)}}" + " ".join(w["p"] for w in g))
+        g_vazio = []
+    for g in ([] if a.estilo == "tela" else grupos(pal)):
         fim_g = g[-1]["t"] + g[-1]["d"] + 0.12
         for i, w in enumerate(g):
             ini = w["t"]; fim = g[i + 1]["t"] if i + 1 < len(g) else fim_g
@@ -53,6 +63,9 @@ def main():
             ass.append(f"Dialogue: 0,{tempo(ini)},{tempo(fim)},L,,0,0,0,," + intro + " ".join(partes))
     tmp = tempfile.NamedTemporaryFile("w", suffix=".ass", delete=False, encoding="utf-8"); tmp.write("\n".join(ass)); tmp.close()
     fontes = os.path.join(RAIZ, "fontes", "ttf")
+    if a.estilo == "tela" and not os.path.exists(os.path.join(fontes, "Montserrat-800.ttf")):
+        from fontTools.ttLib import TTFont
+        f = TTFont(os.path.join(RAIZ, "fontes", "montserrat-latin-800-normal.woff2")); f.flavor = None; f.save(os.path.join(fontes, "Montserrat-800.ttf"))
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", a.video, "-vf", f"ass={tmp.name}:fontsdir={fontes}", "-c:v", "libx264", "-crf", a.crf, "-maxrate", "2200k", "-bufsize", "4400k", "-preset", "medium",
                     "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", a.saida], check=True)
     os.remove(tmp.name); print("✔ legenda", a.saida)
