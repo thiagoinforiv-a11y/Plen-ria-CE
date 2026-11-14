@@ -55,3 +55,13 @@ Os botões do app (lado direito, de y≈900 a 1700) e a descrição do post (de 
 
 ## Nota vira regra
 Quando o Thiago corrigir algo num vídeo ("tira a tarja", "legenda muito embaixo", "corte feio"), corrija e registre a correção como regra nesta skill, com a data, para o próximo já sair certo.
+
+## Objeto 3D que ilustra (referência: o prédio 3D do vídeo do condomínio)
+Quando o assunto tem um "lugar" ou "objeto" que o público reconhece, monte ele em 3D e faça os dados acontecerem nele (como as janelas do prédio que acendem por situação). Base: `cena-camara-3d.html` (three.js em `video/vendor`, renderizado num canvas WebGL e copiado para o canvas 2D, com textos por cima). Ideias prontas:
+- **Plenário** (cadeiras acendem por partido, por quem ficou/saiu, quem votou sim/não numa votação, a Mesa Diretora e o presidente).
+- **Urna eletrônica** (abre e "imprime" o resultado de uma seção; ótimo para "urna a urna").
+- **Prédio da prefeitura/escola/posto de saúde** (andares = secretarias; altura = gasto; janelas = contratos).
+- **Mapa da cidade em relevo** (cada bairro sobe conforme os votos ou o gasto; "o voto tem endereço").
+- **Cofre / pilha de moedas** (orçamento, emendas, repasse à Câmara).
+- **Moto girando na vitrine** (estilo entrega, Super Choque).
+Regras: câmera sempre em movimento lento; o objeto ocupa a metade de cima; nomes e números em lista na metade de baixo (nunca rótulo flutuando em cima de rótulo); fundo escuro com 1 cor de destaque; legenda de cores dentro da zona segura.
