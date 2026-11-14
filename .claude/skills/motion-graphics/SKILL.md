@@ -74,3 +74,9 @@ Regras: câmera sempre em movimento lento; o objeto ocupa a metade de cima; nome
 - **Faixas fixas:** título 0–430, cena 430–1130, painel 1150–1480 (card com borda fina), fonte 1530. Degradês escuros separam as faixas. Rótulo dentro da cena só número curto em bolinha; nomes ficam no painel.
 - **Câmera:** abre alta e desce até o enquadramento em 5 s, órbita curta e lenta, aproxima no fecho. `setViewOffset` para centralizar o objeto na faixa da cena; nada cortado nas bordas (confira as cadeiras das pontas).
 - **Revisão:** prova em 4 tempos (abertura, cena cheia, transição, fecho) antes do render final; olhe borda cortada, texto sobre objeto e área estourada de luz.
+
+## Padrão de entrega (pedido do Thiago em 14/11/2026: vale para TODO vídeo)
+1. **Narração** sempre (`video/narrar_local.py <id>` gera voz + tempo das palavras aqui mesmo; texto em `narracao.json`, ou em `*.local.json` se for interno).
+2. **Fotos das pessoas** citadas, sempre que existirem: foto oficial do TSE (`fotos/ce/<cidade>/<ano>/<sq>.jpg`; anos antigos saem do pacote do TSE lendo só os arquivos necessários, sem baixar o zip inteiro). Foto em círculo com aro da cor do estado, nunca quadrada.
+3. **Capa (thumbnail)** junto com o vídeo: `video/capa.py` (fundo da própria cena sem textos — `cena.html?limpo=1` —, manchete curta em 2 linhas, fotos com aro e brilho, rodapé com a fonte). Conteúdo entre y 240 e 1680 por causa do corte 3:4 da grade do perfil.
+4. **O mais ilustrado possível**: objeto 3D ou mapa quando o tema tem um lugar; nada de "aberração" (forma estranha, texto sobre desenho, borda cortada). Prova em 4 tempos antes de gravar.

@@ -58,3 +58,9 @@ Os botões do app (lado direito, de y≈900 a 1700) e a descrição do post (de 
 
 ## Nota vira regra
 Quando o Thiago corrigir algo num vídeo ("tira a tarja", "legenda muito embaixo", "corte feio"), corrija e registre a correção como regra nesta skill, com a data, para o próximo já sair certo.
+
+## Padrão de entrega (pedido do Thiago em 14/11/2026: vale para TODO vídeo)
+1. **Narração** sempre (`video/narrar_local.py <id>` gera voz + tempo das palavras aqui mesmo; texto em `narracao.json`, ou em `*.local.json` se for interno).
+2. **Fotos das pessoas** citadas, sempre que existirem: foto oficial do TSE (`fotos/ce/<cidade>/<ano>/<sq>.jpg`; anos antigos saem do pacote do TSE lendo só os arquivos necessários, sem baixar o zip inteiro). Foto em círculo com aro da cor do estado, nunca quadrada.
+3. **Capa (thumbnail)** junto com o vídeo: `video/capa.py` (fundo da própria cena sem textos — `cena.html?limpo=1` —, manchete curta em 2 linhas, fotos com aro e brilho, rodapé com a fonte). Conteúdo entre y 240 e 1680 por causa do corte 3:4 da grade do perfil.
+4. **O mais ilustrado possível**: objeto 3D ou mapa quando o tema tem um lugar; nada de "aberração" (forma estranha, texto sobre desenho, borda cortada). Prova em 4 tempos antes de gravar.

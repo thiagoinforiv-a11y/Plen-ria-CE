@@ -19,6 +19,8 @@ import { OutputPass } from "./vendor/jsm/postprocessing/OutputPass.js";
 const W = 1080, H = 1920, out = document.getElementById("c"), ctx = out.getContext("2d");
 const D = await (await fetch("dados-camara-renovacao.json")).json();
 for (const w of ["700", "800", "900"]) { const ff = new FontFace("Montserrat", `url(fontes/montserrat-latin-${w}-normal.woff2)`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+const IMG = {}; await Promise.all(Object.entries(D.fotos || {}).map(([n, f]) => new Promise((ok) => { const i = new Image(); i.onload = () => { IMG[n] = i; ok(); }; i.onerror = ok; i.src = f.startsWith('fotos') ? '../' + f : f; })));
+const avatar = (n, x, y, r, a, borda) => { const im = IMG[n]; ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.closePath(); ctx.save(); ctx.clip(); if (im) { const e = (2 * r) / Math.min(im.width, im.height * 0.8); ctx.drawImage(im, x - (im.width * e) / 2, y - r * 1.05, im.width * e, im.height * e); } else { ctx.fillStyle = '#1c2430'; ctx.fill(); } ctx.restore(); ctx.lineWidth = Math.max(2, r * 0.09); ctx.strokeStyle = borda; ctx.stroke(); ctx.restore(); };
 const OURO = "#f5c451", AZUL = "#5ab4ff", BRANCO = "#f2f5f8", VERM = "#ff5a5a", TX = "#e8edf2", T2 = "#93a1b0", T3 = "#5d6b79", F = "Montserrat";
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), eout = (x) => 1 - Math.pow(1 - x, 3), ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const prog = (t, a, b) => clamp((t - a) / (b - a)), vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
@@ -103,7 +105,7 @@ window.render = (t) => {
     c.feixeM.color.copy(cor); c.feixeM.opacity = 0.3 * c.on; c.pocaM.color.copy(cor); c.pocaM.opacity = 0.6 * c.on; c.ledM.emissive.copy(cor); c.ledM.emissiveIntensity = 3 * c.on;
   });
   comp.render();
-  ctx.clearRect(0, 0, W, H); ctx.drawImage(gl, 0, 0);
+  ctx.clearRect(0, 0, W, H); ctx.drawImage(gl, 0, 0); if (location.search.includes("limpo")) return;
   // faixa do título (degradê para separar do 3D)
   { const g = ctx.createLinearGradient(0, 0, 0, 470); g.addColorStop(0, "rgba(10,14,20,.97)"); g.addColorStop(0.72, "rgba(10,14,20,.88)"); g.addColorStop(1, "rgba(10,14,20,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, 470); }
   T("CÂMARA MUNICIPAL DE VARJOTA", W / 2, 170, { tam: 28, w: 800, ls: 6, cor: OURO, a: vis(t, 0.4, S[5] + 9) });
@@ -116,14 +118,17 @@ window.render = (t) => {
   if (t > S[1]) cad.forEach((c, i) => { if (c.on < 0.2) return; const p = c.topo.clone().project(cam), x = (p.x * 0.5 + 0.5) * W, y = (-p.y * 0.5 + 0.5) * H, a = clamp(c.on);
     ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(x, y, 21, 0, 6.283); ctx.fillStyle = "rgba(10,14,20,.86)"; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = COR[c.est]; ctx.stroke(); ctx.restore(); T(String(i + 1), x, y + 9, { tam: 24, w: 800, a, cor: TX }); });
   // painel de nomes (faixa de baixo, separada)
-  const ap = vis(t, S[1] + 0.2, S[5] + 9);
+  const fimA = eout(prog(t, S[4] + 0.8, S[4] + 1.6)), ap = vis(t, S[1] + 0.2, S[5] + 9) * (1 - fimA);
   if (ap > 0.01) { ctx.save(); ctx.globalAlpha = ap; const g2 = ctx.createLinearGradient(0, 1080, 0, 1170); g2.addColorStop(0, "rgba(10,14,20,0)"); g2.addColorStop(1, "rgba(10,14,20,.96)"); ctx.fillStyle = g2; ctx.fillRect(0, 1080, W, 90); ctx.fillStyle = "rgba(10,14,20,.96)"; ctx.fillRect(0, 1170, W, H - 1170);
     cardR(60, 1150, W - 120, 330, 22, "#111822", "rgba(255,255,255,.07)"); ctx.restore();
     [["Nas três", OURO], ["Continuou", AZUL], ["Chegou", BRANCO], ["Saiu", VERM]].forEach(([n, c], j) => { const x = 100 + j * 225; ctx.save(); ctx.globalAlpha = ap; ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 1192, 8, 0, 6.283); ctx.fill(); ctx.restore(); T(n, x + 18, 1201, { tam: 23, w: 700, al: "left", a: ap, cor: T2 }); });
     ctx.save(); ctx.globalAlpha = ap; ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.fillRect(90, 1222, W - 180, 1.5); ctx.restore();
-    cad.forEach((c, i) => { const col = i < 6 ? 0 : 1, lin = i < 6 ? i : i - 6, x = 100 + col * 450, y = 1272 + lin * 38, a = ap * (0.35 + 0.65 * clamp(c.on));
-      T(String(i + 1).padStart(2, " "), x + 12, y, { tam: 22, w: 800, a, cor: T3, al: "right" }); ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = COR[c.est]; ctx.beginPath(); ctx.arc(x + 32, y - 8, 7, 0, 6.283); ctx.fill(); ctx.restore();
-      T(seat[k][i], x + 50, y, { tam: 27, w: 700, a, cor: c.est === "ouro" ? OURO : TX, al: "left" }); }); }
+    cad.forEach((c, i) => { const col = i < 6 ? 0 : 1, lin = i < 6 ? i : i - 6, x = 100 + col * 450, y = 1268 + lin * 40, a = ap * (0.35 + 0.65 * clamp(c.on));
+      T(String(i + 1).padStart(2, " "), x + 12, y, { tam: 22, w: 800, a, cor: T3, al: "right" }); 
+      avatar(seat[k][i], x + 64, y - 9, 16, a, COR[c.est]); T(seat[k][i], x + 90, y, { tam: 27, w: 700, a, cor: c.est === "ouro" ? OURO : TX, al: "left" }); }); }
+  if (fimA > 0.01) { ctx.save(); ctx.globalAlpha = fimA; ctx.fillStyle = "rgba(10,14,20,.96)"; ctx.fillRect(0, 1130, W, H - 1130); ctx.restore();
+    D.tres.forEach(([n, v], j) => { const x = 60 + j * 330, a = eout(prog(t, S[4] + 1 + j * 0.2, S[4] + 1.6 + j * 0.2)); ctx.save(); ctx.globalAlpha = a; ctx.translate(0, (1 - a) * 24); cardR(x, 1150, 300, 330, 22, "#111822", "rgba(245,196,81,.35)"); ctx.restore();
+      avatar(n, x + 150, 1250 + (1 - a) * 24, 70, a, OURO); T(n, x + 150, 1372 + (1 - a) * 24, { tam: 28, w: 800, a, cor: TX }); T("nas 3 legislaturas", x + 150, 1410 + (1 - a) * 24, { tam: 22, w: 800, a, cor: OURO, ls: 2 }); T(v, x + 150, 1448 + (1 - a) * 24, { tam: 22, w: 700, a, cor: T2 }); }); }
   T("Fonte: TSE · eleições municipais de 2016, 2020 e 2024", W / 2, 1530, { tam: 21, w: 700, a: 0.55, cor: T3 });
 };
 window.render(0); window.pronto = true;
