@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Estilo entrega (vlog comercial)</title>
+<style>html,body{margin:0;background:#000}canvas{display:block;width:540px;height:960px}</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Estilo ENTREGA (vlog comercial de loja/parceiro). Cortes secos com leve aproximação, legenda em caixa alta
+   (branca, palavra-chave vermelha, filete vermelho embaixo), título de abertura "MAIS UMA / ENTREGA",
+   pílulas no topo, logo que salta, e cartão final com a foto da entrega em moldura e o logo da loja.
+   Roteiro (?d=): frames, n, fps, extra, palavras [{t,d,p}], destaques ["KELLY", ...], titulo [t0,t1,"MAIS UMA","ENTREGA", logo],
+   pilulas [[t0,t1,"TEXTO","vermelha"|"branca"]], logos [[t0,t1,arquivo,x,y,larg]], cortes [s...],
+   final {t0, foto (s do vídeo), titulo ["Entrega","feita."], rodape ["Chave entregue pela","Super Choque."], logo, parceiro, slogan} */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const R = await (await fetch(new URLSearchParams(location.search).get("d"))).json();
+  for (const w of ["700", "800", "900"]) { const ff = new FontFace("Montserrat", `url(../fontes/montserrat-latin-${w}-normal.woff2)`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+  const VM = "#ff3d1f", BR = "#ffffff", F = "Montserrat", clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), eout = (x) => 1 - Math.pow(1 - x, 3), eback = (x) => 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2);
+  const imgs = {}; const carregaImg = (src) => imgs[src] || (imgs[src] = new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = "/" + src; }));
+  const quadroImg = new Image(); let atual = -1;
+  const carrega = (i) => new Promise((ok) => { if (i === atual) return ok(); quadroImg.onload = () => { atual = i; ok(); }; quadroImg.onerror = ok; quadroImg.src = "/" + R.frames + String(i + 1).padStart(5, "0") + ".jpg"; });
+  const dur = R.n / R.fps, cortes = [0, ...(R.cortes || [])];
+  const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase().replace(/[^A-Z0-9 ]/g, "");
+  const DEST = (R.destaques || []).map(norm);
+  // legendas: blocos de até 3 palavras / 20 letras, quebrando em pausa e pontuação
+  const blocos = []; { let cur = []; const P = R.palavras || [];
+    P.forEach((w, i) => { cur.push(w); const nx = P[i + 1], pausa = !nx || nx.t - (w.t + w.d) > 0.35, cheio = cur.length >= 3 || cur.reduce((a, x) => a + x.p.length, 0) >= 20;
+      if (pausa || cheio || /[.,;:!?]$/.test(w.p)) { blocos.push({ t0: cur[0].t, t1: nx ? Math.min(nx.t, w.t + w.d + 0.6) : w.t + w.d + 0.6, ws: cur }); cur = []; } }); }
+  const destaca = (ws) => { const s = ws.map((w) => norm(w.p)); const marc = s.map(() => false);
+    DEST.forEach((d) => { const dp = d.split(" "); for (let i = 0; i + dp.length <= s.length; i++) if (dp.every((x, j) => s[i + j] === x)) for (let j = 0; j < dp.length; j++) marc[i + j] = true; });
+    s.forEach((x, i) => { if (/\d/.test(x)) marc[i] = true; }); return marc; };
+  const pilula = (txt, x, y, cor, a, s = 1) => { ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s); ctx.font = `800 30px ${F}`; ctx.letterSpacing = "1px"; const w = ctx.measureText(txt).width + 56;
+    ctx.shadowColor = "rgba(0,0,0,.35)"; ctx.shadowBlur = 16; ctx.fillStyle = cor === "branca" ? BR : VM; ctx.beginPath(); ctx.roundRect(-w / 2, -30, w, 60, 30); ctx.fill(); ctx.shadowBlur = 0;
+    ctx.fillStyle = cor === "branca" ? VM : BR; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(txt, 0, 2); ctx.restore(); };
+  window.quadro = async (t) => {
+    ctx.clearRect(0, 0, W, H);
+    const fim = R.final ? R.final.t0 : 1e9;
+    if (t < fim + 0.4) { // vídeo filmado: corte seco e aproximação lenta em cada trecho
+      const i = Math.min(R.n - 1, Math.floor(t * R.fps)); await carrega(i); let c0 = 0; for (const c of cortes) if (t >= c) c0 = c;
+      const z = 1 + 0.05 * clamp((t - c0) / 4) + (t - c0 < 0.18 ? 0.04 * (1 - (t - c0) / 0.18) : 0), iw = quadroImg.naturalWidth || W, ih = quadroImg.naturalHeight || H, esc = Math.max(W / iw, H / ih) * z;
+      ctx.save(); ctx.filter = "contrast(1.08) saturate(1.12)"; ctx.drawImage(quadroImg, (W - iw * esc) / 2, (H - ih * esc) / 2, iw * esc, ih * esc); ctx.restore();
+      const g = ctx.createLinearGradient(0, H * 0.62, 0, H); g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.45)"); ctx.fillStyle = g; ctx.fillRect(0, H * 0.62, W, H * 0.38);
+      // título de abertura
+      if (R.titulo) { const [t0, t1, l1, l2, lg] = R.titulo; if (t >= t0 && t <= t1) { const k = eout(clamp((t - t0) / 0.35)), sai = 1 - clamp((t - (t1 - 0.25)) / 0.25), y = H * 0.4;
+        ctx.save(); ctx.globalAlpha = sai; ctx.textAlign = "center"; ctx.shadowColor = "rgba(0,0,0,.5)"; ctx.shadowBlur = 24;
+        if (lg) { const im = await carregaImg(lg); if (im) { const w = 300, h = (w * im.height) / im.width; ctx.globalAlpha = sai * k * 0.9; ctx.drawImage(im, W / 2 - w / 2, y - 250, w, h); ctx.globalAlpha = sai; } }
+        ctx.font = `800 64px ${F}`; ctx.letterSpacing = "6px"; ctx.fillStyle = BR; ctx.globalAlpha = sai * k; ctx.fillText(l1, W / 2, y - 10 + (1 - k) * 30);
+        const k2 = eback(clamp((t - t0 - 0.15) / 0.4)); ctx.save(); ctx.translate(W / 2, y + 110); ctx.scale(0.6 + 0.4 * k2, 0.6 + 0.4 * k2); ctx.font = `900 132px ${F}`; ctx.letterSpacing = "2px"; ctx.fillStyle = VM; ctx.globalAlpha = sai * clamp(k2); ctx.fillText(l2, 0, 0); ctx.restore(); ctx.restore(); } }
+      // pílulas no topo
+      for (const [t0, t1, txt, cor] of R.pilulas || []) if (t >= t0 && t <= t1) { const k = eback(clamp((t - t0) / 0.35)), sai = 1 - clamp((t - (t1 - 0.2)) / 0.2); pilula(txt, W / 2, 170, cor, sai * clamp(k), 0.7 + 0.3 * k); }
+      // logos que saltam
+      for (const [t0, t1, src, x, y, lw] of R.logos || []) if (t >= t0 && t <= t1) { const im = await carregaImg(src); if (!im) continue; const k = eback(clamp((t - t0) / 0.4)), sai = 1 - clamp((t - (t1 - 0.2)) / 0.2), w = lw * W * (0.5 + 0.5 * k), h = (w * im.height) / im.width;
+        ctx.save(); ctx.globalAlpha = sai * clamp(k * 1.5); ctx.shadowColor = "rgba(0,0,0,.4)"; ctx.shadowBlur = 20; ctx.drawImage(im, x * W - w / 2, y * H - h / 2, w, h); ctx.restore(); }
+      // legenda
+      const b = blocos.find((b) => t >= b.t0 && t < b.t1);
+      if (b) { const marc = destaca(b.ws), txt = b.ws.map((w) => w.p.toUpperCase()), k = eout(clamp((t - b.t0) / 0.12)); ctx.save(); ctx.font = `800 58px ${F}`; ctx.letterSpacing = "0px";
+        const esp = ctx.measureText(" ").width, larg = txt.map((s) => ctx.measureText(s).width), tot = larg.reduce((a, x) => a + x, 0) + esp * (txt.length - 1), y = H * 0.8 + (1 - k) * 14; let x = W / 2 - tot / 2;
+        ctx.globalAlpha = k; ctx.textBaseline = "alphabetic"; ctx.shadowColor = "rgba(0,0,0,.75)"; ctx.shadowBlur = 14; ctx.shadowOffsetY = 3;
+        txt.forEach((s, i) => { ctx.fillStyle = marc[i] ? VM : BR; ctx.fillText(s, x, y); x += larg[i] + esp; });
+        ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; const gl = ctx.createLinearGradient(W / 2 - tot / 2, 0, W / 2 + tot / 2, 0); gl.addColorStop(0, VM); gl.addColorStop(0.7, VM); gl.addColorStop(1, "rgba(255,61,31,0)");
+        ctx.fillStyle = gl; ctx.fillRect(W / 2 - tot / 2, y + 18, tot * eout(clamp((t - b.t0) / 0.3)), 5); ctx.restore(); }
+    }
+    // cartão final
+    if (R.final && t >= R.final.t0) { const F0 = R.final, u = t - F0.t0, ent = eout(clamp(u / 0.4));
+      const bg = ctx.createRadialGradient(W / 2, H * 0.45, 100, W / 2, H * 0.5, H * 0.8); bg.addColorStop(0, "#3a0f0a"); bg.addColorStop(1, "#120404"); ctx.save(); ctx.globalAlpha = ent; ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H); ctx.restore();
+      const fase2 = F0.dur1 || 3.2;
+      if (u < fase2 + 0.4) { const a = 1 - clamp((u - fase2) / 0.4);
+        // foto da entrega em moldura, entra girando
+        const fi = Math.min(R.n - 1, Math.floor(F0.foto * R.fps)); await carrega(fi); const iw = quadroImg.naturalWidth, ih = quadroImg.naturalHeight, fw = 640, fh = 900, k = eback(clamp(u / 0.6)), rot = (1 - clamp(k)) * -0.25 + 0.03;
+        ctx.save(); ctx.globalAlpha = a; ctx.translate(W / 2, H * 0.5); ctx.rotate(rot); ctx.scale(0.7 + 0.3 * k, 0.7 + 0.3 * k); ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 50; ctx.fillStyle = "#f4f1ec"; ctx.beginPath(); ctx.roundRect(-fw / 2 - 18, -fh / 2 - 18, fw + 36, fh + 36, 26); ctx.fill(); ctx.shadowBlur = 0;
+        ctx.beginPath(); ctx.roundRect(-fw / 2, -fh / 2, fw, fh, 16); ctx.clip(); const e = Math.max(fw / iw, fh / ih); ctx.drawImage(quadroImg, -iw * e / 2, -ih * e / 2, iw * e, ih * e); ctx.restore();
+        ctx.save(); ctx.globalAlpha = a * eout(clamp((u - 0.2) / 0.4)); ctx.textAlign = "center"; ctx.font = `800 76px ${F}`; const [t1, t2] = F0.titulo; const w1 = ctx.measureText(t1 + " ").width, w2 = ctx.measureText(t2).width, x0 = W / 2 - (w1 + w2) / 2; ctx.textAlign = "left";
+        ctx.fillStyle = BR; ctx.fillText(t1 + " ", x0, H * 0.2); ctx.fillStyle = VM; ctx.fillText(t2, x0 + w1, H * 0.2);
+        ctx.font = `700 40px ${F}`; const [r1, r2] = F0.rodape; const v1 = ctx.measureText(r1 + " ").width, v2 = ctx.measureText(r2).width, z0 = W / 2 - (v1 + v2) / 2; ctx.globalAlpha = a * eout(clamp((u - 0.7) / 0.4)); ctx.fillStyle = BR; ctx.fillText(r1 + " ", z0, H * 0.82); ctx.fillStyle = VM; ctx.fillText(r2, z0 + v1, H * 0.82); ctx.restore(); }
+      if (u > fase2) { const v = u - fase2, a = eout(clamp(v / 0.5)); ctx.save(); ctx.globalAlpha = a; ctx.textAlign = "center";
+        const lg = F0.logo && (await carregaImg(F0.logo)); if (lg) { const w = 760 * (0.85 + 0.15 * eback(clamp(v / 0.6))), h = (w * lg.height) / lg.width; ctx.drawImage(lg, W / 2 - w / 2, H * 0.36 - h / 2, w, h); }
+        if (F0.slogan) { ctx.font = `700 34px ${F}`; ctx.letterSpacing = "4px"; ctx.fillStyle = BR; ctx.fillText(F0.slogan, W / 2, H * 0.47); }
+        ctx.fillStyle = VM; ctx.fillRect(W / 2 - 80, H * 0.52, 160 * eout(clamp((v - 0.3) / 0.5)), 5);
+        if (F0.parceiro) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText("EM PARCERIA COM", W / 2, H * 0.58); const pg = await carregaImg(F0.parceiro); if (pg) { const w = 330, h = (w * pg.height) / pg.width; ctx.drawImage(pg, W / 2 - w / 2, H * 0.61, w, h); } }
+        ctx.restore(); } }
+  };
+  await window.quadro(0); window.pronto = true;
+})();
+</script>
+</body>
+</html>

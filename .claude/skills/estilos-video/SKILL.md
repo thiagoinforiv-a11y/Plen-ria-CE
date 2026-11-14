@@ -11,8 +11,13 @@ Cada estilo é um arquivo em `video/estilos/<nome>.html` (desenha um quadro a pa
 
 | Estilo | Para quê | Arquivos |
 |---|---|---|
+| **entrega** (vlog comercial, padrão Super Choque Motos) | entrega de moto, evento de parceiro, depoimento de cliente | `estilos/entrega.html`, `transcrever.py` |
 | **elétrico** (quadrinhos, "super-herói elétrico") | vídeo filmado com ação: entrega, chegada, bastidor, anúncio | `estilos/eletrico.html`, `estilos/som_eletrico.py` |
 | **partículas · política** | raio-X de político, eleição, dados | `cena-*.html` + skill `motion-graphics` |
+
+### entrega (padrão do Thiago, referência: vídeo "Mais uma entrega" da Super Choque Motos × Posto Kelly)
+Cortes secos a cada 0,6–1,5 s no começo e falas mais longas depois; leve aproximação em cada trecho. Abertura com logo + "MAIS UMA" (branco, espaçado) e "ENTREGA" (vermelho, grande). Legenda em caixa alta Montserrat 800, branca, palavra-chave em vermelho (#ff3d1f), filete vermelho embaixo, a 80% da altura, 2–3 palavras por vez. Pílulas no topo ("ENTREGA SUPER CHOQUE", "BINGO · DIA 26", "CONVIDADOS ESPECIAIS"). Logo do parceiro salta na hora em que é citado. Fecho em fundo vinho: "Entrega feita." com a foto da entrega em moldura, "Chave entregue pela Super Choque." e cartão da marca ("compra, troca e venda de motos", "em parceria com").
+Roteiro: `{ "trechos": [[arquivo, ini, fim], ...] (ou --video já montado), "palavras": "auto", "vocab": "nomes próprios", "destaques": [...], "titulo": [t0, t1, "MAIS UMA", "ENTREGA", logo], "pilulas": [[t0, t1, "TEXTO", "vermelha"|"branca"]], "logos": [[t0, t1, png, x, y, largura]], "extra": s, "final": { t0, foto, titulo, rodape, logo, slogan, parceiro } }`. Com `"palavras": "auto"`, a fala é transcrita aqui (`video/transcrever.py`, faster-whisper, roda sem internet depois de baixar o modelo); confira nomes próprios no `.palavras.json` antes do render final. Logos e vídeos ficam em `entregas/midia/` (fora do git).
 
 ### elétrico
 Cor fria e contrastada, vinheta azul-escura; faíscas em volta da pessoa o tempo todo; em cada batida: flash branco-azulado, soco de zoom, tremida, separação de cor, 3 raios das bordas até a pessoa e linhas de velocidade; balões de texto em quadrinhos (estrela vermelha ou azul, retícula, letra Anton amarela com contorno preto e brilho azul); granulação leve. Trilha original: batida eletrônica a 128 bpm + choque, impacto e "whoosh" em cada batida.
