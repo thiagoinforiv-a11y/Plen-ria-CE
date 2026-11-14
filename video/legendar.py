@@ -10,6 +10,30 @@ RAIZ = os.path.dirname(os.path.abspath(__file__))
 def tempo(s):
     h = int(s // 3600); m = int(s % 3600 // 60); return f"{h}:{m:02d}:{s % 60:05.2f}"
 
+NUM = {"zero":0,"um":1,"uma":1,"dois":2,"duas":2,"três":3,"tres":3,"quatro":4,"cinco":5,"seis":6,"sete":7,"oito":8,"nove":9,"dez":10,"onze":11,"doze":12,"treze":13,"catorze":14,"quatorze":14,"quinze":15,"dezesseis":16,"dezessete":17,"dezoito":18,"dezenove":19,
+       "vinte":20,"trinta":30,"quarenta":40,"cinquenta":50,"sessenta":60,"setenta":70,"oitenta":80,"noventa":90,"cem":100,"cento":100,"duzentos":200,"duzentas":200,"trezentos":300,"quatrocentos":400,"quinhentos":500,"seiscentos":600,"setecentos":700,"oitocentos":800,"novecentos":900}
+def numeros(pal):
+    """Junta números falados por extenso em algarismos na legenda ("dois mil e vinte e quatro" → "2024", "oitocentos e dezoito" → "818")."""
+    out, i = [], 0
+    def lim(w): return re.sub(r"[.,;:!?]$", "", w["p"].lower())
+    while i < len(pal):
+        j, tot, cur, tem = i, 0, 0, False
+        while j < len(pal):
+            w = lim(pal[j])
+            if w in NUM: cur += NUM[w]; tem = True
+            elif w == "mil" and (tem or j == i): tot += (cur or 1) * 1000; cur = 0; tem = True
+            elif w == "e" and tem and j + 1 < len(pal) and (lim(pal[j + 1]) in NUM): pass
+            else: break
+            j += 1
+            if re.search(r"[.,;:!?]$", pal[j - 1]["p"]): break
+        if tem and j > i:
+            v = tot + cur; txt = f"{v:,}".replace(",", ".") if v >= 1000 and not 1900 <= v <= 2100 else str(v)
+            fim = pal[j - 1]; pont = re.search(r"[.,;:!?]$", fim["p"])
+            if j < len(pal) and lim(pal[j]) in ("por", "porcento") and j + 1 < len(pal) and lim(pal[j + 1]) == "cento": txt += "%"; fim = pal[j + 1]; j += 2
+            out.append({**pal[i], "p": txt + (pont.group(0) if pont else ""), "d": round(fim["t"] + fim["d"] - pal[i]["t"], 3)}); i = j
+        else: out.append(pal[i]); i += 1
+    return out
+
 def grupos(pal, maxp=3, maxc=18):
     """Quebra a fala em blocos curtos: no máximo 3 palavras/18 letras, e corta em pausa ou pontuação."""
     out, cur = [], []
@@ -27,10 +51,10 @@ def destaque(p):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--video", required=True); ap.add_argument("--palavras", required=True); ap.add_argument("--saida", required=True)
-    ap.add_argument("--y", type=int, default=1440)  # zona segura: acima da descrição/botões do TikTok e Reels (y > ~1500 some); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25"); ap.add_argument("--estilo", default="plenaria", choices=["plenaria", "tela"]); ap.add_argument("--titulo", default=""); ap.add_argument("--titulo-dur", type=float, default=4.0)
+    ap.add_argument("--y", type=int, default=1440); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25"); ap.add_argument("--estilo", default="plenaria", choices=["plenaria", "tela"]); ap.add_argument("--titulo", default=""); ap.add_argument("--titulo-dur", type=float, default=4.0)  # --y 1440 = zona segura, acima da descrição e dos botões do TikTok/Reels
     a = ap.parse_args()
     d = json.load(open(a.palavras, encoding="utf-8")); pal = d["palavras"] if isinstance(d, dict) else d
-    pal = [w for w in pal if w["p"].strip()]
+    pal = numeros([w for w in pal if w["p"].strip()])
     OURO, BRANCO, SOMBRA = "&H0066D1FF&", "&H00EAF1F3&", "&H80000000&"
     ass = ["[Script Info]", "ScriptType: v4.00+", "PlayResX: 1080", "PlayResY: 1920", "WrapStyle: 2", "",
            "[V4+ Styles]", "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",

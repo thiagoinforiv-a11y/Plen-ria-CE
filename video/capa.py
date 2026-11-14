@@ -32,9 +32,9 @@ while d.textlength(a.linha2, font=FT(900, t2)) > W - 120: t2 -= 2
 centro(a.linha2, 568 + (104 - t2) // 2, FT(900, t2), OURO)
 fotos = [f for f in a.fotos.split(",") if f]; nomes = a.nomes.split(",")
 if fotos:
-    n = len(fotos); r = 122 if n == 3 else 160; gap = (W - 2 * 60) / n
+    n = len(fotos); r = 122 if n == 3 else 160 if n == 2 else 250; gap = (W - 2 * 60) / n
     for i, (f, nome) in enumerate(zip(fotos, nomes)):
-        cx, cy = int(60 + gap * (i + 0.5)), 1235; im = Image.open(f).convert("RGB"); s = 2 * r / min(im.width, im.height * 0.8); im = im.resize((int(im.width * s), int(im.height * s)), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.6, percent=90, threshold=2))
+        cx, cy = int(60 + gap * (i + 0.5)), (1235 if n > 1 else 1010); im = Image.open(f).convert("RGB"); s = 2 * r / min(im.width, im.height * 0.8); im = im.resize((int(im.width * s), int(im.height * s)), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=1.6, percent=90, threshold=2))
         quad = Image.new("RGB", (2 * r, 2 * r)); quad.paste(im, (int(r - im.width / 2), int(-0.05 * r)))
         mask = Image.new("L", (2 * r * 4, 2 * r * 4), 0); ImageDraw.Draw(mask).ellipse((0, 0, 2 * r * 4 - 1, 2 * r * 4 - 1), fill=255); mask = mask.resize((2 * r, 2 * r), Image.LANCZOS)
         glow = Image.new("RGBA", (2 * r + 120, 2 * r + 120), (0, 0, 0, 0)); ImageDraw.Draw(glow).ellipse((50, 50, 2 * r + 70, 2 * r + 70), fill=OURO + (170,)); glow = glow.filter(ImageFilter.GaussianBlur(28))
