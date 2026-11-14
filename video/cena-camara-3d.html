@@ -113,7 +113,7 @@ window.render = (t) => {
   T("2016 → 2020 → 2024", W / 2, 360, { tam: 36, w: 700, cor: T2, a: vis(t, 1.3, S[1]) });
   [["2016", "Os 11 eleitos"], ["2020", "7 continuaram · 4 chegaram"], ["2024", "4 continuaram · 7 chegaram"]].forEach(([a, s], j) => { const al = vis(t, S[1 + j] + 0.15, S[2 + j]); T(a, W / 2, 300, { tam: 124, w: 900, a: al, sobe: 1 }); T(s, W / 2, 372, { tam: 38, w: 700, cor: T2, a: vis(t, S[1 + j] + 0.5, S[2 + j]) }); });
   T("Só 3 em todas", W / 2, 290, { tam: 96, w: 900, cor: OURO, a: vis(t, S[4] + 0.5, S[5] + 9), sobe: 1, brilho: 18 });
-  T("as três legislaturas, de 2017 a 2028", W / 2, 362, { tam: 36, w: 700, cor: T2, a: vis(t, S[4] + 1, S[5] + 9) });
+  T("na Câmara desde 2017 · 12 anos em 2028", W / 2, 362, { tam: 36, w: 700, cor: T2, a: vis(t, S[4] + 1, S[5] + 9) });
   // números sobre as cadeiras (dentro da faixa 3D)
   if (t > S[1]) cad.forEach((c, i) => { if (c.on < 0.2) return; const p = c.topo.clone().project(cam), x = (p.x * 0.5 + 0.5) * W, y = (-p.y * 0.5 + 0.5) * H, a = clamp(c.on);
     ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(x, y, 21, 0, 6.283); ctx.fillStyle = "rgba(10,14,20,.86)"; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = COR[c.est]; ctx.stroke(); ctx.restore(); T(String(i + 1), x, y + 9, { tam: 24, w: 800, a, cor: TX }); });

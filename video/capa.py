@@ -23,8 +23,12 @@ def centro(txt, y, fonte, cor, esp=0):
         for ch in txt: d.text((x, y), ch, font=fonte, fill=cor); x += d.textlength(ch, font=fonte) + esp
     else: d.text((x, y), txt, font=fonte, fill=cor)
 centro(a.kicker, 250, FT(800, 34), OURO, esp=8)
-f1 = FT(900, 200); centro(a.linha1, 300, f1, TX)
-f2 = FT(900, 92 if len(a.linha2) > 12 else 120); centro(a.linha2, 520, f2, OURO)
+t1 = 200
+while d.textlength(a.linha1, font=FT(900, t1)) > W - 100: t1 -= 4
+centro(a.linha1, 300 + (200 - t1) // 2, FT(900, t1), TX)
+t2 = 120
+while d.textlength(a.linha2, font=FT(900, t2)) > W - 100: t2 -= 2
+centro(a.linha2, 520 + (120 - t2) // 2, FT(900, t2), OURO)
 fotos = [f for f in a.fotos.split(",") if f]; nomes = a.nomes.split(",")
 if fotos:
     n = len(fotos); r = 135 if n == 3 else 170; gap = (W - 2 * 60) / n
