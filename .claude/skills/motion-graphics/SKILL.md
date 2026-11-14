@@ -65,3 +65,12 @@ Quando o assunto tem um "lugar" ou "objeto" que o público reconhece, monte ele 
 - **Cofre / pilha de moedas** (orçamento, emendas, repasse à Câmara).
 - **Moto girando na vitrine** (estilo entrega, Super Choque).
 Regras: câmera sempre em movimento lento; o objeto ocupa a metade de cima; nomes e números em lista na metade de baixo (nunca rótulo flutuando em cima de rótulo); fundo escuro com 1 cor de destaque; legenda de cores dentro da zona segura.
+
+## Padrão premium para 3D (aprovado em 14/11/2026: "profissional, sem aberração, letra não atrapalha o desenho")
+- **Luz de estúdio:** `RoomEnvironment` (reflexo), luz principal quente com sombra suave (PCFSoft, raio 6), contraluz azulada fraca, tone mapping ACES, exposição ~0,95.
+- **Pós:** `UnrealBloomPass` leve (força 0,4, limiar 0,85) só para o que emite luz. Nada de brilho em texto 3D.
+- **Modelagem:** `RoundedBoxGeometry` em tudo que é móvel (canto vivo parece amador); materiais com nome e função (madeira, couro, metal, ouro, pedra, carpete); detalhes que dizem o lugar (ripas na parede, brasão, microfone com LED, degraus da tribuna).
+- **Dado como luz:** cor no LED, na poça de luz do piso e num feixe suave com degradê (aditivo), nunca em cilindro chapado.
+- **Faixas fixas:** título 0–430, cena 430–1130, painel 1150–1480 (card com borda fina), fonte 1530. Degradês escuros separam as faixas. Rótulo dentro da cena só número curto em bolinha; nomes ficam no painel.
+- **Câmera:** abre alta e desce até o enquadramento em 5 s, órbita curta e lenta, aproxima no fecho. `setViewOffset` para centralizar o objeto na faixa da cena; nada cortado nas bordas (confira as cadeiras das pontas).
+- **Revisão:** prova em 4 tempos (abertura, cena cheia, transição, fecho) antes do render final; olhe borda cortada, texto sobre objeto e área estourada de luz.
