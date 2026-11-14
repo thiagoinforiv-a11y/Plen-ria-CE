@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Câmara de Varjota em 3D</title>
+<style>html,body{margin:0;background:#0b0f14}canvas#c{display:block;width:540px;height:960px}</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+/* Câmara de Varjota em 3D (ideia do "prédio 3D" do vídeo do condomínio): o plenário com 11 cadeiras;
+   cada cadeira acende com quem a ocupou em 2016, 2020 e 2024. Dourado = esteve nas três; azul = continuou; branco = chegou; vermelho = saiu.
+   Dados: TSE (dados-camara-renovacao.json). Three.js (MIT) em video/vendor. */
+import * as THREE from "./vendor/three.module.min.js";
+const W = 1080, H = 1920, out = document.getElementById("c"), ctx = out.getContext("2d");
+const D = await (await fetch("dados-camara-renovacao.json")).json();
+for (const w of ["700", "800"]) { const ff = new FontFace("Montserrat", `url(fontes/montserrat-latin-${w}-normal.woff2)`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+const AC = "#ffd166", AZ = "#4fb7ff", VM = "#ff5d5d", F = "Montserrat";
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), eout = (x) => 1 - Math.pow(1 - x, 3), ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const prog = (t, a, b) => clamp((t - a) / (b - a)), vis = (t, a, b, f = 0.4) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+const S = [0, 5, 13, 21, 29, 37]; window.DURACAO = S[5];
+// quem senta onde: quem continua mantém a cadeira; quem chega ocupa a vaga de quem saiu
+const anos = D.col.map(([a, l]) => ({ a, l: l.map(([n]) => n) })), seat = [anos[0].l.slice()];
+for (let k = 1; k < 3; k++) { const prev = seat[k - 1], cur = anos[k].l, nova = prev.map((n) => (cur.includes(n) ? n : null)), chega = cur.filter((n) => !prev.includes(n)); for (let i = 0; i < 11; i++) if (nova[i] === null) nova[i] = chega.shift(); seat.push(nova); }
+const tres = new Set(anos[0].l.filter((n) => anos[1].l.includes(n) && anos[2].l.includes(n)));
+// cena 3D
+const gl = document.createElement("canvas"); gl.width = W; gl.height = H;
+const R = new THREE.WebGLRenderer({ canvas: gl, antialias: true, preserveDrawingBuffer: true }); R.setSize(W, H, false); R.setClearColor(0x0b0f14); R.toneMapping = THREE.ACESFilmicToneMapping;
+const cena = new THREE.Scene(); cena.fog = new THREE.Fog(0x0b0f14, 30, 70);
+const cam = new THREE.PerspectiveCamera(62, W / H, 0.1, 100);
+cena.add(new THREE.HemisphereLight(0x9fc4ff, 0x0b0f14, 0.55)); const sol = new THREE.DirectionalLight(0xffffff, 0.9); sol.position.set(6, 12, 8); cena.add(sol);
+const mat = (c, e = 0, r = 0.6, m = 0.1) => new THREE.MeshStandardMaterial({ color: c, emissive: e, roughness: r, metalness: m });
+// piso, tablado, mesa diretora e parede com o brasão (formas simples)
+const piso = new THREE.Mesh(new THREE.CircleGeometry(16, 64), mat(0x10161e, 0, 0.9)); piso.rotation.x = -Math.PI / 2; cena.add(piso);
+const grade = new THREE.PolarGridHelper(15, 16, 8, 64, 0x1d2733, 0x161e28); grade.position.y = 0.01; cena.add(grade);
+const tablado = new THREE.Mesh(new THREE.BoxGeometry(7, 0.5, 2.4), mat(0x161c25)); tablado.position.set(0, 0.25, -5.2); cena.add(tablado);
+const mesa = new THREE.Mesh(new THREE.BoxGeometry(5.6, 1.1, 1), mat(0x1c2430, 0x0, 0.5)); mesa.position.set(0, 1.05, -5); cena.add(mesa);
+const friso = new THREE.Mesh(new THREE.BoxGeometry(5.6, 0.06, 1.02), mat(0xffd166, 0x553f10)); friso.position.set(0, 1.62, -5); cena.add(friso);
+const parede = new THREE.Mesh(new THREE.BoxGeometry(12, 6, 0.4), mat(0x121821, 0, 0.8)); parede.position.set(0, 3, -6.8); cena.add(parede);
+const brasao = new THREE.Mesh(new THREE.CircleGeometry(0.9, 48), mat(0x1c2430, 0x332608, 0.4, 0.5)); brasao.position.set(0, 4.3, -6.58); cena.add(brasao);
+const aro = new THREE.Mesh(new THREE.TorusGeometry(0.95, 0.05, 12, 64), mat(0xffd166, 0x6b4f12, 0.3, 0.8)); aro.position.copy(brasao.position); cena.add(aro);
+// 11 cadeiras em semicírculo, cada uma com mesa, encosto e uma coluna de luz
+const cad = []; const raio = 6.2;
+for (let i = 0; i < 11; i++) { const fila = i < 5 ? 0 : 1, j = fila ? i - 5 : i, nf = fila ? 6 : 5, rr = fila ? 6.4 : 4.3, ang = Math.PI * (0.24 + (0.52 * j) / (nf - 1)), x = -Math.cos(ang) * rr, z = Math.sin(ang) * rr - 2.2, g = new THREE.Group(); g.position.set(x, 0, z); g.lookAt(0, 0, -5);
+  const tampo = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.08, 0.7), mat(0x1c2430)); tampo.position.set(0, 0.9, 0.35); g.add(tampo);
+  const pe = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.85, 0.08), mat(0x161c25)); pe.position.set(0, 0.45, 0.68); g.add(pe);
+  const banco = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.1, 0.6), mat(0x252f3d)); banco.position.set(0, 0.55, -0.25); g.add(banco);
+  const encosto = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.8, 0.1), mat(0x252f3d)); encosto.position.set(0, 1.0, -0.55); g.add(encosto);
+  const luzM = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending });
+  const feixe = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.48, 3.2, 24, 1, true), luzM); feixe.position.set(0, 2.2, -0.1); g.add(feixe);
+  const anelM = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0 }); const anel = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.04, 8, 40), anelM); anel.rotation.x = Math.PI / 2; anel.position.set(0, 0.62, -0.1); g.add(anel);
+  cena.add(g); cad.push({ g, luzM, anelM, feixe, pos: new THREE.Vector3(x, (i < 5 ? 3.7 : 4.3) + (i % 2) * 0.5, z) }); }
+const cor = (k, i) => { const n = seat[k][i]; if (k === 0) return tres.has(n) ? AC : "#ffffff"; const ant = seat[k - 1][i]; return n === ant ? (tres.has(n) ? AC : AZ) : "#ffffff"; };
+const texto = (s, x, y, o = {}) => { const a = o.a == null ? 1 : o.a; if (a <= 0.01) return; ctx.save(); ctx.globalAlpha = a; ctx.font = `${o.w || 800} ${o.tam || 60}px ${F}`; ctx.textAlign = o.al || "center"; ctx.letterSpacing = (o.ls || 0) + "px";
+  if (o.caixa) { const w = ctx.measureText(s).width + 36; ctx.fillStyle = o.caixa; ctx.beginPath(); ctx.roundRect(x - w / 2, y - o.tam * 0.95, w, o.tam * 1.3, 10); ctx.fill(); }
+  ctx.fillStyle = o.cor || "#e8edf2"; if (o.brilho) { ctx.shadowColor = o.cor || "#fff"; ctx.shadowBlur = o.brilho; } ctx.fillText(s, x, y + (o.sobe ? (1 - a) * 20 : 0)); ctx.restore(); };
+window.render = (t) => {
+  // câmera: entra de cima, orbita devagar e no fim aproxima das cadeiras douradas
+  const ang = -0.35 + t * 0.018 + 0.25 * ease(prog(t, 0, 5)), dist = 20 - 5 * ease(prog(t, 0, 5)) - 1.5 * ease(prog(t, S[4], S[4] + 3)), alt = 24 - 6 * ease(prog(t, 0, 5)) - 1.5 * ease(prog(t, S[4], S[4] + 3));
+  cam.position.set(Math.sin(ang) * dist, alt, Math.cos(ang) * dist + 1); cam.lookAt(0, 0, 3.4);
+  const k = t < S[3] ? (t < S[2] ? 0 : 1) : 2, t0 = S[1 + k];
+  cad.forEach((c, i) => { let alvo = t < S[1] ? null : cor(k, i), on = t < S[1] ? 0 : eout(prog(t, t0 + 0.4 + i * 0.12, t0 + 0.9 + i * 0.12));
+    if (k > 0 && seat[k][i] !== seat[k - 1][i]) { const tr = prog(t, t0 + 0.2, t0 + 1.4); if (tr < 0.5) { alvo = VM; on = 1 - tr * 2; } else on = (tr - 0.5) * 2; } else if (k > 0) on = 1;
+    if (t > S[4]) { const dim = !tres.has(seat[2][i]); on *= dim ? 1 - 0.75 * prog(t, S[4], S[4] + 1.2) : 1; }
+    const col = new THREE.Color(alvo || "#ffffff"); c.luzM.color.copy(col); c.luzM.emissive.copy(col); c.luzM.emissiveIntensity = 1.6 * on; c.luzM.opacity = 0.55 * on; c.anelM.color.copy(col); c.anelM.emissive.copy(col); c.anelM.emissiveIntensity = 2.2 * on;
+    c.feixe.scale.y = 0.2 + 0.8 * on; c.feixe.position.y = 0.62 + 1.6 * c.feixe.scale.y; c.on = on; c.col = alvo; });
+  R.render(cena, cam);
+  ctx.clearRect(0, 0, W, H); ctx.drawImage(gl, 0, 0);
+  { const g0 = ctx.createLinearGradient(0, 0, 0, 470); g0.addColorStop(0, "rgba(11,15,20,.96)"); g0.addColorStop(0.75, "rgba(11,15,20,.85)"); g0.addColorStop(1, "rgba(11,15,20,0)"); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, 470); }
+  { const g = ctx.createLinearGradient(0, 1020, 0, 1140); g.addColorStop(0, "rgba(11,15,20,0)"); g.addColorStop(1, "rgba(11,15,20,.92)"); ctx.fillStyle = g; ctx.fillRect(0, 1020, W, 120); ctx.fillStyle = "rgba(11,15,20,.92)"; ctx.fillRect(0, 1140, W, H - 1140); }
+  // número na cadeira e a lista de nomes embaixo (sem sobrepor)
+  if (t > S[1]) { cad.forEach((c, i) => { if (c.on < 0.15) return; const p = c.pos.clone().project(cam), x = (p.x * 0.5 + 0.5) * W, y = (-p.y * 0.5 + 0.5) * H;
+      ctx.save(); ctx.globalAlpha = c.on; ctx.fillStyle = "rgba(11,15,20,.8)"; ctx.beginPath(); ctx.arc(x, y - 12, 24, 0, 6.283); ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = c.col; ctx.stroke(); ctx.restore();
+      texto(String(i + 1), x, y, { tam: 26, a: c.on, cor: c.col }); });
+    cad.forEach((c, i) => { const col = i < 6 ? 0 : 1, lin = i < 6 ? i : i - 6, x = 120 + col * 450, y = 1150 + lin * 50, nome = seat[k][i], a = Math.max(c.on, 0.25) * vis(t, S[1] + 0.3, S[5] + 9);
+      texto(String(i + 1), x, y, { tam: 26, a, cor: c.col || "#5d6b79", al: "center" }); texto(nome, x + 30, y, { tam: 30, w: 700, a, cor: c.col === "#ffffff" ? "#e8edf2" : c.col, al: "left" }); }); }
+  // títulos
+  texto("CÂMARA DE VARJOTA", W / 2, 250, { tam: 66, ls: 4, a: vis(t, 0.6, S[1]), sobe: 1 });
+  texto("11 cadeiras · 2016 → 2024", W / 2, 330, { tam: 36, w: 700, cor: AC, a: vis(t, 1.2, S[1]) });
+  [["2016", "os 11 eleitos"], ["2020", "7 ficaram · 4 chegaram"], ["2024", "4 ficaram · 7 chegaram"]].forEach(([a, s], j) => { const al = vis(t, S[1 + j] + 0.2, S[2 + j]); texto(a, W / 2, 250, { tam: 110, a: al, brilho: 20, cor: "#ffffff" }); texto(s, W / 2, 330, { tam: 40, w: 700, cor: j === 2 ? AC : AZ, a: vis(t, S[1 + j] + 0.6, S[2 + j]) }); });
+  texto("SÓ 3 NAS TRÊS", W / 2, 250, { tam: 92, a: vis(t, S[4] + 0.6, S[5] + 9), cor: AC, brilho: 24, sobe: 1 });
+  texto("Gonçalinho · Regio Ximenes · Roberto do Garrone", W / 2, 330, { tam: 34, w: 700, a: vis(t, S[4] + 1.2, S[5] + 9) });
+  // legenda de cores (zona segura)
+  const al = vis(t, S[1] + 0.5, S[4]); [["nas três", AC], ["continuou", AZ], ["chegou", "#ffffff"], ["saiu", VM]].forEach(([n, c], j) => { const x = 140 + j * 220; ctx.save(); ctx.globalAlpha = al; ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, 1455, 12, 0, 6.283); ctx.fill(); ctx.restore(); texto(n, x + 24, 1465, { tam: 28, w: 700, al: "left", a: al, cor: "#93a1b0" }); });
+  texto("Fonte: TSE · eleições de 2016, 2020 e 2024 · Plenária CE", W / 2, 1515, { tam: 22, w: 700, a: 0.6, cor: "#5d6b79" });
+};
+window.render(0); window.pronto = true;
+</script>
+</body>
+</html>
