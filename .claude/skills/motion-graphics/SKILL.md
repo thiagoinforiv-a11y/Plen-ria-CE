@@ -49,3 +49,9 @@ Regras: no máximo 6 palavras por linha; 1 destaque por linha; título no topo (
 - **Público (@falathiagoo / @plenariace):** tom de notícia, sem pedido de voto, sem "apoio", "grupo", "padrinho", "traição" ou "racha". Cena, dados e narração podem ir ao GitHub.
 - **Interno (apoio político, estratégia, briefing):** arquivos com `.local.` no nome (`video/cena-*.local.html`, `video/*.local.json`), que o `.gitignore` não versiona. Sem narração automática (ela passa pelo GitHub público): use só trilha, com faixas mudas em `video/audio/<id>/antonio/NN.mp3` (ruído baixíssimo, 0,2 s). O vídeo sai em `entregas/` com "INTERNO" no nome.
 - Foto de pessoa enviada pelo Thiago fica em `entregas/midia/` (fora do git). Foto oficial de candidato pode vir de `fotos/` (TSE).
+
+## Zona segura (TikTok, Reels, Shorts)
+Os botões do app (lado direito, de y≈900 a 1700) e a descrição do post (de y≈1500 para baixo) cobrem o vídeo. Texto que precisa ser lido fica entre **y 220 e 1450** e **x 60 a 940**. Legenda: `--y 1440` (padrão). Marca e fonte podem ficar embaixo (são secundárias).
+
+## Nota vira regra
+Quando o Thiago corrigir algo num vídeo ("tira a tarja", "legenda muito embaixo", "corte feio"), corrija e registre a correção como regra nesta skill, com a data, para o próximo já sair certo.

@@ -26,6 +26,9 @@ Tela do celular (432×768 CSS × 2,5 = 1080×1920) rolando a página com pausas 
 ### elétrico
 Cor fria e contrastada, vinheta azul-escura; faíscas em volta da pessoa o tempo todo; em cada batida: flash branco-azulado, soco de zoom, tremida, separação de cor, 3 raios das bordas até a pessoa e linhas de velocidade; balões de texto em quadrinhos (estrela vermelha ou azul, retícula, letra Anton amarela com contorno preto e brilho azul); granulação leve. Trilha original: batida eletrônica a 128 bpm + choque, impacto e "whoosh" em cada batida.
 
+## Limpar o bruto falado (antes de qualquer estilo)
+`python3 video/transcrever.py --video bruto.mp4 --saida bruto.palavras.json --vocab "nomes"` → `python3 video/cortar.py --video bruto.mp4 --palavras bruto.palavras.json --saida limpo.mp4`. Corta os silêncios e lista tropeços (repetição, frase recomeçada) em `limpo.tropecos.md` para revisar; os aprovados vão em `--cortes aprovados.json` (`{"cortes":[{"ini":..,"fim":..}]}`). Gancho: os 3 primeiros segundos precisam dar um motivo para assistir até o fim.
+
 ## Como aplicar (vídeo filmado)
 
 1. Assista o bruto (quadros a cada 1 s) e marque: onde está a pessoa (`alvo`, 0–1), os momentos fortes (`batidas`, em segundos, de preferência a cada 1,5 s) e os textos (2 a 3 palavras, `\n` quebra a linha).
@@ -33,6 +36,13 @@ Cor fria e contrastada, vinheta azul-escura; faíscas em volta da pessoa o tempo
 3. Trilha: `python3 video/estilos/som_eletrico.py --roteiro R --dur D --saida trilha.wav [--video bruto.mp4]` (com `--video`, mistura a voz/áudio original por baixo).
 4. Render: `node video/estilo.mjs --estilo eletrico --video bruto.mp4 --roteiro R --audio trilha.wav --saida entregas/<x>.mp4`.
 5. Se houver fala, legende por cima com `video/legendar.py` (precisa do tempo das palavras).
+
+## Referências públicas consultadas (14/11/2026, todas MIT)
+- nateherkai/herk-edit-kit: pipeline de edição em agentes (cortar silêncio → cortar tropeço → edição curta), "gancho de 3 s", nota do usuário vira regra.
+- MakersMCP/easycaptionkit: legenda fora da área dos botões de cada app (zona segura).
+- Barty-Bart/motion-graphics: passe de som medido, com efeitos gravados CC0 em vez de sintetizados; B-roll de uma forma só que se transforma.
+- bangtutorial/bang-motion e Vincentwei1021/anything2explainer: motion em HTML/GSAP renderizado quadro a quadro (mesmo método nosso), explicadores narrados.
+Usamos as ideias; o código aqui é nosso.
 
 ## Estilo novo a partir de uma referência
 
@@ -42,3 +52,9 @@ Cor fria e contrastada, vinheta azul-escura; faíscas em volta da pessoa o tempo
 4. Teste com vídeo de banco gratuito (Pixabay, chave no ambiente) antes do bruto real e registre aqui no catálogo.
 
 Vídeos e roteiros de pessoas ficam em `entregas/` (fora do git).
+
+## Zona segura (TikTok, Reels, Shorts)
+Os botões do app (lado direito, de y≈900 a 1700) e a descrição do post (de y≈1500 para baixo) cobrem o vídeo. Texto que precisa ser lido fica entre **y 220 e 1450** e **x 60 a 940**. Legenda: `--y 1440` (padrão). Marca e fonte podem ficar embaixo (são secundárias).
+
+## Nota vira regra
+Quando o Thiago corrigir algo num vídeo ("tira a tarja", "legenda muito embaixo", "corte feio"), corrija e registre a correção como regra nesta skill, com a data, para o próximo já sair certo.

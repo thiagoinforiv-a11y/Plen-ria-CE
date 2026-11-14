@@ -54,7 +54,7 @@
       // legenda
       const b = blocos.find((b) => t >= b.t0 && t < b.t1);
       if (b) { const marc = destaca(b.ws), txt = b.ws.map((w) => w.p.toUpperCase()), k = eout(clamp((t - b.t0) / 0.12)); ctx.save(); ctx.font = `800 58px ${F}`; ctx.letterSpacing = "0px";
-        const esp = ctx.measureText(" ").width, larg = txt.map((s) => ctx.measureText(s).width), tot = larg.reduce((a, x) => a + x, 0) + esp * (txt.length - 1), y = H * 0.8 + (1 - k) * 14; let x = W / 2 - tot / 2;
+        const esp = ctx.measureText(" ").width, larg = txt.map((s) => ctx.measureText(s).width), tot = larg.reduce((a, x) => a + x, 0) + esp * (txt.length - 1), y = H * 0.76 + (1 - k) * 14; let x = W / 2 - tot / 2;
         ctx.globalAlpha = k; ctx.textBaseline = "alphabetic"; ctx.shadowColor = "rgba(0,0,0,.75)"; ctx.shadowBlur = 14; ctx.shadowOffsetY = 3;
         txt.forEach((s, i) => { ctx.fillStyle = marc[i] ? VM : BR; ctx.fillText(s, x, y); x += larg[i] + esp; });
         ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; const gl = ctx.createLinearGradient(W / 2 - tot / 2, 0, W / 2 + tot / 2, 0); gl.addColorStop(0, VM); gl.addColorStop(0.7, VM); gl.addColorStop(1, "rgba(255,61,31,0)");

@@ -27,7 +27,7 @@ def destaque(p):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--video", required=True); ap.add_argument("--palavras", required=True); ap.add_argument("--saida", required=True)
-    ap.add_argument("--y", type=int, default=1480); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25"); ap.add_argument("--estilo", default="plenaria", choices=["plenaria", "tela"]); ap.add_argument("--titulo", default=""); ap.add_argument("--titulo-dur", type=float, default=4.0)
+    ap.add_argument("--y", type=int, default=1440)  # zona segura: acima da descrição/botões do TikTok e Reels (y > ~1500 some); ap.add_argument("--tam", type=int, default=66); ap.add_argument("--crf", default="25"); ap.add_argument("--estilo", default="plenaria", choices=["plenaria", "tela"]); ap.add_argument("--titulo", default=""); ap.add_argument("--titulo-dur", type=float, default=4.0)
     a = ap.parse_args()
     d = json.load(open(a.palavras, encoding="utf-8")); pal = d["palavras"] if isinstance(d, dict) else d
     pal = [w for w in pal if w["p"].strip()]
