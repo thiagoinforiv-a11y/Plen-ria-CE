@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>Estilo elétrico (quadrinhos)</title>
+<style>html,body{margin:0;background:#000}canvas{display:block;width:540px;height:960px}</style></head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Estilo ELÉTRICO · quadrinhos. Aplica sobre um vídeo filmado: cor fria e contrastada, raios e faíscas,
+   tremida + soco de zoom + flash + separação de cor nas batidas, e balões de texto em quadrinhos.
+   Roteiro (JSON, ?d=): { frames: "pasta/", n, fps, alvo: [x, y] (0–1, onde está a pessoa),
+   batidas: [s...], textos: [[t0, t1, "TEXTO", "amarelo"|"azul"]...] } */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const R = await (await fetch(new URLSearchParams(location.search).get("d"))).json();
+  for (const [f, w] of [["anton-latin-400-normal.woff2", "400"]]) { const ff = new FontFace("Anton", `url(../fontes/${f})`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+  const AZ = "#3ad7ff", AM = "#ffe14d", BR = "#ffffff", clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), eout = (x) => 1 - Math.pow(1 - x, 3);
+  const rr = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  const alvo = R.alvo || [0.5, 0.45], AX = alvo[0] * W, AY = alvo[1] * H;
+  const img = new Image(); let atual = -1;
+  const carrega = (i) => new Promise((ok) => { if (i === atual) return ok(); img.onload = () => { atual = i; ok(); }; img.onerror = ok; img.src = "/" + R.frames + String(i + 1).padStart(5, "0") + ".jpg"; });
+  const batida = (t) => { let melhor = 1e9, b0 = null; for (const b of R.batidas) if (t >= b && t - b < melhor) { melhor = t - b; b0 = b; } return { dt: melhor, b: b0 }; };
+  // raio: deslocamento de ponto médio, com ramificações
+  const raio = (x0, y0, x1, y1, sem, desv, prof = 0) => { const pts = [[x0, y0], [x1, y1]]; let d = desv;
+    for (let n = 0; n < 6; n++) { for (let i = pts.length - 1; i > 0; i--) { const [a, b] = [pts[i - 1], pts[i]], mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, nx = -(b[1] - a[1]), ny = b[0] - a[0], L = Math.hypot(nx, ny) || 1, o = (rr(sem + n * 7 + i) - 0.5) * d; pts.splice(i, 0, [mx + (nx / L) * o, my + (ny / L) * o]); } d *= 0.55; }
+    const desenha = (lw, cor, blur) => { ctx.save(); ctx.strokeStyle = cor; ctx.lineWidth = lw; ctx.lineJoin = "round"; ctx.shadowColor = AZ; ctx.shadowBlur = blur; ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.stroke(); ctx.restore(); };
+    desenha(prof ? 6 : 14, "rgba(58,215,255,.55)", 40); desenha(prof ? 2 : 4, BR, 18);
+    if (prof < 1) for (let k = 0; k < 2; k++) { const p = pts[Math.floor(pts.length * (0.3 + 0.4 * rr(sem + k)))], a = rr(sem + 9 + k) * 6.283, l = 140 + rr(sem + 3 + k) * 220; raio(p[0], p[1], p[0] + Math.cos(a) * l, p[1] + Math.sin(a) * l, sem + 50 + k, desv * 0.5, prof + 1); } };
+  const estrela = (x, y, r, pontas, rot, cor) => { ctx.beginPath(); for (let i = 0; i < pontas * 2; i++) { const a = rot + (i * Math.PI) / pontas, q = i % 2 ? r * 0.62 : r * (0.9 + 0.2 * rr(i)); i ? ctx.lineTo(x + Math.cos(a) * q, y + Math.sin(a) * q) : ctx.moveTo(x + Math.cos(a) * q, y + Math.sin(a) * q); } ctx.closePath(); ctx.fillStyle = cor; ctx.fill(); ctx.lineWidth = 10; ctx.strokeStyle = "#111"; ctx.stroke(); };
+  const retícula = (x, y, r, cor) => { ctx.save(); ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.clip(); ctx.fillStyle = cor; for (let i = -r; i < r; i += 26) for (let j = -r; j < r; j += 26) { const d = 1 - Math.hypot(i, j) / r; if (d > 0) { ctx.beginPath(); ctx.arc(x + i + ((j / 26) % 2) * 13, y + j, 9 * d, 0, 6.283); ctx.fill(); } } ctx.restore(); };
+  window.quadro = async (t) => {
+    const i = Math.min(R.n - 1, Math.floor(t * R.fps)); await carrega(i);
+    const { dt, b } = batida(t), hit = b === null ? 0 : clamp(1 - dt / 0.35), sem = b === null ? 0 : Math.round(b * 100);
+    // câmera: soco de zoom + tremida na batida, deriva lenta fora dela
+    const z = 1.06 + 0.1 * hit * hit, sx = (rr(sem + Math.floor(t * 30)) - 0.5) * 50 * hit + Math.sin(t * 0.7) * 6, sy = (rr(sem + 1 + Math.floor(t * 30)) - 0.5) * 50 * hit;
+    const iw = img.naturalWidth || W, ih = img.naturalHeight || H, esc = Math.max(W / iw, H / ih) * z, dw = iw * esc, dh = ih * esc, x0 = (W - dw) / 2 + sx, y0 = (H - dh) / 2 + sy;
+    ctx.save(); ctx.filter = "contrast(1.28) saturate(1.35) brightness(0.9)"; ctx.drawImage(img, x0, y0, dw, dh); ctx.restore();
+    // separação de cor (RGB) na batida
+    if (hit > 0.3) { ctx.save(); ctx.globalCompositeOperation = "screen"; ctx.globalAlpha = 0.35 * hit; ctx.filter = "hue-rotate(160deg)"; ctx.drawImage(img, x0 + 22 * hit, y0, dw, dh); ctx.filter = "hue-rotate(-60deg)"; ctx.drawImage(img, x0 - 22 * hit, y0, dw, dh); ctx.restore(); }
+    // cor fria + vinheta
+    ctx.save(); ctx.globalCompositeOperation = "soft-light"; ctx.fillStyle = "rgba(20,70,180,.55)"; ctx.fillRect(0, 0, W, H); ctx.restore();
+    const vg = ctx.createRadialGradient(W / 2, H / 2, H * 0.25, W / 2, H / 2, H * 0.75); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,8,30,.75)"); ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+    // aura: faíscas pequenas em volta da pessoa o tempo todo
+    ctx.save(); ctx.globalCompositeOperation = "lighter"; const fq = Math.floor(t * 12);
+    for (let k = 0; k < 3; k++) if (rr(fq * 3 + k) > 0.45) { const a = rr(fq + k * 11) * 6.283, r0 = 160 + rr(fq + k) * 120, x = AX + Math.cos(a) * r0, y = AY + Math.sin(a) * r0 * 1.4; raio(x, y, x + Math.cos(a + 1.2) * 120, y + Math.sin(a + 1.2) * 120, fq * 13 + k, 60, 1); }
+    // batida: raios das bordas até a pessoa + linhas de velocidade
+    if (hit > 0.02) { for (let k = 0; k < 3; k++) { const lado = rr(sem + k * 5), ex = lado < 0.5 ? (rr(sem + k) < 0.5 ? 0 : W) : rr(sem + k) * W, ey = lado < 0.5 ? rr(sem + k + 2) * H : rr(sem + k + 3) < 0.5 ? 0 : H; ctx.globalAlpha = hit; raio(ex, ey, AX + (rr(sem + k + 4) - 0.5) * 120, AY + (rr(sem + k + 6) - 0.5) * 200, sem * 3 + k, 260); }
+      ctx.globalAlpha = 0.5 * hit; ctx.strokeStyle = BR; for (let k = 0; k < 40; k++) { const a = rr(sem + k * 3) * 6.283, r1 = 520 + rr(sem + k) * 200; ctx.lineWidth = 2 + rr(k) * 5; ctx.beginPath(); ctx.moveTo(AX + Math.cos(a) * r1, AY + Math.sin(a) * r1); ctx.lineTo(AX + Math.cos(a) * 1600, AY + Math.sin(a) * 1600); ctx.stroke(); } }
+    ctx.restore();
+    // flash branco-azulado no início da batida
+    if (dt < 0.12) { ctx.fillStyle = `rgba(210,245,255,${0.75 * (1 - dt / 0.12)})`; ctx.fillRect(0, 0, W, H); }
+    // balões de texto em quadrinhos
+    for (const [t0, t1, txt, corN] of R.textos || []) { if (t < t0 || t > t1) continue; const k = eout(clamp((t - t0) / 0.18)), sai = 1 - clamp((t - (t1 - 0.15)) / 0.15), cor = corN === "azul" ? AZ : AM, sid = Math.round(t0 * 10);
+      const ty = (R.textoY || 0.22) * H, rot = (rr(sid) - 0.5) * 0.16, tam = txt.length > 9 ? 120 : 160;
+      ctx.save(); ctx.globalAlpha = sai; ctx.translate(W / 2 + (rr(sid + Math.floor(t * 24)) - 0.5) * 6, ty); ctx.rotate(rot); ctx.scale(0.4 + 0.6 * k + 0.12 * Math.sin(k * Math.PI), 0.4 + 0.6 * k + 0.12 * Math.sin(k * Math.PI));
+      estrela(0, 0, 330, 14, sid, cor === AM ? "#ff3b3b" : "#1b2bd6"); retícula(0, 0, 300, "rgba(255,255,255,.18)");
+      ctx.font = `400 ${tam}px Anton`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.lineJoin = "round"; const linhas = txt.split("\n");
+      linhas.forEach((l, j) => { const y = (j - (linhas.length - 1) / 2) * tam * 1.0; ctx.lineWidth = 26; ctx.strokeStyle = "#111"; ctx.strokeText(l, 0, y + 8); ctx.shadowColor = AZ; ctx.shadowBlur = 30; ctx.fillStyle = cor; ctx.fillText(l, 0, y); ctx.shadowBlur = 0; ctx.lineWidth = 6; ctx.strokeStyle = "#fff"; ctx.strokeText(l, 0, y); ctx.fillText(l, 0, y); });
+      ctx.restore(); }
+    // granulação de quadrinho (leve)
+    ctx.save(); ctx.globalAlpha = 0.05; for (let k = 0; k < 300; k++) { ctx.fillStyle = rr(k + t * 97) > 0.5 ? "#fff" : "#000"; ctx.fillRect(rr(k * 2 + t) * W, rr(k * 3 + t) * H, 3, 3); } ctx.restore();
+  };
+  await window.quadro(0); window.pronto = true;
+})();
+</script>
+</body>
+</html>
