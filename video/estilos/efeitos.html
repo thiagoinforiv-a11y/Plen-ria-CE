@@ -36,13 +36,13 @@
     cc.clearRect(0, 0, W, H); cc.drawImage(ctx.canvas, 0, 0);
     // HOLOFOTE: luz atrás + texto gigante entre o fundo e a pessoa
     if (hol) { const k = env(t, hol, 0.5), g = ctx.createRadialGradient(AX, AY + 120, 40, AX, AY + 120, 760); g.addColorStop(0, `rgba(255,70,90,${0.55 * k})`); g.addColorStop(0.5, `rgba(120,20,60,${0.35 * k})`); g.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-      ctx.save(); ctx.globalAlpha = k; ctx.textAlign = "center"; let tam = 330; ctx.font = `900 ${tam}px ${F}`; while (ctx.measureText(hol.texto).width > W * 1.02) { tam -= 10; ctx.font = `900 ${tam}px ${F}`; }
+      ctx.save(); ctx.globalAlpha = k; ctx.textAlign = "center"; let tam = 330; ctx.font = `900 ${tam}px ${F}`; while (ctx.measureText(hol.texto).width > W * 0.9) { tam -= 10; ctx.font = `900 ${tam}px ${F}`; }
       const yT = hol.y ? hol.y * H : AY - 30, s = 0.85 + 0.15 * eback(clamp((t - hol.t0) / 0.6)); ctx.translate(W / 2, yT); ctx.scale(s, s);
       ctx.shadowColor = hol.cor || "#ff3d5a"; ctx.shadowBlur = 60; ctx.fillStyle = "#ffe9ee"; ctx.fillText(hol.texto, 0, 0); ctx.shadowBlur = 0; ctx.lineWidth = 6; ctx.strokeStyle = hol.cor || "#ff3d5a"; ctx.strokeText(hol.texto, 0, 0); ctx.restore(); }
     // VIDRO: cartões atrás da pessoa
     const cardsV = vid ? vid.cards.map((c, j) => ({ ...c, j })) : [];
     const desenhaCard = (c) => { const k = eback(clamp((t - vid.t0 - c.j * 0.18) / 0.5)) * env(t, vid), bob = Math.sin(t * 1.6 + c.j * 1.7) * 10, w = c.w || 300, h = c.h || 220, x = c.x * W - w / 2, y = c.y * H - h / 2 + bob + (1 - k) * 60;
-      vidroCard(x, y, w, h, clamp(k), () => { ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.font = `900 ${c.tamN || 96}px ${F}`; ctx.fillText(c.n, x + 26, y + 26 + (c.tamN || 96) * 0.85); ctx.font = `700 26px ${F}`; ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.fillText(c.s, x + 28, y + h - 30); if (c.barras) { const bw = (w - 56) / c.barras.length; c.barras.forEach((b, q) => { const bh = b * (h - 120) * clamp((t - vid.t0 - 0.6 - q * 0.06) / 0.4); ctx.fillStyle = q ? "rgba(255,255,255,.5)" : "#ffd166"; ctx.fillRect(x + 28 + q * bw, y + h - 64 - bh, bw - 8, bh); }); } }); };
+      vidroCard(x, y, w, h, clamp(k), () => { ctx.fillStyle = "#fff"; ctx.textAlign = "left"; let tN = c.tamN || 96; ctx.font = `900 ${tN}px ${F}`; while (ctx.measureText(c.n).width > w - 52 && tN > 30) { tN -= 4; ctx.font = `900 ${tN}px ${F}`; } ctx.fillText(c.n, x + 26, y + 26 + tN * 0.85); ctx.font = `700 26px ${F}`; ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.fillText(c.s, x + 28, y + h - 30); if (c.barras) { const bw = (w - 56) / c.barras.length; c.barras.forEach((b, q) => { const bh = b * (h - 120) * clamp((t - vid.t0 - 0.6 - q * 0.06) / 0.4); ctx.fillStyle = q ? "rgba(255,255,255,.5)" : "#ffd166"; ctx.fillRect(x + 28 + q * bw, y + h - 64 - bh, bw - 8, bh); }); } }); };
     cardsV.filter((c) => c.atras).forEach(desenhaCard);
     // pessoa por cima (com contorno de luz quando há efeito de profundidade)
     if (hol || vid) { ctx.save(); if (hol) { ctx.shadowColor = "rgba(255,90,110,.65)"; ctx.shadowBlur = 40; } ctx.drawImage(pessoa, 0, dy); ctx.restore(); }
