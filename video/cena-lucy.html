@@ -8,6 +8,7 @@
 <body>
 <canvas id="c" width="1080" height="1920"></canvas>
 <script src="efeitos.js"></script>
+<script src="motion.js"></script>
 <script>
 /* Lucy Ximenes, vereadora de Cariré: votação urna a urna, Tapuio e arredores. Só dados do TSE (dados-lucy.json). */
 (async () => {
@@ -140,6 +141,7 @@
     texto("Fonte dos votos e foto: TSE · eleições municipais 2012 a 2024", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
     marca();
   };
+  window.render = Motion.envolver(window.render, ctx, S, { respiro: [3], moldura: { serie: "RAIO-X · VEREADORES", cta: "Comenta: qual vereador é o próximo?" } });
   window.render(0); window.pronto = true;
 })();
 </script>

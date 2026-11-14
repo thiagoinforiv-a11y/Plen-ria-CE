@@ -177,7 +177,14 @@ def main():
     with wave.open(tmp, "wb") as w:
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp, "-af", "loudnorm=I=-14:TP=-1.5:LRA=9", "-ar", str(SR), "-ac", "2", a.saida], check=True); os.remove(tmp)
-    json.dump({"S": S, "V": V}, open(a.mapa, "w"))
+    # tempo de cada palavra narrada, já no tempo do vídeo (para legendas sincronizadas: video/legendar.py)
+    palavras = []
+    for k in range(len(S) - 1):
+        jp = os.path.join(pasta, f"{k:02d}.json")
+        if os.path.exists(jp):
+            for w in json.load(open(jp, encoding="utf-8")):
+                palavras.append({"t": round(V[k] + lead[k] + w["t"] / C.get("tempo", 1.0), 3), "d": round(w["d"] / C.get("tempo", 1.0), 3), "p": w["p"], "cena": k})
+    json.dump({"S": S, "V": V, "palavras": palavras}, open(a.mapa, "w"), ensure_ascii=False)
     print("✔ trilha", a.saida, f"{V[-1]:.1f}s")
 
 main()

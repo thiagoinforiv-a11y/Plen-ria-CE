@@ -19,6 +19,20 @@ Vídeo 1080×1920, 30 fps, desenhado em canvas (`video/cena-*.html`) e gravado c
    `node video/gravar.mjs --cena cena-X.html entregas/X/raw.mp4 30 --trilha video/trilha-X.json --mapa entregas/X/a.mapa.json --audio entregas/X/a.wav`
    `ffmpeg -i raw.mp4 -c:v libx264 -crf 25 -maxrate 2200k -bufsize 4400k -c:a aac -b:a 128k -movflags +faststart final.mp4`
 
+## Acabamento (padrão a partir de 14/11/2026)
+
+Inspirado na referência que o Thiago mandou: corte rápido no começo, uma ideia por tela, palavra-chave grande, transições que chamam atenção, câmera viva e legenda no compasso da voz.
+
+1. **Ritmo.** Gancho nos primeiros 20–30 s: frases curtas (cenas de ~6 s, uma ideia cada). Depois, cenas mais longas para explicar. Feche com chamada para ação.
+2. **`video/motion.js`** (inclua `<script src="motion.js"></script>` e, no fim da cena, antes de `window.render(0)`):
+   `window.render = Motion.envolver(window.render, ctx, S, { respiro: [i], moldura: { serie: "RAIO-X · …", cta: "Comenta: …" } });`
+   Dá câmera (empurrão lento + soco de zoom no corte), glitch e flash alternados nos cortes, respiro escuro antes da cena `i` (revelação) e a moldura (tarja da série no topo e chamada final).
+3. **Música:** passe `--musica` no `mixar.py` (trilha original, abaixa sob a voz).
+4. **Legenda sincronizada:** o `mixar.py` grava no mapa o tempo de cada palavra narrada. Depois de gravar o `raw.mp4`:
+   `python3 video/legendar.py --video entregas/X/raw.mp4 --palavras entregas/X/a.mapa.json --saida entregas/X.mp4 --y 1720 --tam 74`
+   Mostra 1 a 3 palavras por vez, a palavra dita entra com "pop", e número, sigla ou nome próprio sai em dourado. Fonte Oswald em `video/fontes/ttf/`. O `legendar.py` já comprime o vídeo final.
+5. **Narração local.** O serviço de voz (speech.platform.bing.com) está liberado no ambiente: dá para narrar aqui, sem passar pelo GitHub (obrigatório para material interno). Guarde também o tempo de cada palavra (`NN.json`) para a legenda.
+
 ## Tipografia cinética
 
 Palavras entram uma a uma (escala + subida). `*palavra*` = destaque dourado, maior e com brilho. Use em títulos e frases de impacto; deixe números grandes com `texto()`.
