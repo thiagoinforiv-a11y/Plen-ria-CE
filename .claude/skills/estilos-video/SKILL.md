@@ -27,6 +27,9 @@ Roteiro: `{ "trechos": [[arquivo, ini, fim], ...] (ou --video já montado), "pal
 ### tela (referência: vídeo "Claude Arrogante" do Mestres da IA)
 Tela do celular (432×768 CSS × 2,5 = 1080×1920) rolando a página com pausas nos pontos citados na fala; título fixo nos primeiros 4 s em caixas brancas com letra preta (`--titulo "Linha 1|Linha 2"`); legenda branca com contorno preto, como foi falada, 2–3 palavras. Fluxo: página pronta (passe antes o `lapidador-visual`) → gravar rolagem com Playwright (`page.screenshot` quadro a quadro, scrollTo por tempo) + narração → `transcrever.py` → corrija nomes no `.json` → `legendar.py --estilo tela --y 1520 --tam 76 --titulo ...`.
 
+### Combinação premium (vídeo da loja, ex.: Cícero Motos × Super Choque, 14/11/2026)
+1ª camada `efeitos` (máscara: nome gigante atrás da pessoa no início da fala; cartões de vidro ESCURO nas laterais, na altura dos ombros, nunca sobre o rosto, só com o que a pessoa realmente fala); 2ª camada `entrega` (abertura com logo, cartão de nome `nome:[t0,t1,"NOME","função"]`, legenda, pílulas, fecho com `parceiroTexto`); 3ª camada `estilos/som_vlog.py` (batida leve que abaixa sob a voz, whoosh nas pílulas, pop nos cartões `extras_sfx`, impacto na abertura e no fecho). Capa `capa.py --cheio` com o quadro do holofote e o texto embaixo, dentro da área 4:5.
+
 ### elétrico
 Cor fria e contrastada, vinheta azul-escura; faíscas em volta da pessoa o tempo todo; em cada batida: flash branco-azulado, soco de zoom, tremida, separação de cor, 3 raios das bordas até a pessoa e linhas de velocidade; balões de texto em quadrinhos (estrela vermelha ou azul, retícula, letra Anton amarela com contorno preto e brilho azul); granulação leve. Trilha original: batida eletrônica a 128 bpm + choque, impacto e "whoosh" em cada batida.
 

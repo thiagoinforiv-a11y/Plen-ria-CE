@@ -20,8 +20,8 @@
   const [AX, AY] = (R.alvo || [0.5, 0.35]).map((v, i) => v * (i ? H : W));
   const ativo = (t, tipo) => (R.efeitos || []).find((e) => e.tipo === tipo && t >= e.t0 && t < e.t1);
   const env = (t, e, f = 0.35) => Math.min(eout(clamp((t - e.t0) / f)), eout(clamp((e.t1 - t) / f)));
-  const vidroCard = (x, y, w, h, a, conteudo) => { ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.roundRect(x, y, w, h, 28); ctx.save(); ctx.clip(); ctx.filter = "blur(18px) brightness(1.15)"; ctx.drawImage(copia, 0, 0); ctx.filter = "none"; ctx.fillStyle = "rgba(255,255,255,.14)"; ctx.fillRect(x, y, w, h); ctx.restore();
-    ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.stroke(); conteudo(); ctx.restore(); };
+  const vidroCard = (x, y, w, h, a, conteudo) => { ctx.save(); ctx.globalAlpha = a; ctx.beginPath(); ctx.roundRect(x, y, w, h, 28); ctx.save(); ctx.clip(); ctx.filter = "blur(18px) brightness(.55)"; ctx.drawImage(copia, 0, 0); ctx.filter = "none"; ctx.fillStyle = "rgba(12,14,20,.55)"; ctx.fillRect(x, y, w, h); ctx.restore(); ctx.shadowColor = "rgba(0,0,0,.35)"; ctx.shadowBlur = 30;
+    ctx.lineWidth = 2; ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.stroke(); ctx.shadowBlur = 0; conteudo(); ctx.restore(); };
   window.quadro = async (t) => {
     const i = Math.min(R.n - 1, Math.floor(t * R.fps)), nome = String(i + 1).padStart(5, "0");
     const [fr, mk] = await Promise.all([ld(R.frames + nome + ".jpg"), R.mascaras ? ld(R.mascaras + nome + ".png") : null]);

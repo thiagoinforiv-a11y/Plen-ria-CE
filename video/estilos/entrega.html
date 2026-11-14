@@ -45,12 +45,17 @@
         ctx.save(); ctx.globalAlpha = sai; ctx.textAlign = "center"; ctx.shadowColor = "rgba(0,0,0,.5)"; ctx.shadowBlur = 24;
         if (lg) { const im = await carregaImg(lg); if (im) { const w = 300, h = (w * im.height) / im.width; ctx.globalAlpha = sai * k * 0.9; ctx.drawImage(im, W / 2 - w / 2, y - 250, w, h); ctx.globalAlpha = sai; } }
         ctx.font = `800 64px ${F}`; ctx.letterSpacing = "6px"; ctx.fillStyle = BR; ctx.globalAlpha = sai * k; ctx.fillText(l1, W / 2, y - 10 + (1 - k) * 30);
-        const k2 = eback(clamp((t - t0 - 0.15) / 0.4)); ctx.save(); ctx.translate(W / 2, y + 110); ctx.scale(0.6 + 0.4 * k2, 0.6 + 0.4 * k2); ctx.font = `900 132px ${F}`; ctx.letterSpacing = "2px"; ctx.fillStyle = VM; ctx.globalAlpha = sai * clamp(k2); ctx.fillText(l2, 0, 0); ctx.restore(); ctx.restore(); } }
+        const k2 = eback(clamp((t - t0 - 0.15) / 0.4)); ctx.save(); ctx.translate(W / 2, y + 110); ctx.scale(0.6 + 0.4 * k2, 0.6 + 0.4 * k2); let tl = 132; ctx.font = `900 ${tl}px ${F}`; while (ctx.measureText(l2).width > W - 110 && tl > 60) { tl -= 4; ctx.font = `900 ${tl}px ${F}`; } ctx.letterSpacing = "2px"; ctx.fillStyle = VM; ctx.globalAlpha = sai * clamp(k2); ctx.fillText(l2, 0, 0); ctx.restore(); ctx.restore(); } }
       // pílulas no topo
       for (const [t0, t1, txt, cor] of R.pilulas || []) if (t >= t0 && t <= t1) { const k = eback(clamp((t - t0) / 0.35)), sai = 1 - clamp((t - (t1 - 0.2)) / 0.2); pilula(txt, W / 2, 170, cor, sai * clamp(k), 0.7 + 0.3 * k); }
       // logos que saltam
       for (const [t0, t1, src, x, y, lw] of R.logos || []) if (t >= t0 && t <= t1) { const im = await carregaImg(src); if (!im) continue; const k = eback(clamp((t - t0) / 0.4)), sai = 1 - clamp((t - (t1 - 0.2)) / 0.2), w = lw * W * (0.5 + 0.5 * k), h = (w * im.height) / im.width;
         ctx.save(); ctx.globalAlpha = sai * clamp(k * 1.5); ctx.shadowColor = "rgba(0,0,0,.4)"; ctx.shadowBlur = 20; ctx.drawImage(im, x * W - w / 2, y * H - h / 2, w, h); ctx.restore(); }
+      // cartão de nome (lower third)
+      if (R.nome) { const [t0, t1, n1, n2] = R.nome; if (t >= t0 && t <= t1) { const k = eout(clamp((t - t0) / 0.45)), sai = 1 - clamp((t - (t1 - 0.3)) / 0.3), y = H * 0.6, x = 70;
+        ctx.save(); ctx.globalAlpha = sai; ctx.font = `900 64px ${F}`; const w1 = ctx.measureText(n1).width; ctx.font = `700 32px ${F}`; const w2 = ctx.measureText(n2).width; const w = Math.max(w1, w2) + 70;
+        ctx.save(); ctx.beginPath(); ctx.rect(x, y - 70, w * k, 160); ctx.clip(); ctx.fillStyle = "rgba(10,10,12,.78)"; ctx.beginPath(); ctx.roundRect(x, y - 70, w, 160, 18); ctx.fill(); ctx.fillStyle = VM; ctx.fillRect(x, y - 70, 10, 160);
+        ctx.textAlign = "left"; ctx.font = `900 64px ${F}`; ctx.fillStyle = BR; ctx.fillText(n1, x + 38, y + 2); ctx.font = `700 32px ${F}`; ctx.fillStyle = VM; ctx.fillText(n2, x + 40, y + 58); ctx.restore(); ctx.restore(); } }
       // legenda
       const b = blocos.find((b) => t >= b.t0 && t < b.t1);
       if (b) { const marc = destaca(b.ws), txt = b.ws.map((w) => w.p.toUpperCase()), k = eout(clamp((t - b.t0) / 0.12)); ctx.save(); ctx.font = `800 58px ${F}`; ctx.letterSpacing = "0px";
@@ -76,6 +81,7 @@
         const lg = F0.logo && (await carregaImg(F0.logo)); if (lg) { const w = 760 * (0.85 + 0.15 * eback(clamp(v / 0.6))), h = (w * lg.height) / lg.width; ctx.drawImage(lg, W / 2 - w / 2, H * 0.36 - h / 2, w, h); }
         if (F0.slogan) { ctx.font = `700 34px ${F}`; ctx.letterSpacing = "4px"; ctx.fillStyle = BR; ctx.fillText(F0.slogan, W / 2, H * 0.47); }
         ctx.fillStyle = VM; ctx.fillRect(W / 2 - 80, H * 0.52, 160 * eout(clamp((v - 0.3) / 0.5)), 5);
+        if (F0.parceiroTexto) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText("EM PARCERIA COM", W / 2, H * 0.58); ctx.letterSpacing = "1px"; ctx.font = `900 84px ${F}`; ctx.fillStyle = BR; ctx.fillText(F0.parceiroTexto, W / 2, H * 0.58 + 110); }
         if (F0.parceiro) { ctx.font = `700 28px ${F}`; ctx.letterSpacing = "5px"; ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.fillText("EM PARCERIA COM", W / 2, H * 0.58); const pg = await carregaImg(F0.parceiro); if (pg) { const w = 330, h = (w * pg.height) / pg.width; ctx.drawImage(pg, W / 2 - w / 2, H * 0.61, w, h); } }
         ctx.restore(); } }
   };

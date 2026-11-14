@@ -9,10 +9,15 @@ R = os.path.dirname(os.path.abspath(__file__)); FT = lambda w, s: ImageFont.true
 OURO, TX, T2, FUNDO = (245, 196, 81), (242, 245, 248), (147, 161, 176), (10, 14, 20)
 ap = argparse.ArgumentParser()
 for k in ("fundo", "kicker", "linha1", "linha2", "fotos", "nomes", "rodape", "saida"): ap.add_argument("--" + k, default="")
-ap.add_argument("--recorte", default="0,420,1080,1140"); ap.add_argument("--cor", default=""); ap.add_argument("--logo", default=""); a = ap.parse_args()
+ap.add_argument("--recorte", default="0,420,1080,1140"); ap.add_argument("--cor", default=""); ap.add_argument("--cheio", action="store_true", help="foto/quadro ocupa a capa inteira e o texto vai para baixo"); ap.add_argument("--logo", default=""); a = ap.parse_args()
 if a.cor: OURO = tuple(int(a.cor.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
 W, H = 1080, 1920; cap = Image.new("RGB", (W, H), FUNDO)
-if a.fundo:
+if a.fundo and a.cheio:
+    import numpy as np
+    bg = Image.open(a.fundo).convert("RGB").resize((W, H)); cap.paste(bg, (0, 120)); v = np.linspace(0, 1, H); al = (np.clip((v - 0.48) / 0.26, 0, 1) ** 1.2 * 240).astype("uint8")
+    cap.paste(Image.new("RGB", (W, H), FUNDO), (0, 0), Image.fromarray(np.tile(al[:, None], (1, W))))
+    d0 = ImageDraw.Draw(cap)
+if a.fundo and not a.cheio:
     x0, y0, x1, y1 = map(int, a.recorte.split(",")); bg = Image.open(a.fundo).convert("RGB").crop((x0, y0, x1, y1)).resize((W, int(W * (y1 - y0) / (x1 - x0))))
     bg = ImageEnhance.Brightness(bg).enhance(1.05); y = 640; bg = bg.crop((0, 0, W, min(bg.height, 620))); cap.paste(bg, (0, y))
     import numpy as np
@@ -24,13 +29,14 @@ def centro(txt, y, fonte, cor, esp=0):
     if esp:
         for ch in txt: d.text((x, y), ch, font=fonte, fill=cor); x += d.textlength(ch, font=fonte) + esp
     else: d.text((x, y), txt, font=fonte, fill=cor)
-centro(a.kicker, 335, FT(800, 32), OURO, esp=7)
+Y0 = 840 if a.cheio else 0
+centro(a.kicker, 335 + Y0, FT(800, 32), OURO, esp=7)
 t1 = 180
 while d.textlength(a.linha1, font=FT(900, t1)) > W - 120: t1 -= 4
-centro(a.linha1, 370 + (180 - t1) // 2, FT(900, t1), TX)
+centro(a.linha1, 370 + Y0 + (180 - t1) // 2, FT(900, t1), TX)
 t2 = 104
 while d.textlength(a.linha2, font=FT(900, t2)) > W - 120: t2 -= 2
-centro(a.linha2, 568 + (104 - t2) // 2, FT(900, t2), OURO)
+centro(a.linha2, 568 + Y0 + (104 - t2) // 2, FT(900, t2), OURO)
 fotos = [f for f in a.fotos.split(",") if f]; nomes = a.nomes.split(",")
 if fotos:
     n = len(fotos); r = 122 if n == 3 else 160 if n == 2 else 250; gap = (W - 2 * 60) / n
