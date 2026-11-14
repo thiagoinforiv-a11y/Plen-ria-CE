@@ -1,0 +1,126 @@
+{
+ "video": "curta1",
+ "S": [
+  0,
+  4.5,
+  10,
+  15.5,
+  21,
+  28,
+  34
+ ],
+ "municipio": "Reriutaba",
+ "cd_ibge": "2311702",
+ "cadeiras": 11,
+ "candidatos": 22,
+ "validos": 13396,
+ "qe": 1218,
+ "eleitos": [
+  {
+   "urna": "Galego Honório",
+   "foto": "fotos/ce/reriutaba/2024/60002187938.jpg",
+   "votos": 1473,
+   "eleito20": true,
+   "v20": 954
+  },
+  {
+   "urna": "Renê Morais",
+   "foto": "fotos/ce/reriutaba/2024/60002187945.jpg",
+   "votos": 1454,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "João Veras",
+   "foto": "fotos/ce/reriutaba/2024/60002187936.jpg",
+   "votos": 1020,
+   "eleito20": true,
+   "v20": 985
+  },
+  {
+   "urna": "Socorro Hermínio",
+   "foto": "fotos/ce/reriutaba/2024/60002187941.jpg",
+   "votos": 900,
+   "eleito20": true,
+   "v20": 717
+  },
+  {
+   "urna": "Lili Lemos",
+   "foto": "fotos/ce/reriutaba/2024/60002311131.jpg",
+   "votos": 770,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Djane Castro",
+   "foto": "fotos/ce/reriutaba/2024/60002187934.jpg",
+   "votos": 733,
+   "eleito20": true,
+   "v20": 648
+  },
+  {
+   "urna": "Gislanny Oliveira",
+   "foto": "fotos/ce/reriutaba/2024/60002311127.jpg",
+   "votos": 637,
+   "eleito20": false,
+   "v20": 439
+  },
+  {
+   "urna": "Luzia do Orlandinho",
+   "foto": "fotos/ce/reriutaba/2024/60002187943.jpg",
+   "votos": 636,
+   "eleito20": true,
+   "v20": 650
+  },
+  {
+   "urna": "Bodó",
+   "foto": "fotos/ce/reriutaba/2024/60002187935.jpg",
+   "votos": 609,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Raimundo do Pretinho",
+   "foto": "fotos/ce/reriutaba/2024/60002311130.jpg",
+   "votos": 596,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Luciélio Paiva",
+   "foto": "fotos/ce/reriutaba/2024/60002187942.jpg",
+   "votos": 471,
+   "eleito20": true,
+   "v20": 592
+  }
+ ],
+ "reeleitos": 6,
+ "novos": 5,
+ "eleitos20": 11,
+ "presidente": {
+  "urna": "Socorro Hermínio",
+  "foto": "fotos/ce/reriutaba/2024/60002187941.jpg"
+ },
+ "fontePres": "Portal da Câmara de Reriutaba",
+ "proximo": null,
+ "top": {
+  "urna": "Galego Honório",
+  "foto": "fotos/ce/reriutaba/2024/60002187938.jpg",
+  "votos": 1473
+ },
+ "cresceu": {
+  "urna": "Gislanny Oliveira",
+  "foto": "fotos/ce/reriutaba/2024/60002311127.jpg",
+  "votos": 637,
+  "v20": 439,
+  "mult": 1.4510250569476082
+ },
+ "fala": [
+  "Vinte e dois candidatos, onze cadeiras. Quanto vale uma vaga na Câmara de Reriutaba?",
+  "Mil duzentos e dezoito votos por cadeira. É o quociente eleitoral.",
+  "Esses são os onze eleitos de dois mil e vinte e quatro.",
+  "Cinco não tinham sido eleitos em dois mil e vinte.",
+  "Maior votação: Galego Honório. E Gislanny Oliveira cresceu quarenta e cinco por cento de voto.",
+  "Hoje, quem preside a Câmara é Socorro Hermínio. E o próximo presidente, quem será? Comenta aqui."
+ ]
+}

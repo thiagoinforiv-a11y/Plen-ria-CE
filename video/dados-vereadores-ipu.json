@@ -1,0 +1,3376 @@
+{
+ "municipio": "Ipu",
+ "cd_ibge": "2305803",
+ "cadeiras": 13,
+ "validos": 28207,
+ "qe": 2170,
+ "nlocais": 51,
+ "candidatos": 77,
+ "locais": [
+  {
+   "id": "21-1015",
+   "nome": "E.m.e.f. Manoel Benvindo de Menezes",
+   "curto": "Manoel Benvindo de Menezes",
+   "bairro": "Distrito",
+   "lat": -4.455217,
+   "lon": -40.731038
+  },
+  {
+   "id": "21-1023",
+   "nome": "E.m.e.f. Antonio de Sousa Barros",
+   "curto": "Antônio de Sousa Barros",
+   "bairro": "Distrito",
+   "lat": -4.382636,
+   "lon": -40.556033
+  },
+  {
+   "id": "21-1031",
+   "nome": "Unidade Basica de Saude das Flores - Francisco das Chagas Torres",
+   "curto": "Unidade Basica de Saude das Flores",
+   "bairro": "Flores",
+   "lat": -4.34472,
+   "lon": -40.561444
+  },
+  {
+   "id": "21-1082",
+   "nome": "Secretaria Municipal de Educacao e Cultura de Ipu",
+   "curto": "Secretaria Municipal de Educacao e Cultura de Ipu",
+   "bairro": "Sede",
+   "lat": -4.324496,
+   "lon": -40.711251
+  },
+  {
+   "id": "21-1090",
+   "nome": "E.m.e.f. Luiz Gonzaga da Costa",
+   "curto": "Luiz Gonzaga da Costa",
+   "bairro": "Distrito",
+   "lat": -4.268438,
+   "lon": -40.720208
+  },
+  {
+   "id": "21-1104",
+   "nome": "Cvt - Centro Vocacional Tecnologico",
+   "curto": "Cvt",
+   "bairro": "Sede",
+   "lat": -4.318156,
+   "lon": -40.708871
+  },
+  {
+   "id": "21-1155",
+   "nome": "Escola de Ensino Fundamental Delmiro Golveia",
+   "curto": "Delmiro Golveia",
+   "bairro": "Sede",
+   "lat": -4.317095,
+   "lon": -40.708872
+  },
+  {
+   "id": "21-1163",
+   "nome": "E.m.e.f. Profa. Maria Valdemira Coelho Mello",
+   "curto": "Profa. Maria Valdemira Coelho Mello",
+   "bairro": "Sede",
+   "lat": -4.322624,
+   "lon": -40.703437
+  },
+  {
+   "id": "21-1171",
+   "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+   "curto": "Monsenhor Gonçalo de Oliveira Lima",
+   "bairro": "Alto da Boa Vista",
+   "lat": -4.330592,
+   "lon": -40.711832
+  },
+  {
+   "id": "21-1180",
+   "nome": "Eef Teresa Odete - Ceja",
+   "curto": "Teresa Odete",
+   "bairro": "Reino de Franca",
+   "lat": -4.322499,
+   "lon": -40.714633
+  },
+  {
+   "id": "21-1244",
+   "nome": "Fsesp",
+   "curto": "Fsesp",
+   "bairro": "Sede",
+   "lat": -4.320725,
+   "lon": -40.708628
+  },
+  {
+   "id": "21-1260",
+   "nome": "Colegio Ipuense",
+   "curto": "Colegio Ipuense",
+   "bairro": "Centro",
+   "lat": -4.321349,
+   "lon": -40.708976
+  },
+  {
+   "id": "21-1279",
+   "nome": "E.m.e.f. Francisco Assis Torquato",
+   "curto": "Francisco Assis Torquato",
+   "bairro": "Distrito",
+   "lat": -4.239216,
+   "lon": -40.735022
+  },
+  {
+   "id": "21-1287",
+   "nome": "Escola de Ensino Fundamental e Medio Auton Aragao",
+   "curto": "Auton Aragao",
+   "bairro": "Sede",
+   "lat": -4.324845,
+   "lon": -40.711862
+  },
+  {
+   "id": "21-1295",
+   "nome": "E.m.e.f. Abilio Martins",
+   "curto": "Abilio Martins",
+   "bairro": "Distrito",
+   "lat": -4.460425,
+   "lon": -40.730871
+  },
+  {
+   "id": "21-1317",
+   "nome": "Ubs Maria Clotilde Carlos Paz",
+   "curto": "Ubs Maria Clotilde Carlos Paz",
+   "bairro": "Distrito",
+   "lat": -4.327019,
+   "lon": -40.636384
+  },
+  {
+   "id": "21-1341",
+   "nome": "E.m.e.f. Pedro Camelo da Silva",
+   "curto": "Pedro Camelo da Silva",
+   "bairro": "Distrito",
+   "lat": -4.266502,
+   "lon": -40.779179
+  },
+  {
+   "id": "21-1376",
+   "nome": "E.m.e.f. Antonio Ferreira Lima",
+   "curto": "Antônio Ferreira Lima",
+   "bairro": "Distrito",
+   "lat": -4.27052,
+   "lon": -40.748846
+  },
+  {
+   "id": "21-1392",
+   "nome": "Posto de Saude - Maria Aydê F. Ximenes",
+   "curto": "Posto de Saude",
+   "bairro": "Distrito",
+   "lat": -4.413693,
+   "lon": -40.66832
+  },
+  {
+   "id": "21-1430",
+   "nome": "E.m.e.f. Guilherme de Oliveira Filho",
+   "curto": "Guilherme de Oliveira Filho",
+   "bairro": "Distrito",
+   "lat": -4.346331,
+   "lon": -40.560324
+  },
+  {
+   "id": "21-1449",
+   "nome": "E.m.e.f. João Sampaio de Araujo",
+   "curto": "João Sampaio de Araújo",
+   "bairro": "Distrito",
+   "lat": -4.317845,
+   "lon": -40.735412
+  },
+  {
+   "id": "21-1490",
+   "nome": "Patronato Souza Carvalho",
+   "curto": "Patronato Souza Carvalho",
+   "bairro": "Sede",
+   "lat": -4.320953,
+   "lon": -40.710007
+  },
+  {
+   "id": "21-1520",
+   "nome": "E.e.e.m. Antonio Pereira de Farias",
+   "curto": "Antônio Pereira de Farias",
+   "bairro": "Distrito",
+   "lat": -4.317395,
+   "lon": -40.735745
+  },
+  {
+   "id": "21-1538",
+   "nome": "Posto da Sucam - Fns",
+   "curto": "Posto da Sucam",
+   "bairro": "Sede",
+   "lat": -4.321528,
+   "lon": -40.710193
+  },
+  {
+   "id": "21-1554",
+   "nome": "Posto de Saude de Ingazeira",
+   "curto": "Posto de Saude de Ingazeira",
+   "bairro": "Distrito",
+   "lat": -4.266629,
+   "lon": -40.77782
+  },
+  {
+   "id": "21-1570",
+   "nome": "Predio da Receita Federal de Ipu",
+   "curto": "Predio da Receita Federal de Ipu",
+   "bairro": "Sede",
+   "lat": -4.32366,
+   "lon": -40.704965
+  },
+  {
+   "id": "21-1597",
+   "nome": "Escola de Ensino Medio Dep Murilo Rocha Aguiar",
+   "curto": "Dep Murilo Rocha Aguiar",
+   "bairro": "Sede",
+   "lat": -4.321618,
+   "lon": -40.709796
+  },
+  {
+   "id": "21-1627",
+   "nome": "Sindicato dos Trabalhadores Rurais de Ipu",
+   "curto": "Sindicato dos Trabalhadores Rurais de Ipu",
+   "bairro": "Sede",
+   "lat": -4.320544,
+   "lon": -40.709108
+  },
+  {
+   "id": "21-1651",
+   "nome": "E.m.e.f. Venceslau Ferreira Chaves",
+   "curto": "Venceslau Ferreira Chaves",
+   "bairro": "Distrito",
+   "lat": -4.28339,
+   "lon": -40.772448
+  },
+  {
+   "id": "21-1660",
+   "nome": "E.m.e.f. Joao de Paula Belem",
+   "curto": "João de Paula Belem",
+   "bairro": "Distrito",
+   "lat": -4.395059,
+   "lon": -40.758872
+  },
+  {
+   "id": "21-1678",
+   "nome": "E.m.e.f. Joao Ferreira da Costa",
+   "curto": "João Ferreira da Costa",
+   "bairro": "Distrito",
+   "lat": -4.310037,
+   "lon": -40.781051
+  },
+  {
+   "id": "21-1686",
+   "nome": "E.m.e.f. Fundação Martins",
+   "curto": "Fundação Martins",
+   "bairro": "Distrito",
+   "lat": -4.408511,
+   "lon": -40.578748
+  },
+  {
+   "id": "21-1694",
+   "nome": "E.m.e.f. Serafim Filomeno do Nascimento",
+   "curto": "Serafim Filomeno do Nascimento",
+   "bairro": "Distrito",
+   "lat": -4.237238,
+   "lon": -40.712833
+  },
+  {
+   "id": "21-1708",
+   "nome": "U.b.s. Manoel Ferreira de Sousa",
+   "curto": "Manoel Ferreira de Sousa",
+   "bairro": "Distrito",
+   "lat": -4.474464,
+   "lon": -40.587768
+  },
+  {
+   "id": "21-1716",
+   "nome": "E.m.e.f. Conrado de Araujo Chaves",
+   "curto": "Conrado de Araújo Chaves",
+   "bairro": "Distrito",
+   "lat": -4.460068,
+   "lon": -40.593184
+  },
+  {
+   "id": "21-1732",
+   "nome": "E.m.e.f. Melquiades Camelo Timbo",
+   "curto": "Melquiades Camelo Timbo",
+   "bairro": "Distrito",
+   "lat": -4.468855,
+   "lon": -40.654484
+  },
+  {
+   "id": "21-1791",
+   "nome": "E.m.e.f. Antonio Alves Ferreira",
+   "curto": "Antônio Alves Ferreira",
+   "bairro": "Distrito",
+   "lat": -4.35563,
+   "lon": -40.614046
+  },
+  {
+   "id": "21-1821",
+   "nome": "E.m.e.f. Maria Laura Sampaio",
+   "curto": "Maria Laura Sampaio",
+   "bairro": "Sede",
+   "lat": -4.332014,
+   "lon": -40.716429
+  },
+  {
+   "id": "21-1856",
+   "nome": "E.m.e.f. José Firmino Barros",
+   "curto": "José Firmino Barros",
+   "bairro": "Distrito",
+   "lat": -4.424445,
+   "lon": -40.599517
+  },
+  {
+   "id": "21-1880",
+   "nome": "E.m.e.f. João Camelo de Farias",
+   "curto": "João Camelo de Farias",
+   "bairro": "Distrito",
+   "lat": -4.398964,
+   "lon": -40.713445
+  },
+  {
+   "id": "21-1899",
+   "nome": "E.m.e.f. Joaquim Ferreira do Nascimento",
+   "curto": "Joaquim Ferreira do Nascimento",
+   "bairro": "Distrito",
+   "lat": -4.38435,
+   "lon": -40.757544
+  },
+  {
+   "id": "21-1937",
+   "nome": "Emeb Francisco Carvalho de Aragão",
+   "curto": "Francisco Carvalho de Aragão",
+   "bairro": "Distrito",
+   "lat": -4.381153,
+   "lon": -40.731219
+  },
+  {
+   "id": "21-1945",
+   "nome": "E.m.e.f. Elda Pereira Mota",
+   "curto": "Elda Pereira Mota",
+   "bairro": "Distrito",
+   "lat": -4.329281,
+   "lon": -40.687782
+  },
+  {
+   "id": "21-1953",
+   "nome": "Polo de Artesanato",
+   "curto": "Polo de Artesanato",
+   "bairro": "Distrito",
+   "lat": -4.352536,
+   "lon": -40.688745
+  },
+  {
+   "id": "21-1961",
+   "nome": "Assembleia de Deus",
+   "curto": "Assembleia de Deus",
+   "bairro": "Distrito",
+   "lat": -4.289934,
+   "lon": -40.725377
+  },
+  {
+   "id": "21-1970",
+   "nome": "E.m.e.f. Crianca Esperanca",
+   "curto": "Crianca Esperanca",
+   "bairro": "Sitio Macaco",
+   "lat": -4.350587,
+   "lon": -40.714437
+  },
+  {
+   "id": "21-1996",
+   "nome": "Eef Duque de Caxias",
+   "curto": "Duque de Caxias",
+   "bairro": "Marruas dos Paivas",
+   "lat": -4.308053,
+   "lon": -40.533999
+  },
+  {
+   "id": "21-2038",
+   "nome": "Emeb Senhor do Bonfim",
+   "curto": "Senhor do Bonfim",
+   "bairro": "Zona Rural",
+   "lat": -4.394404,
+   "lon": -40.74169
+  },
+  {
+   "id": "21-2054",
+   "nome": "Ubs Antonia Lopes Ferreira",
+   "curto": "Ubs Antonia Lopes Ferreira",
+   "bairro": "Zona Rural",
+   "lat": -4.395916,
+   "lon": -40.753435
+  },
+  {
+   "id": "21-2070",
+   "nome": "Ubs João Batista de Azevedo",
+   "curto": "Ubs João Batista de Azevedo",
+   "bairro": "Zona Rural",
+   "lat": -4.356232,
+   "lon": -40.77535
+  },
+  {
+   "id": "21-2089",
+   "nome": "Unidade Básica de Saúde - Ubs - Rita Aprígio de Farias (dona Missanta)",
+   "curto": "Unidade Básica de Saúde",
+   "bairro": "Zona Rural",
+   "lat": -4.24207,
+   "lon": -40.760627
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Nonato Filho",
+   "partido": "PT",
+   "foto": "fotos/ce/ipu/2024/60002205467.jpeg",
+   "votos": 2154,
+   "pos": 1,
+   "pct": 0.07636402311482965,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1226,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1171",
+     210
+    ],
+    [
+     "21-1287",
+     152
+    ],
+    [
+     "21-1821",
+     144
+    ],
+    [
+     "21-1970",
+     132
+    ],
+    [
+     "21-1686",
+     119
+    ],
+    [
+     "21-1163",
+     117
+    ],
+    [
+     "21-1651",
+     105
+    ],
+    [
+     "21-1260",
+     104
+    ],
+    [
+     "21-1490",
+     90
+    ],
+    [
+     "21-1678",
+     80
+    ],
+    [
+     "21-1597",
+     62
+    ],
+    [
+     "21-1155",
+     60
+    ],
+    [
+     "21-2070",
+     56
+    ],
+    [
+     "21-1180",
+     55
+    ],
+    [
+     "21-1317",
+     55
+    ],
+    [
+     "21-1082",
+     39
+    ],
+    [
+     "21-1279",
+     39
+    ],
+    [
+     "21-1104",
+     37
+    ],
+    [
+     "21-1430",
+     32
+    ],
+    [
+     "21-1023",
+     30
+    ],
+    [
+     "21-1538",
+     30
+    ],
+    [
+     "21-1031",
+     29
+    ],
+    [
+     "21-1791",
+     28
+    ],
+    [
+     "21-1520",
+     28
+    ],
+    [
+     "21-1945",
+     25
+    ],
+    [
+     "21-1996",
+     25
+    ],
+    [
+     "21-1570",
+     23
+    ],
+    [
+     "21-1244",
+     22
+    ],
+    [
+     "21-1376",
+     21
+    ],
+    [
+     "21-1937",
+     20
+    ],
+    [
+     "21-1708",
+     20
+    ],
+    [
+     "21-1392",
+     18
+    ],
+    [
+     "21-1449",
+     17
+    ],
+    [
+     "21-2038",
+     15
+    ],
+    [
+     "21-1856",
+     13
+    ],
+    [
+     "21-1295",
+     10
+    ],
+    [
+     "21-2054",
+     10
+    ],
+    [
+     "21-1627",
+     9
+    ],
+    [
+     "21-2089",
+     8
+    ],
+    [
+     "21-1880",
+     7
+    ],
+    [
+     "21-1953",
+     7
+    ],
+    [
+     "21-1554",
+     7
+    ],
+    [
+     "21-1341",
+     7
+    ],
+    [
+     "21-1015",
+     6
+    ],
+    [
+     "21-1694",
+     6
+    ],
+    [
+     "21-1716",
+     6
+    ],
+    [
+     "21-1660",
+     6
+    ],
+    [
+     "21-1090",
+     4
+    ],
+    [
+     "21-1899",
+     4
+    ],
+    [
+     "21-1961",
+     4
+    ],
+    [
+     "21-1732",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 210
+    },
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Auton Aragao",
+     "curto": "Auton Aragao",
+     "bairro": "Sede",
+     "votos": 152
+    },
+    {
+     "nome": "E.m.e.f. Maria Laura Sampaio",
+     "curto": "Maria Laura Sampaio",
+     "bairro": "Sede",
+     "votos": 144
+    }
+   ],
+   "conc": 0.09749303621169916,
+   "top3": 0.23491179201485607,
+   "venceu": 12,
+   "presente": 51
+  },
+  {
+   "urna": "Monga",
+   "partido": "PT",
+   "foto": "fotos/ce/ipu/2024/60002205464.jpeg",
+   "votos": 2064,
+   "pos": 2,
+   "pct": 0.07317332577019889,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1556,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1651",
+     231
+    ],
+    [
+     "21-1341",
+     151
+    ],
+    [
+     "21-1996",
+     134
+    ],
+    [
+     "21-1163",
+     126
+    ],
+    [
+     "21-1554",
+     124
+    ],
+    [
+     "21-1678",
+     122
+    ],
+    [
+     "21-1392",
+     97
+    ],
+    [
+     "21-1171",
+     96
+    ],
+    [
+     "21-1287",
+     69
+    ],
+    [
+     "21-1732",
+     68
+    ],
+    [
+     "21-2070",
+     63
+    ],
+    [
+     "21-1821",
+     60
+    ],
+    [
+     "21-1015",
+     56
+    ],
+    [
+     "21-1716",
+     51
+    ],
+    [
+     "21-1945",
+     51
+    ],
+    [
+     "21-1880",
+     45
+    ],
+    [
+     "21-1155",
+     41
+    ],
+    [
+     "21-1260",
+     39
+    ],
+    [
+     "21-1490",
+     38
+    ],
+    [
+     "21-1295",
+     31
+    ],
+    [
+     "21-1376",
+     31
+    ],
+    [
+     "21-1597",
+     29
+    ],
+    [
+     "21-1180",
+     27
+    ],
+    [
+     "21-1104",
+     23
+    ],
+    [
+     "21-1961",
+     23
+    ],
+    [
+     "21-1082",
+     21
+    ],
+    [
+     "21-1570",
+     20
+    ],
+    [
+     "21-1791",
+     18
+    ],
+    [
+     "21-1520",
+     15
+    ],
+    [
+     "21-1708",
+     15
+    ],
+    [
+     "21-1937",
+     12
+    ],
+    [
+     "21-1031",
+     12
+    ],
+    [
+     "21-1538",
+     12
+    ],
+    [
+     "21-1244",
+     11
+    ],
+    [
+     "21-1627",
+     11
+    ],
+    [
+     "21-1694",
+     10
+    ],
+    [
+     "21-1449",
+     10
+    ],
+    [
+     "21-1953",
+     9
+    ],
+    [
+     "21-1090",
+     8
+    ],
+    [
+     "21-1317",
+     8
+    ],
+    [
+     "21-1430",
+     8
+    ],
+    [
+     "21-1660",
+     6
+    ],
+    [
+     "21-2054",
+     6
+    ],
+    [
+     "21-1856",
+     5
+    ],
+    [
+     "21-1023",
+     4
+    ],
+    [
+     "21-1686",
+     4
+    ],
+    [
+     "21-1899",
+     3
+    ],
+    [
+     "21-1279",
+     3
+    ],
+    [
+     "21-2038",
+     3
+    ],
+    [
+     "21-1970",
+     2
+    ],
+    [
+     "21-2089",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.m.e.f. Venceslau Ferreira Chaves",
+     "curto": "Venceslau Ferreira Chaves",
+     "bairro": "Distrito",
+     "votos": 231
+    },
+    {
+     "nome": "E.m.e.f. Pedro Camelo da Silva",
+     "curto": "Pedro Camelo da Silva",
+     "bairro": "Distrito",
+     "votos": 151
+    },
+    {
+     "nome": "Eef Duque de Caxias",
+     "curto": "Duque de Caxias",
+     "bairro": "Marruas dos Paivas",
+     "votos": 134
+    }
+   ],
+   "conc": 0.1119186046511628,
+   "top3": 0.25,
+   "venceu": 8,
+   "presente": 51
+  },
+  {
+   "urna": "Zeca Rufino",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309615.jpg",
+   "votos": 1446,
+   "pos": 3,
+   "pct": 0.05126387067040097,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1410,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1171",
+     106
+    ],
+    [
+     "21-1163",
+     105
+    ],
+    [
+     "21-1155",
+     84
+    ],
+    [
+     "21-1317",
+     80
+    ],
+    [
+     "21-1287",
+     70
+    ],
+    [
+     "21-1821",
+     68
+    ],
+    [
+     "21-1490",
+     64
+    ],
+    [
+     "21-1260",
+     60
+    ],
+    [
+     "21-1295",
+     55
+    ],
+    [
+     "21-1732",
+     54
+    ],
+    [
+     "21-1015",
+     44
+    ],
+    [
+     "21-1899",
+     44
+    ],
+    [
+     "21-1597",
+     42
+    ],
+    [
+     "21-1180",
+     39
+    ],
+    [
+     "21-1392",
+     39
+    ],
+    [
+     "21-1104",
+     38
+    ],
+    [
+     "21-2054",
+     29
+    ],
+    [
+     "21-1376",
+     26
+    ],
+    [
+     "21-1945",
+     24
+    ],
+    [
+     "21-1708",
+     24
+    ],
+    [
+     "21-1660",
+     23
+    ],
+    [
+     "21-1694",
+     22
+    ],
+    [
+     "21-1791",
+     22
+    ],
+    [
+     "21-1082",
+     22
+    ],
+    [
+     "21-1880",
+     21
+    ],
+    [
+     "21-1937",
+     21
+    ],
+    [
+     "21-2038",
+     21
+    ],
+    [
+     "21-1244",
+     20
+    ],
+    [
+     "21-1570",
+     18
+    ],
+    [
+     "21-1031",
+     17
+    ],
+    [
+     "21-1953",
+     16
+    ],
+    [
+     "21-1430",
+     16
+    ],
+    [
+     "21-1856",
+     15
+    ],
+    [
+     "21-1678",
+     14
+    ],
+    [
+     "21-1716",
+     13
+    ],
+    [
+     "21-2070",
+     13
+    ],
+    [
+     "21-1520",
+     11
+    ],
+    [
+     "21-1449",
+     9
+    ],
+    [
+     "21-1538",
+     8
+    ],
+    [
+     "21-1627",
+     7
+    ],
+    [
+     "21-1686",
+     6
+    ],
+    [
+     "21-1651",
+     3
+    ],
+    [
+     "21-1970",
+     3
+    ],
+    [
+     "21-1554",
+     3
+    ],
+    [
+     "21-1023",
+     2
+    ],
+    [
+     "21-1996",
+     2
+    ],
+    [
+     "21-1090",
+     1
+    ],
+    [
+     "21-1279",
+     1
+    ],
+    [
+     "21-1341",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 106
+    },
+    {
+     "nome": "E.m.e.f. Profa. Maria Valdemira Coelho Mello",
+     "curto": "Profa. Maria Valdemira Coelho Mello",
+     "bairro": "Sede",
+     "votos": 105
+    },
+    {
+     "nome": "Escola de Ensino Fundamental Delmiro Golveia",
+     "curto": "Delmiro Golveia",
+     "bairro": "Sede",
+     "votos": 84
+    }
+   ],
+   "conc": 0.07330567081604426,
+   "top3": 0.20401106500691563,
+   "venceu": 3,
+   "presente": 49
+  },
+  {
+   "urna": "Moreira Filho",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309612.jpeg",
+   "votos": 1232,
+   "pos": 4,
+   "pct": 0.043677101428723365,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1080,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1678",
+     127
+    ],
+    [
+     "21-1651",
+     85
+    ],
+    [
+     "21-1155",
+     77
+    ],
+    [
+     "21-1163",
+     75
+    ],
+    [
+     "21-1490",
+     75
+    ],
+    [
+     "21-1953",
+     67
+    ],
+    [
+     "21-1171",
+     64
+    ],
+    [
+     "21-1287",
+     60
+    ],
+    [
+     "21-1260",
+     57
+    ],
+    [
+     "21-1821",
+     44
+    ],
+    [
+     "21-1015",
+     41
+    ],
+    [
+     "21-2070",
+     40
+    ],
+    [
+     "21-1295",
+     38
+    ],
+    [
+     "21-1899",
+     31
+    ],
+    [
+     "21-1104",
+     29
+    ],
+    [
+     "21-1597",
+     29
+    ],
+    [
+     "21-1961",
+     28
+    ],
+    [
+     "21-1180",
+     22
+    ],
+    [
+     "21-1880",
+     19
+    ],
+    [
+     "21-1376",
+     18
+    ],
+    [
+     "21-1570",
+     17
+    ],
+    [
+     "21-1694",
+     14
+    ],
+    [
+     "21-1660",
+     14
+    ],
+    [
+     "21-2054",
+     13
+    ],
+    [
+     "21-1082",
+     12
+    ],
+    [
+     "21-1538",
+     11
+    ],
+    [
+     "21-1244",
+     10
+    ],
+    [
+     "21-1627",
+     10
+    ],
+    [
+     "21-1945",
+     9
+    ],
+    [
+     "21-1317",
+     9
+    ],
+    [
+     "21-1430",
+     9
+    ],
+    [
+     "21-1732",
+     8
+    ],
+    [
+     "21-1090",
+     8
+    ],
+    [
+     "21-2038",
+     8
+    ],
+    [
+     "21-1031",
+     8
+    ],
+    [
+     "21-1520",
+     8
+    ],
+    [
+     "21-1449",
+     6
+    ],
+    [
+     "21-1716",
+     5
+    ],
+    [
+     "21-1554",
+     4
+    ],
+    [
+     "21-1708",
+     4
+    ],
+    [
+     "21-1791",
+     3
+    ],
+    [
+     "21-1023",
+     3
+    ],
+    [
+     "21-1937",
+     3
+    ],
+    [
+     "21-1392",
+     3
+    ],
+    [
+     "21-2089",
+     2
+    ],
+    [
+     "21-1341",
+     2
+    ],
+    [
+     "21-1856",
+     1
+    ],
+    [
+     "21-1970",
+     1
+    ],
+    [
+     "21-1686",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.m.e.f. Joao Ferreira da Costa",
+     "curto": "João Ferreira da Costa",
+     "bairro": "Distrito",
+     "votos": 127
+    },
+    {
+     "nome": "E.m.e.f. Venceslau Ferreira Chaves",
+     "curto": "Venceslau Ferreira Chaves",
+     "bairro": "Distrito",
+     "votos": 85
+    },
+    {
+     "nome": "Escola de Ensino Fundamental Delmiro Golveia",
+     "curto": "Delmiro Golveia",
+     "bairro": "Sede",
+     "votos": 77
+    }
+   ],
+   "conc": 0.10308441558441558,
+   "top3": 0.23457792207792208,
+   "venceu": 2,
+   "presente": 49
+  },
+  {
+   "urna": "Cristina Peres",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309618.jpg",
+   "votos": 1227,
+   "pos": 5,
+   "pct": 0.04349984046513277,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1171",
+     169
+    ],
+    [
+     "21-1651",
+     98
+    ],
+    [
+     "21-1155",
+     80
+    ],
+    [
+     "21-1821",
+     80
+    ],
+    [
+     "21-1694",
+     67
+    ],
+    [
+     "21-2070",
+     52
+    ],
+    [
+     "21-1678",
+     50
+    ],
+    [
+     "21-1260",
+     49
+    ],
+    [
+     "21-1961",
+     48
+    ],
+    [
+     "21-1287",
+     44
+    ],
+    [
+     "21-1163",
+     42
+    ],
+    [
+     "21-1490",
+     37
+    ],
+    [
+     "21-1597",
+     36
+    ],
+    [
+     "21-1376",
+     34
+    ],
+    [
+     "21-1090",
+     30
+    ],
+    [
+     "21-1104",
+     27
+    ],
+    [
+     "21-1082",
+     24
+    ],
+    [
+     "21-1180",
+     20
+    ],
+    [
+     "21-1660",
+     20
+    ],
+    [
+     "21-2089",
+     20
+    ],
+    [
+     "21-1953",
+     16
+    ],
+    [
+     "21-1520",
+     15
+    ],
+    [
+     "21-1899",
+     14
+    ],
+    [
+     "21-1554",
+     14
+    ],
+    [
+     "21-1244",
+     12
+    ],
+    [
+     "21-1945",
+     11
+    ],
+    [
+     "21-1570",
+     11
+    ],
+    [
+     "21-1937",
+     9
+    ],
+    [
+     "21-1317",
+     9
+    ],
+    [
+     "21-1732",
+     8
+    ],
+    [
+     "21-1430",
+     8
+    ],
+    [
+     "21-1538",
+     8
+    ],
+    [
+     "21-1880",
+     7
+    ],
+    [
+     "21-1996",
+     7
+    ],
+    [
+     "21-1341",
+     7
+    ],
+    [
+     "21-1627",
+     6
+    ],
+    [
+     "21-1295",
+     5
+    ],
+    [
+     "21-2054",
+     5
+    ],
+    [
+     "21-1449",
+     4
+    ],
+    [
+     "21-1791",
+     4
+    ],
+    [
+     "21-2038",
+     4
+    ],
+    [
+     "21-1708",
+     4
+    ],
+    [
+     "21-1716",
+     3
+    ],
+    [
+     "21-1970",
+     3
+    ],
+    [
+     "21-1279",
+     2
+    ],
+    [
+     "21-1015",
+     1
+    ],
+    [
+     "21-1031",
+     1
+    ],
+    [
+     "21-1392",
+     1
+    ],
+    [
+     "21-1686",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 169
+    },
+    {
+     "nome": "E.m.e.f. Venceslau Ferreira Chaves",
+     "curto": "Venceslau Ferreira Chaves",
+     "bairro": "Distrito",
+     "votos": 98
+    },
+    {
+     "nome": "Escola de Ensino Fundamental Delmiro Golveia",
+     "curto": "Delmiro Golveia",
+     "bairro": "Sede",
+     "votos": 80
+    }
+   ],
+   "conc": 0.13773431132844335,
+   "top3": 0.2828035859820701,
+   "venceu": 0,
+   "presente": 49
+  },
+  {
+   "urna": "Raimundo Amaro",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309622.jpg",
+   "votos": 1098,
+   "pos": 6,
+   "pct": 0.038926507604495335,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1318,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1996",
+     273
+    ],
+    [
+     "21-1171",
+     100
+    ],
+    [
+     "21-1791",
+     76
+    ],
+    [
+     "21-1031",
+     58
+    ],
+    [
+     "21-1430",
+     56
+    ],
+    [
+     "21-1651",
+     51
+    ],
+    [
+     "21-1163",
+     45
+    ],
+    [
+     "21-1821",
+     44
+    ],
+    [
+     "21-1287",
+     38
+    ],
+    [
+     "21-1155",
+     37
+    ],
+    [
+     "21-1856",
+     23
+    ],
+    [
+     "21-1260",
+     22
+    ],
+    [
+     "21-1104",
+     20
+    ],
+    [
+     "21-1708",
+     19
+    ],
+    [
+     "21-1945",
+     18
+    ],
+    [
+     "21-1490",
+     18
+    ],
+    [
+     "21-1597",
+     16
+    ],
+    [
+     "21-1376",
+     16
+    ],
+    [
+     "21-1716",
+     14
+    ],
+    [
+     "21-1023",
+     13
+    ],
+    [
+     "21-1686",
+     12
+    ],
+    [
+     "21-1180",
+     11
+    ],
+    [
+     "21-1678",
+     10
+    ],
+    [
+     "21-1082",
+     10
+    ],
+    [
+     "21-1317",
+     10
+    ],
+    [
+     "21-1953",
+     9
+    ],
+    [
+     "21-1392",
+     9
+    ],
+    [
+     "21-1627",
+     9
+    ],
+    [
+     "21-1970",
+     7
+    ],
+    [
+     "21-1570",
+     6
+    ],
+    [
+     "21-1295",
+     5
+    ],
+    [
+     "21-1880",
+     5
+    ],
+    [
+     "21-1538",
+     5
+    ],
+    [
+     "21-2070",
+     4
+    ],
+    [
+     "21-1279",
+     4
+    ],
+    [
+     "21-1341",
+     4
+    ],
+    [
+     "21-1015",
+     3
+    ],
+    [
+     "21-1899",
+     3
+    ],
+    [
+     "21-2038",
+     3
+    ],
+    [
+     "21-1244",
+     3
+    ],
+    [
+     "21-1937",
+     2
+    ],
+    [
+     "21-1554",
+     2
+    ],
+    [
+     "21-1732",
+     1
+    ],
+    [
+     "21-1694",
+     1
+    ],
+    [
+     "21-1660",
+     1
+    ],
+    [
+     "21-1520",
+     1
+    ],
+    [
+     "21-2054",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Eef Duque de Caxias",
+     "curto": "Duque de Caxias",
+     "bairro": "Marruas dos Paivas",
+     "votos": 273
+    },
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 100
+    },
+    {
+     "nome": "E.m.e.f. Antonio Alves Ferreira",
+     "curto": "Antônio Alves Ferreira",
+     "bairro": "Distrito",
+     "votos": 76
+    }
+   ],
+   "conc": 0.24863387978142076,
+   "top3": 0.4089253187613843,
+   "venceu": 5,
+   "presente": 47
+  },
+  {
+   "urna": "Joice Mororó",
+   "partido": "PT",
+   "foto": "fotos/ce/ipu/2024/60002205463.jpeg",
+   "votos": 1021,
+   "pos": 7,
+   "pct": 0.03619668876520013,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1171",
+     110
+    ],
+    [
+     "21-1694",
+     98
+    ],
+    [
+     "21-1090",
+     91
+    ],
+    [
+     "21-1287",
+     74
+    ],
+    [
+     "21-1961",
+     66
+    ],
+    [
+     "21-1821",
+     62
+    ],
+    [
+     "21-1260",
+     60
+    ],
+    [
+     "21-1163",
+     53
+    ],
+    [
+     "21-1490",
+     50
+    ],
+    [
+     "21-1155",
+     46
+    ],
+    [
+     "21-1023",
+     37
+    ],
+    [
+     "21-1180",
+     35
+    ],
+    [
+     "21-1597",
+     30
+    ],
+    [
+     "21-1376",
+     24
+    ],
+    [
+     "21-1520",
+     22
+    ],
+    [
+     "21-1104",
+     16
+    ],
+    [
+     "21-1082",
+     15
+    ],
+    [
+     "21-1449",
+     13
+    ],
+    [
+     "21-1244",
+     13
+    ],
+    [
+     "21-1953",
+     10
+    ],
+    [
+     "21-1538",
+     10
+    ],
+    [
+     "21-1945",
+     8
+    ],
+    [
+     "21-1937",
+     8
+    ],
+    [
+     "21-1317",
+     8
+    ],
+    [
+     "21-1686",
+     8
+    ],
+    [
+     "21-1570",
+     7
+    ],
+    [
+     "21-2054",
+     6
+    ],
+    [
+     "21-1880",
+     5
+    ],
+    [
+     "21-1660",
+     4
+    ],
+    [
+     "21-1430",
+     4
+    ],
+    [
+     "21-1627",
+     4
+    ],
+    [
+     "21-1015",
+     3
+    ],
+    [
+     "21-1899",
+     3
+    ],
+    [
+     "21-2038",
+     3
+    ],
+    [
+     "21-1708",
+     3
+    ],
+    [
+     "21-1295",
+     2
+    ],
+    [
+     "21-1716",
+     2
+    ],
+    [
+     "21-1732",
+     1
+    ],
+    [
+     "21-1791",
+     1
+    ],
+    [
+     "21-2070",
+     1
+    ],
+    [
+     "21-1651",
+     1
+    ],
+    [
+     "21-1678",
+     1
+    ],
+    [
+     "21-1970",
+     1
+    ],
+    [
+     "21-2089",
+     1
+    ],
+    [
+     "21-1031",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 110
+    },
+    {
+     "nome": "E.m.e.f. Serafim Filomeno do Nascimento",
+     "curto": "Serafim Filomeno do Nascimento",
+     "bairro": "Distrito",
+     "votos": 98
+    },
+    {
+     "nome": "E.m.e.f. Luiz Gonzaga da Costa",
+     "curto": "Luiz Gonzaga da Costa",
+     "bairro": "Distrito",
+     "votos": 91
+    }
+   ],
+   "conc": 0.10773751224289912,
+   "top3": 0.29285014691478944,
+   "venceu": 4,
+   "presente": 45
+  },
+  {
+   "urna": "Victor Gomes",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309624.jpeg",
+   "votos": 987,
+   "pos": 8,
+   "pct": 0.034991314212784064,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1171",
+     196
+    ],
+    [
+     "21-1821",
+     98
+    ],
+    [
+     "21-1708",
+     71
+    ],
+    [
+     "21-1651",
+     66
+    ],
+    [
+     "21-1490",
+     64
+    ],
+    [
+     "21-1287",
+     60
+    ],
+    [
+     "21-1155",
+     47
+    ],
+    [
+     "21-1260",
+     44
+    ],
+    [
+     "21-1163",
+     34
+    ],
+    [
+     "21-1180",
+     32
+    ],
+    [
+     "21-1597",
+     24
+    ],
+    [
+     "21-2070",
+     23
+    ],
+    [
+     "21-1104",
+     17
+    ],
+    [
+     "21-1082",
+     16
+    ],
+    [
+     "21-1694",
+     12
+    ],
+    [
+     "21-1716",
+     12
+    ],
+    [
+     "21-1660",
+     11
+    ],
+    [
+     "21-1520",
+     11
+    ],
+    [
+     "21-1295",
+     10
+    ],
+    [
+     "21-1880",
+     10
+    ],
+    [
+     "21-1376",
+     10
+    ],
+    [
+     "21-1015",
+     8
+    ],
+    [
+     "21-1678",
+     8
+    ],
+    [
+     "21-1570",
+     8
+    ],
+    [
+     "21-1686",
+     8
+    ],
+    [
+     "21-1449",
+     7
+    ],
+    [
+     "21-1937",
+     7
+    ],
+    [
+     "21-1244",
+     7
+    ],
+    [
+     "21-1627",
+     7
+    ],
+    [
+     "21-1945",
+     6
+    ],
+    [
+     "21-1538",
+     6
+    ],
+    [
+     "21-2054",
+     6
+    ],
+    [
+     "21-1970",
+     5
+    ],
+    [
+     "21-2038",
+     5
+    ],
+    [
+     "21-1953",
+     4
+    ],
+    [
+     "21-1392",
+     4
+    ],
+    [
+     "21-1279",
+     3
+    ],
+    [
+     "21-1961",
+     3
+    ],
+    [
+     "21-1031",
+     3
+    ],
+    [
+     "21-1554",
+     3
+    ],
+    [
+     "21-1317",
+     3
+    ],
+    [
+     "21-1856",
+     2
+    ],
+    [
+     "21-2089",
+     2
+    ],
+    [
+     "21-1341",
+     2
+    ],
+    [
+     "21-1899",
+     1
+    ],
+    [
+     "21-1996",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 196
+    },
+    {
+     "nome": "E.m.e.f. Maria Laura Sampaio",
+     "curto": "Maria Laura Sampaio",
+     "bairro": "Sede",
+     "votos": 98
+    },
+    {
+     "nome": "U.b.s. Manoel Ferreira de Sousa",
+     "curto": "Manoel Ferreira de Sousa",
+     "bairro": "Distrito",
+     "votos": 71
+    }
+   ],
+   "conc": 0.19858156028368795,
+   "top3": 0.3698074974670719,
+   "venceu": 1,
+   "presente": 46
+  },
+  {
+   "urna": "Ivan Moreira",
+   "partido": "PSB",
+   "foto": "fotos/ce/ipu/2024/60002309621.jpg",
+   "votos": 978,
+   "pos": 9,
+   "pct": 0.034672244478320985,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 638,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1171",
+     152
+    ],
+    [
+     "21-1937",
+     77
+    ],
+    [
+     "21-1821",
+     67
+    ],
+    [
+     "21-1880",
+     53
+    ],
+    [
+     "21-1295",
+     46
+    ],
+    [
+     "21-1660",
+     45
+    ],
+    [
+     "21-1287",
+     45
+    ],
+    [
+     "21-1490",
+     42
+    ],
+    [
+     "21-1260",
+     39
+    ],
+    [
+     "21-1015",
+     36
+    ],
+    [
+     "21-1155",
+     33
+    ],
+    [
+     "21-1970",
+     33
+    ],
+    [
+     "21-1163",
+     26
+    ],
+    [
+     "21-1392",
+     24
+    ],
+    [
+     "21-1953",
+     23
+    ],
+    [
+     "21-1597",
+     23
+    ],
+    [
+     "21-2054",
+     22
+    ],
+    [
+     "21-1899",
+     20
+    ],
+    [
+     "21-1180",
+     19
+    ],
+    [
+     "21-1082",
+     18
+    ],
+    [
+     "21-1104",
+     15
+    ],
+    [
+     "21-1376",
+     15
+    ],
+    [
+     "21-1856",
+     14
+    ],
+    [
+     "21-2089",
+     13
+    ],
+    [
+     "21-1570",
+     10
+    ],
+    [
+     "21-1716",
+     8
+    ],
+    [
+     "21-2070",
+     8
+    ],
+    [
+     "21-2038",
+     8
+    ],
+    [
+     "21-1627",
+     6
+    ],
+    [
+     "21-1651",
+     5
+    ],
+    [
+     "21-1538",
+     5
+    ],
+    [
+     "21-1678",
+     4
+    ],
+    [
+     "21-1945",
+     4
+    ],
+    [
+     "21-1520",
+     3
+    ],
+    [
+     "21-1686",
+     3
+    ],
+    [
+     "21-1708",
+     3
+    ],
+    [
+     "21-1279",
+     2
+    ],
+    [
+     "21-1244",
+     2
+    ],
+    [
+     "21-1791",
+     1
+    ],
+    [
+     "21-1023",
+     1
+    ],
+    [
+     "21-1961",
+     1
+    ],
+    [
+     "21-1996",
+     1
+    ],
+    [
+     "21-1031",
+     1
+    ],
+    [
+     "21-1317",
+     1
+    ],
+    [
+     "21-1449",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 152
+    },
+    {
+     "nome": "Emeb Francisco Carvalho de Aragão",
+     "curto": "Francisco Carvalho de Aragão",
+     "bairro": "Distrito",
+     "votos": 77
+    },
+    {
+     "nome": "E.m.e.f. Maria Laura Sampaio",
+     "curto": "Maria Laura Sampaio",
+     "bairro": "Sede",
+     "votos": 67
+    }
+   ],
+   "conc": 0.1554192229038855,
+   "top3": 0.30265848670756645,
+   "venceu": 2,
+   "presente": 45
+  },
+  {
+   "urna": "Farias Filho",
+   "partido": "PSD",
+   "foto": "fotos/ce/ipu/2024/60002204989.jpeg",
+   "votos": 920,
+   "pos": 10,
+   "pct": 0.03261601730067005,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1171",
+     100
+    ],
+    [
+     "21-1163",
+     97
+    ],
+    [
+     "21-1287",
+     77
+    ],
+    [
+     "21-1821",
+     68
+    ],
+    [
+     "21-1155",
+     52
+    ],
+    [
+     "21-1520",
+     47
+    ],
+    [
+     "21-1260",
+     43
+    ],
+    [
+     "21-2089",
+     42
+    ],
+    [
+     "21-1490",
+     31
+    ],
+    [
+     "21-2070",
+     28
+    ],
+    [
+     "21-1449",
+     26
+    ],
+    [
+     "21-1597",
+     26
+    ],
+    [
+     "21-1651",
+     24
+    ],
+    [
+     "21-1104",
+     23
+    ],
+    [
+     "21-1180",
+     21
+    ],
+    [
+     "21-1376",
+     19
+    ],
+    [
+     "21-1880",
+     18
+    ],
+    [
+     "21-1945",
+     17
+    ],
+    [
+     "21-1660",
+     15
+    ],
+    [
+     "21-1082",
+     14
+    ],
+    [
+     "21-1538",
+     11
+    ],
+    [
+     "21-1570",
+     11
+    ],
+    [
+     "21-1953",
+     10
+    ],
+    [
+     "21-1244",
+     9
+    ],
+    [
+     "21-1716",
+     8
+    ],
+    [
+     "21-1970",
+     8
+    ],
+    [
+     "21-1961",
+     7
+    ],
+    [
+     "21-1317",
+     6
+    ],
+    [
+     "21-1627",
+     6
+    ],
+    [
+     "21-2054",
+     6
+    ],
+    [
+     "21-1295",
+     5
+    ],
+    [
+     "21-1031",
+     5
+    ],
+    [
+     "21-1430",
+     5
+    ],
+    [
+     "21-1678",
+     4
+    ],
+    [
+     "21-1791",
+     4
+    ],
+    [
+     "21-1856",
+     4
+    ],
+    [
+     "21-1341",
+     4
+    ],
+    [
+     "21-1899",
+     3
+    ],
+    [
+     "21-1937",
+     3
+    ],
+    [
+     "21-2038",
+     3
+    ],
+    [
+     "21-1015",
+     3
+    ],
+    [
+     "21-1554",
+     3
+    ],
+    [
+     "21-1090",
+     2
+    ],
+    [
+     "21-1279",
+     1
+    ],
+    [
+     "21-1392",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 100
+    },
+    {
+     "nome": "E.m.e.f. Profa. Maria Valdemira Coelho Mello",
+     "curto": "Profa. Maria Valdemira Coelho Mello",
+     "bairro": "Sede",
+     "votos": 97
+    },
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Auton Aragao",
+     "curto": "Auton Aragao",
+     "bairro": "Sede",
+     "votos": 77
+    }
+   ],
+   "conc": 0.10869565217391304,
+   "top3": 0.29782608695652174,
+   "venceu": 1,
+   "presente": 45
+  },
+  {
+   "urna": "Elisafran Mororó",
+   "partido": "MDB",
+   "foto": "fotos/ce/ipu/2024/60002204986.jpeg",
+   "votos": 692,
+   "pos": 13,
+   "pct": 0.024532917360938773,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1821",
+     74
+    ],
+    [
+     "21-1171",
+     63
+    ],
+    [
+     "21-1155",
+     60
+    ],
+    [
+     "21-1163",
+     58
+    ],
+    [
+     "21-1287",
+     57
+    ],
+    [
+     "21-1260",
+     48
+    ],
+    [
+     "21-1490",
+     48
+    ],
+    [
+     "21-1791",
+     33
+    ],
+    [
+     "21-1104",
+     21
+    ],
+    [
+     "21-1180",
+     18
+    ],
+    [
+     "21-1376",
+     17
+    ],
+    [
+     "21-1082",
+     15
+    ],
+    [
+     "21-1597",
+     15
+    ],
+    [
+     "21-1856",
+     14
+    ],
+    [
+     "21-1570",
+     14
+    ],
+    [
+     "21-1627",
+     11
+    ],
+    [
+     "21-1651",
+     10
+    ],
+    [
+     "21-1244",
+     9
+    ],
+    [
+     "21-1520",
+     9
+    ],
+    [
+     "21-1538",
+     9
+    ],
+    [
+     "21-1708",
+     8
+    ],
+    [
+     "21-1295",
+     7
+    ],
+    [
+     "21-1449",
+     6
+    ],
+    [
+     "21-1937",
+     6
+    ],
+    [
+     "21-1031",
+     6
+    ],
+    [
+     "21-1716",
+     5
+    ],
+    [
+     "21-1015",
+     4
+    ],
+    [
+     "21-1945",
+     4
+    ],
+    [
+     "21-1880",
+     4
+    ],
+    [
+     "21-1961",
+     4
+    ],
+    [
+     "21-1317",
+     4
+    ],
+    [
+     "21-1899",
+     3
+    ],
+    [
+     "21-2038",
+     3
+    ],
+    [
+     "21-1554",
+     3
+    ],
+    [
+     "21-1341",
+     3
+    ],
+    [
+     "21-1686",
+     3
+    ],
+    [
+     "21-1694",
+     2
+    ],
+    [
+     "21-2070",
+     2
+    ],
+    [
+     "21-1023",
+     2
+    ],
+    [
+     "21-1953",
+     2
+    ],
+    [
+     "21-1660",
+     2
+    ],
+    [
+     "21-1430",
+     2
+    ],
+    [
+     "21-1279",
+     1
+    ],
+    [
+     "21-1970",
+     1
+    ],
+    [
+     "21-2089",
+     1
+    ],
+    [
+     "21-1392",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.m.e.f. Maria Laura Sampaio",
+     "curto": "Maria Laura Sampaio",
+     "bairro": "Sede",
+     "votos": 74
+    },
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 63
+    },
+    {
+     "nome": "Escola de Ensino Fundamental Delmiro Golveia",
+     "curto": "Delmiro Golveia",
+     "bairro": "Sede",
+     "votos": 60
+    }
+   ],
+   "conc": 0.1069364161849711,
+   "top3": 0.2846820809248555,
+   "venceu": 0,
+   "presente": 46
+  },
+  {
+   "urna": "Hilton Belém",
+   "partido": "PT",
+   "foto": "fotos/ce/ipu/2024/60002205458.jpeg",
+   "votos": 683,
+   "pos": 14,
+   "pct": 0.024213847626475698,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 715,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "21-1660",
+     180
+    ],
+    [
+     "21-2054",
+     69
+    ],
+    [
+     "21-1821",
+     48
+    ],
+    [
+     "21-1171",
+     46
+    ],
+    [
+     "21-1937",
+     38
+    ],
+    [
+     "21-1899",
+     35
+    ],
+    [
+     "21-2038",
+     35
+    ],
+    [
+     "21-1163",
+     31
+    ],
+    [
+     "21-1880",
+     30
+    ],
+    [
+     "21-1490",
+     25
+    ],
+    [
+     "21-1287",
+     23
+    ],
+    [
+     "21-1155",
+     22
+    ],
+    [
+     "21-1180",
+     14
+    ],
+    [
+     "21-1082",
+     10
+    ],
+    [
+     "21-1597",
+     10
+    ],
+    [
+     "21-1104",
+     9
+    ],
+    [
+     "21-1260",
+     8
+    ],
+    [
+     "21-1015",
+     6
+    ],
+    [
+     "21-1317",
+     6
+    ],
+    [
+     "21-1945",
+     4
+    ],
+    [
+     "21-1627",
+     4
+    ],
+    [
+     "21-1678",
+     3
+    ],
+    [
+     "21-2070",
+     3
+    ],
+    [
+     "21-1376",
+     3
+    ],
+    [
+     "21-1538",
+     3
+    ],
+    [
+     "21-1856",
+     2
+    ],
+    [
+     "21-1953",
+     2
+    ],
+    [
+     "21-1031",
+     2
+    ],
+    [
+     "21-1449",
+     2
+    ],
+    [
+     "21-1651",
+     2
+    ],
+    [
+     "21-1295",
+     1
+    ],
+    [
+     "21-1716",
+     1
+    ],
+    [
+     "21-1961",
+     1
+    ],
+    [
+     "21-1244",
+     1
+    ],
+    [
+     "21-1341",
+     1
+    ],
+    [
+     "21-1392",
+     1
+    ],
+    [
+     "21-1520",
+     1
+    ],
+    [
+     "21-1570",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.m.e.f. Joao de Paula Belem",
+     "curto": "João de Paula Belem",
+     "bairro": "Distrito",
+     "votos": 180
+    },
+    {
+     "nome": "Ubs Antonia Lopes Ferreira",
+     "curto": "Ubs Antonia Lopes Ferreira",
+     "bairro": "Zona Rural",
+     "votos": 69
+    },
+    {
+     "nome": "E.m.e.f. Maria Laura Sampaio",
+     "curto": "Maria Laura Sampaio",
+     "bairro": "Sede",
+     "votos": 48
+    }
+   ],
+   "conc": 0.2635431918008785,
+   "top3": 0.43484626647144947,
+   "venceu": 3,
+   "presente": 38
+  },
+  {
+   "urna": "Chagas Teteu",
+   "partido": "PDT",
+   "foto": "fotos/ce/ipu/2024/60002309659.jpeg",
+   "votos": 647,
+   "pos": 17,
+   "pct": 0.022937568688623393,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "21-1279",
+     151
+    ],
+    [
+     "21-1171",
+     82
+    ],
+    [
+     "21-1163",
+     52
+    ],
+    [
+     "21-1287",
+     42
+    ],
+    [
+     "21-1821",
+     40
+    ],
+    [
+     "21-1260",
+     30
+    ],
+    [
+     "21-1180",
+     22
+    ],
+    [
+     "21-1392",
+     21
+    ],
+    [
+     "21-1376",
+     19
+    ],
+    [
+     "21-1155",
+     15
+    ],
+    [
+     "21-1490",
+     14
+    ],
+    [
+     "21-1716",
+     13
+    ],
+    [
+     "21-1945",
+     13
+    ],
+    [
+     "21-1104",
+     12
+    ],
+    [
+     "21-1082",
+     9
+    ],
+    [
+     "21-1937",
+     8
+    ],
+    [
+     "21-1961",
+     8
+    ],
+    [
+     "21-1791",
+     7
+    ],
+    [
+     "21-2038",
+     7
+    ],
+    [
+     "21-1570",
+     7
+    ],
+    [
+     "21-1694",
+     6
+    ],
+    [
+     "21-1597",
+     6
+    ],
+    [
+     "21-1538",
+     6
+    ],
+    [
+     "21-1708",
+     6
+    ],
+    [
+     "21-1880",
+     5
+    ],
+    [
+     "21-1953",
+     5
+    ],
+    [
+     "21-1244",
+     5
+    ],
+    [
+     "21-1651",
+     4
+    ],
+    [
+     "21-2089",
+     4
+    ],
+    [
+     "21-1430",
+     4
+    ],
+    [
+     "21-1660",
+     3
+    ],
+    [
+     "21-1627",
+     3
+    ],
+    [
+     "21-1449",
+     2
+    ],
+    [
+     "21-1970",
+     2
+    ],
+    [
+     "21-1341",
+     2
+    ],
+    [
+     "21-1520",
+     2
+    ],
+    [
+     "21-1015",
+     1
+    ],
+    [
+     "21-1678",
+     1
+    ],
+    [
+     "21-1295",
+     1
+    ],
+    [
+     "21-1090",
+     1
+    ],
+    [
+     "21-1856",
+     1
+    ],
+    [
+     "21-1031",
+     1
+    ],
+    [
+     "21-1317",
+     1
+    ],
+    [
+     "21-2070",
+     1
+    ],
+    [
+     "21-1686",
+     1
+    ],
+    [
+     "21-2054",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "E.m.e.f. Francisco Assis Torquato",
+     "curto": "Francisco Assis Torquato",
+     "bairro": "Distrito",
+     "votos": 151
+    },
+    {
+     "nome": "Emeb Monsenhor Gonçalo de Oliveira Lima",
+     "curto": "Monsenhor Gonçalo de Oliveira Lima",
+     "bairro": "Alto da Boa Vista",
+     "votos": 82
+    },
+    {
+     "nome": "E.m.e.f. Profa. Maria Valdemira Coelho Mello",
+     "curto": "Profa. Maria Valdemira Coelho Mello",
+     "bairro": "Sede",
+     "votos": 52
+    }
+   ],
+   "conc": 0.23338485316846985,
+   "top3": 0.44049459041731065,
+   "venceu": 1,
+   "presente": 46
+  }
+ ],
+ "qe2028": 2476,
+ "fala": [
+  "Ipu. Os treze vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram setenta e sete candidatos para treze cadeiras. Seis são caras novas. PSB, seis; PT, quatro; PSD, um; MDB, um; PDT, um. E o quociente: dois mil cento e setenta votos.",
+  "Nonato Filho, do PT. Dois mil cento e cinquenta e quatro votos: a maior votação da cidade. Em dois mil e vinte, tinha feito mil duzentos e vinte e seis: ganhou novecentos e vinte e oito votos e renovou o mandato. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: duzentos e dez votos. Liderou a votação em doze dos cinquenta e um locais.",
+  "Monga, do PT. Dois mil e sessenta e quatro votos: segundo lugar. Em dois mil e vinte, tinha feito mil quinhentos e cinquenta e seis: ganhou quinhentos e oito votos e renovou o mandato. O maior reduto é na escola Venceslau Ferreira Chaves: duzentos e trinta e um votos. Liderou a votação em oito dos cinquenta e um locais.",
+  "Zeca Rufino, do PSB. Mil quatrocentos e quarenta e seis votos: terceiro lugar. Em dois mil e vinte, tinha feito mil quatrocentos e dez: ganhou trinta e seis votos e renovou o mandato. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cento e seis votos. Liderou a votação em três dos cinquenta e um locais.",
+  "Moreira Filho, do PSB. Mil duzentos e trinta e dois votos: quarto lugar. Em dois mil e vinte, tinha feito mil e oitenta: ganhou cento e cinquenta e dois votos e renovou o mandato. O maior reduto é na escola João Ferreira da Costa: cento e vinte e sete votos.",
+  "Cristina Peres, do PSB. Mil duzentos e vinte e sete votos: quinto lugar. Em dois mil e vinte, não chegou à Câmara. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cento e sessenta e nove votos.",
+  "Raimundo Amaro, do PSB. Mil e noventa e oito votos: sexto lugar. Em dois mil e vinte, tinha feito mil trezentos e dezoito: perdeu duzentos e vinte votos e renovou o mandato. O maior reduto é na escola Duque de Caxias, em Marruas dos Paivas: duzentos e setenta e três votos. Liderou a votação em cinco dos cinquenta e um locais.",
+  "Joice Mororó, do PT. Mil e vinte e um votos: sétimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cento e dez votos. Liderou a votação em quatro dos cinquenta e um locais.",
+  "Victor Gomes, do PSB. Novecentos e oitenta e sete votos: oitavo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cento e noventa e seis votos.",
+  "Ivan Moreira, do PSB. Novecentos e setenta e oito votos: nono lugar. Em dois mil e vinte, tinha feito seiscentos e trinta e oito: ganhou trezentos e quarenta votos e renovou o mandato. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cento e cinquenta e dois votos. Entrou pela média, na distribuição das sobras.",
+  "Farias Filho, do PSD. Novecentos e vinte votos: décimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Monsenhor Gonçalo de Oliveira Lima, em Alto da Boa Vista: cem votos.",
+  "Elisafran Mororó, do MDB. Seiscentos e noventa e dois votos: décimo terceiro lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Maria Laura Sampaio: setenta e quatro votos. Entrou pela média, na distribuição das sobras.",
+  "Hilton Belém, do PT. Seiscentos e oitenta e três votos. Em dois mil e vinte, tinha feito setecentos e quinze: perdeu trinta e dois votos e renovou o mandato. O maior reduto é na escola João de Paula Belem: cento e oitenta votos. Liderou a votação em três dos cinquenta e um locais. Ficou em décimo quarto lugar, mas a vaga é do partido: com a soma do PT, entrou.",
+  "Chagas Teteu, do PDT. Seiscentos e quarenta e sete votos. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Francisco Assis Torquato: cento e cinquenta e um votos. Três locais somam quase metade dos votos. Ficou em décimo sétimo lugar, mas a vaga é do partido: com a soma do PDT, entrou.",
+  "Nenhum eleito passou do quociente com os próprios votos: todos dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de dois mil e quinhentos votos. Plenária CE. Inteligência eleitoral de Ipu."
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "municipio": "Pacujá",
+ "ibge": "2309904",
+ "fonte": "Tesouro Nacional — Siconfi (DCA e RREO)",
+ "anos": {
+  "2024": {
+   "fonte": "DCA (anual)",
+   "receita_corrente": 55262298.75,
+   "fpm": 18954168.15,
+   "icms": 9861839.18,
+   "impostos_proprios": 1524989.38,
+   "despesa_empenhada": 54686016.6,
+   "despesa_corrente": 47637086.78,
+   "pessoal": 23827415.83,
+   "investimentos": 5933724.73,
+   "despesa_capital": 7048929.82,
+   "funcoes": {
+    "Legislativa": 2039826.6,
+    "Administração": 7828834,
+    "Assistência Social": 2469387.83,
+    "Saúde": 10650595.56,
+    "Educação": 21920823.57,
+    "Cultura": 2480928.03,
+    "Urbanismo": 3944010.86,
+    "Gestão Ambiental": 456349.75,
+    "Agricultura": 629122.05,
+    "Energia": 588028.13,
+    "Transporte": 30235.99,
+    "Encargos Especiais": 1647874.23
+   }
+  },
+  "2025": {
+   "fonte": "DCA (anual)",
+   "receita_corrente": 55375388.08,
+   "fpm": 20979932.63,
+   "icms": 10664580.88,
+   "impostos_proprios": 1575088.5,
+   "despesa_empenhada": 53403316.48,
+   "despesa_corrente": 44898567.73,
+   "pessoal": 26284866.63,
+   "investimentos": 7166897.13,
+   "despesa_capital": 8504748.75,
+   "funcoes": {
+    "Legislativa": 2148420.97,
+    "Administração": 8483557.44,
+    "Assistência Social": 2036601.92,
+    "Saúde": 9873396.96,
+    "Educação": 18565662.3,
+    "Cultura": 2405566.67,
+    "Urbanismo": 6325543.12,
+    "Gestão Ambiental": 416980.22,
+    "Agricultura": 912716.76,
+    "Energia": 723458.31,
+    "Desporto e Lazer": 173560.19,
+    "Encargos Especiais": 1337851.62
+   }
+  },
+  "2026": {
+   "fonte": "RREO 4º bimestre (parcial, até ago)",
+   "receita_corrente": 39204955.46,
+   "despesa_empenhada": 62003515.66,
+   "despesa_paga": 40847007.9
+  }
+ },
+ "fpm_jan_ago": {
+  "2024": 12293489.75,
+  "2025": 13386621.32,
+  "2026": 14522110.11
+ }
+}

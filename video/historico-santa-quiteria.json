@@ -1,0 +1,301 @@
+{
+ "atual": {
+  "nome": "Joel Barroso",
+  "quando": "out/2025"
+ },
+ "cartoes2028": [],
+ "interrupcoes": [
+  {
+   "eleicao": 2024,
+   "nome": "Braguinha",
+   "motivo": "cassado pela Justiça Eleitoral",
+   "curto": "cassado",
+   "depois": "Em outubro de dois mil e vinte e cinco, Joel Barroso venceu a eleição suplementar.",
+   "atual": "Joel Barroso",
+   "quando": "out/2025"
+  }
+ ],
+ "id": "ce/santa-quiteria",
+ "municipio": "Santa Quitéria",
+ "cd_ibge": "2312205",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 35361,
+   "comparecimento": 27351,
+   "abstencoes": 8010
+  },
+  {
+   "ano": "2020",
+   "aptos": 31597,
+   "comparecimento": 26946,
+   "abstencoes": 4651
+  },
+  {
+   "ano": "2024",
+   "aptos": 33649,
+   "comparecimento": 28761,
+   "abstencoes": 4888
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Tomás Figueiredo",
+    "partido": "MDB",
+    "votos": 13594,
+    "pct": 0.5230473258945748,
+    "pid": "ff0f6d1f34",
+    "foto": "fotos/ce/santa-quiteria/2024/60002028872.jpg"
+   },
+   "seg": {
+    "nome": "Fabiano Lobo",
+    "partido": "PDT",
+    "votos": 9410,
+    "pct": 0.3620623316660254,
+    "pid": "8bd2831a26",
+    "foto": null
+   },
+   "margem": 4184
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Braguinha",
+    "partido": "PSB",
+    "votos": 12835,
+    "pct": 0.5138727629419065,
+    "pid": "bd4a3695d0",
+    "foto": "fotos/ce/santa-quiteria/2024/60002029838.jpg"
+   },
+   "seg": {
+    "nome": "Tomás Figueiredo",
+    "partido": "MDB",
+    "votos": 12142,
+    "pct": 0.48612723705809346,
+    "pid": "ff0f6d1f34",
+    "foto": "fotos/ce/santa-quiteria/2024/60002028872.jpg"
+   },
+   "margem": 693
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Braguinha",
+    "partido": "PSB",
+    "votos": 11292,
+    "pct": 0.41011113532359994,
+    "pid": "bd4a3695d0",
+    "foto": "fotos/ce/santa-quiteria/2024/60002029838.jpg"
+   },
+   "seg": {
+    "nome": "Tomás Figueiredo",
+    "partido": "MDB",
+    "votos": 8106,
+    "pct": 0.2943996513401613,
+    "pid": "ff0f6d1f34",
+    "foto": "fotos/ce/santa-quiteria/2024/60002028872.jpg"
+   },
+   "margem": 3186
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 13,
+   "candidatos": 60,
+   "validos": 25840,
+   "qe": 1988,
+   "partidos": [
+    [
+     "PDT",
+     4
+    ],
+    [
+     "PSDB",
+     2
+    ],
+    [
+     "Podemos",
+     1
+    ],
+    [
+     "MDB",
+     1
+    ],
+    [
+     "PRP",
+     1
+    ],
+    [
+     "PTB",
+     1
+    ],
+    [
+     "PC do B",
+     1
+    ],
+    [
+     "PMB",
+     1
+    ],
+    [
+     "PSB",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Joel do Braga",
+    "votos": 1644,
+    "partido": "Podemos",
+    "foto": "fotos/ce/santa-quiteria/2024/60002030969.jpg"
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 13,
+   "candidatos": 68,
+   "validos": 25671,
+   "qe": 1975,
+   "partidos": [
+    [
+     "MDB",
+     5
+    ],
+    [
+     "PSB",
+     3
+    ],
+    [
+     "PDT",
+     2
+    ],
+    [
+     "PT",
+     2
+    ],
+    [
+     "Solidariedade",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Dr. Junior Araújo",
+    "votos": 1299,
+    "partido": "MDB",
+    "foto": "fotos/ce/santa-quiteria/2020/60001083389.jpg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 13,
+   "candidatos": 79,
+   "validos": 27601,
+   "qe": 2123,
+   "partidos": [
+    [
+     "PSB",
+     5
+    ],
+    [
+     "PP",
+     2
+    ],
+    [
+     "PT",
+     2
+    ],
+    [
+     "MDB",
+     2
+    ],
+    [
+     "Republicanos",
+     1
+    ],
+    [
+     "União",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Danio Braga",
+    "votos": 1887,
+    "partido": "PSB",
+    "foto": "fotos/ce/santa-quiteria/2024/60002030973.jpg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 13,
+   "reeleitos": 5,
+   "novos": 8,
+   "nomes": [
+    "Dr. Junior Araujo",
+    "Sonia Paiva",
+    "Diassis Có",
+    "Lino Paiva",
+    "Miudo"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 13,
+   "reeleitos": 5,
+   "novos": 8,
+   "nomes": [
+    "Dr. Junior Araújo",
+    "Cesário Junior",
+    "Joel Barroso",
+    "Miudo",
+    "Viana"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 13,
+   "reeleitos": 9,
+   "novos": 4,
+   "nomes": [
+    "Danio Braga",
+    "Joel Barroso",
+    "Cesario Junior",
+    "Eliandro Mesquita",
+    "Douglas Lira",
+    "Jarina Cavalcante",
+    "Miúdo",
+    "Renato Catunda",
+    "Aurismenia Chaves"
+   ]
+  }
+ ],
+ "semReeleicao": true,
+ "precedente": null,
+ "precedentes": [],
+ "qe2028": 2271,
+ "novosMedia": 7,
+ "fala": [
+  "Santa Quitéria. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de trinta e cinco mil trezentos e sessenta e um para trinta e três mil seiscentos e quarenta e nove. E a abstenção caiu: de oito mil e dez para quatro mil oitocentos e oitenta e oito eleitores.",
+  "Em dois mil e dezesseis, Tomás Figueiredo venceu com cinquenta e dois por cento. Fabiano Lobo ficou com trinta e seis. Diferença de quatro mil cento e oitenta e quatro votos.",
+  "Em dois mil e vinte, Braguinha venceu com cinquenta e um por cento. Tomás Figueiredo ficou com quarenta e nove. Diferença de seiscentos e noventa e três votos.",
+  "Em dois mil e vinte e quatro, Braguinha venceu com quarenta e um por cento. Tomás Figueiredo ficou com vinte e nove. Diferença de três mil cento e oitenta e seis votos. Depois, foi cassado pela Justiça Eleitoral. Em outubro de dois mil e vinte e cinco, Joel Barroso venceu a eleição suplementar.",
+  "Em três eleições: Tomás Figueiredo; depois Braguinha, duas vezes. Hoje, a prefeitura está com Joel Barroso, eleito na eleição suplementar.",
+  "Na Câmara, o PDT fez quatro cadeiras em dois mil e dezesseis. E em dois mil e vinte, o MDB passou a liderar com cinco cadeiras. E em dois mil e vinte e quatro, o PSB passou a liderar com cinco cadeiras, e o PDT ficou sem cadeira.",
+  "A renovação é alta. Caras novas em cada eleição: oito, oito e quatro, de treze cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de mil novecentos e oitenta e oito para dois mil cento e vinte e três votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de dois mil duzentos e cinquenta.",
+  "Então, como será dois mil e vinte e oito? A prefeitura mudou de mãos no meio do mandato. Se a renovação seguir a média, cerca de sete vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Santa Quitéria. A história de cada eleição, para decidir a próxima."
+ ]
+}

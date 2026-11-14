@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Gonçalinho · raio-X 2004–2024</title>
+<style>html, body { margin: 0; background: #070707; } canvas { display: block; width: 540px; height: 960px; }</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="efeitos.js"></script>
+<script>
+/* Raio-X Gonçalinho (Gonçalo Farias de Oliveira, vereador de Varjota), 2004-2024. Só dados do TSE (dados-goncalinho.json). */
+(async () => {
+  const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
+  const D = await (await fetch("dados-goncalinho.json")).json(); D.anos = D.eleicoes.map((e) => [e.ano, e.partido, e.votos, e.eleito]), G = await (await fetch("geo.json")).json();
+  const AC = "#4fb7ff", LR = "#ffd166", FONT = "Oswald, sans-serif", CINZA = "#c9d6e3";
+  const fmt = (n) => Math.round(n).toLocaleString("pt-BR"), pc = (x, d = 1) => (x * 100).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2), eout = (x) => 1 - Math.pow(1 - x, 3);
+  const prog = (t, a, b) => clamp((t - a) / (b - a)), vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
+  let seed = 3; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const S = [0, 6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90]; window.DURACAO = S[S.length - 1];
+  // projeção
+  const CE = { lon: -39.35, lat: -5.25, s: 205 }, VJ = { lon: -40.52, lat: -4.172, s: 4700 }, kx = Math.cos((4.5 * Math.PI) / 180);
+  const proj = (lon, lat, v, cy = H * 0.5) => [W / 2 + (lon - v.lon) * v.s * kx, cy - (lat - v.lat) * v.s];
+  const camera = (t) => { const k = ease(prog(t, 5.6, 8.4)); return { lon: lerp(CE.lon, VJ.lon, k), lat: lerp(CE.lat, VJ.lat, k), s: Math.exp(lerp(Math.log(CE.s), Math.log(VJ.s), k)) }; };
+  const dentro = (x, y, p) => { let c = false; for (let i = 0, j = p.length - 1; i < p.length; j = i++) { const [xi, yi] = p[i], [xj, yj] = p[j]; if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) c = !c; } return c; };
+  const MAPY = H * 0.52, vj = G.varjota;
+  // imagens
+  const img = {}; const carregar = (k, src) => new Promise((ok) => { if (!src) return ok(); const i = new Image(); i.onload = () => { img[k] = i; ok(); }; i.onerror = ok; i.src = "../" + src; });
+  await Promise.all([["rg", D.foto]].map(([k, f]) => carregar(k, f)));
+  for (const [n, f, w] of [["Oswald", "oswald-latin-700-normal.woff2", "700"], ["Oswald", "oswald-latin-600-normal.woff2", "500"]]) { const ff = new FontFace(n, `url(fontes/${f})`, { weight: w }); await ff.load(); document.fonts.add(ff); }
+  // formas
+  const N = 2400, P = Array.from({ length: N }, () => ({ s: 0.8 + rnd() * 2.2, ph: rnd() * 6.283, d: rnd() * 0.35, a: 0.35 + rnd() * 0.65 }));
+  const poeira = () => [rnd() * W, rnd() * H, "dust"], forma = {}, encher = (out) => { while (out.length < N) out.push(poeira()); return out.slice(0, N); };
+  forma.poeira = Array.from({ length: N }, () => [rnd() * W, rnd() * H]);
+  const amostraVJ = (v, cy, cor) => { const out = []; const lo = vj.map((p) => p[0]), la = vj.map((p) => p[1]); const [a, b, c, d] = [Math.min(...lo), Math.max(...lo), Math.min(...la), Math.max(...la)];
+    while (out.length < N) { const lon = a + rnd() * (b - a), lat = c + rnd() * (d - c); if (dentro(lon, lat, vj)) out.push([...proj(lon, lat, v, cy), cor]); } return out; };
+  forma.vjPequena = amostraVJ(CE, MAPY, AC);
+  // 1 · linha do tempo: 7 colunas (1 ponto = 6 votos)
+  const LB = 1380, LG = 14, LP = 5, LX = (i) => 110 + i * ((W - 220) / 5), topoL = (v) => LB - Math.floor(Math.round(v / 6) / LP) * LG;
+  forma.linha = (() => { const out = []; D.anos.forEach(([ano, pt, v, el], i) => { const n = Math.round(v / 6); for (let k = 0; k < n; k++) for (let r = 0; r < 2; r++) out.push([LX(i) - ((LP - 1) * LG) / 2 + (k % LP) * LG + gauss(), LB - Math.floor(k / LP) * LG + gauss(), el ? AC : "#9fb3c2"]); }); return encher(out); })();
+  // 2..7 · ranking de cada eleição (14 primeiros; se ele ficou abaixo, entra como 14ª linha)
+  const EL = D.eleicoes, RY0 = 500, RH = 76, RX = 100, RW = 880, CINZ = "#9fb3c2";
+  EL.forEach((e) => { const mx = e.rows[0][2], tot = e.rows.reduce((a, r) => a + r[2], 0), out = [];
+    e.rows.forEach(([n, p, v, el, rg], k) => { const m = Math.max(30, Math.round((N * 0.92 * v) / tot)), w = (RW * v) / mx; for (let j = 0; j < m; j++) out.push([RX + rnd() * w, RY0 + k * RH + 22 + gauss() * 3.2, rg ? LR : el ? AC : CINZ]); });
+    forma["r" + e.ano] = encher(out); });
+  // 8 · Gonçalinho x Regio (ele primeiro)
+  const GO = [[2004, 245, 300], [2008, 621, 437], [2012, 473, 541], [2016, 663, 676], [2020, 784, 726], [2024, 915, 884]], GY = (k) => 560 + k * 150, GX = 250, GW = 640, GM = 915;
+  forma.gonca = (() => { const out = [], tot = GO.reduce((a, x) => a + x[1] + x[2], 0); GO.forEach(([a, r, g], k) => [[r, 0, LR], [g, 1, AC]].forEach(([v, j, c]) => { const m = Math.round((N * 0.92 * v) / tot); for (let q = 0; q < m; q++) out.push([GX + rnd() * (GW * v) / GM, GY(k) + j * 48 + gauss() * 4, c]); })); return encher(out); })();
+  // 9 · as 6 eleições: Gonçalinho, Anchieta, Fransquinha
+  const TRIO = [[2004, 245, 332, 250], [2008, 621, 402, 417], [2012, 473, 719, 422], [2016, 663, 586, 551], [2020, 784, 575, 414], [2024, 915, 485, 682]], TX = [400, 640, 880], TY = (k) => 620 + k * 150;
+  forma.trio = (() => { const out = [], tot = TRIO.reduce((a, x) => a + x[1] + x[2] + x[3], 0); TRIO.forEach((x, k) => [1, 2, 3].forEach((j) => { const v = x[j], m = Math.round((N * 0.92 * v) / tot), r = Math.sqrt(v) * 2.3; for (let q = 0; q < m; q++) { const a = rnd() * 6.283, rr = Math.sqrt(rnd()) * r; out.push([TX[j - 1] + Math.cos(a) * rr, TY(k) + Math.sin(a) * rr, j === 1 ? LR : AC]); } })); return encher(out); })();
+  const BA = D.bairros.map((x) => ({ ...x, xy: proj(x.lon, x.lat, VJ, MAPY) })), totV = BA.reduce((a, x) => a + x.v, 0);
+  forma.mapa = (() => { const out = []; BA.forEach((x) => { const n = Math.max(20, Math.round((N * 0.85 * x.v) / totV)), r = 10 + Math.sqrt(x.v) * 4; for (let k = 0; k < n; k++) { const a = rnd() * 6.283, rr = Math.sqrt(rnd()) * r; out.push([x.xy[0] + Math.cos(a) * rr, x.xy[1] + Math.sin(a) * rr, x.b === "Croatá dos Martins" ? LR : AC]); } }); return encher(out); })();
+  // 11 · bairros onde foi o mais votado
+  const T3 = [["Croatá dos Martins", 311, 924], ["Jatobá", 103, 305]], BX0 = 110, BW = 860, BY = 640, BG = 330;
+  forma.barras = (() => { const out = []; T3.forEach(([b, v, tot], i) => { for (let k = 0; k < 1100; k++) { const fr = rnd(); out.push([BX0 + fr * BW, BY + i * BG + 90 + gauss() * 10, fr < v / tot ? LR : CINZ]); } }); return encher(out); })();
+  forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 270 + Math.abs(gauss()) * 40; return [W / 2 + Math.cos(a) * r, 820 + Math.sin(a) * r, rnd() < 0.65 ? AC : LR]; });
+  const KF = [[0, "poeira", 0], [1.6, "vjPequena", 2.4], [S[1] + 0.2, "linha", 2.2], ...EL.map((e, i) => [S[2 + i] + 0.2, "r" + e.ano, 1.8]), [S[8] + 0.2, "gonca", 1.8], [S[9] + 0.2, "trio", 1.8], [S[10] + 0.2, "mapa", 2.2], [S[11] + 0.2, "barras", 1.8], [S[12] + 0.2, "halo", 2.0]];
+  const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
+  const fundo = () => { const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8); g.addColorStop(0, "#0f2a40"); g.addColorStop(1, "#03080e"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); };
+  const texto = (s, x, y, o = {}) => { const a = o.a == null ? 1 : o.a; if (a <= 0.01) return; ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center";
+    let tam = o.tam || 56; ctx.font = `${o.w || 700} ${tam}px ${FONT}`; ctx.letterSpacing = (o.ls || 0) + "px"; const ls = String(s).split("\n"), lg = Math.max(...ls.map((l) => ctx.measureText(l).width));
+    if (lg > (o.max || 980)) { tam *= (o.max || 980) / lg; ctx.font = `${o.w || 700} ${tam}px ${FONT}`; } if (o.brilho) { ctx.shadowColor = o.cor || "rgba(255,255,255,.6)"; ctx.shadowBlur = o.brilho; }
+    const dy = o.sobe ? (1 - a) * 24 : 0; ls.forEach((l, i) => ctx.fillText(l, x, y + dy + i * (o.lh || tam * 1.18))); ctx.restore(); };
+  const marca = () => { ctx.save(); ctx.font = `700 19px ${FONT}`; ctx.letterSpacing = "4px"; const s = "PLENÁRIA CE", w = ctx.measureText(s).width + 36, x = W - w - 60, y = H - 130;
+    ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.roundRect(x, y, w, 40, 20); ctx.stroke(); ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.textAlign = "left"; ctx.fillText(s, x + 18, y + 27); ctx.restore(); };
+  const fonte = (a) => texto("Fonte: TSE", W / 2, H - 70, { tam: 22, w: 500, a: a * 0.8, cor: "#8fa6bb" });
+  const contornos = (t, v, cy, a, realce) => { if (a <= 0.01) return; ctx.save(); ctx.lineWidth = 1.4; ctx.strokeStyle = `rgba(255,255,255,${0.16 * a})`; const k = prog(t, 0.2, 2.4);
+    G.mun.forEach((r, ri) => { if (ri / G.mun.length > k * 1.02) return; ctx.beginPath(); r.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.stroke(); });
+    if (realce > 0) { ctx.beginPath(); vj.forEach(([lon, lat], i) => { const [x, y] = proj(lon, lat, v, cy); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.closePath(); ctx.shadowColor = AC; ctx.shadowBlur = 24 * realce; ctx.strokeStyle = `rgba(79,183,255,${0.9 * realce})`; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = `rgba(79,183,255,${0.10 * realce})`; ctx.fill(); }
+    ctx.restore(); };
+  const particulas = (t) => { const { ant, cur, t0, dur } = posicao(t); ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < N; i++) { const p = P[i], k = dur ? ease(clamp(((t - t0) / dur - p.d) / 0.65)) : 1, a0 = ant[i], a1 = cur[i];
+      let x = lerp(a0[0], a1[0], k) + Math.sin(t * 0.9 + p.ph) * 1.6, y = lerp(a0[1], a1[1], k) + Math.cos(t * 0.8 + p.ph) * 1.6; const cv = Math.sin(k * Math.PI) * 60 * (p.d - 0.17); x += cv; y -= cv * 0.6;
+      const c = (k > 0.5 ? a1[2] : a0[2]) || "#fff"; let al = p.a * (0.55 + 0.45 * Math.sin(t * 2 + p.ph * 3) ** 2); if (c === "dust") al *= 0.14; if (c === "#9fb3c2") al *= 0.5;
+      ctx.globalAlpha = clamp(al); ctx.fillStyle = c === "dust" ? "#fff" : c; ctx.beginPath(); ctx.arc(x, y, p.s, 0, 6.283); ctx.fill(); }
+    ctx.restore(); };
+  const sel = (t, i, a = 0.3) => vis(t, S[i] + a, S[i + 1]);
+  const ord = (n) => n + "º";
+  const LEG = {
+    2004: "Suplente · o PL elegeu Célia, Marcos César e Tatá",
+    2008: "1º mandato · o mais votado do PSB",
+    2012: "473 votos: o mesmo do eleito com menos voto · ficou de fora",
+    2016: "3º lugar · Regio, do mesmo partido, 13 votos à frente",
+    2020: "3º lugar · o mais votado do PDT",
+    2024: "3º lugar · a maior votação da carreira" };
+  const NOME = { 2004: "nome na urna: Gonçalo", 2016: "nome na urna: Gonçalim" };
+  window.render = (t) => {
+    ctx.clearRect(0, 0, W, H); fundo();
+    const aMapa = t < S[1] ? 1 - prog(t, S[1] - 1, S[1]) : t > S[10] && t < S[11] ? vis(t, S[10], S[11]) : 0;
+    contornos(t, t < S[1] ? CE : VJ, MAPY, aMapa, (t < S[1] ? prog(t, 1.6, 3.2) : 1) * aMapa);
+    particulas(t);
+    texto("GONÇALINHO", W / 2, 330, { tam: 112, w: 700, ls: 8, a: vis(t, 0.8, S[1]), brilho: 30, sobe: 1 });
+    texto("VEREADOR DE VARJOTA · RAIO-X 2004–2024", W / 2, 400, { tam: 32, w: 700, ls: 5, a: vis(t, 1.4, S[1]), cor: AC });
+    texto("6 ELEIÇÕES", W / 2, 330, { tam: 64, w: 700, ls: 8, a: sel(t, 1), brilho: 16 });
+    texto("azul = eleito · cinza = suplente", W / 2, 392, { tam: 28, w: 500, a: sel(t, 1, 0.6), cor: "#8fa6bb" });
+    D.anos.forEach(([ano, pt, v, el], i) => { const al = vis(t, S[1] + 0.8 + i * 0.15, S[2]); texto(fmt(v), LX(i), topoL(v) - 22, { tam: 34, w: 700, a: al, cor: el ? AC : "#c9d6e3" }); texto(String(ano), LX(i), LB + 52, { tam: 30, w: 700, a: al }); texto(pt, LX(i), LB + 90, { tam: 24, w: 500, a: al, cor: "#8fa6bb" }); texto(ord(EL[i].pos), LX(i), LB + 135, { tam: 30, w: 700, a: al, cor: el ? AC : "#c9d6e3" }); });
+    texto("posição entre todos os candidatos", W / 2, LB + 190, { tam: 24, w: 500, a: vis(t, S[1] + 2, S[2]), cor: "#8fa6bb" });
+    texto("4 vitórias · 2 suplências", W / 2, 1680, { tam: 50, w: 700, a: vis(t, S[1] + 2.6, S[2]), cor: AC, sobe: 1 });
+    fonte(t > S[1] && t < S[12] ? 1 : 0);
+    EL.forEach((e, i) => { const sc = 2 + i; if (t < S[sc] - 0.5 || t > S[sc + 1] + 0.5) return; const rg = e.rows.find((r) => r[4]);
+      texto(String(e.ano), W / 2, 290, { tam: 100, w: 700, ls: 10, a: sel(t, sc), brilho: 16 });
+      texto(`${rg[1]} · ${ord(e.pos)} de ${e.cands} candidatos · ${e.vagas} vagas`, W / 2, 365, { tam: 32, w: 600, ls: 2, a: sel(t, sc, 0.5), cor: "#c9d6e3" });
+      e.rows.forEach(([n, p, v, el, me, pos], k) => { const al = vis(t, S[sc] + 0.7 + k * 0.07, S[sc + 1]), y = RY0 + k * RH, c = me ? LR : el ? "#f3f1ea" : "#8fa6bb";
+        texto(`${pos !== k + 1 ? ord(pos) + " · " : ""}${n} · ${p}`, RX, y, { tam: me ? 34 : 28, w: me ? 700 : 500, al: "left", a: al, cor: c, max: 640, brilho: me ? 12 : 0 }); texto(fmt(v), W - RX, y, { tam: me ? 34 : 28, w: 700, al: "right", a: al, cor: me ? LR : el ? AC : "#8fa6bb" }); });
+      texto(LEG[e.ano], W / 2, 1640, { tam: 38, w: 700, a: vis(t, S[sc] + 2.2, S[sc + 1]), cor: rg[3] ? AC : LR, sobe: 1, max: 960 });
+      if (NOME[e.ano]) texto(NOME[e.ano], W / 2, 1700, { tam: 28, w: 500, a: vis(t, S[sc] + 2.6, S[sc + 1]), cor: "#8fa6bb" });
+      texto("branco = eleito · cinza = não eleito", W / 2, 1760, { tam: 24, w: 500, a: sel(t, sc, 1) * 0.8, cor: "#8fa6bb" }); });
+    texto("REGIO XIMENES", W / 2, 300, { tam: 84, w: 700, ls: 8, a: sel(t, 8), brilho: 14 });
+    texto("no mesmo partido de Gonçalinho desde 2008", W / 2, 370, { tam: 32, w: 500, a: sel(t, 8, 0.5), cor: "#c9d6e3" });
+    texto("GONÇALINHO", W * 0.35, 460, { tam: 30, w: 700, ls: 3, a: sel(t, 8, 0.6), cor: LR }); texto("REGIO", W * 0.65, 460, { tam: 30, w: 700, ls: 3, a: sel(t, 8, 0.6), cor: AC });
+    GO.forEach(([a, r, g], k) => { const al = vis(t, S[8] + 0.8 + k * 0.15, S[9]); texto(String(a), 100, GY(k) + 34, { tam: 34, w: 700, al: "left", a: al });
+      [[r, 0, LR], [g, 1, AC]].forEach(([v, j, c]) => texto(fmt(v), GX + (GW * v) / GM + 22, GY(k) + j * 48 + 11, { tam: 28, w: 700, al: "left", a: al, cor: c, brilho: (j ? g > r : r > g) ? 10 : 0 })); });
+    texto("3 × 3", W / 2, 1560, { tam: 120, w: 700, a: vis(t, S[8] + 2.4, S[9]), brilho: 20, sobe: 1 });
+    texto("cada um teve mais votos em 3 das 6 eleições", W / 2, 1640, { tam: 34, w: 500, a: vis(t, S[8] + 2.8, S[9]), cor: "#c9d6e3" });
+    texto("AS 6 ELEIÇÕES", W / 2, 300, { tam: 76, w: 700, ls: 8, a: sel(t, 9), brilho: 14 });
+    texto("Anchieta e Fransquinha do Edvar também disputaram todas", W / 2, 370, { tam: 30, w: 500, a: sel(t, 9, 0.5), cor: "#c9d6e3", max: 960 });
+    [["GONÇALINHO", LR], ["ANCHIETA", AC], ["FRANSQUINHA", AC]].forEach(([n, c], j) => texto(n, TX[j], 480, { tam: 28, w: 700, ls: 2, a: sel(t, 9, 0.6), cor: c }));
+    TRIO.forEach((x, k) => { const al = vis(t, S[9] + 0.8 + k * 0.12, S[10]); texto(String(x[0]), 100, TY(k) + 12, { tam: 32, w: 700, al: "left", a: al }); [1, 2, 3].forEach((j) => texto(fmt(x[j]), TX[j - 1], TY(k) + 12, { tam: 26, w: 700, a: al * 0.95, cor: "#ffffff" })); });
+    texto("Mais votos que Anchieta em 4 de 6", W / 2, 1600, { tam: 38, w: 700, a: vis(t, S[9] + 2.4, S[10]), cor: LR, sobe: 1, max: 960 });
+    texto("e que Fransquinha em 5 de 6", W / 2, 1660, { tam: 38, w: 700, a: vis(t, S[9] + 2.8, S[10]), cor: LR, sobe: 1 });
+    texto("2024 · BAIRRO A BAIRRO", W / 2, 300, { tam: 48, w: 700, ls: 5, a: sel(t, 10), cor: "#c9d6e3" });
+    { const al = vis(t, S[10] + 1.6, S[11]); const c = BA.find((x) => x.b === "Croatá dos Martins"); if (c) texto("CROATÁ DOS MARTINS", c.xy[0], c.xy[1] - 12 - Math.sqrt(c.v) * 4 - 10, { tam: 30, w: 700, a: al, cor: LR }); const s = BA.find((x) => x.b === "Centro"); if (s) texto("sede", s.xy[0], s.xy[1] - 30 - Math.sqrt(s.v) * 4, { tam: 26, w: 600, a: al }); }
+    texto("Croatá dos Martins: 311 votos, 1 em cada 3", W / 2, 1620, { tam: 46, w: 700, a: vis(t, S[10] + 2.6, S[11]), cor: AC, sobe: 1, max: 960 });
+    texto("O MAIS VOTADO", W / 2, 420, { tam: 70, w: 700, ls: 6, a: sel(t, 11), brilho: 14, cor: LR });
+    texto("parte dourada = votos dele no bairro", W / 2, 490, { tam: 28, w: 500, a: sel(t, 11, 0.6), cor: "#8fa6bb" });
+    T3.forEach(([b, v, tot], i) => { const al = vis(t, S[11] + 0.6 + i * 0.3, S[12]), y = BY + i * BG; texto(b, BX0, y, { tam: 46, w: 700, al: "left", a: al, max: 600 }); texto(`${fmt(v)} de ${fmt(tot)}`, W - 110, y, { tam: 40, w: 700, al: "right", a: al, cor: LR }); texto(`1º entre os vereadores · ${pc(v / tot, 0)} dos votos`, BX0, y + 170, { tam: 30, w: 500, al: "left", a: al, cor: "#c9d6e3" }); });
+    texto("Só a escola Odilon Nobre, no Croatá: 219 votos", W / 2, 1500, { tam: 38, w: 700, a: vis(t, S[11] + 2.4, S[12]), sobe: 1, max: 960 });
+    const af = vis(t, S[12] + 0.2, S[13] + 30, 0.6);
+    if (af > 0.01 && img.rg) { const i = img.rg, r = 210, s = 0.85 + 0.15 * eout(af); ctx.save(); ctx.globalAlpha = af; ctx.translate(W / 2, 820); ctx.scale(s, s);
+      ctx.shadowColor = AC; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.fillStyle = "#f2f2f2"; ctx.fill(); ctx.shadowBlur = 0;
+      ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = (2 * r) / (i.width * 0.9); ctx.drawImage(i, -i.width * sc * 0.5, -i.height * sc * 0.42, i.width * sc, i.height * sc); ctx.restore();
+      ctx.lineWidth = 6; ctx.strokeStyle = LR; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); }
+    texto("GONÇALINHO", W / 2, 360, { tam: 96, w: 700, ls: 6, a: af, brilho: 20 });
+    texto("Gonçalo Farias de Oliveira · vereador de Varjota", W / 2, 430, { tam: 32, w: 500, a: vis(t, S[12] + 0.6, S[13] + 30, 0.6), cor: "#c9d6e3" });
+    texto("4 MANDATOS", W / 2, 1200, { tam: 76, w: 700, ls: 4, a: vis(t, S[12] + 1.4, S[13] + 30, 0.6), cor: LR, brilho: 16, sobe: 1 });
+    texto("3º mais votado em 2016, 2020 e 2024", W / 2, 1275, { tam: 42, w: 700, ls: 2, a: vis(t, S[12] + 1.8, S[13] + 30, 0.6), sobe: 1 });
+    texto("915 votos em 2024, a maior da carreira", W / 2, 1335, { tam: 34, w: 500, a: vis(t, S[12] + 2.2, S[13] + 30, 0.6), cor: AC, sobe: 1 });
+    texto("Fonte dos votos e foto: TSE · eleições municipais 2004 a 2024", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
+    marca();
+  };
+  window.render(0); window.pronto = true;
+})();
+</script>
+</body>
+</html>
