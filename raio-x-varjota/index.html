@@ -1,0 +1,193 @@
+<title>Raio-x Varjota</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dossiê de compras públicas — coluna de leitura com tabelas de contrato, uma barra de tendência e recomendações numeradas por prioridade. */
+:root{
+  --bg:#f6f7f4;
+  --paper:#ffffff;
+  --ink:#1b2320;
+  --ink-2:#4d5853;
+  --muted:#7b8580;
+  --line:#dfe3df;
+  --accent:#0f6b55;
+  --accent-soft:#e3f1ec;
+  --warn:#9a5b00;
+  --warn-soft:#fbf0dc;
+  --bar:#b9c6c0;
+  --font-d:"Public Sans", system-ui, sans-serif;
+  --font-m:"IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111614;--paper:#171e1b;--ink:#e8ede9;--ink-2:#b4bfb9;--muted:#86918b;--line:#2a3430;
+  --accent:#4fc7a3;--accent-soft:#16302a;--warn:#e7a948;--warn-soft:#2e2412;--bar:#3c4a44;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111614;--paper:#171e1b;--ink:#e8ede9;--ink-2:#b4bfb9;--muted:#86918b;--line:#2a3430;
+  --accent:#4fc7a3;--accent-soft:#16302a;--warn:#e7a948;--warn-soft:#2e2412;--bar:#3c4a44;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-d);font-size:16px;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;display:grid;gap:40px}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(30px,4.6vw,44px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:24px;font-weight:700;letter-spacing:-.01em}
+h3{font-size:17px;font-weight:700}
+p{margin:0}
+.mono{font-family:var(--font-m)}
+.num{font-variant-numeric:tabular-nums}
+.label{font-family:var(--font-m);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:14px}
+.flag{justify-self:start;font-family:var(--font-m);font-size:12px;padding:5px 10px;border-radius:4px;background:var(--warn-soft);color:var(--warn);font-weight:500}
+.lead{color:var(--ink-2);font-size:17px;max-width:68ch}
+section{display:grid;gap:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px 24px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kpi{background:var(--paper);padding:20px 22px;display:grid;gap:6px;align-content:start}
+.kpi b{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi span{color:var(--ink-2);font-size:14px;line-height:1.4}
+@media (max-width:700px){.kpis{grid-template-columns:1fr}}
+.trend{display:grid;gap:12px}
+.trow{display:grid;grid-template-columns:48px 1fr 110px;gap:12px;align-items:center;font-size:14.5px}
+.track{height:22px;background:var(--bg);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:4px}
+.trow .v{text-align:right;font-family:var(--font-m);font-size:14px;font-variant-numeric:tabular-nums}
+.trow small{display:block;color:var(--muted);font-size:12px;font-family:var(--font-d)}
+.axis{display:grid;grid-template-columns:48px 1fr 110px;gap:12px}
+.axis div{display:flex;justify-content:space-between;font-family:var(--font-m);font-size:11px;color:var(--muted)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:760px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td .sub{display:block;color:var(--muted);font-size:12.5px}
+.pill{justify-self:start;display:inline-block;font-family:var(--font-m);font-size:11px;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.pill.off{background:var(--bg);color:var(--muted)}
+.findings{display:grid;gap:14px;counter-reset:f;padding:0;margin:0;list-style:none}
+.findings li{counter-increment:f;display:grid;grid-template-columns:36px 1fr;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.findings li::before{content:counter(f);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--paper);font-family:var(--font-m);font-size:13px;font-weight:500}
+.findings p{color:var(--ink-2);font-size:15px;margin-top:4px}
+.gaps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:700px){.gaps{grid-template-columns:1fr}}
+.gap{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--paper);display:grid;gap:4px}
+.gap b{font-size:15px}
+.gap span{font-size:13.5px;color:var(--ink-2)}
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:800px){.pkgs{grid-template-columns:1fr}}
+.pkg{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px 22px;display:grid;gap:10px;align-content:start}
+.pkg.rec{border:2px solid var(--accent)}
+.pkg .price{font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pkg .price small{font-size:14px;font-weight:500;color:var(--muted)}
+.pkg ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px;display:grid;gap:3px}
+.pkg .yr{font-family:var(--font-m);font-size:12.5px;color:var(--muted)}
+.note{font-size:13.5px;color:var(--muted);max-width:80ch}
+.callout{border-left:3px solid var(--warn);background:var(--warn-soft);padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;color:var(--ink)}
+.callout b{color:var(--warn)}
+.obj{font-family:var(--font-m);font-size:13.5px;line-height:1.6;background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:16px 18px;color:var(--ink)}
+.src{font-family:var(--font-m);font-size:12px;color:var(--muted);display:grid;gap:4px}
+.src a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="flag">Uso interno KROMA · não enviar à prefeitura</span>
+  <span class="label">Prefeitura Municipal de Varjota · CNPJ 07.673.114/0001-41</span>
+  <h1>Raio-x dos contratos de comunicação e audiovisual, 2024 a 2026</h1>
+  <p class="lead">Levantamento no Portal da Transparência da prefeitura e no PNCP para entender quanto Varjota paga, como contrata e onde há espaço para a KROMA. Base para precificar a proposta comercial.</p>
+</header>
+
+<section>
+  <div class="kpis">
+    <div class="kpi"><span class="label">Faixa praticada</span><b>R$ 2,6 a 8,3 mil</b><span>por mês, por secretaria, nos contratos de comunicação e audiovisual</span></div>
+    <div class="kpi"><span class="label">Modalidade</span><b>Dispensa</b><span>por valor, menor preço, um contrato por secretaria ou fundo</span></div>
+    <div class="kpi"><span class="label">Vigente hoje</span><b>1 contrato</b><span>fotografia e filmagem da Educação, até 09/04/2027</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Gasto anual com comunicação e audiovisual</h2>
+  <div class="card">
+    <div class="trend" role="img" aria-label="2024: R$ 144.000; 2025: R$ 83.400; 2026: R$ 52.800">
+      <div class="trow"><span class="mono">2024</span><div class="track"><div class="fill" style="width:96%"></div></div><span class="v">R$ 144.000<small>3 contratos · agência</small></span></div>
+      <div class="trow"><span class="mono">2025</span><div class="track"><div class="fill" style="width:55.6%"></div></div><span class="v">R$ 83.400<small>2 contratos · individuais</small></span></div>
+      <div class="trow"><span class="mono">2026</span><div class="track"><div class="fill" style="width:35.2%"></div></div><span class="v">R$ 52.800<small>1 contrato · Educação</small></span></div>
+    </div>
+    <div class="axis" aria-hidden="true"><span></span><div><span>0</span><span>50 mil</span><span>100 mil</span><span>150 mil</span></div><span></span></div>
+  </div>
+  <p class="note">Valor global dos contratos pelo ano de assinatura. O gasto caiu à medida que a agência saiu e entraram prestadores individuais com escopo menor.</p>
+</section>
+
+<section>
+  <h2>Contratos encontrados</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Secretaria</th><th>Fornecedor</th><th>Objeto resumido</th><th>Vigência</th><th class="r">Valor global</th><th class="r">≈ por mês</th></tr></thead>
+      <tbody>
+        <tr><td>Educação</td><td>Agência Sala 8 Ltda</td><td>Assessoria de comunicação, redes sociais, marketing digital e imprensa</td><td class="num">15/04 a 31/12/2024<span class="sub">8,6 meses</span></td><td class="r">R$ 49.200,00</td><td class="r">R$ 5.740</td></tr>
+        <tr><td>Cultura e Tecnologia</td><td>Agência Sala 8 Ltda</td><td>Assessoria de comunicação, redes sociais, marketing digital e imprensa</td><td class="num">12/04 a 31/12/2024<span class="sub">8,7 meses</span></td><td class="r">R$ 40.800,00</td><td class="r">R$ 4.700</td></tr>
+        <tr><td>Gabinete do Prefeito</td><td>Agência Sala 8 Ltda</td><td>Assessoria de comunicação, redes, site oficial, marketing digital e imprensa</td><td class="num">17/06 a 31/12/2024<span class="sub">6,5 meses</span></td><td class="r">R$ 54.000,00</td><td class="r">R$ 8.300</td></tr>
+        <tr><td>Gabinete do Prefeito</td><td>Antonio Martins Rodrigues (MEI)</td><td>Produção de conteúdo digital e design gráfico</td><td class="num">14/02/2025 a 14/02/2026<span class="sub">encerrado</span></td><td class="r">R$ 31.200,00</td><td class="r">R$ 2.600</td></tr>
+        <tr><td>Educação</td><td>Antonio Carlos Feitosa</td><td>Fotografia e filmagem profissionais</td><td class="num">26/03/2025 a 26/03/2026<span class="sub">encerrado</span></td><td class="r">R$ 52.200,00</td><td class="r">R$ 4.350</td></tr>
+        <tr><td>Educação e Tecnologia</td><td>Antonio Carlos Feitosa</td><td>Fotografia e filmagem profissionais</td><td class="num">09/04/2026 a 09/04/2027<span class="sub"><span class="pill">vigente</span></span></td><td class="r">R$ 52.800,00</td><td class="r">R$ 4.400</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Todos os contratos da Sala 8 vieram de dispensa com tipo menor preço (processos 004.24-DE-SEDUC, 005.24-DE-CULT e 017.24-DE-GAB), justificados por pesquisa prévia de mercado.</p>
+</section>
+
+<section>
+  <h2>O que os dados mostram</h2>
+  <ol class="findings">
+    <li><div><h3>A prefeitura contrata por secretaria, sempre por dispensa</h3><p>Cada secretaria ou fundo assina o próprio contrato, com valor anual abaixo do limite de dispensa por valor. É um caminho rápido e já conhecido pelo setor de compras. A proposta da KROMA deve seguir o mesmo formato: um escopo e um preço por secretaria.</p></div></li>
+    <li><div><h3>O preço de referência fica entre R$ 4 e 6 mil por mês</h3><p>Conteúdo e design isolados saíram a R$ 2,6 mil. Fotografia e filmagem, a R$ 4,4 mil. Assessoria completa de agência, entre R$ 4,7 e 8,3 mil. Na pesquisa de preços, a prefeitura vai comparar a KROMA com esses valores.</p></div></li>
+    <li><div><h3>Hoje só a Educação tem contrato de audiovisual</h3><p>O contrato de conteúdo digital do Gabinete terminou em 14/02/2026 e não aparece renovação no PNCP. Nenhuma outra secretaria tem contrato de vídeo ou comunicação publicado em 2025 ou 2026.</p></div></li>
+    <li><div><h3>O dinheiro de eventos é muito maior que o de comunicação</h3><p>Em 2025, os registros do PNCP somam cerca de R$ 3,2 milhões em organização de eventos e shows e R$ 676 mil em serviços gráficos, contra R$ 83 mil em comunicação audiovisual. Argumento de venda: o vídeo é o que faz o investimento em evento render em público e em lembrança.</p></div></li>
+  </ol>
+</section>
+
+<section>
+  <h2>Onde a KROMA pode entrar</h2>
+  <div class="gaps">
+    <div class="gap"><span class="pill">prioridade</span><b>Gabinete do Prefeito</b><span>Contrato de conteúdo encerrado em fev/2026. Comunicação geral da gestão.</span></div>
+    <div class="gap"><span class="pill">prioridade</span><b>Cultura e Tecnologia</b><span>Julho em Varjota, Festejos de Sant'Ana e agenda cultural, com alto gasto em eventos.</span></div>
+    <div class="gap"><span class="pill">prioridade</span><b>Esporte e Juventude</b><span>A KROMA já produziu para a pasta (Corrida do Trabalhador, Copa dos Campeões).</span></div>
+    <div class="gap"><span class="pill off">oportunidade</span><b>Saúde</b><span>Campanhas, UBS e orientação ao cidadão. Sem contrato de audiovisual.</span></div>
+    <div class="gap"><span class="pill off">oportunidade</span><b>Assistência Social</b><span>Programas e cadastros. Sem contrato de audiovisual.</span></div>
+    <div class="gap"><span class="pill off">complementar</span><b>Educação</b><span>Já tem foto e filmagem até abr/2027. Entrar com roteiro e narrativa, sem disputar o registro.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Sugestão de pacotes por secretaria</h2>
+  <p class="lead" style="font-size:15.5px">Preços pensados para ficar na faixa praticada e para que 12 meses caibam no limite de dispensa de cada secretaria. As quantidades são sugestão e devem ser ajustadas à capacidade da equipe.</p>
+  <div class="pkgs">
+    <div class="pkg"><span class="label">Essencial</span><span class="price">R$ 3.200<small>/mês</small></span><span class="yr">R$ 38.400 em 12 meses</span><ul><li>4 reels por mês</li><li>Pauta e roteiros mensais</li><li>Captação e edição</li><li>Relatório mensal</li></ul></div>
+    <div class="pkg rec"><span class="label" style="color:var(--accent)">Narrativa · recomendado</span><span class="price">R$ 4.500<small>/mês</small></span><span class="yr">R$ 54.000 em 12 meses</span><ul><li>8 reels por mês</li><li>Histórias da população</li><li>1 cobertura de evento por mês</li><li>Relatório e reunião mensal</li></ul></div>
+    <div class="pkg"><span class="label">Gabinete</span><span class="price">R$ 5.200<small>/mês</small></span><span class="yr">R$ 62.400 em 12 meses</span><ul><li>12 reels por mês</li><li>2 coberturas de evento por mês</li><li>1 vídeo institucional por trimestre</li><li>Canal direto para urgências</li></ul></div>
+  </div>
+  <p class="note">O pacote Gabinete está no teto: o limite de dispensa por valor para serviços era de R$ 62.725,59 em 2025 (Decreto nº 12.343/2024) e é corrigido todo ano. Confirme o valor vigente antes de fechar.</p>
+</section>
+
+<section>
+  <h2>Objeto sugerido para a contratação</h2>
+  <p class="obj">Contratação de empresa especializada na prestação de serviços de produção audiovisual estratégica, compreendendo planejamento de pautas, roteirização, captação, edição e finalização de vídeos institucionais e conteúdos para redes sociais, com caráter educativo, informativo e de orientação social, para atender às necessidades da Secretaria de [nome] do Município de Varjota – Ceará.</p>
+  <p class="note">Segue a linguagem dos objetos que a prefeitura já usa e deixa clara a diferença da KROMA (estratégia e narrativa, não só registro).</p>
+</section>
+
+<section>
+  <h2>Cuidados antes de propor</h2>
+  <div class="callout"><b>Fracionamento.</b> O limite de dispensa considera a soma das contratações do mesmo ramo na mesma unidade gestora durante o ano. Propostas para várias secretarias são legítimas quando cada uma contrata pelo próprio orçamento, mas confirme com o jurídico e o setor de compras da prefeitura.</div>
+  <div class="callout"><b>Documentação.</b> Tenha em dia o CNPJ com atividade compatível com produção de vídeo, as certidões negativas (federal, estadual, municipal, FGTS e trabalhista) e uma proposta com validade, escopo e preço por item.</div>
+  <div class="callout"><b>Perfil pessoal do prefeito.</b> O prefeito de Varjota é Francisco Elmo Bezerra Monte, o mesmo "Elmo B. Monte" dos reels do kroma.mov. Conteúdo pago com dinheiro público não pode ir para o perfil pessoal dele nem ter promoção pessoal (CF, art. 37, § 1º). Mantenha esses trabalhos fora da proposta institucional.</div>
+</section>
+
+<section class="src">
+  <span class="label">Fontes · consultadas em 18/11/2026</span>
+  <span>Portal da Transparência de Varjota, licitações com objeto "Marketing", "Comunicação" e "Redes", 2024 a 2026: <a href="https://www.varjota.ce.gov.br/licitacaolista.php?ano=2024&amp;obj=Marketing&amp;orderlist=D" target="_blank" rel="noopener">varjota.ce.gov.br/licitacaolista.php</a></span>
+  <span>PNCP, API de consulta de contratos do órgão 07.673.114/0001-41, 2024 a 2026: <a href="https://pncp.gov.br" target="_blank" rel="noopener">pncp.gov.br</a> (controles 000033/2024, 000044/2024, 000137/2024, 000111/2025, 000118/2025, 000176/2026)</span>
+</section>
+
+</div>
