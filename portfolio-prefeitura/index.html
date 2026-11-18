@@ -1,0 +1,469 @@
+<title>KROMA Portfólio Institucional</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: identidade KROMA (tela escura, cromia RGB) — leitura em blocos verticais,
+   cada bloco responde a uma pergunta da prefeitura: quem somos, o que provamos, por que assim, como, quanto medimos. */
+:root{
+  color-scheme: dark;
+  --bg:#060607;
+  --bg-2:#0d0d12;
+  --bg-3:#14141b;
+  --fg:#f4f1ea;
+  --fg-dim:#bdbab2;
+  --muted:#8a877f;
+  --line:rgba(255,255,255,.10);
+  --line-2:rgba(255,255,255,.18);
+  --c-cyan:#3ae7ff;
+  --c-vio:#8b5cff;
+  --c-mag:#ff3d86;
+  --grad:linear-gradient(100deg,var(--c-cyan),var(--c-vio) 52%,var(--c-mag));
+  --font-d:"Bricolage Grotesque", system-ui, sans-serif;
+  --font-b:"Space Grotesk", system-ui, sans-serif;
+  --font-s:"Instrument Serif", Georgia, serif;
+  --font-m:"JetBrains Mono", ui-monospace, monospace;
+  --maxw:1180px;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:var(--font-b);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--c-cyan);outline-offset:3px;border-radius:4px}
+.wrap{
+  max-width:var(--maxw);margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+@media (min-width:720px){.wrap{padding-left:max(40px, env(safe-area-inset-left,0px));padding-right:max(40px, env(safe-area-inset-right,0px))}}
+section{border-top:1px solid var(--line)}
+section > .wrap{padding-block:clamp(56px,9vw,112px)}
+h1,h2,h3{font-family:var(--font-d);font-weight:700;line-height:1.02;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,5.4vw,64px)}
+h3{font-size:22px;letter-spacing:-.01em;line-height:1.15}
+em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:0}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-family:var(--font-m);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.eyebrow b{color:var(--fg-dim);font-weight:500}
+.lead{font-size:clamp(18px,1.6vw,21px);color:var(--fg-dim);max-width:62ch;margin:0}
+p{margin:0}
+.head{display:grid;gap:20px;margin-bottom:clamp(36px,5vw,56px)}
+.mono{font-family:var(--font-m)}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(6,6,7,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--font-d);font-weight:800;font-size:20px;letter-spacing:.02em;text-decoration:none}
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{display:flex;gap:22px;font-size:14px;color:var(--fg-dim)}
+.nav a{text-decoration:none}
+.nav a:hover{color:var(--fg)}
+@media (max-width:820px){.nav{display:none}}
+
+/* hero */
+.hero .wrap{padding-block:clamp(56px,9vw,120px) clamp(48px,7vw,88px);display:grid;gap:32px}
+.hero h1{font-size:clamp(48px,9vw,120px);font-weight:800;letter-spacing:-.035em;line-height:.95}
+.hero .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;border-top:1px solid var(--line);padding-top:24px;margin-top:8px}
+.hero .meta div{display:grid;gap:4px}
+.hero .meta small{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.chroma{height:4px;background:var(--grad);border-radius:4px;width:min(320px,60%)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.stat{background:var(--bg-2);padding:28px 24px;display:grid;gap:10px;align-content:start}
+.stat .n{font-family:var(--font-d);font-weight:800;font-size:clamp(44px,5.5vw,68px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .l{color:var(--fg);font-weight:500;line-height:1.3}
+.stat .d{color:var(--muted);font-size:14px;line-height:1.45}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.stats{grid-template-columns:1fr}}
+
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);margin-top:clamp(40px,5vw,64px);align-items:start}
+@media (max-width:900px){.split{grid-template-columns:1fr}}
+.split > *{min-width:0}
+.panel{border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--bg-2)}
+.panel h3{margin-bottom:6px}
+.panel .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+
+/* bar chart */
+.bars{display:grid;gap:12px}
+.brow{display:grid;grid-template-columns:120px 1fr 36px;gap:12px;align-items:center;font-size:15px}
+.brow .track{height:14px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+.brow .fill{height:100%;background:var(--fg-dim);border-radius:3px}
+.brow.pub .fill{background:var(--grad)}
+.brow.pub span:first-child{color:var(--fg);font-weight:600}
+.brow .v{text-align:right;font-family:var(--font-m);font-size:14px;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:120px 1fr 36px;gap:12px;margin-top:4px}
+.axis .ticks{display:flex;justify-content:space-between;font-family:var(--font-m);font-size:11px;color:var(--muted)}
+@media (max-width:420px){.brow,.axis{grid-template-columns:96px 1fr 30px;font-size:14px}}
+
+/* results */
+.results{display:grid;gap:14px}
+.res{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.res:last-child{border-bottom:0}
+.res .big{font-family:var(--font-d);font-weight:800;font-size:40px;line-height:1;letter-spacing:-.03em;min-width:5.2ch;font-variant-numeric:tabular-nums}
+.res .big small{font-size:16px;font-weight:600;color:var(--fg-dim);letter-spacing:0;margin-left:2px}
+.res p{color:var(--fg-dim);font-size:15px;line-height:1.45}
+.res p b{color:var(--fg);font-weight:600}
+.src{margin-top:18px;font-family:var(--font-m);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+
+/* objectives */
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.goal{background:var(--bg);padding:30px 26px;display:grid;gap:12px;align-content:start}
+.goal .k{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-cyan)}
+.goal p{color:var(--fg-dim);font-size:15.5px}
+@media (max-width:960px){.goals{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.goals{grid-template-columns:1fr}}
+.law{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;padding:24px 26px;border:1px solid var(--line-2);border-radius:var(--r)}
+.law .tag{font-family:var(--font-m);font-size:12px;padding:6px 10px;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap;color:var(--fg)}
+.law p{color:var(--fg-dim);font-size:15.5px;max-width:78ch}
+.law q{font-family:var(--font-s);font-style:italic;font-size:19px;color:var(--fg);quotes:"“" "”"}
+@media (max-width:560px){.law{grid-template-columns:1fr}}
+
+/* public works */
+.themes{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:820px){.themes{grid-template-columns:1fr}}
+.theme{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:var(--bg-2);display:grid;gap:14px;align-content:start}
+.theme header{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.theme header span{font-family:var(--font-m);font-size:12px;color:var(--muted);white-space:nowrap}
+.theme .why{color:var(--fg-dim);font-size:15px}
+.reels{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.reels a{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 12px;margin:0 -12px;border-radius:8px;text-decoration:none;transition:background .2s}
+.reels a:hover{background:var(--bg-3)}
+.reels .t{font-weight:500}
+.reels .c{font-family:var(--font-m);font-size:12px;color:var(--muted);text-align:right}
+.reels .t::before{content:"▶";font-size:10px;margin-right:10px;color:var(--c-mag)}
+
+/* clients */
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.client{background:var(--bg);padding:20px 22px;display:grid;gap:4px;text-decoration:none;transition:background .2s}
+.client:hover{background:var(--bg-2)}
+.client b{font-family:var(--font-d);font-weight:700;font-size:19px;letter-spacing:-.01em}
+.client span{font-family:var(--font-m);font-size:12px;color:var(--muted)}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;counter-reset:s}
+.steps li{display:grid;gap:10px;align-content:start;padding-top:18px;border-top:2px solid var(--line-2);counter-increment:s}
+.steps li::before{content:"0" counter(s);font-family:var(--font-m);font-size:12px;color:var(--c-cyan)}
+.steps p{color:var(--fg-dim);font-size:15px}
+@media (max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* scope table */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--bg-2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-family:var(--font-d);font-weight:700;font-size:17px;white-space:nowrap}
+td{color:var(--fg-dim)}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:760px){.kpis{grid-template-columns:1fr}}
+.kpi{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding:22px 24px;border:1px solid var(--line);border-radius:var(--r)}
+.kpi h3{font-size:19px}
+.kpi .f{font-family:var(--font-m);font-size:12px;color:var(--muted);align-self:start;padding-top:4px;white-space:nowrap}
+.kpi p{grid-column:1/-1;color:var(--fg-dim);font-size:15px}
+.note{margin-top:20px;color:var(--muted);font-size:14px;max-width:80ch}
+
+/* contact */
+.cta .wrap{display:grid;gap:28px}
+.cta h2{font-size:clamp(40px,7vw,92px);font-weight:800}
+.contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:760px){.contacts{grid-template-columns:1fr}}
+.contact{padding:22px 24px;border:1px solid var(--line-2);border-radius:var(--r);display:grid;gap:8px}
+.contact small{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.contact .v{font-family:var(--font-d);font-weight:700;font-size:22px;user-select:all;word-break:break-word}
+.copy{justify-self:start;font:inherit;font-size:13px;font-family:var(--font-m);background:transparent;color:var(--fg-dim);border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;cursor:pointer}
+.copy:hover{color:var(--fg);border-color:var(--fg-dim)}
+footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--font-m);font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#topo">KR<span>O</span>MA</a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#numeros">Números</a>
+      <a href="#porque">Por que assim</a>
+      <a href="#publico">Setor público</a>
+      <a href="#privado">Iniciativa privada</a>
+      <a href="#metodo">Método</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="topo">
+
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <div class="eyebrow"><b>Portfólio institucional</b> · Apresentação à Prefeitura Municipal · Novembro 2026</div>
+    <h1>Comunicação pública que o <em class="s grad">cidadão</em> assiste até o fim.</h1>
+    <div class="chroma" aria-hidden="true"></div>
+    <p class="lead">A KROMA é uma assessoria audiovisual do Ceará. Fazemos vídeo com estratégia antes da câmera: cada peça nasce de um objetivo claro, seja informar, prestar contas ou mobilizar a população. Para a prefeitura, isso significa obras, serviços e campanhas explicados no formato que as pessoas realmente consomem.</p>
+    <div class="meta">
+      <div><small>Base</small><span>Fortaleza · CE, atuação no interior</span></div>
+      <div><small>Já atuamos em</small><span>Fortaleza · Varjota · Granja · Santa Quitéria</span></div>
+      <div><small>Formato principal</small><span>Reels verticais, institucional e cobertura de eventos</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>01</b> · O que já entregamos</div>
+      <h2>Trabalho real, <em class="s">no ar</em>.</h2>
+      <p class="lead">Os números abaixo vêm do nosso portfólio público em kroma.mov. Todos os vídeos citados estão publicados e podem ser assistidos pelos links desta página.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n num grad">57</span><span class="l">reels publicados</span><span class="d">Produções no ar, de marcas privadas a comunicação pública.</span></div>
+      <div class="stat"><span class="n num">18</span><span class="l">peças para o setor público</span><span class="d">Saúde, educação, água, obras, eventos e datas cívicas.</span></div>
+      <div class="stat"><span class="n num">100%</span><span class="l">clientes recorrentes</span><span class="d">8 clientes fixos hoje. Nenhum é avulso: quem começa, continua.</span></div>
+      <div class="stat"><span class="n num">7</span><span class="l">segmentos atendidos</span><span class="d">Em 4 cidades do Ceará, da capital ao interior.</span></div>
+    </div>
+
+    <div class="split">
+      <div class="panel">
+        <h3>Reels entregues por segmento</h3>
+        <p class="sub">57 vídeos no portfólio. O setor público é o maior volume.</p>
+        <div class="bars" role="img" aria-label="Setor público 18, Serviços 13, Alimentação 7, Educação 6, Automotivo 5, Saúde 4, Varejo 4">
+          <div class="brow pub"><span>Setor público</span><div class="track"><div class="fill" style="width:90%"></div></div><span class="v">18</span></div>
+          <div class="brow"><span>Serviços</span><div class="track"><div class="fill" style="width:65%"></div></div><span class="v">13</span></div>
+          <div class="brow"><span>Alimentação</span><div class="track"><div class="fill" style="width:35%"></div></div><span class="v">7</span></div>
+          <div class="brow"><span>Educação</span><div class="track"><div class="fill" style="width:30%"></div></div><span class="v">6</span></div>
+          <div class="brow"><span>Automotivo</span><div class="track"><div class="fill" style="width:25%"></div></div><span class="v">5</span></div>
+          <div class="brow"><span>Saúde</span><div class="track"><div class="fill" style="width:20%"></div></div><span class="v">4</span></div>
+          <div class="brow"><span>Varejo</span><div class="track"><div class="fill" style="width:20%"></div></div><span class="v">4</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div><span></span></div>
+      </div>
+
+      <div class="panel">
+        <h3>Alcance que vira resultado</h3>
+        <p class="sub">Reels de maior desempenho em clientes de conteúdo recorrente.</p>
+        <div class="results">
+          <div class="res"><span class="big num">19<small>mil</small></span><p><b>Dr. Júnior Mororó</b>, odontologia. Conteúdo de autoridade que gera confiança antes do paciente marcar.</p></div>
+          <div class="res"><span class="big num">15<small>mil</small></span><p><b>Frango do Zé</b>, restaurante em Varjota. Presença semanal no feed de quem decide onde almoçar.</p></div>
+          <div class="res"><span class="big num">9<small>mil</small></span><p><b>Natural Roots</b>, açaí e sorvetes. Reels recorrentes trazendo público novo.</p></div>
+        </div>
+        <p class="src">Visualizações por reel · fonte: kroma.mov, consultado em 18/11/2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="porque">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>02</b> · Objetivos</div>
+      <h2>Por que trabalhar <em class="s grad">dessa forma</em>.</h2>
+      <p class="lead">A prefeitura já produz muita coisa boa: obra entregue, posto reformado, campanha de vacinação. O problema costuma ser que a informação não chega a quem precisa dela. Nosso trabalho resolve essa ponta.</p>
+    </div>
+
+    <div class="goals">
+      <div class="goal"><span class="k">Transparência</span><h3>Prestação de contas que o cidadão entende</h3><p>Uma obra explicada em 40 segundos, com antes e depois, comunica mais que um ofício publicado. O cidadão vê para onde foi o recurso.</p></div>
+      <div class="goal"><span class="k">Serviço público</span><h3>Informação útil na hora certa</h3><p>Matrícula escolar, horário da UBS, dia de vacinação, mudança no trânsito. Vídeo curto e direto reduz dúvida no balcão e no telefone.</p></div>
+      <div class="goal"><span class="k">Planejamento</span><h3>Estratégia antes da câmera</h3><p>Pauta mensal construída com as secretarias. Cada vídeo tem objetivo, público e mensagem definidos antes da gravação, sem improviso.</p></div>
+      <div class="goal"><span class="k">Linguagem</span><h3>O formato que a população consome</h3><p>Vídeo vertical, curto e legendado para Instagram, WhatsApp e redes. Legenda em todos os vídeos também amplia o acesso para quem tem deficiência auditiva.</p></div>
+      <div class="goal"><span class="k">Mobilização</span><h3>Campanhas que geram adesão</h3><p>Eventos, festas tradicionais e campanhas de saúde precisam de gente participando. O vídeo certo antes do evento enche a praça; o de depois vira registro.</p></div>
+      <div class="goal"><span class="k">Mensuração</span><h3>Resultado medido todo mês</h3><p>Relatório mensal com alcance, visualizações e retenção por secretaria. A gestão sabe o que funcionou e onde ajustar.</p></div>
+    </div>
+
+    <div class="law">
+      <span class="tag">CF/88 · art. 37, § 1º</span>
+      <p><q>A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social…</q><br><br>Todo o conteúdo que produzimos para a prefeitura segue esse princípio: foco no serviço e no cidadão, sem promoção pessoal de autoridades. É isso que dá segurança jurídica à comunicação da gestão.</p>
+    </div>
+  </div>
+</section>
+
+<section id="publico">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>03</b> · Setor público</div>
+      <h2>O que já fizemos para <em class="s">o interior do Ceará</em>.</h2>
+      <p class="lead">18 peças publicadas para o setor público e comunidade em Varjota e região. Organizamos por tipo de pauta para mostrar como cada uma atende uma necessidade diferente da gestão. Clique para assistir.</p>
+    </div>
+
+    <div class="themes">
+      <article class="theme">
+        <header><h3>Saúde</h3><span>3 reels</span></header>
+        <p class="why">Mostrar estrutura nova e orientar a população sobre onde e como ser atendida.</p>
+        <ul class="reels">
+          <li><a href="https://www.instagram.com/reel/DYNzy4wJcEp" target="_blank" rel="noopener"><span class="t">Nova UBS</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DZVn6Eph_Pe" target="_blank" rel="noopener"><span class="t">Mais Saúde</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DYxkekohI9o" target="_blank" rel="noopener"><span class="t">Saúde Avança</span><span class="c">Elmo B. Monte</span></a></li>
+        </ul>
+      </article>
+
+      <article class="theme">
+        <header><h3>Água e infraestrutura</h3><span>3 reels</span></header>
+        <p class="why">Prestar contas de obras estruturantes, que mudam a vida no sertão.</p>
+        <ul class="reels">
+          <li><a href="https://www.instagram.com/reel/DX_xaKGRog7" target="_blank" rel="noopener"><span class="t">Água que Transforma</span><span class="c">Prefeitura de Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DOL0q-mDUat" target="_blank" rel="noopener"><span class="t">Açude Araras</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DZ2Rs9fRsz6" target="_blank" rel="noopener"><span class="t">Um Marco pra Região</span><span class="c">Elmo B. Monte</span></a></li>
+        </ul>
+      </article>
+
+      <article class="theme">
+        <header><h3>Educação e datas cívicas</h3><span>3 reels</span></header>
+        <p class="why">Valorizar a escola pública e fortalecer o sentimento de pertencimento.</p>
+        <ul class="reels">
+          <li><a href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><span class="t">Nova Escola, Nova Cara</span><span class="c">Prefeitura de Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><span class="t">Orgulho Nacional</span><span class="c">Prefeitura de Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DY8CdpnB397" target="_blank" rel="noopener"><span class="t">Prêmio Sertão de Ouro</span><span class="c">Elmo B. Monte</span></a></li>
+        </ul>
+      </article>
+
+      <article class="theme">
+        <header><h3>Cultura, fé e eventos</h3><span>5 reels</span></header>
+        <p class="why">Divulgar antes para mobilizar, registrar depois para virar memória da cidade.</p>
+        <ul class="reels">
+          <li><a href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><span class="t">O Mês dos Reencontros</span><span class="c">Julho em Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><span class="t">Só em Julho</span><span class="c">Julho em Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/Da5fsrQRLt4" target="_blank" rel="noopener"><span class="t">Festa de Sant'Ana</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DV9bukSjm29" target="_blank" rel="noopener"><span class="t">Caminhada da Fé</span><span class="c">Comunidade · Varjota</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DbOo7W3BMRv" target="_blank" rel="noopener"><span class="t">Fé, Louvor e União</span><span class="c">Elmo B. Monte</span></a></li>
+        </ul>
+      </article>
+
+      <article class="theme" style="grid-column:1/-1">
+        <header><h3>Comunicados e agradecimentos</h3><span>4 reels</span></header>
+        <p class="why">Anunciar decisões e boas notícias com rapidez, no tom certo.</p>
+        <ul class="reels">
+          <li><a href="https://www.instagram.com/reel/DTiR6yujUKM" target="_blank" rel="noopener"><span class="t">É Oficial</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DT08nfribkp" target="_blank" rel="noopener"><span class="t">Boas Notícias</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/DY5UV0fhhXm" target="_blank" rel="noopener"><span class="t">O Legado Permanece</span><span class="c">Elmo B. Monte</span></a></li>
+          <li><a href="https://www.instagram.com/reel/Db0axCjx1vk" target="_blank" rel="noopener"><span class="t">Gratidão em Forma de Café</span><span class="c">Elmo B. Monte</span></a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="privado">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>04</b> · Iniciativa privada</div>
+      <h2>Empresas que <em class="s grad">confiam</em> na KROMA.</h2>
+      <p class="lead">O mesmo método que usamos com marcas privadas, onde o resultado é cobrado em cliente e venda, é o que levamos para a gestão pública. Trabalhamos com poucos clientes por vez para manter a qualidade.</p>
+    </div>
+    <div class="clients">
+      <a class="client" href="https://www.instagram.com/reel/DbEgTDAzxqa" target="_blank" rel="noopener"><b>Dr. Júnior Mororó</b><span>Saúde · 4 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DTvknsGkR-x" target="_blank" rel="noopener"><b>Winner Escola</b><span>Educação · 6 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DYJ4hzPRsUf" target="_blank" rel="noopener"><b>Liana Borges Contabilidade</b><span>Serviços · 6 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DZxV_QgRPAA" target="_blank" rel="noopener"><b>Frango do Zé</b><span>Alimentação · 4 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/Dai6NndhgWT" target="_blank" rel="noopener"><b>Natural Roots Açaí</b><span>Alimentação · 3 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/Da8egUEPge5" target="_blank" rel="noopener"><b>Auto Posto União</b><span>Serviços · 4 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DYaT0qhMrE8" target="_blank" rel="noopener"><b>Granet Telecom</b><span>Serviços · 3 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DXU-OR4j6uP" target="_blank" rel="noopener"><b>Paulo Jefferson</b><span>Automotivo · 4 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DVBXf1uAvoM" target="_blank" rel="noopener"><b>Estoff Couros</b><span>Varejo · 2 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DWTr2H_DpcH" target="_blank" rel="noopener"><b>Régis Cell</b><span>Varejo · 2 reels</span></a>
+      <a class="client" href="https://www.instagram.com/reel/DVqr5-Djk-6" target="_blank" rel="noopener"><b>Diego Magnata</b><span>Automotivo · 1 reel</span></a>
+      <a class="client" href="https://kroma.mov" target="_blank" rel="noopener"><b>Portfólio completo</b><span>kroma.mov · 57 reels</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="metodo">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>05</b> · Método</div>
+      <h2>Como funciona <em class="s">com a prefeitura</em>.</h2>
+      <p class="lead">Um processo claro, para a assessoria de comunicação saber em que etapa está cada vídeo.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>Diagnóstico</h3><p>Reunião com o gabinete e as secretarias. Levantamos obras, serviços e campanhas do período.</p></li>
+      <li><h3>Plano mensal</h3><p>Pauta e roteiros aprovados antes de gravar. Cada vídeo com objetivo e público definidos.</p></li>
+      <li><h3>Captação</h3><p>Equipe e equipamento na rua, nas escolas, nas unidades de saúde e nos eventos.</p></li>
+      <li><h3>Edição</h3><p>Montagem, cor, som, legenda e identidade visual da prefeitura em todas as peças.</p></li>
+      <li><h3>Relatório</h3><p>Entrega pronta para publicar e relatório mensal de desempenho por secretaria.</p></li>
+    </ol>
+
+    <div class="head" style="margin-top:clamp(56px,7vw,88px)">
+      <h3 style="font-size:clamp(24px,3vw,32px)">Escopo por secretaria</h3>
+      <p class="lead">Exemplo de pautas que podem compor o plano mensal. O escopo final é definido junto com a gestão.</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Secretaria</th><th>Pautas típicas</th><th>Formato</th></tr></thead>
+        <tbody>
+          <tr><td>Saúde</td><td>Campanhas de vacinação, inauguração e reforma de UBS, orientação sobre atendimento</td><td>Reels informativos, cobertura</td></tr>
+          <tr><td>Educação</td><td>Matrícula, volta às aulas, reforma de escolas, projetos pedagógicos</td><td>Reels, vídeo institucional</td></tr>
+          <tr><td>Infraestrutura</td><td>Obras de água, estradas, calçamento, antes e depois</td><td>Reels de prestação de contas</td></tr>
+          <tr><td>Cultura e turismo</td><td>Festas tradicionais, eventos de julho, festejos religiosos, agenda cultural</td><td>Chamadas, cobertura de eventos</td></tr>
+          <tr><td>Assistência social</td><td>Programas sociais, cadastros, ações nos bairros e distritos</td><td>Reels de orientação</td></tr>
+          <tr><td>Comunicação / gabinete</td><td>Comunicados oficiais, datas cívicas, balanço da gestão</td><td>Vídeo institucional, reels</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="indicadores">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><b>06</b> · Indicadores</div>
+      <h2>O que vamos <em class="s grad">medir</em>.</h2>
+      <p class="lead">Comunicação pública também precisa de resultado comprovado. Estes são os indicadores do relatório mensal. As metas são pactuadas com a gestão no diagnóstico, a partir dos números atuais dos perfis oficiais.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><h3>Alcance e visualizações</h3><span class="f">mensal</span><p>Quantas pessoas viram o conteúdo da prefeitura, por vídeo e por secretaria.</p></div>
+      <div class="kpi"><h3>Retenção</h3><span class="f">por vídeo</span><p>Quanto do vídeo as pessoas assistem. Mostra se a mensagem chegou inteira.</p></div>
+      <div class="kpi"><h3>Interação do cidadão</h3><span class="f">mensal</span><p>Comentários, compartilhamentos e dúvidas recebidas. Ajuda a ouvir a população.</p></div>
+      <div class="kpi"><h3>Adesão a campanhas</h3><span class="f">por campanha</span><p>Comparação com dados da secretaria: doses aplicadas, matrículas, público em eventos.</p></div>
+    </div>
+    <p class="note">Linha de base: no primeiro mês, levantamos os números atuais dos perfis oficiais da prefeitura para que a evolução seja comparada com dados reais.</p>
+  </div>
+</section>
+
+<section id="contato" class="cta">
+  <div class="wrap">
+    <div class="eyebrow"><b>07</b> · Próximo passo</div>
+    <h2>Vamos montar o <span class="grad">diagnóstico</span> da prefeitura.</h2>
+    <p class="lead">O diagnóstico é gratuito. Analisamos a comunicação atual do município e apresentamos um plano de pautas para os primeiros 90 dias.</p>
+    <div class="contacts">
+      <div class="contact"><small>WhatsApp</small><span class="v num" id="c-whats">(88) 92184-7584</span><button class="copy" type="button" data-copy="c-whats">Copiar</button></div>
+      <div class="contact"><small>E-mail</small><span class="v" id="c-mail">kromamov@gmail.com</span><button class="copy" type="button" data-copy="c-mail">Copiar</button></div>
+      <div class="contact"><small>Instagram · Site</small><span class="v"><a href="https://www.instagram.com/kroma_mov" target="_blank" rel="noopener">@kroma_mov</a></span><a class="copy" href="https://kroma.mov" target="_blank" rel="noopener" style="text-decoration:none">kroma.mov ↗</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>KROMA · Assessoria audiovisual · Fortaleza, CE</span>
+    <span>Dados do portfólio: kroma.mov, consultado em 18/11/2026</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('button.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var el = document.getElementById(btn.getAttribute('data-copy'));
+    var text = el.textContent.trim();
+    var done = function(){ btn.textContent = 'Copiado'; setTimeout(function(){ btn.textContent = 'Copiar'; }, 1600); };
+    var fallback = function(){
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selecionado';
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+});
+</script>
