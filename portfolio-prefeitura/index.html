@@ -126,6 +126,13 @@ em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:
 .res p{color:var(--fg-dim);font-size:14.5px;line-height:1.45}
 .res p b{color:var(--fg);font-weight:600;display:block}
 @media (max-width:460px){.res{grid-template-columns:52px 1fr}.res img{width:52px;grid-row:span 2}.res .big{font-size:32px}}
+.res{text-decoration:none;border-radius:10px;transition:background .2s}
+a.res:hover{background:var(--bg-3)}
+.res .badge{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--grad);color:#060607;white-space:nowrap;justify-self:start;align-self:center}
+.private{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:10px}
+.private > span{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.private ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--fg-dim)}
+.private b{font-family:var(--font-d);font-size:18px;color:var(--fg);margin-right:4px}
 .src{margin-top:18px;font-family:var(--font-m);font-size:11.5px;color:var(--muted)}
 
 /* grid de objetivos/princípios com ícone */
@@ -363,12 +370,19 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
       </div>
 
       <div class="panel">
-        <h3>Alcance que vira resultado</h3>
-        <p class="sub">Reels de maior desempenho em clientes de conteúdo recorrente.</p>
+        <h3>Virais da prefeitura</h3>
+        <p class="sub">Reels do Julho em Varjota que ganharam a cidade e passaram de mão em mão.</p>
         <div class="results">
-          <div class="res"><img src="img/dr-junior.jpg" alt="" width="320" height="567"><span class="big num">19<small>mil</small></span><p><b>Dr. Júnior Mororó · odontologia</b>Conteúdo de autoridade que gera confiança antes do paciente marcar.</p></div>
-          <div class="res"><img src="img/frango-do-ze.jpg" alt="" width="320" height="567"><span class="big num">15<small>mil</small></span><p><b>Frango do Zé · Varjota</b>Presença semanal no feed de quem decide onde almoçar.</p></div>
-          <div class="res"><img src="img/natural-roots.jpg" alt="" width="320" height="567"><span class="big num">9<small>mil</small></span><p><b>Natural Roots · açaí</b>Reels recorrentes trazendo público novo toda semana.</p></div>
+          <a class="res" href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><img src="img/mes-dos-reencontros.jpg" alt="" width="320" height="567"><span class="badge">Viral</span><p><b>O Mês dos Reencontros · Julho em Varjota</b>Chamada para o mês em que a cidade se reencontra. Orgulho local e convite para todo mundo participar.</p></a>
+          <a class="res" href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><img src="img/so-em-julho.jpg" alt="" width="320" height="567"><span class="badge">Viral</span><p><b>Só em Julho · Julho em Varjota</b>O que só acontece na cidade nessa época, contado no ritmo das redes. Mobilização antes do evento.</p></a>
+        </div>
+        <div class="private">
+          <span>Na iniciativa privada</span>
+          <ul>
+            <li><b class="num">19 mil</b> Dr. Júnior Mororó</li>
+            <li><b class="num">15 mil</b> Frango do Zé</li>
+            <li><b class="num">9 mil</b> Natural Roots</li>
+          </ul>
         </div>
         <p class="src">Visualizações por reel · fonte: kroma.mov, consultado em 18/11/2026</p>
       </div>
