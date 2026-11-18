@@ -119,7 +119,7 @@ em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:
 @media (max-width:420px){.brow,.axis{grid-template-columns:92px 1fr 28px;font-size:14px}}
 
 .results{display:grid;gap:14px}
-.res{display:grid;grid-template-columns:62px auto 1fr;gap:16px;align-items:center}
+.res{display:grid;grid-template-columns:62px 118px 1fr;gap:16px;align-items:center}
 .res img{width:62px;aspect-ratio:9/16;object-fit:cover;border-radius:8px;border:1px solid var(--line-2)}
 .res .big{font-family:var(--font-d);font-weight:800;font-size:38px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;min-width:3.4ch}
 .res .big small{font-size:15px;font-weight:600;color:var(--fg-dim);letter-spacing:0;margin-left:2px}
@@ -128,7 +128,7 @@ em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:
 @media (max-width:460px){.res{grid-template-columns:52px 1fr}.res img{width:52px;grid-row:span 2}.res .big{font-size:32px}}
 .res{text-decoration:none;border-radius:10px;transition:background .2s}
 a.res:hover{background:var(--bg-3)}
-.res .badge{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--grad);color:#060607;white-space:nowrap;justify-self:start;align-self:center}
+.res .badge{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--grad);color:#060607;white-space:nowrap;justify-self:start;align-self:center;min-width:9.5ch;text-align:center}
 .res .eng{display:block;margin-top:4px;font-family:var(--font-m);font-size:11.5px;color:var(--muted)}
 .private{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:10px}
 .private > span{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -371,22 +371,23 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
       </div>
 
       <div class="panel">
-        <h3>Virais da prefeitura</h3>
-        <p class="sub">Reels nos perfis oficiais de Varjota. Somados: <b class="num" style="color:var(--fg)">29,1 mil visualizações</b> e <b class="num" style="color:var(--fg)">2,8 mil curtidas</b>.</p>
+        <h3>Cada vídeo tem um propósito</h3>
+        <p class="sub">Nem todo vídeo nasce para viralizar. Uns informam, outros educam, outros mobilizam. A narrativa é construída a partir do objetivo e do contexto de cada pauta.</p>
         <div class="results">
-          <a class="res" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="big num">13,6<small>mil</small></span><p><b>Nova Escola, Nova Cara</b>Alunos convidam a cidade para conhecer a escola reformada. <span class="eng num">1.610 curtidas · 144 comentários</span></p></a>
-          <a class="res" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="big num">9,8<small>mil</small></span><p><b>Corrida do Trabalhador Varjotense</b>Chamada que abriu a programação esportiva e levou a cidade às inscrições. <span class="eng num">749 curtidas · 44 comentários</span></p></a>
-          <a class="res" href="https://www.instagram.com/reel/DZgPpZ0xCd5" target="_blank" rel="noopener"><img src="img/copa-master.jpg" alt="" width="480" height="852"><span class="big num">5,7<small>mil</small></span><p><b>Copa dos Campeões · Futebol Master</b>Contagem regressiva para a abertura no Distrito de Croatá dos Martins. <span class="eng num">443 curtidas · 14 comentários</span></p></a>
+          <a class="res" href="https://www.instagram.com/reel/DQjvppLkcNM" target="_blank" rel="noopener"><img src="img/transito-ipva.jpg" alt="" width="480" height="853"><span class="badge">Informar</span><p><b>IPVA sem multas e juros</b>Serviço direto ao cidadão: o benefício explicado de forma simples, para quem precisa regularizar o veículo.</p></a>
+          <a class="res" href="https://www.instagram.com/reel/DQo5UAdEbeX" target="_blank" rel="noopener"><img src="img/transito-capacete.jpg" alt="" width="480" height="853"><span class="badge">Educar</span><p><b>Capacete é lei</b>Humor e personagem local para falar de regra de trânsito sem sermão. Quem ri, assiste até o fim.</p></a>
+          <a class="res" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="badge">Mobilizar</span><p><b>Corrida do Trabalhador Varjotense</b>Convite com energia para levar a população às inscrições e à programação esportiva.</p></a>
+          <a class="res" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="badge">Valorizar</span><p><b>Nova Escola, Nova Cara</b>A obra apresentada pelos próprios alunos. Prestação de contas que vira orgulho da comunidade.</p></a>
         </div>
         <div class="private">
-          <span>Na iniciativa privada</span>
+          <span>Alcance na iniciativa privada</span>
           <ul>
             <li><b class="num">19 mil</b> Dr. Júnior Mororó</li>
             <li><b class="num">15 mil</b> Frango do Zé</li>
             <li><b class="num">9 mil</b> Natural Roots</li>
           </ul>
         </div>
-        <p class="src">Prefeitura: @prefeituradevarjota e @sejuv_varjota (Instagram) · Privado: kroma.mov · consultado em 18/11/2026</p>
+        <p class="src">Reels publicados em @prefeituradevarjota e @sejuv_varjota · alcance privado: kroma.mov, consultado em 18/11/2026</p>
       </div>
     </div>
   </div>
@@ -517,13 +518,13 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
 
     <div class="gallery">
       <a class="reel" href="https://www.instagram.com/reel/DX_xaKGRog7" target="_blank" rel="noopener"><img src="img/agua-que-transforma.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Água que Transforma</b><span>Infraestrutura</span></span></a>
-      <a class="reel" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Nova Escola, Nova Cara</b><span>Educação · 13,6 mil views</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Nova Escola, Nova Cara</b><span>Valorizar</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><img src="img/orgulho-nacional.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Orgulho Nacional</b><span>Aluno premiado</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><img src="img/mes-dos-reencontros.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>O Mês dos Reencontros</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><img src="img/so-em-julho.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Só em Julho</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DV9bukSjm29" target="_blank" rel="noopener"><img src="img/caminhada-da-fe.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Caminhada da Fé</b><span>Comunidade</span></span></a>
-      <a class="reel" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Corrida do Trabalhador</b><span>Esporte · 9,8 mil views</span></span></a>
-      <a class="reel" href="https://www.instagram.com/reel/DZgPpZ0xCd5" target="_blank" rel="noopener"><img src="img/copa-master.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Copa dos Campeões</b><span>Esporte · 5,7 mil views</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Corrida do Trabalhador</b><span>Mobilizar</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DZgPpZ0xCd5" target="_blank" rel="noopener"><img src="img/copa-master.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Copa dos Campeões</b><span>Mobilizar</span></span></a>
     </div>
     <div class="tags"><span>Educação</span><span>Esporte e juventude</span><span>Trânsito</span><span>Saúde</span><span>Água e obras</span><span>Datas cívicas</span><span>Festas tradicionais</span><span>Eventos religiosos</span><span>Comunicados oficiais</span></div>
   </div>
@@ -614,7 +615,7 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
     <div class="head">
       <div class="eyebrow"><b>08</b> · Indicadores</div>
       <h2>O que vamos <em class="s grad">medir</em>.</h2>
-      <p class="lead">Comunicação pública também precisa de resultado comprovado. As metas são pactuadas com a gestão no diagnóstico, a partir dos números atuais dos perfis oficiais da prefeitura.</p>
+      <p class="lead">Cada peça é avaliada pelo objetivo para o qual foi feita. Um vídeo que informa é medido pela clareza e pelas dúvidas que resolve; um que mobiliza, pela adesão; um que educa, por quanto as pessoas assistem. Alcance é consequência, não o único critério. As metas são pactuadas com a gestão no diagnóstico.</p>
     </div>
     <div class="kpis">
       <div class="kpi"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><h3>Alcance e visualizações</h3><span class="f">mensal</span><p>Quantas pessoas viram o conteúdo da prefeitura, por vídeo e por secretaria.</p></div>
