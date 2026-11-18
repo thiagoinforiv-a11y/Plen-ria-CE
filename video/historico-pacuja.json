@@ -1,0 +1,298 @@
+{
+ "cartoes2028": [
+  [
+   "A gestão perdeu aliados",
+   "ex-prefeito Alex Melo e a vice Milena deixaram o grupo (nov/2026)"
+  ]
+ ],
+ "interrupcoes": [
+  {
+   "eleicao": 2020,
+   "nome": "Raimundo Filho",
+   "motivo": "cassado por abuso de poder econômico",
+   "curto": "cassado"
+  }
+ ],
+ "id": "ce/pacuja",
+ "municipio": "Pacujá",
+ "cd_ibge": "2309904",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 6006,
+   "comparecimento": 5139,
+   "abstencoes": 867
+  },
+  {
+   "ano": "2020",
+   "aptos": 6214,
+   "comparecimento": 5224,
+   "abstencoes": 990
+  },
+  {
+   "ano": "2024",
+   "aptos": 6617,
+   "comparecimento": 5759,
+   "abstencoes": 858
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Alex Melo",
+    "partido": "PDT",
+    "votos": 2583,
+    "pct": 0.5275735294117647,
+    "pid": "c595a02d21",
+    "foto": null
+   },
+   "seg": {
+    "nome": "Eraldo Aguiar",
+    "partido": "PC do B",
+    "votos": 2313,
+    "pct": 0.4724264705882353,
+    "pid": "cfdce8e1ff",
+    "foto": "fotos/ce/pacuja/2020/60000946985.jpg"
+   },
+   "margem": 270
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Raimundo Filho",
+    "partido": "PDT",
+    "votos": 2644,
+    "pct": 0.5279552715654952,
+    "pid": "bbc86704cf",
+    "foto": "fotos/ce/pacuja/2020/60000988157.jpg"
+   },
+   "seg": {
+    "nome": "Elisângela Aguiar",
+    "partido": "Cidadania",
+    "votos": 2364,
+    "pct": 0.4720447284345048,
+    "pid": "5974948c4a",
+    "foto": "fotos/ce/pacuja/2020/60000735350.jpg"
+   },
+   "margem": 280
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Pedro Allan",
+    "partido": "PSB",
+    "votos": 3901,
+    "pct": 0.7143380333272294,
+    "pid": "01a252be63",
+    "foto": "fotos/ce/pacuja/2024/60002397141.jpg"
+   },
+   "seg": {
+    "nome": "João Paulo da Elma",
+    "partido": "Cidadania",
+    "votos": 1560,
+    "pct": 0.28566196667277055,
+    "pid": "bf0e216a4b",
+    "foto": "fotos/ce/pacuja/2024/60002396909.jpeg"
+   },
+   "margem": 2341
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 9,
+   "candidatos": 25,
+   "validos": 4996,
+   "qe": 555,
+   "partidos": [
+    [
+     "PDT",
+     2
+    ],
+    [
+     "PC do B",
+     2
+    ],
+    [
+     "PP",
+     1
+    ],
+    [
+     "PTB",
+     1
+    ],
+    [
+     "PSD",
+     1
+    ],
+    [
+     "União",
+     1
+    ],
+    [
+     "Patriota",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Dr. Luciray Jefferson",
+    "votos": 655,
+    "partido": "PDT",
+    "foto": null
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 9,
+   "candidatos": 19,
+   "validos": 4960,
+   "qe": 551,
+   "partidos": [
+    [
+     "Cidadania",
+     5
+    ],
+    [
+     "PDT",
+     4
+    ]
+   ],
+   "top": {
+    "nome": "Eraldo Aguiar",
+    "votos": 759,
+    "partido": "Cidadania",
+    "foto": "fotos/ce/pacuja/2020/60000946985.jpg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 9,
+   "candidatos": 30,
+   "validos": 5564,
+   "qe": 618,
+   "partidos": [
+    [
+     "PSB",
+     3
+    ],
+    [
+     "Republicanos",
+     3
+    ],
+    [
+     "União",
+     2
+    ],
+    [
+     "Cidadania",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Carlos Junior",
+    "votos": 633,
+    "partido": "PSB",
+    "foto": "fotos/ce/pacuja/2024/60002036650.jpg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 9,
+   "reeleitos": 4,
+   "novos": 5,
+   "nomes": [
+    "Dr. Luciray Jefferson",
+    "Carlos Veras",
+    "Braz",
+    "Júnior Brito"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 9,
+   "reeleitos": 1,
+   "novos": 8,
+   "nomes": [
+    "Fernando Alves"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 9,
+   "reeleitos": 1,
+   "novos": 8,
+   "nomes": [
+    "Orlando Rodrigues"
+   ]
+  }
+ ],
+ "semReeleicao": false,
+ "precedente": {
+  "ano": "2024",
+  "saiu": "Raimundo Filho",
+  "interrompido": "cassado",
+  "motivo": "cassado por abuso de poder econômico",
+  "partidoSaiu": "PDT",
+  "venceu": "Pedro Allan",
+  "partidoVenceu": "PSB",
+  "mesmoPartido": false
+ },
+ "precedentes": [
+  {
+   "ano": "2016",
+   "saiu": "Lucivane",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "PSB",
+   "venceu": "Alex Melo",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": false
+  },
+  {
+   "ano": "2020",
+   "saiu": "Alex Melo",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "PDT",
+   "venceu": "Raimundo Filho",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": true
+  },
+  {
+   "ano": "2024",
+   "saiu": "Raimundo Filho",
+   "interrompido": "cassado",
+   "motivo": "cassado por abuso de poder econômico",
+   "partidoSaiu": "PDT",
+   "venceu": "Pedro Allan",
+   "partidoVenceu": "PSB",
+   "mesmoPartido": false
+  }
+ ],
+ "qe2028": 685,
+ "novosMedia": 7,
+ "fala": [
+  "Pacujá. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de seis mil e seis para seis mil seiscentos e dezessete. E a abstenção caiu: de oitocentos e sessenta e sete para oitocentos e cinquenta e oito eleitores.",
+  "Em dois mil e dezesseis, Alex Melo venceu com cinquenta e três por cento. Eraldo Aguiar ficou com quarenta e sete. Diferença de duzentos e setenta votos.",
+  "Em dois mil e vinte, Raimundo Filho venceu com cinquenta e três por cento. Elisângela Aguiar ficou com quarenta e sete. Diferença de duzentos e oitenta votos. Depois, foi cassado por abuso de poder econômico.",
+  "Em dois mil e vinte e quatro, Pedro Allan venceu com setenta e um por cento. João Paulo da Elma ficou com vinte e nove. Diferença de dois mil trezentos e quarenta e um votos.",
+  "Em três eleições: Alex Melo; depois Raimundo Filho; depois Pedro Allan. Em dois mil e vinte e oito, Pedro Allan pode tentar a reeleição.",
+  "Na Câmara, o PDT e o PC do B fizeram duas cadeiras cada em dois mil e dezesseis. E em dois mil e vinte, o Cidadania passou a liderar com cinco cadeiras. E em dois mil e vinte e quatro, o PSB e o Republicanos empataram na frente, com três cadeiras cada, e o PDT e o PC do B ficaram sem cadeira.",
+  "A renovação é alta. Caras novas em cada eleição: cinco, oito e oito, de nove cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de quinhentos e cinquenta e cinco para seiscentos e dezoito votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de setecentos.",
+  "Então, como será dois mil e vinte e oito? Isso já aconteceu três vezes. Em dois mil e dezesseis, sem Lucivane na disputa, Alex Melo venceu, pelo PDT. Em dois mil e vinte, sem Alex Melo na disputa, o PDT manteve a prefeitura com Raimundo Filho. Em dois mil e vinte e quatro, com Raimundo Filho cassado e fora da disputa, Pedro Allan venceu, pelo PSB. E os grupos mudaram desde então. Se a renovação seguir a média, cerca de sete vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Pacujá. A história de cada eleição, para decidir a próxima."
+ ]
+}

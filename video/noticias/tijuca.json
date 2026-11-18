@@ -1,0 +1,39 @@
+{
+ "id": "noticia-tijuca",
+ "tarja": "Alece aprova R$ 2,5 milhões do Governo do Ceará para a Unidos da Tijuca",
+ "fontes": "Fontes: Diário do Nordeste, O Povo, GC Mais · Alece, PL 92/2026",
+ "cenas": [
+  {
+   "grande": "R$ 2,5 MI",
+   "sub": "PARA A UNIDOS DA TIJUCA",
+   "fala": "Dois milhões e meio de reais do Governo do Ceará para uma escola de samba do Rio de Janeiro.",
+   "tarja": "Governo do Ceará vai patrocinar escola de samba do Rio"
+  },
+  {
+   "fala": "A Assembleia aprovou na terça, por vinte e um votos a dez, o projeto do governador Elmano de Freitas.",
+   "midia": "fotos/ce/varjota/2026/60002543969.jpg",
+   "credito": "Foto: TSE",
+   "tarja": "Alece aprova projeto de Elmano por 21 a 10"
+  },
+  {
+   "fala": "O dinheiro sai da Secretaria do Turismo e patrocina o desfile de dois mil e vinte e sete, com o enredo A Cabeça do Santo, livro da cearense Socorro Acioli.",
+   "grande": "2027",
+   "sub": "“A CABEÇA DO SANTO”",
+   "tarja": "Enredo inspirado no livro de Socorro Acioli"
+  },
+  {
+   "fala": "O livro se inspira em Caridade, onde a estátua de Santo Antônio ficou décadas com a cabeça separada do corpo.",
+   "grande": "CARIDADE",
+   "sub": "CEARÁ",
+   "tarja": "Estátua de Santo Antônio ficou décadas sem a cabeça"
+  },
+  {
+   "fala": "O governo diz que o patrocínio promove o turismo e a cultura do Ceará. A oposição questionou o gasto: o deputado Cláudio Pinho, do PSDB, citou o risco de seca em dois mil e vinte e sete.",
+   "tarja": "Governo fala em turismo; oposição cita risco de seca em 2027"
+  },
+  {
+   "fala": "E você: é investimento para divulgar o Ceará, ou gasto fora de hora? Comenta aqui.",
+   "tarja": "Investimento ou gasto fora de hora? Comenta"
+  }
+ ]
+}

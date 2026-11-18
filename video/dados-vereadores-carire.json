@@ -1,0 +1,1876 @@
+{
+ "municipio": "Cariré",
+ "cd_ibge": "2303105",
+ "cadeiras": 11,
+ "validos": 12772,
+ "qe": 1161,
+ "nlocais": 30,
+ "candidatos": 20,
+ "locais": [
+  {
+   "id": "65-1031",
+   "nome": "Cagece - Escritorio",
+   "curto": "Cagece",
+   "bairro": "Caixa D'agua",
+   "lat": -3.951556,
+   "lon": -40.472398
+  },
+  {
+   "id": "65-1082",
+   "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+   "curto": "Marieta Cals",
+   "bairro": "Centro",
+   "lat": -3.948205,
+   "lon": -40.475229
+  },
+  {
+   "id": "65-1090",
+   "nome": "Eefm Cefisa Aguiar",
+   "curto": "Eefm Cefisa Aguiar",
+   "bairro": "Paraíso",
+   "lat": -3.953106,
+   "lon": -40.4769
+  },
+  {
+   "id": "65-1112",
+   "nome": "Secretaria de Educacao de Cariré",
+   "curto": "Secretaria de Educacao de Cariré",
+   "bairro": "Centro",
+   "lat": -3.948659,
+   "lon": -40.47232
+  },
+  {
+   "id": "65-1139",
+   "nome": "Escola Eief Manoel Lopes da Cunha",
+   "curto": "Manoel Lopes da Cunha",
+   "bairro": "Zona Rural",
+   "lat": -3.867193,
+   "lon": -40.531575
+  },
+  {
+   "id": "65-1155",
+   "nome": "Escola Eief Ernesto Alexandre da Silva",
+   "curto": "Ernesto Alexandre da Silva",
+   "bairro": "Zona Rural",
+   "lat": -3.954605,
+   "lon": -40.423386
+  },
+  {
+   "id": "65-1171",
+   "nome": "Escola Eief Filinto Elisio Aguiar",
+   "curto": "Filinto Elisio Aguiar",
+   "bairro": "Zona Rural",
+   "lat": -3.886,
+   "lon": -40.601755
+  },
+  {
+   "id": "65-1210",
+   "nome": "Escola Eief Mons. Antonio Candido de Melo",
+   "curto": "Monsenhor Antônio Cândido de Melo",
+   "bairro": "Zona Rural",
+   "lat": -3.919817,
+   "lon": -40.557251
+  },
+  {
+   "id": "65-1236",
+   "nome": "Escola E.i.e.f Inácia Rodrigues Moreira",
+   "curto": "Inácia Rodrigues Moreira",
+   "bairro": "Cacimbas",
+   "lat": -3.864098,
+   "lon": -40.680676
+  },
+  {
+   "id": "65-1252",
+   "nome": "Escola Eief Dona Maria Lucas",
+   "curto": "Dona Maria Lucas",
+   "bairro": "Zona Rural",
+   "lat": -3.867686,
+   "lon": -40.583656
+  },
+  {
+   "id": "65-1287",
+   "nome": "Escola Eief Lucas Rodrigues de Brito",
+   "curto": "Lucas Rodrigues de Brito",
+   "bairro": "Zona Rural",
+   "lat": -4.013672,
+   "lon": -40.590412
+  },
+  {
+   "id": "65-1317",
+   "nome": "Escola Eief Raimunda Ferreira do Nascimento",
+   "curto": "Raimunda Ferreira do Nascimento",
+   "bairro": "Zona Rural",
+   "lat": -3.987954,
+   "lon": -40.626349
+  },
+  {
+   "id": "65-1333",
+   "nome": "Escola Eief Maria Marlene Feitosa de Paiva",
+   "curto": "Maria Marlene Feitosa de Paiva",
+   "bairro": "Zona Rural",
+   "lat": -3.846227,
+   "lon": -40.412224
+  },
+  {
+   "id": "65-1341",
+   "nome": "Escola Eief Evangelina Feijao",
+   "curto": "Evangelina Feijão",
+   "bairro": "Zona Rural",
+   "lat": -3.81223,
+   "lon": -40.416078
+  },
+  {
+   "id": "65-1376",
+   "nome": "Escola Eief Jose do Patrocinio Braga",
+   "curto": "José do Patrocínio Braga",
+   "bairro": "Zona Rural",
+   "lat": -4.061847,
+   "lon": -40.404862
+  },
+  {
+   "id": "65-1392",
+   "nome": "Escola E.i.e.f Manoelrodrigues dos Santos",
+   "curto": "Manoelrodrigues dos Santos",
+   "bairro": "Zona Rural",
+   "lat": -3.993176,
+   "lon": -40.380473
+  },
+  {
+   "id": "65-1422",
+   "nome": "Escola Eief Adauta Mocinha Barros Rocha",
+   "curto": "Adauta Mocinha Barros Rocha",
+   "bairro": "Tapuio",
+   "lat": -4.008246,
+   "lon": -40.447101
+  },
+  {
+   "id": "65-1457",
+   "nome": "Escola Eief Manoel Fernandes Bezerra",
+   "curto": "Manoel Fernandes Bezerra",
+   "bairro": "Zona Rural",
+   "lat": -4.012885,
+   "lon": -40.475474
+  },
+  {
+   "id": "65-1465",
+   "nome": "Escola Eief Cel. Joao Fernandes",
+   "curto": "Cel. João Fernandes",
+   "bairro": "Zona Rural",
+   "lat": -4.056744,
+   "lon": -40.481445
+  },
+  {
+   "id": "65-1473",
+   "nome": "Escola Eief Tenente Avelino Gomes",
+   "curto": "Tenente Avelino Gomes",
+   "bairro": "Zona Rural",
+   "lat": -4.045875,
+   "lon": -40.446611
+  },
+  {
+   "id": "65-1481",
+   "nome": "Escola E.i.e.f Adauta Mosinha (anexo)",
+   "curto": "Adauta Mosinha (anexo)",
+   "bairro": "Zona Rural",
+   "lat": -4.012833,
+   "lon": -40.430002
+  },
+  {
+   "id": "65-1490",
+   "nome": "Escola Eief Raimundo Dico Monteiro",
+   "curto": "Raimundo Dico Monteiro",
+   "bairro": "Zona Rural",
+   "lat": -3.906558,
+   "lon": -40.410436
+  },
+  {
+   "id": "65-1503",
+   "nome": "Escola Eief Estevao Ferreira da Costa",
+   "curto": "Estevao Ferreira da Costa",
+   "bairro": "Zona Rural",
+   "lat": -4.042822,
+   "lon": -40.473912
+  },
+  {
+   "id": "65-1511",
+   "nome": "Escola Eief Tiburcio de Brito",
+   "curto": "Tibúrcio de Brito",
+   "bairro": "Zona Rural",
+   "lat": -4.071238,
+   "lon": -40.430041
+  },
+  {
+   "id": "65-1538",
+   "nome": "Escola Eief Maria Jose Rodrigues Ponte",
+   "curto": "Maria José Rodrigues Ponte",
+   "bairro": "Campo de Aviação",
+   "lat": -3.951766,
+   "lon": -40.480137
+  },
+  {
+   "id": "65-1546",
+   "nome": "Eeief Mariana França de Sousa",
+   "curto": "Mariana França de Sousa",
+   "bairro": "Rafael Arruda",
+   "lat": -3.837013,
+   "lon": -40.66587
+  },
+  {
+   "id": "65-1554",
+   "nome": "Associação Mucaúba de Muquem de São Pedro",
+   "curto": "Associação Mucaúba de Muquem de São Pedro",
+   "bairro": "Zona Rural",
+   "lat": -4.015573,
+   "lon": -40.528788
+  },
+  {
+   "id": "65-1570",
+   "nome": "E.e.i.e.f. Manoel Alves de Almeida",
+   "curto": "Manoel Alves de Almeida",
+   "bairro": "Zona Rural",
+   "lat": -4.017092,
+   "lon": -40.373156
+  },
+  {
+   "id": "65-1589",
+   "nome": "E.e.f. Francisco Herminio Ponte",
+   "curto": "Francisco Herminio Ponte",
+   "bairro": "Fórum",
+   "lat": -3.945127,
+   "lon": -40.476285
+  },
+  {
+   "id": "65-1597",
+   "nome": "Eefti Professor Luis de Sena Dias",
+   "curto": "Eefti Professor Luis de Sena Dias",
+   "bairro": "N.s. de Fátima",
+   "lat": -3.953752,
+   "lon": -40.476613
+  }
+ ],
+ "eleitos": [
+  {
+   "urna": "Robson Pessoa",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965879.jpg",
+   "votos": 1360,
+   "pos": 1,
+   "pct": 0.10648293141246477,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 1081,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1210",
+     184
+    ],
+    [
+     "65-1082",
+     144
+    ],
+    [
+     "65-1236",
+     124
+    ],
+    [
+     "65-1597",
+     110
+    ],
+    [
+     "65-1341",
+     95
+    ],
+    [
+     "65-1333",
+     83
+    ],
+    [
+     "65-1538",
+     79
+    ],
+    [
+     "65-1090",
+     73
+    ],
+    [
+     "65-1589",
+     70
+    ],
+    [
+     "65-1171",
+     47
+    ],
+    [
+     "65-1546",
+     47
+    ],
+    [
+     "65-1422",
+     45
+    ],
+    [
+     "65-1465",
+     38
+    ],
+    [
+     "65-1139",
+     36
+    ],
+    [
+     "65-1031",
+     32
+    ],
+    [
+     "65-1112",
+     24
+    ],
+    [
+     "65-1155",
+     21
+    ],
+    [
+     "65-1503",
+     20
+    ],
+    [
+     "65-1473",
+     16
+    ],
+    [
+     "65-1481",
+     14
+    ],
+    [
+     "65-1252",
+     12
+    ],
+    [
+     "65-1554",
+     10
+    ],
+    [
+     "65-1287",
+     10
+    ],
+    [
+     "65-1457",
+     7
+    ],
+    [
+     "65-1317",
+     6
+    ],
+    [
+     "65-1490",
+     5
+    ],
+    [
+     "65-1376",
+     4
+    ],
+    [
+     "65-1511",
+     4
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Mons. Antonio Candido de Melo",
+     "curto": "Monsenhor Antônio Cândido de Melo",
+     "bairro": "Zona Rural",
+     "votos": 184
+    },
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+     "curto": "Marieta Cals",
+     "bairro": "Centro",
+     "votos": 144
+    },
+    {
+     "nome": "Escola E.i.e.f Inácia Rodrigues Moreira",
+     "curto": "Inácia Rodrigues Moreira",
+     "bairro": "Cacimbas",
+     "votos": 124
+    }
+   ],
+   "conc": 0.13529411764705881,
+   "top3": 0.3323529411764706,
+   "venceu": 1,
+   "presente": 28
+  },
+  {
+   "urna": "Luciana Miranda",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965880.jpg",
+   "votos": 1249,
+   "pos": 2,
+   "pct": 0.0977920450986533,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "65-1597",
+     174
+    ],
+    [
+     "65-1236",
+     173
+    ],
+    [
+     "65-1082",
+     170
+    ],
+    [
+     "65-1090",
+     114
+    ],
+    [
+     "65-1538",
+     108
+    ],
+    [
+     "65-1589",
+     95
+    ],
+    [
+     "65-1112",
+     57
+    ],
+    [
+     "65-1031",
+     42
+    ],
+    [
+     "65-1210",
+     40
+    ],
+    [
+     "65-1376",
+     39
+    ],
+    [
+     "65-1155",
+     30
+    ],
+    [
+     "65-1422",
+     28
+    ],
+    [
+     "65-1503",
+     26
+    ],
+    [
+     "65-1465",
+     23
+    ],
+    [
+     "65-1333",
+     18
+    ],
+    [
+     "65-1473",
+     14
+    ],
+    [
+     "65-1481",
+     14
+    ],
+    [
+     "65-1171",
+     11
+    ],
+    [
+     "65-1546",
+     11
+    ],
+    [
+     "65-1554",
+     10
+    ],
+    [
+     "65-1490",
+     10
+    ],
+    [
+     "65-1317",
+     9
+    ],
+    [
+     "65-1139",
+     8
+    ],
+    [
+     "65-1511",
+     8
+    ],
+    [
+     "65-1392",
+     5
+    ],
+    [
+     "65-1457",
+     5
+    ],
+    [
+     "65-1287",
+     4
+    ],
+    [
+     "65-1252",
+     2
+    ],
+    [
+     "65-1341",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Eefti Professor Luis de Sena Dias",
+     "curto": "Eefti Professor Luis de Sena Dias",
+     "bairro": "N.s. de Fátima",
+     "votos": 174
+    },
+    {
+     "nome": "Escola E.i.e.f Inácia Rodrigues Moreira",
+     "curto": "Inácia Rodrigues Moreira",
+     "bairro": "Cacimbas",
+     "votos": 173
+    },
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+     "curto": "Marieta Cals",
+     "bairro": "Centro",
+     "votos": 170
+    }
+   ],
+   "conc": 0.13931144915932747,
+   "top3": 0.41393114491593275,
+   "venceu": 6,
+   "presente": 29
+  },
+  {
+   "urna": "Manim Pinheiro",
+   "partido": "PL",
+   "foto": "fotos/ce/carire/2024/60002336249.jpg",
+   "votos": 1081,
+   "pos": 3,
+   "pct": 0.08463827121829001,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "65-1082",
+     145
+    ],
+    [
+     "65-1597",
+     118
+    ],
+    [
+     "65-1538",
+     113
+    ],
+    [
+     "65-1333",
+     109
+    ],
+    [
+     "65-1090",
+     105
+    ],
+    [
+     "65-1457",
+     70
+    ],
+    [
+     "65-1589",
+     62
+    ],
+    [
+     "65-1155",
+     57
+    ],
+    [
+     "65-1287",
+     39
+    ],
+    [
+     "65-1112",
+     31
+    ],
+    [
+     "65-1031",
+     30
+    ],
+    [
+     "65-1481",
+     29
+    ],
+    [
+     "65-1139",
+     24
+    ],
+    [
+     "65-1210",
+     23
+    ],
+    [
+     "65-1341",
+     22
+    ],
+    [
+     "65-1422",
+     20
+    ],
+    [
+     "65-1490",
+     18
+    ],
+    [
+     "65-1252",
+     12
+    ],
+    [
+     "65-1473",
+     11
+    ],
+    [
+     "65-1171",
+     10
+    ],
+    [
+     "65-1554",
+     9
+    ],
+    [
+     "65-1465",
+     9
+    ],
+    [
+     "65-1236",
+     7
+    ],
+    [
+     "65-1503",
+     4
+    ],
+    [
+     "65-1317",
+     2
+    ],
+    [
+     "65-1376",
+     2
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+     "curto": "Marieta Cals",
+     "bairro": "Centro",
+     "votos": 145
+    },
+    {
+     "nome": "Eefti Professor Luis de Sena Dias",
+     "curto": "Eefti Professor Luis de Sena Dias",
+     "bairro": "N.s. de Fátima",
+     "votos": 118
+    },
+    {
+     "nome": "Escola Eief Maria Jose Rodrigues Ponte",
+     "curto": "Maria José Rodrigues Ponte",
+     "bairro": "Campo de Aviação",
+     "votos": 113
+    }
+   ],
+   "conc": 0.1341350601295097,
+   "top3": 0.34782608695652173,
+   "venceu": 2,
+   "presente": 26
+  },
+  {
+   "urna": "Professora Sandra Aguiar",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965882.jpg",
+   "votos": 974,
+   "pos": 4,
+   "pct": 0.07626056999686814,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 568,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1236",
+     373
+    ],
+    [
+     "65-1546",
+     209
+    ],
+    [
+     "65-1171",
+     85
+    ],
+    [
+     "65-1252",
+     81
+    ],
+    [
+     "65-1538",
+     38
+    ],
+    [
+     "65-1597",
+     27
+    ],
+    [
+     "65-1082",
+     26
+    ],
+    [
+     "65-1589",
+     21
+    ],
+    [
+     "65-1090",
+     16
+    ],
+    [
+     "65-1210",
+     16
+    ],
+    [
+     "65-1112",
+     15
+    ],
+    [
+     "65-1155",
+     11
+    ],
+    [
+     "65-1031",
+     10
+    ],
+    [
+     "65-1139",
+     7
+    ],
+    [
+     "65-1422",
+     6
+    ],
+    [
+     "65-1554",
+     5
+    ],
+    [
+     "65-1376",
+     5
+    ],
+    [
+     "65-1503",
+     5
+    ],
+    [
+     "65-1457",
+     4
+    ],
+    [
+     "65-1317",
+     3
+    ],
+    [
+     "65-1465",
+     3
+    ],
+    [
+     "65-1490",
+     3
+    ],
+    [
+     "65-1287",
+     1
+    ],
+    [
+     "65-1333",
+     1
+    ],
+    [
+     "65-1392",
+     1
+    ],
+    [
+     "65-1481",
+     1
+    ],
+    [
+     "65-1473",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola E.i.e.f Inácia Rodrigues Moreira",
+     "curto": "Inácia Rodrigues Moreira",
+     "bairro": "Cacimbas",
+     "votos": 373
+    },
+    {
+     "nome": "Eeief Mariana França de Sousa",
+     "curto": "Mariana França de Sousa",
+     "bairro": "Rafael Arruda",
+     "votos": 209
+    },
+    {
+     "nome": "Escola Eief Filinto Elisio Aguiar",
+     "curto": "Filinto Elisio Aguiar",
+     "bairro": "Zona Rural",
+     "votos": 85
+    }
+   ],
+   "conc": 0.38295687885010266,
+   "top3": 0.6848049281314168,
+   "venceu": 3,
+   "presente": 27
+  },
+  {
+   "urna": "Neto Chaves",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965873.jpg",
+   "votos": 917,
+   "pos": 5,
+   "pct": 0.07179768243031631,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 554,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1473",
+     143
+    ],
+    [
+     "65-1597",
+     118
+    ],
+    [
+     "65-1171",
+     107
+    ],
+    [
+     "65-1082",
+     78
+    ],
+    [
+     "65-1090",
+     65
+    ],
+    [
+     "65-1538",
+     59
+    ],
+    [
+     "65-1210",
+     39
+    ],
+    [
+     "65-1252",
+     35
+    ],
+    [
+     "65-1589",
+     34
+    ],
+    [
+     "65-1554",
+     34
+    ],
+    [
+     "65-1031",
+     28
+    ],
+    [
+     "65-1511",
+     22
+    ],
+    [
+     "65-1112",
+     21
+    ],
+    [
+     "65-1422",
+     18
+    ],
+    [
+     "65-1155",
+     17
+    ],
+    [
+     "65-1287",
+     15
+    ],
+    [
+     "65-1333",
+     14
+    ],
+    [
+     "65-1490",
+     11
+    ],
+    [
+     "65-1481",
+     10
+    ],
+    [
+     "65-1465",
+     9
+    ],
+    [
+     "65-1546",
+     8
+    ],
+    [
+     "65-1503",
+     7
+    ],
+    [
+     "65-1236",
+     6
+    ],
+    [
+     "65-1570",
+     6
+    ],
+    [
+     "65-1376",
+     5
+    ],
+    [
+     "65-1392",
+     5
+    ],
+    [
+     "65-1457",
+     3
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Tenente Avelino Gomes",
+     "curto": "Tenente Avelino Gomes",
+     "bairro": "Zona Rural",
+     "votos": 143
+    },
+    {
+     "nome": "Eefti Professor Luis de Sena Dias",
+     "curto": "Eefti Professor Luis de Sena Dias",
+     "bairro": "N.s. de Fátima",
+     "votos": 118
+    },
+    {
+     "nome": "Escola Eief Filinto Elisio Aguiar",
+     "curto": "Filinto Elisio Aguiar",
+     "bairro": "Zona Rural",
+     "votos": 107
+    }
+   ],
+   "conc": 0.1559432933478735,
+   "top3": 0.40130861504907306,
+   "venceu": 2,
+   "presente": 27
+  },
+  {
+   "urna": "Lucy Ximenes",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965878.jpg",
+   "votos": 869,
+   "pos": 6,
+   "pct": 0.06803946132164108,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 570,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1422",
+     454
+    ],
+    [
+     "65-1392",
+     76
+    ],
+    [
+     "65-1481",
+     68
+    ],
+    [
+     "65-1457",
+     43
+    ],
+    [
+     "65-1503",
+     37
+    ],
+    [
+     "65-1082",
+     25
+    ],
+    [
+     "65-1597",
+     23
+    ],
+    [
+     "65-1473",
+     18
+    ],
+    [
+     "65-1155",
+     16
+    ],
+    [
+     "65-1465",
+     16
+    ],
+    [
+     "65-1589",
+     15
+    ],
+    [
+     "65-1376",
+     13
+    ],
+    [
+     "65-1090",
+     11
+    ],
+    [
+     "65-1538",
+     10
+    ],
+    [
+     "65-1112",
+     8
+    ],
+    [
+     "65-1511",
+     8
+    ],
+    [
+     "65-1554",
+     7
+    ],
+    [
+     "65-1139",
+     6
+    ],
+    [
+     "65-1570",
+     6
+    ],
+    [
+     "65-1546",
+     2
+    ],
+    [
+     "65-1031",
+     2
+    ],
+    [
+     "65-1490",
+     2
+    ],
+    [
+     "65-1210",
+     1
+    ],
+    [
+     "65-1236",
+     1
+    ],
+    [
+     "65-1287",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Adauta Mocinha Barros Rocha",
+     "curto": "Adauta Mocinha Barros Rocha",
+     "bairro": "Tapuio",
+     "votos": 454
+    },
+    {
+     "nome": "Escola E.i.e.f Manoelrodrigues dos Santos",
+     "curto": "Manoelrodrigues dos Santos",
+     "bairro": "Zona Rural",
+     "votos": 76
+    },
+    {
+     "nome": "Escola E.i.e.f Adauta Mosinha (anexo)",
+     "curto": "Adauta Mosinha (anexo)",
+     "bairro": "Zona Rural",
+     "votos": 68
+    }
+   ],
+   "conc": 0.522439585730725,
+   "top3": 0.6881472957422324,
+   "venceu": 2,
+   "presente": 25
+  },
+  {
+   "urna": "Edilson Brito",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965874.jpg",
+   "votos": 823,
+   "pos": 7,
+   "pct": 0.06443783275916067,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 413,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1287",
+     125
+    ],
+    [
+     "65-1538",
+     120
+    ],
+    [
+     "65-1597",
+     117
+    ],
+    [
+     "65-1082",
+     105
+    ],
+    [
+     "65-1090",
+     77
+    ],
+    [
+     "65-1589",
+     51
+    ],
+    [
+     "65-1112",
+     31
+    ],
+    [
+     "65-1554",
+     30
+    ],
+    [
+     "65-1031",
+     30
+    ],
+    [
+     "65-1422",
+     19
+    ],
+    [
+     "65-1317",
+     15
+    ],
+    [
+     "65-1473",
+     13
+    ],
+    [
+     "65-1546",
+     11
+    ],
+    [
+     "65-1333",
+     11
+    ],
+    [
+     "65-1376",
+     10
+    ],
+    [
+     "65-1139",
+     9
+    ],
+    [
+     "65-1457",
+     9
+    ],
+    [
+     "65-1465",
+     7
+    ],
+    [
+     "65-1511",
+     6
+    ],
+    [
+     "65-1210",
+     5
+    ],
+    [
+     "65-1392",
+     5
+    ],
+    [
+     "65-1481",
+     4
+    ],
+    [
+     "65-1503",
+     4
+    ],
+    [
+     "65-1155",
+     3
+    ],
+    [
+     "65-1490",
+     3
+    ],
+    [
+     "65-1252",
+     1
+    ],
+    [
+     "65-1570",
+     1
+    ],
+    [
+     "65-1341",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Lucas Rodrigues de Brito",
+     "curto": "Lucas Rodrigues de Brito",
+     "bairro": "Zona Rural",
+     "votos": 125
+    },
+    {
+     "nome": "Escola Eief Maria Jose Rodrigues Ponte",
+     "curto": "Maria José Rodrigues Ponte",
+     "bairro": "Campo de Aviação",
+     "votos": 120
+    },
+    {
+     "nome": "Eefti Professor Luis de Sena Dias",
+     "curto": "Eefti Professor Luis de Sena Dias",
+     "bairro": "N.s. de Fátima",
+     "votos": 117
+    }
+   ],
+   "conc": 0.15188335358444716,
+   "top3": 0.4398541919805589,
+   "venceu": 1,
+   "presente": 28
+  },
+  {
+   "urna": "Henrique Chaves",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965872.jpg",
+   "votos": 818,
+   "pos": 8,
+   "pct": 0.06404635139367366,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 561,
+   "eleito20": false,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1082",
+     150
+    ],
+    [
+     "65-1597",
+     99
+    ],
+    [
+     "65-1538",
+     92
+    ],
+    [
+     "65-1090",
+     85
+    ],
+    [
+     "65-1376",
+     85
+    ],
+    [
+     "65-1589",
+     55
+    ],
+    [
+     "65-1155",
+     43
+    ],
+    [
+     "65-1465",
+     36
+    ],
+    [
+     "65-1317",
+     31
+    ],
+    [
+     "65-1031",
+     21
+    ],
+    [
+     "65-1112",
+     14
+    ],
+    [
+     "65-1210",
+     12
+    ],
+    [
+     "65-1392",
+     12
+    ],
+    [
+     "65-1422",
+     11
+    ],
+    [
+     "65-1490",
+     9
+    ],
+    [
+     "65-1503",
+     9
+    ],
+    [
+     "65-1554",
+     8
+    ],
+    [
+     "65-1139",
+     8
+    ],
+    [
+     "65-1457",
+     7
+    ],
+    [
+     "65-1236",
+     6
+    ],
+    [
+     "65-1287",
+     6
+    ],
+    [
+     "65-1511",
+     5
+    ],
+    [
+     "65-1570",
+     4
+    ],
+    [
+     "65-1481",
+     4
+    ],
+    [
+     "65-1333",
+     3
+    ],
+    [
+     "65-1341",
+     2
+    ],
+    [
+     "65-1473",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+     "curto": "Marieta Cals",
+     "bairro": "Centro",
+     "votos": 150
+    },
+    {
+     "nome": "Eefti Professor Luis de Sena Dias",
+     "curto": "Eefti Professor Luis de Sena Dias",
+     "bairro": "N.s. de Fátima",
+     "votos": 99
+    },
+    {
+     "nome": "Escola Eief Maria Jose Rodrigues Ponte",
+     "curto": "Maria José Rodrigues Ponte",
+     "bairro": "Campo de Aviação",
+     "votos": 92
+    }
+   ],
+   "conc": 0.18337408312958436,
+   "top3": 0.41687041564792177,
+   "venceu": 0,
+   "presente": 27
+  },
+  {
+   "urna": "Márcio Brito",
+   "partido": "PL",
+   "foto": "fotos/ce/carire/2024/60002336248.jpg",
+   "votos": 795,
+   "pos": 9,
+   "pct": 0.06224553711243345,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": 605,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1422",
+     91
+    ],
+    [
+     "65-1082",
+     88
+    ],
+    [
+     "65-1481",
+     65
+    ],
+    [
+     "65-1090",
+     54
+    ],
+    [
+     "65-1597",
+     44
+    ],
+    [
+     "65-1287",
+     42
+    ],
+    [
+     "65-1589",
+     36
+    ],
+    [
+     "65-1376",
+     36
+    ],
+    [
+     "65-1457",
+     34
+    ],
+    [
+     "65-1538",
+     33
+    ],
+    [
+     "65-1210",
+     31
+    ],
+    [
+     "65-1155",
+     31
+    ],
+    [
+     "65-1341",
+     31
+    ],
+    [
+     "65-1112",
+     25
+    ],
+    [
+     "65-1465",
+     18
+    ],
+    [
+     "65-1473",
+     17
+    ],
+    [
+     "65-1031",
+     15
+    ],
+    [
+     "65-1333",
+     14
+    ],
+    [
+     "65-1236",
+     12
+    ],
+    [
+     "65-1317",
+     12
+    ],
+    [
+     "65-1554",
+     11
+    ],
+    [
+     "65-1252",
+     11
+    ],
+    [
+     "65-1503",
+     11
+    ],
+    [
+     "65-1139",
+     9
+    ],
+    [
+     "65-1546",
+     7
+    ],
+    [
+     "65-1490",
+     7
+    ],
+    [
+     "65-1171",
+     5
+    ],
+    [
+     "65-1511",
+     5
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Adauta Mocinha Barros Rocha",
+     "curto": "Adauta Mocinha Barros Rocha",
+     "bairro": "Tapuio",
+     "votos": 91
+    },
+    {
+     "nome": "Escola de Ensino Fundamental e Medio Marieta Cals",
+     "curto": "Marieta Cals",
+     "bairro": "Centro",
+     "votos": 88
+    },
+    {
+     "nome": "Escola E.i.e.f Adauta Mosinha (anexo)",
+     "curto": "Adauta Mosinha (anexo)",
+     "bairro": "Zona Rural",
+     "votos": 65
+    }
+   ],
+   "conc": 0.11446540880503145,
+   "top3": 0.3069182389937107,
+   "venceu": 0,
+   "presente": 28
+  },
+  {
+   "urna": "Elizangela Mesquita",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965883.jpg",
+   "votos": 768,
+   "pos": 10,
+   "pct": 0.060131537738803635,
+   "situacao": "eleito por qp",
+   "qp": true,
+   "v20": null,
+   "eleito20": false,
+   "disputou20": false,
+   "locais": [
+    [
+     "65-1376",
+     197
+    ],
+    [
+     "65-1392",
+     88
+    ],
+    [
+     "65-1570",
+     62
+    ],
+    [
+     "65-1155",
+     47
+    ],
+    [
+     "65-1597",
+     44
+    ],
+    [
+     "65-1333",
+     38
+    ],
+    [
+     "65-1082",
+     37
+    ],
+    [
+     "65-1538",
+     35
+    ],
+    [
+     "65-1589",
+     27
+    ],
+    [
+     "65-1090",
+     26
+    ],
+    [
+     "65-1481",
+     26
+    ],
+    [
+     "65-1511",
+     25
+    ],
+    [
+     "65-1490",
+     20
+    ],
+    [
+     "65-1473",
+     16
+    ],
+    [
+     "65-1422",
+     14
+    ],
+    [
+     "65-1112",
+     13
+    ],
+    [
+     "65-1031",
+     11
+    ],
+    [
+     "65-1554",
+     9
+    ],
+    [
+     "65-1546",
+     8
+    ],
+    [
+     "65-1210",
+     6
+    ],
+    [
+     "65-1139",
+     5
+    ],
+    [
+     "65-1457",
+     5
+    ],
+    [
+     "65-1317",
+     3
+    ],
+    [
+     "65-1236",
+     2
+    ],
+    [
+     "65-1171",
+     1
+    ],
+    [
+     "65-1465",
+     1
+    ],
+    [
+     "65-1503",
+     1
+    ],
+    [
+     "65-1287",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Jose do Patrocinio Braga",
+     "curto": "José do Patrocínio Braga",
+     "bairro": "Zona Rural",
+     "votos": 197
+    },
+    {
+     "nome": "Escola E.i.e.f Manoelrodrigues dos Santos",
+     "curto": "Manoelrodrigues dos Santos",
+     "bairro": "Zona Rural",
+     "votos": 88
+    },
+    {
+     "nome": "E.e.i.e.f. Manoel Alves de Almeida",
+     "curto": "Manoel Alves de Almeida",
+     "bairro": "Zona Rural",
+     "votos": 62
+    }
+   ],
+   "conc": 0.2565104166666667,
+   "top3": 0.4518229166666667,
+   "venceu": 4,
+   "presente": 28
+  },
+  {
+   "urna": "Flávio do Ozir",
+   "partido": "PDT",
+   "foto": "fotos/ce/carire/2024/60001965877.jpg",
+   "votos": 727,
+   "pos": 11,
+   "pct": 0.05692139054181021,
+   "situacao": "eleito por média",
+   "qp": false,
+   "v20": 613,
+   "eleito20": true,
+   "disputou20": true,
+   "locais": [
+    [
+     "65-1341",
+     303
+    ],
+    [
+     "65-1333",
+     166
+    ],
+    [
+     "65-1139",
+     142
+    ],
+    [
+     "65-1597",
+     21
+    ],
+    [
+     "65-1490",
+     20
+    ],
+    [
+     "65-1082",
+     19
+    ],
+    [
+     "65-1589",
+     9
+    ],
+    [
+     "65-1112",
+     8
+    ],
+    [
+     "65-1376",
+     7
+    ],
+    [
+     "65-1473",
+     7
+    ],
+    [
+     "65-1090",
+     6
+    ],
+    [
+     "65-1155",
+     6
+    ],
+    [
+     "65-1422",
+     4
+    ],
+    [
+     "65-1538",
+     2
+    ],
+    [
+     "65-1210",
+     1
+    ],
+    [
+     "65-1031",
+     1
+    ],
+    [
+     "65-1392",
+     1
+    ],
+    [
+     "65-1457",
+     1
+    ],
+    [
+     "65-1465",
+     1
+    ],
+    [
+     "65-1481",
+     1
+    ],
+    [
+     "65-1503",
+     1
+    ]
+   ],
+   "top": [
+    {
+     "nome": "Escola Eief Evangelina Feijao",
+     "curto": "Evangelina Feijão",
+     "bairro": "Zona Rural",
+     "votos": 303
+    },
+    {
+     "nome": "Escola Eief Maria Marlene Feitosa de Paiva",
+     "curto": "Maria Marlene Feitosa de Paiva",
+     "bairro": "Zona Rural",
+     "votos": 166
+    },
+    {
+     "nome": "Escola Eief Manoel Lopes da Cunha",
+     "curto": "Manoel Lopes da Cunha",
+     "bairro": "Zona Rural",
+     "votos": 142
+    }
+   ],
+   "conc": 0.4167812929848693,
+   "top3": 0.8404401650618982,
+   "venceu": 3,
+   "presente": 21
+  }
+ ],
+ "qe2028": 1253,
+ "fala": [
+  "Cariré. Os onze vereadores eleitos em dois mil e vinte e quatro, um por um: quantos votos, de onde vieram e o que mudou desde dois mil e vinte.",
+  "Foram vinte candidatos para onze cadeiras. Seis são caras novas. PDT, nove; PL, dois. E o quociente: mil cento e sessenta e um votos.",
+  "Robson Pessoa, do PDT. Mil trezentos e sessenta votos: a maior votação da cidade. Em dois mil e vinte, tinha feito mil e oitenta e um: ganhou duzentos e setenta e nove votos e renovou o mandato. O maior reduto é na escola Monsenhor Antônio Cândido de Melo: cento e oitenta e quatro votos.",
+  "Luciana Miranda, do PDT. Mil duzentos e quarenta e nove votos: segundo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Eefti Professor Luis de Sena Dias, em Nossa Senhora de Fátima: cento e setenta e quatro votos. Liderou a votação em seis dos trinta locais.",
+  "Manim Pinheiro, do PL. Mil e oitenta e um votos: terceiro lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola Marieta Cals, no Centro: cento e quarenta e cinco votos.",
+  "Professora Sandra Aguiar, do PDT. Novecentos e setenta e quatro votos: quarto lugar. Em dois mil e vinte, tinha feito quinhentos e sessenta e oito: ganhou quatrocentos e seis votos e renovou o mandato. O maior reduto é na escola Inácia Rodrigues Moreira, em Cacimbas: trezentos e setenta e três votos. Liderou a votação em três dos trinta locais.",
+  "Neto Chaves, do PDT. Novecentos e dezessete votos: quinto lugar. Em dois mil e vinte, teve quinhentos e cinquenta e quatro votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Tenente Avelino Gomes: cento e quarenta e três votos.",
+  "Lucy Ximenes, do PDT. Oitocentos e sessenta e nove votos: sexto lugar. Em dois mil e vinte, tinha feito quinhentos e setenta: ganhou duzentos e noventa e nove votos e renovou o mandato. O maior reduto é na escola Adauta Mocinha Barros Rocha, em Tapuio: quatrocentos e cinquenta e quatro votos. Mais da metade dos votos veio desse único local.",
+  "Edilson Brito, do PDT. Oitocentos e vinte e três votos: sétimo lugar. Em dois mil e vinte, teve quatrocentos e treze votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Lucas Rodrigues de Brito: cento e vinte e cinco votos.",
+  "Henrique Chaves, do PDT. Oitocentos e dezoito votos: oitavo lugar. Em dois mil e vinte, teve quinhentos e sessenta e um votos e ficou sem a vaga. Desta vez, chegou lá. O maior reduto é na escola Marieta Cals, no Centro: cento e cinquenta votos.",
+  "Márcio Brito, do PL. Setecentos e noventa e cinco votos: nono lugar. Em dois mil e vinte, tinha feito seiscentos e cinco: ganhou cento e noventa votos e renovou o mandato. O maior reduto é na escola Adauta Mocinha Barros Rocha, em Tapuio: noventa e um votos.",
+  "Elizangela Mesquita, do PDT. Setecentos e sessenta e oito votos: décimo lugar. Não disputou a Câmara em dois mil e vinte. O maior reduto é na escola José do Patrocínio Braga: cento e noventa e sete votos. Liderou a votação em quatro dos trinta locais.",
+  "Flávio do Ozir, do PDT. Setecentos e vinte e sete votos: décimo primeiro lugar. Em dois mil e vinte, tinha feito seiscentos e treze: ganhou cento e catorze votos e renovou o mandato. O maior reduto é na escola Evangelina Feijão: trezentos e três votos. Quase metade dos votos veio desse único local. Entrou pela média, na distribuição das sobras.",
+  "Robson Pessoa e Luciana Miranda passaram do quociente com os próprios votos. Os outros nove dependeram da soma do partido.",
+  "Em dois mil e vinte e oito, na tendência, cada cadeira vai pedir perto de mil duzentos e cinquenta votos. Plenária CE. Inteligência eleitoral de Cariré."
+ ]
+}

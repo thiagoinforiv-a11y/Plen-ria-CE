@@ -1,0 +1,253 @@
+{
+ "cartoes2028": [],
+ "interrupcoes": [],
+ "id": "ce/pires-ferreira",
+ "municipio": "Pires Ferreira",
+ "cd_ibge": "2310951",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 8036,
+   "comparecimento": 6571,
+   "abstencoes": 1465
+  },
+  {
+   "ano": "2020",
+   "aptos": 8084,
+   "comparecimento": 6831,
+   "abstencoes": 1253
+  },
+  {
+   "ano": "2024",
+   "aptos": 8502,
+   "comparecimento": 7715,
+   "abstencoes": 787
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Marfisa",
+    "partido": "PDT",
+    "votos": 3640,
+    "pct": 0.5777777777777777,
+    "pid": "999c6f1d98",
+    "foto": null
+   },
+   "seg": {
+    "nome": "José Augusto",
+    "partido": "PSDB",
+    "votos": 2660,
+    "pct": 0.4222222222222222,
+    "pid": "ffc530778d",
+    "foto": "fotos/ce/pires-ferreira/2020/60001042455.jpg"
+   },
+   "margem": 980
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Dra. Lívia",
+    "partido": "PDT",
+    "votos": 3690,
+    "pct": 0.5543037404236142,
+    "pid": "e85a84ab31",
+    "foto": "fotos/ce/pires-ferreira/2024/60002188305.jpg"
+   },
+   "seg": {
+    "nome": "José Augusto",
+    "partido": "PTB",
+    "votos": 2967,
+    "pct": 0.44569625957638576,
+    "pid": "ffc530778d",
+    "foto": "fotos/ce/pires-ferreira/2020/60001042455.jpg"
+   },
+   "margem": 723
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Dra. Lívia",
+    "partido": "PSB",
+    "votos": 5391,
+    "pct": 0.716221602231965,
+    "pid": "e85a84ab31",
+    "foto": "fotos/ce/pires-ferreira/2024/60002188305.jpg"
+   },
+   "seg": {
+    "nome": "Corrinha",
+    "partido": "PT",
+    "votos": 2096,
+    "pct": 0.2784641955626412,
+    "pid": "3ff63e891f",
+    "foto": "fotos/ce/pires-ferreira/2024/60002188656.jpg"
+   },
+   "margem": 3295
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 9,
+   "candidatos": 31,
+   "validos": 6332,
+   "qe": 704,
+   "partidos": [
+    [
+     "PDT",
+     5
+    ],
+    [
+     "PSDB",
+     2
+    ],
+    [
+     "PSC",
+     1
+    ],
+    [
+     "PMB",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Eriberto Paiva",
+    "votos": 626,
+    "partido": "PSC",
+    "foto": "fotos/ce/pires-ferreira/2020/60001045443.jpeg"
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 9,
+   "candidatos": 26,
+   "validos": 6623,
+   "qe": 736,
+   "partidos": [
+    [
+     "PDT",
+     7
+    ],
+    [
+     "PTB",
+     2
+    ]
+   ],
+   "top": {
+    "nome": "Eriberto Paiva",
+    "votos": 583,
+    "partido": "PDT",
+    "foto": "fotos/ce/pires-ferreira/2020/60001045443.jpeg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 9,
+   "candidatos": 23,
+   "validos": 7523,
+   "qe": 836,
+   "partidos": [
+    [
+     "PSB",
+     8
+    ],
+    [
+     "PT",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Samara Pereira",
+    "votos": 1140,
+    "partido": "PSB",
+    "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 9,
+   "reeleitos": 2,
+   "novos": 7,
+   "nomes": [
+    "Antenor Carneiro",
+    "Eduardo do Donato"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 9,
+   "reeleitos": 6,
+   "novos": 3,
+   "nomes": [
+    "Eriberto Paiva",
+    "Chico Ana",
+    "Francisca",
+    "Aldemir da Cerâmica",
+    "Eduardo do Donato",
+    "Nilton Anastácio"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 9,
+   "reeleitos": 5,
+   "novos": 4,
+   "nomes": [
+    "Jamile Mororo",
+    "Francisca",
+    "Chico Ana",
+    "Luciano",
+    "Nilton Anastacio"
+   ]
+  }
+ ],
+ "semReeleicao": true,
+ "precedente": {
+  "ano": "2020",
+  "saiu": "Marfisa",
+  "interrompido": null,
+  "motivo": "fim do segundo mandato",
+  "partidoSaiu": "PDT",
+  "venceu": "Dra. Lívia",
+  "partidoVenceu": "PDT",
+  "mesmoPartido": true
+ },
+ "precedentes": [
+  {
+   "ano": "2020",
+   "saiu": "Marfisa",
+   "interrompido": null,
+   "motivo": "fim do segundo mandato",
+   "partidoSaiu": "PDT",
+   "venceu": "Dra. Lívia",
+   "partidoVenceu": "PDT",
+   "mesmoPartido": true
+  }
+ ],
+ "qe2028": 936,
+ "novosMedia": 5,
+ "fala": [
+  "Pires Ferreira. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de oito mil e trinta e seis para oito mil quinhentos e dois. E a abstenção caiu: de mil quatrocentos e sessenta e cinco para setecentos e oitenta e sete eleitores.",
+  "Em dois mil e dezesseis, Marfisa venceu com cinquenta e oito por cento. José Augusto ficou com quarenta e dois. Diferença de novecentos e oitenta votos.",
+  "Em dois mil e vinte, Doutora Lívia venceu com cinquenta e cinco por cento. José Augusto ficou com quarenta e cinco. Diferença de setecentos e vinte e três votos.",
+  "Em dois mil e vinte e quatro, Doutora Lívia venceu com setenta e dois por cento. Corrinha ficou com vinte e oito. Diferença de três mil duzentos e noventa e cinco votos.",
+  "Em três eleições: Marfisa; depois Doutora Lívia, duas vezes. Em dois mil e vinte e oito, Doutora Lívia não pode concorrer de novo: a cadeira de prefeito fica aberta.",
+  "Na Câmara, o PDT fez cinco cadeiras em dois mil e dezesseis. E em dois mil e vinte, o PDT seguiu na frente, com sete cadeiras. E em dois mil e vinte e quatro, o PSB passou a liderar com oito cadeiras, e o PDT ficou sem cadeira.",
+  "A renovação é alta. Caras novas em cada eleição: sete, três e quatro, de nove cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de setecentos e quatro para oitocentos e trinta e seis votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de novecentos e cinquenta.",
+  "Então, como será dois mil e vinte e oito? Prefeitura aberta. Isso já aconteceu uma vez. Em dois mil e vinte, sem Marfisa na disputa, o PDT manteve a prefeitura com Doutora Lívia. Se a renovação seguir a média, cerca de cinco vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Pires Ferreira. A história de cada eleição, para decidir a próxima."
+ ]
+}

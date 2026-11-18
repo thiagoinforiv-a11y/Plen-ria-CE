@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -m 120 -F \"reqtype=fileupload\" -F \"time=72h\" -F \"fileToUpload=@entregas/*\" https://litterbox.catbox.moe/resources/internals/api.php)"
+    ]
+  }
+}

@@ -1,0 +1,309 @@
+{
+ "cartoes2028": [],
+ "interrupcoes": [],
+ "id": "ce/ipu",
+ "municipio": "Ipu",
+ "cd_ibge": "2305803",
+ "anos": [
+  "2016",
+  "2020",
+  "2024"
+ ],
+ "eleitorado": [
+  {
+   "ano": "2016",
+   "aptos": 33808,
+   "comparecimento": 25547,
+   "abstencoes": 8261
+  },
+  {
+   "ano": "2020",
+   "aptos": 33898,
+   "comparecimento": 25799,
+   "abstencoes": 8099
+  },
+  {
+   "ano": "2024",
+   "aptos": 32860,
+   "comparecimento": 29122,
+   "abstencoes": 3738
+  }
+ ],
+ "prefeito": [
+  {
+   "ano": "2016",
+   "venc": {
+    "nome": "Sérgio Rufino",
+    "partido": "PC do B",
+    "votos": 12785,
+    "pct": 0.5331081644566759,
+    "pid": "64b3208134",
+    "foto": "fotos/ce/ipu/2024/60002189263.jpg"
+   },
+   "seg": {
+    "nome": "Diego",
+    "partido": "PDT",
+    "votos": 11098,
+    "pct": 0.46276373947127014,
+    "pid": "d4804fdbe6",
+    "foto": "fotos/ce/ipu/2020/60001243353.jpg"
+   },
+   "margem": 1687
+  },
+  {
+   "ano": "2020",
+   "venc": {
+    "nome": "Robério Rufino",
+    "partido": "PC do B",
+    "votos": 14156,
+    "pct": 0.5883868822478074,
+    "pid": "03a0cb1dc3",
+    "foto": "fotos/ce/ipu/2020/60001198134.jpg"
+   },
+   "seg": {
+    "nome": "Diego Carlos",
+    "partido": "PDT",
+    "votos": 8881,
+    "pct": 0.36913421172949834,
+    "pid": "d4804fdbe6",
+    "foto": "fotos/ce/ipu/2020/60001243353.jpg"
+   },
+   "margem": 5275
+  },
+  {
+   "ano": "2024",
+   "venc": {
+    "nome": "Milena Damasceno",
+    "partido": "PT",
+    "votos": 14519,
+    "pct": 0.5197236540664376,
+    "pid": "b6107e50d1",
+    "foto": "fotos/ce/ipu/2024/60002189191.jpeg"
+   },
+   "seg": {
+    "nome": "Sérgio Rufino",
+    "partido": "PSB",
+    "votos": 13417,
+    "pct": 0.48027634593356244,
+    "pid": "64b3208134",
+    "foto": "fotos/ce/ipu/2024/60002189263.jpg"
+   },
+   "margem": 1102
+  }
+ ],
+ "camara": [
+  {
+   "ano": "2016",
+   "cadeiras": 13,
+   "candidatos": 86,
+   "validos": 24292,
+   "qe": 1869,
+   "partidos": [
+    [
+     "PC do B",
+     5
+    ],
+    [
+     "PSD",
+     2
+    ],
+    [
+     "PMB",
+     1
+    ],
+    [
+     "Solidariedade",
+     1
+    ],
+    [
+     "PV",
+     1
+    ],
+    [
+     "PL",
+     1
+    ],
+    [
+     "PDT",
+     1
+    ],
+    [
+     "PROS",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Zeca Rufino",
+    "votos": 1627,
+    "partido": "PC do B",
+    "foto": "fotos/ce/ipu/2024/60002309615.jpg"
+   }
+  },
+  {
+   "ano": "2020",
+   "cadeiras": 13,
+   "candidatos": 77,
+   "validos": 24232,
+   "qe": 1864,
+   "partidos": [
+    [
+     "PC do B",
+     8
+    ],
+    [
+     "PSB",
+     3
+    ],
+    [
+     "PROS",
+     1
+    ],
+    [
+     "PDT",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Monga",
+    "votos": 1556,
+    "partido": "PC do B",
+    "foto": "fotos/ce/ipu/2024/60002205464.jpeg"
+   }
+  },
+  {
+   "ano": "2024",
+   "cadeiras": 13,
+   "candidatos": 77,
+   "validos": 28207,
+   "qe": 2170,
+   "partidos": [
+    [
+     "PSB",
+     6
+    ],
+    [
+     "PT",
+     4
+    ],
+    [
+     "PSD",
+     1
+    ],
+    [
+     "MDB",
+     1
+    ],
+    [
+     "PDT",
+     1
+    ]
+   ],
+   "top": {
+    "nome": "Nonato Filho",
+    "votos": 2154,
+    "partido": "PT",
+    "foto": "fotos/ce/ipu/2024/60002205467.jpeg"
+   }
+  }
+ ],
+ "renov": [
+  {
+   "ano": "2016",
+   "de": "2012",
+   "cadeiras": 13,
+   "reeleitos": 9,
+   "novos": 4,
+   "nomes": [
+    "Zeca Rufino",
+    "Eduardo Ximenes",
+    "Monga",
+    "Arlete",
+    "Nonato Filho",
+    "Adriano Melo",
+    "Evaldo",
+    "Hilton Belém",
+    "Ivo Sousa"
+   ]
+  },
+  {
+   "ano": "2020",
+   "de": "2016",
+   "cadeiras": 13,
+   "reeleitos": 7,
+   "novos": 6,
+   "nomes": [
+    "Monga",
+    "Zeca Rufino",
+    "Nonato Filho",
+    "Arlete",
+    "Eduardo Ximenes",
+    "Tia Olinda",
+    "Hilton Belém"
+   ]
+  },
+  {
+   "ano": "2024",
+   "de": "2020",
+   "cadeiras": 13,
+   "reeleitos": 7,
+   "novos": 6,
+   "nomes": [
+    "Nonato Filho",
+    "Monga",
+    "Zeca Rufino",
+    "Moreira Filho",
+    "Raimundo Amaro",
+    "Ivan Moreira",
+    "Hilton Belém"
+   ]
+  }
+ ],
+ "semReeleicao": false,
+ "precedente": {
+  "ano": "2024",
+  "saiu": "Robério Rufino",
+  "interrompido": null,
+  "motivo": "não disputou",
+  "partidoSaiu": "PC do B",
+  "venceu": "Milena Damasceno",
+  "partidoVenceu": "PT",
+  "mesmoPartido": false
+ },
+ "precedentes": [
+  {
+   "ano": "2020",
+   "saiu": "Sérgio Rufino",
+   "interrompido": null,
+   "motivo": "fim do segundo mandato",
+   "partidoSaiu": "PC do B",
+   "venceu": "Robério Rufino",
+   "partidoVenceu": "PC do B",
+   "mesmoPartido": true
+  },
+  {
+   "ano": "2024",
+   "saiu": "Robério Rufino",
+   "interrompido": null,
+   "motivo": "não disputou",
+   "partidoSaiu": "PC do B",
+   "venceu": "Milena Damasceno",
+   "partidoVenceu": "PT",
+   "mesmoPartido": false
+  }
+ ],
+ "qe2028": 2476,
+ "novosMedia": 5,
+ "fala": [
+  "Ipu. De dois mil e dezesseis a dois mil e vinte e quatro: a prefeitura e a Câmara, eleição por eleição. E o que isso diz de dois mil e vinte e oito.",
+  "O eleitorado foi de trinta e três mil oitocentos e oito para trinta e dois mil oitocentos e sessenta. E a abstenção caiu: de oito mil duzentos e sessenta e um para três mil setecentos e trinta e oito eleitores.",
+  "Em dois mil e dezesseis, Sérgio Rufino venceu com cinquenta e três por cento. Diego ficou com quarenta e seis. Diferença de mil seiscentos e oitenta e sete votos.",
+  "Em dois mil e vinte, Robério Rufino venceu com cinquenta e nove por cento. Diego Carlos ficou com trinta e sete. Diferença de cinco mil duzentos e setenta e cinco votos.",
+  "Em dois mil e vinte e quatro, Milena Damasceno venceu com cinquenta e dois por cento. Sérgio Rufino ficou com quarenta e oito. Diferença de mil cento e dois votos.",
+  "Em três eleições: Sérgio Rufino; depois Robério Rufino; depois Milena Damasceno. Em dois mil e vinte e oito, Milena Damasceno pode tentar a reeleição.",
+  "Na Câmara, o PC do B fez cinco cadeiras em dois mil e dezesseis. E em dois mil e vinte, o PC do B seguiu na frente, com oito cadeiras. E em dois mil e vinte e quatro, o PSB passou a liderar com seis cadeiras, e o PC do B ficou sem cadeira.",
+  "A renovação é alta. Caras novas em cada eleição: quatro, seis e seis, de treze cadeiras.",
+  "Para se eleger, o preço subiu. O quociente foi de mil oitocentos e sessenta e nove para dois mil cento e setenta votos por cadeira. Na tendência, dois mil e vinte e oito pede perto de dois mil e quinhentos.",
+  "Então, como será dois mil e vinte e oito? Isso já aconteceu duas vezes. Em dois mil e vinte, sem Sérgio Rufino na disputa, o PC do B manteve a prefeitura com Robério Rufino. Em dois mil e vinte e quatro, sem Robério Rufino na disputa, Milena Damasceno venceu, pelo PT. Se a renovação seguir a média, cerca de cinco vereadores novos.",
+  "Plenária CE. Inteligência eleitoral de Ipu. A história de cada eleição, para decidir a próxima."
+ ]
+}

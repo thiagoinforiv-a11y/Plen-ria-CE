@@ -1,0 +1,10 @@
+{
+ "_sobre": "Presidente da Câmara de cada cidade (informação pública, com fonte). 'atual' = mandato em curso; 'proximo' = já eleito para o biênio seguinte. Pesquisado em 05/11/2026.",
+ "ce/varjota": { "atual": { "urna": "Roberto do Garrone", "fonte": "Portal da Câmara de Varjota", "url": "https://www.camaravarjota.ce.gov.br/parlamentares/presidente/", "selo": "confirmado" } },
+ "ce/pacuja": { "atual": { "urna": "Lourinho", "fonte": "Portal da Câmara de Pacujá (registro da sessão de 08/10/2025)", "url": "https://www.camarapacuja.ce.gov.br/", "selo": "uma-fonte" } },
+ "ce/reriutaba": { "atual": { "urna": "Socorro Hermínio", "fonte": "Portal da Câmara de Reriutaba (Maria do Socorro de Souza Araujo)", "url": "https://camarareriutaba.ce.gov.br/noticias.php", "selo": "uma-fonte" } },
+ "ce/pires-ferreira": { "atual": { "urna": "Samara Pereira", "fonte": "Portal da Câmara de Pires Ferreira (Maria Samara Oliveira Mendes)", "url": "https://www.cmpiresferreira.ce.gov.br/sobre.php", "selo": "uma-fonte" } },
+ "ce/ipu": { "atual": { "urna": "Cristina Peres", "fonte": "Portal da Câmara de Ipu (biênio 2025/2026)", "url": "https://www.cmipu.ce.gov.br/vereadores/1831", "selo": "uma-fonte" } },
+ "ce/santa-quiteria": { "proximo": { "urna": "Renato Catunda", "bienio": "2027–2028", "eleito": "2026-11-03", "votos": "11 de 13", "fonte": "Blog do Amaury Alencar", "url": "https://www.blogdoamauryalencar.com.br/2026/11/renato-catunda-e-eleito-presidente-da.html", "selo": "uma-fonte" } },
+ "ce/carire": { "atual": { "urna": "Luciana Miranda", "fonte": "Câmara de Cariré, Projeto de Resolução nº 06 de 02/05/2025 (Luciana Cristina Rodrigues Miranda)", "url": "https://www.camaracarire.ce.gov.br/requerimentos/998/Arquivo_006_2025_0000001.pdf", "selo": "uma-fonte" } }
+}

@@ -1,0 +1,343 @@
+{
+ "urna": "Yury do Paredão",
+ "partido": "MDB",
+ "foto": "fotos/ce/varjota/2026/60002542442.jpg",
+ "votos": 2387,
+ "validos": 12867,
+ "pct": 0.1855133286702417,
+ "top3": [
+  {
+   "urna": "Yury do Paredão",
+   "partido": "MDB",
+   "votos": 2387,
+   "foto": "fotos/ce/varjota/2026/60002542442.jpg"
+  },
+  {
+   "urna": "Denis Bezerra",
+   "partido": "PSB",
+   "votos": 2099,
+   "foto": "fotos/ce/varjota/2026/60002536708.jpg"
+  },
+  {
+   "urna": "Eduardo Bismarck",
+   "partido": "PV",
+   "votos": 1160,
+   "foto": "fotos/ce/varjota/2026/60002540732.jpg"
+  }
+ ],
+ "urnas": 59,
+ "comVoto": 59,
+ "min": 0.10526315789473684,
+ "mediana": 0.18146718146718147,
+ "max": 0.36419753086419754,
+ "locais": [
+  {
+   "nome": "E.e.f. Deputado Manoel Rodrigues",
+   "bairro": "Centro",
+   "lat": -4.191144,
+   "lon": -40.475999,
+   "v": 212,
+   "t": 1285,
+   "urnas": 5,
+   "pct": 0.1649805447470817,
+   "curto": "Deputado Manoel Rodrigues"
+  },
+  {
+   "nome": "Liceu Waldir Leopércio",
+   "bairro": "Empréstimos",
+   "lat": -4.188648,
+   "lon": -40.480831,
+   "v": 175,
+   "t": 1143,
+   "urnas": 5,
+   "pct": 0.15310586176727908,
+   "curto": "Liceu Waldir Leopércio"
+  },
+  {
+   "nome": "E.e.f. Florência Ferreira Neta",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.198676,
+   "lon": -40.467963,
+   "v": 151,
+   "t": 900,
+   "urnas": 4,
+   "pct": 0.16777777777777778,
+   "curto": "Florência Ferreira Neta"
+  },
+  {
+   "nome": "E.e.f. Tereza Aragão Ximenes",
+   "bairro": "Ararinha",
+   "lat": -4.202835,
+   "lon": -40.46881,
+   "v": 145,
+   "t": 577,
+   "urnas": 3,
+   "pct": 0.2512998266897747,
+   "curto": "Tereza Aragão Ximenes"
+  },
+  {
+   "nome": "E.e.f. Vicente Trajano de Mesquita",
+   "bairro": "Olho Dágua dos Trajanos",
+   "lat": -4.121744,
+   "lon": -40.480539,
+   "v": 138,
+   "t": 465,
+   "urnas": 3,
+   "pct": 0.2967741935483871,
+   "curto": "Vicente Trajano de Mesquita"
+  },
+  {
+   "nome": "E.e.i. José Neves Damasceno - Creche Balneário",
+   "bairro": "Balneario",
+   "lat": -4.200936,
+   "lon": -40.476335,
+   "v": 136,
+   "t": 708,
+   "urnas": 3,
+   "pct": 0.192090395480226,
+   "curto": "E.e.i. José Neves Damasceno - Creche Balneário"
+  },
+  {
+   "nome": "E.e.f. Waldir Leopércio",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.202123,
+   "lon": -40.460921,
+   "v": 132,
+   "t": 691,
+   "urnas": 4,
+   "pct": 0.191027496382055,
+   "curto": "Waldir Leopércio"
+  },
+  {
+   "nome": "E.e.f. Odilon Nobre",
+   "bairro": "Croatá dos Martins",
+   "lat": -4.210669,
+   "lon": -40.550497,
+   "v": 124,
+   "t": 626,
+   "urnas": 3,
+   "pct": 0.19808306709265175,
+   "curto": "Odilon Nobre"
+  },
+  {
+   "nome": "Cheche Pro-infância Euclides Pinto de Macedo Neto - Varjota",
+   "bairro": "Ararinha",
+   "lat": -4.2012,
+   "lon": -40.469384,
+   "v": 123,
+   "t": 509,
+   "urnas": 2,
+   "pct": 0.24165029469548133,
+   "curto": "Creche Euclides Pinto de Macedo Neto"
+  },
+  {
+   "nome": "E.e.i.f. Naiara Macedo Vasconcelos",
+   "bairro": "Vila Naiara",
+   "lat": -4.096904,
+   "lon": -40.440671,
+   "v": 100,
+   "t": 380,
+   "urnas": 2,
+   "pct": 0.2631578947368421,
+   "curto": "Naiara Macedo Vasconcelos"
+  },
+  {
+   "nome": "E.e.f. Francisco Pio de Farias",
+   "bairro": "Pedreira",
+   "lat": -4.199795,
+   "lon": -40.482778,
+   "v": 78,
+   "t": 403,
+   "urnas": 2,
+   "pct": 0.1935483870967742,
+   "curto": "Francisco Pio de Farias"
+  },
+  {
+   "nome": "E.e.i. Teodoro Sales de Oliveira-creche Pedacinho do Céu",
+   "bairro": "Pedreira",
+   "lat": -4.199129,
+   "lon": -40.484917,
+   "v": 78,
+   "t": 379,
+   "urnas": 2,
+   "pct": 0.20580474934036938,
+   "curto": "E.e.i. Teodoro Sales de Oliveira-creche Pedacinho do Céu"
+  },
+  {
+   "nome": "Creche Comunitária João Balbino",
+   "bairro": "Acampamento",
+   "lat": -4.202876,
+   "lon": -40.468865,
+   "v": 78,
+   "t": 359,
+   "urnas": 2,
+   "pct": 0.21727019498607242,
+   "curto": "Creche Comunitária João Balbino"
+  },
+  {
+   "nome": "E.e.f. Antônio Manoel de Araújo (antigo Ceru)",
+   "bairro": "Centro",
+   "lat": -4.19323,
+   "lon": -40.480972,
+   "v": 72,
+   "t": 484,
+   "urnas": 3,
+   "pct": 0.1487603305785124,
+   "curto": "Antônio Manoel de Araújo (antigo Ceru)"
+  },
+  {
+   "nome": "E.e.f. Emiliano Ribeiro da Cunha",
+   "bairro": "Empréstimos",
+   "lat": -4.186793,
+   "lon": -40.483964,
+   "v": 71,
+   "t": 484,
+   "urnas": 2,
+   "pct": 0.14669421487603307,
+   "curto": "Emiliano Ribeiro da Cunha"
+  },
+  {
+   "nome": "E.e.i.f.francisco Pereira da Costa",
+   "bairro": "Várzea da Palha",
+   "lat": -4.1779,
+   "lon": -40.465871,
+   "v": 70,
+   "t": 293,
+   "urnas": 1,
+   "pct": 0.23890784982935154,
+   "curto": "francisco Pereira da Costa"
+  },
+  {
+   "nome": "C.e.i. Edson Bernardino Bezerra Teixeira",
+   "bairro": "Empréstimos",
+   "lat": -4.186051,
+   "lon": -40.491721,
+   "v": 66,
+   "t": 410,
+   "urnas": 2,
+   "pct": 0.16097560975609757,
+   "curto": "C.e.i. Edson Bernardino Bezerra Teixeira"
+  },
+  {
+   "nome": "E.e.f. Francisca Ezequiel de Sousa",
+   "bairro": "Jatobá",
+   "lat": -4.248843,
+   "lon": -40.519659,
+   "v": 66,
+   "t": 276,
+   "urnas": 1,
+   "pct": 0.2391304347826087,
+   "curto": "Francisca Ezequiel de Sousa"
+  },
+  {
+   "nome": "E.e.i.f. Melquíades Muniz Farrapo",
+   "bairro": "Transval",
+   "lat": -4.157284,
+   "lon": -40.441695,
+   "v": 59,
+   "t": 235,
+   "urnas": 1,
+   "pct": 0.251063829787234,
+   "curto": "Melquíades Muniz Farrapo"
+  },
+  {
+   "nome": "Centro Digital",
+   "bairro": "Centro",
+   "lat": -4.19591,
+   "lon": -40.476409,
+   "v": 47,
+   "t": 259,
+   "urnas": 1,
+   "pct": 0.18146718146718147,
+   "curto": "Centro Digital"
+  },
+  {
+   "nome": "C.e.i. Cândida Ferreira de Paula",
+   "bairro": "Pedreira",
+   "lat": -4.199752,
+   "lon": -40.484039,
+   "v": 42,
+   "t": 237,
+   "urnas": 1,
+   "pct": 0.17721518987341772,
+   "curto": "C.e.i. Cândida Ferreira de Paula"
+  },
+  {
+   "nome": "Centro de Referência de Assist Social-cras-casa do Idoso",
+   "bairro": "Pedreira",
+   "lat": -4.19899,
+   "lon": -40.482378,
+   "v": 40,
+   "t": 224,
+   "urnas": 1,
+   "pct": 0.17857142857142858,
+   "curto": "Centro de Referência de Assist Social-cras-casa do Idoso"
+  },
+  {
+   "nome": "E.e.i. Rosa Paiva Nobre",
+   "bairro": "Croatá dos Martins",
+   "lat": -4.211739,
+   "lon": -40.551918,
+   "v": 39,
+   "t": 264,
+   "urnas": 1,
+   "pct": 0.14772727272727273,
+   "curto": "E.e.i. Rosa Paiva Nobre"
+  },
+  {
+   "nome": "Secretaria de Educação de Varjota",
+   "bairro": "Centro",
+   "lat": -4.195504,
+   "lon": -40.477303,
+   "v": 36,
+   "t": 282,
+   "urnas": 1,
+   "pct": 0.1276595744680851,
+   "curto": "Secretaria de Educação de Varjota"
+  },
+  {
+   "nome": "E.e.f. Benjamim Rodrigues Macedo",
+   "bairro": "Acampamento Dnocs",
+   "lat": -4.19882,
+   "lon": -40.465217,
+   "v": 33,
+   "t": 187,
+   "urnas": 1,
+   "pct": 0.17647058823529413,
+   "curto": "Benjamim Rodrigues Macedo"
+  },
+  {
+   "nome": "E.e.i.f. Manoel Rodrigues Tavares",
+   "bairro": "Angelim",
+   "lat": -4.226162,
+   "lon": -40.511916,
+   "v": 33,
+   "t": 160,
+   "urnas": 1,
+   "pct": 0.20625,
+   "curto": "Manoel Rodrigues Tavares"
+  },
+  {
+   "nome": "Ubs - Teodorico Rodrigues Lopes",
+   "bairro": "Centro",
+   "lat": -4.191834,
+   "lon": -40.471799,
+   "v": 31,
+   "t": 235,
+   "urnas": 1,
+   "pct": 0.13191489361702127,
+   "curto": "Ubs - Teodorico Rodrigues Lopes"
+  },
+  {
+   "nome": "Centro Educacional Especializado (apae Varjota)",
+   "bairro": "Empréstimos",
+   "lat": -4.187588,
+   "lon": -40.486519,
+   "v": 12,
+   "t": 114,
+   "urnas": 1,
+   "pct": 0.10526315789473684,
+   "curto": "Centro Educacional Especializado (apae Varjota)"
+  }
+ ]
+}
