@@ -200,6 +200,23 @@ em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tags span{font-family:var(--font-m);font-size:12px;padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;color:var(--fg-dim)}
 
+/* cases de campanha */
+.cases{display:grid;grid-template-columns:1fr 1.25fr;gap:18px;margin-bottom:clamp(40px,6vw,64px)}
+.cases > *{min-width:0}
+@media (max-width:900px){.cases{grid-template-columns:1fr}}
+.case{border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);padding:22px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+.case .thumbs{display:flex;gap:10px}
+.case .reel{width:130px}
+.case .info{display:grid;gap:12px;min-width:0}
+.case .info p{color:var(--fg-dim);font-size:15px}
+.case dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:4px 0 0;font-size:14px}
+.case dt{font-family:var(--font-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.case dd{margin:0;color:var(--fg)}
+.chip{justify-self:start;font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line-2);color:var(--c-cyan)}
+.reel.illu{display:grid;place-items:center;background:radial-gradient(120% 80% at 50% 0%,rgba(255,61,134,.22),transparent 60%),var(--bg-3)}
+.reel.illu svg.art{width:64%;height:auto}
+@media (max-width:560px){.case{grid-template-columns:1fr}.case .reel{width:calc(50% - 5px);max-width:150px}}
+
 /* privado */
 .mosaic{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 @media (max-width:1000px){.mosaic{grid-template-columns:repeat(4,1fr)}}
@@ -420,6 +437,7 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
         <li><div><b>A cara e o sotaque da cidade</b><span>Gravamos nas ruas, nos distritos e nas festas, com gente daqui. A população se reconhece na tela.</span></div></li>
         <li><div><b>Antes, durante e depois</b><span>Toda entrega tem uma jornada: a necessidade, o trabalho e a vida que muda. Esse arco gera orgulho e memória.</span></div></li>
         <li><div><b>Uma história em capítulos</b><span>Nada de post solto. A comunicação vira uma narrativa contínua ao longo do ano.</span></div></li>
+        <li><div><b>O tom certo para cada pauta</b><span>Emoção para celebrar uma conquista, humor para falar de multa e trânsito, clareza para orientar. O tom é escolhido pela mensagem.</span></div></li>
         <li><div><b>O povo também pauta</b><span>Comentários, dúvidas e pedidos que chegam pelas redes voltam como pauta. A gestão fala e também ouve.</span></div></li>
       </ol>
     </div>
@@ -452,17 +470,47 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
     <div class="head">
       <div class="eyebrow"><b>04</b> · Setor público</div>
       <h2>Comunicação pública <em class="s">feita no interior do Ceará</em>.</h2>
-      <p class="lead">Peças institucionais produzidas para a Prefeitura de Varjota, para o evento Julho em Varjota e para a comunidade. Educação, água, datas cívicas, cultura e fé, cada uma com um objetivo diferente para a gestão. Clique para assistir.</p>
+      <p class="lead">Campanhas e peças institucionais produzidas para a Prefeitura de Varjota, para o evento Julho em Varjota e para a comunidade. Cada pauta pede um tom: emoção para celebrar, humor para educar, orgulho para unir. Clique para assistir.</p>
     </div>
+    <div class="cases">
+      <article class="case">
+        <div class="thumbs">
+          <a class="reel" href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><img src="img/orgulho-nacional.jpg" alt="Capa do reel Orgulho Nacional" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Orgulho Nacional</b><span>Assistir</span></span></a>
+        </div>
+        <div class="info">
+          <span class="chip">Campanha · Educação</span>
+          <h3>Um aluno da cidade premiado em nível nacional</h3>
+          <p>A conquista de um estudante virou orgulho coletivo. Em vez de uma nota oficial, a cidade inteira celebrou um dos seus, e a escola pública ganhou a vitrine que merece.</p>
+          <dl><dt>Objetivo</dt><dd>Valorizar a educação pública</dd><dt>Tom</dt><dd>Emoção e pertencimento</dd><dt>Cliente</dt><dd>Prefeitura de Varjota</dd></dl>
+        </div>
+      </article>
+      <article class="case">
+        <div class="thumbs">
+          <a class="reel illu" href="https://www.instagram.com/reel/DQo5UAdEbeX" target="_blank" rel="noopener" aria-label="Assistir campanha de trânsito, vídeo 1">
+            <svg class="art" viewBox="0 0 60 120" aria-hidden="true"><rect x="8" y="4" width="44" height="104" rx="10" fill="#1c1c24" stroke="#3a3a46" stroke-width="2"/><circle cx="30" cy="26" r="11" fill="#ff3d86"/><circle cx="30" cy="56" r="11" fill="#3a3a46"/><circle cx="30" cy="86" r="11" fill="#3a3a46"/><rect x="26" y="108" width="8" height="12" fill="#3a3a46"/></svg>
+            <span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Trânsito · parte 1</b><span>Assistir</span></span></a>
+          <a class="reel illu" href="https://www.instagram.com/reel/DQjvppLkcNM" target="_blank" rel="noopener" aria-label="Assistir campanha de trânsito, vídeo 2">
+            <svg class="art" viewBox="0 0 60 120" aria-hidden="true"><polygon points="18,10 42,10 56,24 56,48 42,62 18,62 4,48 4,24" fill="#ff3d86" stroke="#f4f1ea" stroke-width="2.5"/><text x="30" y="41" text-anchor="middle" fill="#f4f1ea" font-family="Bricolage Grotesque, system-ui, sans-serif" font-weight="800" font-size="13">PARE</text><rect x="27" y="62" width="6" height="56" fill="#3a3a46"/></svg>
+            <span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Trânsito · parte 2</b><span>Assistir</span></span></a>
+        </div>
+        <div class="info">
+          <span class="chip" style="color:var(--c-mag)">Campanha · Trânsito</span>
+          <h3>Multas e regras de trânsito explicadas com humor</h3>
+          <p>Multa costuma gerar rejeição. Usamos humor e situações do dia a dia da cidade para passar a mensagem sem sermão. Quem ri assiste até o fim, entende a regra e compartilha com os amigos.</p>
+          <dl><dt>Objetivo</dt><dd>Educação no trânsito e menos infrações</dd><dt>Tom</dt><dd>Comédia com informação</dd><dt>Formato</dt><dd>Série de reels</dd></dl>
+        </div>
+      </article>
+    </div>
+
     <div class="gallery">
       <a class="reel" href="https://www.instagram.com/reel/DX_xaKGRog7" target="_blank" rel="noopener"><img src="img/agua-que-transforma.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Água que Transforma</b><span>Infraestrutura</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Nova Escola, Nova Cara</b><span>Educação</span></span></a>
-      <a class="reel" href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><img src="img/orgulho-nacional.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Orgulho Nacional</b><span>Data cívica</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><img src="img/orgulho-nacional.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Orgulho Nacional</b><span>Aluno premiado</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><img src="img/mes-dos-reencontros.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>O Mês dos Reencontros</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><img src="img/so-em-julho.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Só em Julho</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DV9bukSjm29" target="_blank" rel="noopener"><img src="img/caminhada-da-fe.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Caminhada da Fé</b><span>Comunidade</span></span></a>
     </div>
-    <div class="tags"><span>Educação</span><span>Saúde</span><span>Água e obras</span><span>Datas cívicas</span><span>Festas tradicionais</span><span>Eventos religiosos</span><span>Comunicados oficiais</span></div>
+    <div class="tags"><span>Educação</span><span>Trânsito</span><span>Saúde</span><span>Água e obras</span><span>Datas cívicas</span><span>Festas tradicionais</span><span>Eventos religiosos</span><span>Comunicados oficiais</span></div>
   </div>
 </section>
 
@@ -517,6 +565,7 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
           <tr><td>Educação</td><td>Matrícula, volta às aulas, reforma de escolas, projetos pedagógicos</td><td>Reels, vídeo institucional</td></tr>
           <tr><td>Infraestrutura</td><td>Obras de água, estradas, calçamento, antes e depois</td><td>Reels de prestação de contas</td></tr>
           <tr><td>Cultura e turismo</td><td>Festas tradicionais, eventos de julho, festejos religiosos, agenda cultural</td><td>Chamadas, cobertura de eventos</td></tr>
+          <tr><td>Trânsito</td><td>Educação no trânsito, multas e regras explicadas com humor, campanhas de segurança</td><td>Série de reels de campanha</td></tr>
           <tr><td>Assistência social</td><td>Programas sociais, cadastros, ações nos bairros e distritos</td><td>Reels de orientação</td></tr>
           <tr><td>Comunicação</td><td>Comunicados oficiais, datas cívicas, balanço da gestão</td><td>Vídeo institucional, reels</td></tr>
         </tbody>
