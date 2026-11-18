@@ -129,6 +129,7 @@ em.s{font-family:var(--font-s);font-style:italic;font-weight:400;letter-spacing:
 .res{text-decoration:none;border-radius:10px;transition:background .2s}
 a.res:hover{background:var(--bg-3)}
 .res .badge{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--grad);color:#060607;white-space:nowrap;justify-self:start;align-self:center}
+.res .eng{display:block;margin-top:4px;font-family:var(--font-m);font-size:11.5px;color:var(--muted)}
 .private{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:10px}
 .private > span{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .private ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--fg-dim)}
@@ -193,7 +194,7 @@ a.res:hover{background:var(--bg-3)}
 @media (max-width:420px){.cmp.new .body{grid-template-columns:90px 1fr}.cmp.new img{width:90px}}
 
 /* galeria pública */
-.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media (max-width:1000px){.gallery{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:520px){.gallery{grid-template-columns:repeat(2,1fr)}}
 .reel{position:relative;display:block;aspect-ratio:9/16;max-width:100%;border-radius:12px;overflow:hidden;text-decoration:none;border:1px solid var(--line);background:var(--bg-3)}
@@ -371,11 +372,11 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
 
       <div class="panel">
         <h3>Virais da prefeitura</h3>
-        <p class="sub">Reels da Prefeitura de Varjota que ganharam a cidade e passaram de mão em mão.</p>
+        <p class="sub">Reels nos perfis oficiais de Varjota. Somados: <b class="num" style="color:var(--fg)">29,1 mil visualizações</b> e <b class="num" style="color:var(--fg)">2,8 mil curtidas</b>.</p>
         <div class="results">
-          <a class="res" href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><img src="img/mes-dos-reencontros.jpg" alt="" width="320" height="567"><span class="badge">Viral</span><p><b>O Mês dos Reencontros · Julho em Varjota</b>Chamada para o mês em que a cidade se reencontra. Orgulho local e convite para todo mundo participar.</p></a>
-          <a class="res" href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><img src="img/so-em-julho.jpg" alt="" width="320" height="567"><span class="badge">Viral</span><p><b>Só em Julho · Julho em Varjota</b>O que só acontece na cidade nessa época, contado no ritmo das redes. Mobilização antes do evento.</p></a>
-          <a class="res" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="badge">Viral</span><p><b>Nova Escola, Nova Cara · Educação</b>A escola reformada mostrada pelos olhos de quem estuda nela. Prestação de contas que gera orgulho.</p></a>
+          <a class="res" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="big num">13,6<small>mil</small></span><p><b>Nova Escola, Nova Cara</b>Alunos convidam a cidade para conhecer a escola reformada. <span class="eng num">1.610 curtidas · 144 comentários</span></p></a>
+          <a class="res" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="big num">9,8<small>mil</small></span><p><b>Corrida do Trabalhador Varjotense</b>Chamada que abriu a programação esportiva e levou a cidade às inscrições. <span class="eng num">749 curtidas · 44 comentários</span></p></a>
+          <a class="res" href="https://www.instagram.com/reel/DZgPpZ0xCd5" target="_blank" rel="noopener"><img src="img/copa-master.jpg" alt="" width="480" height="852"><span class="big num">5,7<small>mil</small></span><p><b>Copa dos Campeões · Futebol Master</b>Contagem regressiva para a abertura no Distrito de Croatá dos Martins. <span class="eng num">443 curtidas · 14 comentários</span></p></a>
         </div>
         <div class="private">
           <span>Na iniciativa privada</span>
@@ -385,7 +386,7 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
             <li><b class="num">9 mil</b> Natural Roots</li>
           </ul>
         </div>
-        <p class="src">Visualizações por reel · fonte: kroma.mov, consultado em 18/11/2026</p>
+        <p class="src">Prefeitura: @prefeituradevarjota e @sejuv_varjota (Instagram) · Privado: kroma.mov · consultado em 18/11/2026</p>
       </div>
     </div>
   </div>
@@ -486,7 +487,7 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
     <div class="head">
       <div class="eyebrow"><b>04</b> · Setor público</div>
       <h2>Comunicação pública <em class="s">feita no interior do Ceará</em>.</h2>
-      <p class="lead">Campanhas e peças institucionais produzidas para a Prefeitura de Varjota, para o evento Julho em Varjota e para a comunidade. Cada pauta pede um tom: emoção para celebrar, humor para educar, orgulho para unir. Clique para assistir.</p>
+      <p class="lead">Campanhas e peças institucionais produzidas para a Prefeitura de Varjota, a Secretaria de Esporte e Juventude, o Julho em Varjota e a comunidade. Cada pauta pede um tom: emoção para celebrar, humor para educar, orgulho para unir. Clique para assistir.</p>
     </div>
     <div class="cases">
       <article class="case">
@@ -516,13 +517,15 @@ footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:1
 
     <div class="gallery">
       <a class="reel" href="https://www.instagram.com/reel/DX_xaKGRog7" target="_blank" rel="noopener"><img src="img/agua-que-transforma.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Água que Transforma</b><span>Infraestrutura</span></span></a>
-      <a class="reel" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Nova Escola, Nova Cara</b><span>Educação</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DVT15p8kfYi" target="_blank" rel="noopener"><img src="img/nova-escola.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Nova Escola, Nova Cara</b><span>Educação · 13,6 mil views</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DQMjRAjjdQj" target="_blank" rel="noopener"><img src="img/orgulho-nacional.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Orgulho Nacional</b><span>Aluno premiado</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DaVHSybSPCX" target="_blank" rel="noopener"><img src="img/mes-dos-reencontros.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>O Mês dos Reencontros</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DadjaXsSOHp" target="_blank" rel="noopener"><img src="img/so-em-julho.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Só em Julho</b><span>Cultura · Julho</span></span></a>
       <a class="reel" href="https://www.instagram.com/reel/DV9bukSjm29" target="_blank" rel="noopener"><img src="img/caminhada-da-fe.jpg" alt="" width="320" height="567"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Caminhada da Fé</b><span>Comunidade</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DXOxjq3giEo" target="_blank" rel="noopener"><img src="img/corrida-do-trabalhador.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Corrida do Trabalhador</b><span>Esporte · 9,8 mil views</span></span></a>
+      <a class="reel" href="https://www.instagram.com/reel/DZgPpZ0xCd5" target="_blank" rel="noopener"><img src="img/copa-master.jpg" alt="" width="480" height="852"><span class="play"><svg><use href="#i-play"/></svg></span><span class="cap"><b>Copa dos Campeões</b><span>Esporte · 5,7 mil views</span></span></a>
     </div>
-    <div class="tags"><span>Educação</span><span>Trânsito</span><span>Saúde</span><span>Água e obras</span><span>Datas cívicas</span><span>Festas tradicionais</span><span>Eventos religiosos</span><span>Comunicados oficiais</span></div>
+    <div class="tags"><span>Educação</span><span>Esporte e juventude</span><span>Trânsito</span><span>Saúde</span><span>Água e obras</span><span>Datas cívicas</span><span>Festas tradicionais</span><span>Eventos religiosos</span><span>Comunicados oficiais</span></div>
   </div>
 </section>
 
