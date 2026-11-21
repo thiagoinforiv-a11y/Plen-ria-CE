@@ -36,6 +36,16 @@ Comunicação e agência de notícias, assessoria de imprensa, para as diversas 
 - Lima's Agência de Notícias Ltda (CNPJ 18.172.206/0001-64): 9 itens, R$ 1.324.800,00.
 - E. V. da Frota Junior (CNPJ 13.017.113/0001-41): 2 itens, R$ 219.588,00.
 
+## Participantes (ata da sessão)
+
+| Empresa | CNPJ | Proposta inicial | Enviada em |
+| --- | --- | --- | --- |
+| Lima's Agência de Notícias Ltda | 18.172.206/0001-64 | R$ 2.173.999,92 | 20/06/2025 |
+| Panorama Broadcast | 58.675.747/0001-20 | R$ 1.909.200,00 | 01/07/2025 |
+| E. V. da Frota Junior | 13.017.113/0001-41 | R$ 2.173.999,92 | 02/07/2025 |
+
+Duas empresas entraram exatamente no valor estimado. O preço final caiu na fase de lances, em modo de disputa aberto.
+
 ## O que o termo de referência exigia em cada item
 
 - Cobertura dos eventos municipais com fotógrafo, cinegrafista e repórter.
