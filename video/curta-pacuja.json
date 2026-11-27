@@ -1,0 +1,106 @@
+{
+ "video": "curta1",
+ "S": [
+  0,
+  4.5,
+  10,
+  15.5,
+  21,
+  28,
+  34
+ ],
+ "municipio": "Pacujá",
+ "cd_ibge": "2309904",
+ "cadeiras": 9,
+ "candidatos": 30,
+ "validos": 5564,
+ "qe": 618,
+ "eleitos": [
+  {
+   "urna": "Carlos Júnior",
+   "foto": "fotos/ce/pacuja/2024/60002036650.jpg",
+   "votos": 633,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Lourinho",
+   "foto": "fotos/ce/pacuja/2024/60002036651.jpg",
+   "votos": 582,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Liduína Fernandes",
+   "foto": "fotos/ce/pacuja/2024/60002006523.jpg",
+   "votos": 409,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "João Hernando",
+   "foto": "fotos/ce/pacuja/2024/60002006522.jpg",
+   "votos": 375,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Vinícius Araújo",
+   "foto": "fotos/ce/pacuja/2024/60002036656.jpg",
+   "votos": 358,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Marli Melo",
+   "foto": "fotos/ce/pacuja/2024/60002006524.jpg",
+   "votos": 353,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Natália do Mão Calejada",
+   "foto": "fotos/ce/pacuja/2024/60002006442.jpg",
+   "votos": 300,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Luiz Fernando",
+   "foto": "fotos/ce/pacuja/2024/60002396910.jpg",
+   "votos": 293,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Orlando Rodrigues",
+   "foto": "fotos/ce/pacuja/2024/60002006436.jpg",
+   "votos": 244,
+   "eleito20": true,
+   "v20": 432
+  }
+ ],
+ "reeleitos": 1,
+ "novos": 8,
+ "eleitos20": 9,
+ "presidente": {
+  "urna": "Lourinho",
+  "foto": "fotos/ce/pacuja/2024/60002036651.jpg"
+ },
+ "fontePres": "Portal da Câmara de Pacujá",
+ "proximo": null,
+ "top": {
+  "urna": "Carlos Júnior",
+  "foto": "fotos/ce/pacuja/2024/60002036650.jpg",
+  "votos": 633
+ },
+ "cresceu": null,
+ "fala": [
+  "Trinta candidatos, nove cadeiras. Quanto vale uma vaga na Câmara de Pacujá?",
+  "Seiscentos e dezoito votos por cadeira. É o quociente eleitoral.",
+  "Esses são os nove eleitos de dois mil e vinte e quatro.",
+  "Oito não tinham sido eleitos em dois mil e vinte.",
+  "Maior votação: Carlos Júnior.",
+  "Hoje, quem preside a Câmara é Lourinho. E o próximo presidente, quem será? Comenta aqui."
+ ]
+}

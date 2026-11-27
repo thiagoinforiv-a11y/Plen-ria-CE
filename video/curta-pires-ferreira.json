@@ -1,0 +1,112 @@
+{
+ "video": "curta1",
+ "S": [
+  0,
+  4.5,
+  10,
+  15.5,
+  21,
+  28,
+  34
+ ],
+ "municipio": "Pires Ferreira",
+ "cd_ibge": "2310951",
+ "cadeiras": 9,
+ "candidatos": 23,
+ "validos": 7523,
+ "qe": 836,
+ "eleitos": [
+  {
+   "urna": "Samara Pereira",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg",
+   "votos": 1140,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Fabiana",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188679.jpg",
+   "votos": 961,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Jamile Mororó",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188681.jpg",
+   "votos": 776,
+   "eleito20": true,
+   "v20": 521
+  },
+  {
+   "urna": "Francisca",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188678.jpg",
+   "votos": 686,
+   "eleito20": true,
+   "v20": 503
+  },
+  {
+   "urna": "Chico Ana",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188675.jpg",
+   "votos": 679,
+   "eleito20": true,
+   "v20": 524
+  },
+  {
+   "urna": "Luciano",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188684.jpg",
+   "votos": 654,
+   "eleito20": true,
+   "v20": 499
+  },
+  {
+   "urna": "Anastácio Neto",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188683.jpg",
+   "votos": 472,
+   "eleito20": false,
+   "v20": 315
+  },
+  {
+   "urna": "Torrim",
+   "foto": "fotos/ce/pires-ferreira/2024/60002241209.jpg",
+   "votos": 445,
+   "eleito20": false,
+   "v20": null
+  },
+  {
+   "urna": "Nilton Anastácio",
+   "foto": "fotos/ce/pires-ferreira/2024/60002188680.jpg",
+   "votos": 401,
+   "eleito20": true,
+   "v20": 331
+  }
+ ],
+ "reeleitos": 5,
+ "novos": 4,
+ "eleitos20": 9,
+ "presidente": {
+  "urna": "Samara Pereira",
+  "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg"
+ },
+ "fontePres": "Portal da Câmara de Pires Ferreira",
+ "proximo": null,
+ "top": {
+  "urna": "Samara Pereira",
+  "foto": "fotos/ce/pires-ferreira/2024/60002188682.jpeg",
+  "votos": 1140
+ },
+ "cresceu": {
+  "urna": "Anastácio Neto",
+  "foto": "fotos/ce/pires-ferreira/2024/60002188683.jpg",
+  "votos": 472,
+  "v20": 315,
+  "mult": 1.4984126984126984
+ },
+ "fala": [
+  "Vinte e três candidatos, nove cadeiras. Quanto vale uma vaga na Câmara de Pires Ferreira?",
+  "Oitocentos e trinta e seis votos por cadeira. É o quociente eleitoral.",
+  "Esses são os nove eleitos de dois mil e vinte e quatro.",
+  "Quatro não tinham sido eleitos em dois mil e vinte.",
+  "Maior votação: Samara Pereira. E Anastácio Neto cresceu cinquenta por cento de voto.",
+  "Hoje, quem preside a Câmara é Samara Pereira. E o próximo presidente, quem será? Comenta aqui."
+ ]
+}

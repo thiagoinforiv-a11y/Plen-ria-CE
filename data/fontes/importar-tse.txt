@@ -1,0 +1,7 @@
+# Cidades ("municipio: Nome", uma por linha) e anos (um por linha) para a automação "Importar dados do TSE".
+# Alterar este arquivo dispara a importação.
+# 05/11/2026: Santa Quitéria de novo, agora sem a eleição suplementar de 2025 misturada em 2024
+municipio: Santa Quitéria
+2024
+2026
+2020

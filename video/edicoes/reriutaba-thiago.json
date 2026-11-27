@@ -1,0 +1,16 @@
+{
+ "video": "entregas/brutos/reriutaba-thiago.mov",
+ "palavras": "entregas/brutos/reriutaba-thiago.words.json",
+ "correcoes": { "5.0": "vice-", "5.18": "prefeito Tarciano", "7.62": "", "7.82": "Djane", "11.66": "Reriutaba,", "17.56": "Reriutaba.", "22.52": "vice", "38.68": "vice-versa?", "38.82": "" },
+ "tarja": { "texto": "O bom filho à casa torna: vice e vereadora voltam à base de Pedro Humberto", "ate": 4.4 },
+ "cartoes": [
+  { "tipo": "foto", "de": 5.0, "ate": 9.0, "img": "entregas/midia/reriutaba/tarciano.jpg", "nome": "Tarciano Castro", "papel": "Vice-prefeito", "lado": "esq" },
+  { "tipo": "foto", "de": 7.1, "ate": 11.4, "img": "entregas/midia/reriutaba/djane.jpg", "nome": "Djane Castro", "papel": "Vereadora", "lado": "dir" },
+  { "tipo": "foto", "de": 13.3, "ate": 17.2, "img": "entregas/midia/reriutaba/pedro.png", "nome": "Pedro Humberto", "papel": "Prefeito de Reriutaba", "lado": "centro" },
+  { "tipo": "numero", "de": 20.2, "ate": 22.4, "valor": 733, "rotulo": "VOTOS EM 2024" },
+  { "tipo": "numero", "de": 27.5, "ate": 31.0, "texto": "2028", "rotulo": "PRÓXIMA ELEIÇÃO" },
+  { "tipo": "numero", "de": 34.9, "ate": 39.5, "texto": "?", "rotulo": "QUEM SERÁ O PRÓXIMO?" }
+ ],
+ "zooms": [[0, 1.0], [3.24, 1.12], [6.3, 1.0], [9.08, 1.1], [14.42, 1.0], [18.18, 1.14], [22.42, 1.0], [28.44, 1.12], [31.94, 1.0], [34.84, 1.18], [39.6, 1.0]],
+ "creditos": "Fontes: Blog Lucas Oliveira · TSE"
+}

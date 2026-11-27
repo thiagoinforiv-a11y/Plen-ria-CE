@@ -1,0 +1,63 @@
+name: Importar dados do TSE
+# Roda nos servidores do GitHub (que têm acesso ao TSE): baixa votação por seção, locais de votação,
+# candidaturas, vagas e FOTOS oficiais, confere tudo e salva no branch. Disparo manual.
+on:
+  workflow_dispatch:
+    inputs:
+      anos:
+        description: "Anos a importar (separados por espaço)"
+        default: "2024 2026 2022"
+  push:
+    paths:
+      - "data/fontes/importar-tse.txt"
+permissions:
+  contents: write
+jobs:
+  importar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Importar do TSE
+        run: |
+          # o arquivo diz as cidades ("municipio: Nome", uma por linha) e os anos (um por linha)
+          grep -i '^municipio:' data/fontes/importar-tse.txt | cut -d: -f2- | sed 's/^ *//;s/ *$//' > /tmp/cidades.txt; [ -s /tmp/cidades.txt ] || echo "Varjota" > /tmp/cidades.txt
+          anos="${{ inputs.anos }}"; [ -z "$anos" ] && anos="$(grep -v -e '^#' -e '^municipio:' data/fontes/importar-tse.txt | tr '\n' ' ')"
+          CIDADE="$(paste -sd, /tmp/cidades.txt)"; echo "Cidades: $CIDADE · Anos: $anos"; echo "ANOS=$anos" >> $GITHUB_ENV; echo "CIDADE=$CIDADE" >> $GITHUB_ENV
+          args=""; for a in $anos; do args="$args --ano $a"; done
+          while IFS= read -r cidade; do python3 scripts/plenaria.py tse --municipio "$cidade" $args --baixar --continuar || echo "::warning::falhou $cidade"; done < /tmp/cidades.txt
+      - name: Emendas parlamentares (Portal da Transparência)
+        continue-on-error: true
+        run: while IFS= read -r cidade; do python3 scripts/emendas.py --municipio "$cidade" --uf CE || true; done < /tmp/cidades.txt
+      - name: Completar 2026 com a lista parcial (só se o TSE ainda não tiver 2026)
+        run: 'grep -qx "Varjota" /tmp/cidades.txt && python3 scripts/plenaria.py manual data/fontes/ce-varjota-2026.json || true'
+      - name: Guardar dados no branch dados-tse (mesmo se a conferência acusar algo, para não perder o download)
+        run: |
+          git config user.name "plenaria-bot"
+          git config user.email "plenaria-bot@users.noreply.github.com"
+          git checkout -B dados-tse
+          git add data fotos
+          git commit -m "Dados oficiais do TSE: $CIDADE ($ANOS) — base para revisão" || true
+          git push -f origin dados-tse
+          git checkout -
+      - name: Conferir dados
+        run: node scripts/verificar.mjs
+      - name: Testar a página
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          node scripts/teste-pagina.mjs
+      - name: Salvar no branch
+        run: |
+          git config user.name "plenaria-bot"
+          git config user.email "plenaria-bot@users.noreply.github.com"
+          git add data fotos
+          git diff --cached --quiet && { echo "Nada novo."; exit 0; }
+          git commit -m "Dados oficiais do TSE: $CIDADE ($ANOS) com fotos — importação automática"
+          git push
