@@ -11,6 +11,17 @@ window.PLENARIA_CIDADES = [
   ]
  },
  {
+  "id": "ce/croata",
+  "uf": "CE",
+  "nome": "Croatá",
+  "arquivo": "data/ce/croata.js",
+  "anos": [
+   "2020",
+   "2016",
+   "2012"
+  ]
+ },
+ {
   "id": "ce/ipu",
   "uf": "CE",
   "nome": "Ipu",
