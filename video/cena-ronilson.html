@@ -10,7 +10,7 @@
 <script src="efeitos.js"></script>
 <script src="motion.js"></script>
 <script>
-/* Raio-X Ronilson Oliveira, prefeito de Croatá: 2016, suplementar de 2018, 2020 e 2024, seção a seção. Votos: TSE. */
+/* Raio-X completo de Ronilson Oliveira, prefeito de Croatá: eleições 2016–2024 seção a seção, ranking no Ceará e na Ibiapaba, Câmara, vereadores, eleição de 2026 e orçamento. Fontes: TSE e Tesouro Nacional. */
 (async () => {
   const W = 1080, H = 1920, ctx = document.getElementById("c").getContext("2d");
   const D = await (await fetch("dados-ronilson.json")).json(), G = await (await fetch("geo.json")).json();
@@ -21,7 +21,7 @@
   const prog = (t, a, b) => clamp((t - a) / (b - a)), vis = (t, a, b, f = 0.45) => Math.min(prog(t, a, a + f), 1 - prog(t, b - f, b));
   let seed = 3; const rnd = () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-  const S = [0, 6, 13, 20, 27, 34, 41, 48, 55, 62]; window.DURACAO = S[S.length - 1];
+  const S = [0, 6, 13, 20, 27, 34, 41, 48, 55, 62, 69, 76, 83, 90, 97, 104, 111, 118]; window.DURACAO = S[S.length - 1];
   // projeção
   const CE = { lon: -39.35, lat: -5.25, s: 205 }, VJ = { lon: -40.52, lat: -4.172, s: 4700 }, kx = Math.cos((4.5 * Math.PI) / 180);
   const proj = (lon, lat, v, cy = H * 0.5) => [W / 2 + (lon - v.lon) * v.s * kx, cy - (lat - v.lat) * v.s];
@@ -50,8 +50,19 @@
   const VY = 600, VH = 140, VX = 330, VW = 620;
   forma.viradas = (() => { const out = []; D.viradas.forEach(([n, a, b], k) => { [[a, CINZ, 0], [b, LR, 36]].forEach(([p, c, dy]) => { const w = (VW * p) / 100, m = Math.round(p * 2.4); for (let j = 0; j < m; j++) out.push([VX + rnd() * w, VY + k * VH + 30 + dy + gauss() * 3.2, c]); }); }); return encher(out); })();
   forma.fracos = (() => { const out = []; D.fracos.forEach(([n, p], k) => { const w = (VW * p) / 100, m = Math.round(p * 4); for (let j = 0; j < m; j++) out.push([VX + rnd() * w, VY + k * VH + 40 + gauss() * 4, k ? AC : "#ff6b6b"]); }); return encher(out); })();
+  forma.ce = ranking(D.ce.map(([c, n, p, me]) => [c, p, me]), 600, 130, 150);
+  forma.ibi = ranking(D.ibiapaba.map(([c, p, me]) => [c, p, me]), 560, 92, 80);
+  const GX = (i) => 120 + (i % 8) * 120, GY = (i) => 560 + Math.floor(i / 8) * 100;
+  forma.urnas = Array.from({ length: N }, (_, i) => { if (i > N * 0.95) return poeira(); const j = i % D.secs.length, a = rnd() * 6.283, r = 30 + Math.abs(gauss()) * 4; return [GX(j) + Math.cos(a) * r, GY(j) + Math.sin(a) * r, D.secs[j] === 2 ? LR : D.secs[j] === 1 ? AC : "#ff6b6b"]; });
+  const CAD = (n, m) => Array.from({ length: N }, (_, i) => { if (i > N * 0.93) return poeira(); const j = i % 11, a = rnd() * 6.283, r = 44 + Math.abs(gauss()) * 5, x = 150 + (j % 6) * 156 + (j >= 6 ? 78 : 0), y = j < 6 ? 640 : 820; return [x + Math.cos(a) * r, y + Math.sin(a) * r, j < m ? LR : CINZ]; });
+  forma.cam20 = CAD(11, D.camara.c20); forma.cam24 = CAD(11, D.camara.c24);
+  forma.cresceram = (() => { const out = [], mx = 1046; D.cresceram.forEach(([n, a, b], k) => { [[a, CINZ, 0], [b, LR, 36]].forEach(([v, c, dy]) => { const w = (VW * v) / mx, m = Math.round(v * 0.45); for (let j = 0; j < m; j++) out.push([VX + rnd() * w, VY + k * VH + 30 + dy + gauss() * 3.2, c]); }); }); return encher(out); })();
+  forma.saida = Array.from({ length: N }, (_, i) => i % 6 ? [rnd() * W, rnd() * H, "dust"] : [60 + rnd() * 20, 460 + rnd() * 1000, i % 12 ? AC : "#ff6b6b"]);
+  forma.e26 = Array.from({ length: N }, (_, i) => { if (i > N * 0.9) return poeira(); const k = i % 4, p = [58.8, 35.4, 47.8, 39.3][k], w = (VW * p) / 100; return [VX + rnd() * w, 600 + k * 190 + 40 + gauss() * 4, LR]; });
+  const CX4 = [W * 0.2, W * 0.4, W * 0.62, W * 0.82];
+  forma.fin = (() => { const out = [], v = [D.fin.rc[0][1], D.fin.rc[1][1], D.fin.inv[0][1] * 4, D.fin.inv[1][1] * 4], mx = Math.max(...v); v.forEach((x, j) => { const h = (520 * x) / mx, m = Math.round(N * 0.22); for (let k = 0; k < m; k++) out.push([CX4[j] - 60 + rnd() * 120, 1150 - rnd() * h, j % 2 ? LR : AC]); }); return encher(out); })();
   forma.halo = Array.from({ length: N }, () => { const a = rnd() * 6.283, r = 270 + Math.abs(gauss()) * 40; return [W / 2 + Math.cos(a) * r, 820 + Math.sin(a) * r, rnd() < 0.65 ? AC : LR]; });
-  const KF = [[0, "poeira", 0], [1.2, "anel", 2.4], [S[1] + 0.2, "e16", 1.8], [S[2] + 0.2, "e20", 1.8], [S[3] + 0.2, "e24", 1.8], [S[4] + 0.2, "cres", 1.8], [S[5] + 0.2, "fortes", 1.8], [S[6] + 0.2, "viradas", 1.8], [S[7] + 0.2, "fracos", 1.8], [S[8] + 0.2, "halo", 2.0]];
+  const KF = [[0, "poeira", 0], [1.2, "anel", 2.4], [S[1] + 0.2, "e16", 1.8], [S[2] + 0.2, "e20", 1.8], [S[3] + 0.2, "e24", 1.8], [S[4] + 0.2, "cres", 1.8], [S[5] + 0.2, "ce", 1.8], [S[6] + 0.2, "ibi", 1.8], [S[7] + 0.2, "urnas", 1.8], [S[8] + 0.2, "fortes", 1.8], [S[9] + 0.2, "viradas", 1.8], [S[10] + 0.2, "fracos", 1.8], [S[11] + 0.2, "cam20", 1.4], [S[11] + 3.2, "cam24", 1.4], [S[12] + 0.2, "cresceram", 1.8], [S[13] + 0.2, "saida", 1.8], [S[14] + 0.2, "e26", 1.8], [S[15] + 0.2, "fin", 1.8], [S[16] + 0.2, "halo", 2.0]];
   const posicao = (t) => { let k = 0; while (k + 1 < KF.length && t >= KF[k + 1][0]) k++; const [t0, nome, dur] = KF[k]; return { ant: k ? forma[KF[k - 1][1]] : forma[nome], cur: forma[nome], t0, dur }; };
   const fundo = () => { const g = ctx.createRadialGradient(W / 2, H * 0.42, 50, W / 2, H * 0.5, H * 0.8); g.addColorStop(0, "#0f2a40"); g.addColorStop(1, "#03080e"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); };
   const LIMPO = location.search.includes("limpo"), texto = (s, x, y, o = {}) => { const a = o.a == null ? 1 : o.a; if (a <= 0.01 || LIMPO) return; ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = o.cor || "#f3f1ea"; ctx.textAlign = o.al || "center";
@@ -80,7 +91,7 @@
     texto("PREFEITO", W / 2, 830, { tam: 96, w: 700, ls: 8, a: vis(t, 1.6, S[1]), brilho: 18, cor: LR });
     texto("2º mandato · 2025–2028", W / 2, 905, { tam: 40, w: 600, a: vis(t, 2.0, S[1]), cor: "#c9d6e3" });
     texto("eleito em 2020 e reeleito em 2024", W / 2, 1345, { tam: 40, w: 600, a: vis(t, 2.4, S[1]), cor: "#c9d6e3", sobe: 1 });
-    fonte(t > S[1] && t < S[8] ? 1 : 0);
+    fonte(t > S[1] && t < S[16] && !(t > S[15] && t < S[16]) ? 1 : 0);
     const rankTxt = (rows, i, y0, rh, tam, fmtv = fmt) => rows.forEach((r, k) => { const al = vis(t, S[i] + 0.7 + k * 0.12, S[i + 1]), y = y0 + k * rh, me = r[r.length - 1] === 1;
       texto(r[0], RX, y, { tam: me ? tam + 4 : tam, w: me ? 700 : 500, al: "left", a: al, cor: me ? LR : "#f3f1ea", max: 680, brilho: me ? 12 : 0 });
       texto(fmtv(vv(r)), W - RX, y, { tam: me ? tam + 4 : tam, w: 700, al: "right", a: al, cor: me ? LR : AC }); });
@@ -108,34 +119,78 @@
     texto("votos de Ronilson para prefeito", W / 2, 370, { tam: 32, w: 500, a: sel(t, 4, 0.5), cor: "#c9d6e3" });
     D.cres.forEach(([a, v], j) => { const al = vis(t, S[4] + 0.8 + j * 0.3, S[5]); texto(fmt(v), CX2[j], PB - (PH * v) / D.cres[1][1] - 30, { tam: 60, w: 700, a: al, cor: j ? LR : AC, brilho: j ? 14 : 0 }); texto(String(a), CX2[j], PB + 60, { tam: 44, w: 700, a: al }); });
     texto("+3.813 votos · +66%", W / 2, 1345, { tam: 54, w: 700, a: vis(t, S[4] + 2.2, S[5]), cor: LR, brilho: 12, sobe: 1 });
+    // 5 · Ceará
+    texto("4º DO CEARÁ", W / 2, 300, { tam: 96, w: 700, ls: 4, a: sel(t, 5), brilho: 16, cor: LR });
+    texto("maiores votações para prefeito em 2024 · % dos válidos · 182 cidades com disputa", W / 2, 370, { tam: 26, w: 500, a: sel(t, 5, 0.5), cor: "#c9d6e3", max: 980 });
+    D.ce.forEach(([c, n, p, me], k) => { const al = vis(t, S[5] + 0.7 + k * 0.12, S[6]), y = 600 + k * 130; texto(`${k + 1}º  ${c} · ${n}`, RX, y, { tam: me ? 38 : 32, w: me ? 700 : 600, al: "left", a: al, cor: me ? LR : "#f3f1ea", brilho: me ? 12 : 0, max: 700 }); texto(String(p).replace(".", ",") + "%", W - RX, y, { tam: me ? 40 : 34, w: 700, al: "right", a: al, cor: me ? LR : AC }); });
+    texto("entre 182 cidades com disputa", W / 2, 1345, { tam: 46, w: 700, a: vis(t, S[5] + 2.4, S[6]), cor: LR, sobe: 1 });
+    // 6 · Ibiapaba
+    texto("1º DA IBIAPABA", W / 2, 300, { tam: 92, w: 700, ls: 4, a: sel(t, 6), brilho: 16, cor: LR });
+    texto("prefeitos eleitos em 2024 · % dos votos válidos", W / 2, 370, { tam: 30, w: 500, a: sel(t, 6, 0.5), cor: "#c9d6e3" });
+    rankTxt(D.ibiapaba.map(([c, p, me]) => [c, p, me]), 6, 560, 92, 32, (v) => String(v).replace(".", ",") + "%");
+    texto("21 pontos à frente do 2º colocado", W / 2, 1400, { tam: 42, w: 700, a: vis(t, S[6] + 2.4, S[7]), cor: LR, sobe: 1 });
+    // 7 · urnas
+    texto("57 DE 58 URNAS", W / 2, 300, { tam: 92, w: 700, ls: 4, a: sel(t, 7), brilho: 16 });
+    texto("cada círculo é uma seção eleitoral de Croatá em 2024", W / 2, 370, { tam: 30, w: 500, a: sel(t, 7, 0.5), cor: "#c9d6e3" });
+    texto("dourado: acima de 90% · azul: venceu · vermelho: perdeu", W / 2, 1300, { tam: 28, w: 500, a: vis(t, S[7] + 1.4, S[8]), cor: "#c9d6e3" });
+    texto("28 seções acima de 90%", W / 2, 1370, { tam: 46, w: 700, a: vis(t, S[7] + 2.2, S[8]), cor: LR, sobe: 1 });
     // 5 · fortes
-    texto("ONDE É MAIS FORTE", W / 2, 300, { tam: 80, w: 700, ls: 4, a: sel(t, 5), brilho: 16 });
-    texto("2024 · locais com mais votos para Ronilson", W / 2, 370, { tam: 32, w: 500, a: sel(t, 5, 0.5), cor: "#c9d6e3" });
-    D.fortes.forEach(([n, b, v, p], k) => { const al = vis(t, S[5] + 0.7 + k * 0.12, S[6]), y = 600 + k * 120; texto(n, RX, y, { tam: 34, w: 700, al: "left", a: al, max: 520 }); texto(`${fmt(v)} · ${p}`, W - RX, y, { tam: 34, w: 700, al: "right", a: al, cor: LR }); });
-    texto("venceu em 21 dos 22 locais", W / 2, 1345, { tam: 50, w: 700, a: vis(t, S[5] + 2.4, S[6]), cor: LR, sobe: 1 });
+    texto("ONDE É MAIS FORTE", W / 2, 300, { tam: 80, w: 700, ls: 4, a: sel(t, 8), brilho: 16 });
+    texto("2024 · locais com mais votos para Ronilson", W / 2, 370, { tam: 32, w: 500, a: sel(t, 8, 0.5), cor: "#c9d6e3" });
+    D.fortes.forEach(([n, b, v, p], k) => { const al = vis(t, S[8] + 0.7 + k * 0.12, S[9]), y = 600 + k * 120; texto(n, RX, y, { tam: 34, w: 700, al: "left", a: al, max: 520 }); texto(`${fmt(v)} · ${p}`, W - RX, y, { tam: 34, w: 700, al: "right", a: al, cor: LR }); });
+    texto("venceu em 21 dos 22 locais", W / 2, 1345, { tam: 50, w: 700, a: vis(t, S[8] + 2.4, S[9]), cor: LR, sobe: 1 });
     // 6 · viradas
-    texto("AS VIRADAS", W / 2, 300, { tam: 88, w: 700, ls: 4, a: sel(t, 6), brilho: 16 });
-    texto("onde perdeu em 2020 e venceu em 2024 · % dos votos válidos", W / 2, 370, { tam: 28, w: 500, a: sel(t, 6, 0.5), cor: "#c9d6e3", max: 980 });
-    D.viradas.forEach(([n, a, b], k) => { const al = vis(t, S[6] + 0.7 + k * 0.12, S[7]), y = VY + k * VH; texto(n, VX - 30, y + 62, { tam: 32, w: 700, al: "right", a: al, max: 250 }); texto(`${String(a).replace(".", ",")}% → ${String(b).replace(".", ",")}%`, W - RX + 40, y + 10, { tam: 30, w: 700, al: "right", a: al, cor: LR }); });
-    texto("Betânia: +505 votos", W / 2, 1345, { tam: 50, w: 700, a: vis(t, S[6] + 2.4, S[7]), cor: LR, sobe: 1 });
+    texto("AS VIRADAS", W / 2, 300, { tam: 88, w: 700, ls: 4, a: sel(t, 9), brilho: 16 });
+    texto("onde perdeu em 2020 e venceu em 2024 · % dos votos válidos", W / 2, 370, { tam: 28, w: 500, a: sel(t, 9, 0.5), cor: "#c9d6e3", max: 980 });
+    D.viradas.forEach(([n, a, b], k) => { const al = vis(t, S[9] + 0.7 + k * 0.12, S[10]), y = VY + k * VH; texto(n, VX - 30, y + 62, { tam: 32, w: 700, al: "right", a: al, max: 250 }); texto(`${String(a).replace(".", ",")}% → ${String(b).replace(".", ",")}%`, W - RX + 40, y + 10, { tam: 30, w: 700, al: "right", a: al, cor: LR }); });
+    texto("Betânia: +505 votos", W / 2, 1345, { tam: 50, w: 700, a: vis(t, S[9] + 2.4, S[10]), cor: LR, sobe: 1 });
     // 7 · fracos
-    texto("ONDE É MAIS FRACO", W / 2, 300, { tam: 80, w: 700, ls: 4, a: sel(t, 7), brilho: 16, cor: "#ff8a8a" });
-    texto("2024 · menores percentuais de Ronilson", W / 2, 370, { tam: 32, w: 500, a: sel(t, 7, 0.5), cor: "#c9d6e3" });
-    D.fracos.forEach(([n, p], k) => { const al = vis(t, S[7] + 0.7 + k * 0.12, S[8]), y = VY + k * VH; texto(n, VX - 30, y + 52, { tam: 32, w: 700, al: "right", a: al, max: 250 }); texto(`${String(p).replace(".", ",")}%`, W - RX + 40, y + 10, { tam: 32, w: 700, al: "right", a: al, cor: k ? AC : "#ff8a8a" }); });
-    texto("Tabocas: o único local que não venceu, 50 a 52", W / 2, 1300, { tam: 38, w: 700, a: vis(t, S[7] + 2.2, S[8]), cor: "#ff8a8a", sobe: 1 });
-    texto("brancos e nulos: 398 → 1.596", W / 2, 1370, { tam: 42, w: 700, a: vis(t, S[7] + 2.8, S[8]), cor: LR, sobe: 1 });
+    texto("ONDE É MAIS FRACO", W / 2, 300, { tam: 80, w: 700, ls: 4, a: sel(t, 10), brilho: 16, cor: "#ff8a8a" });
+    texto("2024 · menores percentuais de Ronilson", W / 2, 370, { tam: 32, w: 500, a: sel(t, 10, 0.5), cor: "#c9d6e3" });
+    D.fracos.forEach(([n, p], k) => { const al = vis(t, S[10] + 0.7 + k * 0.12, S[11]), y = VY + k * VH; texto(n, VX - 30, y + 52, { tam: 32, w: 700, al: "right", a: al, max: 250 }); texto(`${String(p).replace(".", ",")}%`, W - RX + 40, y + 10, { tam: 32, w: 700, al: "right", a: al, cor: k ? AC : "#ff8a8a" }); });
+    texto("Tabocas: o único local que não venceu, 50 a 52", W / 2, 1300, { tam: 38, w: 700, a: vis(t, S[10] + 2.2, S[11]), cor: "#ff8a8a", sobe: 1 });
+    texto("brancos e nulos: 398 → 1.596", W / 2, 1370, { tam: 42, w: 700, a: vis(t, S[10] + 2.8, S[11]), cor: LR, sobe: 1 });
+    // 11 · Câmara
+    texto("A CÂMARA MUDOU", W / 2, 300, { tam: 88, w: 700, ls: 4, a: sel(t, 11), brilho: 16 });
+    texto("vereadores eleitos pela coligação do prefeito · 11 cadeiras", W / 2, 370, { tam: 30, w: 500, a: sel(t, 11, 0.5), cor: "#c9d6e3" });
+    texto("2020: 6 de 11", W / 2, 1040, { tam: 64, w: 700, a: vis(t, S[11] + 0.6, S[11] + 3.2), cor: "#c9d6e3" });
+    texto("2024: 10 de 11", W / 2, 1040, { tam: 72, w: 700, a: vis(t, S[11] + 3.4, S[12]), cor: LR, brilho: 14 });
+    texto("2020: MDB e PSB · 2024: PT, PC do B, PV e PSB", W / 2, 1140, { tam: 30, w: 500, a: vis(t, S[11] + 3.8, S[12]), cor: "#c9d6e3" });
+    texto("o PDT caiu de 5 cadeiras para 1", W / 2, 1345, { tam: 46, w: 700, a: vis(t, S[11] + 4.2, S[12]), cor: LR, sobe: 1 });
+    // 12 · cresceram
+    texto("QUEM SE FORTALECEU", W / 2, 300, { tam: 80, w: 700, ls: 4, a: sel(t, 12), brilho: 16 });
+    texto("vereadores reeleitos · votos 2020 (cinza) e 2024 (dourado)", W / 2, 370, { tam: 30, w: 500, a: sel(t, 12, 0.5), cor: "#c9d6e3", max: 980 });
+    D.cresceram.forEach(([n, a, b], k) => { const al = vis(t, S[12] + 0.7 + k * 0.12, S[13]), y = VY + k * VH; texto(n.split(" ")[0] + "\n" + n.split(" ").slice(1).join(" "), VX - 30, y + 46, { tam: 28, w: 700, al: "right", a: al, max: 250, lh: 32 }); texto(`${fmt(a)} → ${fmt(b)}`, W - RX + 40, y + 10, { tam: 30, w: 700, al: "right", a: al, cor: LR }); });
+    texto("Eunice Magalhães: a mais votada, 1.046", W / 2, 1345, { tam: 44, w: 700, a: vis(t, S[12] + 2.4, S[13]), cor: LR, sobe: 1 });
+    // 13 · novos e saídas
+    texto("QUEM CHEGOU E QUEM SAIU", W / 2, 300, { tam: 70, w: 700, ls: 3, a: sel(t, 13), brilho: 16 });
+    texto("estreantes eleitos em 2024", W / 2, 400, { tam: 32, w: 700, a: sel(t, 13, 0.5), cor: AC });
+    D.novos.forEach(([n, p, v], k) => { const al = vis(t, S[13] + 0.8 + k * 0.12, S[14]), y = 470 + k * 56; texto(`${n} · ${p}`, RX, y, { tam: 32, w: 600, al: "left", a: al }); texto(fmt(v), W - RX, y, { tam: 34, w: 700, al: "right", a: al, cor: LR }); });
+    texto("nomes de 2020 que não voltaram", W / 2, 700, { tam: 32, w: 700, a: vis(t, S[13] + 1.6, S[14]), cor: "#ff8a8a" });
+    D.sairam.forEach(([n, s], k) => { const al = vis(t, S[13] + 1.9 + k * 0.12, S[14]), y = 770 + k * 92; texto(n, RX, y, { tam: 34, w: 700, al: "left", a: al }); texto(s, RX, y + 38, { tam: 26, w: 500, al: "left", a: al, cor: "#c9d6e3", max: 880 }); });
+    // 14 · 2026
+    texto("O VOTO DE CROATÁ EM 2026", W / 2, 300, { tam: 66, w: 700, ls: 3, a: sel(t, 14), brilho: 16 });
+    texto("os mais votados na cidade · % dos votos válidos", W / 2, 370, { tam: 30, w: 500, a: sel(t, 14, 0.5), cor: "#c9d6e3" });
+    D.e26.forEach(([c, n, p, ce], k) => { const al = vis(t, S[14] + 0.7 + k * 0.15, S[15]), y = 600 + k * 190; texto(c.toUpperCase(), RX, y - 10, { tam: 26, w: 700, al: "left", a: al, cor: AC }); texto(n, RX, y + 28, { tam: 34, w: 700, al: "left", a: al, max: 640 }); texto(p, W - RX, y + 28, { tam: 44, w: 700, al: "right", a: al, cor: LR }); texto(ce, W - RX, y + 110, { tam: 24, w: 500, al: "right", a: al, cor: "#8fa6bb" }); });
+    // 15 · dinheiro
+    texto("O ORÇAMENTO CRESCEU", W / 2, 300, { tam: 78, w: 700, ls: 3, a: sel(t, 15), brilho: 16 });
+    texto("Prefeitura de Croatá · Tesouro Nacional · valores nominais", W / 2, 370, { tam: 30, w: 500, a: sel(t, 15, 0.5), cor: "#c9d6e3" });
+    [["R$ 53 mi", "2020"], ["R$ 142 mi", "2025"], ["R$ 4,1 mi", "2020"], ["R$ 21,7 mi", "2025"]].forEach(([v, a], j) => { const al = vis(t, S[15] + 0.8 + j * 0.2, S[16]); texto(v, CX4[j], j < 2 ? (j ? 600 : 960) : (j === 3 ? 900 : 1080), { tam: 36, w: 700, a: al, cor: j % 2 ? LR : AC }); texto(a, CX4[j], 1200, { tam: 32, w: 700, a: al }); });
+    texto("receita corrente", (CX4[0] + CX4[1]) / 2, 1250, { tam: 28, w: 600, a: vis(t, S[15] + 1, S[16]), cor: "#c9d6e3" });
+    texto("investimentos", (CX4[2] + CX4[3]) / 2, 1250, { tam: 28, w: 600, a: vis(t, S[15] + 1, S[16]), cor: "#c9d6e3" });
+    texto("investimento cinco vezes maior", W / 2, 1345, { tam: 46, w: 700, a: vis(t, S[15] + 2.4, S[16]), cor: LR, sobe: 1 });
     // 8 · fecho
-    const af = vis(t, S[8] + 0.2, S[9] + 30, 0.6);
+    const af = vis(t, S[16] + 0.2, S[17] + 30, 0.6);
     if (af > 0.01 && img.rg) { const i = img.rg, r = 210, s = 0.85 + 0.15 * eout(af); ctx.save(); ctx.globalAlpha = af; ctx.translate(W / 2, 820); ctx.scale(s, s);
       ctx.shadowColor = AC; ctx.shadowBlur = 40; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.fillStyle = "#f2f2f2"; ctx.fill(); ctx.shadowBlur = 0;
       ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 6.283); ctx.clip(); const sc = (2 * r) / (i.width * 0.9); ctx.drawImage(i, -i.width * sc * 0.5, -i.height * sc * 0.4, i.width * sc, i.height * sc); ctx.restore();
       ctx.lineWidth = 6; ctx.strokeStyle = LR; ctx.beginPath(); ctx.arc(0, 0, r + 3, 0, 6.283); ctx.stroke(); ctx.restore(); }
     texto("RONILSON OLIVEIRA", W / 2, 360, { tam: 84, w: 700, ls: 4, a: af, brilho: 20 });
-    texto("prefeito de Croatá · 2º mandato", W / 2, 430, { tam: 34, w: 500, a: vis(t, S[8] + 0.6, S[9] + 30, 0.6), cor: "#c9d6e3" });
-    texto("9.599 VOTOS EM 2024", W / 2, 1200, { tam: 66, w: 700, ls: 4, a: vis(t, S[8] + 1.4, S[9] + 30, 0.6), cor: LR, brilho: 16, sobe: 1 });
-    texto("de 381 para 8.247 votos de vantagem", W / 2, 1270, { tam: 40, w: 700, a: vis(t, S[8] + 1.8, S[9] + 30, 0.6), sobe: 1 });
-    texto("21 de 22 locais vencidos em 2024", W / 2, 1335, { tam: 36, w: 500, a: vis(t, S[8] + 2.2, S[9] + 30, 0.6), cor: AC, sobe: 1 });
-    texto("Fonte: TSE · eleições de 2016, 2018 (suplementar), 2020 e 2024", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
+    texto("prefeito de Croatá · 2º mandato", W / 2, 430, { tam: 34, w: 500, a: vis(t, S[16] + 0.6, S[17] + 30, 0.6), cor: "#c9d6e3" });
+    texto("9.599 VOTOS EM 2024", W / 2, 1200, { tam: 66, w: 700, ls: 4, a: vis(t, S[16] + 1.4, S[17] + 30, 0.6), cor: LR, brilho: 16, sobe: 1 });
+    texto("de 381 para 8.247 votos de vantagem", W / 2, 1270, { tam: 40, w: 700, a: vis(t, S[16] + 1.8, S[17] + 30, 0.6), sobe: 1 });
+    texto("21 de 22 locais vencidos em 2024", W / 2, 1335, { tam: 36, w: 500, a: vis(t, S[16] + 2.2, S[17] + 30, 0.6), cor: AC, sobe: 1 });
+    texto("Fonte: TSE (2016 a 2026) · Tesouro Nacional (Siconfi)", W / 2, H - 70, { tam: 22, w: 500, a: af * 0.8, cor: "#8fa6bb" });
     marca();
   };
   if (!LIMPO) window.render = Motion.envolver(window.render, ctx, S, { respiro: [3], moldura: { serie: "RAIO-X · CROATÁ", cta: "Comenta: como você avalia a gestão?" } });
